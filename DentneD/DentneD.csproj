@@ -1,0 +1,370 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{29E70CEE-F381-4C42-97FA-1BB49BF8F710}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DG.DentneD</RootNamespace>
+    <AssemblyName>DentneD</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>ico_dentned.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AdvancedDataGridView">
+      <HintPath>..\packages\AdvancedDataGridView\AdvancedDataGridView.dll</HintPath>
+    </Reference>
+    <Reference Include="DGDataModel">
+      <HintPath>..\packages\DGDataModel\DGDataModel.dll</HintPath>
+    </Reference>
+    <Reference Include="DGUIGHF">
+      <HintPath>..\packages\DGUIGHF\DGUIGHF.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.Calendar">
+      <HintPath>..\packages\JoseCalendar\System.Windows.Forms.Calendar.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormAddressesTypes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormAddressesTypes.Designer.cs">
+      <DependentUpon>FormAddressesTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormAppointments.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormAppointments.Designer.cs">
+      <DependentUpon>FormAppointments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormContactsTypes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormContactsTypes.Designer.cs">
+      <DependentUpon>FormContactsTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormDoctors.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormDoctors.Designer.cs">
+      <DependentUpon>FormDoctors.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormEstimatesFooters.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormEstimatesFooters.Designer.cs">
+      <DependentUpon>FormEstimatesFooters.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormInvoices.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormInvoices.Designer.cs">
+      <DependentUpon>FormInvoices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormInvoicesFooters.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormInvoicesFooters.Designer.cs">
+      <DependentUpon>FormInvoicesFooters.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormMedicalrecordsTypes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormMedicalrecordsTypes.Designer.cs">
+      <DependentUpon>FormMedicalrecordsTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormPatients.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormPatients.Designer.cs">
+      <DependentUpon>FormPatients.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormPatientsAttachmentsTypes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormPatientsAttachmentsTypes.Designer.cs">
+      <DependentUpon>FormPatientsAttachmentsTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormPaymentsTypes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormPaymentsTypes.Designer.cs">
+      <DependentUpon>FormPaymentsTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormRooms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormRooms.Designer.cs">
+      <DependentUpon>FormRooms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormTaxes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormTaxes.Designer.cs">
+      <DependentUpon>FormTaxes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormTaxesDeductions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormTaxesDeductions.Designer.cs">
+      <DependentUpon>FormTaxesDeductions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormTreatments.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormTreatments.Designer.cs">
+      <DependentUpon>FormTreatments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormTreatmentsTypes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormTreatmentsTypes.Designer.cs">
+      <DependentUpon>FormTreatmentsTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormTreatmentsPricesLists.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormTreatmentsPricesLists.Designer.cs">
+      <DependentUpon>FormTreatmentsPricesLists.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Objects\VEstimatesFooters.cs" />
+    <Compile Include="Forms\Objects\VInvoicesLines.cs" />
+    <Compile Include="Forms\Objects\VInvoices.cs" />
+    <Compile Include="Forms\Objects\VPatientsPayments.cs" />
+    <Compile Include="Forms\Objects\VPatientsTreatments.cs" />
+    <Compile Include="Forms\Objects\VPatientsAppointments.cs" />
+    <Compile Include="Forms\Objects\VPatientsNotes.cs" />
+    <Compile Include="Forms\Objects\VPatientsAttachmentsTypes.cs" />
+    <Compile Include="Forms\Objects\VMedicalrecordsTypes.cs" />
+    <Compile Include="Forms\Objects\VContactsTypes.cs" />
+    <Compile Include="Forms\Objects\VAddressesTypes.cs" />
+    <Compile Include="Forms\Objects\VPatientsAttachments.cs" />
+    <Compile Include="Forms\Objects\VPatientsMedicalrecords.cs" />
+    <Compile Include="Forms\Objects\VPatientsContacts.cs" />
+    <Compile Include="Forms\Objects\VPatientsAddresses.cs" />
+    <Compile Include="Forms\Objects\VPaymentsTypes.cs" />
+    <Compile Include="Forms\Objects\VInvoicesFooters.cs" />
+    <Compile Include="Forms\Objects\VPatients.cs" />
+    <Compile Include="Forms\Objects\VRooms.cs" />
+    <Compile Include="Forms\Objects\VTreatmentsPrices.cs" />
+    <Compile Include="Forms\Objects\VTreatments.cs" />
+    <Compile Include="Forms\Objects\VTreatmentsPricesLists.cs" />
+    <Compile Include="Forms\Objects\VTreatmentsTypes.cs" />
+    <Compile Include="Forms\Objects\VTaxesDeductions.cs" />
+    <Compile Include="Forms\Objects\VTaxes.cs" />
+    <Compile Include="Forms\Objects\VDoctors.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormAddressesTypes.resx">
+      <DependentUpon>FormAddressesTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormAppointments.resx">
+      <DependentUpon>FormAppointments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormContactsTypes.resx">
+      <DependentUpon>FormContactsTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormDoctors.resx">
+      <DependentUpon>FormDoctors.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormEstimatesFooters.resx">
+      <DependentUpon>FormEstimatesFooters.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormInvoices.resx">
+      <DependentUpon>FormInvoices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormInvoicesFooters.resx">
+      <DependentUpon>FormInvoicesFooters.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormMedicalrecordsTypes.resx">
+      <DependentUpon>FormMedicalrecordsTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormPatients.resx">
+      <DependentUpon>FormPatients.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormPatientsAttachmentsTypes.resx">
+      <DependentUpon>FormPatientsAttachmentsTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormPaymentsTypes.resx">
+      <DependentUpon>FormPaymentsTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormRooms.resx">
+      <DependentUpon>FormRooms.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormTaxes.resx">
+      <DependentUpon>FormTaxes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormTaxesDeductions.resx">
+      <DependentUpon>FormTaxesDeductions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormTreatments.resx">
+      <DependentUpon>FormTreatments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormTreatmentsTypes.resx">
+      <DependentUpon>FormTreatmentsTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormTreatmentsPricesLists.resx">
+      <DependentUpon>FormTreatmentsPricesLists.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VAddressesTypes.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VContactsTypes.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VDoctors.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VEstimatesFooters.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VInvoices.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VInvoicesFooters.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VInvoicesLines.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VMedicalrecordsTypes.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VPatients.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VPatientsAddresses.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VPatientsAppointments.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VPatientsAttachments.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VPatientsAttachmentsTypes.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VPatientsContacts.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VPatientsMedicalrecords.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VPatientsNotes.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VPatientsPayments.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VPatientsTreatments.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VPaymentsTypes.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VRooms.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VTaxes.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VTaxesDeductions.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VTreatments.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VTreatmentsPrices.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VTreatmentsPricesLists.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VTreatmentsTypes.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Model.Entity.addressestypes.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Model.Entity.appointments.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Model.Entity.contactstypes.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Model.Entity.dentnedEntities.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Model.Entity.doctors.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Model.Entity.estimates.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Model.Entity.estimatesfooters.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Model.Entity.estimateslines.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Model.Entity.invoices.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Model.Entity.invoicesfooters.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Model.Entity.invoiceslines.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Model.Entity.medicalrecordstypes.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Model.Entity.patients.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Model.Entity.patientsaddresses.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Model.Entity.patientsattachments.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Model.Entity.patientsattachmentstypes.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Model.Entity.patientscontacts.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Model.Entity.patientsmedicalrecords.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Model.Entity.patientsnotes.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Model.Entity.patientstreatments.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Model.Entity.payments.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Model.Entity.paymentstypes.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Model.Entity.rooms.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Model.Entity.taxes.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Model.Entity.taxesdeductions.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Model.Entity.treatments.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Model.Entity.treatmentsprices.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Model.Entity.treatmentspriceslists.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Model.Entity.treatmentstypes.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="about_logoimg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DentneDModel\DentneDModel.csproj">
+      <Project>{b00e28db-3dbe-41d6-ae16-fd8352ce3d2b}</Project>
+      <Name>DentneDModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="splashscreen_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\packages\srm\srm.exe">
+      <Link>srm.exe</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ico_dentned.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

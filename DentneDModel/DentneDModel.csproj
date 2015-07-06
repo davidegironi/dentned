@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B00E28DB-3DBE-41D6-AE16-FD8352CE3D2B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DG.DentneD.Model</RootNamespace>
+    <AssemblyName>DentneDModel</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DGDataModel">
+      <HintPath>..\packages\DGDataModel\DGDataModel.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DentneDModel.cs" />
+    <Compile Include="Entity\addressestypes.cs">
+      <DependentUpon>Model_dentned.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\appointments.cs">
+      <DependentUpon>Model_dentned.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\contactstypes.cs">
+      <DependentUpon>Model_dentned.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\doctors.cs">
+      <DependentUpon>Model_dentned.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\estimates.cs">
+      <DependentUpon>Model_dentned.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\estimatesfooters.cs">
+      <DependentUpon>Model_dentned.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\estimateslines.cs">
+      <DependentUpon>Model_dentned.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\invoices.cs">
+      <DependentUpon>Model_dentned.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\invoicesfooters.cs">
+      <DependentUpon>Model_dentned.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\invoiceslines.cs">
+      <DependentUpon>Model_dentned.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\medicalrecordstypes.cs">
+      <DependentUpon>Model_dentned.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Model_dentned.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model_dentned.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Model_dentned.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model_dentned.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Model_dentned.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model_dentned.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\patients.cs">
+      <DependentUpon>Model_dentned.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\patientsaddresses.cs">
+      <DependentUpon>Model_dentned.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\patientsattachments.cs">
+      <DependentUpon>Model_dentned.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\patientsattachmentstypes.cs">
+      <DependentUpon>Model_dentned.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\patientscontacts.cs">
+      <DependentUpon>Model_dentned.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\patientsmedicalrecords.cs">
+      <DependentUpon>Model_dentned.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\patientsnotes.cs">
+      <DependentUpon>Model_dentned.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\patientstreatments.cs">
+      <DependentUpon>Model_dentned.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\payments.cs">
+      <DependentUpon>Model_dentned.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\paymentstypes.cs">
+      <DependentUpon>Model_dentned.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\rooms.cs">
+      <DependentUpon>Model_dentned.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\taxes.cs">
+      <DependentUpon>Model_dentned.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\taxesdeductions.cs">
+      <DependentUpon>Model_dentned.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\treatments.cs">
+      <DependentUpon>Model_dentned.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\treatmentsprices.cs">
+      <DependentUpon>Model_dentned.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\treatmentspriceslists.cs">
+      <DependentUpon>Model_dentned.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\treatmentstypes.cs">
+      <DependentUpon>Model_dentned.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\EstimatesFototersRepositories.cs" />
+    <Compile Include="Repositories\EstimatesRepositories.cs" />
+    <Compile Include="Repositories\EstimatesLinesRepositories.cs" />
+    <Compile Include="Repositories\InvoicesRepositories.cs" />
+    <Compile Include="Repositories\InvoicesLinesRepositories.cs" />
+    <Compile Include="Repositories\PaymentsRepositories.cs" />
+    <Compile Include="Repositories\PatientsTreatmentsRepositories.cs" />
+    <Compile Include="Repositories\PatientsAttachementsTypesRepositories.cs" />
+    <Compile Include="Repositories\InvoicesFototersRepositories.cs" />
+    <Compile Include="Repositories\PatientsAttachmentsRepositories.cs" />
+    <Compile Include="Repositories\PatientsNotesRepositories.cs" />
+    <Compile Include="Repositories\PatientsMedicalrecordsRepositories.cs" />
+    <Compile Include="Repositories\PatientsContactsRepositories.cs" />
+    <Compile Include="Repositories\PatientsAddressesRepositories.cs" />
+    <Compile Include="Repositories\MedicalrecordsTypesRepositories.cs" />
+    <Compile Include="Repositories\ContactsTypesRepositories.cs" />
+    <Compile Include="Repositories\PaymentsTypesRepositories.cs" />
+    <Compile Include="Repositories\AddressesTypesRepositories.cs" />
+    <Compile Include="Repositories\PatientsRepositories.cs" />
+    <Compile Include="Repositories\AppointmentsRepositories.cs" />
+    <Compile Include="Repositories\TreatmentsRepositories.cs" />
+    <Compile Include="Repositories\TreatmentsPricesRepositories.cs" />
+    <Compile Include="Repositories\TreatmentsPricesListsRepositories.cs" />
+    <Compile Include="Repositories\TreatmentsTypesRepositories.cs" />
+    <Compile Include="Repositories\TaxesDeductionsRepositories.cs" />
+    <Compile Include="Repositories\TaxesRepositories.cs" />
+    <Compile Include="Repositories\RoomsRepositories.cs" />
+    <Compile Include="Repositories\DoctorsRepositories.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <EntityDeploy Include="Entity\Model_dentned.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model_dentned.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Entity\Model_dentned.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model_dentned.edmx</DependentUpon>
+      <LastGenOutput>Model_dentned.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Entity\Model_dentned.edmx.diagram">
+      <DependentUpon>Model_dentned.edmx</DependentUpon>
+    </None>
+    <None Include="Entity\Model_dentned.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model_dentned.edmx</DependentUpon>
+      <LastGenOutput>Model_dentned.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

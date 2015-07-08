@@ -10,6 +10,6 @@ namespace DG.DentneD.Forms.Objects
     {
         public int patients_id { get; set; }
         public string name { get; set; }
-        public bool isarchied { get; set; }
+        public bool isarchived { get; set; }
     }
 }

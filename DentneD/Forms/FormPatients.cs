@@ -38,6 +38,8 @@ namespace DG.DentneD.Forms
         private TabElement tabElement_tabPayments = new TabElement();
         private TabElement tabElement_tabAppointments = new TabElement();
         private TabElement tabElement_tabPatientsAttachments = new TabElement();
+        private TabElement tabElement_tabInvoices = new TabElement();
+        private TabElement tabElement_tabEstimates = new TabElement();
         private TabElement tabElement_tabPatientsNotes = new TabElement();
 
         private const int MaxRowValueLength = 60;
@@ -348,6 +350,70 @@ namespace DG.DentneD.Forms
                 }
             };
 
+            //set tabInvoices
+            tabElement_tabInvoices = new TabElement()
+            {
+                TabPageElement = tabPage_tabInvoices,
+                ElementListItem = new TabElement.TabElementListItem()
+                {
+                    PanelFilters = null,
+                    PanelList = panel_tabInvoices_list,
+
+                    PanelData = null,
+                    PanelActions = panel_tabInvoices_actions,
+                    PanelUpdates = null,
+
+                    BindingSourceList = vPatientsInvoicesBindingSource,
+                    GetDataSourceList = GetDataSourceList_tabInvoices,
+
+                    BindingSourceEdit = invoicesBindingSource,
+                    GetDataSourceEdit = GetDataSourceEdit_tabInvoices,
+                    AfterSaveAction = null,
+
+                    AddButton = null,
+                    UpdateButton = null,
+                    RemoveButton = null,
+                    SaveButton = null,
+                    CancelButton = null,
+
+                    Add = null,
+                    Update = null,
+                    Remove = null
+                }
+            };
+
+            //set tabEstimates
+            tabElement_tabEstimates = new TabElement()
+            {
+                TabPageElement = tabPage_tabEstimates,
+                ElementListItem = new TabElement.TabElementListItem()
+                {
+                    PanelFilters = null,
+                    PanelList = panel_tabEstimates_list,
+
+                    PanelData = null,
+                    PanelActions = panel_tabEstimates_actions,
+                    PanelUpdates = null,
+
+                    BindingSourceList = vPatientsEstimatesBindingSource,
+                    GetDataSourceList = GetDataSourceList_tabEstimates,
+
+                    BindingSourceEdit = estimatesBindingSource,
+                    GetDataSourceEdit = GetDataSourceEdit_tabEstimates,
+                    AfterSaveAction = null,
+
+                    AddButton = null,
+                    UpdateButton = null,
+                    RemoveButton = null,
+                    SaveButton = null,
+                    CancelButton = null,
+
+                    Add = null,
+                    Update = null,
+                    Remove = null
+                }
+            };
+
             //set tabPatientsNotes
             tabElement_tabPatientsNotes = new TabElement()
             {
@@ -406,6 +472,8 @@ namespace DG.DentneD.Forms
             TabElements.Add(tabElement_tabPayments);
             TabElements.Add(tabElement_tabAppointments);
             TabElements.Add(tabElement_tabPatientsAttachments);
+            TabElements.Add(tabElement_tabInvoices);
+            TabElements.Add(tabElement_tabEstimates);
             TabElements.Add(tabElement_tabPatientsNotes);
         }
 
@@ -428,6 +496,8 @@ namespace DG.DentneD.Forms
             advancedDataGridView_tabPatientsTreatments_list.DisableFilterAndSort(advancedDataGridView_tabPatientsTreatments_list.Columns["toothsDataGridViewTextBoxColumn"]);
             advancedDataGridView_tabAppointments_list.SortDESC(advancedDataGridView_tabAppointments_list.Columns[1]);
             advancedDataGridView_tabPatientsAttachments_list.SortASC(advancedDataGridView_tabPatientsAttachments_list.Columns[1]);
+            advancedDataGridView_tabInvoices_list.SortASC(advancedDataGridView_tabInvoices_list.Columns[1]);
+            advancedDataGridView_tabEstimates_list.SortASC(advancedDataGridView_tabEstimates_list.Columns[1]);
             advancedDataGridView_tabPatientsNotes_list.SortASC(advancedDataGridView_tabPatientsNotes_list.Columns[1]);
         }
 
@@ -504,6 +574,8 @@ namespace DG.DentneD.Forms
             advancedDataGridView_tabPatientsTreatments_list.CleanFilterAndSort();
             advancedDataGridView_tabAppointments_list.CleanFilterAndSort();
             advancedDataGridView_tabPatientsAttachments_list.CleanFilterAndSort();
+            advancedDataGridView_tabInvoices_list.CleanFilterAndSort();
+            advancedDataGridView_tabEstimates_list.CleanFilterAndSort();
             advancedDataGridView_tabPatientsNotes_list.CleanFilterAndSort();
 
             List<patients> patients = new List<patients>();
@@ -526,7 +598,7 @@ namespace DG.DentneD.Forms
                 {
                     patients_id = r.patients_id,
                     name = r.patients_surname + " " + r.patients_name,
-                    isarchied = r.patients_isarchived
+                    isarchived = r.patients_isarchived
                 }).ToList();
 
             return DGDataTableUtils.ToDataTable<VPatients>(vPatients);
@@ -584,6 +656,7 @@ namespace DG.DentneD.Forms
         {
             countTextBox.Text = vPatientsBindingSource.Count.ToString();
         }
+
 
         #region various
 
@@ -1144,7 +1217,7 @@ namespace DG.DentneD.Forms
             {
                 patientsmedicalrecords_id = r.patientsmedicalrecords_id,
                 medicalrecordstype = _dentnedModel.MedicalrecordsTypes.Find(r.medicalrecordstypes_id).medicalrecordstypes_name,
-                value = (r.patientsmedicalrecords_value.Length > MaxRowValueLength ? r.patientsmedicalrecords_value.Substring(0, MaxRowValueLength) + "..." : r.patientsmedicalrecords_value)
+                value = (r.patientsmedicalrecords_value != null ? (r.patientsmedicalrecords_value.Length > MaxRowValueLength ? r.patientsmedicalrecords_value.Substring(0, MaxRowValueLength) + "..." : r.patientsmedicalrecords_value) : "")
             }).ToList();
 
             ret = DGDataTableUtils.ToDataTable<VPatientsMedicalrecords>(vPatientsMedicalrecords);
@@ -3642,6 +3715,196 @@ namespace DG.DentneD.Forms
         #endregion
 
 
+        #region tabInvoices
+
+        /// <summary>
+        /// Get tab list DataSource
+        /// </summary>
+        /// <returns></returns>
+        private object GetDataSourceList_tabInvoices()
+        {
+            object ret = null;
+
+            int patients_id = -1;
+            if (vPatientsBindingSource.Current != null)
+            {
+                patients_id = (((DataRowView)vPatientsBindingSource.Current).Row).Field<int>("patients_id");
+            }
+
+            //update totals
+            double payedtotalnum = Convert.ToDouble(_dentnedModel.Invoices.List(r => r.patients_id == patients_id && r.invoices_ispaid).Sum(r => r.invoices_total));
+            double invoicestotalnum = Convert.ToDouble(_dentnedModel.Invoices.List(r => r.patients_id == patients_id).Sum(r => r.invoices_total));
+            double invoiceslefttotalnum = Convert.ToDouble(_dentnedModel.Invoices.List(r => r.patients_id == patients_id && !r.invoices_ispaid).Sum(r => r.invoices_total));
+            label_tabInvoices_payedtotalnum.Text = String.Format("{0:0.00}", payedtotalnum);
+            label_tabInvoices_invoicestotalnum.Text = String.Format("{0:0.00}", invoicestotalnum);
+            label_tabInvoices_invoiceslefttotalnum.Text = String.Format("{0:0.00}", invoiceslefttotalnum);
+
+            IEnumerable<VPatientsInvoices> vPatientsInvoices =
+            _dentnedModel.Invoices.List(r => r.patients_id == patients_id).Select(
+            r => new VPatientsInvoices
+            {
+                invoices_id = r.invoices_id,
+                date = r.invoices_date,
+                doctor = (r.doctors_id != null ? _dentnedModel.Doctors.Find(r.doctors_id).doctors_surname + " " + _dentnedModel.Doctors.Find(r.doctors_id).doctors_name : ""),
+                number = r.invoices_number,
+                total = (double)r.invoices_total,
+                ispayed = r.invoices_ispaid
+            }).ToList();
+
+            ret = DGDataTableUtils.ToDataTable<VPatientsInvoices>(vPatientsInvoices);
+
+            return ret;
+        }
+
+        /// <summary>
+        /// Tab Datagrid filter handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void advancedDataGridView_tabInvoices_list_FilterStringChanged(object sender, EventArgs e)
+        {
+            vPatientsInvoicesBindingSource.Filter = advancedDataGridView_tabInvoices_list.FilterString;
+        }
+
+        /// <summary>
+        /// Tab Datagrid sort handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void advancedDataGridView_tabInvoices_list_SortStringChanged(object sender, EventArgs e)
+        {
+            vPatientsInvoicesBindingSource.Sort = advancedDataGridView_tabInvoices_list.SortString;
+        }
+
+        /// <summary>
+        /// Load the tab DataSource
+        /// </summary>
+        /// <returns></returns>
+        private object GetDataSourceEdit_tabInvoices()
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// Invoices button view click handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button_tabInvoices_view_Click(object sender, EventArgs e)
+        {
+            if (vPatientsInvoicesBindingSource.Current != null)
+            {
+                int invoices_id = -1;
+                if (vPatientsInvoicesBindingSource.Current != null)
+                {
+                    invoices_id = (((DataRowView)vPatientsInvoicesBindingSource.Current).Row).Field<int>("invoices_id");
+                }
+
+                if (invoices_id != -1)
+                {
+
+                }
+            }
+        }
+
+        #endregion
+
+
+        #region tabEstimates
+
+        /// <summary>
+        /// Get tab list DataSource
+        /// </summary>
+        /// <returns></returns>
+        private object GetDataSourceList_tabEstimates()
+        {
+            object ret = null;
+
+            int patients_id = -1;
+            if (vPatientsBindingSource.Current != null)
+            {
+                patients_id = (((DataRowView)vPatientsBindingSource.Current).Row).Field<int>("patients_id");
+            }
+
+            //update totals
+            double invoicedtotalnum = Convert.ToDouble(_dentnedModel.Estimates.List(r => r.patients_id == patients_id && r.invoices_id == null).Sum(r => r.estimates_total));
+            double estimatestotalnum = Convert.ToDouble(_dentnedModel.Estimates.List(r => r.patients_id == patients_id).Sum(r => r.estimates_total));
+            double estimateslefttotalnum = Convert.ToDouble(_dentnedModel.Estimates.List(r => r.patients_id == patients_id && r.invoices_id != null).Sum(r => r.estimates_total));
+            label_tabEstimates_invoicedtotalnum.Text = String.Format("{0:0.00}", invoicedtotalnum);
+            label_tabEstimates_estimatestotalnum.Text = String.Format("{0:0.00}", estimatestotalnum);
+            label_tabEstimates_estimateslefttotalnum.Text = String.Format("{0:0.00}", estimateslefttotalnum);
+
+            IEnumerable<VPatientsEstimates> vPatientsEstimates =
+            _dentnedModel.Estimates.List(r => r.patients_id == patients_id).Select(
+            r => new VPatientsEstimates
+            {
+                estimates_id = r.estimates_id,
+                date = r.estimates_date,
+                doctor = (r.doctors_id != null ? _dentnedModel.Doctors.Find(r.doctors_id).doctors_surname + " " + _dentnedModel.Doctors.Find(r.doctors_id).doctors_name : ""),
+                number = r.estimates_number,
+                total = (double)r.estimates_total,
+                isinvoiced = (r.invoices_id != null ? true : false)
+            }).ToList();
+
+            ret = DGDataTableUtils.ToDataTable<VPatientsEstimates>(vPatientsEstimates);
+
+            return ret;
+        }
+
+        /// <summary>
+        /// Tab Datagrid filter handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void advancedDataGridView_tabEstimates_list_FilterStringChanged(object sender, EventArgs e)
+        {
+            vPatientsEstimatesBindingSource.Filter = advancedDataGridView_tabEstimates_list.FilterString;
+        }
+
+        /// <summary>
+        /// Tab Datagrid sort handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void advancedDataGridView_tabEstimates_list_SortStringChanged(object sender, EventArgs e)
+        {
+            vPatientsEstimatesBindingSource.Sort = advancedDataGridView_tabEstimates_list.SortString;
+        }
+
+        /// <summary>
+        /// Load the tab DataSource
+        /// </summary>
+        /// <returns></returns>
+        private object GetDataSourceEdit_tabEstimates()
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// Estimates button view click handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button_tabEstimates_view_Click(object sender, EventArgs e)
+        {
+            if (vPatientsEstimatesBindingSource.Current != null)
+            {
+                int estimates_id = -1;
+                if (vPatientsEstimatesBindingSource.Current != null)
+                {
+                    estimates_id = (((DataRowView)vPatientsEstimatesBindingSource.Current).Row).Field<int>("estimates_id");
+                }
+
+                if (estimates_id != -1)
+                {
+
+                }
+            }
+        }
+
+        #endregion
+
+
         #region tabPatientsNotes
 
         /// <summary>
@@ -3756,6 +4019,6 @@ namespace DG.DentneD.Forms
         }
 
         #endregion
-                                
+               
     }
 }

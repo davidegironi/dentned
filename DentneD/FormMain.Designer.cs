@@ -107,15 +107,16 @@
             // invoicesToolStripMenuItem
             // 
             this.invoicesToolStripMenuItem.Name = "invoicesToolStripMenuItem";
-            this.invoicesToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.invoicesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.invoicesToolStripMenuItem.Text = "Invoices";
             this.invoicesToolStripMenuItem.Click += new System.EventHandler(this.invoicesToolStripMenuItem_Click);
             // 
             // estimatesToolStripMenuItem
             // 
             this.estimatesToolStripMenuItem.Name = "estimatesToolStripMenuItem";
-            this.estimatesToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.estimatesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.estimatesToolStripMenuItem.Text = "Estimates";
+            this.estimatesToolStripMenuItem.Click += new System.EventHandler(this.estimatesToolStripMenuItem_Click);
             // 
             // reportsToolStripMenuItem
             // 

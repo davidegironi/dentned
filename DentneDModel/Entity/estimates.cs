@@ -20,8 +20,8 @@ namespace DG.DentneD.Model.Entity
         }
     
         public int estimates_id { get; set; }
-        public int doctors_id { get; set; }
-        public int patients_id { get; set; }
+        public Nullable<int> doctors_id { get; set; }
+        public Nullable<int> patients_id { get; set; }
         public Nullable<int> invoices_id { get; set; }
         public string estimates_number { get; set; }
         public System.DateTime estimates_date { get; set; }

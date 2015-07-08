@@ -35,14 +35,17 @@
     <ApplicationIcon>ico_dentned.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AdvancedDataGridView">
-      <HintPath>..\packages\AdvancedDataGridView\AdvancedDataGridView.dll</HintPath>
+    <Reference Include="AdvancedDataGridView, Version=1.0.17202.9, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Ext\AdvancedDataGridView\AdvancedDataGridView.dll</HintPath>
     </Reference>
-    <Reference Include="DGDataModel">
-      <HintPath>..\packages\DGDataModel\DGDataModel.dll</HintPath>
+    <Reference Include="DGDataModel, Version=1.1.18530.42, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Ext\DGDataModel\DGDataModel.dll</HintPath>
     </Reference>
-    <Reference Include="DGUIGHF">
-      <HintPath>..\packages\DGUIGHF\DGUIGHF.dll</HintPath>
+    <Reference Include="DGUIGHF, Version=1.1.18701.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Ext\DGUIGHF\DGUIGHF.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -56,8 +59,9 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Windows.Forms.Calendar">
-      <HintPath>..\packages\JoseCalendar\System.Windows.Forms.Calendar.dll</HintPath>
+    <Reference Include="System.Windows.Forms.Calendar, Version=1.0.5665.40596, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Ext\JoseCalendar\System.Windows.Forms.Calendar.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -98,6 +102,12 @@
     </Compile>
     <Compile Include="Forms\FormDoctors.Designer.cs">
       <DependentUpon>FormDoctors.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormEstimates.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormEstimates.Designer.cs">
+      <DependentUpon>FormEstimates.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormEstimatesFooters.cs">
       <SubType>Form</SubType>
@@ -178,8 +188,12 @@
       <DependentUpon>FormTreatmentsPricesLists.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Objects\VEstimatesFooters.cs" />
+    <Compile Include="Forms\Objects\VEstimates.cs" />
+    <Compile Include="Forms\Objects\VEstimatesLines.cs" />
     <Compile Include="Forms\Objects\VInvoicesLines.cs" />
     <Compile Include="Forms\Objects\VInvoices.cs" />
+    <Compile Include="Forms\Objects\VPatientsEstimates.cs" />
+    <Compile Include="Forms\Objects\VPatientsInvoices.cs" />
     <Compile Include="Forms\Objects\VPatientsPayments.cs" />
     <Compile Include="Forms\Objects\VPatientsTreatments.cs" />
     <Compile Include="Forms\Objects\VPatientsAppointments.cs" />
@@ -219,6 +233,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormDoctors.resx">
       <DependentUpon>FormDoctors.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormEstimates.resx">
+      <DependentUpon>FormEstimates.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormEstimatesFooters.resx">
       <DependentUpon>FormEstimatesFooters.cs</DependentUpon>
@@ -273,7 +290,9 @@
     <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VAddressesTypes.datasource" />
     <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VContactsTypes.datasource" />
     <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VDoctors.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VEstimates.datasource" />
     <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VEstimatesFooters.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VEstimatesLines.datasource" />
     <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VInvoices.datasource" />
     <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VInvoicesFooters.datasource" />
     <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VInvoicesLines.datasource" />
@@ -284,6 +303,8 @@
     <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VPatientsAttachments.datasource" />
     <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VPatientsAttachmentsTypes.datasource" />
     <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VPatientsContacts.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VPatientsEstimates.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VPatientsInvoices.datasource" />
     <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VPatientsMedicalrecords.datasource" />
     <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VPatientsNotes.datasource" />
     <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VPatientsPayments.datasource" />
@@ -353,7 +374,7 @@
     <EmbeddedResource Include="splashscreen_logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\packages\srm\srm.exe">
+    <Content Include="..\packages\Ext\srm\srm.exe">
       <Link>srm.exe</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

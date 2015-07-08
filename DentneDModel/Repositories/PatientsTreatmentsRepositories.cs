@@ -112,6 +112,11 @@ namespace DG.DentneD.Model.Repositories
                     invoiceline.patientstreatments_id = null;
                     BaseModel.InvoicesLines.Update(invoiceline);
                 }
+                foreach (estimateslines estimateline in BaseModel.EstimatesLines.List(r => r.patientstreatments_id == item.patientstreatments_id))
+                {
+                    estimateline.patientstreatments_id = null;
+                    BaseModel.EstimatesLines.Update(estimateline);
+                }
             }
 
             base.Remove(items);

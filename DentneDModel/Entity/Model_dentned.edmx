@@ -46,8 +46,8 @@
             <PropertyRef Name="estimates_id" />
           </Key>
           <Property Name="estimates_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="doctors_id" Type="int" Nullable="false" />
-          <Property Name="patients_id" Type="int" Nullable="false" />
+          <Property Name="doctors_id" Type="int" />
+          <Property Name="patients_id" Type="int" />
           <Property Name="invoices_id" Type="int" />
           <Property Name="estimates_number" Type="varchar" MaxLength="32" Nullable="false" />
           <Property Name="estimates_date" Type="date" Nullable="false" />
@@ -73,6 +73,7 @@
           </Key>
           <Property Name="estimateslines_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="estimates_id" Type="int" Nullable="false" />
+          <Property Name="patientstreatments_id" Type="int" />
           <Property Name="estimateslines_code" Type="char" MaxLength="3" Nullable="false" />
           <Property Name="estimateslines_description" Type="varchar" MaxLength="512" Nullable="false" />
           <Property Name="estimateslines_quantity" Type="int" Nullable="false" />
@@ -363,7 +364,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_estimates_doctors">
-          <End Role="doctors" Type="Self.doctors" Multiplicity="1" />
+          <End Role="doctors" Type="Self.doctors" Multiplicity="0..1" />
           <End Role="estimates" Type="Self.estimates" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="doctors">
@@ -387,7 +388,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_estimates_patients">
-          <End Role="patients" Type="Self.patients" Multiplicity="1" />
+          <End Role="patients" Type="Self.patients" Multiplicity="0..1" />
           <End Role="estimates" Type="Self.estimates" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="patients">
@@ -407,6 +408,18 @@
             </Principal>
             <Dependent Role="estimateslines">
               <PropertyRef Name="estimates_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_estimateslines_patientstreatments">
+          <End Role="patientstreatments" Type="Self.patientstreatments" Multiplicity="0..1" />
+          <End Role="estimateslines" Type="Self.estimateslines" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patientstreatments">
+              <PropertyRef Name="patientstreatments_id" />
+            </Principal>
+            <Dependent Role="estimateslines">
+              <PropertyRef Name="patientstreatments_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -707,6 +720,10 @@
             <End Role="estimates" EntitySet="estimates" />
             <End Role="estimateslines" EntitySet="estimateslines" />
           </AssociationSet>
+          <AssociationSet Name="FK_estimateslines_patientstreatments" Association="Self.FK_estimateslines_patientstreatments">
+            <End Role="patientstreatments" EntitySet="patientstreatments" />
+            <End Role="estimateslines" EntitySet="estimateslines" />
+          </AssociationSet>
           <AssociationSet Name="FK_invoices_doctors" Association="Self.FK_invoices_doctors">
             <End Role="doctors" EntitySet="doctors" />
             <End Role="invoices" EntitySet="invoices" />
@@ -865,6 +882,10 @@
             <End Role="estimates" EntitySet="estimates" />
             <End Role="estimateslines" EntitySet="estimateslines" />
           </AssociationSet>
+          <AssociationSet Name="FK_estimateslines_patientstreatments" Association="dentnedModel.FK_estimateslines_patientstreatments">
+            <End Role="patientstreatments" EntitySet="patientstreatments" />
+            <End Role="estimateslines" EntitySet="estimateslines" />
+          </AssociationSet>
           <AssociationSet Name="FK_invoices_patients" Association="dentnedModel.FK_invoices_patients">
             <End Role="patients" EntitySet="patients" />
             <End Role="invoices" EntitySet="invoices" />
@@ -980,8 +1001,8 @@
             <PropertyRef Name="estimates_id" />
           </Key>
           <Property Name="estimates_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="doctors_id" Type="Int32" Nullable="false" />
-          <Property Name="patients_id" Type="Int32" Nullable="false" />
+          <Property Name="doctors_id" Type="Int32" />
+          <Property Name="patients_id" Type="Int32" />
           <Property Name="invoices_id" Type="Int32" />
           <Property Name="estimates_number" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
           <Property Name="estimates_date" Type="DateTime" Nullable="false" Precision="0" />
@@ -1011,12 +1032,14 @@
           </Key>
           <Property Name="estimateslines_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="estimates_id" Type="Int32" Nullable="false" />
+          <Property Name="patientstreatments_id" Type="Int32" />
           <Property Name="estimateslines_code" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
           <Property Name="estimateslines_description" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="false" />
           <Property Name="estimateslines_quantity" Type="Int32" Nullable="false" />
           <Property Name="estimateslines_unitprice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
           <Property Name="estimateslines_taxrate" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
           <NavigationProperty Name="estimates" Relationship="dentnedModel.FK_estimateslines_estimates" FromRole="estimateslines" ToRole="estimates" />
+          <NavigationProperty Name="patientstreatments" Relationship="dentnedModel.FK_estimateslines_patientstreatments" FromRole="estimateslines" ToRole="patientstreatments" />
         </EntityType>
         <EntityType Name="invoices">
           <Key>
@@ -1212,6 +1235,7 @@
           <Property Name="patientstreatments_t47" Type="Boolean" Nullable="false" />
           <Property Name="patientstreatments_t48" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="doctors" Relationship="dentnedModel.FK_patientstreatments_doctors" FromRole="patientstreatments" ToRole="doctors" />
+          <NavigationProperty Name="estimateslines" Relationship="dentnedModel.FK_estimateslines_patientstreatments" FromRole="patientstreatments" ToRole="estimateslines" />
           <NavigationProperty Name="invoiceslines" Relationship="dentnedModel.FK_invoiceslines_patientstreatments" FromRole="patientstreatments" ToRole="invoiceslines" />
           <NavigationProperty Name="patients" Relationship="dentnedModel.FK_patientstreatments_patients" FromRole="patientstreatments" ToRole="patients" />
           <NavigationProperty Name="treatments" Relationship="dentnedModel.FK_patientstreatments_treatments" FromRole="patientstreatments" ToRole="treatments" />
@@ -1366,7 +1390,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_estimates_doctors">
-          <End Type="dentnedModel.doctors" Role="doctors" Multiplicity="1" />
+          <End Type="dentnedModel.doctors" Role="doctors" Multiplicity="0..1" />
           <End Type="dentnedModel.estimates" Role="estimates" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="doctors">
@@ -1414,7 +1438,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_estimates_patients">
-          <End Type="dentnedModel.patients" Role="patients" Multiplicity="1" />
+          <End Type="dentnedModel.patients" Role="patients" Multiplicity="0..1" />
           <End Type="dentnedModel.estimates" Role="estimates" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="patients">
@@ -1434,6 +1458,18 @@
             </Principal>
             <Dependent Role="estimateslines">
               <PropertyRef Name="estimates_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_estimateslines_patientstreatments">
+          <End Type="dentnedModel.patientstreatments" Role="patientstreatments" Multiplicity="0..1" />
+          <End Type="dentnedModel.estimateslines" Role="estimateslines" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patientstreatments">
+              <PropertyRef Name="patientstreatments_id" />
+            </Principal>
+            <Dependent Role="estimateslines">
+              <PropertyRef Name="patientstreatments_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1711,6 +1747,7 @@
                 <ScalarProperty Name="estimateslines_quantity" ColumnName="estimateslines_quantity" />
                 <ScalarProperty Name="estimateslines_description" ColumnName="estimateslines_description" />
                 <ScalarProperty Name="estimateslines_code" ColumnName="estimateslines_code" />
+                <ScalarProperty Name="patientstreatments_id" ColumnName="patientstreatments_id" />
                 <ScalarProperty Name="estimates_id" ColumnName="estimates_id" />
                 <ScalarProperty Name="estimateslines_id" ColumnName="estimateslines_id" />
               </MappingFragment>

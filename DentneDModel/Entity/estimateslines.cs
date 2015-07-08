@@ -16,6 +16,7 @@ namespace DG.DentneD.Model.Entity
     {
         public int estimateslines_id { get; set; }
         public int estimates_id { get; set; }
+        public Nullable<int> patientstreatments_id { get; set; }
         public string estimateslines_code { get; set; }
         public string estimateslines_description { get; set; }
         public int estimateslines_quantity { get; set; }
@@ -23,5 +24,6 @@ namespace DG.DentneD.Model.Entity
         public decimal estimateslines_taxrate { get; set; }
     
         public virtual estimates estimates { get; set; }
+        public virtual patientstreatments patientstreatments { get; set; }
     }
 }

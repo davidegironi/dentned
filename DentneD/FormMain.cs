@@ -244,6 +244,16 @@ namespace DentneD
         {
             ShowForm(this, typeof(FormInvoices));
         }
+
+        /// <summary>
+        /// Estimates form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void estimatesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowForm(this, typeof(FormEstimates));
+        }
                 
     }
 }

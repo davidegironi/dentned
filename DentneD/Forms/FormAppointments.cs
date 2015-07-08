@@ -36,6 +36,8 @@ namespace DG.DentneD.Forms
         private int _selectedAppointmentId = -1;
         private DayOfWeek _calendarFirstDayOfTheWeek = DayOfWeek.Monday;
 
+        private bool _calendar_listmonthsReloadAfterMouseWheel = true;
+
         private const int CalendarTitleDayMaxLengh = 100;
         private const int CalendarTitleWeekMaxLengh = 50;
         private const int CalendarTitleMonthMaxLengh = 20;
@@ -114,15 +116,6 @@ namespace DG.DentneD.Forms
             calendar_listweeks.AllowItemEdit = false;
             calendar_listweeks.AllowItemResize = false;
             calendar_listweeks.AllowNew = false;
-            //calendar_listweeks.Height = 24 * (60 / (int)calendar_listweeks.TimeScale) * 23 + 58;
-
-            ////            int scrollvalue = 0;
-            //scrollvalue = calendarDayHourBegin * (60 / (int)calendar_listdays.TimeScale) * 23 + 58 - 30;
-            ////if (scrollvalue > tabPage_tabListDays.VerticalScroll.Minimum && scrollvalue < tabPage_tabListDays.VerticalScroll.Maximum)
-            ////    tabPage_tabListDays.AutoScrollPosition = new Point(0, scrollvalue);
-            //scrollvalue = calendarDayHourBegin * (60 / (int)calendar_listmonths.TimeScale) * 23 + 58 - 30;
-            //if (scrollvalue > tabPage_tabListWeeks.VerticalScroll.Minimum && scrollvalue < tabPage_tabListWeeks.VerticalScroll.Maximum)
-            //    tabPage_tabListWeeks.AutoScrollPosition = new Point(0, scrollvalue);
 
             calendar_listmonths.HighlightRanges = highlightrange;
             calendar_listmonths.TimeScale = CalendarTimeScale.ThirtyMinutes;
@@ -133,10 +126,7 @@ namespace DG.DentneD.Forms
             calendar_listmonths.AllowNew = false;
             calendar_listmonths.MaximumViewDays = 42;
 
-            IsBindingSourceLoading = true;
-            _selectedAppointmentId = -1;
-            appointmentsBindingSource.DataSource = new appointments();
-            IsBindingSourceLoading = false;
+            ResetAppointmentBindingSource();
         }
 
         /// <summary>
@@ -291,14 +281,14 @@ namespace DG.DentneD.Forms
                             r.appointments_from >= fromdate &&
                             r.appointments_from <= todate &&
                             r.doctors_id == doctors_id &&
-                            r.rooms_id == rooms_id).ToList();
+                            r.rooms_id == rooms_id).OrderBy(r => r.rooms_id).ThenBy(r => r.doctors_id).ToList();
                 }
                 else
                 {
                     appointments = _dentnedModel.Appointments.List(r =>
                             r.appointments_from >= fromdate &&
                             r.appointments_from <= todate &&
-                            r.doctors_id == doctors_id).ToList();
+                            r.doctors_id == doctors_id).OrderBy(r => r.rooms_id).ThenBy(r => r.doctors_id).ToList();
                 }                
             }
 
@@ -363,10 +353,7 @@ namespace DG.DentneD.Forms
         /// </summary>
         private void ReloadCalendarItems()
         {
-            IsBindingSourceLoading = true;
-            _selectedAppointmentId = -1;
-            appointmentsBindingSource.DataSource = new appointments();
-            IsBindingSourceLoading = false;
+            ResetAppointmentBindingSource();
 
             if (tabControl_list.SelectedTab == tabPage_tabListDays)
             {
@@ -507,32 +494,11 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void tabControl_list_SelectedIndexChanged(object sender, EventArgs e)
         {
-            IsBindingSourceLoading = true;
-            _selectedAppointmentId = -1;
-            appointmentsBindingSource.DataSource = new appointments();
-            IsBindingSourceLoading = false;
+            ResetAppointmentBindingSource();
 
             LoadAppointments();
         }
 
-        /// <summary>
-        /// Main BindingSource changed handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void appointmentsBindingSource_CurrentChanged(object sender, EventArgs e)
-        {
-            if (IsBindingSourceLoading)
-                return;
-
-            if (appointmentsBindingSource.Current != null)
-            {
-                _selectedAppointmentId = ((appointments)appointmentsBindingSource.Current).appointments_id;
-                if (_selectedAppointmentId == 0)
-                    _selectedAppointmentId = -1;
-            }
-        }
-        
         #endregion
 
         
@@ -575,18 +541,18 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void button_tabAppointments_save_Click(object sender, EventArgs e)
         {
-            if (appointments_fromDateTimePicker.Value.Minute <= 30)
-                appointments_fromDateTimePicker.Value = new DateTime(appointments_fromDateTimePicker.Value.Year, appointments_fromDateTimePicker.Value.Month, appointments_fromDateTimePicker.Value.Day, appointments_fromDateTimePicker.Value.Hour, 0, 0);
-            else
+            if (appointments_fromDateTimePicker.Value.Minute >= 30)
                 appointments_fromDateTimePicker.Value = new DateTime(appointments_fromDateTimePicker.Value.Year, appointments_fromDateTimePicker.Value.Month, appointments_fromDateTimePicker.Value.Day, appointments_fromDateTimePicker.Value.Hour, 30, 0);
-
-            if (appointments_toDateTimePicker.Value.Minute <= 30)
-                appointments_toDateTimePicker.Value = new DateTime(appointments_toDateTimePicker.Value.Year, appointments_toDateTimePicker.Value.Month, appointments_toDateTimePicker.Value.Day, appointments_toDateTimePicker.Value.Hour, 0, 0);
             else
+                appointments_fromDateTimePicker.Value = new DateTime(appointments_fromDateTimePicker.Value.Year, appointments_fromDateTimePicker.Value.Month, appointments_fromDateTimePicker.Value.Day, appointments_fromDateTimePicker.Value.Hour, 0, 0);
+            
+            if (appointments_toDateTimePicker.Value.Minute >= 30)
                 appointments_toDateTimePicker.Value = new DateTime(appointments_toDateTimePicker.Value.Year, appointments_toDateTimePicker.Value.Month, appointments_toDateTimePicker.Value.Day, appointments_toDateTimePicker.Value.Hour, 30, 0);
+            else
+                appointments_toDateTimePicker.Value = new DateTime(appointments_toDateTimePicker.Value.Year, appointments_toDateTimePicker.Value.Month, appointments_toDateTimePicker.Value.Day, appointments_toDateTimePicker.Value.Hour, 0, 0);
 
-            DateTime from = new DateTime(appointments_dateDateTimePicker.Value.Year, appointments_dateDateTimePicker.Value.Month, appointments_dateDateTimePicker.Value.Day, appointments_fromDateTimePicker.Value.Hour, appointments_fromDateTimePicker.Value.Minute, 00);
-            DateTime to = new DateTime(appointments_dateDateTimePicker.Value.Year, appointments_dateDateTimePicker.Value.Month, appointments_dateDateTimePicker.Value.Day, appointments_toDateTimePicker.Value.Hour, appointments_toDateTimePicker.Value.Minute, 00);
+            DateTime from = new DateTime(appointments_dateDateTimePicker.Value.Year, appointments_dateDateTimePicker.Value.Month, appointments_dateDateTimePicker.Value.Day, appointments_fromDateTimePicker.Value.Hour, appointments_fromDateTimePicker.Value.Minute, 0);
+            DateTime to = new DateTime(appointments_dateDateTimePicker.Value.Year, appointments_dateDateTimePicker.Value.Month, appointments_dateDateTimePicker.Value.Day, appointments_toDateTimePicker.Value.Hour, appointments_toDateTimePicker.Value.Minute, 0);
 
             ((appointments)appointmentsBindingSource.Current).appointments_from = from;
             ((appointments)appointmentsBindingSource.Current).appointments_to = to;
@@ -614,7 +580,7 @@ namespace DG.DentneD.Forms
             _currentEditingMode = EditingMode.R;
             SetCustomEditingMode(false);
 
-            monthView_filterDay.SetDate(appointments_dateDateTimePicker.Value);
+            monthView_filterDay.SetDate(from);
 
             LoadAppointments();
         }
@@ -632,6 +598,46 @@ namespace DG.DentneD.Forms
             SetCustomEditingMode(false);
 
             LoadAppointments();
+        }
+
+        /// <summary>
+        /// Main BindingSource changed handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void appointmentsBindingSource_CurrentChanged(object sender, EventArgs e)
+        {
+            if (IsBindingSourceLoading)
+                return;
+
+            if (appointmentsBindingSource.Current != null)
+            {
+                _selectedAppointmentId = ((appointments)appointmentsBindingSource.Current).appointments_id;
+                if (_selectedAppointmentId == 0)
+                    _selectedAppointmentId = -1;
+
+                if (_selectedAppointmentId != -1)
+                {
+                    appointments_dateDateTimePicker.Value = ((appointments)appointmentsBindingSource.Current).appointments_from;
+                    appointments_fromDateTimePicker.Value = ((appointments)appointmentsBindingSource.Current).appointments_from;
+                    appointments_toDateTimePicker.Value = ((appointments)appointmentsBindingSource.Current).appointments_to;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Reset appointment binding source
+        /// </summary>
+        private void ResetAppointmentBindingSource()
+        {
+            IsBindingSourceLoading = true;
+            _selectedAppointmentId = -1;
+            DateTime now = DateTime.Now;
+            appointments_dateDateTimePicker.Value = DateTime.Now;
+            appointments_fromDateTimePicker.Value = new DateTime(now.Year, now.Month, now.Day, 0, 0, 0);
+            appointments_toDateTimePicker.Value = new DateTime(now.Year, now.Month, now.Day, 0, 0, 0);
+            appointmentsBindingSource.DataSource = new appointments();
+            IsBindingSourceLoading = false;
         }
 
         /// <summary>
@@ -668,10 +674,7 @@ namespace DG.DentneD.Forms
 
 
         #region calendar handlers
-
-        private int _verticalscrollY = 0;
-
-
+        
         /// <summary>
         /// Day item click
         /// </summary>
@@ -685,11 +688,6 @@ namespace DG.DentneD.Forms
             }
             else
             {
-                if(tabControl_list.SelectedTab == tabPage_tabListDays)
-                    tabPage_tabListDays.AutoScrollPosition = new Point(0, _verticalscrollY);
-                else if (tabControl_list.SelectedTab == tabPage_tabListMonths)
-                    tabPage_tabListMonths.AutoScrollPosition = new Point(0, _verticalscrollY);
-
                 int appointments_id = ((CustomCalendarItem)e.Item).AppointmentId;
                 if (appointments_id != -1)
                 {
@@ -712,9 +710,9 @@ namespace DG.DentneD.Forms
                 _currentEditingMode = EditingMode.C;
                 SetCustomEditingMode(true);
 
+                ResetAppointmentBindingSource();
+
                 IsBindingSourceLoading = true;
-                _selectedAppointmentId = -1;
-                appointmentsBindingSource.DataSource = new appointments();
                 appointmentsBindingSource.AddNew();
                 IsBindingSourceLoading = false;
 
@@ -733,7 +731,6 @@ namespace DG.DentneD.Forms
                 }
 
                 ((appointments)appointmentsBindingSource.Current).doctors_id = Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_filterDoctors.SelectedItem).Id);
-                doctors_idComboBox.Enabled = false;
                                
                 if (comboBox_filterRooms.SelectedIndex != -1 && comboBox_filterRooms.SelectedIndex != 0)
                     ((appointments)appointmentsBindingSource.Current).rooms_id = Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_filterRooms.SelectedItem).Id);
@@ -785,10 +782,7 @@ namespace DG.DentneD.Forms
 
             if (calendar_listdays.GetSelectedItems().Count() > 1 || calendar_listdays.GetSelectedItems().Count() == 0)
             {
-                IsBindingSourceLoading = true;
-                _selectedAppointmentId = -1;
-                appointmentsBindingSource.DataSource = new appointments();
-                IsBindingSourceLoading = false;
+                ResetAppointmentBindingSource();
             }
         }
         
@@ -810,6 +804,7 @@ namespace DG.DentneD.Forms
         private void calendar_listweeks_ItemCreating(object sender, CalendarItemCancelEventArgs e)
         {
             calendar_listdays_ItemCreating(sender, new CalendarItemCancelEventArgs(e.Item));
+            e.Cancel = true;
         }
 
         /// <summary>
@@ -848,10 +843,7 @@ namespace DG.DentneD.Forms
 
             if (calendar_listweeks.GetSelectedItems().Count() > 1 || calendar_listweeks.GetSelectedItems().Count() == 0)
             {
-                IsBindingSourceLoading = true;
-                _selectedAppointmentId = -1;
-                appointmentsBindingSource.DataSource = new appointments();
-                IsBindingSourceLoading = false;
+                ResetAppointmentBindingSource();
             }
         }
 
@@ -900,11 +892,34 @@ namespace DG.DentneD.Forms
 
             if (calendar_listmonths.GetSelectedItems().Count() > 1 || calendar_listmonths.GetSelectedItems().Count() == 0)
             {
-                IsBindingSourceLoading = true;
-                _selectedAppointmentId = -1;
-                appointmentsBindingSource.DataSource = new appointments();
-                IsBindingSourceLoading = false;
+                ResetAppointmentBindingSource();
             }
+
+            if (_calendar_listmonthsReloadAfterMouseWheel)
+            {
+                _calendar_listmonthsReloadAfterMouseWheel = false;
+                ReloadCalendarItems();
+            }
+        }
+
+        /// <summary>
+        /// Month mouse wheel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void calendar_listmonths_MouseWheel(object sender, MouseEventArgs e)
+        {
+            //prevent mousewhell
+            if (e.Delta >= 0)
+            {
+                calendar_listmonths.SetViewRange(calendar_listmonths.ViewStart.AddDays(7), calendar_listmonths.ViewEnd.AddDays(7));
+            }
+            else
+            {
+                calendar_listmonths.SetViewRange(calendar_listmonths.ViewStart.AddDays(-7), calendar_listmonths.ViewEnd.AddDays(-7));
+            }
+
+            _calendar_listmonthsReloadAfterMouseWheel = true;
         }
 
         /// <summary>
@@ -918,8 +933,8 @@ namespace DG.DentneD.Forms
             return Color.FromArgb(randomGen.Next(0, 255), randomGen.Next(0, 255), randomGen.Next(0, 255));
         }
 
-        #endregion
-                                                                               
+        #endregion                                                                
+
     }
 
     #region Calendar custom objects

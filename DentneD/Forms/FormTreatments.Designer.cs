@@ -40,6 +40,7 @@
             System.Windows.Forms.Label treatmentsprices_priceLabel;
             System.Windows.Forms.Label treatments_mexpirationLabel;
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormTreatments));
             this.panel_data = new System.Windows.Forms.Panel();
@@ -80,18 +81,18 @@
             this.button_tabTreatmentsPrices_new = new System.Windows.Forms.Button();
             this.panel_tabTreatmentsPrices_list = new System.Windows.Forms.Panel();
             this.advancedDataGridView_tabTreatmentsPrices_list = new Zuby.ADGV.AdvancedDataGridView();
+            this.vTreatmentsPricesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel_list = new System.Windows.Forms.Panel();
             this.advancedDataGridView_main = new Zuby.ADGV.AdvancedDataGridView();
-            this.panel_filters = new System.Windows.Forms.Panel();
             this.treatmentsidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.codeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.typeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.vTreatmentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.panel_filters = new System.Windows.Forms.Panel();
             this.treatmentspricesidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pricelistDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vTreatmentsPricesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             treatments_idLabel = new System.Windows.Forms.Label();
             treatments_codeLabel = new System.Windows.Forms.Label();
             treatments_nameLabel = new System.Windows.Forms.Label();
@@ -117,10 +118,10 @@
             this.panel_tabTreatmentsPrices_actions.SuspendLayout();
             this.panel_tabTreatmentsPrices_list.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabTreatmentsPrices_list)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vTreatmentsPricesBindingSource)).BeginInit();
             this.panel_list.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_main)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.vTreatmentsBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vTreatmentsPricesBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // treatments_idLabel
@@ -599,6 +600,10 @@
             this.advancedDataGridView_tabTreatmentsPrices_list.SortStringChanged += new System.EventHandler(this.advancedDataGridView_tabTreatmentsPrices_list_SortStringChanged);
             this.advancedDataGridView_tabTreatmentsPrices_list.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_tabTreatmentsPrices_list_FilterStringChanged);
             // 
+            // vTreatmentsPricesBindingSource
+            // 
+            this.vTreatmentsPricesBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VTreatmentsPrices);
+            // 
             // panel_list
             // 
             this.panel_list.Controls.Add(this.advancedDataGridView_main);
@@ -613,8 +618,8 @@
             this.advancedDataGridView_main.AllowUserToAddRows = false;
             this.advancedDataGridView_main.AllowUserToDeleteRows = false;
             this.advancedDataGridView_main.AllowUserToResizeRows = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.advancedDataGridView_main.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.advancedDataGridView_main.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.advancedDataGridView_main.AutoGenerateColumns = false;
             this.advancedDataGridView_main.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.advancedDataGridView_main.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -635,14 +640,6 @@
             this.advancedDataGridView_main.TabIndex = 0;
             this.advancedDataGridView_main.SortStringChanged += new System.EventHandler(this.advancedDataGridView_main_SortStringChanged);
             this.advancedDataGridView_main.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_main_FilterStringChanged);
-            // 
-            // panel_filters
-            // 
-            this.panel_filters.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel_filters.Location = new System.Drawing.Point(0, 0);
-            this.panel_filters.Name = "panel_filters";
-            this.panel_filters.Size = new System.Drawing.Size(284, 60);
-            this.panel_filters.TabIndex = 10;
             // 
             // treatmentsidDataGridViewTextBoxColumn
             // 
@@ -688,6 +685,14 @@
             this.vTreatmentsBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VTreatments);
             this.vTreatmentsBindingSource.CurrentChanged += new System.EventHandler(this.vTreatmentsBindingSource_CurrentChanged);
             // 
+            // panel_filters
+            // 
+            this.panel_filters.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel_filters.Location = new System.Drawing.Point(0, 0);
+            this.panel_filters.Name = "panel_filters";
+            this.panel_filters.Size = new System.Drawing.Size(284, 60);
+            this.panel_filters.TabIndex = 10;
+            // 
             // treatmentspricesidDataGridViewTextBoxColumn
             // 
             this.treatmentspricesidDataGridViewTextBoxColumn.DataPropertyName = "treatmentsprices_id";
@@ -712,15 +717,13 @@
             // 
             this.priceDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.priceDataGridViewTextBoxColumn.DataPropertyName = "price";
+            dataGridViewCellStyle2.Format = "0.00";
+            this.priceDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
             this.priceDataGridViewTextBoxColumn.HeaderText = "Price";
             this.priceDataGridViewTextBoxColumn.MinimumWidth = 22;
             this.priceDataGridViewTextBoxColumn.Name = "priceDataGridViewTextBoxColumn";
             this.priceDataGridViewTextBoxColumn.ReadOnly = true;
             this.priceDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // vTreatmentsPricesBindingSource
-            // 
-            this.vTreatmentsPricesBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VTreatmentsPrices);
             // 
             // FormTreatments
             // 
@@ -754,10 +757,10 @@
             this.panel_tabTreatmentsPrices_actions.ResumeLayout(false);
             this.panel_tabTreatmentsPrices_list.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabTreatmentsPrices_list)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vTreatmentsPricesBindingSource)).EndInit();
             this.panel_list.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_main)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.vTreatmentsBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vTreatmentsPricesBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }

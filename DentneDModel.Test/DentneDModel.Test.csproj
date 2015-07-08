@@ -35,8 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DGDataModel">
-      <HintPath>..\packages\DGDataModel\DGDataModel.dll</HintPath>
+    <Reference Include="DGDataModel, Version=1.1.18530.42, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Ext\DGDataModel\DGDataModel.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -102,7 +103,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\packages\srm\srm.exe">
+    <Content Include="..\packages\Ext\srm\srm.exe">
       <Link>srm.exe</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

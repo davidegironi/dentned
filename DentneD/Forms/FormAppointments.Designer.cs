@@ -37,16 +37,16 @@
             System.Windows.Forms.Label appointments_notesLabel;
             System.Windows.Forms.Label appointments_fromLabel;
             System.Windows.Forms.Label appointments_toLabel;
-            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange6 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
-            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange7 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
-            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange8 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
-            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange9 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
-            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange10 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
             System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange1 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
             System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange2 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
             System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange3 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
             System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange4 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
             System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange5 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
+            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange6 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
+            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange7 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
+            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange8 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
+            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange9 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
+            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange10 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
             System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange11 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
             System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange12 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
             System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange13 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
@@ -58,10 +58,10 @@
             this.tabPage_tabAppointments = new System.Windows.Forms.TabPage();
             this.panel_tabAppointments_data = new System.Windows.Forms.Panel();
             this.appointments_dateDateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.appointmentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.appointments_toDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.appointments_fromDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.appointments_notesTextBox = new System.Windows.Forms.TextBox();
+            this.appointmentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.appointments_titleTextBox = new System.Windows.Forms.TextBox();
             this.patients_idComboBox = new System.Windows.Forms.ComboBox();
             this.doctors_idComboBox = new System.Windows.Forms.ComboBox();
@@ -75,10 +75,10 @@
             this.button_tabAppointments_edit = new System.Windows.Forms.Button();
             this.panel_list = new System.Windows.Forms.Panel();
             this.tabControl_list = new System.Windows.Forms.TabControl();
-            this.tabPage_tabListWeeks = new System.Windows.Forms.TabPage();
-            this.calendar_listweeks = new System.Windows.Forms.Calendar.Calendar();
             this.tabPage_tabListDays = new System.Windows.Forms.TabPage();
             this.calendar_listdays = new System.Windows.Forms.Calendar.Calendar();
+            this.tabPage_tabListWeeks = new System.Windows.Forms.TabPage();
+            this.calendar_listweeks = new System.Windows.Forms.Calendar.Calendar();
             this.tabPage_tabListMonths = new System.Windows.Forms.TabPage();
             this.calendar_listmonths = new System.Windows.Forms.Calendar.Calendar();
             this.panel_filters = new System.Windows.Forms.Panel();
@@ -105,8 +105,8 @@
             this.panel_tabAppointments_actions.SuspendLayout();
             this.panel_list.SuspendLayout();
             this.tabControl_list.SuspendLayout();
-            this.tabPage_tabListWeeks.SuspendLayout();
             this.tabPage_tabListDays.SuspendLayout();
+            this.tabPage_tabListWeeks.SuspendLayout();
             this.tabPage_tabListMonths.SuspendLayout();
             this.panel_filters.SuspendLayout();
             this.SuspendLayout();
@@ -242,22 +242,15 @@
             // 
             // appointments_dateDateTimePicker
             // 
-            this.appointments_dateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.appointmentsBindingSource, "appointments_from", true));
             this.appointments_dateDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.appointments_dateDateTimePicker.Location = new System.Drawing.Point(13, 104);
             this.appointments_dateDateTimePicker.Name = "appointments_dateDateTimePicker";
             this.appointments_dateDateTimePicker.Size = new System.Drawing.Size(100, 20);
             this.appointments_dateDateTimePicker.TabIndex = 19;
             // 
-            // appointmentsBindingSource
-            // 
-            this.appointmentsBindingSource.DataSource = typeof(DG.DentneD.Model.Entity.appointments);
-            this.appointmentsBindingSource.CurrentChanged += new System.EventHandler(this.appointmentsBindingSource_CurrentChanged);
-            // 
             // appointments_toDateTimePicker
             // 
             this.appointments_toDateTimePicker.CustomFormat = "HH:mm";
-            this.appointments_toDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.appointmentsBindingSource, "appointments_to", true));
             this.appointments_toDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.appointments_toDateTimePicker.Location = new System.Drawing.Point(119, 143);
             this.appointments_toDateTimePicker.Name = "appointments_toDateTimePicker";
@@ -268,7 +261,6 @@
             // appointments_fromDateTimePicker
             // 
             this.appointments_fromDateTimePicker.CustomFormat = "HH:mm";
-            this.appointments_fromDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.appointmentsBindingSource, "appointments_from", true));
             this.appointments_fromDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.appointments_fromDateTimePicker.Location = new System.Drawing.Point(119, 104);
             this.appointments_fromDateTimePicker.Name = "appointments_fromDateTimePicker";
@@ -285,6 +277,11 @@
             this.appointments_notesTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.appointments_notesTextBox.Size = new System.Drawing.Size(200, 50);
             this.appointments_notesTextBox.TabIndex = 15;
+            // 
+            // appointmentsBindingSource
+            // 
+            this.appointmentsBindingSource.DataSource = typeof(DG.DentneD.Model.Entity.appointments);
+            this.appointmentsBindingSource.CurrentChanged += new System.EventHandler(this.appointmentsBindingSource_CurrentChanged);
             // 
             // appointments_titleTextBox
             // 
@@ -417,53 +414,6 @@
             this.tabControl_list.TabIndex = 0;
             this.tabControl_list.SelectedIndexChanged += new System.EventHandler(this.tabControl_list_SelectedIndexChanged);
             // 
-            // tabPage_tabListWeeks
-            // 
-            this.tabPage_tabListWeeks.Controls.Add(this.calendar_listweeks);
-            this.tabPage_tabListWeeks.Location = new System.Drawing.Point(4, 22);
-            this.tabPage_tabListWeeks.Name = "tabPage_tabListWeeks";
-            this.tabPage_tabListWeeks.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_tabListWeeks.Size = new System.Drawing.Size(476, 354);
-            this.tabPage_tabListWeeks.TabIndex = 1;
-            this.tabPage_tabListWeeks.Text = "Week";
-            this.tabPage_tabListWeeks.UseVisualStyleBackColor = true;
-            // 
-            // calendar_listweeks
-            // 
-            this.calendar_listweeks.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.calendar_listweeks.Font = new System.Drawing.Font("Segoe UI", 9F);
-            calendarHighlightRange6.DayOfWeek = System.DayOfWeek.Monday;
-            calendarHighlightRange6.EndTime = System.TimeSpan.Parse("17:00:00");
-            calendarHighlightRange6.StartTime = System.TimeSpan.Parse("08:00:00");
-            calendarHighlightRange7.DayOfWeek = System.DayOfWeek.Tuesday;
-            calendarHighlightRange7.EndTime = System.TimeSpan.Parse("17:00:00");
-            calendarHighlightRange7.StartTime = System.TimeSpan.Parse("08:00:00");
-            calendarHighlightRange8.DayOfWeek = System.DayOfWeek.Wednesday;
-            calendarHighlightRange8.EndTime = System.TimeSpan.Parse("17:00:00");
-            calendarHighlightRange8.StartTime = System.TimeSpan.Parse("08:00:00");
-            calendarHighlightRange9.DayOfWeek = System.DayOfWeek.Thursday;
-            calendarHighlightRange9.EndTime = System.TimeSpan.Parse("17:00:00");
-            calendarHighlightRange9.StartTime = System.TimeSpan.Parse("08:00:00");
-            calendarHighlightRange10.DayOfWeek = System.DayOfWeek.Friday;
-            calendarHighlightRange10.EndTime = System.TimeSpan.Parse("17:00:00");
-            calendarHighlightRange10.StartTime = System.TimeSpan.Parse("08:00:00");
-            this.calendar_listweeks.HighlightRanges = new System.Windows.Forms.Calendar.CalendarHighlightRange[] {
-        calendarHighlightRange6,
-        calendarHighlightRange7,
-        calendarHighlightRange8,
-        calendarHighlightRange9,
-        calendarHighlightRange10};
-            this.calendar_listweeks.ItemsTimeFormat = "hh:mm";
-            this.calendar_listweeks.Location = new System.Drawing.Point(3, 3);
-            this.calendar_listweeks.Name = "calendar_listweeks";
-            this.calendar_listweeks.Size = new System.Drawing.Size(470, 348);
-            this.calendar_listweeks.TabIndex = 1;
-            this.calendar_listweeks.Text = "calendar_listweeks";
-            this.calendar_listweeks.DayHeaderClick += new System.Windows.Forms.Calendar.Calendar.CalendarDayEventHandler(this.calendar_listweeks_DayHeaderClick);
-            this.calendar_listweeks.ItemClick += new System.Windows.Forms.Calendar.Calendar.CalendarItemEventHandler(this.calendar_listweeks_ItemClick);
-            this.calendar_listweeks.ItemDoubleClick += new System.Windows.Forms.Calendar.Calendar.CalendarItemEventHandler(this.calendar_listweeks_ItemDoubleClick);
-            this.calendar_listweeks.Paint += new System.Windows.Forms.PaintEventHandler(this.calendar_listweeks_Paint);
-            // 
             // tabPage_tabListDays
             // 
             this.tabPage_tabListDays.Controls.Add(this.calendar_listdays);
@@ -507,10 +457,61 @@
             this.calendar_listdays.Size = new System.Drawing.Size(470, 348);
             this.calendar_listdays.TabIndex = 0;
             this.calendar_listdays.Text = "calendar_listdays";
+            this.calendar_listdays.ItemCreating += new System.Windows.Forms.Calendar.Calendar.CalendarItemCancelEventHandler(this.calendar_listdays_ItemCreating);
+            this.calendar_listdays.ItemDeleting += new System.Windows.Forms.Calendar.Calendar.CalendarItemCancelEventHandler(this.calendar_listdays_ItemDeleting);
             this.calendar_listdays.ItemClick += new System.Windows.Forms.Calendar.Calendar.CalendarItemEventHandler(this.calendar_listdays_ItemClick);
             this.calendar_listdays.ItemDoubleClick += new System.Windows.Forms.Calendar.Calendar.CalendarItemEventHandler(this.calendar_listdays_ItemDoubleClick);
             this.calendar_listdays.ItemSelected += new System.Windows.Forms.Calendar.Calendar.CalendarItemEventHandler(this.calendar_listdays_ItemSelected);
             this.calendar_listdays.Paint += new System.Windows.Forms.PaintEventHandler(this.calendar_listdays_Paint);
+            // 
+            // tabPage_tabListWeeks
+            // 
+            this.tabPage_tabListWeeks.Controls.Add(this.calendar_listweeks);
+            this.tabPage_tabListWeeks.Location = new System.Drawing.Point(4, 22);
+            this.tabPage_tabListWeeks.Name = "tabPage_tabListWeeks";
+            this.tabPage_tabListWeeks.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage_tabListWeeks.Size = new System.Drawing.Size(476, 354);
+            this.tabPage_tabListWeeks.TabIndex = 1;
+            this.tabPage_tabListWeeks.Text = "Week";
+            this.tabPage_tabListWeeks.UseVisualStyleBackColor = true;
+            // 
+            // calendar_listweeks
+            // 
+            this.calendar_listweeks.AutoScroll = true;
+            this.calendar_listweeks.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.calendar_listweeks.Font = new System.Drawing.Font("Segoe UI", 9F);
+            calendarHighlightRange6.DayOfWeek = System.DayOfWeek.Monday;
+            calendarHighlightRange6.EndTime = System.TimeSpan.Parse("17:00:00");
+            calendarHighlightRange6.StartTime = System.TimeSpan.Parse("08:00:00");
+            calendarHighlightRange7.DayOfWeek = System.DayOfWeek.Tuesday;
+            calendarHighlightRange7.EndTime = System.TimeSpan.Parse("17:00:00");
+            calendarHighlightRange7.StartTime = System.TimeSpan.Parse("08:00:00");
+            calendarHighlightRange8.DayOfWeek = System.DayOfWeek.Wednesday;
+            calendarHighlightRange8.EndTime = System.TimeSpan.Parse("17:00:00");
+            calendarHighlightRange8.StartTime = System.TimeSpan.Parse("08:00:00");
+            calendarHighlightRange9.DayOfWeek = System.DayOfWeek.Thursday;
+            calendarHighlightRange9.EndTime = System.TimeSpan.Parse("17:00:00");
+            calendarHighlightRange9.StartTime = System.TimeSpan.Parse("08:00:00");
+            calendarHighlightRange10.DayOfWeek = System.DayOfWeek.Friday;
+            calendarHighlightRange10.EndTime = System.TimeSpan.Parse("17:00:00");
+            calendarHighlightRange10.StartTime = System.TimeSpan.Parse("08:00:00");
+            this.calendar_listweeks.HighlightRanges = new System.Windows.Forms.Calendar.CalendarHighlightRange[] {
+        calendarHighlightRange6,
+        calendarHighlightRange7,
+        calendarHighlightRange8,
+        calendarHighlightRange9,
+        calendarHighlightRange10};
+            this.calendar_listweeks.ItemsTimeFormat = "hh:mm";
+            this.calendar_listweeks.Location = new System.Drawing.Point(3, 3);
+            this.calendar_listweeks.Name = "calendar_listweeks";
+            this.calendar_listweeks.Size = new System.Drawing.Size(470, 348);
+            this.calendar_listweeks.TabIndex = 1;
+            this.calendar_listweeks.Text = "calendar_listweeks";
+            this.calendar_listweeks.DayHeaderClick += new System.Windows.Forms.Calendar.Calendar.CalendarDayEventHandler(this.calendar_listweeks_DayHeaderClick);
+            this.calendar_listweeks.ItemCreating += new System.Windows.Forms.Calendar.Calendar.CalendarItemCancelEventHandler(this.calendar_listweeks_ItemCreating);
+            this.calendar_listweeks.ItemClick += new System.Windows.Forms.Calendar.Calendar.CalendarItemEventHandler(this.calendar_listweeks_ItemClick);
+            this.calendar_listweeks.ItemDoubleClick += new System.Windows.Forms.Calendar.Calendar.CalendarItemEventHandler(this.calendar_listweeks_ItemDoubleClick);
+            this.calendar_listweeks.Paint += new System.Windows.Forms.PaintEventHandler(this.calendar_listweeks_Paint);
             // 
             // tabPage_tabListMonths
             // 
@@ -555,7 +556,9 @@
             this.calendar_listmonths.TabIndex = 1;
             this.calendar_listmonths.Text = "calendar_listmonths";
             this.calendar_listmonths.DayHeaderClick += new System.Windows.Forms.Calendar.Calendar.CalendarDayEventHandler(this.calendar_listmonths_DayHeaderClick);
+            this.calendar_listmonths.ItemCreating += new System.Windows.Forms.Calendar.Calendar.CalendarItemCancelEventHandler(this.calendar_listmonths_ItemCreating);
             this.calendar_listmonths.ItemClick += new System.Windows.Forms.Calendar.Calendar.CalendarItemEventHandler(this.calendar_listmonths_ItemClick);
+            this.calendar_listmonths.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.calendar_listmonths_MouseWheel);
             this.calendar_listmonths.Paint += new System.Windows.Forms.PaintEventHandler(this.calendar_listmonths_Paint);
             // 
             // panel_filters
@@ -651,15 +654,15 @@
             this.panel_tabAppointments_actions.ResumeLayout(false);
             this.panel_list.ResumeLayout(false);
             this.tabControl_list.ResumeLayout(false);
-            this.tabPage_tabListWeeks.ResumeLayout(false);
             this.tabPage_tabListDays.ResumeLayout(false);
+            this.tabPage_tabListWeeks.ResumeLayout(false);
             this.tabPage_tabListMonths.ResumeLayout(false);
             this.panel_filters.ResumeLayout(false);
             this.panel_filters.PerformLayout();
             this.ResumeLayout(false);
 
         }
-
+        
         #endregion
 
         private System.Windows.Forms.Panel panel_data;

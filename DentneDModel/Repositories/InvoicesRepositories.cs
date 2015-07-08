@@ -153,6 +153,11 @@ namespace DG.DentneD.Model.Repositories
             foreach (invoices item in items)
             {
                 BaseModel.InvoicesLines.Remove(BaseModel.InvoicesLines.List(r => r.invoices_id == item.invoices_id).ToArray());
+                foreach (estimates estimate in BaseModel.Estimates.List(r => r.invoices_id == item.invoices_id))
+                {
+                    estimate.invoices_id = null;
+                    BaseModel.Estimates.Update(estimate);
+                }
             }
 
             base.Remove(items);

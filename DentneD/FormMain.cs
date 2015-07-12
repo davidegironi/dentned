@@ -5,9 +5,11 @@
 #endregion
 
 using DG.DentneD.Forms;
+using DG.DentneD.Model;
 using DG.UI.GHF;
 using System;
 using System.IO;
+using System.Windows.Forms;
 
 namespace DentneD
 {
@@ -31,8 +33,16 @@ namespace DentneD
         private void FormMain_Load(object sender, EventArgs e)
         {
             // Perform the first connection
-            DG.DentneD.Model.DentneDModel _dentnedModel = new DG.DentneD.Model.DentneDModel();
-            _dentnedModel.Doctors.Find(-1);
+            try
+            {
+                DentneDModel dentnedModel = new DentneDModel();
+                dentnedModel.Doctors.Find(-1);
+            }
+            catch
+            {
+                MessageBox.Show("Database connection error. This application will be closed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+            }
         }
 
         /// <summary>

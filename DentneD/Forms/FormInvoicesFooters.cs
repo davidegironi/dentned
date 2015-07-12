@@ -100,7 +100,9 @@ namespace DG.DentneD.Forms
         {
             ReloadView();
 
+            IsBindingSourceLoading = true;
             advancedDataGridView_main.SortASC(advancedDataGridView_main.Columns[1]);
+            IsBindingSourceLoading = false;
         }
 
         /// <summary>

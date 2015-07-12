@@ -138,8 +138,11 @@ namespace DG.DentneD.Forms
 
             ReloadView();
 
+            IsBindingSourceLoading = true;
             advancedDataGridView_main.SortASC(advancedDataGridView_main.Columns[1]);
-            advancedDataGridView_tabTreatmentsPrices_list.SortASC(advancedDataGridView_tabTreatmentsPrices_list.Columns[1]);
+            IsBindingSourceLoading = false;
+
+            ResetTabsDataGrid();
         }
 
         /// <summary>
@@ -168,12 +171,23 @@ namespace DG.DentneD.Forms
         }
 
         /// <summary>
+        /// Reset all the tab datagrid
+        /// </summary>
+        private void ResetTabsDataGrid()
+        {
+            IsBindingSourceLoading = true;
+            advancedDataGridView_tabTreatmentsPrices_list.CleanFilterAndSort();
+            advancedDataGridView_tabTreatmentsPrices_list.SortASC(advancedDataGridView_tabTreatmentsPrices_list.Columns[1]);
+            IsBindingSourceLoading = false;
+        }
+
+        /// <summary>
         /// Get main list DataSource
         /// </summary>
         /// <returns></returns>
         private object GetDataSource_main()
         {
-            advancedDataGridView_tabTreatmentsPrices_list.CleanFilterAndSort();
+            ResetTabsDataGrid();
 
             IEnumerable<VTreatments> vTreatments =
                 _dentnedModel.Treatments.List().Select(

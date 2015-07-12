@@ -22,6 +22,7 @@ using System.Diagnostics;
 using System.Text;
 using DG.DentneD.Model.Repositories;
 using System.Linq.Expressions;
+using System.Drawing;
 
 namespace DG.DentneD.Forms
 {
@@ -51,6 +52,9 @@ namespace DG.DentneD.Forms
         private readonly string _patientsAttachmentsdir = "";
         private readonly bool _doSecureDelete = false;
 
+        public int invoices_id_toload = -1;
+        public int estimates_id_toload = -1;
+        
         /// <summary>
         /// Constructor
         /// </summary>
@@ -250,7 +254,7 @@ namespace DG.DentneD.Forms
                     Remove = Remove_tabPatientsTreatments
                 }
             };
-
+            tabElement_tabPatientsTreatments.ElementListItem.BindingSourceListChanged += tabPatientsTreatments_BindingSourceListChanged;
             //set tabPayments
             tabElement_tabPayments = new TabElement()
             {
@@ -476,7 +480,7 @@ namespace DG.DentneD.Forms
             TabElements.Add(tabElement_tabEstimates);
             TabElements.Add(tabElement_tabPatientsNotes);
         }
-
+                
         /// <summary>
         /// Loader
         /// </summary>
@@ -488,17 +492,15 @@ namespace DG.DentneD.Forms
 
             ReloadView();
 
+            IsBindingSourceLoading = true;
             advancedDataGridView_main.SortASC(advancedDataGridView_main.Columns[1]);
-            advancedDataGridView_tabPatients_tabPatientsContacts_list.SortASC(advancedDataGridView_tabPatients_tabPatientsContacts_list.Columns[1]);
-            advancedDataGridView_tabPatients_tabPatientsAddresses_list.SortASC(advancedDataGridView_tabPatients_tabPatientsAddresses_list.Columns[1]);
-            advancedDataGridView_tabPatientsMedicalrecords_list.SortASC(advancedDataGridView_tabPatientsMedicalrecords_list.Columns[1]);
-            advancedDataGridView_tabPatientsTreatments_list.SortDESC(advancedDataGridView_tabPatientsTreatments_list.Columns[1]);
-            advancedDataGridView_tabPatientsTreatments_list.DisableFilterAndSort(advancedDataGridView_tabPatientsTreatments_list.Columns["toothsDataGridViewTextBoxColumn"]);
-            advancedDataGridView_tabAppointments_list.SortDESC(advancedDataGridView_tabAppointments_list.Columns[1]);
-            advancedDataGridView_tabPatientsAttachments_list.SortASC(advancedDataGridView_tabPatientsAttachments_list.Columns[1]);
-            advancedDataGridView_tabInvoices_list.SortASC(advancedDataGridView_tabInvoices_list.Columns[1]);
-            advancedDataGridView_tabEstimates_list.SortASC(advancedDataGridView_tabEstimates_list.Columns[1]);
-            advancedDataGridView_tabPatientsNotes_list.SortASC(advancedDataGridView_tabPatientsNotes_list.Columns[1]);
+            IsBindingSourceLoading = false;
+
+            ResetTabsDataGrid();
+
+            IsBindingSourceLoading = true;
+            patientstreatments_filtertanyCheckBox.Checked = true;
+            IsBindingSourceLoading = false;
         }
 
         /// <summary>
@@ -506,6 +508,8 @@ namespace DG.DentneD.Forms
         /// </summary>
         private void PreloadView()
         {
+            IsBindingSourceLoading = true;
+
             //load filter doctors
             comboBox_filterArchived.Items.Clear();
             comboBox_filterArchived.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(FilterShow.NotArchived.ToString(), "Not Archived"));
@@ -560,6 +564,36 @@ namespace DG.DentneD.Forms
             treatments_idComboBox.DataSource = _dentnedModel.Treatments.List().Select(r => new { name = r.treatments_code + " - " + r.treatments_name, r.treatments_id }).OrderBy(r => r.name).ToList();
             treatments_idComboBox.DisplayMember = "name";
             treatments_idComboBox.ValueMember = "treatments_id";
+
+            IsBindingSourceLoading = false;
+        }
+
+        /// <summary>
+        /// Reset all the tab datagrid
+        /// </summary>
+        private void ResetTabsDataGrid()
+        {
+            IsBindingSourceLoading = true;
+            advancedDataGridView_tabPatients_tabPatientsContacts_list.CleanFilterAndSort();
+            advancedDataGridView_tabPatients_tabPatientsContacts_list.SortASC(advancedDataGridView_tabPatients_tabPatientsContacts_list.Columns[1]);
+            advancedDataGridView_tabPatients_tabPatientsAddresses_list.CleanFilterAndSort();
+            advancedDataGridView_tabPatients_tabPatientsAddresses_list.SortASC(advancedDataGridView_tabPatients_tabPatientsAddresses_list.Columns[1]);
+            advancedDataGridView_tabPatientsMedicalrecords_list.CleanFilterAndSort();
+            advancedDataGridView_tabPatientsMedicalrecords_list.SortASC(advancedDataGridView_tabPatientsMedicalrecords_list.Columns[1]);
+            advancedDataGridView_tabPatientsTreatments_list.CleanFilterAndSort();
+            advancedDataGridView_tabPatientsTreatments_list.SortDESC(advancedDataGridView_tabPatientsTreatments_list.Columns[1]);
+            advancedDataGridView_tabPatientsTreatments_list.DisableFilterAndSort(advancedDataGridView_tabPatientsTreatments_list.Columns["toothsDataGridViewTextBoxColumn"]);
+            advancedDataGridView_tabAppointments_list.CleanFilterAndSort();
+            advancedDataGridView_tabAppointments_list.SortDESC(advancedDataGridView_tabAppointments_list.Columns[1]);
+            advancedDataGridView_tabPatientsAttachments_list.CleanFilterAndSort();
+            advancedDataGridView_tabPatientsAttachments_list.SortASC(advancedDataGridView_tabPatientsAttachments_list.Columns[1]);
+            advancedDataGridView_tabInvoices_list.CleanFilterAndSort();
+            advancedDataGridView_tabInvoices_list.SortASC(advancedDataGridView_tabInvoices_list.Columns[2]);
+            advancedDataGridView_tabEstimates_list.CleanFilterAndSort();
+            advancedDataGridView_tabEstimates_list.SortASC(advancedDataGridView_tabEstimates_list.Columns[2]);
+            advancedDataGridView_tabPatientsNotes_list.CleanFilterAndSort();
+            advancedDataGridView_tabPatientsNotes_list.SortASC(advancedDataGridView_tabPatientsNotes_list.Columns[1]);
+            IsBindingSourceLoading = false;
         }
 
         /// <summary>
@@ -568,15 +602,7 @@ namespace DG.DentneD.Forms
         /// <returns></returns>
         private object GetDataSource_main()
         {
-            advancedDataGridView_tabPatients_tabPatientsContacts_list.CleanFilterAndSort();
-            advancedDataGridView_tabPatients_tabPatientsAddresses_list.CleanFilterAndSort();
-            advancedDataGridView_tabPatientsMedicalrecords_list.CleanFilterAndSort();
-            advancedDataGridView_tabPatientsTreatments_list.CleanFilterAndSort();
-            advancedDataGridView_tabAppointments_list.CleanFilterAndSort();
-            advancedDataGridView_tabPatientsAttachments_list.CleanFilterAndSort();
-            advancedDataGridView_tabInvoices_list.CleanFilterAndSort();
-            advancedDataGridView_tabEstimates_list.CleanFilterAndSort();
-            advancedDataGridView_tabPatientsNotes_list.CleanFilterAndSort();
+            ResetTabsDataGrid();
 
             List<patients> patients = new List<patients>();
             if(comboBox_filterArchived.SelectedIndex != -1)
@@ -631,6 +657,9 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void comboBox_filterArchived_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (IsBindingSourceLoading)
+                return;
+
             ReloadView();
         }
 
@@ -645,6 +674,21 @@ namespace DG.DentneD.Forms
                 return;
 
             ResetPatientstreatmentsFiltert();
+
+            int patients_id = -1;
+            if (vPatientsBindingSource.Current != null)
+            {
+                patients_id = (((DataRowView)vPatientsBindingSource.Current).Row).Field<int>("patients_id");
+            }
+
+            if (patients_id != -1)
+            {
+                patients patient = _dentnedModel.Patients.Find(patients_id);
+                if (patient.patients_sex == "F")
+                    patients_sexFRadioButton.Checked = true;
+                else
+                    patients_sexMRadioButton.Checked = true;
+            }
         }
 
         /// <summary>
@@ -656,8 +700,7 @@ namespace DG.DentneD.Forms
         {
             countTextBox.Text = vPatientsBindingSource.Count.ToString();
         }
-
-
+        
         #region various
 
 
@@ -881,7 +924,7 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void button_tabPatients_tabPatients_datadir_Click(object sender, EventArgs e)
         {
-            if (patientsBindingSource.Current != null)
+            if (vPatientsBindingSource.Current != null)
             {
                 if (!Directory.Exists(_patientsDatadir))
                 {
@@ -891,7 +934,7 @@ namespace DG.DentneD.Forms
                     }
                     catch
                     {
-                        MessageBox.Show("Can not create folder \"" + _patientsDatadir + "\"", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(String.Format("Can not create folder \"{0}\"", _patientsDatadir), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                 }
@@ -904,34 +947,14 @@ namespace DG.DentneD.Forms
                     }
                     catch
                     {
-                        MessageBox.Show("Can not create folder \"" + patientsDatadir + "\"", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(String.Format("Can not create folder \"{0}\"", _patientsDatadir), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                 }
                 Process.Start("explorer.exe", patientsDatadir);
             }
         }
-
-        /// <summary>
-        /// Tab DataSource current changed
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void patientsBindingSource_CurrentChanged(object sender, EventArgs e)
-        {
-            if (IsBindingSourceLoading)
-                return;
-
-            if (patientsBindingSource.Current != null)
-            {
-                if (((patients)patientsBindingSource.Current).patients_sex == "F")
-                    patients_sexFRadioButton.Checked = true;
-                else
-                    patients_sexMRadioButton.Checked = true;
-            }
-        }
-
-
+        
         /// <summary>
         /// Combobox autocomplete
         /// </summary>
@@ -1672,12 +1695,150 @@ namespace DG.DentneD.Forms
                         predicateor = predicateor.Or(r => r.patientstreatments_t47);
                     if (patientstreatments_filtert48CheckBox.Checked)
                         predicateor = predicateor.Or(r => r.patientstreatments_t48);
+                    //include single tooths
                     predicate = predicate.And(predicateor);
+                    //exlude all, none, up, down
+                    predicate = predicate.And(r => !(
+                        (r.patientstreatments_t11 &&
+                        r.patientstreatments_t12 &&
+                        r.patientstreatments_t13 &&
+                        r.patientstreatments_t14 &&
+                        r.patientstreatments_t15 &&
+                        r.patientstreatments_t16 &&
+                        r.patientstreatments_t17 &&
+                        r.patientstreatments_t18 &&
+                        r.patientstreatments_t21 &&
+                        r.patientstreatments_t22 &&
+                        r.patientstreatments_t23 &&
+                        r.patientstreatments_t24 &&
+                        r.patientstreatments_t25 &&
+                        r.patientstreatments_t26 &&
+                        r.patientstreatments_t27 &&
+                        r.patientstreatments_t28 &&
+                        r.patientstreatments_t31 &&
+                        r.patientstreatments_t32 &&
+                        r.patientstreatments_t33 &&
+                        r.patientstreatments_t34 &&
+                        r.patientstreatments_t35 &&
+                        r.patientstreatments_t36 &&
+                        r.patientstreatments_t37 &&
+                        r.patientstreatments_t38 &&
+                        r.patientstreatments_t41 &&
+                        r.patientstreatments_t42 &&
+                        r.patientstreatments_t43 &&
+                        r.patientstreatments_t44 &&
+                        r.patientstreatments_t45 &&
+                        r.patientstreatments_t46 &&
+                        r.patientstreatments_t47 &&
+                        r.patientstreatments_t48)
+                        ||
+                        (r.patientstreatments_t11 &&
+                        r.patientstreatments_t12 &&
+                        r.patientstreatments_t13 &&
+                        r.patientstreatments_t14 &&
+                        r.patientstreatments_t15 &&
+                        r.patientstreatments_t16 &&
+                        r.patientstreatments_t17 &&
+                        r.patientstreatments_t18 &&
+                        r.patientstreatments_t21 &&
+                        r.patientstreatments_t22 &&
+                        r.patientstreatments_t23 &&
+                        r.patientstreatments_t24 &&
+                        r.patientstreatments_t25 &&
+                        r.patientstreatments_t26 &&
+                        r.patientstreatments_t27 &&
+                        r.patientstreatments_t28 &&
+                        !r.patientstreatments_t31 &&
+                        !r.patientstreatments_t32 &&
+                        !r.patientstreatments_t33 &&
+                        !r.patientstreatments_t34 &&
+                        !r.patientstreatments_t35 &&
+                        !r.patientstreatments_t36 &&
+                        !r.patientstreatments_t37 &&
+                        !r.patientstreatments_t38 &&
+                        !r.patientstreatments_t41 &&
+                        !r.patientstreatments_t42 &&
+                        !r.patientstreatments_t43 &&
+                        !r.patientstreatments_t44 &&
+                        !r.patientstreatments_t45 &&
+                        !r.patientstreatments_t46 &&
+                        !r.patientstreatments_t47 &&
+                        !r.patientstreatments_t48)
+                        ||
+                        (!r.patientstreatments_t11 &&
+                        !r.patientstreatments_t12 &&
+                        !r.patientstreatments_t13 &&
+                        !r.patientstreatments_t14 &&
+                        !r.patientstreatments_t15 &&
+                        !r.patientstreatments_t16 &&
+                        !r.patientstreatments_t17 &&
+                        !r.patientstreatments_t18 &&
+                        !r.patientstreatments_t21 &&
+                        !r.patientstreatments_t22 &&
+                        !r.patientstreatments_t23 &&
+                        !r.patientstreatments_t24 &&
+                        !r.patientstreatments_t25 &&
+                        !r.patientstreatments_t26 &&
+                        !r.patientstreatments_t27 &&
+                        !r.patientstreatments_t28 &&
+                        r.patientstreatments_t31 &&
+                        r.patientstreatments_t32 &&
+                        r.patientstreatments_t33 &&
+                        r.patientstreatments_t34 &&
+                        r.patientstreatments_t35 &&
+                        r.patientstreatments_t36 &&
+                        r.patientstreatments_t37 &&
+                        r.patientstreatments_t38 &&
+                        r.patientstreatments_t41 &&
+                        r.patientstreatments_t42 &&
+                        r.patientstreatments_t43 &&
+                        r.patientstreatments_t44 &&
+                        r.patientstreatments_t45 &&
+                        r.patientstreatments_t46 &&
+                        r.patientstreatments_t47 &&
+                        r.patientstreatments_t48)
+                        ||
+                        (!r.patientstreatments_t11 &&
+                        !r.patientstreatments_t12 &&
+                        !r.patientstreatments_t13 &&
+                        !r.patientstreatments_t14 &&
+                        !r.patientstreatments_t15 &&
+                        !r.patientstreatments_t16 &&
+                        !r.patientstreatments_t17 &&
+                        !r.patientstreatments_t18 &&
+                        !r.patientstreatments_t21 &&
+                        !r.patientstreatments_t22 &&
+                        !r.patientstreatments_t23 &&
+                        !r.patientstreatments_t24 &&
+                        !r.patientstreatments_t25 &&
+                        !r.patientstreatments_t26 &&
+                        !r.patientstreatments_t27 &&
+                        !r.patientstreatments_t28 &&
+                        !r.patientstreatments_t31 &&
+                        !r.patientstreatments_t32 &&
+                        !r.patientstreatments_t33 &&
+                        !r.patientstreatments_t34 &&
+                        !r.patientstreatments_t35 &&
+                        !r.patientstreatments_t36 &&
+                        !r.patientstreatments_t37 &&
+                        !r.patientstreatments_t38 &&
+                        !r.patientstreatments_t41 &&
+                        !r.patientstreatments_t42 &&
+                        !r.patientstreatments_t43 &&
+                        !r.patientstreatments_t44 &&
+                        !r.patientstreatments_t45 &&
+                        !r.patientstreatments_t46 &&
+                        !r.patientstreatments_t47 &&
+                        !r.patientstreatments_t48)
+                        ));
+
                 }
             }
 
             //set the filter numbers
+            IsBindingSourceLoading = true;
             SetPatientstreatmentsFiltert();
+            IsBindingSourceLoading = false;
 
             IEnumerable<VPatientsTreatments> vPatientsTreatments =
             _dentnedModel.PatientsTreatments.List(predicate.Compile()).Select(
@@ -1715,7 +1876,7 @@ namespace DG.DentneD.Forms
         {
             vPatientsTreatmentsBindingSource.Sort = advancedDataGridView_tabPatientsTreatments_list.SortString;
         }
-
+        
         /// <summary>
         /// Load the tab DataSource
         /// </summary>
@@ -1740,7 +1901,14 @@ namespace DG.DentneD.Forms
         /// <param name="item"></param>
         private void Add_tabPatientsTreatments(object item)
         {
-            SetCurrentpatientstreatmentsBindingSource();
+            SetCurrentPatientstreatmentsBindingSource();
+
+            IsBindingSourceLoading = true;
+            advancedDataGridView_tabPatientsTreatments_list.CleanFilterAndSort();
+            IsBindingSourceLoading = false;
+
+            //scroll up
+            tabPage_tabPatientsTreatments.AutoScrollPosition = new Point(0, 0);
 
             //unset lazy load for payments tab, to reload totals
             tabElement_tabPayments.IsLaziLoaded = false;
@@ -1754,7 +1922,14 @@ namespace DG.DentneD.Forms
         /// <param name="item"></param>
         private void Update_tabPatientsTreatments(object item)
         {
-            SetCurrentpatientstreatmentsBindingSource();
+            SetCurrentPatientstreatmentsBindingSource();
+
+            IsBindingSourceLoading = true;
+            advancedDataGridView_tabPatientsTreatments_list.CleanFilterAndSort();
+            IsBindingSourceLoading = false;
+
+            //scroll up
+            tabPage_tabPatientsTreatments.AutoScrollPosition = new Point(0, 0);
 
             //unset lazy load for payments tab, to reload totals
             tabElement_tabPayments.IsLaziLoaded = false;
@@ -1768,6 +1943,10 @@ namespace DG.DentneD.Forms
         /// <param name="item"></param>
         private void Remove_tabPatientsTreatments(object item)
         {
+            IsBindingSourceLoading = true;
+            advancedDataGridView_tabPatientsTreatments_list.CleanFilterAndSort();
+            IsBindingSourceLoading = false;
+
             //unset lazy load for payments tab, to reload totals
             tabElement_tabPayments.IsLaziLoaded = false;
 
@@ -1792,7 +1971,12 @@ namespace DG.DentneD.Forms
                         ((patientstreatments)patientstreatmentsBindingSource.Current).doctors_id = doctor.doctors_id;
                     patientstreatmentsBindingSource.ResetBindings(true);
 
+                    patientstreatments_invoiceTextBox.Text = "";
                     patientstreatments_tnoCheckBox.Checked = true;
+                    patientstreatments_expirationdateenabledCheckBox.Checked = false;
+                    patientstreatments_expirationdateenabledCheckBox_CheckedChanged(null, null);
+                    patientstreatments_fulfilldateenabledCheckBox.Checked = false;
+                    patientstreatments_fulfilldateenabledCheckBox_CheckedChanged(null, null);
                 }
             }
         }
@@ -1833,7 +2017,8 @@ namespace DG.DentneD.Forms
                 patientstreatment.patientstreatments_fulfilldate = DateTime.Now;
                 _dentnedModel.PatientsTreatments.Update(patientstreatment);
 
-                ReloadView();
+                //reload tab
+                ReloadTab(tabElement_tabPatientsTreatments);
             }
         }
 
@@ -1856,8 +2041,19 @@ namespace DG.DentneD.Forms
                 patientstreatment.patientstreatments_ispayed = true;
                 _dentnedModel.PatientsTreatments.Update(patientstreatment);
 
-                ReloadView();
+                //reload tab
+                ReloadTab(tabElement_tabPatientsTreatments);
             }
+        }
+        
+        /// <summary>
+        ///  Patients treatments view BindingSourceList event raised
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void tabPatientsTreatments_BindingSourceListChanged(object sender, EventArgs e)
+        {
+            vPatientsTreatmentsBindingSource_CurrentChanged(sender, e);
         }
 
         /// <summary>
@@ -1867,6 +2063,9 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void vPatientsTreatmentsBindingSource_CurrentChanged(object sender, EventArgs e)
         {
+            if (IsBindingSourceLoading)
+                return;
+
             int patientstreatments_id = -1;
             if (vPatientsTreatmentsBindingSource.Current != null)
             {
@@ -1890,7 +2089,7 @@ namespace DG.DentneD.Forms
                 {
                     invoices invoice = _dentnedModel.Invoices.Find(invoiceline.invoices_id);
                     doctors doctors = null;
-                    if(invoice.doctors_id != null)
+                    if (invoice.doctors_id != null)
                         doctors = _dentnedModel.Doctors.Find(invoice.doctors_id);
                     patientstreatments_invoiceTextBox.Text = invoice.invoices_number + "/" + invoice.invoices_date.Year + (doctors != null ? " " + doctors.doctors_surname + " " + doctors.doctors_name + " (" + invoice.invoices_id + ")" : " (" + invoice.invoices_id + ")");
                 }
@@ -1985,50 +2184,53 @@ namespace DG.DentneD.Forms
             if (IsBindingSourceLoading)
                 return;
 
-            if (treatments_idComboBox.SelectedIndex != -1)
+            if (tabElement_tabPatientsTreatments.CurrentEditingMode == EditingMode.C || tabElement_tabPatientsTreatments.CurrentEditingMode == EditingMode.U)
             {
-                int patients_id = -1;
-                if (vPatientsBindingSource.Current != null)
+                if (patientstreatmentsBindingSource.Current != null && treatments_idComboBox.SelectedIndex != -1)
                 {
-                    patients_id = (((DataRowView)vPatientsBindingSource.Current).Row).Field<int>("patients_id");
-                }
-
-                if (patientstreatmentsBindingSource.Current != null &&
-                    (tabElement_tabPatientsTreatments.CurrentEditingMode == EditingMode.C || tabElement_tabPatientsTreatments.CurrentEditingMode == EditingMode.U))
-                {
-                    treatments treatment = _dentnedModel.Treatments.Find(treatments_idComboBox.SelectedValue);
-                    if (treatment != null)
+                    int patients_id = -1;
+                    if (vPatientsBindingSource.Current != null)
                     {
-                        string description = treatment.treatments_name;
-                        decimal price = treatment.treatments_price;
-                        byte expirationmonths = 0;
-                        if (treatment.treatments_mexpiration != null)
-                            expirationmonths = (byte)treatment.treatments_mexpiration;
-                        if (patients_id != -1)
+                        patients_id = (((DataRowView)vPatientsBindingSource.Current).Row).Field<int>("patients_id");
+                    }
+                    if (patients_id != -1)
+                    {
+                        treatments treatment = _dentnedModel.Treatments.Find(treatments_idComboBox.SelectedValue);
+                        if (treatment != null)
                         {
-                            patients patient = _dentnedModel.Patients.Find(patients_id);
-                            if (patient != null)
+                            string description = treatment.treatments_name;
+                            decimal price = treatment.treatments_price;
+                            byte expirationmonths = 0;
+                            if (treatment.treatments_mexpiration != null)
+                                expirationmonths = (byte)treatment.treatments_mexpiration;
+                            if (patients_id != -1)
                             {
-                                treatmentsprices treatmentsprice = _dentnedModel.TreatmentsPrices.List(r => r.treatments_id == treatment.treatments_id && r.treatmentspriceslists_id == patient.treatmentspriceslists_id).FirstOrDefault();
-                                if (treatmentsprice != null)
+                                patients patient = _dentnedModel.Patients.Find(patients_id);
+                                if (patient != null)
                                 {
-                                    price = treatmentsprice.treatmentsprices_price;
+                                    treatmentsprices treatmentsprice = _dentnedModel.TreatmentsPrices.List(r => r.treatments_id == treatment.treatments_id && r.treatmentspriceslists_id == patient.treatmentspriceslists_id).FirstOrDefault();
+                                    if (treatmentsprice != null)
+                                    {
+                                        price = treatmentsprice.treatmentsprices_price;
+                                    }
                                 }
                             }
-                        }
 
-                        if (expirationmonths != 0)
-                        {
-                            patientstreatments_expirationdateDateTimePicker.Value = ((patientstreatments)patientstreatmentsBindingSource.Current).patientstreatments_creationdate.AddMonths((int)expirationmonths);
-                            patientstreatments_expirationdateenabledCheckBox.Checked = true;
-                        }
-                        else
-                            patientstreatments_expirationdateenabledCheckBox.Checked = false;
+                            if (expirationmonths != 0)
+                            {
+                                patientstreatments_expirationdateDateTimePicker.Value = ((patientstreatments)patientstreatmentsBindingSource.Current).patientstreatments_creationdate.AddMonths((int)expirationmonths);
+                                patientstreatments_expirationdateenabledCheckBox.Checked = true;
+                            }
+                            else
+                                patientstreatments_expirationdateenabledCheckBox.Checked = false;
 
-                        patientstreatments_priceTextBox.Text = price.ToString();
-                        patientstreatments_descriptionTextBox.Text = description;
+                            ((patientstreatments)patientstreatmentsBindingSource.Current).treatments_id = treatment.treatments_id;
+                            ((patientstreatments)patientstreatmentsBindingSource.Current).patientstreatments_price = price;
+                            ((patientstreatments)patientstreatmentsBindingSource.Current).patientstreatments_description = description;
+                        }
                     }
                 }
+                patientstreatmentsBindingSource.ResetBindings(true);
             }
         }
 
@@ -2067,7 +2269,7 @@ namespace DG.DentneD.Forms
         /// <summary>
         /// Set the current patient treatments before update the record
         /// </summary>
-        private void SetCurrentpatientstreatmentsBindingSource()
+        private void SetCurrentPatientstreatmentsBindingSource()
         {
             if(patientstreatmentsBindingSource.Current != null)
             {
@@ -2522,7 +2724,140 @@ namespace DG.DentneD.Forms
             int patientstreatments_t46num = 0;
             int patientstreatments_t47num = 0;
             int patientstreatments_t48num = 0;
-            foreach (patientstreatments patientstreatment in _dentnedModel.PatientsTreatments.List(r => r.patients_id == patients_id))
+            foreach (patientstreatments patientstreatment in _dentnedModel.PatientsTreatments.List(r => r.patients_id == patients_id && !(
+                        //exclude all, none, up, down
+                        (r.patientstreatments_t11 &&
+                        r.patientstreatments_t12 &&
+                        r.patientstreatments_t13 &&
+                        r.patientstreatments_t14 &&
+                        r.patientstreatments_t15 &&
+                        r.patientstreatments_t16 &&
+                        r.patientstreatments_t17 &&
+                        r.patientstreatments_t18 &&
+                        r.patientstreatments_t21 &&
+                        r.patientstreatments_t22 &&
+                        r.patientstreatments_t23 &&
+                        r.patientstreatments_t24 &&
+                        r.patientstreatments_t25 &&
+                        r.patientstreatments_t26 &&
+                        r.patientstreatments_t27 &&
+                        r.patientstreatments_t28 &&
+                        r.patientstreatments_t31 &&
+                        r.patientstreatments_t32 &&
+                        r.patientstreatments_t33 &&
+                        r.patientstreatments_t34 &&
+                        r.patientstreatments_t35 &&
+                        r.patientstreatments_t36 &&
+                        r.patientstreatments_t37 &&
+                        r.patientstreatments_t38 &&
+                        r.patientstreatments_t41 &&
+                        r.patientstreatments_t42 &&
+                        r.patientstreatments_t43 &&
+                        r.patientstreatments_t44 &&
+                        r.patientstreatments_t45 &&
+                        r.patientstreatments_t46 &&
+                        r.patientstreatments_t47 &&
+                        r.patientstreatments_t48)
+                        ||
+                        (r.patientstreatments_t11 &&
+                        r.patientstreatments_t12 &&
+                        r.patientstreatments_t13 &&
+                        r.patientstreatments_t14 &&
+                        r.patientstreatments_t15 &&
+                        r.patientstreatments_t16 &&
+                        r.patientstreatments_t17 &&
+                        r.patientstreatments_t18 &&
+                        r.patientstreatments_t21 &&
+                        r.patientstreatments_t22 &&
+                        r.patientstreatments_t23 &&
+                        r.patientstreatments_t24 &&
+                        r.patientstreatments_t25 &&
+                        r.patientstreatments_t26 &&
+                        r.patientstreatments_t27 &&
+                        r.patientstreatments_t28 &&
+                        !r.patientstreatments_t31 &&
+                        !r.patientstreatments_t32 &&
+                        !r.patientstreatments_t33 &&
+                        !r.patientstreatments_t34 &&
+                        !r.patientstreatments_t35 &&
+                        !r.patientstreatments_t36 &&
+                        !r.patientstreatments_t37 &&
+                        !r.patientstreatments_t38 &&
+                        !r.patientstreatments_t41 &&
+                        !r.patientstreatments_t42 &&
+                        !r.patientstreatments_t43 &&
+                        !r.patientstreatments_t44 &&
+                        !r.patientstreatments_t45 &&
+                        !r.patientstreatments_t46 &&
+                        !r.patientstreatments_t47 &&
+                        !r.patientstreatments_t48)
+                        ||
+                        (!r.patientstreatments_t11 &&
+                        !r.patientstreatments_t12 &&
+                        !r.patientstreatments_t13 &&
+                        !r.patientstreatments_t14 &&
+                        !r.patientstreatments_t15 &&
+                        !r.patientstreatments_t16 &&
+                        !r.patientstreatments_t17 &&
+                        !r.patientstreatments_t18 &&
+                        !r.patientstreatments_t21 &&
+                        !r.patientstreatments_t22 &&
+                        !r.patientstreatments_t23 &&
+                        !r.patientstreatments_t24 &&
+                        !r.patientstreatments_t25 &&
+                        !r.patientstreatments_t26 &&
+                        !r.patientstreatments_t27 &&
+                        !r.patientstreatments_t28 &&
+                        r.patientstreatments_t31 &&
+                        r.patientstreatments_t32 &&
+                        r.patientstreatments_t33 &&
+                        r.patientstreatments_t34 &&
+                        r.patientstreatments_t35 &&
+                        r.patientstreatments_t36 &&
+                        r.patientstreatments_t37 &&
+                        r.patientstreatments_t38 &&
+                        r.patientstreatments_t41 &&
+                        r.patientstreatments_t42 &&
+                        r.patientstreatments_t43 &&
+                        r.patientstreatments_t44 &&
+                        r.patientstreatments_t45 &&
+                        r.patientstreatments_t46 &&
+                        r.patientstreatments_t47 &&
+                        r.patientstreatments_t48)
+                        ||
+                        (!r.patientstreatments_t11 &&
+                        !r.patientstreatments_t12 &&
+                        !r.patientstreatments_t13 &&
+                        !r.patientstreatments_t14 &&
+                        !r.patientstreatments_t15 &&
+                        !r.patientstreatments_t16 &&
+                        !r.patientstreatments_t17 &&
+                        !r.patientstreatments_t18 &&
+                        !r.patientstreatments_t21 &&
+                        !r.patientstreatments_t22 &&
+                        !r.patientstreatments_t23 &&
+                        !r.patientstreatments_t24 &&
+                        !r.patientstreatments_t25 &&
+                        !r.patientstreatments_t26 &&
+                        !r.patientstreatments_t27 &&
+                        !r.patientstreatments_t28 &&
+                        !r.patientstreatments_t31 &&
+                        !r.patientstreatments_t32 &&
+                        !r.patientstreatments_t33 &&
+                        !r.patientstreatments_t34 &&
+                        !r.patientstreatments_t35 &&
+                        !r.patientstreatments_t36 &&
+                        !r.patientstreatments_t37 &&
+                        !r.patientstreatments_t38 &&
+                        !r.patientstreatments_t41 &&
+                        !r.patientstreatments_t42 &&
+                        !r.patientstreatments_t43 &&
+                        !r.patientstreatments_t44 &&
+                        !r.patientstreatments_t45 &&
+                        !r.patientstreatments_t46 &&
+                        !r.patientstreatments_t47 &&
+                        !r.patientstreatments_t48)
+                        )))
             {
                 if (patientstreatment.patientstreatments_t11)
                     patientstreatments_t11num++;
@@ -2644,6 +2979,8 @@ namespace DG.DentneD.Forms
             if (IsBindingSourceLoading)
                 return;
 
+            IsBindingSourceLoading = true;
+
             if (
                 patientstreatments_filtert11CheckBox.Checked ||
                 patientstreatments_filtert12CheckBox.Checked ||
@@ -2679,12 +3016,10 @@ namespace DG.DentneD.Forms
                 patientstreatments_filtert48CheckBox.Checked)
                 patientstreatments_filtertanyCheckBox.Checked = false;
 
-            //get the new binding source
-            IsBindingSourceLoading = true;
-            vPatientsTreatmentsBindingSource.DataSource = GetDataSourceList_tabPatientsTreatments();
             IsBindingSourceLoading = false;
 
-            vPatientsTreatmentsBindingSource_CurrentChanged(null, null);
+            //reload tab
+            ReloadTab(tabElement_tabPatientsTreatments);
         }
 
         /// <summary>
@@ -2694,6 +3029,9 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void patientstreatments_filtertalCheckBox_CheckedChanged(object sender, EventArgs e)
         {
+            if (IsBindingSourceLoading)
+                return;
+
             IsBindingSourceLoading = true;
 
             if (patientstreatments_filtertalCheckBox.Checked)
@@ -2747,6 +3085,9 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void patientstreatments_filtertnoCheckBox_CheckedChanged(object sender, EventArgs e)
         {
+            if (IsBindingSourceLoading)
+                return;
+
             IsBindingSourceLoading = true;
 
             if (patientstreatments_filtertnoCheckBox.Checked)
@@ -2800,6 +3141,9 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void patientstreatments_filtertupCheckBox_CheckedChanged(object sender, EventArgs e)
         {
+            if (IsBindingSourceLoading)
+                return;
+
             IsBindingSourceLoading = true;
 
             if (patientstreatments_filtertupCheckBox.Checked)
@@ -2853,6 +3197,9 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void patientstreatments_filtertdwCheckBox_CheckedChanged(object sender, EventArgs e)
         {
+            if (IsBindingSourceLoading)
+                return;
+
             IsBindingSourceLoading = true;
 
             if (patientstreatments_filtertdwCheckBox.Checked)
@@ -2906,6 +3253,9 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void patientstreatments_filtertanyCheckBox_CheckedChanged(object sender, EventArgs e)
         {
+            if (IsBindingSourceLoading)
+                return;
+
             IsBindingSourceLoading = true;
 
             if (patientstreatments_filtertanyCheckBox.Checked)
@@ -3802,11 +4152,13 @@ namespace DG.DentneD.Forms
 
                 if (invoices_id != -1)
                 {
-
+                    invoices_id_toload = invoices_id;
+                    DGUIGHFFormMain mainForm = (DGUIGHFFormMain)this.MdiParent;
+                    mainForm.ShowForm(mainForm, typeof(FormInvoices));
                 }
             }
         }
-
+        
         #endregion
 
 
@@ -3897,7 +4249,9 @@ namespace DG.DentneD.Forms
 
                 if (estimates_id != -1)
                 {
-
+                    estimates_id_toload = estimates_id;
+                    DGUIGHFFormMain mainForm = (DGUIGHFFormMain)this.MdiParent;
+                    mainForm.ShowForm(mainForm, typeof(FormEstimates));
                 }
             }
         }

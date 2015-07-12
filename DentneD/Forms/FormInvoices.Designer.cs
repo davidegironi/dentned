@@ -47,9 +47,9 @@
             System.Windows.Forms.Label patientstreatments_idLabel;
             System.Windows.Forms.Label invoices_totalLabel;
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormInvoices));
             this.panel_data = new System.Windows.Forms.Panel();
             this.tabControl_main = new System.Windows.Forms.TabControl();
@@ -102,6 +102,13 @@
             this.button_tabInvoicesLines_new = new System.Windows.Forms.Button();
             this.panel_tabInvoicesLines_list = new System.Windows.Forms.Panel();
             this.advancedDataGridView_tabInvoicesLines_list = new Zuby.ADGV.AdvancedDataGridView();
+            this.invoiceslinesidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.codeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.quantityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unitpriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.taxrateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totalpriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.vInvoicesLinesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel_list = new System.Windows.Forms.Panel();
             this.advancedDataGridView_main = new Zuby.ADGV.AdvancedDataGridView();
@@ -117,15 +124,10 @@
             this.totalTextBox = new System.Windows.Forms.TextBox();
             this.totalLabel = new System.Windows.Forms.Label();
             this.panel_filters = new System.Windows.Forms.Panel();
+            this.label_filterYears = new System.Windows.Forms.Label();
+            this.comboBox_filterYears = new System.Windows.Forms.ComboBox();
             this.comboBox_filterDoctors = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.invoiceslinesidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.codeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.quantityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unitpriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.taxrateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totalpriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             invoices_idLabel = new System.Windows.Forms.Label();
             invoices_numberLabel = new System.Windows.Forms.Label();
             invoices_doctorLabel = new System.Windows.Forms.Label();
@@ -879,6 +881,78 @@
             this.advancedDataGridView_tabInvoicesLines_list.SortStringChanged += new System.EventHandler(this.advancedDataGridView_tabInvoicesLines_list_SortStringChanged);
             this.advancedDataGridView_tabInvoicesLines_list.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_tabInvoicesLines_list_FilterStringChanged);
             // 
+            // invoiceslinesidDataGridViewTextBoxColumn
+            // 
+            this.invoiceslinesidDataGridViewTextBoxColumn.DataPropertyName = "invoiceslines_id";
+            this.invoiceslinesidDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.invoiceslinesidDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.invoiceslinesidDataGridViewTextBoxColumn.Name = "invoiceslinesidDataGridViewTextBoxColumn";
+            this.invoiceslinesidDataGridViewTextBoxColumn.ReadOnly = true;
+            this.invoiceslinesidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.invoiceslinesidDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // codeDataGridViewTextBoxColumn
+            // 
+            this.codeDataGridViewTextBoxColumn.DataPropertyName = "code";
+            this.codeDataGridViewTextBoxColumn.HeaderText = "Code";
+            this.codeDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.codeDataGridViewTextBoxColumn.Name = "codeDataGridViewTextBoxColumn";
+            this.codeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.codeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.codeDataGridViewTextBoxColumn.Width = 60;
+            // 
+            // descriptionDataGridViewTextBoxColumn
+            // 
+            this.descriptionDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.descriptionDataGridViewTextBoxColumn.DataPropertyName = "description";
+            this.descriptionDataGridViewTextBoxColumn.HeaderText = "Description";
+            this.descriptionDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
+            this.descriptionDataGridViewTextBoxColumn.ReadOnly = true;
+            this.descriptionDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // quantityDataGridViewTextBoxColumn
+            // 
+            this.quantityDataGridViewTextBoxColumn.DataPropertyName = "quantity";
+            this.quantityDataGridViewTextBoxColumn.HeaderText = "Qty";
+            this.quantityDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.quantityDataGridViewTextBoxColumn.Name = "quantityDataGridViewTextBoxColumn";
+            this.quantityDataGridViewTextBoxColumn.ReadOnly = true;
+            this.quantityDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.quantityDataGridViewTextBoxColumn.Width = 50;
+            // 
+            // unitpriceDataGridViewTextBoxColumn
+            // 
+            this.unitpriceDataGridViewTextBoxColumn.DataPropertyName = "unitprice";
+            this.unitpriceDataGridViewTextBoxColumn.HeaderText = "Price";
+            this.unitpriceDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.unitpriceDataGridViewTextBoxColumn.Name = "unitpriceDataGridViewTextBoxColumn";
+            this.unitpriceDataGridViewTextBoxColumn.ReadOnly = true;
+            this.unitpriceDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.unitpriceDataGridViewTextBoxColumn.Width = 70;
+            // 
+            // taxrateDataGridViewTextBoxColumn
+            // 
+            this.taxrateDataGridViewTextBoxColumn.DataPropertyName = "taxrate";
+            this.taxrateDataGridViewTextBoxColumn.HeaderText = "Tax";
+            this.taxrateDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.taxrateDataGridViewTextBoxColumn.Name = "taxrateDataGridViewTextBoxColumn";
+            this.taxrateDataGridViewTextBoxColumn.ReadOnly = true;
+            this.taxrateDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.taxrateDataGridViewTextBoxColumn.Width = 60;
+            // 
+            // totalpriceDataGridViewTextBoxColumn
+            // 
+            this.totalpriceDataGridViewTextBoxColumn.DataPropertyName = "totalprice";
+            dataGridViewCellStyle2.Format = "0.00";
+            this.totalpriceDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            this.totalpriceDataGridViewTextBoxColumn.HeaderText = "Total";
+            this.totalpriceDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.totalpriceDataGridViewTextBoxColumn.Name = "totalpriceDataGridViewTextBoxColumn";
+            this.totalpriceDataGridViewTextBoxColumn.ReadOnly = true;
+            this.totalpriceDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.totalpriceDataGridViewTextBoxColumn.Width = 70;
+            // 
             // vInvoicesLinesBindingSource
             // 
             this.vInvoicesLinesBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VInvoicesLines);
@@ -1029,6 +1103,8 @@
             // 
             // panel_filters
             // 
+            this.panel_filters.Controls.Add(this.label_filterYears);
+            this.panel_filters.Controls.Add(this.comboBox_filterYears);
             this.panel_filters.Controls.Add(this.comboBox_filterDoctors);
             this.panel_filters.Controls.Add(this.label1);
             this.panel_filters.Dock = System.Windows.Forms.DockStyle.Top;
@@ -1037,13 +1113,32 @@
             this.panel_filters.Size = new System.Drawing.Size(284, 60);
             this.panel_filters.TabIndex = 10;
             // 
+            // label_filterYears
+            // 
+            this.label_filterYears.AutoSize = true;
+            this.label_filterYears.Location = new System.Drawing.Point(170, 9);
+            this.label_filterYears.Name = "label_filterYears";
+            this.label_filterYears.Size = new System.Drawing.Size(32, 13);
+            this.label_filterYears.TabIndex = 7;
+            this.label_filterYears.Text = "Year:";
+            // 
+            // comboBox_filterYears
+            // 
+            this.comboBox_filterYears.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_filterYears.FormattingEnabled = true;
+            this.comboBox_filterYears.Location = new System.Drawing.Point(173, 25);
+            this.comboBox_filterYears.Name = "comboBox_filterYears";
+            this.comboBox_filterYears.Size = new System.Drawing.Size(70, 21);
+            this.comboBox_filterYears.TabIndex = 6;
+            this.comboBox_filterYears.SelectedIndexChanged += new System.EventHandler(this.comboBox_filterYear_SelectedIndexChanged);
+            // 
             // comboBox_filterDoctors
             // 
             this.comboBox_filterDoctors.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_filterDoctors.FormattingEnabled = true;
             this.comboBox_filterDoctors.Location = new System.Drawing.Point(6, 25);
             this.comboBox_filterDoctors.Name = "comboBox_filterDoctors";
-            this.comboBox_filterDoctors.Size = new System.Drawing.Size(121, 21);
+            this.comboBox_filterDoctors.Size = new System.Drawing.Size(150, 21);
             this.comboBox_filterDoctors.TabIndex = 5;
             this.comboBox_filterDoctors.SelectedIndexChanged += new System.EventHandler(this.comboBox_filterDoctors_SelectedIndexChanged);
             // 
@@ -1052,81 +1147,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(3, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 13);
+            this.label1.Size = new System.Drawing.Size(42, 13);
             this.label1.TabIndex = 4;
-            this.label1.Text = "Doctors:";
-            // 
-            // invoiceslinesidDataGridViewTextBoxColumn
-            // 
-            this.invoiceslinesidDataGridViewTextBoxColumn.DataPropertyName = "invoiceslines_id";
-            this.invoiceslinesidDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.invoiceslinesidDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.invoiceslinesidDataGridViewTextBoxColumn.Name = "invoiceslinesidDataGridViewTextBoxColumn";
-            this.invoiceslinesidDataGridViewTextBoxColumn.ReadOnly = true;
-            this.invoiceslinesidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.invoiceslinesidDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // codeDataGridViewTextBoxColumn
-            // 
-            this.codeDataGridViewTextBoxColumn.DataPropertyName = "code";
-            this.codeDataGridViewTextBoxColumn.HeaderText = "Code";
-            this.codeDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.codeDataGridViewTextBoxColumn.Name = "codeDataGridViewTextBoxColumn";
-            this.codeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.codeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.codeDataGridViewTextBoxColumn.Width = 60;
-            // 
-            // descriptionDataGridViewTextBoxColumn
-            // 
-            this.descriptionDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.descriptionDataGridViewTextBoxColumn.DataPropertyName = "description";
-            this.descriptionDataGridViewTextBoxColumn.HeaderText = "Description";
-            this.descriptionDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
-            this.descriptionDataGridViewTextBoxColumn.ReadOnly = true;
-            this.descriptionDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // quantityDataGridViewTextBoxColumn
-            // 
-            this.quantityDataGridViewTextBoxColumn.DataPropertyName = "quantity";
-            this.quantityDataGridViewTextBoxColumn.HeaderText = "Qty";
-            this.quantityDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.quantityDataGridViewTextBoxColumn.Name = "quantityDataGridViewTextBoxColumn";
-            this.quantityDataGridViewTextBoxColumn.ReadOnly = true;
-            this.quantityDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.quantityDataGridViewTextBoxColumn.Width = 50;
-            // 
-            // unitpriceDataGridViewTextBoxColumn
-            // 
-            this.unitpriceDataGridViewTextBoxColumn.DataPropertyName = "unitprice";
-            this.unitpriceDataGridViewTextBoxColumn.HeaderText = "Price";
-            this.unitpriceDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.unitpriceDataGridViewTextBoxColumn.Name = "unitpriceDataGridViewTextBoxColumn";
-            this.unitpriceDataGridViewTextBoxColumn.ReadOnly = true;
-            this.unitpriceDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.unitpriceDataGridViewTextBoxColumn.Width = 70;
-            // 
-            // taxrateDataGridViewTextBoxColumn
-            // 
-            this.taxrateDataGridViewTextBoxColumn.DataPropertyName = "taxrate";
-            this.taxrateDataGridViewTextBoxColumn.HeaderText = "Tax";
-            this.taxrateDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.taxrateDataGridViewTextBoxColumn.Name = "taxrateDataGridViewTextBoxColumn";
-            this.taxrateDataGridViewTextBoxColumn.ReadOnly = true;
-            this.taxrateDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.taxrateDataGridViewTextBoxColumn.Width = 60;
-            // 
-            // totalpriceDataGridViewTextBoxColumn
-            // 
-            this.totalpriceDataGridViewTextBoxColumn.DataPropertyName = "totalprice";
-            dataGridViewCellStyle2.Format = "0.00";
-            this.totalpriceDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
-            this.totalpriceDataGridViewTextBoxColumn.HeaderText = "Total";
-            this.totalpriceDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.totalpriceDataGridViewTextBoxColumn.Name = "totalpriceDataGridViewTextBoxColumn";
-            this.totalpriceDataGridViewTextBoxColumn.ReadOnly = true;
-            this.totalpriceDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.totalpriceDataGridViewTextBoxColumn.Width = 70;
+            this.label1.Text = "Doctor:";
             // 
             // FormInvoices
             // 
@@ -1249,5 +1272,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn unitpriceDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn taxrateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn totalpriceDataGridViewTextBoxColumn;
+        private System.Windows.Forms.ComboBox comboBox_filterYears;
+        private System.Windows.Forms.Label label_filterYears;
     }
 }

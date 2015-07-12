@@ -141,9 +141,47 @@ namespace DG.DentneD.Forms
         {
             PreloadView();
 
+            //select an invoice on load invoice
+            int invoices_id = -1;
+            invoices invoice = null;
+            foreach (Form form in this.MdiParent.MdiChildren)
+            {
+                if (form.GetType() == typeof(FormPatients))
+                {
+                    invoices_id = ((FormPatients)form).invoices_id_toload;
+                    ((FormPatients)form).invoices_id_toload = -1;
+                }
+
+                if (invoices_id != -1)
+                {
+                    IsBindingSourceLoading = true;
+                    invoice = _dentnedModel.Invoices.Find(invoices_id);
+                    if (invoice != null)
+                    {
+                        if (invoice.doctors_id != null)
+                            DGUIGHFUtilsUI.DGComboBoxItem.SelectItemById(comboBox_filterDoctors, invoice.doctors_id);
+                        else
+                            comboBox_filterDoctors.SelectedIndex = -1;
+                    }
+                    DGUIGHFUtilsUI.DGComboBoxItem.SelectItemById(comboBox_filterYears, invoice.invoices_date.Year);
+                    IsBindingSourceLoading = false;
+                    break;
+                }
+            }
+            
             ReloadView();
 
+            IsBindingSourceLoading = true;
             advancedDataGridView_main.SortASC(advancedDataGridView_main.Columns[1]);
+            IsBindingSourceLoading = false;
+
+            ResetTabsDataGrid();
+
+            //select an invoice on load invoice
+            if (invoice != null)
+            {
+                DGUIGHFData.SetBindingSourcePosition<invoices, DentneDModel>(_dentnedModel.Invoices, invoice, vInvoicesBindingSource);
+            }
         }
 
         /// <summary>
@@ -214,7 +252,50 @@ namespace DG.DentneD.Forms
                 comboBox_filterDoctors.SelectedIndex = 1;
             else
                 comboBox_filterDoctors.SelectedIndex = -1;
+            
+            IsBindingSourceLoading = false;
 
+            //load filter years
+            ReloadFilterYears();
+        }
+
+        /// <summary>
+        /// Reset all the tab datagrid
+        /// </summary>
+        private void ResetTabsDataGrid()
+        {
+            IsBindingSourceLoading = true;
+            advancedDataGridView_tabInvoicesLines_list.CleanFilterAndSort();
+            advancedDataGridView_tabInvoicesLines_list.SortASC(advancedDataGridView_tabInvoicesLines_list.Columns[1]);
+            IsBindingSourceLoading = false;
+        }
+
+        /// <summary>
+        /// Reload Years filter
+        /// </summary>
+        private void ReloadFilterYears()
+        {
+            IsBindingSourceLoading = true;
+            int currentSelectedIndex = comboBox_filterYears.SelectedIndex;
+            List<int> years = new List<int>();
+            comboBox_filterYears.Items.Clear();
+            foreach (invoices a in _dentnedModel.Invoices.List().OrderBy(r => r.invoices_date))
+            {
+                if(!years.Contains(a.invoices_date.Year))
+                {
+                    comboBox_filterYears.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(a.invoices_date.Year.ToString(), a.invoices_date.Year.ToString()));
+                    years.Add(a.invoices_date.Year);
+                }                    
+            }
+            if (currentSelectedIndex == -1)
+                comboBox_filterYears.SelectedIndex = comboBox_filterYears.Items.Count - 1;
+            else
+            {
+                if (currentSelectedIndex > comboBox_filterYears.Items.Count - 1)
+                    comboBox_filterYears.SelectedIndex = comboBox_filterYears.Items.Count - 1;
+                else
+                    comboBox_filterYears.SelectedIndex = currentSelectedIndex;
+            }
             IsBindingSourceLoading = false;
         }
 
@@ -224,10 +305,17 @@ namespace DG.DentneD.Forms
         /// <returns></returns>
         private object GetDataSource_main()
         {
+            ResetTabsDataGrid();
+
             int doctors_id = -1;
             if (comboBox_filterDoctors.SelectedIndex != -1)
             {
                 doctors_id = Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_filterDoctors.SelectedItem).Id);
+            }
+            int year = -1;
+            if (comboBox_filterDoctors.SelectedIndex != -1)
+            {
+                year = Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_filterYears.SelectedItem).Id);
             }
 
             totalTextBox.Text = "0";
@@ -236,20 +324,15 @@ namespace DG.DentneD.Forms
             //reset list total
             SetListTotal();
 
-            IEnumerable<VInvoices> vInvoices = Enumerable.Empty<VInvoices>();
-            if (doctors_id != -1)
-            {
-                vInvoices = _dentnedModel.Invoices.List(r => r.doctors_id == doctors_id).Select(
-                    r => new VInvoices
-                    {
-                        invoices_id = r.invoices_id,
-                        date = r.invoices_date,
-                        ispayed = r.invoices_ispaid,
-                        number = r.invoices_number,
-                        patient = (_dentnedModel.Patients.Find(r.patients_id) != null ? _dentnedModel.Patients.Find(r.patients_id).patients_surname + " " + _dentnedModel.Patients.Find(r.patients_id).patients_name : "")
-                    }).ToList();
-
-            }
+            IEnumerable<VInvoices> vInvoices = _dentnedModel.Invoices.List(r => r.invoices_date.Year == year && r.doctors_id == (doctors_id == -1 ? null : (Nullable<int>)doctors_id)).Select(
+                r => new VInvoices
+                {
+                    invoices_id = r.invoices_id,
+                    date = r.invoices_date,
+                    ispayed = r.invoices_ispaid,
+                    number = r.invoices_number,
+                    patient = (_dentnedModel.Patients.Find(r.patients_id) != null ? _dentnedModel.Patients.Find(r.patients_id).patients_surname + " " + _dentnedModel.Patients.Find(r.patients_id).patients_name : "")
+                }).ToList();
 
             return DGDataTableUtils.ToDataTable<VInvoices>(vInvoices);
         }
@@ -275,11 +358,24 @@ namespace DG.DentneD.Forms
         }
 
         /// <summary>
-        /// Doctor filter handler
+        /// Doctors filter handler
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void comboBox_filterDoctors_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (IsBindingSourceLoading)
+                return;
+
+            ReloadView();
+        }
+
+        /// <summary>
+        /// Years filter handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBox_filterYear_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (IsBindingSourceLoading)
                 return;
@@ -329,6 +425,9 @@ namespace DG.DentneD.Forms
         private void Add_tabInvoices(object item)
         {
             DGUIGHFData.Add<invoices, DentneDModel>(_dentnedModel.Invoices, item);
+
+            //load filter years
+            ReloadFilterYears();
         }
 
         /// <summary>
@@ -338,6 +437,9 @@ namespace DG.DentneD.Forms
         private void Update_tabInvoices(object item)
         {
             DGUIGHFData.Update<invoices, DentneDModel>(_dentnedModel.Invoices, item);
+
+            //load filter years
+            ReloadFilterYears();
         }
 
         /// <summary>
@@ -347,6 +449,9 @@ namespace DG.DentneD.Forms
         private void Remove_tabInvoices(object item)
         {
             DGUIGHFData.Remove<invoices, DentneDModel>(false, _dentnedModel.Invoices, item);
+
+            //load filter years
+            ReloadFilterYears();
         }
 
         /// <summary>
@@ -800,7 +905,7 @@ namespace DG.DentneD.Forms
                 if (!loadall)
                 {
                     //do not load already inserted treatments
-                    patientstreatmentsl = _dentnedModel.PatientsTreatments.List(r => r.patients_id == patients_id && !r.patientstreatments_ispayed).ToList();
+                    patientstreatmentsl = _dentnedModel.PatientsTreatments.List(r => r.patients_id == patients_id).ToList();
                     foreach (invoiceslines invoicesline in _dentnedModel.InvoicesLines.List())
                     {
                         patientstreatments patientstreatment = patientstreatmentsl.Where(r => r.patientstreatments_id == invoicesline.patientstreatments_id).FirstOrDefault();
@@ -1019,8 +1124,6 @@ namespace DG.DentneD.Forms
         }
 
         #endregion
-
-
-        
+                       
     }
 }

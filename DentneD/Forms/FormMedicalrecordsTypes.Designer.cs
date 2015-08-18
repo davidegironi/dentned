@@ -29,15 +29,16 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.Label medicalrecordstypes_idLabel;
-            System.Windows.Forms.Label medicalrecordstypes_nameLabel;
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMedicalrecordsTypes));
+            this.medicalrecordstypes_idLabel = new System.Windows.Forms.Label();
+            this.medicalrecordstypes_nameLabel = new System.Windows.Forms.Label();
             this.panel_data = new System.Windows.Forms.Panel();
             this.tabControl_main = new System.Windows.Forms.TabControl();
             this.tabPage_tabMedicalrecordsTypes = new System.Windows.Forms.TabPage();
             this.panel_tabMedicalrecordsTypes_data = new System.Windows.Forms.Panel();
             this.medicalrecordstypes_nameTextBox = new System.Windows.Forms.TextBox();
+            this.medicalrecordstypesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.medicalrecordstypes_idTextBox = new System.Windows.Forms.TextBox();
             this.panel_tabMedicalrecordsTypes_updates = new System.Windows.Forms.Panel();
             this.button_tabMedicalrecordsTypes_cancel = new System.Windows.Forms.Button();
@@ -48,42 +49,39 @@
             this.button_tabMedicalrecordsTypes_new = new System.Windows.Forms.Button();
             this.panel_list = new System.Windows.Forms.Panel();
             this.advancedDataGridView_main = new Zuby.ADGV.AdvancedDataGridView();
-            this.panel_filters = new System.Windows.Forms.Panel();
             this.medicalrecordstypesidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.vMedicalrecordsTypesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.medicalrecordstypesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            medicalrecordstypes_idLabel = new System.Windows.Forms.Label();
-            medicalrecordstypes_nameLabel = new System.Windows.Forms.Label();
+            this.panel_filters = new System.Windows.Forms.Panel();
             this.panel_data.SuspendLayout();
             this.tabControl_main.SuspendLayout();
             this.tabPage_tabMedicalrecordsTypes.SuspendLayout();
             this.panel_tabMedicalrecordsTypes_data.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.medicalrecordstypesBindingSource)).BeginInit();
             this.panel_tabMedicalrecordsTypes_updates.SuspendLayout();
             this.panel_tabMedicalrecordsTypes_actions.SuspendLayout();
             this.panel_list.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_main)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.vMedicalrecordsTypesBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.medicalrecordstypesBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // medicalrecordstypes_idLabel
             // 
-            medicalrecordstypes_idLabel.AutoSize = true;
-            medicalrecordstypes_idLabel.Location = new System.Drawing.Point(9, 9);
-            medicalrecordstypes_idLabel.Name = "medicalrecordstypes_idLabel";
-            medicalrecordstypes_idLabel.Size = new System.Drawing.Size(19, 13);
-            medicalrecordstypes_idLabel.TabIndex = 0;
-            medicalrecordstypes_idLabel.Text = "Id:";
+            this.medicalrecordstypes_idLabel.AutoSize = true;
+            this.medicalrecordstypes_idLabel.Location = new System.Drawing.Point(9, 9);
+            this.medicalrecordstypes_idLabel.Name = "medicalrecordstypes_idLabel";
+            this.medicalrecordstypes_idLabel.Size = new System.Drawing.Size(19, 13);
+            this.medicalrecordstypes_idLabel.TabIndex = 0;
+            this.medicalrecordstypes_idLabel.Text = "Id:";
             // 
             // medicalrecordstypes_nameLabel
             // 
-            medicalrecordstypes_nameLabel.AutoSize = true;
-            medicalrecordstypes_nameLabel.Location = new System.Drawing.Point(9, 48);
-            medicalrecordstypes_nameLabel.Name = "medicalrecordstypes_nameLabel";
-            medicalrecordstypes_nameLabel.Size = new System.Drawing.Size(38, 13);
-            medicalrecordstypes_nameLabel.TabIndex = 2;
-            medicalrecordstypes_nameLabel.Text = "Name:";
+            this.medicalrecordstypes_nameLabel.AutoSize = true;
+            this.medicalrecordstypes_nameLabel.Location = new System.Drawing.Point(9, 48);
+            this.medicalrecordstypes_nameLabel.Name = "medicalrecordstypes_nameLabel";
+            this.medicalrecordstypes_nameLabel.Size = new System.Drawing.Size(38, 13);
+            this.medicalrecordstypes_nameLabel.TabIndex = 2;
+            this.medicalrecordstypes_nameLabel.Text = "Name:";
             // 
             // panel_data
             // 
@@ -119,9 +117,9 @@
             // 
             // panel_tabMedicalrecordsTypes_data
             // 
-            this.panel_tabMedicalrecordsTypes_data.Controls.Add(medicalrecordstypes_nameLabel);
+            this.panel_tabMedicalrecordsTypes_data.Controls.Add(this.medicalrecordstypes_nameLabel);
             this.panel_tabMedicalrecordsTypes_data.Controls.Add(this.medicalrecordstypes_nameTextBox);
-            this.panel_tabMedicalrecordsTypes_data.Controls.Add(medicalrecordstypes_idLabel);
+            this.panel_tabMedicalrecordsTypes_data.Controls.Add(this.medicalrecordstypes_idLabel);
             this.panel_tabMedicalrecordsTypes_data.Controls.Add(this.medicalrecordstypes_idTextBox);
             this.panel_tabMedicalrecordsTypes_data.Location = new System.Drawing.Point(6, 42);
             this.panel_tabMedicalrecordsTypes_data.Name = "panel_tabMedicalrecordsTypes_data";
@@ -135,6 +133,10 @@
             this.medicalrecordstypes_nameTextBox.Name = "medicalrecordstypes_nameTextBox";
             this.medicalrecordstypes_nameTextBox.Size = new System.Drawing.Size(150, 20);
             this.medicalrecordstypes_nameTextBox.TabIndex = 3;
+            // 
+            // medicalrecordstypesBindingSource
+            // 
+            this.medicalrecordstypesBindingSource.DataSource = typeof(DG.DentneD.Model.Entity.medicalrecordstypes);
             // 
             // medicalrecordstypes_idTextBox
             // 
@@ -244,14 +246,6 @@
             this.advancedDataGridView_main.SortStringChanged += new System.EventHandler(this.advancedDataGridView_main_SortStringChanged);
             this.advancedDataGridView_main.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_main_FilterStringChanged);
             // 
-            // panel_filters
-            // 
-            this.panel_filters.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel_filters.Location = new System.Drawing.Point(0, 0);
-            this.panel_filters.Name = "panel_filters";
-            this.panel_filters.Size = new System.Drawing.Size(284, 60);
-            this.panel_filters.TabIndex = 10;
-            // 
             // medicalrecordstypesidDataGridViewTextBoxColumn
             // 
             this.medicalrecordstypesidDataGridViewTextBoxColumn.DataPropertyName = "medicalrecordstypes_id";
@@ -276,9 +270,13 @@
             // 
             this.vMedicalrecordsTypesBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VMedicalrecordsTypes);
             // 
-            // medicalrecordstypesBindingSource
+            // panel_filters
             // 
-            this.medicalrecordstypesBindingSource.DataSource = typeof(DG.DentneD.Model.Entity.medicalrecordstypes);
+            this.panel_filters.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel_filters.Location = new System.Drawing.Point(0, 0);
+            this.panel_filters.Name = "panel_filters";
+            this.panel_filters.Size = new System.Drawing.Size(284, 60);
+            this.panel_filters.TabIndex = 10;
             // 
             // FormMedicalrecordsTypes
             // 
@@ -298,12 +296,12 @@
             this.tabPage_tabMedicalrecordsTypes.ResumeLayout(false);
             this.panel_tabMedicalrecordsTypes_data.ResumeLayout(false);
             this.panel_tabMedicalrecordsTypes_data.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.medicalrecordstypesBindingSource)).EndInit();
             this.panel_tabMedicalrecordsTypes_updates.ResumeLayout(false);
             this.panel_tabMedicalrecordsTypes_actions.ResumeLayout(false);
             this.panel_list.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_main)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.vMedicalrecordsTypesBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.medicalrecordstypesBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -330,5 +328,7 @@
         private System.Windows.Forms.TextBox medicalrecordstypes_nameTextBox;
         private System.Windows.Forms.BindingSource medicalrecordstypesBindingSource;
         private System.Windows.Forms.TextBox medicalrecordstypes_idTextBox;
+        private System.Windows.Forms.Label medicalrecordstypes_idLabel;
+        private System.Windows.Forms.Label medicalrecordstypes_nameLabel;
     }
 }

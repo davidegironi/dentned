@@ -14,6 +14,26 @@ namespace DG.DentneD.Model.Repositories
     public class InvoicesRepository : GenericDataRepository<invoices, DentneDModel>
     {
         public InvoicesRepository() : base() { }
+        
+        /// <summary>
+        /// Repository language dictionary
+        /// </summary>
+        public class RepositoryLanguage : IGenericDataRepositoryLanguage
+        {
+            public string text001 = "Number can not be empty.";
+            public string text002 = "Doctor can not be empty.";
+            public string text003 = "Patient can not be empty.";
+            public string text004 = "Payment can not be empty.";
+            public string text005 = "Invalid price. Can not be less than zero.";
+            public string text006 = "Doctor is mandatory.";
+            public string text007 = "Patient is mandatory.";
+            public string text008 = "Invoice footer already inserted within this year.";
+        }
+
+        /// <summary>
+        /// Repository language
+        /// </summary>
+        public RepositoryLanguage language = new RepositoryLanguage();
 
         /// <summary>
         /// Check if an item can be added
@@ -69,22 +89,22 @@ namespace DG.DentneD.Model.Repositories
                 if (String.IsNullOrEmpty(item.invoices_number))
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Number can not be empty." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text001 }).ToArray();
                 }
                 if (String.IsNullOrEmpty(item.invoices_doctor))
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Doctor can not be empty." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text002 }).ToArray();
                 }
                 if (String.IsNullOrEmpty(item.invoices_patient))
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Patient can not be empty." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text003 }).ToArray();
                 }
                 if (String.IsNullOrEmpty(item.invoices_payment))
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Payment can not be empty." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text004 }).ToArray();
                 }
 
                 if (!ret)
@@ -93,7 +113,7 @@ namespace DG.DentneD.Model.Repositories
                 if (item.invoices_total < 0)
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Invalid price. Can not be less than zero." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text005 }).ToArray();
                 }
                 
                 if (!ret)
@@ -105,12 +125,12 @@ namespace DG.DentneD.Model.Repositories
                     if (BaseModel.Doctors.Find(item.doctors_id) == null)
                     {
                         ret = false;
-                        errors = errors.Concat(new string[] { "Doctor is mandatory." }).ToArray();
+                        errors = errors.Concat(new string[] { language.text006 }).ToArray();
                     }
                     if (BaseModel.Patients.Find(item.patients_id) == null)
                     {
                         ret = false;
-                        errors = errors.Concat(new string[] { "Patient is mandatory." }).ToArray();
+                        errors = errors.Concat(new string[] { language.text007 }).ToArray();
                     }
                 }
                 else
@@ -124,7 +144,7 @@ namespace DG.DentneD.Model.Repositories
                     if (List(r => r.invoices_date.Year == item.invoices_date.Year && r.invoices_number == item.invoices_number).Count() > 0)
                     {
                         ret = false;
-                        errors = errors.Concat(new string[] { "Invoice footer already inserted within this year." }).ToArray();
+                        errors = errors.Concat(new string[] { language.text008 }).ToArray();
                     }
                 }
                 else
@@ -132,7 +152,7 @@ namespace DG.DentneD.Model.Repositories
                     if (List(r => r.invoices_id != item.invoices_id && r.invoices_date.Year == item.invoices_date.Year && r.invoices_number == item.invoices_number).Count() > 0)
                     {
                         ret = false;
-                        errors = errors.Concat(new string[] { "Invoice footer already inserted within this year." }).ToArray();
+                        errors = errors.Concat(new string[] { language.text008 }).ToArray();
                     }
                 }
 

@@ -11,9 +11,24 @@ using System;
 
 namespace DG.DentneD.Model.Repositories
 {
-    public class EstimatesFootersRepository : GenericDataRepository<estimatesfooters, DentneDModel>
+    public class InvoicesFootersRepository : GenericDataRepository<invoicesfooters, DentneDModel>
     {
-        public EstimatesFootersRepository() : base() { }
+        public InvoicesFootersRepository() : base() { }
+
+        /// <summary>
+        /// Repository language dictionary
+        /// </summary>
+        public class RepositoryLanguage : IGenericDataRepositoryLanguage
+        {
+            public string text001 = "Name can not be empty.";
+            public string text002 = "Text can not be empty.";
+            public string text003 = "Invoice footer already inserted.";
+        }
+
+        /// <summary>
+        /// Repository language
+        /// </summary>
+        public RepositoryLanguage language = new RepositoryLanguage();
 
         /// <summary>
         /// Check if an item can be added
@@ -21,7 +36,7 @@ namespace DG.DentneD.Model.Repositories
         /// <param name="errors"></param>
         /// <param name="items"></param>
         /// <returns></returns>
-        public override bool CanAdd(ref string[] errors, params estimatesfooters[] items)
+        public override bool CanAdd(ref string[] errors, params invoicesfooters[] items)
         {
             errors = new string[] { };
 
@@ -40,7 +55,7 @@ namespace DG.DentneD.Model.Repositories
         /// <param name="errors"></param>
         /// <param name="items"></param>
         /// <returns></returns>
-        public override bool CanUpdate(ref string[] errors, params estimatesfooters[] items)
+        public override bool CanUpdate(ref string[] errors, params invoicesfooters[] items)
         {
             errors = new string[] { };
 
@@ -60,21 +75,21 @@ namespace DG.DentneD.Model.Repositories
         /// <param name="errors"></param>
         /// <param name="items"></param>
         /// <returns></returns>
-        private bool Validate(bool isUpdate, ref string[] errors, params estimatesfooters[] items)
+        private bool Validate(bool isUpdate, ref string[] errors, params invoicesfooters[] items)
         {
             bool ret = true;
 
-            foreach (estimatesfooters item in items)
+            foreach (invoicesfooters item in items)
             {
-                if (String.IsNullOrEmpty(item.estimatesfooters_name))
+                if (String.IsNullOrEmpty(item.invoicesfooters_name))
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Name can not be empty." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text001 }).ToArray();
                 }
-                if (String.IsNullOrEmpty(item.estimatesfooters_doctext))
+                if (String.IsNullOrEmpty(item.invoicesfooters_doctext))
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Text can not be empty." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text002 }).ToArray();
                 }
 
                 if (!ret)
@@ -82,18 +97,18 @@ namespace DG.DentneD.Model.Repositories
 
                 if (!isUpdate)
                 {
-                    if (List(r => r.estimatesfooters_name == item.estimatesfooters_name).Count() > 0)
+                    if (List(r => r.invoicesfooters_name == item.invoicesfooters_name).Count() > 0)
                     {
                         ret = false;
-                        errors = errors.Concat(new string[] { "Estimate footer already inserted." }).ToArray();
+                        errors = errors.Concat(new string[] { language.text003 }).ToArray();
                     }
                 }
                 else
                 {
-                    if (List(r => r.estimatesfooters_id != item.estimatesfooters_id && r.estimatesfooters_name == item.estimatesfooters_name).Count() > 0)
+                    if (List(r => r.invoicesfooters_id != item.invoicesfooters_id && r.invoicesfooters_name == item.invoicesfooters_name).Count() > 0)
                     {
                         ret = false;
-                        errors = errors.Concat(new string[] { "Estimate footer already inserted." }).ToArray();
+                        errors = errors.Concat(new string[] { language.text003 }).ToArray();
                     }
                 }
 
@@ -108,7 +123,7 @@ namespace DG.DentneD.Model.Repositories
         /// Add an item
         /// </summary>
         /// <param name="items"></param>
-        public override void Add(params estimatesfooters[] items)
+        public override void Add(params invoicesfooters[] items)
         {
             SetIsDefault(items);
 
@@ -119,7 +134,7 @@ namespace DG.DentneD.Model.Repositories
         /// Update an item
         /// </summary>
         /// <param name="items"></param>
-        public override void Update(params estimatesfooters[] items)
+        public override void Update(params invoicesfooters[] items)
         {
             SetIsDefault(items);
 
@@ -131,24 +146,24 @@ namespace DG.DentneD.Model.Repositories
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        private void SetIsDefault(params estimatesfooters[] items)
+        private void SetIsDefault(params invoicesfooters[] items)
         {
-            foreach (estimatesfooters item in items)
+            foreach (invoicesfooters item in items)
             {
-                if (item.estimatesfooters_isdefault)
+                if (item.invoicesfooters_isdefault)
                 {
                     //unset all db items default
-                    estimatesfooters[] itemsupd = List().ToArray();
-                    foreach (estimatesfooters itemupd in itemsupd)
+                    invoicesfooters[] itemsupd = List().ToArray();
+                    foreach (invoicesfooters itemupd in itemsupd)
                     {
-                        itemupd.estimatesfooters_isdefault = false;
+                        itemupd.invoicesfooters_isdefault = false;
                         base.Update(itemupd);
                     }
                     //unset all current items default
-                    foreach (estimatesfooters item2 in items)
+                    foreach (invoicesfooters item2 in items)
                     {
                         if (item2 != item)
-                            item2.estimatesfooters_isdefault = false;
+                            item2.invoicesfooters_isdefault = false;
                     }
                     break;
                 }

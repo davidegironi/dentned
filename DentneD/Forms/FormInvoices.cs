@@ -6,7 +6,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using DG.Data.Model.Helpers;
@@ -14,7 +13,6 @@ using DG.UI.GHF;
 using DG.DentneD.Model;
 using DG.DentneD.Model.Entity;
 using DG.DentneD.Forms.Objects;
-using DentneD;
 using Zuby.ADGV;
 using System.Data;
 
@@ -39,6 +37,67 @@ namespace DG.DentneD.Forms
             Initialize(Program.uighfApplication);
 
             _dentnedModel = new DentneDModel();
+            _dentnedModel.LanguageHelper.LoadFromFile(Program.uighfApplication.LanguageFilename);
+        }
+
+        /// <summary>
+        /// Add components language
+        /// </summary>
+        public override void AddLanguageComponents()
+        {
+            //main
+            LanguageHelper.AddComponent(this);
+            LanguageHelper.AddComponent(label_filterDoctors);
+            LanguageHelper.AddComponent(label_filterYears);
+            LanguageHelper.AddComponent(totalLabel);
+            LanguageHelper.AddComponent(totalpaiedLabel);
+            LanguageHelper.AddComponent(invoicesidDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(numberDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(dateDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(patientDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(ispaidDataGridViewCheckBoxColumn, this.GetType().Name, "HeaderText");
+            //tabInvoices
+            LanguageHelper.AddComponent(tabPage_tabInvoices);
+            LanguageHelper.AddComponent(button_tabInvoices_new);
+            LanguageHelper.AddComponent(button_tabInvoices_edit);
+            LanguageHelper.AddComponent(button_tabInvoices_delete);
+            LanguageHelper.AddComponent(button_tabInvoices_save);
+            LanguageHelper.AddComponent(button_tabInvoices_cancel);
+            LanguageHelper.AddComponent(button_tabInvoices_print);
+            LanguageHelper.AddComponent(button_tabInvoices_setpaid);
+            LanguageHelper.AddComponent(invoices_idLabel);
+            LanguageHelper.AddComponent(invoices_numberLabel);
+            LanguageHelper.AddComponent(invoices_totalLabel);
+            LanguageHelper.AddComponent(invoices_dateLabel);
+            LanguageHelper.AddComponent(invoices_doctorLabel);
+            LanguageHelper.AddComponent(invoices_patientLabel);
+            LanguageHelper.AddComponent(invoices_paymentLabel);
+            LanguageHelper.AddComponent(invoices_footerLabel);
+            LanguageHelper.AddComponent(invoices_deductiontaxrateLabel);
+            LanguageHelper.AddComponent(invoices_ispaidCheckBox);
+            //tabInvoicesLines
+            LanguageHelper.AddComponent(tabPage_tabInvoicesLines);
+            LanguageHelper.AddComponent(invoiceslinesidDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(codeDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(descriptionDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(quantityDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(unitpriceDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(taxrateDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(totalpriceDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(button_tabInvoicesLines_new);
+            LanguageHelper.AddComponent(button_tabInvoicesLines_edit);
+            LanguageHelper.AddComponent(button_tabInvoicesLines_delete);
+            LanguageHelper.AddComponent(button_tabInvoicesLines_save);
+            LanguageHelper.AddComponent(button_tabInvoicesLines_cancel);
+            LanguageHelper.AddComponent(invoiceslines_idLabel);
+            LanguageHelper.AddComponent(patientstreatments_idLabel);
+            LanguageHelper.AddComponent(invoiceslines_codeLabel);
+            LanguageHelper.AddComponent(invoiceslines_quantityLabel);
+            LanguageHelper.AddComponent(invoiceslines_unitpriceLabel);
+            LanguageHelper.AddComponent(invoiceslines_taxrateLabel);
+            LanguageHelper.AddComponent(invoiceslines_descriptionLabel);
+            LanguageHelper.AddComponent(treatments_idLabel);
+            LanguageHelper.AddComponent(groupBox_tabInvoicesLines_filler);
         }
 
         /// <summary>
@@ -329,7 +388,7 @@ namespace DG.DentneD.Forms
                 {
                     invoices_id = r.invoices_id,
                     date = r.invoices_date,
-                    ispayed = r.invoices_ispaid,
+                    ispaid = r.invoices_ispaid,
                     number = r.invoices_number,
                     patient = (_dentnedModel.Patients.Find(r.patients_id) != null ? _dentnedModel.Patients.Find(r.patients_id).patients_surname + " " + _dentnedModel.Patients.Find(r.patients_id).patients_name : "")
                 }).ToList();
@@ -515,11 +574,11 @@ namespace DG.DentneD.Forms
         }
 
         /// <summary>
-        /// Payed button click
+        /// Paid button click
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void button_tabInvoices_setpayed_Click(object sender, EventArgs e)
+        private void button_tabInvoices_setpaid_Click(object sender, EventArgs e)
         {
             if(vInvoicesBindingSource.Current != null)
             {

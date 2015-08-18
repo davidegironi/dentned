@@ -16,6 +16,21 @@ namespace DG.DentneD.Model.Repositories
         public RoomsRepository() : base() { }
 
         /// <summary>
+        /// Repository language dictionary
+        /// </summary>
+        public class RepositoryLanguage : IGenericDataRepositoryLanguage
+        {
+            public string text001 = "Room already inserted.";
+            public string text002 = "Name can not be empty.";
+            public string text003 = "Remove appointments before deleting this item.";
+        }
+
+        /// <summary>
+        /// Repository language
+        /// </summary>
+        public RepositoryLanguage language = new RepositoryLanguage();
+        
+        /// <summary>
         /// Check if an item can be added
         /// </summary>
         /// <param name="errors"></param>
@@ -70,7 +85,7 @@ namespace DG.DentneD.Model.Repositories
                 if (String.IsNullOrEmpty(item.rooms_name))
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Name can not be empty." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text002 }).ToArray();
                 }
 
                 if (!ret)
@@ -79,7 +94,7 @@ namespace DG.DentneD.Model.Repositories
                 if (BaseModel.Appointments.List(r => r.rooms_id == item.rooms_id).Count() > 0)
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Remove appointments before deleting this item." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text003 }).ToArray();
                 }
 
                 if (!ret)
@@ -107,7 +122,7 @@ namespace DG.DentneD.Model.Repositories
                     if (List(r => r.rooms_name == item.rooms_name).Count() > 0)
                     {
                         ret = false;
-                        errors = errors.Concat(new string[] { "Room already inserted." }).ToArray();
+                        errors = errors.Concat(new string[] { language.text001 }).ToArray();
                     }
                 }
                 else
@@ -115,7 +130,7 @@ namespace DG.DentneD.Model.Repositories
                     if (List(r => r.rooms_id != item.rooms_id && r.rooms_name == item.rooms_name).Count() > 0)
                     {
                         ret = false;
-                        errors = errors.Concat(new string[] { "Room already inserted." }).ToArray();
+                        errors = errors.Concat(new string[] { language.text001 }).ToArray();
                     }
                 }
 

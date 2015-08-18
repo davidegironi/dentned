@@ -3,9 +3,9 @@
 IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = N'dentned')
 BEGIN
 CREATE DATABASE [dentned] ON  PRIMARY 
-( NAME = N'dentned', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\dentned.mdf' , SIZE = 3072KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
+( NAME = N'dentned', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\DATA\dentned.mdf' , SIZE = 4096KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
  LOG ON 
-( NAME = N'dentned_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\dentned_log.ldf' , SIZE = 8384KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
+( NAME = N'dentned_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\DATA\dentned_1.ldf' , SIZE = 9216KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
  COLLATE Latin1_General_CI_AS
 END;
 ALTER DATABASE [dentned] SET COMPATIBILITY_LEVEL = 100;
@@ -115,8 +115,8 @@ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[es
 BEGIN
 CREATE TABLE [dbo].[estimates](
 	[estimates_id] [int] IDENTITY(1,1) NOT NULL,
-	[doctors_id] [int] NOT NULL,
-	[patients_id] [int] NOT NULL,
+	[doctors_id] [int] NULL,
+	[patients_id] [int] NULL,
 	[invoices_id] [int] NULL,
 	[estimates_number] [varchar](32) COLLATE Latin1_General_CI_AS NOT NULL,
 	[estimates_date] [date] NOT NULL,
@@ -156,6 +156,7 @@ BEGIN
 CREATE TABLE [dbo].[estimateslines](
 	[estimateslines_id] [int] IDENTITY(1,1) NOT NULL,
 	[estimates_id] [int] NOT NULL,
+	[patientstreatments_id] [int] NULL,
 	[estimateslines_code] [char](3) COLLATE Latin1_General_CI_AS NOT NULL,
 	[estimateslines_description] [varchar](512) COLLATE Latin1_General_CI_AS NOT NULL,
 	[estimateslines_quantity] [int] NOT NULL,
@@ -454,6 +455,21 @@ END;
  ALTER AUTHORIZATION ON [dbo].[paymentstypes] TO  SCHEMA OWNER;
 SET ANSI_NULLS ON;
 SET QUOTED_IDENTIFIER ON;
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[reports]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[reports](
+	[reports_id] [int] IDENTITY(1,1) NOT NULL,
+	[reports_name] [varchar](32) COLLATE Latin1_General_CI_AS NOT NULL,
+	[reports_query] [text] COLLATE Latin1_General_CI_AS NOT NULL,
+ CONSTRAINT [PK_reports] PRIMARY KEY CLUSTERED 
+(
+	[reports_id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+END;
+ ALTER AUTHORIZATION ON [dbo].[reports] TO  SCHEMA OWNER;
+SET ANSI_NULLS ON;
+SET QUOTED_IDENTIFIER ON;
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[rooms]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [dbo].[rooms](
@@ -601,6 +617,11 @@ ALTER TABLE [dbo].[estimateslines]  WITH CHECK ADD  CONSTRAINT [FK_estimatesline
 REFERENCES [estimates] ([estimates_id]);
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_estimateslines_estimates]') AND parent_object_id = OBJECT_ID(N'[dbo].[estimateslines]'))
 ALTER TABLE [dbo].[estimateslines] CHECK CONSTRAINT [FK_estimateslines_estimates];
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_estimateslines_patientstreatments]') AND parent_object_id = OBJECT_ID(N'[dbo].[estimateslines]'))
+ALTER TABLE [dbo].[estimateslines]  WITH CHECK ADD  CONSTRAINT [FK_estimateslines_patientstreatments] FOREIGN KEY([patientstreatments_id])
+REFERENCES [patientstreatments] ([patientstreatments_id]);
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_estimateslines_patientstreatments]') AND parent_object_id = OBJECT_ID(N'[dbo].[estimateslines]'))
+ALTER TABLE [dbo].[estimateslines] CHECK CONSTRAINT [FK_estimateslines_patientstreatments];
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_invoices_doctors]') AND parent_object_id = OBJECT_ID(N'[dbo].[invoices]'))
 ALTER TABLE [dbo].[invoices]  WITH CHECK ADD  CONSTRAINT [FK_invoices_doctors] FOREIGN KEY([doctors_id])
 REFERENCES [doctors] ([doctors_id]);

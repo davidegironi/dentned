@@ -29,27 +29,27 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.Label treatments_idLabel;
-            System.Windows.Forms.Label estimates_totalLabel;
-            System.Windows.Forms.Label estimates_deductiontaxrateLabel;
-            System.Windows.Forms.Label estimates_footerLabel;
-            System.Windows.Forms.Label estimates_paymentLabel;
-            System.Windows.Forms.Label estimates_dateLabel;
-            System.Windows.Forms.Label estimates_patientLabel;
-            System.Windows.Forms.Label estimates_numberLabel;
-            System.Windows.Forms.Label estimates_idLabel;
-            System.Windows.Forms.Label estimateslines_unitpriceLabel;
-            System.Windows.Forms.Label estimateslines_taxrateLabel;
-            System.Windows.Forms.Label estimateslines_quantityLabel;
-            System.Windows.Forms.Label estimateslines_descriptionLabel;
-            System.Windows.Forms.Label estimateslines_codeLabel;
-            System.Windows.Forms.Label estimateslines_idLabel;
-            System.Windows.Forms.Label patientstreatments_idLabel;
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormEstimates));
+            this.treatments_idLabel = new System.Windows.Forms.Label();
+            this.estimates_totalLabel = new System.Windows.Forms.Label();
+            this.estimates_deductiontaxrateLabel = new System.Windows.Forms.Label();
+            this.estimates_footerLabel = new System.Windows.Forms.Label();
+            this.estimates_paymentLabel = new System.Windows.Forms.Label();
+            this.estimates_dateLabel = new System.Windows.Forms.Label();
+            this.estimates_patientLabel = new System.Windows.Forms.Label();
+            this.estimates_numberLabel = new System.Windows.Forms.Label();
+            this.estimates_idLabel = new System.Windows.Forms.Label();
+            this.estimateslines_unitpriceLabel = new System.Windows.Forms.Label();
+            this.estimateslines_taxrateLabel = new System.Windows.Forms.Label();
+            this.estimateslines_quantityLabel = new System.Windows.Forms.Label();
+            this.estimateslines_descriptionLabel = new System.Windows.Forms.Label();
+            this.estimateslines_codeLabel = new System.Windows.Forms.Label();
+            this.estimateslines_idLabel = new System.Windows.Forms.Label();
+            this.patientstreatments_idLabel = new System.Windows.Forms.Label();
             this.estimates_doctorLabel = new System.Windows.Forms.Label();
             this.treatments_idComboBox = new System.Windows.Forms.ComboBox();
             this.button_tabEstimatesLines_delete = new System.Windows.Forms.Button();
@@ -93,11 +93,6 @@
             this.totalLabel = new System.Windows.Forms.Label();
             this.panel_listtotal = new System.Windows.Forms.Panel();
             this.advancedDataGridView_main = new Zuby.ADGV.AdvancedDataGridView();
-            this.estimatesidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.numberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.patientDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.isinvoicedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.vEstimatesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel_list = new System.Windows.Forms.Panel();
             this.button_tabEstimates_new = new System.Windows.Forms.Button();
@@ -129,22 +124,11 @@
             this.button_tabEstimates_invoice = new System.Windows.Forms.Button();
             this.tabPage_tabEstimatesLines = new System.Windows.Forms.TabPage();
             this.panel_tabEstimatesLines_data = new System.Windows.Forms.Panel();
-            treatments_idLabel = new System.Windows.Forms.Label();
-            estimates_totalLabel = new System.Windows.Forms.Label();
-            estimates_deductiontaxrateLabel = new System.Windows.Forms.Label();
-            estimates_footerLabel = new System.Windows.Forms.Label();
-            estimates_paymentLabel = new System.Windows.Forms.Label();
-            estimates_dateLabel = new System.Windows.Forms.Label();
-            estimates_patientLabel = new System.Windows.Forms.Label();
-            estimates_numberLabel = new System.Windows.Forms.Label();
-            estimates_idLabel = new System.Windows.Forms.Label();
-            estimateslines_unitpriceLabel = new System.Windows.Forms.Label();
-            estimateslines_taxrateLabel = new System.Windows.Forms.Label();
-            estimateslines_quantityLabel = new System.Windows.Forms.Label();
-            estimateslines_descriptionLabel = new System.Windows.Forms.Label();
-            estimateslines_codeLabel = new System.Windows.Forms.Label();
-            estimateslines_idLabel = new System.Windows.Forms.Label();
-            patientstreatments_idLabel = new System.Windows.Forms.Label();
+            this.estimatesidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.numberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.patientDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isinvoicedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.panel_tabEstimatesLines_actions.SuspendLayout();
             this.panel_tabEstimatesLines_updates.SuspendLayout();
             this.panel_tabEstimatesLines_list.SuspendLayout();
@@ -170,147 +154,147 @@
             // 
             // treatments_idLabel
             // 
-            treatments_idLabel.AutoSize = true;
-            treatments_idLabel.Location = new System.Drawing.Point(6, 16);
-            treatments_idLabel.Name = "treatments_idLabel";
-            treatments_idLabel.Size = new System.Drawing.Size(58, 13);
-            treatments_idLabel.TabIndex = 13;
-            treatments_idLabel.Text = "Treatment:";
+            this.treatments_idLabel.AutoSize = true;
+            this.treatments_idLabel.Location = new System.Drawing.Point(6, 16);
+            this.treatments_idLabel.Name = "treatments_idLabel";
+            this.treatments_idLabel.Size = new System.Drawing.Size(58, 13);
+            this.treatments_idLabel.TabIndex = 13;
+            this.treatments_idLabel.Text = "Treatment:";
             // 
             // estimates_totalLabel
             // 
-            estimates_totalLabel.AutoSize = true;
-            estimates_totalLabel.Location = new System.Drawing.Point(296, 48);
-            estimates_totalLabel.Name = "estimates_totalLabel";
-            estimates_totalLabel.Size = new System.Drawing.Size(34, 13);
-            estimates_totalLabel.TabIndex = 24;
-            estimates_totalLabel.Text = "Total:";
+            this.estimates_totalLabel.AutoSize = true;
+            this.estimates_totalLabel.Location = new System.Drawing.Point(296, 48);
+            this.estimates_totalLabel.Name = "estimates_totalLabel";
+            this.estimates_totalLabel.Size = new System.Drawing.Size(34, 13);
+            this.estimates_totalLabel.TabIndex = 24;
+            this.estimates_totalLabel.Text = "Total:";
             // 
             // estimates_deductiontaxrateLabel
             // 
-            estimates_deductiontaxrateLabel.AutoSize = true;
-            estimates_deductiontaxrateLabel.Location = new System.Drawing.Point(11, 399);
-            estimates_deductiontaxrateLabel.Name = "estimates_deductiontaxrateLabel";
-            estimates_deductiontaxrateLabel.Size = new System.Drawing.Size(106, 13);
-            estimates_deductiontaxrateLabel.TabIndex = 18;
-            estimates_deductiontaxrateLabel.Text = "Deduction Tax Rate:";
+            this.estimates_deductiontaxrateLabel.AutoSize = true;
+            this.estimates_deductiontaxrateLabel.Location = new System.Drawing.Point(11, 399);
+            this.estimates_deductiontaxrateLabel.Name = "estimates_deductiontaxrateLabel";
+            this.estimates_deductiontaxrateLabel.Size = new System.Drawing.Size(106, 13);
+            this.estimates_deductiontaxrateLabel.TabIndex = 18;
+            this.estimates_deductiontaxrateLabel.Text = "Deduction Tax Rate:";
             // 
             // estimates_footerLabel
             // 
-            estimates_footerLabel.AutoSize = true;
-            estimates_footerLabel.Location = new System.Drawing.Point(229, 304);
-            estimates_footerLabel.Name = "estimates_footerLabel";
-            estimates_footerLabel.Size = new System.Drawing.Size(40, 13);
-            estimates_footerLabel.TabIndex = 15;
-            estimates_footerLabel.Text = "Footer:";
+            this.estimates_footerLabel.AutoSize = true;
+            this.estimates_footerLabel.Location = new System.Drawing.Point(229, 304);
+            this.estimates_footerLabel.Name = "estimates_footerLabel";
+            this.estimates_footerLabel.Size = new System.Drawing.Size(40, 13);
+            this.estimates_footerLabel.TabIndex = 15;
+            this.estimates_footerLabel.Text = "Footer:";
             // 
             // estimates_paymentLabel
             // 
-            estimates_paymentLabel.AutoSize = true;
-            estimates_paymentLabel.Location = new System.Drawing.Point(11, 304);
-            estimates_paymentLabel.Name = "estimates_paymentLabel";
-            estimates_paymentLabel.Size = new System.Drawing.Size(51, 13);
-            estimates_paymentLabel.TabIndex = 12;
-            estimates_paymentLabel.Text = "Payment:";
+            this.estimates_paymentLabel.AutoSize = true;
+            this.estimates_paymentLabel.Location = new System.Drawing.Point(11, 304);
+            this.estimates_paymentLabel.Name = "estimates_paymentLabel";
+            this.estimates_paymentLabel.Size = new System.Drawing.Size(51, 13);
+            this.estimates_paymentLabel.TabIndex = 12;
+            this.estimates_paymentLabel.Text = "Payment:";
             // 
             // estimates_dateLabel
             // 
-            estimates_dateLabel.AutoSize = true;
-            estimates_dateLabel.Location = new System.Drawing.Point(125, 48);
-            estimates_dateLabel.Name = "estimates_dateLabel";
-            estimates_dateLabel.Size = new System.Drawing.Size(33, 13);
-            estimates_dateLabel.TabIndex = 8;
-            estimates_dateLabel.Text = "Date:";
+            this.estimates_dateLabel.AutoSize = true;
+            this.estimates_dateLabel.Location = new System.Drawing.Point(125, 48);
+            this.estimates_dateLabel.Name = "estimates_dateLabel";
+            this.estimates_dateLabel.Size = new System.Drawing.Size(33, 13);
+            this.estimates_dateLabel.TabIndex = 8;
+            this.estimates_dateLabel.Text = "Date:";
             // 
             // estimates_patientLabel
             // 
-            estimates_patientLabel.AutoSize = true;
-            estimates_patientLabel.Location = new System.Drawing.Point(11, 201);
-            estimates_patientLabel.Name = "estimates_patientLabel";
-            estimates_patientLabel.Size = new System.Drawing.Size(43, 13);
-            estimates_patientLabel.TabIndex = 6;
-            estimates_patientLabel.Text = "Patient:";
+            this.estimates_patientLabel.AutoSize = true;
+            this.estimates_patientLabel.Location = new System.Drawing.Point(11, 201);
+            this.estimates_patientLabel.Name = "estimates_patientLabel";
+            this.estimates_patientLabel.Size = new System.Drawing.Size(43, 13);
+            this.estimates_patientLabel.TabIndex = 6;
+            this.estimates_patientLabel.Text = "Patient:";
             // 
             // estimates_numberLabel
             // 
-            estimates_numberLabel.AutoSize = true;
-            estimates_numberLabel.Location = new System.Drawing.Point(9, 48);
-            estimates_numberLabel.Name = "estimates_numberLabel";
-            estimates_numberLabel.Size = new System.Drawing.Size(47, 13);
-            estimates_numberLabel.TabIndex = 2;
-            estimates_numberLabel.Text = "Number:";
+            this.estimates_numberLabel.AutoSize = true;
+            this.estimates_numberLabel.Location = new System.Drawing.Point(9, 48);
+            this.estimates_numberLabel.Name = "estimates_numberLabel";
+            this.estimates_numberLabel.Size = new System.Drawing.Size(47, 13);
+            this.estimates_numberLabel.TabIndex = 2;
+            this.estimates_numberLabel.Text = "Number:";
             // 
             // estimates_idLabel
             // 
-            estimates_idLabel.AutoSize = true;
-            estimates_idLabel.Location = new System.Drawing.Point(9, 9);
-            estimates_idLabel.Name = "estimates_idLabel";
-            estimates_idLabel.Size = new System.Drawing.Size(19, 13);
-            estimates_idLabel.TabIndex = 0;
-            estimates_idLabel.Text = "Id:";
+            this.estimates_idLabel.AutoSize = true;
+            this.estimates_idLabel.Location = new System.Drawing.Point(9, 9);
+            this.estimates_idLabel.Name = "estimates_idLabel";
+            this.estimates_idLabel.Size = new System.Drawing.Size(19, 13);
+            this.estimates_idLabel.TabIndex = 0;
+            this.estimates_idLabel.Text = "Id:";
             // 
             // estimateslines_unitpriceLabel
             // 
-            estimateslines_unitpriceLabel.AutoSize = true;
-            estimateslines_unitpriceLabel.Location = new System.Drawing.Point(180, 89);
-            estimateslines_unitpriceLabel.Name = "estimateslines_unitpriceLabel";
-            estimateslines_unitpriceLabel.Size = new System.Drawing.Size(34, 13);
-            estimateslines_unitpriceLabel.TabIndex = 10;
-            estimateslines_unitpriceLabel.Text = "Price:";
+            this.estimateslines_unitpriceLabel.AutoSize = true;
+            this.estimateslines_unitpriceLabel.Location = new System.Drawing.Point(180, 89);
+            this.estimateslines_unitpriceLabel.Name = "estimateslines_unitpriceLabel";
+            this.estimateslines_unitpriceLabel.Size = new System.Drawing.Size(34, 13);
+            this.estimateslines_unitpriceLabel.TabIndex = 10;
+            this.estimateslines_unitpriceLabel.Text = "Price:";
             // 
             // estimateslines_taxrateLabel
             // 
-            estimateslines_taxrateLabel.AutoSize = true;
-            estimateslines_taxrateLabel.Location = new System.Drawing.Point(282, 89);
-            estimateslines_taxrateLabel.Name = "estimateslines_taxrateLabel";
-            estimateslines_taxrateLabel.Size = new System.Drawing.Size(54, 13);
-            estimateslines_taxrateLabel.TabIndex = 8;
-            estimateslines_taxrateLabel.Text = "Tax Rate:";
+            this.estimateslines_taxrateLabel.AutoSize = true;
+            this.estimateslines_taxrateLabel.Location = new System.Drawing.Point(282, 89);
+            this.estimateslines_taxrateLabel.Name = "estimateslines_taxrateLabel";
+            this.estimateslines_taxrateLabel.Size = new System.Drawing.Size(54, 13);
+            this.estimateslines_taxrateLabel.TabIndex = 8;
+            this.estimateslines_taxrateLabel.Text = "Tax Rate:";
             // 
             // estimateslines_quantityLabel
             // 
-            estimateslines_quantityLabel.AutoSize = true;
-            estimateslines_quantityLabel.Location = new System.Drawing.Point(100, 89);
-            estimateslines_quantityLabel.Name = "estimateslines_quantityLabel";
-            estimateslines_quantityLabel.Size = new System.Drawing.Size(49, 13);
-            estimateslines_quantityLabel.TabIndex = 6;
-            estimateslines_quantityLabel.Text = "Quantity:";
+            this.estimateslines_quantityLabel.AutoSize = true;
+            this.estimateslines_quantityLabel.Location = new System.Drawing.Point(100, 89);
+            this.estimateslines_quantityLabel.Name = "estimateslines_quantityLabel";
+            this.estimateslines_quantityLabel.Size = new System.Drawing.Size(49, 13);
+            this.estimateslines_quantityLabel.TabIndex = 6;
+            this.estimateslines_quantityLabel.Text = "Quantity:";
             // 
             // estimateslines_descriptionLabel
             // 
-            estimateslines_descriptionLabel.AutoSize = true;
-            estimateslines_descriptionLabel.Location = new System.Drawing.Point(9, 128);
-            estimateslines_descriptionLabel.Name = "estimateslines_descriptionLabel";
-            estimateslines_descriptionLabel.Size = new System.Drawing.Size(63, 13);
-            estimateslines_descriptionLabel.TabIndex = 4;
-            estimateslines_descriptionLabel.Text = "Description:";
+            this.estimateslines_descriptionLabel.AutoSize = true;
+            this.estimateslines_descriptionLabel.Location = new System.Drawing.Point(9, 128);
+            this.estimateslines_descriptionLabel.Name = "estimateslines_descriptionLabel";
+            this.estimateslines_descriptionLabel.Size = new System.Drawing.Size(63, 13);
+            this.estimateslines_descriptionLabel.TabIndex = 4;
+            this.estimateslines_descriptionLabel.Text = "Description:";
             // 
             // estimateslines_codeLabel
             // 
-            estimateslines_codeLabel.AutoSize = true;
-            estimateslines_codeLabel.Location = new System.Drawing.Point(9, 89);
-            estimateslines_codeLabel.Name = "estimateslines_codeLabel";
-            estimateslines_codeLabel.Size = new System.Drawing.Size(35, 13);
-            estimateslines_codeLabel.TabIndex = 2;
-            estimateslines_codeLabel.Text = "Code:";
+            this.estimateslines_codeLabel.AutoSize = true;
+            this.estimateslines_codeLabel.Location = new System.Drawing.Point(9, 89);
+            this.estimateslines_codeLabel.Name = "estimateslines_codeLabel";
+            this.estimateslines_codeLabel.Size = new System.Drawing.Size(35, 13);
+            this.estimateslines_codeLabel.TabIndex = 2;
+            this.estimateslines_codeLabel.Text = "Code:";
             // 
             // estimateslines_idLabel
             // 
-            estimateslines_idLabel.AutoSize = true;
-            estimateslines_idLabel.Location = new System.Drawing.Point(9, 9);
-            estimateslines_idLabel.Name = "estimateslines_idLabel";
-            estimateslines_idLabel.Size = new System.Drawing.Size(19, 13);
-            estimateslines_idLabel.TabIndex = 0;
-            estimateslines_idLabel.Text = "Id:";
+            this.estimateslines_idLabel.AutoSize = true;
+            this.estimateslines_idLabel.Location = new System.Drawing.Point(9, 9);
+            this.estimateslines_idLabel.Name = "estimateslines_idLabel";
+            this.estimateslines_idLabel.Size = new System.Drawing.Size(19, 13);
+            this.estimateslines_idLabel.TabIndex = 0;
+            this.estimateslines_idLabel.Text = "Id:";
             // 
             // patientstreatments_idLabel
             // 
-            patientstreatments_idLabel.AutoSize = true;
-            patientstreatments_idLabel.Location = new System.Drawing.Point(9, 49);
-            patientstreatments_idLabel.Name = "patientstreatments_idLabel";
-            patientstreatments_idLabel.Size = new System.Drawing.Size(94, 13);
-            patientstreatments_idLabel.TabIndex = 15;
-            patientstreatments_idLabel.Text = "Patient Treatment:";
+            this.patientstreatments_idLabel.AutoSize = true;
+            this.patientstreatments_idLabel.Location = new System.Drawing.Point(9, 49);
+            this.patientstreatments_idLabel.Name = "patientstreatments_idLabel";
+            this.patientstreatments_idLabel.Size = new System.Drawing.Size(94, 13);
+            this.patientstreatments_idLabel.TabIndex = 15;
+            this.patientstreatments_idLabel.Text = "Patient Treatment:";
             // 
             // estimates_doctorLabel
             // 
@@ -516,7 +500,7 @@
             // 
             // groupBox_tabEstimatesLines_filler
             // 
-            this.groupBox_tabEstimatesLines_filler.Controls.Add(treatments_idLabel);
+            this.groupBox_tabEstimatesLines_filler.Controls.Add(this.treatments_idLabel);
             this.groupBox_tabEstimatesLines_filler.Controls.Add(this.treatments_idComboBox);
             this.groupBox_tabEstimatesLines_filler.Location = new System.Drawing.Point(270, 23);
             this.groupBox_tabEstimatesLines_filler.Name = "groupBox_tabEstimatesLines_filler";
@@ -758,59 +742,6 @@
             this.advancedDataGridView_main.SortStringChanged += new System.EventHandler(this.advancedDataGridView_main_SortStringChanged);
             this.advancedDataGridView_main.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_main_FilterStringChanged);
             // 
-            // estimatesidDataGridViewTextBoxColumn
-            // 
-            this.estimatesidDataGridViewTextBoxColumn.DataPropertyName = "estimates_id";
-            this.estimatesidDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.estimatesidDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.estimatesidDataGridViewTextBoxColumn.Name = "estimatesidDataGridViewTextBoxColumn";
-            this.estimatesidDataGridViewTextBoxColumn.ReadOnly = true;
-            this.estimatesidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.estimatesidDataGridViewTextBoxColumn.Visible = false;
-            this.estimatesidDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // numberDataGridViewTextBoxColumn
-            // 
-            this.numberDataGridViewTextBoxColumn.DataPropertyName = "number";
-            this.numberDataGridViewTextBoxColumn.HeaderText = "Number";
-            this.numberDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.numberDataGridViewTextBoxColumn.Name = "numberDataGridViewTextBoxColumn";
-            this.numberDataGridViewTextBoxColumn.ReadOnly = true;
-            this.numberDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.numberDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // dateDataGridViewTextBoxColumn
-            // 
-            this.dateDataGridViewTextBoxColumn.DataPropertyName = "date";
-            dataGridViewCellStyle4.Format = "d";
-            this.dateDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
-            this.dateDataGridViewTextBoxColumn.HeaderText = "Date";
-            this.dateDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
-            this.dateDataGridViewTextBoxColumn.ReadOnly = true;
-            this.dateDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.dateDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // patientDataGridViewTextBoxColumn
-            // 
-            this.patientDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.patientDataGridViewTextBoxColumn.DataPropertyName = "patient";
-            this.patientDataGridViewTextBoxColumn.HeaderText = "Patient";
-            this.patientDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.patientDataGridViewTextBoxColumn.Name = "patientDataGridViewTextBoxColumn";
-            this.patientDataGridViewTextBoxColumn.ReadOnly = true;
-            this.patientDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // isinvoicedDataGridViewCheckBoxColumn
-            // 
-            this.isinvoicedDataGridViewCheckBoxColumn.DataPropertyName = "isinvoiced";
-            this.isinvoicedDataGridViewCheckBoxColumn.HeaderText = "I";
-            this.isinvoicedDataGridViewCheckBoxColumn.MinimumWidth = 22;
-            this.isinvoicedDataGridViewCheckBoxColumn.Name = "isinvoicedDataGridViewCheckBoxColumn";
-            this.isinvoicedDataGridViewCheckBoxColumn.ReadOnly = true;
-            this.isinvoicedDataGridViewCheckBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.isinvoicedDataGridViewCheckBoxColumn.Width = 40;
-            // 
             // vEstimatesBindingSource
             // 
             this.vEstimatesBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VEstimates);
@@ -840,28 +771,28 @@
             // 
             this.panel_tabEstimates_data.Controls.Add(this.estimates_invoiceTextBox);
             this.panel_tabEstimates_data.Controls.Add(this.estimates_invoiceLabel);
-            this.panel_tabEstimates_data.Controls.Add(estimates_totalLabel);
+            this.panel_tabEstimates_data.Controls.Add(this.estimates_totalLabel);
             this.panel_tabEstimates_data.Controls.Add(this.estimates_totalTextBox);
             this.panel_tabEstimates_data.Controls.Add(this.patients_idComboBox);
             this.panel_tabEstimates_data.Controls.Add(this.doctors_idComboBox);
             this.panel_tabEstimates_data.Controls.Add(this.estimates_deductiontaxrateComboBox);
-            this.panel_tabEstimates_data.Controls.Add(estimates_deductiontaxrateLabel);
+            this.panel_tabEstimates_data.Controls.Add(this.estimates_deductiontaxrateLabel);
             this.panel_tabEstimates_data.Controls.Add(this.estimates_deductiontaxrateTextBox);
             this.panel_tabEstimates_data.Controls.Add(this.estimates_footerComboBox);
-            this.panel_tabEstimates_data.Controls.Add(estimates_footerLabel);
+            this.panel_tabEstimates_data.Controls.Add(this.estimates_footerLabel);
             this.panel_tabEstimates_data.Controls.Add(this.estimates_footerTextBox);
             this.panel_tabEstimates_data.Controls.Add(this.estimates_paymentComboBox);
-            this.panel_tabEstimates_data.Controls.Add(estimates_paymentLabel);
+            this.panel_tabEstimates_data.Controls.Add(this.estimates_paymentLabel);
             this.panel_tabEstimates_data.Controls.Add(this.estimates_paymentTextBox);
             this.panel_tabEstimates_data.Controls.Add(this.estimates_patientTextBox);
             this.panel_tabEstimates_data.Controls.Add(this.estimates_doctorTextBox);
-            this.panel_tabEstimates_data.Controls.Add(estimates_dateLabel);
+            this.panel_tabEstimates_data.Controls.Add(this.estimates_dateLabel);
             this.panel_tabEstimates_data.Controls.Add(this.estimates_dateDateTimePicker);
-            this.panel_tabEstimates_data.Controls.Add(estimates_patientLabel);
+            this.panel_tabEstimates_data.Controls.Add(this.estimates_patientLabel);
             this.panel_tabEstimates_data.Controls.Add(this.estimates_doctorLabel);
-            this.panel_tabEstimates_data.Controls.Add(estimates_numberLabel);
+            this.panel_tabEstimates_data.Controls.Add(this.estimates_numberLabel);
             this.panel_tabEstimates_data.Controls.Add(this.estimates_numberTextBox);
-            this.panel_tabEstimates_data.Controls.Add(estimates_idLabel);
+            this.panel_tabEstimates_data.Controls.Add(this.estimates_idLabel);
             this.panel_tabEstimates_data.Controls.Add(this.estimates_idTextBox);
             this.panel_tabEstimates_data.Location = new System.Drawing.Point(6, 42);
             this.panel_tabEstimates_data.Name = "panel_tabEstimates_data";
@@ -1135,24 +1066,77 @@
             // 
             this.panel_tabEstimatesLines_data.Controls.Add(this.groupBox_tabEstimatesLines_filler);
             this.panel_tabEstimatesLines_data.Controls.Add(this.estimateslines_taxrateComboBox);
-            this.panel_tabEstimatesLines_data.Controls.Add(patientstreatments_idLabel);
+            this.panel_tabEstimatesLines_data.Controls.Add(this.patientstreatments_idLabel);
             this.panel_tabEstimatesLines_data.Controls.Add(this.patientstreatments_idComboBox);
-            this.panel_tabEstimatesLines_data.Controls.Add(estimateslines_unitpriceLabel);
+            this.panel_tabEstimatesLines_data.Controls.Add(this.estimateslines_unitpriceLabel);
             this.panel_tabEstimatesLines_data.Controls.Add(this.estimateslines_unitpriceTextBox);
-            this.panel_tabEstimatesLines_data.Controls.Add(estimateslines_taxrateLabel);
+            this.panel_tabEstimatesLines_data.Controls.Add(this.estimateslines_taxrateLabel);
             this.panel_tabEstimatesLines_data.Controls.Add(this.estimateslines_taxrateTextBox);
-            this.panel_tabEstimatesLines_data.Controls.Add(estimateslines_quantityLabel);
+            this.panel_tabEstimatesLines_data.Controls.Add(this.estimateslines_quantityLabel);
             this.panel_tabEstimatesLines_data.Controls.Add(this.estimateslines_quantityTextBox);
-            this.panel_tabEstimatesLines_data.Controls.Add(estimateslines_descriptionLabel);
+            this.panel_tabEstimatesLines_data.Controls.Add(this.estimateslines_descriptionLabel);
             this.panel_tabEstimatesLines_data.Controls.Add(this.estimateslines_descriptionTextBox);
-            this.panel_tabEstimatesLines_data.Controls.Add(estimateslines_codeLabel);
+            this.panel_tabEstimatesLines_data.Controls.Add(this.estimateslines_codeLabel);
             this.panel_tabEstimatesLines_data.Controls.Add(this.estimateslines_codeTextBox);
-            this.panel_tabEstimatesLines_data.Controls.Add(estimateslines_idLabel);
+            this.panel_tabEstimatesLines_data.Controls.Add(this.estimateslines_idLabel);
             this.panel_tabEstimatesLines_data.Controls.Add(this.estimateslines_idTextBox);
             this.panel_tabEstimatesLines_data.Location = new System.Drawing.Point(6, 249);
             this.panel_tabEstimatesLines_data.Name = "panel_tabEstimatesLines_data";
             this.panel_tabEstimatesLines_data.Size = new System.Drawing.Size(480, 171);
             this.panel_tabEstimatesLines_data.TabIndex = 9;
+            // 
+            // estimatesidDataGridViewTextBoxColumn
+            // 
+            this.estimatesidDataGridViewTextBoxColumn.DataPropertyName = "estimates_id";
+            this.estimatesidDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.estimatesidDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.estimatesidDataGridViewTextBoxColumn.Name = "estimatesidDataGridViewTextBoxColumn";
+            this.estimatesidDataGridViewTextBoxColumn.ReadOnly = true;
+            this.estimatesidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.estimatesidDataGridViewTextBoxColumn.Visible = false;
+            this.estimatesidDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // numberDataGridViewTextBoxColumn
+            // 
+            this.numberDataGridViewTextBoxColumn.DataPropertyName = "number";
+            this.numberDataGridViewTextBoxColumn.HeaderText = "Number";
+            this.numberDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.numberDataGridViewTextBoxColumn.Name = "numberDataGridViewTextBoxColumn";
+            this.numberDataGridViewTextBoxColumn.ReadOnly = true;
+            this.numberDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.numberDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // dateDataGridViewTextBoxColumn
+            // 
+            this.dateDataGridViewTextBoxColumn.DataPropertyName = "date";
+            dataGridViewCellStyle4.Format = "d";
+            this.dateDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dateDataGridViewTextBoxColumn.HeaderText = "Date";
+            this.dateDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
+            this.dateDataGridViewTextBoxColumn.ReadOnly = true;
+            this.dateDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.dateDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // patientDataGridViewTextBoxColumn
+            // 
+            this.patientDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.patientDataGridViewTextBoxColumn.DataPropertyName = "patient";
+            this.patientDataGridViewTextBoxColumn.HeaderText = "Patient";
+            this.patientDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.patientDataGridViewTextBoxColumn.Name = "patientDataGridViewTextBoxColumn";
+            this.patientDataGridViewTextBoxColumn.ReadOnly = true;
+            this.patientDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // isinvoicedDataGridViewCheckBoxColumn
+            // 
+            this.isinvoicedDataGridViewCheckBoxColumn.DataPropertyName = "isinvoiced";
+            this.isinvoicedDataGridViewCheckBoxColumn.HeaderText = "I";
+            this.isinvoicedDataGridViewCheckBoxColumn.MinimumWidth = 22;
+            this.isinvoicedDataGridViewCheckBoxColumn.Name = "isinvoicedDataGridViewCheckBoxColumn";
+            this.isinvoicedDataGridViewCheckBoxColumn.ReadOnly = true;
+            this.isinvoicedDataGridViewCheckBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.isinvoicedDataGridViewCheckBoxColumn.Width = 40;
             // 
             // FormEstimates
             // 
@@ -1260,11 +1244,6 @@
         private System.Windows.Forms.Panel panel_tabEstimatesLines_data;
         private System.Windows.Forms.BindingSource vEstimatesLinesBindingSource;
         private System.Windows.Forms.BindingSource vEstimatesBindingSource;
-        private System.Windows.Forms.DataGridViewTextBoxColumn estimatesidDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn numberDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn patientDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn isinvoicedDataGridViewCheckBoxColumn;
         private System.Windows.Forms.Label estimates_doctorLabel;
         private System.Windows.Forms.Button button_tabEstimates_invoice;
         private System.Windows.Forms.TextBox estimates_invoiceTextBox;
@@ -1278,5 +1257,26 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn totalpriceDataGridViewTextBoxColumn;
         private System.Windows.Forms.ComboBox comboBox_filterYears;
         private System.Windows.Forms.Label label_filterYears;
+        private System.Windows.Forms.Label estimates_totalLabel;
+        private System.Windows.Forms.Label estimates_deductiontaxrateLabel;
+        private System.Windows.Forms.Label estimates_footerLabel;
+        private System.Windows.Forms.Label estimates_paymentLabel;
+        private System.Windows.Forms.Label estimates_dateLabel;
+        private System.Windows.Forms.Label estimates_patientLabel;
+        private System.Windows.Forms.Label estimates_numberLabel;
+        private System.Windows.Forms.Label estimates_idLabel;
+        private System.Windows.Forms.Label treatments_idLabel;
+        private System.Windows.Forms.Label estimateslines_unitpriceLabel;
+        private System.Windows.Forms.Label estimateslines_taxrateLabel;
+        private System.Windows.Forms.Label estimateslines_quantityLabel;
+        private System.Windows.Forms.Label estimateslines_descriptionLabel;
+        private System.Windows.Forms.Label estimateslines_codeLabel;
+        private System.Windows.Forms.Label estimateslines_idLabel;
+        private System.Windows.Forms.Label patientstreatments_idLabel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn estimatesidDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn numberDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn patientDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn isinvoicedDataGridViewCheckBoxColumn;
     }
 }

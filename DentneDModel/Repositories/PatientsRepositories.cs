@@ -16,6 +16,25 @@ namespace DG.DentneD.Model.Repositories
         public PatientsRepository() : base() { }
 
         /// <summary>
+        /// Repository language dictionary
+        /// </summary>
+        public class RepositoryLanguage : IGenericDataRepositoryLanguage
+        {
+            public string text001 = "Name can not be empty.";
+            public string text002 = "Surname can not be empty.";
+            public string text003 = "Birth city can not be empty.";
+            public string text004 = "Invoices text can not be empty.";
+            public string text005 = "Invalid sex. Can be 'M' or 'F'.";
+            public string text006 = "Invalid treatment price list.";
+            public string text007 = "Remove appointments before deleting this item.";
+        }
+
+        /// <summary>
+        /// Repository language
+        /// </summary>
+        public RepositoryLanguage language = new RepositoryLanguage();
+
+        /// <summary>
         /// Check if an item can be added
         /// </summary>
         /// <param name="errors"></param>
@@ -70,7 +89,7 @@ namespace DG.DentneD.Model.Repositories
                 if (BaseModel.Appointments.List(r => r.patients_id == item.patients_id).Count() > 0)
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Remove appointments before deleting this item." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text007 }).ToArray();
                 }
 
                 if (!ret)
@@ -96,22 +115,22 @@ namespace DG.DentneD.Model.Repositories
                 if (String.IsNullOrEmpty(item.patients_name))
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Name can not be empty." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text001 }).ToArray();
                 }
                 if (String.IsNullOrEmpty(item.patients_surname))
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Surname can not be empty." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text002 }).ToArray();
                 }
                 if (String.IsNullOrEmpty(item.patients_birthcity))
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Birth city can not be empty." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text003 }).ToArray();
                 }
                 if (String.IsNullOrEmpty(item.patients_doctext))
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Invoices text can not be empty." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text004 }).ToArray();
                 }
 
                 if (!ret)
@@ -120,7 +139,7 @@ namespace DG.DentneD.Model.Repositories
                 if (item.patients_sex != "M" && item.patients_sex != "F")
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Invalid sex. Can be 'M' or 'F'." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text005 }).ToArray();
                 }
 
                 if (!ret)
@@ -129,7 +148,7 @@ namespace DG.DentneD.Model.Repositories
                 if (item.treatmentspriceslists_id != null && BaseModel.TreatmentsPricesLists.Find(item.treatmentspriceslists_id) == null)
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Invalid treatment price list." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text006 }).ToArray();
                 }
                 
                 if (!ret)

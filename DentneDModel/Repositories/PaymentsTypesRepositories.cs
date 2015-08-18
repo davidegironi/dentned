@@ -16,6 +16,21 @@ namespace DG.DentneD.Model.Repositories
         public PaymentsTypesRepository() : base() { }
 
         /// <summary>
+        /// Repository language dictionary
+        /// </summary>
+        public class RepositoryLanguage : IGenericDataRepositoryLanguage
+        {
+            public string text001 = "Name can not be empty.";
+            public string text002 = "Text can not be empty.";
+            public string text003 = "Payment type already inserted.";
+        }
+
+        /// <summary>
+        /// Repository language
+        /// </summary>
+        public RepositoryLanguage language = new RepositoryLanguage();
+
+        /// <summary>
         /// Check if an item can be added
         /// </summary>
         /// <param name="errors"></param>
@@ -69,12 +84,12 @@ namespace DG.DentneD.Model.Repositories
                 if (String.IsNullOrEmpty(item.paymentstypes_name))
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Name can not be empty." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text001 }).ToArray();
                 }
                 if (String.IsNullOrEmpty(item.paymentstypes_doctext))
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Text can not be empty." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text002 }).ToArray();
                 }
 
                 if (!ret)
@@ -85,7 +100,7 @@ namespace DG.DentneD.Model.Repositories
                     if (List(r => r.paymentstypes_name == item.paymentstypes_name).Count() > 0)
                     {
                         ret = false;
-                        errors = errors.Concat(new string[] { "Payment type already inserted." }).ToArray();
+                        errors = errors.Concat(new string[] { language.text003 }).ToArray();
                     }
                 }
                 else
@@ -93,7 +108,7 @@ namespace DG.DentneD.Model.Repositories
                     if (List(r => r.paymentstypes_id != item.paymentstypes_id && r.paymentstypes_name == item.paymentstypes_name).Count() > 0)
                     {
                         ret = false;
-                        errors = errors.Concat(new string[] { "Payment type already inserted." }).ToArray();
+                        errors = errors.Concat(new string[] { language.text003 }).ToArray();
                     }
                 }
 

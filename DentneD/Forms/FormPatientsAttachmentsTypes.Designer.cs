@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.Label patientsattachmentstypes_idLabel;
-            System.Windows.Forms.Label patientsattachmentstypes_nameLabel;
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPatientsAttachmentsTypes));
+            this.patientsattachmentstypes_idLabel = new System.Windows.Forms.Label();
+            this.patientsattachmentstypes_nameLabel = new System.Windows.Forms.Label();
             this.panel_data = new System.Windows.Forms.Panel();
             this.tabControl_main = new System.Windows.Forms.TabControl();
             this.tabPage_tabPatientsAttachmentsTypes = new System.Windows.Forms.TabPage();
@@ -53,8 +53,6 @@
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.vPatientsAttachmentsTypesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel_filters = new System.Windows.Forms.Panel();
-            patientsattachmentstypes_idLabel = new System.Windows.Forms.Label();
-            patientsattachmentstypes_nameLabel = new System.Windows.Forms.Label();
             this.panel_data.SuspendLayout();
             this.tabControl_main.SuspendLayout();
             this.tabPage_tabPatientsAttachmentsTypes.SuspendLayout();
@@ -69,21 +67,21 @@
             // 
             // patientsattachmentstypes_idLabel
             // 
-            patientsattachmentstypes_idLabel.AutoSize = true;
-            patientsattachmentstypes_idLabel.Location = new System.Drawing.Point(9, 9);
-            patientsattachmentstypes_idLabel.Name = "patientsattachmentstypes_idLabel";
-            patientsattachmentstypes_idLabel.Size = new System.Drawing.Size(19, 13);
-            patientsattachmentstypes_idLabel.TabIndex = 0;
-            patientsattachmentstypes_idLabel.Text = "Id:";
+            this.patientsattachmentstypes_idLabel.AutoSize = true;
+            this.patientsattachmentstypes_idLabel.Location = new System.Drawing.Point(9, 9);
+            this.patientsattachmentstypes_idLabel.Name = "patientsattachmentstypes_idLabel";
+            this.patientsattachmentstypes_idLabel.Size = new System.Drawing.Size(19, 13);
+            this.patientsattachmentstypes_idLabel.TabIndex = 0;
+            this.patientsattachmentstypes_idLabel.Text = "Id:";
             // 
             // patientsattachmentstypes_nameLabel
             // 
-            patientsattachmentstypes_nameLabel.AutoSize = true;
-            patientsattachmentstypes_nameLabel.Location = new System.Drawing.Point(9, 48);
-            patientsattachmentstypes_nameLabel.Name = "patientsattachmentstypes_nameLabel";
-            patientsattachmentstypes_nameLabel.Size = new System.Drawing.Size(38, 13);
-            patientsattachmentstypes_nameLabel.TabIndex = 2;
-            patientsattachmentstypes_nameLabel.Text = "Name:";
+            this.patientsattachmentstypes_nameLabel.AutoSize = true;
+            this.patientsattachmentstypes_nameLabel.Location = new System.Drawing.Point(9, 48);
+            this.patientsattachmentstypes_nameLabel.Name = "patientsattachmentstypes_nameLabel";
+            this.patientsattachmentstypes_nameLabel.Size = new System.Drawing.Size(38, 13);
+            this.patientsattachmentstypes_nameLabel.TabIndex = 2;
+            this.patientsattachmentstypes_nameLabel.Text = "Name:";
             // 
             // panel_data
             // 
@@ -119,9 +117,9 @@
             // 
             // panel_tabPatientsAttachmentsTypes_data
             // 
-            this.panel_tabPatientsAttachmentsTypes_data.Controls.Add(patientsattachmentstypes_nameLabel);
+            this.panel_tabPatientsAttachmentsTypes_data.Controls.Add(this.patientsattachmentstypes_nameLabel);
             this.panel_tabPatientsAttachmentsTypes_data.Controls.Add(this.patientsattachmentstypes_nameTextBox);
-            this.panel_tabPatientsAttachmentsTypes_data.Controls.Add(patientsattachmentstypes_idLabel);
+            this.panel_tabPatientsAttachmentsTypes_data.Controls.Add(this.patientsattachmentstypes_idLabel);
             this.panel_tabPatientsAttachmentsTypes_data.Controls.Add(this.patientsattachmentstypes_idTextBox);
             this.panel_tabPatientsAttachmentsTypes_data.Location = new System.Drawing.Point(6, 42);
             this.panel_tabPatientsAttachmentsTypes_data.Name = "panel_tabPatientsAttachmentsTypes_data";
@@ -330,5 +328,7 @@
         private System.Windows.Forms.TextBox patientsattachmentstypes_idTextBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn patientsattachmentstypesidDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Label patientsattachmentstypes_idLabel;
+        private System.Windows.Forms.Label patientsattachmentstypes_nameLabel;
     }
 }

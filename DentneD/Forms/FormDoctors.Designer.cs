@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.Label doctors_idLabel;
-            System.Windows.Forms.Label doctors_nameLabel;
-            System.Windows.Forms.Label doctors_surnameLabel;
-            System.Windows.Forms.Label doctors_doctextLabel;
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDoctors));
+            this.doctors_idLabel = new System.Windows.Forms.Label();
+            this.doctors_nameLabel = new System.Windows.Forms.Label();
+            this.doctors_surnameLabel = new System.Windows.Forms.Label();
+            this.doctors_doctextLabel = new System.Windows.Forms.Label();
             this.tabPage_tabDoctors = new System.Windows.Forms.TabPage();
             this.panel_tabDoctors_data = new System.Windows.Forms.Panel();
             this.doctors_doctextTextBox = new System.Windows.Forms.TextBox();
@@ -57,10 +57,6 @@
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.vDoctorsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel_filters = new System.Windows.Forms.Panel();
-            doctors_idLabel = new System.Windows.Forms.Label();
-            doctors_nameLabel = new System.Windows.Forms.Label();
-            doctors_surnameLabel = new System.Windows.Forms.Label();
-            doctors_doctextLabel = new System.Windows.Forms.Label();
             this.tabPage_tabDoctors.SuspendLayout();
             this.panel_tabDoctors_data.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.doctorsBindingSource)).BeginInit();
@@ -75,39 +71,39 @@
             // 
             // doctors_idLabel
             // 
-            doctors_idLabel.AutoSize = true;
-            doctors_idLabel.Location = new System.Drawing.Point(9, 9);
-            doctors_idLabel.Name = "doctors_idLabel";
-            doctors_idLabel.Size = new System.Drawing.Size(19, 13);
-            doctors_idLabel.TabIndex = 0;
-            doctors_idLabel.Text = "Id:";
+            this.doctors_idLabel.AutoSize = true;
+            this.doctors_idLabel.Location = new System.Drawing.Point(9, 9);
+            this.doctors_idLabel.Name = "doctors_idLabel";
+            this.doctors_idLabel.Size = new System.Drawing.Size(19, 13);
+            this.doctors_idLabel.TabIndex = 0;
+            this.doctors_idLabel.Text = "Id:";
             // 
             // doctors_nameLabel
             // 
-            doctors_nameLabel.AutoSize = true;
-            doctors_nameLabel.Location = new System.Drawing.Point(9, 48);
-            doctors_nameLabel.Name = "doctors_nameLabel";
-            doctors_nameLabel.Size = new System.Drawing.Size(38, 13);
-            doctors_nameLabel.TabIndex = 2;
-            doctors_nameLabel.Text = "Name:";
+            this.doctors_nameLabel.AutoSize = true;
+            this.doctors_nameLabel.Location = new System.Drawing.Point(9, 48);
+            this.doctors_nameLabel.Name = "doctors_nameLabel";
+            this.doctors_nameLabel.Size = new System.Drawing.Size(38, 13);
+            this.doctors_nameLabel.TabIndex = 2;
+            this.doctors_nameLabel.Text = "Name:";
             // 
             // doctors_surnameLabel
             // 
-            doctors_surnameLabel.AutoSize = true;
-            doctors_surnameLabel.Location = new System.Drawing.Point(9, 87);
-            doctors_surnameLabel.Name = "doctors_surnameLabel";
-            doctors_surnameLabel.Size = new System.Drawing.Size(52, 13);
-            doctors_surnameLabel.TabIndex = 4;
-            doctors_surnameLabel.Text = "Surname:";
+            this.doctors_surnameLabel.AutoSize = true;
+            this.doctors_surnameLabel.Location = new System.Drawing.Point(9, 87);
+            this.doctors_surnameLabel.Name = "doctors_surnameLabel";
+            this.doctors_surnameLabel.Size = new System.Drawing.Size(52, 13);
+            this.doctors_surnameLabel.TabIndex = 4;
+            this.doctors_surnameLabel.Text = "Surname:";
             // 
             // doctors_doctextLabel
             // 
-            doctors_doctextLabel.AutoSize = true;
-            doctors_doctextLabel.Location = new System.Drawing.Point(9, 127);
-            doctors_doctextLabel.Name = "doctors_doctextLabel";
-            doctors_doctextLabel.Size = new System.Drawing.Size(54, 13);
-            doctors_doctextLabel.TabIndex = 6;
-            doctors_doctextLabel.Text = "Doc Text:";
+            this.doctors_doctextLabel.AutoSize = true;
+            this.doctors_doctextLabel.Location = new System.Drawing.Point(9, 127);
+            this.doctors_doctextLabel.Name = "doctors_doctextLabel";
+            this.doctors_doctextLabel.Size = new System.Drawing.Size(54, 13);
+            this.doctors_doctextLabel.TabIndex = 6;
+            this.doctors_doctextLabel.Text = "Doc Text:";
             // 
             // tabPage_tabDoctors
             // 
@@ -124,13 +120,13 @@
             // 
             // panel_tabDoctors_data
             // 
-            this.panel_tabDoctors_data.Controls.Add(doctors_doctextLabel);
+            this.panel_tabDoctors_data.Controls.Add(this.doctors_doctextLabel);
             this.panel_tabDoctors_data.Controls.Add(this.doctors_doctextTextBox);
-            this.panel_tabDoctors_data.Controls.Add(doctors_surnameLabel);
+            this.panel_tabDoctors_data.Controls.Add(this.doctors_surnameLabel);
             this.panel_tabDoctors_data.Controls.Add(this.doctors_surnameTextBox);
-            this.panel_tabDoctors_data.Controls.Add(doctors_nameLabel);
+            this.panel_tabDoctors_data.Controls.Add(this.doctors_nameLabel);
             this.panel_tabDoctors_data.Controls.Add(this.doctors_nameTextBox);
-            this.panel_tabDoctors_data.Controls.Add(doctors_idLabel);
+            this.panel_tabDoctors_data.Controls.Add(this.doctors_idLabel);
             this.panel_tabDoctors_data.Controls.Add(this.doctors_idTextBox);
             this.panel_tabDoctors_data.Location = new System.Drawing.Point(6, 42);
             this.panel_tabDoctors_data.Name = "panel_tabDoctors_data";
@@ -380,5 +376,9 @@
         private System.Windows.Forms.TextBox doctors_idTextBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn doctorsidDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Label doctors_idLabel;
+        private System.Windows.Forms.Label doctors_nameLabel;
+        private System.Windows.Forms.Label doctors_surnameLabel;
+        private System.Windows.Forms.Label doctors_doctextLabel;
     }
 }

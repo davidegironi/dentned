@@ -16,6 +16,21 @@ namespace DG.DentneD.Model.Repositories
         public TreatmentsPricesListsRepository() : base() { }
 
         /// <summary>
+        /// Repository language dictionary
+        /// </summary>
+        public class RepositoryLanguage : IGenericDataRepositoryLanguage
+        {
+            public string text001 = "Name can not be empty.";
+            public string text002 = "Invalid multiplier. Insert from 1 to 10, or leave empty.";
+            public string text003 = "Treatments price list already inserted.";
+        }
+
+        /// <summary>
+        /// Repository language
+        /// </summary>
+        public RepositoryLanguage language = new RepositoryLanguage();
+
+        /// <summary>
         /// Check if an item can be added
         /// </summary>
         /// <param name="errors"></param>
@@ -69,7 +84,7 @@ namespace DG.DentneD.Model.Repositories
                 if (String.IsNullOrEmpty(item.treatmentspriceslists_name))
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Name can not be empty." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text001 }).ToArray();
                 }
 
                 if (!ret)
@@ -78,7 +93,7 @@ namespace DG.DentneD.Model.Repositories
                 if (item.treatmentspriceslists_multiplier < 1 || item.treatmentspriceslists_multiplier > 10)
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Invalid multiplier. Insert from 1 to 10, or leave empty." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text002 }).ToArray();
                 }
 
                 if (!ret)
@@ -89,7 +104,7 @@ namespace DG.DentneD.Model.Repositories
                     if (List(r => r.treatmentspriceslists_name == item.treatmentspriceslists_name).Count() > 0)
                     {
                         ret = false;
-                        errors = errors.Concat(new string[] { "Treatments price list already inserted." }).ToArray();
+                        errors = errors.Concat(new string[] { language.text003 }).ToArray();
                     }
                 }
                 else
@@ -97,7 +112,7 @@ namespace DG.DentneD.Model.Repositories
                     if (List(r => r.treatmentspriceslists_id != item.treatmentspriceslists_id && r.treatmentspriceslists_name == item.treatmentspriceslists_name).Count() > 0)
                     {
                         ret = false;
-                        errors = errors.Concat(new string[] { "Treatments price list already inserted." }).ToArray();
+                        errors = errors.Concat(new string[] { language.text003 }).ToArray();
                     }
                 }
 

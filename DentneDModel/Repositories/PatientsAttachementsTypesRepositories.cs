@@ -16,6 +16,20 @@ namespace DG.DentneD.Model.Repositories
         public PatientsAttachmentsTypesRepository() : base() { }
 
         /// <summary>
+        /// Repository language dictionary
+        /// </summary>
+        public class RepositoryLanguage : IGenericDataRepositoryLanguage
+        {
+            public string text001 = "Name can not be empty.";
+            public string text002 = "Attachement type already inserted.";
+        }
+
+        /// <summary>
+        /// Repository language
+        /// </summary>
+        public RepositoryLanguage language = new RepositoryLanguage();
+
+        /// <summary>
         /// Check if an item can be added
         /// </summary>
         /// <param name="errors"></param>
@@ -69,7 +83,7 @@ namespace DG.DentneD.Model.Repositories
                 if (String.IsNullOrEmpty(item.patientsattachmentstypes_name))
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Name can not be empty." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text001 }).ToArray();
                 }
 
                 if (!ret)
@@ -80,7 +94,7 @@ namespace DG.DentneD.Model.Repositories
                     if (List(r => r.patientsattachmentstypes_name == item.patientsattachmentstypes_name).Count() > 0)
                     {
                         ret = false;
-                        errors = errors.Concat(new string[] { "Attachement type already inserted." }).ToArray();
+                        errors = errors.Concat(new string[] { language.text002 }).ToArray();
                     }
                 }
                 else
@@ -88,7 +102,7 @@ namespace DG.DentneD.Model.Repositories
                     if (List(r => r.patientsattachmentstypes_id != item.patientsattachmentstypes_id && r.patientsattachmentstypes_name == item.patientsattachmentstypes_name).Count() > 0)
                     {
                         ret = false;
-                        errors = errors.Concat(new string[] { "Attachement type already inserted." }).ToArray();
+                        errors = errors.Concat(new string[] { language.text002 }).ToArray();
                     }
                 }
 

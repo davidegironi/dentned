@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.Label treatmentspriceslists_idLabel;
-            System.Windows.Forms.Label treatmentspriceslists_nameLabel;
-            System.Windows.Forms.Label treatmentspriceslists_multiplierLabel;
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormTreatmentsPricesLists));
+            this.treatmentspriceslists_idLabel = new System.Windows.Forms.Label();
+            this.treatmentspriceslists_nameLabel = new System.Windows.Forms.Label();
+            this.treatmentspriceslists_multiplierLabel = new System.Windows.Forms.Label();
             this.panel_data = new System.Windows.Forms.Panel();
             this.tabControl_main = new System.Windows.Forms.TabControl();
             this.tabPage_tabTreatmentsPricesLists = new System.Windows.Forms.TabPage();
@@ -55,9 +55,6 @@
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.vTreatmentsPricesListsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel_filters = new System.Windows.Forms.Panel();
-            treatmentspriceslists_idLabel = new System.Windows.Forms.Label();
-            treatmentspriceslists_nameLabel = new System.Windows.Forms.Label();
-            treatmentspriceslists_multiplierLabel = new System.Windows.Forms.Label();
             this.panel_data.SuspendLayout();
             this.tabControl_main.SuspendLayout();
             this.tabPage_tabTreatmentsPricesLists.SuspendLayout();
@@ -72,30 +69,30 @@
             // 
             // treatmentspriceslists_idLabel
             // 
-            treatmentspriceslists_idLabel.AutoSize = true;
-            treatmentspriceslists_idLabel.Location = new System.Drawing.Point(9, 9);
-            treatmentspriceslists_idLabel.Name = "treatmentspriceslists_idLabel";
-            treatmentspriceslists_idLabel.Size = new System.Drawing.Size(19, 13);
-            treatmentspriceslists_idLabel.TabIndex = 0;
-            treatmentspriceslists_idLabel.Text = "Id:";
+            this.treatmentspriceslists_idLabel.AutoSize = true;
+            this.treatmentspriceslists_idLabel.Location = new System.Drawing.Point(9, 9);
+            this.treatmentspriceslists_idLabel.Name = "treatmentspriceslists_idLabel";
+            this.treatmentspriceslists_idLabel.Size = new System.Drawing.Size(19, 13);
+            this.treatmentspriceslists_idLabel.TabIndex = 0;
+            this.treatmentspriceslists_idLabel.Text = "Id:";
             // 
             // treatmentspriceslists_nameLabel
             // 
-            treatmentspriceslists_nameLabel.AutoSize = true;
-            treatmentspriceslists_nameLabel.Location = new System.Drawing.Point(9, 48);
-            treatmentspriceslists_nameLabel.Name = "treatmentspriceslists_nameLabel";
-            treatmentspriceslists_nameLabel.Size = new System.Drawing.Size(38, 13);
-            treatmentspriceslists_nameLabel.TabIndex = 2;
-            treatmentspriceslists_nameLabel.Text = "Name:";
+            this.treatmentspriceslists_nameLabel.AutoSize = true;
+            this.treatmentspriceslists_nameLabel.Location = new System.Drawing.Point(9, 48);
+            this.treatmentspriceslists_nameLabel.Name = "treatmentspriceslists_nameLabel";
+            this.treatmentspriceslists_nameLabel.Size = new System.Drawing.Size(38, 13);
+            this.treatmentspriceslists_nameLabel.TabIndex = 2;
+            this.treatmentspriceslists_nameLabel.Text = "Name:";
             // 
             // treatmentspriceslists_multiplierLabel
             // 
-            treatmentspriceslists_multiplierLabel.AutoSize = true;
-            treatmentspriceslists_multiplierLabel.Location = new System.Drawing.Point(9, 87);
-            treatmentspriceslists_multiplierLabel.Name = "treatmentspriceslists_multiplierLabel";
-            treatmentspriceslists_multiplierLabel.Size = new System.Drawing.Size(88, 13);
-            treatmentspriceslists_multiplierLabel.TabIndex = 4;
-            treatmentspriceslists_multiplierLabel.Text = "Default Multiplier:";
+            this.treatmentspriceslists_multiplierLabel.AutoSize = true;
+            this.treatmentspriceslists_multiplierLabel.Location = new System.Drawing.Point(9, 87);
+            this.treatmentspriceslists_multiplierLabel.Name = "treatmentspriceslists_multiplierLabel";
+            this.treatmentspriceslists_multiplierLabel.Size = new System.Drawing.Size(88, 13);
+            this.treatmentspriceslists_multiplierLabel.TabIndex = 4;
+            this.treatmentspriceslists_multiplierLabel.Text = "Default Multiplier:";
             // 
             // panel_data
             // 
@@ -132,11 +129,11 @@
             // 
             // panel_tabTreatmentsPricesLists_data
             // 
-            this.panel_tabTreatmentsPricesLists_data.Controls.Add(treatmentspriceslists_multiplierLabel);
+            this.panel_tabTreatmentsPricesLists_data.Controls.Add(this.treatmentspriceslists_multiplierLabel);
             this.panel_tabTreatmentsPricesLists_data.Controls.Add(this.treatmentspriceslists_multiplierTextBox);
-            this.panel_tabTreatmentsPricesLists_data.Controls.Add(treatmentspriceslists_nameLabel);
+            this.panel_tabTreatmentsPricesLists_data.Controls.Add(this.treatmentspriceslists_nameLabel);
             this.panel_tabTreatmentsPricesLists_data.Controls.Add(this.treatmentspriceslists_nameTextBox);
-            this.panel_tabTreatmentsPricesLists_data.Controls.Add(treatmentspriceslists_idLabel);
+            this.panel_tabTreatmentsPricesLists_data.Controls.Add(this.treatmentspriceslists_idLabel);
             this.panel_tabTreatmentsPricesLists_data.Controls.Add(this.treatmentspriceslists_idTextBox);
             this.panel_tabTreatmentsPricesLists_data.Location = new System.Drawing.Point(6, 42);
             this.panel_tabTreatmentsPricesLists_data.Name = "panel_tabTreatmentsPricesLists_data";
@@ -354,5 +351,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn treatmentspriceslistsidDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource vTreatmentsPricesListsBindingSource;
+        private System.Windows.Forms.Label treatmentspriceslists_idLabel;
+        private System.Windows.Forms.Label treatmentspriceslists_nameLabel;
+        private System.Windows.Forms.Label treatmentspriceslists_multiplierLabel;
     }
 }

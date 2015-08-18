@@ -29,14 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.Label appointments_idLabel;
-            System.Windows.Forms.Label rooms_idLabel;
-            System.Windows.Forms.Label doctors_idLabel;
-            System.Windows.Forms.Label patients_idLabel;
-            System.Windows.Forms.Label appointments_titleLabel;
-            System.Windows.Forms.Label appointments_notesLabel;
-            System.Windows.Forms.Label appointments_fromLabel;
-            System.Windows.Forms.Label appointments_toLabel;
             System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange1 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
             System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange2 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
             System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange3 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
@@ -53,6 +45,14 @@
             System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange14 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
             System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange15 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAppointments));
+            this.appointments_idLabel = new System.Windows.Forms.Label();
+            this.rooms_idLabel = new System.Windows.Forms.Label();
+            this.doctors_idLabel = new System.Windows.Forms.Label();
+            this.patients_idLabel = new System.Windows.Forms.Label();
+            this.appointments_titleLabel = new System.Windows.Forms.Label();
+            this.appointments_notesLabel = new System.Windows.Forms.Label();
+            this.appointments_fromLabel = new System.Windows.Forms.Label();
+            this.appointments_toLabel = new System.Windows.Forms.Label();
             this.panel_data = new System.Windows.Forms.Panel();
             this.tabControl_main = new System.Windows.Forms.TabControl();
             this.tabPage_tabAppointments = new System.Windows.Forms.TabPage();
@@ -82,20 +82,12 @@
             this.tabPage_tabListMonths = new System.Windows.Forms.TabPage();
             this.calendar_listmonths = new System.Windows.Forms.Calendar.Calendar();
             this.panel_filters = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
+            this.label_filterRooms = new System.Windows.Forms.Label();
             this.comboBox_filterRooms = new System.Windows.Forms.ComboBox();
             this.monthView_filterDay = new System.Windows.Forms.MonthCalendar();
             this.comboBox_filterDoctors = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.label_filterDoctors = new System.Windows.Forms.Label();
             this.checkBox_filterTreatmentsadvices = new System.Windows.Forms.CheckBox();
-            appointments_idLabel = new System.Windows.Forms.Label();
-            rooms_idLabel = new System.Windows.Forms.Label();
-            doctors_idLabel = new System.Windows.Forms.Label();
-            patients_idLabel = new System.Windows.Forms.Label();
-            appointments_titleLabel = new System.Windows.Forms.Label();
-            appointments_notesLabel = new System.Windows.Forms.Label();
-            appointments_fromLabel = new System.Windows.Forms.Label();
-            appointments_toLabel = new System.Windows.Forms.Label();
             this.panel_data.SuspendLayout();
             this.tabControl_main.SuspendLayout();
             this.tabPage_tabAppointments.SuspendLayout();
@@ -113,75 +105,75 @@
             // 
             // appointments_idLabel
             // 
-            appointments_idLabel.AutoSize = true;
-            appointments_idLabel.Location = new System.Drawing.Point(9, 9);
-            appointments_idLabel.Name = "appointments_idLabel";
-            appointments_idLabel.Size = new System.Drawing.Size(19, 13);
-            appointments_idLabel.TabIndex = 0;
-            appointments_idLabel.Text = "Id:";
+            this.appointments_idLabel.AutoSize = true;
+            this.appointments_idLabel.Location = new System.Drawing.Point(9, 9);
+            this.appointments_idLabel.Name = "appointments_idLabel";
+            this.appointments_idLabel.Size = new System.Drawing.Size(19, 13);
+            this.appointments_idLabel.TabIndex = 0;
+            this.appointments_idLabel.Text = "Id:";
             // 
             // rooms_idLabel
             // 
-            rooms_idLabel.AutoSize = true;
-            rooms_idLabel.Location = new System.Drawing.Point(10, 206);
-            rooms_idLabel.Name = "rooms_idLabel";
-            rooms_idLabel.Size = new System.Drawing.Size(38, 13);
-            rooms_idLabel.TabIndex = 6;
-            rooms_idLabel.Text = "Room:";
+            this.rooms_idLabel.AutoSize = true;
+            this.rooms_idLabel.Location = new System.Drawing.Point(10, 206);
+            this.rooms_idLabel.Name = "rooms_idLabel";
+            this.rooms_idLabel.Size = new System.Drawing.Size(38, 13);
+            this.rooms_idLabel.TabIndex = 6;
+            this.rooms_idLabel.Text = "Room:";
             // 
             // doctors_idLabel
             // 
-            doctors_idLabel.AutoSize = true;
-            doctors_idLabel.Location = new System.Drawing.Point(8, 166);
-            doctors_idLabel.Name = "doctors_idLabel";
-            doctors_idLabel.Size = new System.Drawing.Size(42, 13);
-            doctors_idLabel.TabIndex = 8;
-            doctors_idLabel.Text = "Doctor:";
+            this.doctors_idLabel.AutoSize = true;
+            this.doctors_idLabel.Location = new System.Drawing.Point(8, 166);
+            this.doctors_idLabel.Name = "doctors_idLabel";
+            this.doctors_idLabel.Size = new System.Drawing.Size(42, 13);
+            this.doctors_idLabel.TabIndex = 8;
+            this.doctors_idLabel.Text = "Doctor:";
             // 
             // patients_idLabel
             // 
-            patients_idLabel.AutoSize = true;
-            patients_idLabel.Location = new System.Drawing.Point(9, 48);
-            patients_idLabel.Name = "patients_idLabel";
-            patients_idLabel.Size = new System.Drawing.Size(43, 13);
-            patients_idLabel.TabIndex = 10;
-            patients_idLabel.Text = "Patient:";
+            this.patients_idLabel.AutoSize = true;
+            this.patients_idLabel.Location = new System.Drawing.Point(9, 48);
+            this.patients_idLabel.Name = "patients_idLabel";
+            this.patients_idLabel.Size = new System.Drawing.Size(43, 13);
+            this.patients_idLabel.TabIndex = 10;
+            this.patients_idLabel.Text = "Patient:";
             // 
             // appointments_titleLabel
             // 
-            appointments_titleLabel.AutoSize = true;
-            appointments_titleLabel.Location = new System.Drawing.Point(9, 246);
-            appointments_titleLabel.Name = "appointments_titleLabel";
-            appointments_titleLabel.Size = new System.Drawing.Size(30, 13);
-            appointments_titleLabel.TabIndex = 12;
-            appointments_titleLabel.Text = "Title:";
+            this.appointments_titleLabel.AutoSize = true;
+            this.appointments_titleLabel.Location = new System.Drawing.Point(9, 246);
+            this.appointments_titleLabel.Name = "appointments_titleLabel";
+            this.appointments_titleLabel.Size = new System.Drawing.Size(30, 13);
+            this.appointments_titleLabel.TabIndex = 12;
+            this.appointments_titleLabel.Text = "Title:";
             // 
             // appointments_notesLabel
             // 
-            appointments_notesLabel.AutoSize = true;
-            appointments_notesLabel.Location = new System.Drawing.Point(9, 285);
-            appointments_notesLabel.Name = "appointments_notesLabel";
-            appointments_notesLabel.Size = new System.Drawing.Size(33, 13);
-            appointments_notesLabel.TabIndex = 14;
-            appointments_notesLabel.Text = "Note:";
+            this.appointments_notesLabel.AutoSize = true;
+            this.appointments_notesLabel.Location = new System.Drawing.Point(9, 285);
+            this.appointments_notesLabel.Name = "appointments_notesLabel";
+            this.appointments_notesLabel.Size = new System.Drawing.Size(33, 13);
+            this.appointments_notesLabel.TabIndex = 14;
+            this.appointments_notesLabel.Text = "Note:";
             // 
             // appointments_fromLabel
             // 
-            appointments_fromLabel.AutoSize = true;
-            appointments_fromLabel.Location = new System.Drawing.Point(10, 88);
-            appointments_fromLabel.Name = "appointments_fromLabel";
-            appointments_fromLabel.Size = new System.Drawing.Size(33, 13);
-            appointments_fromLabel.TabIndex = 16;
-            appointments_fromLabel.Text = "From:";
+            this.appointments_fromLabel.AutoSize = true;
+            this.appointments_fromLabel.Location = new System.Drawing.Point(10, 88);
+            this.appointments_fromLabel.Name = "appointments_fromLabel";
+            this.appointments_fromLabel.Size = new System.Drawing.Size(33, 13);
+            this.appointments_fromLabel.TabIndex = 16;
+            this.appointments_fromLabel.Text = "From:";
             // 
             // appointments_toLabel
             // 
-            appointments_toLabel.AutoSize = true;
-            appointments_toLabel.Location = new System.Drawing.Point(10, 127);
-            appointments_toLabel.Name = "appointments_toLabel";
-            appointments_toLabel.Size = new System.Drawing.Size(23, 13);
-            appointments_toLabel.TabIndex = 17;
-            appointments_toLabel.Text = "To:";
+            this.appointments_toLabel.AutoSize = true;
+            this.appointments_toLabel.Location = new System.Drawing.Point(10, 127);
+            this.appointments_toLabel.Name = "appointments_toLabel";
+            this.appointments_toLabel.Size = new System.Drawing.Size(23, 13);
+            this.appointments_toLabel.TabIndex = 17;
+            this.appointments_toLabel.Text = "To:";
             // 
             // panel_data
             // 
@@ -219,21 +211,21 @@
             // panel_tabAppointments_data
             // 
             this.panel_tabAppointments_data.Controls.Add(this.appointments_dateDateTimePicker);
-            this.panel_tabAppointments_data.Controls.Add(appointments_toLabel);
+            this.panel_tabAppointments_data.Controls.Add(this.appointments_toLabel);
             this.panel_tabAppointments_data.Controls.Add(this.appointments_toDateTimePicker);
-            this.panel_tabAppointments_data.Controls.Add(appointments_fromLabel);
+            this.panel_tabAppointments_data.Controls.Add(this.appointments_fromLabel);
             this.panel_tabAppointments_data.Controls.Add(this.appointments_fromDateTimePicker);
-            this.panel_tabAppointments_data.Controls.Add(appointments_notesLabel);
+            this.panel_tabAppointments_data.Controls.Add(this.appointments_notesLabel);
             this.panel_tabAppointments_data.Controls.Add(this.appointments_notesTextBox);
-            this.panel_tabAppointments_data.Controls.Add(appointments_titleLabel);
+            this.panel_tabAppointments_data.Controls.Add(this.appointments_titleLabel);
             this.panel_tabAppointments_data.Controls.Add(this.appointments_titleTextBox);
-            this.panel_tabAppointments_data.Controls.Add(patients_idLabel);
+            this.panel_tabAppointments_data.Controls.Add(this.patients_idLabel);
             this.panel_tabAppointments_data.Controls.Add(this.patients_idComboBox);
-            this.panel_tabAppointments_data.Controls.Add(doctors_idLabel);
+            this.panel_tabAppointments_data.Controls.Add(this.doctors_idLabel);
             this.panel_tabAppointments_data.Controls.Add(this.doctors_idComboBox);
-            this.panel_tabAppointments_data.Controls.Add(rooms_idLabel);
+            this.panel_tabAppointments_data.Controls.Add(this.rooms_idLabel);
             this.panel_tabAppointments_data.Controls.Add(this.rooms_idComboBox);
-            this.panel_tabAppointments_data.Controls.Add(appointments_idLabel);
+            this.panel_tabAppointments_data.Controls.Add(this.appointments_idLabel);
             this.panel_tabAppointments_data.Controls.Add(this.appointments_idTextBox);
             this.panel_tabAppointments_data.Location = new System.Drawing.Point(6, 42);
             this.panel_tabAppointments_data.Name = "panel_tabAppointments_data";
@@ -558,16 +550,16 @@
             this.calendar_listmonths.DayHeaderClick += new System.Windows.Forms.Calendar.Calendar.CalendarDayEventHandler(this.calendar_listmonths_DayHeaderClick);
             this.calendar_listmonths.ItemCreating += new System.Windows.Forms.Calendar.Calendar.CalendarItemCancelEventHandler(this.calendar_listmonths_ItemCreating);
             this.calendar_listmonths.ItemClick += new System.Windows.Forms.Calendar.Calendar.CalendarItemEventHandler(this.calendar_listmonths_ItemClick);
-            this.calendar_listmonths.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.calendar_listmonths_MouseWheel);
             this.calendar_listmonths.Paint += new System.Windows.Forms.PaintEventHandler(this.calendar_listmonths_Paint);
+            this.calendar_listmonths.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.calendar_listmonths_MouseWheel);
             // 
             // panel_filters
             // 
-            this.panel_filters.Controls.Add(this.label2);
+            this.panel_filters.Controls.Add(this.label_filterRooms);
             this.panel_filters.Controls.Add(this.comboBox_filterRooms);
             this.panel_filters.Controls.Add(this.monthView_filterDay);
             this.panel_filters.Controls.Add(this.comboBox_filterDoctors);
-            this.panel_filters.Controls.Add(this.label1);
+            this.panel_filters.Controls.Add(this.label_filterDoctors);
             this.panel_filters.Controls.Add(this.checkBox_filterTreatmentsadvices);
             this.panel_filters.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel_filters.Location = new System.Drawing.Point(0, 0);
@@ -575,14 +567,14 @@
             this.panel_filters.Size = new System.Drawing.Size(484, 182);
             this.panel_filters.TabIndex = 10;
             // 
-            // label2
+            // label_filterRooms
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(252, 77);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(43, 13);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Rooms:";
+            this.label_filterRooms.AutoSize = true;
+            this.label_filterRooms.Location = new System.Drawing.Point(252, 77);
+            this.label_filterRooms.Name = "label_filterRooms";
+            this.label_filterRooms.Size = new System.Drawing.Size(43, 13);
+            this.label_filterRooms.TabIndex = 6;
+            this.label_filterRooms.Text = "Rooms:";
             // 
             // comboBox_filterRooms
             // 
@@ -611,14 +603,14 @@
             this.comboBox_filterDoctors.TabIndex = 3;
             this.comboBox_filterDoctors.SelectedIndexChanged += new System.EventHandler(this.comboBox_filterDoctors_SelectedIndexChanged);
             // 
-            // label1
+            // label_filterDoctors
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(252, 37);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Doctors:";
+            this.label_filterDoctors.AutoSize = true;
+            this.label_filterDoctors.Location = new System.Drawing.Point(252, 37);
+            this.label_filterDoctors.Name = "label_filterDoctors";
+            this.label_filterDoctors.Size = new System.Drawing.Size(47, 13);
+            this.label_filterDoctors.TabIndex = 2;
+            this.label_filterDoctors.Text = "Doctors:";
             // 
             // checkBox_filterTreatmentsadvices
             // 
@@ -685,7 +677,7 @@
         private System.Windows.Forms.Calendar.Calendar calendar_listweeks;
         private System.Windows.Forms.Calendar.Calendar calendar_listmonths;
         private System.Windows.Forms.ComboBox comboBox_filterDoctors;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label_filterDoctors;
         private System.Windows.Forms.CheckBox checkBox_filterTreatmentsadvices;
         private System.Windows.Forms.BindingSource appointmentsBindingSource;
         private System.Windows.Forms.DateTimePicker appointments_dateDateTimePicker;
@@ -698,7 +690,15 @@
         private System.Windows.Forms.ComboBox rooms_idComboBox;
         private System.Windows.Forms.TextBox appointments_idTextBox;
         private System.Windows.Forms.MonthCalendar monthView_filterDay;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label_filterRooms;
         private System.Windows.Forms.ComboBox comboBox_filterRooms;
+        private System.Windows.Forms.Label appointments_idLabel;
+        private System.Windows.Forms.Label rooms_idLabel;
+        private System.Windows.Forms.Label doctors_idLabel;
+        private System.Windows.Forms.Label patients_idLabel;
+        private System.Windows.Forms.Label appointments_titleLabel;
+        private System.Windows.Forms.Label appointments_notesLabel;
+        private System.Windows.Forms.Label appointments_fromLabel;
+        private System.Windows.Forms.Label appointments_toLabel;
     }
 }

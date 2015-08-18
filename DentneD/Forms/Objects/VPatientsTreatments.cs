@@ -14,6 +14,6 @@ namespace DG.DentneD.Forms.Objects
         public string treatment { get; set; }
         public string tooths { get; set; }
         public bool isfulfilled { get; set; }
-        public bool ispayed { get; set; }
+        public bool ispaid { get; set; }
     }
 }

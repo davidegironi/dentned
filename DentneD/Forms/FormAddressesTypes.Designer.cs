@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.Label addressestypes_idLabel;
-            System.Windows.Forms.Label addressestypes_nameLabel;
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAddressesTypes));
+            this.addressestypes_idLabel = new System.Windows.Forms.Label();
+            this.addressestypes_nameLabel = new System.Windows.Forms.Label();
             this.panel_data = new System.Windows.Forms.Panel();
             this.tabControl_main = new System.Windows.Forms.TabControl();
             this.tabPage_tabAddressesTypes = new System.Windows.Forms.TabPage();
@@ -53,8 +53,6 @@
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.vAddressesTypesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel_filters = new System.Windows.Forms.Panel();
-            addressestypes_idLabel = new System.Windows.Forms.Label();
-            addressestypes_nameLabel = new System.Windows.Forms.Label();
             this.panel_data.SuspendLayout();
             this.tabControl_main.SuspendLayout();
             this.tabPage_tabAddressesTypes.SuspendLayout();
@@ -69,21 +67,21 @@
             // 
             // addressestypes_idLabel
             // 
-            addressestypes_idLabel.AutoSize = true;
-            addressestypes_idLabel.Location = new System.Drawing.Point(9, 9);
-            addressestypes_idLabel.Name = "addressestypes_idLabel";
-            addressestypes_idLabel.Size = new System.Drawing.Size(19, 13);
-            addressestypes_idLabel.TabIndex = 0;
-            addressestypes_idLabel.Text = "Id:";
+            this.addressestypes_idLabel.AutoSize = true;
+            this.addressestypes_idLabel.Location = new System.Drawing.Point(9, 9);
+            this.addressestypes_idLabel.Name = "addressestypes_idLabel";
+            this.addressestypes_idLabel.Size = new System.Drawing.Size(19, 13);
+            this.addressestypes_idLabel.TabIndex = 0;
+            this.addressestypes_idLabel.Text = "Id:";
             // 
             // addressestypes_nameLabel
             // 
-            addressestypes_nameLabel.AutoSize = true;
-            addressestypes_nameLabel.Location = new System.Drawing.Point(9, 48);
-            addressestypes_nameLabel.Name = "addressestypes_nameLabel";
-            addressestypes_nameLabel.Size = new System.Drawing.Size(38, 13);
-            addressestypes_nameLabel.TabIndex = 2;
-            addressestypes_nameLabel.Text = "Name:";
+            this.addressestypes_nameLabel.AutoSize = true;
+            this.addressestypes_nameLabel.Location = new System.Drawing.Point(9, 48);
+            this.addressestypes_nameLabel.Name = "addressestypes_nameLabel";
+            this.addressestypes_nameLabel.Size = new System.Drawing.Size(38, 13);
+            this.addressestypes_nameLabel.TabIndex = 2;
+            this.addressestypes_nameLabel.Text = "Name:";
             // 
             // panel_data
             // 
@@ -119,9 +117,9 @@
             // 
             // panel_tabAddressesTypes_data
             // 
-            this.panel_tabAddressesTypes_data.Controls.Add(addressestypes_nameLabel);
+            this.panel_tabAddressesTypes_data.Controls.Add(this.addressestypes_nameLabel);
             this.panel_tabAddressesTypes_data.Controls.Add(this.addressestypes_nameTextBox);
-            this.panel_tabAddressesTypes_data.Controls.Add(addressestypes_idLabel);
+            this.panel_tabAddressesTypes_data.Controls.Add(this.addressestypes_idLabel);
             this.panel_tabAddressesTypes_data.Controls.Add(this.addressestypes_idTextBox);
             this.panel_tabAddressesTypes_data.Location = new System.Drawing.Point(6, 42);
             this.panel_tabAddressesTypes_data.Name = "panel_tabAddressesTypes_data";
@@ -330,5 +328,7 @@
         private System.Windows.Forms.TextBox addressestypes_nameTextBox;
         private System.Windows.Forms.BindingSource addressestypesBindingSource;
         private System.Windows.Forms.TextBox addressestypes_idTextBox;
+        private System.Windows.Forms.Label addressestypes_idLabel;
+        private System.Windows.Forms.Label addressestypes_nameLabel;
     }
 }

@@ -42,6 +42,7 @@ namespace DG.DentneD.Model
         public InvoicesLinesRepository InvoicesLines { get; private set; }
         public EstimatesRepository Estimates { get; private set; }
         public EstimatesLinesRepository EstimatesLines { get; private set; }
+        public ReportsRepository Reports { get; private set; }
 
         /// <summary>
         /// Initialize the Model

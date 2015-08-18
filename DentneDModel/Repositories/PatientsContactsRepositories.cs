@@ -16,6 +16,21 @@ namespace DG.DentneD.Model.Repositories
         public PatientsContactsRepository() : base() { }
 
         /// <summary>
+        /// Repository language dictionary
+        /// </summary>
+        public class RepositoryLanguage : IGenericDataRepositoryLanguage
+        {
+            public string text001 = "Contact can not be empty.";
+            public string text002 = "Patient is mandatory.";
+            public string text003 = "Contact type is mandatory.";
+        }
+
+        /// <summary>
+        /// Repository language
+        /// </summary>
+        public RepositoryLanguage language = new RepositoryLanguage();
+
+        /// <summary>
         /// Check if an item can be added
         /// </summary>
         /// <param name="errors"></param>
@@ -69,7 +84,7 @@ namespace DG.DentneD.Model.Repositories
                 if (String.IsNullOrEmpty(item.patientscontacts_value))
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Contact can not be empty." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text001 }).ToArray();
                 }
 
                 if (!ret)
@@ -78,12 +93,12 @@ namespace DG.DentneD.Model.Repositories
                 if (BaseModel.Patients.Find(item.patients_id) == null)
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Patient is mandatory." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text002 }).ToArray();
                 }
                 if (BaseModel.ContactsTypes.Find(item.contactstypes_id) == null)
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Contact type is mandatory." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text003 }).ToArray();
                 }
 
                 if (!ret)

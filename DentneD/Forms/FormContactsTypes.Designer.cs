@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.Label contactstypes_idLabel;
-            System.Windows.Forms.Label contactstypes_nameLabel;
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormContactsTypes));
+            this.contactstypes_idLabel = new System.Windows.Forms.Label();
+            this.contactstypes_nameLabel = new System.Windows.Forms.Label();
             this.panel_data = new System.Windows.Forms.Panel();
             this.tabControl_main = new System.Windows.Forms.TabControl();
             this.tabPage_tabContactsTypes = new System.Windows.Forms.TabPage();
@@ -53,8 +53,6 @@
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.vContactsTypesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel_filters = new System.Windows.Forms.Panel();
-            contactstypes_idLabel = new System.Windows.Forms.Label();
-            contactstypes_nameLabel = new System.Windows.Forms.Label();
             this.panel_data.SuspendLayout();
             this.tabControl_main.SuspendLayout();
             this.tabPage_tabContactsTypes.SuspendLayout();
@@ -69,21 +67,21 @@
             // 
             // contactstypes_idLabel
             // 
-            contactstypes_idLabel.AutoSize = true;
-            contactstypes_idLabel.Location = new System.Drawing.Point(9, 9);
-            contactstypes_idLabel.Name = "contactstypes_idLabel";
-            contactstypes_idLabel.Size = new System.Drawing.Size(19, 13);
-            contactstypes_idLabel.TabIndex = 0;
-            contactstypes_idLabel.Text = "Id:";
+            this.contactstypes_idLabel.AutoSize = true;
+            this.contactstypes_idLabel.Location = new System.Drawing.Point(9, 9);
+            this.contactstypes_idLabel.Name = "contactstypes_idLabel";
+            this.contactstypes_idLabel.Size = new System.Drawing.Size(19, 13);
+            this.contactstypes_idLabel.TabIndex = 0;
+            this.contactstypes_idLabel.Text = "Id:";
             // 
             // contactstypes_nameLabel
             // 
-            contactstypes_nameLabel.AutoSize = true;
-            contactstypes_nameLabel.Location = new System.Drawing.Point(9, 48);
-            contactstypes_nameLabel.Name = "contactstypes_nameLabel";
-            contactstypes_nameLabel.Size = new System.Drawing.Size(38, 13);
-            contactstypes_nameLabel.TabIndex = 2;
-            contactstypes_nameLabel.Text = "Name:";
+            this.contactstypes_nameLabel.AutoSize = true;
+            this.contactstypes_nameLabel.Location = new System.Drawing.Point(9, 48);
+            this.contactstypes_nameLabel.Name = "contactstypes_nameLabel";
+            this.contactstypes_nameLabel.Size = new System.Drawing.Size(38, 13);
+            this.contactstypes_nameLabel.TabIndex = 2;
+            this.contactstypes_nameLabel.Text = "Name:";
             // 
             // panel_data
             // 
@@ -119,9 +117,9 @@
             // 
             // panel_tabContactsTypes_data
             // 
-            this.panel_tabContactsTypes_data.Controls.Add(contactstypes_nameLabel);
+            this.panel_tabContactsTypes_data.Controls.Add(this.contactstypes_nameLabel);
             this.panel_tabContactsTypes_data.Controls.Add(this.contactstypes_nameTextBox);
-            this.panel_tabContactsTypes_data.Controls.Add(contactstypes_idLabel);
+            this.panel_tabContactsTypes_data.Controls.Add(this.contactstypes_idLabel);
             this.panel_tabContactsTypes_data.Controls.Add(this.contactstypes_idTextBox);
             this.panel_tabContactsTypes_data.Location = new System.Drawing.Point(6, 42);
             this.panel_tabContactsTypes_data.Name = "panel_tabContactsTypes_data";
@@ -330,5 +328,7 @@
         private System.Windows.Forms.TextBox contactstypes_nameTextBox;
         private System.Windows.Forms.BindingSource contactstypesBindingSource;
         private System.Windows.Forms.TextBox contactstypes_idTextBox;
+        private System.Windows.Forms.Label contactstypes_idLabel;
+        private System.Windows.Forms.Label contactstypes_nameLabel;
     }
 }

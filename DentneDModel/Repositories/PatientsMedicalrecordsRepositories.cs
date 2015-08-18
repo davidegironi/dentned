@@ -16,6 +16,20 @@ namespace DG.DentneD.Model.Repositories
         public PatientsMedicalrecordsRepository() : base() { }
 
         /// <summary>
+        /// Repository language dictionary
+        /// </summary>
+        public class RepositoryLanguage : IGenericDataRepositoryLanguage
+        {
+            public string text001 = "Patient is mandatory.";
+            public string text002 = "Medical record type is mandatory.";
+        }
+
+        /// <summary>
+        /// Repository language
+        /// </summary>
+        public RepositoryLanguage language = new RepositoryLanguage();
+
+        /// <summary>
         /// Check if an item can be added
         /// </summary>
         /// <param name="errors"></param>
@@ -69,12 +83,12 @@ namespace DG.DentneD.Model.Repositories
                 if (BaseModel.Patients.Find(item.patients_id) == null)
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Patient is mandatory." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text001 }).ToArray();
                 }
                 if (BaseModel.MedicalrecordsTypes.Find(item.medicalrecordstypes_id) == null)
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Medical record type is mandatory." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text002 }).ToArray();
                 }
 
                 if (!ret)

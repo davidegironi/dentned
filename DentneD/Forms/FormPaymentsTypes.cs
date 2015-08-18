@@ -6,7 +6,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using DG.Data.Model.Helpers;
@@ -14,7 +13,6 @@ using DG.UI.GHF;
 using DG.DentneD.Model;
 using DG.DentneD.Model.Entity;
 using DG.DentneD.Forms.Objects;
-using DentneD;
 using Zuby.ADGV;
 
 namespace DG.DentneD.Forms
@@ -35,6 +33,30 @@ namespace DG.DentneD.Forms
             Initialize(Program.uighfApplication);
 
             _dentnedModel = new DentneDModel();
+            _dentnedModel.LanguageHelper.LoadFromFile(Program.uighfApplication.LanguageFilename);
+        }
+
+        /// <summary>
+        /// Add components language
+        /// </summary>
+        public override void AddLanguageComponents()
+        {
+            //main
+            LanguageHelper.AddComponent(this);
+            LanguageHelper.AddComponent(paymentstypesidDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(nameDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(isdefaultDataGridViewCheckBoxColumn, this.GetType().Name, "HeaderText");
+            //tabPaymentsTypes
+            LanguageHelper.AddComponent(tabPage_tabPaymentsTypes);
+            LanguageHelper.AddComponent(button_tabPaymentsTypes_new);
+            LanguageHelper.AddComponent(button_tabPaymentsTypes_edit);
+            LanguageHelper.AddComponent(button_tabPaymentsTypes_delete);
+            LanguageHelper.AddComponent(button_tabPaymentsTypes_save);
+            LanguageHelper.AddComponent(button_tabPaymentsTypes_cancel);
+            LanguageHelper.AddComponent(paymentstypes_idLabel);
+            LanguageHelper.AddComponent(paymentstypes_nameLabel);
+            LanguageHelper.AddComponent(paymentstypes_doctextLabel);
+            LanguageHelper.AddComponent(paymentstypes_isdefaultCheckBox);
         }
 
         /// <summary>
@@ -191,7 +213,6 @@ namespace DG.DentneD.Forms
         }
 
         #endregion
-
 
     }
 }

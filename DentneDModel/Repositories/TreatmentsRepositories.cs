@@ -17,6 +17,25 @@ namespace DG.DentneD.Model.Repositories
         public TreatmentsRepository() : base() { }
 
         /// <summary>
+        /// Repository language dictionary
+        /// </summary>
+        public class RepositoryLanguage : IGenericDataRepositoryLanguage
+        {
+            public string text001 = "Name can not be empty.";
+            public string text002 = "Code can not be empty.";
+            public string text003 = "Invalid code format. 3 character, uppercase letters [A-Z] or numbers [0-9], or minus '-'.";
+            public string text004 = "Invalid expiration period. Insert from 1 to 48 month, or leave empty.";
+            public string text005 = "Invalid price. Can not be less than zero.";
+            public string text006 = "Treatment type is mandatory.";
+            public string text007 = "Treatment already inserted.";
+        }
+
+        /// <summary>
+        /// Repository language
+        /// </summary>
+        public RepositoryLanguage language = new RepositoryLanguage();
+
+        /// <summary>
         /// Check if an item can be added
         /// </summary>
         /// <param name="errors"></param>
@@ -70,12 +89,12 @@ namespace DG.DentneD.Model.Repositories
                 if (String.IsNullOrEmpty(item.treatments_name))
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Name can not be empty." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text001 }).ToArray();
                 }
                 if (String.IsNullOrEmpty(item.treatments_code))
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Code can not be empty." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text002 }).ToArray();
                 }
 
                 if (!ret)
@@ -84,17 +103,17 @@ namespace DG.DentneD.Model.Repositories
                 if (item.treatments_code != null && !Regex.Match(item.treatments_code, @"^[A-Z0-9\-]{3}$").Success)
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Invalid code format. 3 character, uppercase letters [A-Z] or numbers [0-9], or minus '-'." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text003 }).ToArray();
                 }
                 if (item.treatments_mexpiration != null && (item.treatments_mexpiration <= 0 || item.treatments_mexpiration > 48))
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Invalid expiration period. Insert from 1 to 48 month, or leave empty." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text004 }).ToArray();
                 }
                 if (item.treatments_price < 0)
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Invalid price. Can not be less than zero." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text005 }).ToArray();
                 }
 
                 if (!ret)
@@ -103,7 +122,7 @@ namespace DG.DentneD.Model.Repositories
                 if (BaseModel.TreatmentsTypes.Find(item.treatmentstypes_id) == null)
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Treatment type is mandatory." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text006 }).ToArray();
                 }
 
                 if (!ret)
@@ -115,7 +134,7 @@ namespace DG.DentneD.Model.Repositories
                         List(r => r.treatments_name == item.treatments_name).Count() > 0)
                     {
                         ret = false;
-                        errors = errors.Concat(new string[] { "Treatment already inserted." }).ToArray();
+                        errors = errors.Concat(new string[] { language.text007 }).ToArray();
                     }
                 }
                 else
@@ -124,7 +143,7 @@ namespace DG.DentneD.Model.Repositories
                         List(r => r.treatments_id != item.treatments_id && r.treatments_name == item.treatments_name).Count() > 0)
                     {
                         ret = false;
-                        errors = errors.Concat(new string[] { "Treatment already inserted." }).ToArray();
+                        errors = errors.Concat(new string[] { language.text007 }).ToArray();
                     }
                 }
 

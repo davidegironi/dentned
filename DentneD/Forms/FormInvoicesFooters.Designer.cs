@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.Label invoicesfooters_idLabel;
-            System.Windows.Forms.Label invoicesfooters_nameLabel;
-            System.Windows.Forms.Label invoicesfooters_doctextLabel;
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormInvoicesFooters));
+            this.invoicesfooters_idLabel = new System.Windows.Forms.Label();
+            this.invoicesfooters_nameLabel = new System.Windows.Forms.Label();
+            this.invoicesfooters_doctextLabel = new System.Windows.Forms.Label();
             this.button_tabInvoicesFooters_delete = new System.Windows.Forms.Button();
             this.button_tabInvoicesFooters_edit = new System.Windows.Forms.Button();
             this.button_tabInvoicesFooters_new = new System.Windows.Forms.Button();
@@ -57,9 +57,6 @@
             this.invoicesfootersidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.isdefaultDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            invoicesfooters_idLabel = new System.Windows.Forms.Label();
-            invoicesfooters_nameLabel = new System.Windows.Forms.Label();
-            invoicesfooters_doctextLabel = new System.Windows.Forms.Label();
             this.panel_tabInvoicesFooters_actions.SuspendLayout();
             this.panel_tabInvoicesFooters_updates.SuspendLayout();
             this.panel_tabInvoicesFooters_data.SuspendLayout();
@@ -74,30 +71,30 @@
             // 
             // invoicesfooters_idLabel
             // 
-            invoicesfooters_idLabel.AutoSize = true;
-            invoicesfooters_idLabel.Location = new System.Drawing.Point(9, 9);
-            invoicesfooters_idLabel.Name = "invoicesfooters_idLabel";
-            invoicesfooters_idLabel.Size = new System.Drawing.Size(19, 13);
-            invoicesfooters_idLabel.TabIndex = 0;
-            invoicesfooters_idLabel.Text = "Id:";
+            this.invoicesfooters_idLabel.AutoSize = true;
+            this.invoicesfooters_idLabel.Location = new System.Drawing.Point(9, 9);
+            this.invoicesfooters_idLabel.Name = "invoicesfooters_idLabel";
+            this.invoicesfooters_idLabel.Size = new System.Drawing.Size(19, 13);
+            this.invoicesfooters_idLabel.TabIndex = 0;
+            this.invoicesfooters_idLabel.Text = "Id:";
             // 
             // invoicesfooters_nameLabel
             // 
-            invoicesfooters_nameLabel.AutoSize = true;
-            invoicesfooters_nameLabel.Location = new System.Drawing.Point(9, 48);
-            invoicesfooters_nameLabel.Name = "invoicesfooters_nameLabel";
-            invoicesfooters_nameLabel.Size = new System.Drawing.Size(38, 13);
-            invoicesfooters_nameLabel.TabIndex = 2;
-            invoicesfooters_nameLabel.Text = "Name:";
+            this.invoicesfooters_nameLabel.AutoSize = true;
+            this.invoicesfooters_nameLabel.Location = new System.Drawing.Point(9, 48);
+            this.invoicesfooters_nameLabel.Name = "invoicesfooters_nameLabel";
+            this.invoicesfooters_nameLabel.Size = new System.Drawing.Size(38, 13);
+            this.invoicesfooters_nameLabel.TabIndex = 2;
+            this.invoicesfooters_nameLabel.Text = "Name:";
             // 
             // invoicesfooters_doctextLabel
             // 
-            invoicesfooters_doctextLabel.AutoSize = true;
-            invoicesfooters_doctextLabel.Location = new System.Drawing.Point(9, 87);
-            invoicesfooters_doctextLabel.Name = "invoicesfooters_doctextLabel";
-            invoicesfooters_doctextLabel.Size = new System.Drawing.Size(54, 13);
-            invoicesfooters_doctextLabel.TabIndex = 4;
-            invoicesfooters_doctextLabel.Text = "Doc Text:";
+            this.invoicesfooters_doctextLabel.AutoSize = true;
+            this.invoicesfooters_doctextLabel.Location = new System.Drawing.Point(9, 87);
+            this.invoicesfooters_doctextLabel.Name = "invoicesfooters_doctextLabel";
+            this.invoicesfooters_doctextLabel.Size = new System.Drawing.Size(54, 13);
+            this.invoicesfooters_doctextLabel.TabIndex = 4;
+            this.invoicesfooters_doctextLabel.Text = "Doc Text:";
             // 
             // button_tabInvoicesFooters_delete
             // 
@@ -166,11 +163,11 @@
             // panel_tabInvoicesFooters_data
             // 
             this.panel_tabInvoicesFooters_data.Controls.Add(this.invoicesfooters_isdefaultCheckBox);
-            this.panel_tabInvoicesFooters_data.Controls.Add(invoicesfooters_doctextLabel);
+            this.panel_tabInvoicesFooters_data.Controls.Add(this.invoicesfooters_doctextLabel);
             this.panel_tabInvoicesFooters_data.Controls.Add(this.invoicesfooters_doctextTextBox);
-            this.panel_tabInvoicesFooters_data.Controls.Add(invoicesfooters_nameLabel);
+            this.panel_tabInvoicesFooters_data.Controls.Add(this.invoicesfooters_nameLabel);
             this.panel_tabInvoicesFooters_data.Controls.Add(this.invoicesfooters_nameTextBox);
-            this.panel_tabInvoicesFooters_data.Controls.Add(invoicesfooters_idLabel);
+            this.panel_tabInvoicesFooters_data.Controls.Add(this.invoicesfooters_idLabel);
             this.panel_tabInvoicesFooters_data.Controls.Add(this.invoicesfooters_idTextBox);
             this.panel_tabInvoicesFooters_data.Location = new System.Drawing.Point(6, 42);
             this.panel_tabInvoicesFooters_data.Name = "panel_tabInvoicesFooters_data";
@@ -314,7 +311,7 @@
             // nameDataGridViewTextBoxColumn
             // 
             this.nameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "name";
             this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
             this.nameDataGridViewTextBoxColumn.MinimumWidth = 22;
             this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
@@ -381,6 +378,9 @@
         private System.Windows.Forms.TextBox invoicesfooters_idTextBox;
         private System.Windows.Forms.BindingSource vInvoicesFootersBindingSource;
         private System.Windows.Forms.CheckBox invoicesfooters_isdefaultCheckBox;
+        private System.Windows.Forms.Label invoicesfooters_idLabel;
+        private System.Windows.Forms.Label invoicesfooters_nameLabel;
+        private System.Windows.Forms.Label invoicesfooters_doctextLabel;
         private System.Windows.Forms.DataGridViewTextBoxColumn invoicesfootersidDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn isdefaultDataGridViewCheckBoxColumn;

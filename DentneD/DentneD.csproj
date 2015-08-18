@@ -59,6 +59,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms.Calendar, Version=1.0.5665.40596, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Ext\JoseCalendar\System.Windows.Forms.Calendar.dll</HintPath>
@@ -151,6 +152,18 @@
     <Compile Include="Forms\FormPaymentsTypes.Designer.cs">
       <DependentUpon>FormPaymentsTypes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormReports.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormReports.Designer.cs">
+      <DependentUpon>FormReports.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormReportsrun.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormReportsrun.Designer.cs">
+      <DependentUpon>FormReportsrun.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormRooms.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -187,6 +200,7 @@
     <Compile Include="Forms\FormTreatmentsPricesLists.Designer.cs">
       <DependentUpon>FormTreatmentsPricesLists.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Objects\VReports.cs" />
     <Compile Include="Forms\Objects\VEstimatesFooters.cs" />
     <Compile Include="Forms\Objects\VEstimates.cs" />
     <Compile Include="Forms\Objects\VEstimatesLines.cs" />
@@ -217,6 +231,7 @@
     <Compile Include="Forms\Objects\VTaxesDeductions.cs" />
     <Compile Include="Forms\Objects\VTaxes.cs" />
     <Compile Include="Forms\Objects\VDoctors.cs" />
+    <Compile Include="Libs\NDesk.Options\Options.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormMain.resx">
@@ -258,6 +273,12 @@
     <EmbeddedResource Include="Forms\FormPaymentsTypes.resx">
       <DependentUpon>FormPaymentsTypes.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormReports.resx">
+      <DependentUpon>FormReports.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormReportsrun.resx">
+      <DependentUpon>FormReportsrun.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormRooms.resx">
       <DependentUpon>FormRooms.cs</DependentUpon>
     </EmbeddedResource>
@@ -286,6 +307,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="CleanDatadir.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="lang\it.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VAddressesTypes.datasource" />
     <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VContactsTypes.datasource" />
@@ -310,6 +337,7 @@
     <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VPatientsPayments.datasource" />
     <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VPatientsTreatments.datasource" />
     <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VPaymentsTypes.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VReports.datasource" />
     <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VRooms.datasource" />
     <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VTaxes.datasource" />
     <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VTaxesDeductions.datasource" />
@@ -339,6 +367,7 @@
     <None Include="Properties\DataSources\DG.DentneD.Model.Entity.patientstreatments.datasource" />
     <None Include="Properties\DataSources\DG.DentneD.Model.Entity.payments.datasource" />
     <None Include="Properties\DataSources\DG.DentneD.Model.Entity.paymentstypes.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Model.Entity.reports.datasource" />
     <None Include="Properties\DataSources\DG.DentneD.Model.Entity.rooms.datasource" />
     <None Include="Properties\DataSources\DG.DentneD.Model.Entity.taxes.datasource" />
     <None Include="Properties\DataSources\DG.DentneD.Model.Entity.taxesdeductions.datasource" />
@@ -355,6 +384,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="RebuildLanguage.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -379,6 +411,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="ico_dentned.ico" />
+    <None Include="RebuildDefaultLanguage.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

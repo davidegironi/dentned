@@ -1,4 +1,4 @@
-﻿namespace DentneD
+﻿namespace DG.DentneD
 {
     partial class FormMain
     {
@@ -36,6 +36,9 @@
             this.invoicesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.estimatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.runReportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.setReportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tablesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addressesTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contactTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,7 +52,7 @@
             this.taxesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.taxesDeductionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.treatmentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.treamentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.treatments1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.treatmentsTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.treatmentsPricesListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -120,9 +123,32 @@
             // 
             // reportsToolStripMenuItem
             // 
+            this.reportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.runReportsToolStripMenuItem,
+            this.toolStripMenuItem2,
+            this.setReportsToolStripMenuItem});
             this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
             this.reportsToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
             this.reportsToolStripMenuItem.Text = "Reports";
+            // 
+            // runReportsToolStripMenuItem
+            // 
+            this.runReportsToolStripMenuItem.Name = "runReportsToolStripMenuItem";
+            this.runReportsToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.runReportsToolStripMenuItem.Text = "Run Reports";
+            this.runReportsToolStripMenuItem.Click += new System.EventHandler(this.runReportsToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(135, 6);
+            // 
+            // setReportsToolStripMenuItem
+            // 
+            this.setReportsToolStripMenuItem.Name = "setReportsToolStripMenuItem";
+            this.setReportsToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.setReportsToolStripMenuItem.Text = "Set Reports";
+            this.setReportsToolStripMenuItem.Click += new System.EventHandler(this.setReportsToolStripMenuItem_Click);
             // 
             // tablesToolStripMenuItem
             // 
@@ -223,7 +249,7 @@
             // treatmentsToolStripMenuItem
             // 
             this.treatmentsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.treamentsToolStripMenuItem,
+            this.treatments1ToolStripMenuItem,
             this.toolStripMenuItem1,
             this.treatmentsTypesToolStripMenuItem,
             this.treatmentsPricesListToolStripMenuItem});
@@ -231,12 +257,12 @@
             this.treatmentsToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.treatmentsToolStripMenuItem.Text = "Treatments";
             // 
-            // treamentsToolStripMenuItem
+            // treatments1ToolStripMenuItem
             // 
-            this.treamentsToolStripMenuItem.Name = "treamentsToolStripMenuItem";
-            this.treamentsToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
-            this.treamentsToolStripMenuItem.Text = "Treaments";
-            this.treamentsToolStripMenuItem.Click += new System.EventHandler(this.treamentsToolStripMenuItem_Click);
+            this.treatments1ToolStripMenuItem.Name = "treatments1ToolStripMenuItem";
+            this.treatments1ToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.treatments1ToolStripMenuItem.Text = "Treatments";
+            this.treatments1ToolStripMenuItem.Click += new System.EventHandler(this.treatments1ToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -345,7 +371,7 @@
         private System.Windows.Forms.ToolStripMenuItem invoicesFootersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem paymentTypesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem treatmentsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem treamentsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem treatments1ToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem treatmentsTypesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem treatmentsPricesListToolStripMenuItem;
@@ -362,6 +388,9 @@
         private System.Windows.Forms.ToolStripMenuItem backupToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem patientAttachmentsTypesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem estimatesFootersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem runReportsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem setReportsToolStripMenuItem;
     }
 }
 

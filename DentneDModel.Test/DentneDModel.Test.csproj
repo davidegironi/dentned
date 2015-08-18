@@ -63,6 +63,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="DentneDModelTest.Reports.cs" />
     <Compile Include="DentneDModelTest.EstimatesFooters.cs" />
     <Compile Include="DentneDModelTest.InvoicesLines.cs" />
     <Compile Include="DentneDModelTest.Invoices.cs" />

@@ -53,5 +53,6 @@ namespace DG.DentneD.Model.Entity
         public virtual DbSet<treatmentsprices> treatmentsprices { get; set; }
         public virtual DbSet<treatmentspriceslists> treatmentspriceslists { get; set; }
         public virtual DbSet<treatmentstypes> treatmentstypes { get; set; }
+        public virtual DbSet<reports> reports { get; set; }
     }
 }

@@ -17,6 +17,25 @@ namespace DG.DentneD.Model.Repositories
         public InvoicesLinesRepository() : base() { }
 
         /// <summary>
+        /// Repository language dictionary
+        /// </summary>
+        public class RepositoryLanguage : IGenericDataRepositoryLanguage
+        {
+            public string text001 = "Code can not be empty.";
+            public string text002 = "Description can not be empty.";
+            public string text003 = "Invalid quantity. Can not be less than zero.";
+            public string text004 = "Invoice is mandatory.";
+            public string text005 = "Invalid code format. 3 character, uppercase letters [A-Z] or numbers [0-9], or minus '-'.";
+            public string text006 = "Invalid price. Invoice total can not be less than zero.";
+            public string text007 = "Treatments is mandatory if not empty.";
+        }
+
+        /// <summary>
+        /// Repository language
+        /// </summary>
+        public RepositoryLanguage language = new RepositoryLanguage();
+
+        /// <summary>
         /// Check if an item can be added
         /// </summary>
         /// <param name="errors"></param>
@@ -70,12 +89,12 @@ namespace DG.DentneD.Model.Repositories
                 if (String.IsNullOrEmpty(item.invoiceslines_code))
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Code can not be empty." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text001 }).ToArray();
                 }
                 if (String.IsNullOrEmpty(item.invoiceslines_description))
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Description can not be empty." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text002 }).ToArray();
                 }
 
                 if (!ret)
@@ -84,7 +103,7 @@ namespace DG.DentneD.Model.Repositories
                 if (item.invoiceslines_quantity < 0)
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Invalid quantity. Can not be less than zero." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text003 }).ToArray();
                 }
 
                 if (!ret)
@@ -93,12 +112,12 @@ namespace DG.DentneD.Model.Repositories
                 if (BaseModel.Invoices.Find(item.invoices_id) == null)
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Invoice is mandatory." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text004 }).ToArray();
                 }
                 if (item.patientstreatments_id != null && BaseModel.PatientsTreatments.Find(item.patientstreatments_id) == null)
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Treatments is mandatory if not empty." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text007 }).ToArray();
                 }
 
                 if (!ret)
@@ -107,7 +126,7 @@ namespace DG.DentneD.Model.Repositories
                 if (item.invoiceslines_code != null && !Regex.Match(item.invoiceslines_code, @"^[A-Z0-9\-]{3}$").Success)
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Invalid code format. 3 character, uppercase letters [A-Z] or numbers [0-9], or minus '-'." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text005 }).ToArray();
                 }
 
                 if (!ret)
@@ -117,7 +136,7 @@ namespace DG.DentneD.Model.Repositories
                     (Math.Round((item.invoiceslines_quantity * item.invoiceslines_unitprice)*item.invoiceslines_taxrate / 100, 2) + Math.Round(item.invoiceslines_quantity * item.invoiceslines_unitprice, 2)) < 0)
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Invalid price. Invoice total can not be less than zero." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text006 }).ToArray();
                 }
             }
 

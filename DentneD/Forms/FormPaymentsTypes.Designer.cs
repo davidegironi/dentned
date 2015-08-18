@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.Label paymentstypes_idLabel;
-            System.Windows.Forms.Label paymentstypes_nameLabel;
-            System.Windows.Forms.Label paymentstypes_doctextLabel;
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPaymentsTypes));
+            this.paymentstypes_idLabel = new System.Windows.Forms.Label();
+            this.paymentstypes_nameLabel = new System.Windows.Forms.Label();
+            this.paymentstypes_doctextLabel = new System.Windows.Forms.Label();
             this.button_tabPaymentsTypes_delete = new System.Windows.Forms.Button();
             this.button_tabPaymentsTypes_edit = new System.Windows.Forms.Button();
             this.button_tabPaymentsTypes_new = new System.Windows.Forms.Button();
@@ -51,15 +51,12 @@
             this.tabPage_tabPaymentsTypes = new System.Windows.Forms.TabPage();
             this.panel_list = new System.Windows.Forms.Panel();
             this.advancedDataGridView_main = new Zuby.ADGV.AdvancedDataGridView();
-            this.vPaymentsTypesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.panel_filters = new System.Windows.Forms.Panel();
-            this.panel_data = new System.Windows.Forms.Panel();
             this.paymentstypesidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.isdefaultDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            paymentstypes_idLabel = new System.Windows.Forms.Label();
-            paymentstypes_nameLabel = new System.Windows.Forms.Label();
-            paymentstypes_doctextLabel = new System.Windows.Forms.Label();
+            this.vPaymentsTypesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.panel_filters = new System.Windows.Forms.Panel();
+            this.panel_data = new System.Windows.Forms.Panel();
             this.panel_tabPaymentsTypes_actions.SuspendLayout();
             this.panel_tabPaymentsTypes_updates.SuspendLayout();
             this.panel_tabPaymentsTypes_data.SuspendLayout();
@@ -74,30 +71,30 @@
             // 
             // paymentstypes_idLabel
             // 
-            paymentstypes_idLabel.AutoSize = true;
-            paymentstypes_idLabel.Location = new System.Drawing.Point(9, 9);
-            paymentstypes_idLabel.Name = "paymentstypes_idLabel";
-            paymentstypes_idLabel.Size = new System.Drawing.Size(19, 13);
-            paymentstypes_idLabel.TabIndex = 0;
-            paymentstypes_idLabel.Text = "Id:";
+            this.paymentstypes_idLabel.AutoSize = true;
+            this.paymentstypes_idLabel.Location = new System.Drawing.Point(9, 9);
+            this.paymentstypes_idLabel.Name = "paymentstypes_idLabel";
+            this.paymentstypes_idLabel.Size = new System.Drawing.Size(19, 13);
+            this.paymentstypes_idLabel.TabIndex = 0;
+            this.paymentstypes_idLabel.Text = "Id:";
             // 
             // paymentstypes_nameLabel
             // 
-            paymentstypes_nameLabel.AutoSize = true;
-            paymentstypes_nameLabel.Location = new System.Drawing.Point(9, 48);
-            paymentstypes_nameLabel.Name = "paymentstypes_nameLabel";
-            paymentstypes_nameLabel.Size = new System.Drawing.Size(38, 13);
-            paymentstypes_nameLabel.TabIndex = 2;
-            paymentstypes_nameLabel.Text = "Name:";
+            this.paymentstypes_nameLabel.AutoSize = true;
+            this.paymentstypes_nameLabel.Location = new System.Drawing.Point(9, 48);
+            this.paymentstypes_nameLabel.Name = "paymentstypes_nameLabel";
+            this.paymentstypes_nameLabel.Size = new System.Drawing.Size(38, 13);
+            this.paymentstypes_nameLabel.TabIndex = 2;
+            this.paymentstypes_nameLabel.Text = "Name:";
             // 
             // paymentstypes_doctextLabel
             // 
-            paymentstypes_doctextLabel.AutoSize = true;
-            paymentstypes_doctextLabel.Location = new System.Drawing.Point(9, 87);
-            paymentstypes_doctextLabel.Name = "paymentstypes_doctextLabel";
-            paymentstypes_doctextLabel.Size = new System.Drawing.Size(54, 13);
-            paymentstypes_doctextLabel.TabIndex = 4;
-            paymentstypes_doctextLabel.Text = "Doc Text:";
+            this.paymentstypes_doctextLabel.AutoSize = true;
+            this.paymentstypes_doctextLabel.Location = new System.Drawing.Point(9, 87);
+            this.paymentstypes_doctextLabel.Name = "paymentstypes_doctextLabel";
+            this.paymentstypes_doctextLabel.Size = new System.Drawing.Size(54, 13);
+            this.paymentstypes_doctextLabel.TabIndex = 4;
+            this.paymentstypes_doctextLabel.Text = "Doc Text:";
             // 
             // button_tabPaymentsTypes_delete
             // 
@@ -166,11 +163,11 @@
             // panel_tabPaymentsTypes_data
             // 
             this.panel_tabPaymentsTypes_data.Controls.Add(this.paymentstypes_isdefaultCheckBox);
-            this.panel_tabPaymentsTypes_data.Controls.Add(paymentstypes_doctextLabel);
+            this.panel_tabPaymentsTypes_data.Controls.Add(this.paymentstypes_doctextLabel);
             this.panel_tabPaymentsTypes_data.Controls.Add(this.paymentstypes_doctextTextBox);
-            this.panel_tabPaymentsTypes_data.Controls.Add(paymentstypes_nameLabel);
+            this.panel_tabPaymentsTypes_data.Controls.Add(this.paymentstypes_nameLabel);
             this.panel_tabPaymentsTypes_data.Controls.Add(this.paymentstypes_nameTextBox);
-            this.panel_tabPaymentsTypes_data.Controls.Add(paymentstypes_idLabel);
+            this.panel_tabPaymentsTypes_data.Controls.Add(this.paymentstypes_idLabel);
             this.panel_tabPaymentsTypes_data.Controls.Add(this.paymentstypes_idTextBox);
             this.panel_tabPaymentsTypes_data.Location = new System.Drawing.Point(6, 42);
             this.panel_tabPaymentsTypes_data.Name = "panel_tabPaymentsTypes_data";
@@ -279,27 +276,6 @@
             this.advancedDataGridView_main.SortStringChanged += new System.EventHandler(this.advancedDataGridView_main_SortStringChanged);
             this.advancedDataGridView_main.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_main_FilterStringChanged);
             // 
-            // vPaymentsTypesBindingSource
-            // 
-            this.vPaymentsTypesBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPaymentsTypes);
-            // 
-            // panel_filters
-            // 
-            this.panel_filters.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel_filters.Location = new System.Drawing.Point(0, 0);
-            this.panel_filters.Name = "panel_filters";
-            this.panel_filters.Size = new System.Drawing.Size(284, 60);
-            this.panel_filters.TabIndex = 10;
-            // 
-            // panel_data
-            // 
-            this.panel_data.Controls.Add(this.tabControl_main);
-            this.panel_data.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel_data.Location = new System.Drawing.Point(284, 0);
-            this.panel_data.Name = "panel_data";
-            this.panel_data.Size = new System.Drawing.Size(500, 562);
-            this.panel_data.TabIndex = 9;
-            // 
             // paymentstypesidDataGridViewTextBoxColumn
             // 
             this.paymentstypesidDataGridViewTextBoxColumn.DataPropertyName = "paymentstypes_id";
@@ -329,6 +305,27 @@
             this.isdefaultDataGridViewCheckBoxColumn.ReadOnly = true;
             this.isdefaultDataGridViewCheckBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             this.isdefaultDataGridViewCheckBoxColumn.Width = 50;
+            // 
+            // vPaymentsTypesBindingSource
+            // 
+            this.vPaymentsTypesBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPaymentsTypes);
+            // 
+            // panel_filters
+            // 
+            this.panel_filters.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel_filters.Location = new System.Drawing.Point(0, 0);
+            this.panel_filters.Name = "panel_filters";
+            this.panel_filters.Size = new System.Drawing.Size(284, 60);
+            this.panel_filters.TabIndex = 10;
+            // 
+            // panel_data
+            // 
+            this.panel_data.Controls.Add(this.tabControl_main);
+            this.panel_data.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel_data.Location = new System.Drawing.Point(284, 0);
+            this.panel_data.Name = "panel_data";
+            this.panel_data.Size = new System.Drawing.Size(500, 562);
+            this.panel_data.TabIndex = 9;
             // 
             // FormPaymentsTypes
             // 
@@ -383,5 +380,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn paymentstypesidDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn isdefaultDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.Label paymentstypes_idLabel;
+        private System.Windows.Forms.Label paymentstypes_nameLabel;
+        private System.Windows.Forms.Label paymentstypes_doctextLabel;
     }
 }

@@ -14,13 +14,11 @@ using DG.UI.GHF;
 using DG.DentneD.Model;
 using DG.DentneD.Model.Entity;
 using DG.DentneD.Forms.Objects;
-using DentneD;
 using Zuby.ADGV;
 using System.Data;
 using System.Configuration;
 using System.Diagnostics;
 using System.Text;
-using DG.DentneD.Model.Repositories;
 using System.Linq.Expressions;
 using System.Drawing;
 
@@ -65,10 +63,206 @@ namespace DG.DentneD.Forms
             Initialize(Program.uighfApplication);
 
             _dentnedModel = new DentneDModel();
+            _dentnedModel.LanguageHelper.LoadFromFile(Program.uighfApplication.LanguageFilename);
 
             _patientsDatadir = ConfigurationManager.AppSettings["patientsDatadir"];
             _patientsAttachmentsdir = ConfigurationManager.AppSettings["patientsAttachmentsdir"];
             _doSecureDelete = Convert.ToBoolean(ConfigurationManager.AppSettings["doSecureDelete"]);
+        }
+
+        /// <summary>
+        /// Add components language
+        /// </summary>
+        public override void AddLanguageComponents()
+        {
+            //main
+            LanguageHelper.AddComponent(this);
+            LanguageHelper.AddComponent(patientsidDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(nameDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(isarchivedDataGridViewCheckBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(label_filterShow);
+            LanguageHelper.AddComponent(countLabel);
+            //tabPatients
+            LanguageHelper.AddComponent(tabPage_tabPatients);
+            //tabPatients_tabPatients
+            LanguageHelper.AddComponent(tabPage_tabPatients_tabPatients);
+            LanguageHelper.AddComponent(button_tabPatients_tabPatients_new);
+            LanguageHelper.AddComponent(button_tabPatients_tabPatients_edit);
+            LanguageHelper.AddComponent(button_tabPatients_tabPatients_delete);
+            LanguageHelper.AddComponent(button_tabPatients_tabPatients_save);
+            LanguageHelper.AddComponent(button_tabPatients_tabPatients_cancel);
+            LanguageHelper.AddComponent(button_tabPatients_tabPatients_datadir);
+            LanguageHelper.AddComponent(patients_idLabel);
+            LanguageHelper.AddComponent(patients_nameLabel);
+            LanguageHelper.AddComponent(patients_surnameLabel);
+            LanguageHelper.AddComponent(patients_sexLabel);
+            LanguageHelper.AddComponent(patients_birthdateLabel);
+            LanguageHelper.AddComponent(patients_birthcityLabel);
+            LanguageHelper.AddComponent(patients_notesLabel);
+            LanguageHelper.AddComponent(treatmentspriceslists_idLabel);
+            LanguageHelper.AddComponent(patients_doctextLabel);
+            LanguageHelper.AddComponent(patients_isarchivedCheckBox);
+            LanguageHelper.AddComponent(patients_sexMRadioButton);
+            LanguageHelper.AddComponent(patients_sexFRadioButton);
+            LanguageHelper.AddComponent(button_tabPatients_tabPatients_priceslistsreset);
+            //tabPatients_tabPatientsContacts
+            LanguageHelper.AddComponent(tabPage_tabPatients_tabPatientsContacts);
+            LanguageHelper.AddComponent(patientscontactsidDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(contactstypeDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(contactDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(button_tabPatients_tabPatientsContacts_new);
+            LanguageHelper.AddComponent(button_tabPatients_tabPatientsContacts_edit);
+            LanguageHelper.AddComponent(button_tabPatients_tabPatientsContacts_delete);
+            LanguageHelper.AddComponent(button_tabPatients_tabPatientsContacts_save);
+            LanguageHelper.AddComponent(button_tabPatients_tabPatientsContacts_cancel);
+            LanguageHelper.AddComponent(patientscontacts_idLabel);
+            LanguageHelper.AddComponent(contactstypes_idLabel);
+            LanguageHelper.AddComponent(patientscontacts_valueLabel);
+            //tabPatients_tabPatientsAddresses
+            LanguageHelper.AddComponent(tabPage_tabPatients_tabPatientsAddresses);
+            LanguageHelper.AddComponent(button_tabPatients_tabPatientsAddresses_new);
+            LanguageHelper.AddComponent(button_tabPatients_tabPatientsAddresses_edit);
+            LanguageHelper.AddComponent(button_tabPatients_tabPatientsAddresses_delete);
+            LanguageHelper.AddComponent(button_tabPatients_tabPatientsAddresses_save);
+            LanguageHelper.AddComponent(button_tabPatients_tabPatientsAddresses_cancel);
+            LanguageHelper.AddComponent(patientsaddresses_idLabel);
+            LanguageHelper.AddComponent(addressestypes_idLabel);
+            LanguageHelper.AddComponent(patientsaddresses_stateLabel);
+            LanguageHelper.AddComponent(patientsaddresses_cityLabel);
+            LanguageHelper.AddComponent(patientsaddresses_zipcodeLabel);
+            LanguageHelper.AddComponent(patientsaddresses_streetLabel);
+            //tabPatientsMedicalrecords
+            LanguageHelper.AddComponent(tabPage_tabPatientsMedicalrecords);
+            LanguageHelper.AddComponent(patientsmedicalrecordsidDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(medicalrecordstypeDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(valueDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(button_tabPatientsMedicalrecords_new);
+            LanguageHelper.AddComponent(button_tabPatientsMedicalrecords_edit);
+            LanguageHelper.AddComponent(button_tabPatientsMedicalrecords_delete);
+            LanguageHelper.AddComponent(button_tabPatientsMedicalrecords_save);
+            LanguageHelper.AddComponent(button_tabPatientsMedicalrecords_cancel);
+            LanguageHelper.AddComponent(patientsmedicalrecords_idLabel);
+            LanguageHelper.AddComponent(medicalrecordstypes_idLabel);
+            LanguageHelper.AddComponent(patientsmedicalrecords_valueLabel);
+            //tabPatientsTreatments
+            LanguageHelper.AddComponent(tabPage_tabPatientsTreatments);
+            LanguageHelper.AddComponent(patientstreatments_filtertalLabel);
+            LanguageHelper.AddComponent(patientstreatments_filtertupLabel);
+            LanguageHelper.AddComponent(patientstreatments_filtertdwLabel);
+            LanguageHelper.AddComponent(patientstreatments_filtertnoLabel);
+            LanguageHelper.AddComponent(patientstreatments_filtertanyLabel);
+            LanguageHelper.AddComponent(patientstreatmentsidDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(dateDataGridViewTextBoxColumn1, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(treatmentDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(toothsDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(ispaidDataGridViewCheckBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(button_tabPatientsTreatments_new);
+            LanguageHelper.AddComponent(button_tabPatientsTreatments_edit);
+            LanguageHelper.AddComponent(button_tabPatientsTreatments_delete);
+            LanguageHelper.AddComponent(button_tabPatientsTreatments_save);
+            LanguageHelper.AddComponent(button_tabPatientsTreatments_cancel);
+            LanguageHelper.AddComponent(button_tabPatientsTreatments_setfulfilled);
+            LanguageHelper.AddComponent(button_tabPatientsTreatments_setpaid);
+            LanguageHelper.AddComponent(patientstreatments_idLabel);
+            LanguageHelper.AddComponent(patientstreatments_creationdateLabel);
+            LanguageHelper.AddComponent(patientstreatments_expirationdateLabel);
+            LanguageHelper.AddComponent(patientstreatments_fulfilldateLabel);
+            LanguageHelper.AddComponent(patientstreatments_invoiceLabel);
+            LanguageHelper.AddComponent(doctors_idLabel1);
+            LanguageHelper.AddComponent(treatments_idLabel);
+            LanguageHelper.AddComponent(patientstreatments_priceLabel);
+            LanguageHelper.AddComponent(patientstreatments_descriptionLabel);
+            LanguageHelper.AddComponent(patientstreatments_notesLabel);
+            LanguageHelper.AddComponent(patientstreatments_talLabel);
+            LanguageHelper.AddComponent(patientstreatments_tupLabel);
+            LanguageHelper.AddComponent(patientstreatments_tdwLabel);
+            LanguageHelper.AddComponent(patientstreatments_tnoLabel);
+            LanguageHelper.AddComponent(patientstreatments_ispaidCheckBox);
+            //tabPayments
+            LanguageHelper.AddComponent(tabPage_tabPayments);
+            LanguageHelper.AddComponent(paymentsidDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(dateDataGridViewTextBoxColumn2, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(noteDataGridViewTextBoxColumn1, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(amountDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(label_tabPayments_payedtotal);
+            LanguageHelper.AddComponent(label_tabPayments_treatmentstotal);
+            LanguageHelper.AddComponent(label_tabPayments_treatmentslefttotal);
+            LanguageHelper.AddComponent(button_tabPayments_new);
+            LanguageHelper.AddComponent(button_tabPayments_edit);
+            LanguageHelper.AddComponent(button_tabPayments_delete);
+            LanguageHelper.AddComponent(button_tabPayments_save);
+            LanguageHelper.AddComponent(button_tabPayments_cancel);
+            LanguageHelper.AddComponent(payments_idLabel);
+            LanguageHelper.AddComponent(payments_dateLabel);
+            LanguageHelper.AddComponent(payments_amountLabel);
+            LanguageHelper.AddComponent(payments_notesLabel);
+            //tabAppointments
+            LanguageHelper.AddComponent(tabPage_tabAppointments);
+            LanguageHelper.AddComponent(appointmentsidDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(fromDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(toDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(titleDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(appointments_idLabel);
+            LanguageHelper.AddComponent(rooms_idLabel);
+            LanguageHelper.AddComponent(doctors_idLabel);
+            LanguageHelper.AddComponent(appointments_titleLabel);
+            LanguageHelper.AddComponent(appointments_notesLabel);
+            //tabPatientsAttachments
+            LanguageHelper.AddComponent(tabPage_tabPatientsAttachments);
+            LanguageHelper.AddComponent(patientsattachmentsidDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(attachmetnstypeDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(attachmentDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(button_tabPatientsAttachments_new);
+            LanguageHelper.AddComponent(button_tabPatientsAttachments_edit);
+            LanguageHelper.AddComponent(button_tabPatientsAttachments_delete);
+            LanguageHelper.AddComponent(button_tabPatientsAttachments_save);
+            LanguageHelper.AddComponent(button_tabPatientsAttachments_cancel);
+            LanguageHelper.AddComponent(button_tabPatientsAttachments_filepathopenfolder);
+            LanguageHelper.AddComponent(patientsattachments_idLabel);
+            LanguageHelper.AddComponent(patientsattachments_dateLabel);
+            LanguageHelper.AddComponent(patientsattachmentstypes_idLabel);
+            LanguageHelper.AddComponent(patientsattachments_valueLabel);
+            LanguageHelper.AddComponent(patientsattachments_filenameLabel);
+            LanguageHelper.AddComponent(patientsattachments_noteLabel);
+            LanguageHelper.AddComponent(button_tabPatientsAttachments_filepathselect);
+            LanguageHelper.AddComponent(button_tabPatientsAttachments_filepathdelete);
+            //tabInvoices
+            LanguageHelper.AddComponent(tabPage_tabInvoices);
+            LanguageHelper.AddComponent(invoicesidDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(numberDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(dateDataGridViewTextBoxColumn3, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(doctorDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(ispaidDataGridViewCheckBoxColumn1, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(totalDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(label_tabInvoices_paidtotal);
+            LanguageHelper.AddComponent(label_tabInvoices_invoicestotal);
+            LanguageHelper.AddComponent(label_tabInvoices_invoiceslefttotal);
+            LanguageHelper.AddComponent(button_tabInvoices_view);
+            //tabEstimates
+            LanguageHelper.AddComponent(tabPage_tabEstimates);
+            LanguageHelper.AddComponent(estimatesidDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(numberDataGridViewTextBoxColumn1, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(dateDataGridViewTextBoxColumn4, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(doctorDataGridViewTextBoxColumn1, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(isinvoicedDataGridViewCheckBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(totalDataGridViewTextBoxColumn1, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(label_tabEstimates_invoicedtotal);
+            LanguageHelper.AddComponent(label_tabEstimates_estimatestotal);
+            LanguageHelper.AddComponent(label_tabEstimates_estimateslefttotal);
+            LanguageHelper.AddComponent(button_tabEstimates_view);
+            //tabPatientsNotes
+            LanguageHelper.AddComponent(tabPage_tabPatientsNotes);
+            LanguageHelper.AddComponent(patientsnotesidDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(dateDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(noteDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(button_tabPatientsNotes_new);
+            LanguageHelper.AddComponent(button_tabPatientsNotes_edit);
+            LanguageHelper.AddComponent(button_tabPatientsNotes_delete);
+            LanguageHelper.AddComponent(button_tabPatientsNotes_save);
+            LanguageHelper.AddComponent(button_tabPatientsNotes_cancel);
+            LanguageHelper.AddComponent(patientsnotes_idLabel);
+            LanguageHelper.AddComponent(patientsnotes_dateLabel);
+            LanguageHelper.AddComponent(patientsnotes_textLabel);
         }
 
         /// <summary>
@@ -1847,7 +2041,7 @@ namespace DG.DentneD.Forms
                 patientstreatments_id = r.patientstreatments_id,
                 treatment = _dentnedModel.Treatments.Find(r.treatments_id).treatments_code,
                 isfulfilled = (r.patientstreatments_fulfilldate != null ? true : false),
-                ispayed = r.patientstreatments_ispayed,
+                ispaid = r.patientstreatments_ispayed,
                 date = r.patientstreatments_creationdate,
                 tooths = _dentnedModel.PatientsTreatments.GetTreatmentsToothsString(r)
             }).ToList();
@@ -2023,11 +2217,11 @@ namespace DG.DentneD.Forms
         }
 
         /// <summary>
-        /// Set current treatment payed
+        /// Set current treatment paid
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void button_tabPatientsTreatments_setpayed_Click(object sender, EventArgs e)
+        private void button_tabPatientsTreatments_setpaid_Click(object sender, EventArgs e)
         {
             int patientstreatments_id = -1;
             if (vPatientsTreatmentsBindingSource.Current != null)
@@ -3642,10 +3836,10 @@ namespace DG.DentneD.Forms
             }
 
             //update totals
-            double payedtotalnum = Convert.ToDouble(_dentnedModel.Payments.List(r => r.patients_id == patients_id).Sum(r => r.payments_amount));
+            double paidtotalnum = Convert.ToDouble(_dentnedModel.Payments.List(r => r.patients_id == patients_id).Sum(r => r.payments_amount));
             double treatmentstotalnum = Convert.ToDouble(_dentnedModel.PatientsTreatments.List(r => r.patients_id == patients_id && !r.patientstreatments_ispayed && r.patientstreatments_fulfilldate != null).Sum(r => r.patientstreatments_price));
-            double treatmentslefttotalnum = treatmentstotalnum - payedtotalnum;
-            label_tabPayments_payedtotalnum.Text = String.Format("{0:0.00}", payedtotalnum);
+            double treatmentslefttotalnum = treatmentstotalnum - paidtotalnum;
+            label_tabPayments_paidtotalnum.Text = String.Format("{0:0.00}", paidtotalnum);
             label_tabPayments_treatmentstotalnum.Text = String.Format("{0:0.00}", treatmentstotalnum);
             label_tabPayments_treatmentslefttotalnum.Text = String.Format("{0:0.00}", treatmentslefttotalnum);
 
@@ -4082,10 +4276,10 @@ namespace DG.DentneD.Forms
             }
 
             //update totals
-            double payedtotalnum = Convert.ToDouble(_dentnedModel.Invoices.List(r => r.patients_id == patients_id && r.invoices_ispaid).Sum(r => r.invoices_total));
+            double paidtotalnum = Convert.ToDouble(_dentnedModel.Invoices.List(r => r.patients_id == patients_id && r.invoices_ispaid).Sum(r => r.invoices_total));
             double invoicestotalnum = Convert.ToDouble(_dentnedModel.Invoices.List(r => r.patients_id == patients_id).Sum(r => r.invoices_total));
             double invoiceslefttotalnum = Convert.ToDouble(_dentnedModel.Invoices.List(r => r.patients_id == patients_id && !r.invoices_ispaid).Sum(r => r.invoices_total));
-            label_tabInvoices_payedtotalnum.Text = String.Format("{0:0.00}", payedtotalnum);
+            label_tabInvoices_paidtotalnum.Text = String.Format("{0:0.00}", paidtotalnum);
             label_tabInvoices_invoicestotalnum.Text = String.Format("{0:0.00}", invoicestotalnum);
             label_tabInvoices_invoiceslefttotalnum.Text = String.Format("{0:0.00}", invoiceslefttotalnum);
 
@@ -4098,7 +4292,7 @@ namespace DG.DentneD.Forms
                 doctor = (r.doctors_id != null ? _dentnedModel.Doctors.Find(r.doctors_id).doctors_surname + " " + _dentnedModel.Doctors.Find(r.doctors_id).doctors_name : ""),
                 number = r.invoices_number,
                 total = (double)r.invoices_total,
-                ispayed = r.invoices_ispaid
+                ispaid = r.invoices_ispaid
             }).ToList();
 
             ret = DGDataTableUtils.ToDataTable<VPatientsInvoices>(vPatientsInvoices);

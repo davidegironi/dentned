@@ -6,7 +6,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using DG.Data.Model.Helpers;
@@ -14,7 +13,6 @@ using DG.UI.GHF;
 using DG.DentneD.Model;
 using DG.DentneD.Model.Entity;
 using DG.DentneD.Forms.Objects;
-using DentneD;
 using System.Data;
 using Zuby.ADGV;
 
@@ -37,6 +35,49 @@ namespace DG.DentneD.Forms
             Initialize(Program.uighfApplication);
 
             _dentnedModel = new DentneDModel();
+            _dentnedModel.LanguageHelper.LoadFromFile(Program.uighfApplication.LanguageFilename);
+        }
+
+        /// <summary>
+        /// Add components language
+        /// </summary>
+        public override void AddLanguageComponents()
+        {
+            //main
+            LanguageHelper.AddComponent(this);
+            LanguageHelper.AddComponent(treatmentsidDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(nameDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(codeDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(typeDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            //tabTreatments
+            LanguageHelper.AddComponent(tabPage_tabTreatments);
+            LanguageHelper.AddComponent(button_tabTreatments_new);
+            LanguageHelper.AddComponent(button_tabTreatments_edit);
+            LanguageHelper.AddComponent(button_tabTreatments_delete);
+            LanguageHelper.AddComponent(button_tabTreatments_save);
+            LanguageHelper.AddComponent(button_tabTreatments_cancel);
+            LanguageHelper.AddComponent(treatments_idLabel);
+            LanguageHelper.AddComponent(treatments_nameLabel);
+            LanguageHelper.AddComponent(treatments_codeLabel);
+            LanguageHelper.AddComponent(treatmentstypes_idLabel);
+            LanguageHelper.AddComponent(treatments_mexpirationLabel);
+            LanguageHelper.AddComponent(treatments_mexpirationinfoLabel);
+            LanguageHelper.AddComponent(treatments_priceLabel);
+            LanguageHelper.AddComponent(treatments_notesLabel);
+            //tabTreatmentsPrices
+            LanguageHelper.AddComponent(tabPage_tabTreatmentsPrices);
+            LanguageHelper.AddComponent(label_tabTreatmentsPrices_filterpriceslists);
+            LanguageHelper.AddComponent(treatmentspricesidDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(pricelistDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(priceDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(button_tabTreatmentsPrices_new);
+            LanguageHelper.AddComponent(button_tabTreatmentsPrices_edit);
+            LanguageHelper.AddComponent(button_tabTreatmentsPrices_delete);
+            LanguageHelper.AddComponent(button_tabTreatmentsPrices_save);
+            LanguageHelper.AddComponent(button_tabTreatmentsPrices_cancel);
+            LanguageHelper.AddComponent(treatmentsprices_idLabel);
+            LanguageHelper.AddComponent(treatmentspriceslists_idLabel);
+            LanguageHelper.AddComponent(treatmentsprices_priceLabel);
         }
 
         /// <summary>

@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.Label rooms_idLabel;
-            System.Windows.Forms.Label rooms_nameLabel;
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormRooms));
+            this.rooms_idLabel = new System.Windows.Forms.Label();
+            this.rooms_nameLabel = new System.Windows.Forms.Label();
             this.panel_filters = new System.Windows.Forms.Panel();
             this.advancedDataGridView_main = new Zuby.ADGV.AdvancedDataGridView();
             this.roomsidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -53,8 +53,6 @@
             this.button_tabRooms_edit = new System.Windows.Forms.Button();
             this.button_tabRooms_new = new System.Windows.Forms.Button();
             this.panel_data = new System.Windows.Forms.Panel();
-            rooms_idLabel = new System.Windows.Forms.Label();
-            rooms_nameLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_main)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.vRoomsBindingSource)).BeginInit();
             this.panel_list.SuspendLayout();
@@ -69,21 +67,21 @@
             // 
             // rooms_idLabel
             // 
-            rooms_idLabel.AutoSize = true;
-            rooms_idLabel.Location = new System.Drawing.Point(9, 9);
-            rooms_idLabel.Name = "rooms_idLabel";
-            rooms_idLabel.Size = new System.Drawing.Size(19, 13);
-            rooms_idLabel.TabIndex = 0;
-            rooms_idLabel.Text = "Id:";
+            this.rooms_idLabel.AutoSize = true;
+            this.rooms_idLabel.Location = new System.Drawing.Point(9, 9);
+            this.rooms_idLabel.Name = "rooms_idLabel";
+            this.rooms_idLabel.Size = new System.Drawing.Size(19, 13);
+            this.rooms_idLabel.TabIndex = 0;
+            this.rooms_idLabel.Text = "Id:";
             // 
             // rooms_nameLabel
             // 
-            rooms_nameLabel.AutoSize = true;
-            rooms_nameLabel.Location = new System.Drawing.Point(9, 48);
-            rooms_nameLabel.Name = "rooms_nameLabel";
-            rooms_nameLabel.Size = new System.Drawing.Size(38, 13);
-            rooms_nameLabel.TabIndex = 2;
-            rooms_nameLabel.Text = "Name:";
+            this.rooms_nameLabel.AutoSize = true;
+            this.rooms_nameLabel.Location = new System.Drawing.Point(9, 48);
+            this.rooms_nameLabel.Name = "rooms_nameLabel";
+            this.rooms_nameLabel.Size = new System.Drawing.Size(38, 13);
+            this.rooms_nameLabel.TabIndex = 2;
+            this.rooms_nameLabel.Text = "Name:";
             // 
             // panel_filters
             // 
@@ -177,9 +175,9 @@
             // 
             // panel_tabRooms_data
             // 
-            this.panel_tabRooms_data.Controls.Add(rooms_nameLabel);
+            this.panel_tabRooms_data.Controls.Add(this.rooms_nameLabel);
             this.panel_tabRooms_data.Controls.Add(this.rooms_nameTextBox);
-            this.panel_tabRooms_data.Controls.Add(rooms_idLabel);
+            this.panel_tabRooms_data.Controls.Add(this.rooms_idLabel);
             this.panel_tabRooms_data.Controls.Add(this.rooms_idTextBox);
             this.panel_tabRooms_data.Location = new System.Drawing.Point(6, 42);
             this.panel_tabRooms_data.Name = "panel_tabRooms_data";
@@ -330,5 +328,7 @@
         private System.Windows.Forms.BindingSource vRoomsBindingSource;
         private System.Windows.Forms.TextBox rooms_nameTextBox;
         private System.Windows.Forms.TextBox rooms_idTextBox;
+        private System.Windows.Forms.Label rooms_idLabel;
+        private System.Windows.Forms.Label rooms_nameLabel;
     }
 }

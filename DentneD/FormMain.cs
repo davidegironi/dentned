@@ -8,10 +8,9 @@ using DG.DentneD.Forms;
 using DG.DentneD.Model;
 using DG.UI.GHF;
 using System;
-using System.IO;
 using System.Windows.Forms;
 
-namespace DentneD
+namespace DG.DentneD
 {
     public partial class FormMain : DGUIGHFFormMain
     {
@@ -24,7 +23,7 @@ namespace DentneD
 
             Initialize(Program.uighfApplication);
         }
-
+        
         /// <summary>
         /// Load handler
         /// </summary>
@@ -45,6 +44,55 @@ namespace DentneD
             }
         }
 
+        /// <summary>
+        /// Add components language
+        /// </summary>
+        public override void AddLanguageComponents()
+        {
+            //main ToolStripMenuItem
+            LanguageHelper.AddComponent(patientsToolStripMenuItem);
+            LanguageHelper.AddComponent(appointmentsToolStripMenuItem);
+            LanguageHelper.AddComponent(documentsToolStripMenuItem);
+            LanguageHelper.AddComponent(reportsToolStripMenuItem);
+            LanguageHelper.AddComponent(tablesToolStripMenuItem);
+            LanguageHelper.AddComponent(toolsToolStripMenuItem);
+            LanguageHelper.AddComponent(windowsToolStripMenuItem);
+            LanguageHelper.AddComponent(exitToolStripMenuItem);
+            LanguageHelper.AddComponent(aboutToolStripMenuItem);
+            //sub ToolStripMenuItem
+            LanguageHelper.AddComponent(estimatesToolStripMenuItem);
+            LanguageHelper.AddComponent(invoicesToolStripMenuItem);
+            LanguageHelper.AddComponent(runReportsToolStripMenuItem);
+            LanguageHelper.AddComponent(setReportsToolStripMenuItem);
+            LanguageHelper.AddComponent(addressesTypesToolStripMenuItem);
+            LanguageHelper.AddComponent(contactTypesToolStripMenuItem);
+            LanguageHelper.AddComponent(doctorsToolStripMenuItem);
+            LanguageHelper.AddComponent(estimatesFootersToolStripMenuItem);
+            LanguageHelper.AddComponent(medicalRecordTypesToolStripMenuItem);
+            LanguageHelper.AddComponent(invoicesFootersToolStripMenuItem);
+            LanguageHelper.AddComponent(patientAttachmentsTypesToolStripMenuItem);
+            LanguageHelper.AddComponent(paymentTypesToolStripMenuItem);
+            LanguageHelper.AddComponent(roomsToolStripMenuItem);
+            LanguageHelper.AddComponent(taxesToolStripMenuItem);
+            LanguageHelper.AddComponent(taxesDeductionsToolStripMenuItem);
+            LanguageHelper.AddComponent(treatmentsToolStripMenuItem);
+            LanguageHelper.AddComponent(treatments1ToolStripMenuItem);
+            LanguageHelper.AddComponent(treatmentsTypesToolStripMenuItem);
+            LanguageHelper.AddComponent(treatmentsPricesListToolStripMenuItem);
+            LanguageHelper.AddComponent(backupToolStripMenuItem);
+            LanguageHelper.AddComponent(minimizeAllToolStripMenuItem);
+            LanguageHelper.AddComponent(closeAllToolStripMenuItem);
+        }
+
+        /// <summary>
+        /// Add additional language
+        /// </summary>
+        public override void SetAdditionalLanguage()
+        {
+            DentneDModel dentnedModel = new DentneDModel();
+            dentnedModel.LanguageHelper.LoadFromFile(Program.uighfApplication.LanguageFilename);
+            LanguageHelper.AddAdditionalLanguage(dentnedModel.LanguageHelper.Get());
+        }
         /// <summary>
         /// Minimize All click
         /// </summary>
@@ -160,7 +208,7 @@ namespace DentneD
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void treamentsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void treatments1ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowForm(this, typeof(FormTreatments));
         }
@@ -264,6 +312,27 @@ namespace DentneD
         {
             ShowForm(this, typeof(FormEstimates));
         }
+
+        /// <summary>
+        /// Reportsrun form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void runReportsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowForm(this, typeof(FormReportsrun));
+        }
+
+        /// <summary>
+        /// Reports form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void setReportsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowForm(this, typeof(FormReports));
+        }
+        
                 
     }
 }

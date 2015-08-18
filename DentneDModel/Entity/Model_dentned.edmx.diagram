@@ -61,6 +61,7 @@
         <AssociationConnector Association="dentnedModel.FK_treatments_treatmentstypes" />
         <AssociationConnector Association="dentnedModel.FK_treatmentsprices_treatments" />
         <AssociationConnector Association="dentnedModel.FK_treatmentsprices_treatmentspriceslists" />
+        <EntityTypeShape EntityType="dentnedModel.reports" Width="1.5" PointX="0.75" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

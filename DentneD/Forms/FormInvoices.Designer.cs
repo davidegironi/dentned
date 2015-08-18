@@ -29,28 +29,28 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.Label invoices_idLabel;
-            System.Windows.Forms.Label invoices_numberLabel;
-            System.Windows.Forms.Label invoices_doctorLabel;
-            System.Windows.Forms.Label invoices_patientLabel;
-            System.Windows.Forms.Label invoices_dateLabel;
-            System.Windows.Forms.Label invoices_paymentLabel;
-            System.Windows.Forms.Label invoices_footerLabel;
-            System.Windows.Forms.Label invoices_deductiontaxrateLabel;
-            System.Windows.Forms.Label invoiceslines_idLabel;
-            System.Windows.Forms.Label invoiceslines_codeLabel;
-            System.Windows.Forms.Label invoiceslines_descriptionLabel;
-            System.Windows.Forms.Label invoiceslines_quantityLabel;
-            System.Windows.Forms.Label invoiceslines_taxrateLabel;
-            System.Windows.Forms.Label invoiceslines_unitpriceLabel;
-            System.Windows.Forms.Label treatments_idLabel;
-            System.Windows.Forms.Label patientstreatments_idLabel;
-            System.Windows.Forms.Label invoices_totalLabel;
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormInvoices));
+            this.invoices_idLabel = new System.Windows.Forms.Label();
+            this.invoices_numberLabel = new System.Windows.Forms.Label();
+            this.invoices_doctorLabel = new System.Windows.Forms.Label();
+            this.invoices_patientLabel = new System.Windows.Forms.Label();
+            this.invoices_dateLabel = new System.Windows.Forms.Label();
+            this.invoices_paymentLabel = new System.Windows.Forms.Label();
+            this.invoices_footerLabel = new System.Windows.Forms.Label();
+            this.invoices_deductiontaxrateLabel = new System.Windows.Forms.Label();
+            this.invoiceslines_idLabel = new System.Windows.Forms.Label();
+            this.invoiceslines_codeLabel = new System.Windows.Forms.Label();
+            this.invoiceslines_descriptionLabel = new System.Windows.Forms.Label();
+            this.invoiceslines_quantityLabel = new System.Windows.Forms.Label();
+            this.invoiceslines_taxrateLabel = new System.Windows.Forms.Label();
+            this.invoiceslines_unitpriceLabel = new System.Windows.Forms.Label();
+            this.treatments_idLabel = new System.Windows.Forms.Label();
+            this.patientstreatments_idLabel = new System.Windows.Forms.Label();
+            this.invoices_totalLabel = new System.Windows.Forms.Label();
             this.panel_data = new System.Windows.Forms.Panel();
             this.tabControl_main = new System.Windows.Forms.TabControl();
             this.tabPage_tabInvoices = new System.Windows.Forms.TabPage();
@@ -76,7 +76,7 @@
             this.button_tabInvoices_save = new System.Windows.Forms.Button();
             this.panel_tabInvoices_actions = new System.Windows.Forms.Panel();
             this.button_tabInvoices_print = new System.Windows.Forms.Button();
-            this.button_tabInvoices_setpayed = new System.Windows.Forms.Button();
+            this.button_tabInvoices_setpaid = new System.Windows.Forms.Button();
             this.button_tabInvoices_delete = new System.Windows.Forms.Button();
             this.button_tabInvoices_edit = new System.Windows.Forms.Button();
             this.button_tabInvoices_new = new System.Windows.Forms.Button();
@@ -102,22 +102,8 @@
             this.button_tabInvoicesLines_new = new System.Windows.Forms.Button();
             this.panel_tabInvoicesLines_list = new System.Windows.Forms.Panel();
             this.advancedDataGridView_tabInvoicesLines_list = new Zuby.ADGV.AdvancedDataGridView();
-            this.invoiceslinesidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.codeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.quantityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unitpriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.taxrateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totalpriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vInvoicesLinesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel_list = new System.Windows.Forms.Panel();
             this.advancedDataGridView_main = new Zuby.ADGV.AdvancedDataGridView();
-            this.invoicesidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.numberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.patientDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ispayedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.vInvoicesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel_listtotal = new System.Windows.Forms.Panel();
             this.totalpaiedTextBox = new System.Windows.Forms.TextBox();
             this.totalpaiedLabel = new System.Windows.Forms.Label();
@@ -127,24 +113,21 @@
             this.label_filterYears = new System.Windows.Forms.Label();
             this.comboBox_filterYears = new System.Windows.Forms.ComboBox();
             this.comboBox_filterDoctors = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            invoices_idLabel = new System.Windows.Forms.Label();
-            invoices_numberLabel = new System.Windows.Forms.Label();
-            invoices_doctorLabel = new System.Windows.Forms.Label();
-            invoices_patientLabel = new System.Windows.Forms.Label();
-            invoices_dateLabel = new System.Windows.Forms.Label();
-            invoices_paymentLabel = new System.Windows.Forms.Label();
-            invoices_footerLabel = new System.Windows.Forms.Label();
-            invoices_deductiontaxrateLabel = new System.Windows.Forms.Label();
-            invoiceslines_idLabel = new System.Windows.Forms.Label();
-            invoiceslines_codeLabel = new System.Windows.Forms.Label();
-            invoiceslines_descriptionLabel = new System.Windows.Forms.Label();
-            invoiceslines_quantityLabel = new System.Windows.Forms.Label();
-            invoiceslines_taxrateLabel = new System.Windows.Forms.Label();
-            invoiceslines_unitpriceLabel = new System.Windows.Forms.Label();
-            treatments_idLabel = new System.Windows.Forms.Label();
-            patientstreatments_idLabel = new System.Windows.Forms.Label();
-            invoices_totalLabel = new System.Windows.Forms.Label();
+            this.label_filterDoctors = new System.Windows.Forms.Label();
+            this.invoiceslinesidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.codeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.quantityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unitpriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.taxrateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totalpriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vInvoicesLinesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.vInvoicesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.invoicesidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.numberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.patientDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ispaidDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.panel_data.SuspendLayout();
             this.tabControl_main.SuspendLayout();
             this.tabPage_tabInvoices.SuspendLayout();
@@ -160,166 +143,166 @@
             this.panel_tabInvoicesLines_actions.SuspendLayout();
             this.panel_tabInvoicesLines_list.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabInvoicesLines_list)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vInvoicesLinesBindingSource)).BeginInit();
             this.panel_list.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_main)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vInvoicesBindingSource)).BeginInit();
             this.panel_listtotal.SuspendLayout();
             this.panel_filters.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.vInvoicesLinesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vInvoicesBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // invoices_idLabel
             // 
-            invoices_idLabel.AutoSize = true;
-            invoices_idLabel.Location = new System.Drawing.Point(9, 9);
-            invoices_idLabel.Name = "invoices_idLabel";
-            invoices_idLabel.Size = new System.Drawing.Size(19, 13);
-            invoices_idLabel.TabIndex = 0;
-            invoices_idLabel.Text = "Id:";
+            this.invoices_idLabel.AutoSize = true;
+            this.invoices_idLabel.Location = new System.Drawing.Point(9, 9);
+            this.invoices_idLabel.Name = "invoices_idLabel";
+            this.invoices_idLabel.Size = new System.Drawing.Size(19, 13);
+            this.invoices_idLabel.TabIndex = 0;
+            this.invoices_idLabel.Text = "Id:";
             // 
             // invoices_numberLabel
             // 
-            invoices_numberLabel.AutoSize = true;
-            invoices_numberLabel.Location = new System.Drawing.Point(9, 48);
-            invoices_numberLabel.Name = "invoices_numberLabel";
-            invoices_numberLabel.Size = new System.Drawing.Size(47, 13);
-            invoices_numberLabel.TabIndex = 2;
-            invoices_numberLabel.Text = "Number:";
+            this.invoices_numberLabel.AutoSize = true;
+            this.invoices_numberLabel.Location = new System.Drawing.Point(9, 48);
+            this.invoices_numberLabel.Name = "invoices_numberLabel";
+            this.invoices_numberLabel.Size = new System.Drawing.Size(47, 13);
+            this.invoices_numberLabel.TabIndex = 2;
+            this.invoices_numberLabel.Text = "Number:";
             // 
             // invoices_doctorLabel
             // 
-            invoices_doctorLabel.AutoSize = true;
-            invoices_doctorLabel.Location = new System.Drawing.Point(11, 98);
-            invoices_doctorLabel.Name = "invoices_doctorLabel";
-            invoices_doctorLabel.Size = new System.Drawing.Size(42, 13);
-            invoices_doctorLabel.TabIndex = 4;
-            invoices_doctorLabel.Text = "Doctor:";
+            this.invoices_doctorLabel.AutoSize = true;
+            this.invoices_doctorLabel.Location = new System.Drawing.Point(11, 98);
+            this.invoices_doctorLabel.Name = "invoices_doctorLabel";
+            this.invoices_doctorLabel.Size = new System.Drawing.Size(42, 13);
+            this.invoices_doctorLabel.TabIndex = 4;
+            this.invoices_doctorLabel.Text = "Doctor:";
             // 
             // invoices_patientLabel
             // 
-            invoices_patientLabel.AutoSize = true;
-            invoices_patientLabel.Location = new System.Drawing.Point(11, 201);
-            invoices_patientLabel.Name = "invoices_patientLabel";
-            invoices_patientLabel.Size = new System.Drawing.Size(43, 13);
-            invoices_patientLabel.TabIndex = 6;
-            invoices_patientLabel.Text = "Patient:";
+            this.invoices_patientLabel.AutoSize = true;
+            this.invoices_patientLabel.Location = new System.Drawing.Point(11, 201);
+            this.invoices_patientLabel.Name = "invoices_patientLabel";
+            this.invoices_patientLabel.Size = new System.Drawing.Size(43, 13);
+            this.invoices_patientLabel.TabIndex = 6;
+            this.invoices_patientLabel.Text = "Patient:";
             // 
             // invoices_dateLabel
             // 
-            invoices_dateLabel.AutoSize = true;
-            invoices_dateLabel.Location = new System.Drawing.Point(125, 48);
-            invoices_dateLabel.Name = "invoices_dateLabel";
-            invoices_dateLabel.Size = new System.Drawing.Size(33, 13);
-            invoices_dateLabel.TabIndex = 8;
-            invoices_dateLabel.Text = "Date:";
+            this.invoices_dateLabel.AutoSize = true;
+            this.invoices_dateLabel.Location = new System.Drawing.Point(125, 48);
+            this.invoices_dateLabel.Name = "invoices_dateLabel";
+            this.invoices_dateLabel.Size = new System.Drawing.Size(33, 13);
+            this.invoices_dateLabel.TabIndex = 8;
+            this.invoices_dateLabel.Text = "Date:";
             // 
             // invoices_paymentLabel
             // 
-            invoices_paymentLabel.AutoSize = true;
-            invoices_paymentLabel.Location = new System.Drawing.Point(11, 304);
-            invoices_paymentLabel.Name = "invoices_paymentLabel";
-            invoices_paymentLabel.Size = new System.Drawing.Size(51, 13);
-            invoices_paymentLabel.TabIndex = 12;
-            invoices_paymentLabel.Text = "Payment:";
+            this.invoices_paymentLabel.AutoSize = true;
+            this.invoices_paymentLabel.Location = new System.Drawing.Point(11, 304);
+            this.invoices_paymentLabel.Name = "invoices_paymentLabel";
+            this.invoices_paymentLabel.Size = new System.Drawing.Size(51, 13);
+            this.invoices_paymentLabel.TabIndex = 12;
+            this.invoices_paymentLabel.Text = "Payment:";
             // 
             // invoices_footerLabel
             // 
-            invoices_footerLabel.AutoSize = true;
-            invoices_footerLabel.Location = new System.Drawing.Point(229, 304);
-            invoices_footerLabel.Name = "invoices_footerLabel";
-            invoices_footerLabel.Size = new System.Drawing.Size(40, 13);
-            invoices_footerLabel.TabIndex = 15;
-            invoices_footerLabel.Text = "Footer:";
+            this.invoices_footerLabel.AutoSize = true;
+            this.invoices_footerLabel.Location = new System.Drawing.Point(229, 304);
+            this.invoices_footerLabel.Name = "invoices_footerLabel";
+            this.invoices_footerLabel.Size = new System.Drawing.Size(40, 13);
+            this.invoices_footerLabel.TabIndex = 15;
+            this.invoices_footerLabel.Text = "Footer:";
             // 
             // invoices_deductiontaxrateLabel
             // 
-            invoices_deductiontaxrateLabel.AutoSize = true;
-            invoices_deductiontaxrateLabel.Location = new System.Drawing.Point(11, 399);
-            invoices_deductiontaxrateLabel.Name = "invoices_deductiontaxrateLabel";
-            invoices_deductiontaxrateLabel.Size = new System.Drawing.Size(106, 13);
-            invoices_deductiontaxrateLabel.TabIndex = 18;
-            invoices_deductiontaxrateLabel.Text = "Deduction Tax Rate:";
+            this.invoices_deductiontaxrateLabel.AutoSize = true;
+            this.invoices_deductiontaxrateLabel.Location = new System.Drawing.Point(11, 399);
+            this.invoices_deductiontaxrateLabel.Name = "invoices_deductiontaxrateLabel";
+            this.invoices_deductiontaxrateLabel.Size = new System.Drawing.Size(106, 13);
+            this.invoices_deductiontaxrateLabel.TabIndex = 18;
+            this.invoices_deductiontaxrateLabel.Text = "Deduction Tax Rate:";
             // 
             // invoiceslines_idLabel
             // 
-            invoiceslines_idLabel.AutoSize = true;
-            invoiceslines_idLabel.Location = new System.Drawing.Point(9, 9);
-            invoiceslines_idLabel.Name = "invoiceslines_idLabel";
-            invoiceslines_idLabel.Size = new System.Drawing.Size(19, 13);
-            invoiceslines_idLabel.TabIndex = 0;
-            invoiceslines_idLabel.Text = "Id:";
+            this.invoiceslines_idLabel.AutoSize = true;
+            this.invoiceslines_idLabel.Location = new System.Drawing.Point(9, 9);
+            this.invoiceslines_idLabel.Name = "invoiceslines_idLabel";
+            this.invoiceslines_idLabel.Size = new System.Drawing.Size(19, 13);
+            this.invoiceslines_idLabel.TabIndex = 0;
+            this.invoiceslines_idLabel.Text = "Id:";
             // 
             // invoiceslines_codeLabel
             // 
-            invoiceslines_codeLabel.AutoSize = true;
-            invoiceslines_codeLabel.Location = new System.Drawing.Point(9, 89);
-            invoiceslines_codeLabel.Name = "invoiceslines_codeLabel";
-            invoiceslines_codeLabel.Size = new System.Drawing.Size(35, 13);
-            invoiceslines_codeLabel.TabIndex = 2;
-            invoiceslines_codeLabel.Text = "Code:";
+            this.invoiceslines_codeLabel.AutoSize = true;
+            this.invoiceslines_codeLabel.Location = new System.Drawing.Point(9, 89);
+            this.invoiceslines_codeLabel.Name = "invoiceslines_codeLabel";
+            this.invoiceslines_codeLabel.Size = new System.Drawing.Size(35, 13);
+            this.invoiceslines_codeLabel.TabIndex = 2;
+            this.invoiceslines_codeLabel.Text = "Code:";
             // 
             // invoiceslines_descriptionLabel
             // 
-            invoiceslines_descriptionLabel.AutoSize = true;
-            invoiceslines_descriptionLabel.Location = new System.Drawing.Point(9, 128);
-            invoiceslines_descriptionLabel.Name = "invoiceslines_descriptionLabel";
-            invoiceslines_descriptionLabel.Size = new System.Drawing.Size(63, 13);
-            invoiceslines_descriptionLabel.TabIndex = 4;
-            invoiceslines_descriptionLabel.Text = "Description:";
+            this.invoiceslines_descriptionLabel.AutoSize = true;
+            this.invoiceslines_descriptionLabel.Location = new System.Drawing.Point(9, 128);
+            this.invoiceslines_descriptionLabel.Name = "invoiceslines_descriptionLabel";
+            this.invoiceslines_descriptionLabel.Size = new System.Drawing.Size(63, 13);
+            this.invoiceslines_descriptionLabel.TabIndex = 4;
+            this.invoiceslines_descriptionLabel.Text = "Description:";
             // 
             // invoiceslines_quantityLabel
             // 
-            invoiceslines_quantityLabel.AutoSize = true;
-            invoiceslines_quantityLabel.Location = new System.Drawing.Point(100, 89);
-            invoiceslines_quantityLabel.Name = "invoiceslines_quantityLabel";
-            invoiceslines_quantityLabel.Size = new System.Drawing.Size(49, 13);
-            invoiceslines_quantityLabel.TabIndex = 6;
-            invoiceslines_quantityLabel.Text = "Quantity:";
+            this.invoiceslines_quantityLabel.AutoSize = true;
+            this.invoiceslines_quantityLabel.Location = new System.Drawing.Point(100, 89);
+            this.invoiceslines_quantityLabel.Name = "invoiceslines_quantityLabel";
+            this.invoiceslines_quantityLabel.Size = new System.Drawing.Size(49, 13);
+            this.invoiceslines_quantityLabel.TabIndex = 6;
+            this.invoiceslines_quantityLabel.Text = "Quantity:";
             // 
             // invoiceslines_taxrateLabel
             // 
-            invoiceslines_taxrateLabel.AutoSize = true;
-            invoiceslines_taxrateLabel.Location = new System.Drawing.Point(282, 89);
-            invoiceslines_taxrateLabel.Name = "invoiceslines_taxrateLabel";
-            invoiceslines_taxrateLabel.Size = new System.Drawing.Size(54, 13);
-            invoiceslines_taxrateLabel.TabIndex = 8;
-            invoiceslines_taxrateLabel.Text = "Tax Rate:";
+            this.invoiceslines_taxrateLabel.AutoSize = true;
+            this.invoiceslines_taxrateLabel.Location = new System.Drawing.Point(282, 89);
+            this.invoiceslines_taxrateLabel.Name = "invoiceslines_taxrateLabel";
+            this.invoiceslines_taxrateLabel.Size = new System.Drawing.Size(54, 13);
+            this.invoiceslines_taxrateLabel.TabIndex = 8;
+            this.invoiceslines_taxrateLabel.Text = "Tax Rate:";
             // 
             // invoiceslines_unitpriceLabel
             // 
-            invoiceslines_unitpriceLabel.AutoSize = true;
-            invoiceslines_unitpriceLabel.Location = new System.Drawing.Point(180, 89);
-            invoiceslines_unitpriceLabel.Name = "invoiceslines_unitpriceLabel";
-            invoiceslines_unitpriceLabel.Size = new System.Drawing.Size(34, 13);
-            invoiceslines_unitpriceLabel.TabIndex = 10;
-            invoiceslines_unitpriceLabel.Text = "Price:";
+            this.invoiceslines_unitpriceLabel.AutoSize = true;
+            this.invoiceslines_unitpriceLabel.Location = new System.Drawing.Point(180, 89);
+            this.invoiceslines_unitpriceLabel.Name = "invoiceslines_unitpriceLabel";
+            this.invoiceslines_unitpriceLabel.Size = new System.Drawing.Size(34, 13);
+            this.invoiceslines_unitpriceLabel.TabIndex = 10;
+            this.invoiceslines_unitpriceLabel.Text = "Price:";
             // 
             // treatments_idLabel
             // 
-            treatments_idLabel.AutoSize = true;
-            treatments_idLabel.Location = new System.Drawing.Point(6, 16);
-            treatments_idLabel.Name = "treatments_idLabel";
-            treatments_idLabel.Size = new System.Drawing.Size(58, 13);
-            treatments_idLabel.TabIndex = 13;
-            treatments_idLabel.Text = "Treatment:";
+            this.treatments_idLabel.AutoSize = true;
+            this.treatments_idLabel.Location = new System.Drawing.Point(6, 16);
+            this.treatments_idLabel.Name = "treatments_idLabel";
+            this.treatments_idLabel.Size = new System.Drawing.Size(58, 13);
+            this.treatments_idLabel.TabIndex = 13;
+            this.treatments_idLabel.Text = "Treatment:";
             // 
             // patientstreatments_idLabel
             // 
-            patientstreatments_idLabel.AutoSize = true;
-            patientstreatments_idLabel.Location = new System.Drawing.Point(9, 49);
-            patientstreatments_idLabel.Name = "patientstreatments_idLabel";
-            patientstreatments_idLabel.Size = new System.Drawing.Size(94, 13);
-            patientstreatments_idLabel.TabIndex = 15;
-            patientstreatments_idLabel.Text = "Patient Treatment:";
+            this.patientstreatments_idLabel.AutoSize = true;
+            this.patientstreatments_idLabel.Location = new System.Drawing.Point(9, 49);
+            this.patientstreatments_idLabel.Name = "patientstreatments_idLabel";
+            this.patientstreatments_idLabel.Size = new System.Drawing.Size(94, 13);
+            this.patientstreatments_idLabel.TabIndex = 15;
+            this.patientstreatments_idLabel.Text = "Patient Treatment:";
             // 
             // invoices_totalLabel
             // 
-            invoices_totalLabel.AutoSize = true;
-            invoices_totalLabel.Location = new System.Drawing.Point(296, 48);
-            invoices_totalLabel.Name = "invoices_totalLabel";
-            invoices_totalLabel.Size = new System.Drawing.Size(34, 13);
-            invoices_totalLabel.TabIndex = 24;
-            invoices_totalLabel.Text = "Total:";
+            this.invoices_totalLabel.AutoSize = true;
+            this.invoices_totalLabel.Location = new System.Drawing.Point(296, 48);
+            this.invoices_totalLabel.Name = "invoices_totalLabel";
+            this.invoices_totalLabel.Size = new System.Drawing.Size(34, 13);
+            this.invoices_totalLabel.TabIndex = 24;
+            this.invoices_totalLabel.Text = "Total:";
             // 
             // panel_data
             // 
@@ -357,29 +340,29 @@
             // 
             // panel_tabInvoices_data
             // 
-            this.panel_tabInvoices_data.Controls.Add(invoices_totalLabel);
+            this.panel_tabInvoices_data.Controls.Add(this.invoices_totalLabel);
             this.panel_tabInvoices_data.Controls.Add(this.invoices_totalTextBox);
             this.panel_tabInvoices_data.Controls.Add(this.patients_idComboBox);
             this.panel_tabInvoices_data.Controls.Add(this.doctors_idComboBox);
             this.panel_tabInvoices_data.Controls.Add(this.invoices_deductiontaxrateComboBox);
             this.panel_tabInvoices_data.Controls.Add(this.invoices_ispaidCheckBox);
-            this.panel_tabInvoices_data.Controls.Add(invoices_deductiontaxrateLabel);
+            this.panel_tabInvoices_data.Controls.Add(this.invoices_deductiontaxrateLabel);
             this.panel_tabInvoices_data.Controls.Add(this.invoices_deductiontaxrateTextBox);
             this.panel_tabInvoices_data.Controls.Add(this.invoices_footerComboBox);
-            this.panel_tabInvoices_data.Controls.Add(invoices_footerLabel);
+            this.panel_tabInvoices_data.Controls.Add(this.invoices_footerLabel);
             this.panel_tabInvoices_data.Controls.Add(this.invoices_footerTextBox);
             this.panel_tabInvoices_data.Controls.Add(this.invoices_paymentComboBox);
-            this.panel_tabInvoices_data.Controls.Add(invoices_paymentLabel);
+            this.panel_tabInvoices_data.Controls.Add(this.invoices_paymentLabel);
             this.panel_tabInvoices_data.Controls.Add(this.invoices_paymentTextBox);
             this.panel_tabInvoices_data.Controls.Add(this.invoices_patientTextBox);
             this.panel_tabInvoices_data.Controls.Add(this.invoices_doctorTextBox);
-            this.panel_tabInvoices_data.Controls.Add(invoices_dateLabel);
+            this.panel_tabInvoices_data.Controls.Add(this.invoices_dateLabel);
             this.panel_tabInvoices_data.Controls.Add(this.invoices_dateDateTimePicker);
-            this.panel_tabInvoices_data.Controls.Add(invoices_patientLabel);
-            this.panel_tabInvoices_data.Controls.Add(invoices_doctorLabel);
-            this.panel_tabInvoices_data.Controls.Add(invoices_numberLabel);
+            this.panel_tabInvoices_data.Controls.Add(this.invoices_patientLabel);
+            this.panel_tabInvoices_data.Controls.Add(this.invoices_doctorLabel);
+            this.panel_tabInvoices_data.Controls.Add(this.invoices_numberLabel);
             this.panel_tabInvoices_data.Controls.Add(this.invoices_numberTextBox);
-            this.panel_tabInvoices_data.Controls.Add(invoices_idLabel);
+            this.panel_tabInvoices_data.Controls.Add(this.invoices_idLabel);
             this.panel_tabInvoices_data.Controls.Add(this.invoices_idTextBox);
             this.panel_tabInvoices_data.Location = new System.Drawing.Point(6, 42);
             this.panel_tabInvoices_data.Name = "panel_tabInvoices_data";
@@ -443,9 +426,9 @@
             this.invoices_ispaidCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.invoicesBindingSource, "invoices_ispaid", true));
             this.invoices_ispaidCheckBox.Location = new System.Drawing.Point(375, 66);
             this.invoices_ispaidCheckBox.Name = "invoices_ispaidCheckBox";
-            this.invoices_ispaidCheckBox.Size = new System.Drawing.Size(67, 17);
+            this.invoices_ispaidCheckBox.Size = new System.Drawing.Size(58, 17);
             this.invoices_ispaidCheckBox.TabIndex = 21;
-            this.invoices_ispaidCheckBox.Text = "Is Payed";
+            this.invoices_ispaidCheckBox.Text = "Is Paid";
             this.invoices_ispaidCheckBox.UseVisualStyleBackColor = true;
             // 
             // invoices_deductiontaxrateTextBox
@@ -580,7 +563,7 @@
             // panel_tabInvoices_actions
             // 
             this.panel_tabInvoices_actions.Controls.Add(this.button_tabInvoices_print);
-            this.panel_tabInvoices_actions.Controls.Add(this.button_tabInvoices_setpayed);
+            this.panel_tabInvoices_actions.Controls.Add(this.button_tabInvoices_setpaid);
             this.panel_tabInvoices_actions.Controls.Add(this.button_tabInvoices_delete);
             this.panel_tabInvoices_actions.Controls.Add(this.button_tabInvoices_edit);
             this.panel_tabInvoices_actions.Controls.Add(this.button_tabInvoices_new);
@@ -598,15 +581,15 @@
             this.button_tabInvoices_print.Text = "Print";
             this.button_tabInvoices_print.UseVisualStyleBackColor = true;
             // 
-            // button_tabInvoices_setpayed
+            // button_tabInvoices_setpaid
             // 
-            this.button_tabInvoices_setpayed.Location = new System.Drawing.Point(402, 3);
-            this.button_tabInvoices_setpayed.Name = "button_tabInvoices_setpayed";
-            this.button_tabInvoices_setpayed.Size = new System.Drawing.Size(75, 23);
-            this.button_tabInvoices_setpayed.TabIndex = 3;
-            this.button_tabInvoices_setpayed.Text = "Payed";
-            this.button_tabInvoices_setpayed.UseVisualStyleBackColor = true;
-            this.button_tabInvoices_setpayed.Click += new System.EventHandler(this.button_tabInvoices_setpayed_Click);
+            this.button_tabInvoices_setpaid.Location = new System.Drawing.Point(402, 3);
+            this.button_tabInvoices_setpaid.Name = "button_tabInvoices_setpaid";
+            this.button_tabInvoices_setpaid.Size = new System.Drawing.Size(75, 23);
+            this.button_tabInvoices_setpaid.TabIndex = 3;
+            this.button_tabInvoices_setpaid.Text = "Paid";
+            this.button_tabInvoices_setpaid.UseVisualStyleBackColor = true;
+            this.button_tabInvoices_setpaid.Click += new System.EventHandler(this.button_tabInvoices_setpaid_Click);
             // 
             // button_tabInvoices_delete
             // 
@@ -655,19 +638,19 @@
             // 
             this.panel_tabInvoicesLines_data.Controls.Add(this.groupBox_tabInvoicesLines_filler);
             this.panel_tabInvoicesLines_data.Controls.Add(this.invoiceslines_taxrateComboBox);
-            this.panel_tabInvoicesLines_data.Controls.Add(patientstreatments_idLabel);
+            this.panel_tabInvoicesLines_data.Controls.Add(this.patientstreatments_idLabel);
             this.panel_tabInvoicesLines_data.Controls.Add(this.patientstreatments_idComboBox);
-            this.panel_tabInvoicesLines_data.Controls.Add(invoiceslines_unitpriceLabel);
+            this.panel_tabInvoicesLines_data.Controls.Add(this.invoiceslines_unitpriceLabel);
             this.panel_tabInvoicesLines_data.Controls.Add(this.invoiceslines_unitpriceTextBox);
-            this.panel_tabInvoicesLines_data.Controls.Add(invoiceslines_taxrateLabel);
+            this.panel_tabInvoicesLines_data.Controls.Add(this.invoiceslines_taxrateLabel);
             this.panel_tabInvoicesLines_data.Controls.Add(this.invoiceslines_taxrateTextBox);
-            this.panel_tabInvoicesLines_data.Controls.Add(invoiceslines_quantityLabel);
+            this.panel_tabInvoicesLines_data.Controls.Add(this.invoiceslines_quantityLabel);
             this.panel_tabInvoicesLines_data.Controls.Add(this.invoiceslines_quantityTextBox);
-            this.panel_tabInvoicesLines_data.Controls.Add(invoiceslines_descriptionLabel);
+            this.panel_tabInvoicesLines_data.Controls.Add(this.invoiceslines_descriptionLabel);
             this.panel_tabInvoicesLines_data.Controls.Add(this.invoiceslines_descriptionTextBox);
-            this.panel_tabInvoicesLines_data.Controls.Add(invoiceslines_codeLabel);
+            this.panel_tabInvoicesLines_data.Controls.Add(this.invoiceslines_codeLabel);
             this.panel_tabInvoicesLines_data.Controls.Add(this.invoiceslines_codeTextBox);
-            this.panel_tabInvoicesLines_data.Controls.Add(invoiceslines_idLabel);
+            this.panel_tabInvoicesLines_data.Controls.Add(this.invoiceslines_idLabel);
             this.panel_tabInvoicesLines_data.Controls.Add(this.invoiceslines_idTextBox);
             this.panel_tabInvoicesLines_data.Location = new System.Drawing.Point(6, 249);
             this.panel_tabInvoicesLines_data.Name = "panel_tabInvoicesLines_data";
@@ -676,7 +659,7 @@
             // 
             // groupBox_tabInvoicesLines_filler
             // 
-            this.groupBox_tabInvoicesLines_filler.Controls.Add(treatments_idLabel);
+            this.groupBox_tabInvoicesLines_filler.Controls.Add(this.treatments_idLabel);
             this.groupBox_tabInvoicesLines_filler.Controls.Add(this.treatments_idComboBox);
             this.groupBox_tabInvoicesLines_filler.Location = new System.Drawing.Point(270, 23);
             this.groupBox_tabInvoicesLines_filler.Name = "groupBox_tabInvoicesLines_filler";
@@ -881,6 +864,143 @@
             this.advancedDataGridView_tabInvoicesLines_list.SortStringChanged += new System.EventHandler(this.advancedDataGridView_tabInvoicesLines_list_SortStringChanged);
             this.advancedDataGridView_tabInvoicesLines_list.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_tabInvoicesLines_list_FilterStringChanged);
             // 
+            // panel_list
+            // 
+            this.panel_list.Controls.Add(this.advancedDataGridView_main);
+            this.panel_list.Controls.Add(this.panel_listtotal);
+            this.panel_list.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel_list.Location = new System.Drawing.Point(0, 60);
+            this.panel_list.Name = "panel_list";
+            this.panel_list.Size = new System.Drawing.Size(284, 502);
+            this.panel_list.TabIndex = 11;
+            // 
+            // advancedDataGridView_main
+            // 
+            this.advancedDataGridView_main.AllowUserToAddRows = false;
+            this.advancedDataGridView_main.AllowUserToDeleteRows = false;
+            this.advancedDataGridView_main.AllowUserToResizeRows = false;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.advancedDataGridView_main.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            this.advancedDataGridView_main.AutoGenerateColumns = false;
+            this.advancedDataGridView_main.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.advancedDataGridView_main.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.invoicesidDataGridViewTextBoxColumn,
+            this.numberDataGridViewTextBoxColumn,
+            this.dateDataGridViewTextBoxColumn,
+            this.patientDataGridViewTextBoxColumn,
+            this.ispaidDataGridViewCheckBoxColumn});
+            this.advancedDataGridView_main.DataSource = this.vInvoicesBindingSource;
+            this.advancedDataGridView_main.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.advancedDataGridView_main.FilterAndSortEnabled = true;
+            this.advancedDataGridView_main.Location = new System.Drawing.Point(0, 0);
+            this.advancedDataGridView_main.MultiSelect = false;
+            this.advancedDataGridView_main.Name = "advancedDataGridView_main";
+            this.advancedDataGridView_main.ReadOnly = true;
+            this.advancedDataGridView_main.RowHeadersVisible = false;
+            this.advancedDataGridView_main.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.advancedDataGridView_main.Size = new System.Drawing.Size(284, 446);
+            this.advancedDataGridView_main.TabIndex = 0;
+            // 
+            // panel_listtotal
+            // 
+            this.panel_listtotal.Controls.Add(this.totalpaiedTextBox);
+            this.panel_listtotal.Controls.Add(this.totalpaiedLabel);
+            this.panel_listtotal.Controls.Add(this.totalTextBox);
+            this.panel_listtotal.Controls.Add(this.totalLabel);
+            this.panel_listtotal.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel_listtotal.Location = new System.Drawing.Point(0, 446);
+            this.panel_listtotal.Name = "panel_listtotal";
+            this.panel_listtotal.Size = new System.Drawing.Size(284, 56);
+            this.panel_listtotal.TabIndex = 2;
+            // 
+            // totalpaiedTextBox
+            // 
+            this.totalpaiedTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.totalpaiedTextBox.Location = new System.Drawing.Point(208, 32);
+            this.totalpaiedTextBox.Name = "totalpaiedTextBox";
+            this.totalpaiedTextBox.ReadOnly = true;
+            this.totalpaiedTextBox.Size = new System.Drawing.Size(70, 20);
+            this.totalpaiedTextBox.TabIndex = 3;
+            // 
+            // totalpaiedLabel
+            // 
+            this.totalpaiedLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.totalpaiedLabel.Location = new System.Drawing.Point(52, 35);
+            this.totalpaiedLabel.Name = "totalpaiedLabel";
+            this.totalpaiedLabel.Size = new System.Drawing.Size(150, 13);
+            this.totalpaiedLabel.TabIndex = 2;
+            this.totalpaiedLabel.Text = "Total Payed:";
+            this.totalpaiedLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // totalTextBox
+            // 
+            this.totalTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.totalTextBox.Location = new System.Drawing.Point(208, 6);
+            this.totalTextBox.Name = "totalTextBox";
+            this.totalTextBox.ReadOnly = true;
+            this.totalTextBox.Size = new System.Drawing.Size(70, 20);
+            this.totalTextBox.TabIndex = 1;
+            // 
+            // totalLabel
+            // 
+            this.totalLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.totalLabel.Location = new System.Drawing.Point(52, 9);
+            this.totalLabel.Name = "totalLabel";
+            this.totalLabel.Size = new System.Drawing.Size(150, 13);
+            this.totalLabel.TabIndex = 0;
+            this.totalLabel.Text = "Total:";
+            this.totalLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // panel_filters
+            // 
+            this.panel_filters.Controls.Add(this.label_filterYears);
+            this.panel_filters.Controls.Add(this.comboBox_filterYears);
+            this.panel_filters.Controls.Add(this.comboBox_filterDoctors);
+            this.panel_filters.Controls.Add(this.label_filterDoctors);
+            this.panel_filters.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel_filters.Location = new System.Drawing.Point(0, 0);
+            this.panel_filters.Name = "panel_filters";
+            this.panel_filters.Size = new System.Drawing.Size(284, 60);
+            this.panel_filters.TabIndex = 10;
+            // 
+            // label_filterYears
+            // 
+            this.label_filterYears.AutoSize = true;
+            this.label_filterYears.Location = new System.Drawing.Point(170, 9);
+            this.label_filterYears.Name = "label_filterYears";
+            this.label_filterYears.Size = new System.Drawing.Size(32, 13);
+            this.label_filterYears.TabIndex = 7;
+            this.label_filterYears.Text = "Year:";
+            // 
+            // comboBox_filterYears
+            // 
+            this.comboBox_filterYears.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_filterYears.FormattingEnabled = true;
+            this.comboBox_filterYears.Location = new System.Drawing.Point(173, 25);
+            this.comboBox_filterYears.Name = "comboBox_filterYears";
+            this.comboBox_filterYears.Size = new System.Drawing.Size(70, 21);
+            this.comboBox_filterYears.TabIndex = 6;
+            this.comboBox_filterYears.SelectedIndexChanged += new System.EventHandler(this.comboBox_filterYear_SelectedIndexChanged);
+            // 
+            // comboBox_filterDoctors
+            // 
+            this.comboBox_filterDoctors.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_filterDoctors.FormattingEnabled = true;
+            this.comboBox_filterDoctors.Location = new System.Drawing.Point(6, 25);
+            this.comboBox_filterDoctors.Name = "comboBox_filterDoctors";
+            this.comboBox_filterDoctors.Size = new System.Drawing.Size(150, 21);
+            this.comboBox_filterDoctors.TabIndex = 5;
+            this.comboBox_filterDoctors.SelectedIndexChanged += new System.EventHandler(this.comboBox_filterDoctors_SelectedIndexChanged);
+            // 
+            // label_filterDoctors
+            // 
+            this.label_filterDoctors.AutoSize = true;
+            this.label_filterDoctors.Location = new System.Drawing.Point(3, 9);
+            this.label_filterDoctors.Name = "label_filterDoctors";
+            this.label_filterDoctors.Size = new System.Drawing.Size(42, 13);
+            this.label_filterDoctors.TabIndex = 4;
+            this.label_filterDoctors.Text = "Doctor:";
+            // 
             // invoiceslinesidDataGridViewTextBoxColumn
             // 
             this.invoiceslinesidDataGridViewTextBoxColumn.DataPropertyName = "invoiceslines_id";
@@ -957,42 +1077,9 @@
             // 
             this.vInvoicesLinesBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VInvoicesLines);
             // 
-            // panel_list
+            // vInvoicesBindingSource
             // 
-            this.panel_list.Controls.Add(this.advancedDataGridView_main);
-            this.panel_list.Controls.Add(this.panel_listtotal);
-            this.panel_list.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel_list.Location = new System.Drawing.Point(0, 60);
-            this.panel_list.Name = "panel_list";
-            this.panel_list.Size = new System.Drawing.Size(284, 502);
-            this.panel_list.TabIndex = 11;
-            // 
-            // advancedDataGridView_main
-            // 
-            this.advancedDataGridView_main.AllowUserToAddRows = false;
-            this.advancedDataGridView_main.AllowUserToDeleteRows = false;
-            this.advancedDataGridView_main.AllowUserToResizeRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.advancedDataGridView_main.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
-            this.advancedDataGridView_main.AutoGenerateColumns = false;
-            this.advancedDataGridView_main.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.advancedDataGridView_main.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.invoicesidDataGridViewTextBoxColumn,
-            this.numberDataGridViewTextBoxColumn,
-            this.dateDataGridViewTextBoxColumn,
-            this.patientDataGridViewTextBoxColumn,
-            this.ispayedDataGridViewCheckBoxColumn});
-            this.advancedDataGridView_main.DataSource = this.vInvoicesBindingSource;
-            this.advancedDataGridView_main.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.advancedDataGridView_main.FilterAndSortEnabled = true;
-            this.advancedDataGridView_main.Location = new System.Drawing.Point(0, 0);
-            this.advancedDataGridView_main.MultiSelect = false;
-            this.advancedDataGridView_main.Name = "advancedDataGridView_main";
-            this.advancedDataGridView_main.ReadOnly = true;
-            this.advancedDataGridView_main.RowHeadersVisible = false;
-            this.advancedDataGridView_main.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.advancedDataGridView_main.Size = new System.Drawing.Size(284, 446);
-            this.advancedDataGridView_main.TabIndex = 0;
+            this.vInvoicesBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VInvoices);
             // 
             // invoicesidDataGridViewTextBoxColumn
             // 
@@ -1037,119 +1124,15 @@
             this.patientDataGridViewTextBoxColumn.ReadOnly = true;
             this.patientDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
-            // ispayedDataGridViewCheckBoxColumn
+            // ispaidDataGridViewCheckBoxColumn
             // 
-            this.ispayedDataGridViewCheckBoxColumn.DataPropertyName = "ispayed";
-            this.ispayedDataGridViewCheckBoxColumn.HeaderText = "P";
-            this.ispayedDataGridViewCheckBoxColumn.MinimumWidth = 22;
-            this.ispayedDataGridViewCheckBoxColumn.Name = "ispayedDataGridViewCheckBoxColumn";
-            this.ispayedDataGridViewCheckBoxColumn.ReadOnly = true;
-            this.ispayedDataGridViewCheckBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.ispayedDataGridViewCheckBoxColumn.Width = 40;
-            // 
-            // vInvoicesBindingSource
-            // 
-            this.vInvoicesBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VInvoices);
-            // 
-            // panel_listtotal
-            // 
-            this.panel_listtotal.Controls.Add(this.totalpaiedTextBox);
-            this.panel_listtotal.Controls.Add(this.totalpaiedLabel);
-            this.panel_listtotal.Controls.Add(this.totalTextBox);
-            this.panel_listtotal.Controls.Add(this.totalLabel);
-            this.panel_listtotal.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_listtotal.Location = new System.Drawing.Point(0, 446);
-            this.panel_listtotal.Name = "panel_listtotal";
-            this.panel_listtotal.Size = new System.Drawing.Size(284, 56);
-            this.panel_listtotal.TabIndex = 2;
-            // 
-            // totalpaiedTextBox
-            // 
-            this.totalpaiedTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.totalpaiedTextBox.Location = new System.Drawing.Point(208, 32);
-            this.totalpaiedTextBox.Name = "totalpaiedTextBox";
-            this.totalpaiedTextBox.ReadOnly = true;
-            this.totalpaiedTextBox.Size = new System.Drawing.Size(70, 20);
-            this.totalpaiedTextBox.TabIndex = 3;
-            // 
-            // totalpaiedLabel
-            // 
-            this.totalpaiedLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.totalpaiedLabel.Location = new System.Drawing.Point(52, 35);
-            this.totalpaiedLabel.Name = "totalpaiedLabel";
-            this.totalpaiedLabel.Size = new System.Drawing.Size(150, 13);
-            this.totalpaiedLabel.TabIndex = 2;
-            this.totalpaiedLabel.Text = "Total Payed:";
-            this.totalpaiedLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // totalTextBox
-            // 
-            this.totalTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.totalTextBox.Location = new System.Drawing.Point(208, 6);
-            this.totalTextBox.Name = "totalTextBox";
-            this.totalTextBox.ReadOnly = true;
-            this.totalTextBox.Size = new System.Drawing.Size(70, 20);
-            this.totalTextBox.TabIndex = 1;
-            // 
-            // totalLabel
-            // 
-            this.totalLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.totalLabel.Location = new System.Drawing.Point(52, 9);
-            this.totalLabel.Name = "totalLabel";
-            this.totalLabel.Size = new System.Drawing.Size(150, 13);
-            this.totalLabel.TabIndex = 0;
-            this.totalLabel.Text = "Total:";
-            this.totalLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // panel_filters
-            // 
-            this.panel_filters.Controls.Add(this.label_filterYears);
-            this.panel_filters.Controls.Add(this.comboBox_filterYears);
-            this.panel_filters.Controls.Add(this.comboBox_filterDoctors);
-            this.panel_filters.Controls.Add(this.label1);
-            this.panel_filters.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel_filters.Location = new System.Drawing.Point(0, 0);
-            this.panel_filters.Name = "panel_filters";
-            this.panel_filters.Size = new System.Drawing.Size(284, 60);
-            this.panel_filters.TabIndex = 10;
-            // 
-            // label_filterYears
-            // 
-            this.label_filterYears.AutoSize = true;
-            this.label_filterYears.Location = new System.Drawing.Point(170, 9);
-            this.label_filterYears.Name = "label_filterYears";
-            this.label_filterYears.Size = new System.Drawing.Size(32, 13);
-            this.label_filterYears.TabIndex = 7;
-            this.label_filterYears.Text = "Year:";
-            // 
-            // comboBox_filterYears
-            // 
-            this.comboBox_filterYears.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_filterYears.FormattingEnabled = true;
-            this.comboBox_filterYears.Location = new System.Drawing.Point(173, 25);
-            this.comboBox_filterYears.Name = "comboBox_filterYears";
-            this.comboBox_filterYears.Size = new System.Drawing.Size(70, 21);
-            this.comboBox_filterYears.TabIndex = 6;
-            this.comboBox_filterYears.SelectedIndexChanged += new System.EventHandler(this.comboBox_filterYear_SelectedIndexChanged);
-            // 
-            // comboBox_filterDoctors
-            // 
-            this.comboBox_filterDoctors.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_filterDoctors.FormattingEnabled = true;
-            this.comboBox_filterDoctors.Location = new System.Drawing.Point(6, 25);
-            this.comboBox_filterDoctors.Name = "comboBox_filterDoctors";
-            this.comboBox_filterDoctors.Size = new System.Drawing.Size(150, 21);
-            this.comboBox_filterDoctors.TabIndex = 5;
-            this.comboBox_filterDoctors.SelectedIndexChanged += new System.EventHandler(this.comboBox_filterDoctors_SelectedIndexChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(42, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Doctor:";
+            this.ispaidDataGridViewCheckBoxColumn.DataPropertyName = "ispaid";
+            this.ispaidDataGridViewCheckBoxColumn.HeaderText = "P";
+            this.ispaidDataGridViewCheckBoxColumn.MinimumWidth = 22;
+            this.ispaidDataGridViewCheckBoxColumn.Name = "ispaidDataGridViewCheckBoxColumn";
+            this.ispaidDataGridViewCheckBoxColumn.ReadOnly = true;
+            this.ispaidDataGridViewCheckBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.ispaidDataGridViewCheckBoxColumn.Width = 50;
             // 
             // FormInvoices
             // 
@@ -1183,14 +1166,14 @@
             this.panel_tabInvoicesLines_actions.ResumeLayout(false);
             this.panel_tabInvoicesLines_list.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabInvoicesLines_list)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vInvoicesLinesBindingSource)).EndInit();
             this.panel_list.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_main)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vInvoicesBindingSource)).EndInit();
             this.panel_listtotal.ResumeLayout(false);
             this.panel_listtotal.PerformLayout();
             this.panel_filters.ResumeLayout(false);
             this.panel_filters.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.vInvoicesLinesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vInvoicesBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1224,17 +1207,12 @@
         private System.Windows.Forms.ComboBox invoices_deductiontaxrateComboBox;
         private System.Windows.Forms.CheckBox invoices_ispaidCheckBox;
         private System.Windows.Forms.TextBox invoices_deductiontaxrateTextBox;
-        private System.Windows.Forms.Button button_tabInvoices_setpayed;
+        private System.Windows.Forms.Button button_tabInvoices_setpaid;
         private System.Windows.Forms.Button button_tabInvoices_print;
         private System.Windows.Forms.TabPage tabPage_tabInvoicesLines;
-        private System.Windows.Forms.DataGridViewTextBoxColumn invoicesidDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn numberDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn patientDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn ispayedDataGridViewCheckBoxColumn;
         private System.Windows.Forms.BindingSource vInvoicesBindingSource;
         private System.Windows.Forms.ComboBox comboBox_filterDoctors;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label_filterDoctors;
         private System.Windows.Forms.Panel panel_tabInvoicesLines_data;
         private System.Windows.Forms.Panel panel_tabInvoicesLines_updates;
         private System.Windows.Forms.Button button_tabInvoicesLines_cancel;
@@ -1274,5 +1252,27 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn totalpriceDataGridViewTextBoxColumn;
         private System.Windows.Forms.ComboBox comboBox_filterYears;
         private System.Windows.Forms.Label label_filterYears;
+        private System.Windows.Forms.Label invoices_idLabel;
+        private System.Windows.Forms.Label invoices_numberLabel;
+        private System.Windows.Forms.Label invoices_doctorLabel;
+        private System.Windows.Forms.Label invoices_patientLabel;
+        private System.Windows.Forms.Label invoices_dateLabel;
+        private System.Windows.Forms.Label invoices_paymentLabel;
+        private System.Windows.Forms.Label invoices_footerLabel;
+        private System.Windows.Forms.Label invoices_deductiontaxrateLabel;
+        private System.Windows.Forms.Label invoiceslines_idLabel;
+        private System.Windows.Forms.Label invoiceslines_codeLabel;
+        private System.Windows.Forms.Label invoiceslines_descriptionLabel;
+        private System.Windows.Forms.Label invoiceslines_quantityLabel;
+        private System.Windows.Forms.Label invoiceslines_taxrateLabel;
+        private System.Windows.Forms.Label invoiceslines_unitpriceLabel;
+        private System.Windows.Forms.Label treatments_idLabel;
+        private System.Windows.Forms.Label patientstreatments_idLabel;
+        private System.Windows.Forms.Label invoices_totalLabel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn invoicesidDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn numberDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn patientDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn ispaidDataGridViewCheckBoxColumn;
     }
 }

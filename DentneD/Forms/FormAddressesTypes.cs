@@ -6,7 +6,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using DG.Data.Model.Helpers;
@@ -14,7 +13,6 @@ using DG.UI.GHF;
 using DG.DentneD.Model;
 using DG.DentneD.Model.Entity;
 using DG.DentneD.Forms.Objects;
-using DentneD;
 using Zuby.ADGV;
 
 namespace DG.DentneD.Forms
@@ -31,10 +29,31 @@ namespace DG.DentneD.Forms
         public FormAddressesTypes()
         {
             InitializeComponent();
-
+            
             Initialize(Program.uighfApplication);
 
             _dentnedModel = new DentneDModel();
+            _dentnedModel.LanguageHelper.LoadFromFile(Program.uighfApplication.LanguageFilename);
+        }
+
+        /// <summary>
+        /// Add components language
+        /// </summary>
+        public override void AddLanguageComponents()
+        {
+            //main
+            LanguageHelper.AddComponent(this);
+            LanguageHelper.AddComponent(addressestypesidDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(nameDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            //tabAddressesTypes
+            LanguageHelper.AddComponent(tabPage_tabAddressesTypes);
+            LanguageHelper.AddComponent(button_tabAddressesTypes_new);
+            LanguageHelper.AddComponent(button_tabAddressesTypes_edit);
+            LanguageHelper.AddComponent(button_tabAddressesTypes_delete);
+            LanguageHelper.AddComponent(button_tabAddressesTypes_save);
+            LanguageHelper.AddComponent(button_tabAddressesTypes_cancel);
+            LanguageHelper.AddComponent(addressestypes_idLabel);
+            LanguageHelper.AddComponent(addressestypes_nameLabel);
         }
 
         /// <summary>
@@ -191,7 +210,6 @@ namespace DG.DentneD.Forms
         }
 
         #endregion
-
 
     }
 }

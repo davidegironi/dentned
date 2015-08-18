@@ -15,6 +15,6 @@ namespace DG.DentneD.Forms.Objects
         public DateTime date { get; set; }
         public string doctor { get; set; }
         public double total { get; set; }
-        public bool ispayed { get; set; }
+        public bool ispaid { get; set; }
     }
 }

@@ -17,6 +17,24 @@ namespace DG.DentneD.Model.Repositories
         public EstimatesLinesRepository() : base() { }
 
         /// <summary>
+        /// Repository language dictionary
+        /// </summary>
+        public class RepositoryLanguage : IGenericDataRepositoryLanguage
+        {
+            public string text001 = "Code can not be empty.";
+            public string text002 = "Description can not be empty.";
+            public string text003 = "Invalid quantity. Can not be less than zero.";
+            public string text004 = "Invoice is mandatory.";
+            public string text005 = "Invalid code format. 3 character, uppercase letters [A-Z] or numbers [0-9], or minus '-'.";
+            public string text006 = "Invalid price. Invoice total can not be less than zero.";
+        }
+
+        /// <summary>
+        /// Repository language
+        /// </summary>
+        public RepositoryLanguage language = new RepositoryLanguage();
+
+        /// <summary>
         /// Check if an item can be added
         /// </summary>
         /// <param name="errors"></param>
@@ -70,12 +88,12 @@ namespace DG.DentneD.Model.Repositories
                 if (String.IsNullOrEmpty(item.estimateslines_code))
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Code can not be empty." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text001 }).ToArray();
                 }
                 if (String.IsNullOrEmpty(item.estimateslines_description))
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Description can not be empty." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text002 }).ToArray();
                 }
 
                 if (!ret)
@@ -84,7 +102,7 @@ namespace DG.DentneD.Model.Repositories
                 if (item.estimateslines_quantity < 0)
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Invalid quantity. Can not be less than zero." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text003 }).ToArray();
                 }
 
                 if (!ret)
@@ -93,7 +111,7 @@ namespace DG.DentneD.Model.Repositories
                 if (BaseModel.Estimates.Find(item.estimates_id) == null)
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Invoice is mandatory." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text004 }).ToArray();
                 }
 
                 if (!ret)
@@ -102,7 +120,7 @@ namespace DG.DentneD.Model.Repositories
                 if (item.estimateslines_code != null && !Regex.Match(item.estimateslines_code, @"^[A-Z0-9\-]{3}$").Success)
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Invalid code format. 3 character, uppercase letters [A-Z] or numbers [0-9], or minus '-'." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text005 }).ToArray();
                 }
 
                 if (!ret)
@@ -112,7 +130,7 @@ namespace DG.DentneD.Model.Repositories
                     (Math.Round((item.estimateslines_quantity * item.estimateslines_unitprice)*item.estimateslines_taxrate / 100, 2) + Math.Round(item.estimateslines_quantity * item.estimateslines_unitprice, 2)) < 0)
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Invalid price. Invoice total can not be less than zero." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text006 }).ToArray();
                 }
             }
 

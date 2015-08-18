@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.Label estimatesfooters_idLabel;
-            System.Windows.Forms.Label estimatesfooters_nameLabel;
-            System.Windows.Forms.Label estimatesfooters_doctextLabel;
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormEstimatesFooters));
+            this.estimatesfooters_idLabel = new System.Windows.Forms.Label();
+            this.estimatesfooters_nameLabel = new System.Windows.Forms.Label();
+            this.estimatesfooters_doctextLabel = new System.Windows.Forms.Label();
             this.panel_data = new System.Windows.Forms.Panel();
             this.tabControl_main = new System.Windows.Forms.TabControl();
             this.tabPage_tabEstimatesFooters = new System.Windows.Forms.TabPage();
@@ -51,15 +51,12 @@
             this.button_tabEstimatesFooters_edit = new System.Windows.Forms.Button();
             this.button_tabEstimatesFooters_new = new System.Windows.Forms.Button();
             this.advancedDataGridView_main = new Zuby.ADGV.AdvancedDataGridView();
-            this.vEstimatesFootersBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.panel_list = new System.Windows.Forms.Panel();
-            this.panel_filters = new System.Windows.Forms.Panel();
             this.estimatesfootersidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.isdefaultDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            estimatesfooters_idLabel = new System.Windows.Forms.Label();
-            estimatesfooters_nameLabel = new System.Windows.Forms.Label();
-            estimatesfooters_doctextLabel = new System.Windows.Forms.Label();
+            this.vEstimatesFootersBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.panel_list = new System.Windows.Forms.Panel();
+            this.panel_filters = new System.Windows.Forms.Panel();
             this.panel_data.SuspendLayout();
             this.tabControl_main.SuspendLayout();
             this.tabPage_tabEstimatesFooters.SuspendLayout();
@@ -74,30 +71,30 @@
             // 
             // estimatesfooters_idLabel
             // 
-            estimatesfooters_idLabel.AutoSize = true;
-            estimatesfooters_idLabel.Location = new System.Drawing.Point(9, 9);
-            estimatesfooters_idLabel.Name = "estimatesfooters_idLabel";
-            estimatesfooters_idLabel.Size = new System.Drawing.Size(19, 13);
-            estimatesfooters_idLabel.TabIndex = 0;
-            estimatesfooters_idLabel.Text = "Id:";
+            this.estimatesfooters_idLabel.AutoSize = true;
+            this.estimatesfooters_idLabel.Location = new System.Drawing.Point(9, 9);
+            this.estimatesfooters_idLabel.Name = "estimatesfooters_idLabel";
+            this.estimatesfooters_idLabel.Size = new System.Drawing.Size(19, 13);
+            this.estimatesfooters_idLabel.TabIndex = 0;
+            this.estimatesfooters_idLabel.Text = "Id:";
             // 
             // estimatesfooters_nameLabel
             // 
-            estimatesfooters_nameLabel.AutoSize = true;
-            estimatesfooters_nameLabel.Location = new System.Drawing.Point(9, 48);
-            estimatesfooters_nameLabel.Name = "estimatesfooters_nameLabel";
-            estimatesfooters_nameLabel.Size = new System.Drawing.Size(38, 13);
-            estimatesfooters_nameLabel.TabIndex = 2;
-            estimatesfooters_nameLabel.Text = "Name:";
+            this.estimatesfooters_nameLabel.AutoSize = true;
+            this.estimatesfooters_nameLabel.Location = new System.Drawing.Point(9, 48);
+            this.estimatesfooters_nameLabel.Name = "estimatesfooters_nameLabel";
+            this.estimatesfooters_nameLabel.Size = new System.Drawing.Size(38, 13);
+            this.estimatesfooters_nameLabel.TabIndex = 2;
+            this.estimatesfooters_nameLabel.Text = "Name:";
             // 
             // estimatesfooters_doctextLabel
             // 
-            estimatesfooters_doctextLabel.AutoSize = true;
-            estimatesfooters_doctextLabel.Location = new System.Drawing.Point(9, 87);
-            estimatesfooters_doctextLabel.Name = "estimatesfooters_doctextLabel";
-            estimatesfooters_doctextLabel.Size = new System.Drawing.Size(54, 13);
-            estimatesfooters_doctextLabel.TabIndex = 4;
-            estimatesfooters_doctextLabel.Text = "Doc Text:";
+            this.estimatesfooters_doctextLabel.AutoSize = true;
+            this.estimatesfooters_doctextLabel.Location = new System.Drawing.Point(9, 87);
+            this.estimatesfooters_doctextLabel.Name = "estimatesfooters_doctextLabel";
+            this.estimatesfooters_doctextLabel.Size = new System.Drawing.Size(54, 13);
+            this.estimatesfooters_doctextLabel.TabIndex = 4;
+            this.estimatesfooters_doctextLabel.Text = "Doc Text:";
             // 
             // panel_data
             // 
@@ -135,11 +132,11 @@
             // panel_tabEstimatesFooters_data
             // 
             this.panel_tabEstimatesFooters_data.Controls.Add(this.estimatesfooters_isdefaultCheckBox);
-            this.panel_tabEstimatesFooters_data.Controls.Add(estimatesfooters_doctextLabel);
+            this.panel_tabEstimatesFooters_data.Controls.Add(this.estimatesfooters_doctextLabel);
             this.panel_tabEstimatesFooters_data.Controls.Add(this.estimatesfooters_doctextTextBox);
-            this.panel_tabEstimatesFooters_data.Controls.Add(estimatesfooters_nameLabel);
+            this.panel_tabEstimatesFooters_data.Controls.Add(this.estimatesfooters_nameLabel);
             this.panel_tabEstimatesFooters_data.Controls.Add(this.estimatesfooters_nameTextBox);
-            this.panel_tabEstimatesFooters_data.Controls.Add(estimatesfooters_idLabel);
+            this.panel_tabEstimatesFooters_data.Controls.Add(this.estimatesfooters_idLabel);
             this.panel_tabEstimatesFooters_data.Controls.Add(this.estimatesfooters_idTextBox);
             this.panel_tabEstimatesFooters_data.Location = new System.Drawing.Point(6, 42);
             this.panel_tabEstimatesFooters_data.Name = "panel_tabEstimatesFooters_data";
@@ -280,27 +277,6 @@
             this.advancedDataGridView_main.SortStringChanged += new System.EventHandler(this.advancedDataGridView_main_SortStringChanged);
             this.advancedDataGridView_main.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_main_FilterStringChanged);
             // 
-            // vEstimatesFootersBindingSource
-            // 
-            this.vEstimatesFootersBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VEstimatesFooters);
-            // 
-            // panel_list
-            // 
-            this.panel_list.Controls.Add(this.advancedDataGridView_main);
-            this.panel_list.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel_list.Location = new System.Drawing.Point(0, 60);
-            this.panel_list.Name = "panel_list";
-            this.panel_list.Size = new System.Drawing.Size(284, 502);
-            this.panel_list.TabIndex = 14;
-            // 
-            // panel_filters
-            // 
-            this.panel_filters.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel_filters.Location = new System.Drawing.Point(0, 0);
-            this.panel_filters.Name = "panel_filters";
-            this.panel_filters.Size = new System.Drawing.Size(284, 60);
-            this.panel_filters.TabIndex = 13;
-            // 
             // estimatesfootersidDataGridViewTextBoxColumn
             // 
             this.estimatesfootersidDataGridViewTextBoxColumn.DataPropertyName = "estimatesfooters_id";
@@ -330,6 +306,27 @@
             this.isdefaultDataGridViewCheckBoxColumn.ReadOnly = true;
             this.isdefaultDataGridViewCheckBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             this.isdefaultDataGridViewCheckBoxColumn.Width = 50;
+            // 
+            // vEstimatesFootersBindingSource
+            // 
+            this.vEstimatesFootersBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VEstimatesFooters);
+            // 
+            // panel_list
+            // 
+            this.panel_list.Controls.Add(this.advancedDataGridView_main);
+            this.panel_list.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel_list.Location = new System.Drawing.Point(0, 60);
+            this.panel_list.Name = "panel_list";
+            this.panel_list.Size = new System.Drawing.Size(284, 502);
+            this.panel_list.TabIndex = 14;
+            // 
+            // panel_filters
+            // 
+            this.panel_filters.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel_filters.Location = new System.Drawing.Point(0, 0);
+            this.panel_filters.Name = "panel_filters";
+            this.panel_filters.Size = new System.Drawing.Size(284, 60);
+            this.panel_filters.TabIndex = 13;
             // 
             // FormEstimatesFooters
             // 
@@ -384,5 +381,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn estimatesfootersidDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn isdefaultDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.Label estimatesfooters_idLabel;
+        private System.Windows.Forms.Label estimatesfooters_nameLabel;
+        private System.Windows.Forms.Label estimatesfooters_doctextLabel;
     }
 }

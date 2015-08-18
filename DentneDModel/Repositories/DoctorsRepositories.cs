@@ -16,6 +16,23 @@ namespace DG.DentneD.Model.Repositories
         public DoctorsRepository() : base() { }
 
         /// <summary>
+        /// Repository language dictionary
+        /// </summary>
+        public class RepositoryLanguage : IGenericDataRepositoryLanguage
+        {
+            public string text001 = "Invoice text can not be empty.";
+            public string text002 = "Remove doctor's appointments before deleting this item.";
+            public string text003 = "Name can not be empty.";
+            public string text004 = "Surnname can not be empty.";
+            public string text005 = "Doctor already inserted.";
+        }
+
+        /// <summary>
+        /// Repository language
+        /// </summary>
+        public RepositoryLanguage language = new RepositoryLanguage();
+
+        /// <summary>
         /// Check if an item can be added
         /// </summary>
         /// <param name="errors"></param>
@@ -70,7 +87,7 @@ namespace DG.DentneD.Model.Repositories
                 if (String.IsNullOrEmpty(item.doctors_doctext))
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Invoice text can not be empty." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text001 }).ToArray();
                 }
 
                 if (!ret)
@@ -79,7 +96,7 @@ namespace DG.DentneD.Model.Repositories
                 if (BaseModel.Appointments.List(r => r.doctors_id == item.doctors_id).Count() > 0)
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Remove appointments before deleting this item." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text002 }).ToArray();
                 }
 
                 if (!ret)
@@ -105,17 +122,17 @@ namespace DG.DentneD.Model.Repositories
                 if (String.IsNullOrEmpty(item.doctors_name))
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Name can not be empty." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text003 }).ToArray();
                 }
                 if (String.IsNullOrEmpty(item.doctors_surname))
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Surnname can not be empty." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text004 }).ToArray();
                 }
                 if (String.IsNullOrEmpty(item.doctors_doctext))
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Invoice text can not be empty." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text001 }).ToArray();
                 }
 
                 if (!ret)
@@ -126,7 +143,7 @@ namespace DG.DentneD.Model.Repositories
                     if (List(r => r.doctors_name == item.doctors_name && r.doctors_surname == item.doctors_surname).Count() > 0)
                     {
                         ret = false;
-                        errors = errors.Concat(new string[] { "Doctor already inserted." }).ToArray();
+                        errors = errors.Concat(new string[] { language.text005 }).ToArray();
                     }
                 }
                 else
@@ -134,7 +151,7 @@ namespace DG.DentneD.Model.Repositories
                     if (List(r => r.doctors_id != item.doctors_id && r.doctors_name == item.doctors_name && r.doctors_surname == item.doctors_surname).Count() > 0)
                     {
                         ret = false;
-                        errors = errors.Concat(new string[] { "Doctor already inserted." }).ToArray();
+                        errors = errors.Concat(new string[] { language.text005 }).ToArray();
                     }
                 }
 

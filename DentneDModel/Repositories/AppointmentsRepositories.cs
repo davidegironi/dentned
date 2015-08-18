@@ -21,6 +21,24 @@ namespace DG.DentneD.Model.Repositories
         private bool _checkAppointmentsTimeOverride = false;
 
         /// <summary>
+        /// Repository language dictionary
+        /// </summary>
+        public class RepositoryLanguage : IGenericDataRepositoryLanguage
+        {
+            public string text001 = "Title can not be empty.";
+            public string text002 = "End date can not be greater than start date.";
+            public string text003 = "Patient is mandatory.";
+            public string text004 = "Doctors is mandatory.";
+            public string text005 = "Room is mandatory.";
+            public string text006 = "Appointment already inserted.";
+        }
+
+        /// <summary>
+        /// Repository language
+        /// </summary>
+        public RepositoryLanguage language = new RepositoryLanguage();
+
+        /// <summary>
         /// Check if an item can be added
         /// </summary>
         /// <param name="errors"></param>
@@ -74,7 +92,7 @@ namespace DG.DentneD.Model.Repositories
                 if (String.IsNullOrEmpty(item.appointments_title))
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Title can not be empty." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text001 }).ToArray();
                 }
 
                 if (!ret)
@@ -83,7 +101,7 @@ namespace DG.DentneD.Model.Repositories
                 if (item.appointments_from >= item.appointments_to)
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "End date can not be greater than start date." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text002 }).ToArray();
                 }
 
                 if (!ret)
@@ -92,17 +110,17 @@ namespace DG.DentneD.Model.Repositories
                 if (BaseModel.Patients.Find(item.patients_id) == null)
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Patient is mandatory." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text003 }).ToArray();
                 }
                 if (BaseModel.Doctors.Find(item.doctors_id) == null)
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Doctors is mandatory." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text004 }).ToArray();
                 }
                 if (BaseModel.Rooms.Find(item.rooms_id) == null)
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Room is mandatory." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text005 }).ToArray();
                 }
                 if (!ret)
                     break;
@@ -128,7 +146,7 @@ namespace DG.DentneD.Model.Repositories
                                 (r.appointments_from >= item.appointments_from && r.appointments_to <= item.appointments_to))).Count() > 0)
                         {
                             ret = false;
-                            errors = errors.Concat(new string[] { "Appointment already inserted." }).ToArray();
+                            errors = errors.Concat(new string[] { language.text006 }).ToArray();
                         }
                     }
                     else
@@ -150,7 +168,7 @@ namespace DG.DentneD.Model.Repositories
                                 (r.appointments_from >= item.appointments_from && r.appointments_to <= item.appointments_to))).Count() > 0)
                         {
                             ret = false;
-                            errors = errors.Concat(new string[] { "Appointment already inserted." }).ToArray();
+                            errors = errors.Concat(new string[] { language.text006 }).ToArray();
                         }
                     }
 

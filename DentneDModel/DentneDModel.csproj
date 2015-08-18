@@ -131,6 +131,9 @@
     <Compile Include="Entity\paymentstypes.cs">
       <DependentUpon>Model_dentned.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\reports.cs">
+      <DependentUpon>Model_dentned.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\rooms.cs">
       <DependentUpon>Model_dentned.tt</DependentUpon>
     </Compile>
@@ -153,7 +156,8 @@
       <DependentUpon>Model_dentned.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\EstimatesFototersRepositories.cs" />
+    <Compile Include="Repositories\ReportsRepositories.cs" />
+    <Compile Include="Repositories\EstimatesFootersRepositories.cs" />
     <Compile Include="Repositories\EstimatesRepositories.cs" />
     <Compile Include="Repositories\EstimatesLinesRepositories.cs" />
     <Compile Include="Repositories\InvoicesRepositories.cs" />
@@ -161,7 +165,7 @@
     <Compile Include="Repositories\PaymentsRepositories.cs" />
     <Compile Include="Repositories\PatientsTreatmentsRepositories.cs" />
     <Compile Include="Repositories\PatientsAttachementsTypesRepositories.cs" />
-    <Compile Include="Repositories\InvoicesFototersRepositories.cs" />
+    <Compile Include="Repositories\InvoicesFootersRepositories.cs" />
     <Compile Include="Repositories\PatientsAttachmentsRepositories.cs" />
     <Compile Include="Repositories\PatientsNotesRepositories.cs" />
     <Compile Include="Repositories\PatientsMedicalrecordsRepositories.cs" />

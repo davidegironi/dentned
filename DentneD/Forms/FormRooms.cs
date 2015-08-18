@@ -6,7 +6,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using DG.Data.Model.Helpers;
@@ -14,7 +13,6 @@ using DG.UI.GHF;
 using DG.DentneD.Model;
 using DG.DentneD.Model.Entity;
 using DG.DentneD.Forms.Objects;
-using DentneD;
 using Zuby.ADGV;
 
 namespace DG.DentneD.Forms
@@ -35,6 +33,27 @@ namespace DG.DentneD.Forms
             Initialize(Program.uighfApplication);
 
             _dentnedModel = new DentneDModel();
+            _dentnedModel.LanguageHelper.LoadFromFile(Program.uighfApplication.LanguageFilename);
+        }
+
+        /// <summary>
+        /// Add components language
+        /// </summary>
+        public override void AddLanguageComponents()
+        {
+            //main
+            LanguageHelper.AddComponent(this);
+            LanguageHelper.AddComponent(roomsidDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(nameDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            //tabRooms
+            LanguageHelper.AddComponent(tabPage_tabRooms);
+            LanguageHelper.AddComponent(button_tabRooms_new);
+            LanguageHelper.AddComponent(button_tabRooms_edit);
+            LanguageHelper.AddComponent(button_tabRooms_delete);
+            LanguageHelper.AddComponent(button_tabRooms_save);
+            LanguageHelper.AddComponent(button_tabRooms_cancel);
+            LanguageHelper.AddComponent(rooms_idLabel);
+            LanguageHelper.AddComponent(rooms_nameLabel);
         }
 
         /// <summary>
@@ -191,7 +210,6 @@ namespace DG.DentneD.Forms
         }
 
         #endregion
-
 
     }
 }

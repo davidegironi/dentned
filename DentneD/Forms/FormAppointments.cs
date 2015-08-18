@@ -6,10 +6,8 @@
 
 using System;
 using System.Linq;
-using System.IO;
 using DG.UI.GHF;
 using DG.DentneD.Model;
-using DentneD;
 using DG.DentneD.Model.Entity;
 using System.Configuration;
 using System.Windows.Forms.Calendar;
@@ -52,6 +50,7 @@ namespace DG.DentneD.Forms
             Initialize(Program.uighfApplication);
 
             _dentnedModel = new DentneDModel();
+            _dentnedModel.LanguageHelper.LoadFromFile(Program.uighfApplication.LanguageFilename);
 
             calendarDayHourBegin = Convert.ToInt16(ConfigurationManager.AppSettings["calendarDayHourBegin"]);
             calendarDayHourEnd = Convert.ToInt16(ConfigurationManager.AppSettings["calendarDayHourEnd"]);
@@ -127,6 +126,35 @@ namespace DG.DentneD.Forms
             calendar_listmonths.MaximumViewDays = 42;
 
             ResetAppointmentBindingSource();
+        }
+
+        /// <summary>
+        /// Add components language
+        /// </summary>
+        public override void AddLanguageComponents()
+        {
+            //main
+            LanguageHelper.AddComponent(this);
+            LanguageHelper.AddComponent(checkBox_filterTreatmentsadvices);
+            LanguageHelper.AddComponent(label_filterDoctors);
+            LanguageHelper.AddComponent(label_filterRooms);
+            LanguageHelper.AddComponent(tabPage_tabListDays);
+            LanguageHelper.AddComponent(tabPage_tabListWeeks);
+            LanguageHelper.AddComponent(tabPage_tabListMonths);
+            //tabAppointments
+            LanguageHelper.AddComponent(tabPage_tabAppointments);
+            LanguageHelper.AddComponent(button_tabAppointments_edit);
+            LanguageHelper.AddComponent(button_tabAppointments_delete);
+            LanguageHelper.AddComponent(button_tabAppointments_save);
+            LanguageHelper.AddComponent(button_tabAppointments_cancel);
+            LanguageHelper.AddComponent(appointments_idLabel);
+            LanguageHelper.AddComponent(patients_idLabel);
+            LanguageHelper.AddComponent(appointments_fromLabel);
+            LanguageHelper.AddComponent(appointments_toLabel);
+            LanguageHelper.AddComponent(doctors_idLabel);
+            LanguageHelper.AddComponent(rooms_idLabel);
+            LanguageHelper.AddComponent(appointments_titleLabel);
+            LanguageHelper.AddComponent(appointments_notesLabel);
         }
 
         /// <summary>

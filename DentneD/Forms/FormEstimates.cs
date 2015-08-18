@@ -6,7 +6,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using DG.Data.Model.Helpers;
@@ -14,7 +13,6 @@ using DG.UI.GHF;
 using DG.DentneD.Model;
 using DG.DentneD.Model.Entity;
 using DG.DentneD.Forms.Objects;
-using DentneD;
 using Zuby.ADGV;
 using System.Data;
 
@@ -39,6 +37,67 @@ namespace DG.DentneD.Forms
             Initialize(Program.uighfApplication);
 
             _dentnedModel = new DentneDModel();
+            _dentnedModel.LanguageHelper.LoadFromFile(Program.uighfApplication.LanguageFilename);
+        }
+
+        /// <summary>
+        /// Add components language
+        /// </summary>
+        public override void AddLanguageComponents()
+        {
+            //main
+            LanguageHelper.AddComponent(this);
+            LanguageHelper.AddComponent(label_filterDoctors);
+            LanguageHelper.AddComponent(label_filterYears);
+            LanguageHelper.AddComponent(totalLabel);
+            LanguageHelper.AddComponent(totalinvoicedLabel);
+            LanguageHelper.AddComponent(estimatesidDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(numberDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(dateDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(patientDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(isinvoicedDataGridViewCheckBoxColumn, this.GetType().Name, "HeaderText");
+            //tabEstimates
+            LanguageHelper.AddComponent(tabPage_tabEstimates);
+            LanguageHelper.AddComponent(button_tabEstimates_new);
+            LanguageHelper.AddComponent(button_tabEstimates_edit);
+            LanguageHelper.AddComponent(button_tabEstimates_delete);
+            LanguageHelper.AddComponent(button_tabEstimates_save);
+            LanguageHelper.AddComponent(button_tabEstimates_cancel);
+            LanguageHelper.AddComponent(button_tabEstimates_print);
+            LanguageHelper.AddComponent(button_tabEstimates_invoice);
+            LanguageHelper.AddComponent(estimates_idLabel);
+            LanguageHelper.AddComponent(estimates_numberLabel);
+            LanguageHelper.AddComponent(estimates_invoiceLabel);
+            LanguageHelper.AddComponent(estimates_totalLabel);
+            LanguageHelper.AddComponent(estimates_dateLabel);
+            LanguageHelper.AddComponent(estimates_doctorLabel);
+            LanguageHelper.AddComponent(estimates_patientLabel);
+            LanguageHelper.AddComponent(estimates_paymentLabel);
+            LanguageHelper.AddComponent(estimates_footerLabel);
+            LanguageHelper.AddComponent(estimates_deductiontaxrateLabel);
+            //tabEstimatesLines
+            LanguageHelper.AddComponent(tabPage_tabEstimatesLines);
+            LanguageHelper.AddComponent(estimateslinesidDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(codeDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(descriptionDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(quantityDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(unitpriceDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(taxrateDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(totalpriceDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(button_tabEstimatesLines_new);
+            LanguageHelper.AddComponent(button_tabEstimatesLines_edit);
+            LanguageHelper.AddComponent(button_tabEstimatesLines_delete);
+            LanguageHelper.AddComponent(button_tabEstimatesLines_save);
+            LanguageHelper.AddComponent(button_tabEstimatesLines_cancel);
+            LanguageHelper.AddComponent(estimateslines_idLabel);
+            LanguageHelper.AddComponent(patientstreatments_idLabel);
+            LanguageHelper.AddComponent(estimateslines_codeLabel);
+            LanguageHelper.AddComponent(estimateslines_quantityLabel);
+            LanguageHelper.AddComponent(estimateslines_unitpriceLabel);
+            LanguageHelper.AddComponent(estimateslines_taxrateLabel);
+            LanguageHelper.AddComponent(estimateslines_descriptionLabel);
+            LanguageHelper.AddComponent(treatments_idLabel);
+            LanguageHelper.AddComponent(groupBox_tabEstimatesLines_filler);
         }
 
         /// <summary>

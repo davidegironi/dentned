@@ -6,7 +6,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using DG.Data.Model.Helpers;
@@ -14,7 +13,6 @@ using DG.UI.GHF;
 using DG.DentneD.Model;
 using DG.DentneD.Model.Entity;
 using DG.DentneD.Forms.Objects;
-using DentneD;
 using Zuby.ADGV;
 
 namespace DG.DentneD.Forms
@@ -35,6 +33,29 @@ namespace DG.DentneD.Forms
             Initialize(Program.uighfApplication);
 
             _dentnedModel = new DentneDModel();
+            _dentnedModel.LanguageHelper.LoadFromFile(Program.uighfApplication.LanguageFilename);
+        }
+
+        /// <summary>
+        /// Add components language
+        /// </summary>
+        public override void AddLanguageComponents()
+        {
+            //main
+            LanguageHelper.AddComponent(this);
+            LanguageHelper.AddComponent(doctorsidDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(nameDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            //tabDoctors
+            LanguageHelper.AddComponent(tabPage_tabDoctors);
+            LanguageHelper.AddComponent(button_tabDoctors_new);
+            LanguageHelper.AddComponent(button_tabDoctors_edit);
+            LanguageHelper.AddComponent(button_tabDoctors_delete);
+            LanguageHelper.AddComponent(button_tabDoctors_save);
+            LanguageHelper.AddComponent(button_tabDoctors_cancel);
+            LanguageHelper.AddComponent(doctors_idLabel);
+            LanguageHelper.AddComponent(doctors_nameLabel);
+            LanguageHelper.AddComponent(doctors_surnameLabel);
+            LanguageHelper.AddComponent(doctors_doctextLabel);
         }
 
         /// <summary>
@@ -191,7 +212,6 @@ namespace DG.DentneD.Forms
         }
 
         #endregion
-
 
     }
 }

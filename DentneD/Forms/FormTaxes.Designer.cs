@@ -29,13 +29,16 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.Label taxes_idLabel;
-            System.Windows.Forms.Label taxes_nameLabel;
-            System.Windows.Forms.Label taxes_rateLabel;
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormTaxes));
+            this.taxes_idLabel = new System.Windows.Forms.Label();
+            this.taxes_nameLabel = new System.Windows.Forms.Label();
+            this.taxes_rateLabel = new System.Windows.Forms.Label();
             this.panel_filters = new System.Windows.Forms.Panel();
             this.advancedDataGridView_main = new Zuby.ADGV.AdvancedDataGridView();
+            this.taxesidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isdefaultDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.vTaxesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel_list = new System.Windows.Forms.Panel();
             this.tabControl_main = new System.Windows.Forms.TabControl();
@@ -54,12 +57,6 @@
             this.button_tabTaxes_edit = new System.Windows.Forms.Button();
             this.button_tabTaxes_new = new System.Windows.Forms.Button();
             this.panel_data = new System.Windows.Forms.Panel();
-            this.taxesidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.isdefaultDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            taxes_idLabel = new System.Windows.Forms.Label();
-            taxes_nameLabel = new System.Windows.Forms.Label();
-            taxes_rateLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_main)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.vTaxesBindingSource)).BeginInit();
             this.panel_list.SuspendLayout();
@@ -74,30 +71,30 @@
             // 
             // taxes_idLabel
             // 
-            taxes_idLabel.AutoSize = true;
-            taxes_idLabel.Location = new System.Drawing.Point(9, 9);
-            taxes_idLabel.Name = "taxes_idLabel";
-            taxes_idLabel.Size = new System.Drawing.Size(19, 13);
-            taxes_idLabel.TabIndex = 0;
-            taxes_idLabel.Text = "Id:";
+            this.taxes_idLabel.AutoSize = true;
+            this.taxes_idLabel.Location = new System.Drawing.Point(9, 9);
+            this.taxes_idLabel.Name = "taxes_idLabel";
+            this.taxes_idLabel.Size = new System.Drawing.Size(19, 13);
+            this.taxes_idLabel.TabIndex = 0;
+            this.taxes_idLabel.Text = "Id:";
             // 
             // taxes_nameLabel
             // 
-            taxes_nameLabel.AutoSize = true;
-            taxes_nameLabel.Location = new System.Drawing.Point(9, 48);
-            taxes_nameLabel.Name = "taxes_nameLabel";
-            taxes_nameLabel.Size = new System.Drawing.Size(38, 13);
-            taxes_nameLabel.TabIndex = 2;
-            taxes_nameLabel.Text = "Name:";
+            this.taxes_nameLabel.AutoSize = true;
+            this.taxes_nameLabel.Location = new System.Drawing.Point(9, 48);
+            this.taxes_nameLabel.Name = "taxes_nameLabel";
+            this.taxes_nameLabel.Size = new System.Drawing.Size(38, 13);
+            this.taxes_nameLabel.TabIndex = 2;
+            this.taxes_nameLabel.Text = "Name:";
             // 
             // taxes_rateLabel
             // 
-            taxes_rateLabel.AutoSize = true;
-            taxes_rateLabel.Location = new System.Drawing.Point(9, 87);
-            taxes_rateLabel.Name = "taxes_rateLabel";
-            taxes_rateLabel.Size = new System.Drawing.Size(33, 13);
-            taxes_rateLabel.TabIndex = 4;
-            taxes_rateLabel.Text = "Rate:";
+            this.taxes_rateLabel.AutoSize = true;
+            this.taxes_rateLabel.Location = new System.Drawing.Point(9, 87);
+            this.taxes_rateLabel.Name = "taxes_rateLabel";
+            this.taxes_rateLabel.Size = new System.Drawing.Size(33, 13);
+            this.taxes_rateLabel.TabIndex = 4;
+            this.taxes_rateLabel.Text = "Rate:";
             // 
             // panel_filters
             // 
@@ -133,6 +130,36 @@
             this.advancedDataGridView_main.TabIndex = 0;
             this.advancedDataGridView_main.SortStringChanged += new System.EventHandler(this.advancedDataGridView_main_SortStringChanged);
             this.advancedDataGridView_main.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_main_FilterStringChanged);
+            // 
+            // taxesidDataGridViewTextBoxColumn
+            // 
+            this.taxesidDataGridViewTextBoxColumn.DataPropertyName = "taxes_id";
+            this.taxesidDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.taxesidDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.taxesidDataGridViewTextBoxColumn.Name = "taxesidDataGridViewTextBoxColumn";
+            this.taxesidDataGridViewTextBoxColumn.ReadOnly = true;
+            this.taxesidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.taxesidDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            this.nameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            this.nameDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.nameDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // isdefaultDataGridViewCheckBoxColumn
+            // 
+            this.isdefaultDataGridViewCheckBoxColumn.DataPropertyName = "isdefault";
+            this.isdefaultDataGridViewCheckBoxColumn.HeaderText = "D";
+            this.isdefaultDataGridViewCheckBoxColumn.MinimumWidth = 22;
+            this.isdefaultDataGridViewCheckBoxColumn.Name = "isdefaultDataGridViewCheckBoxColumn";
+            this.isdefaultDataGridViewCheckBoxColumn.ReadOnly = true;
+            this.isdefaultDataGridViewCheckBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.isdefaultDataGridViewCheckBoxColumn.Width = 50;
             // 
             // vTaxesBindingSource
             // 
@@ -173,11 +200,11 @@
             // panel_tabTaxes_data
             // 
             this.panel_tabTaxes_data.Controls.Add(this.taxes_isdefaultCheckBox);
-            this.panel_tabTaxes_data.Controls.Add(taxes_rateLabel);
+            this.panel_tabTaxes_data.Controls.Add(this.taxes_rateLabel);
             this.panel_tabTaxes_data.Controls.Add(this.taxes_rateTextBox);
-            this.panel_tabTaxes_data.Controls.Add(taxes_nameLabel);
+            this.panel_tabTaxes_data.Controls.Add(this.taxes_nameLabel);
             this.panel_tabTaxes_data.Controls.Add(this.taxes_nameTextBox);
-            this.panel_tabTaxes_data.Controls.Add(taxes_idLabel);
+            this.panel_tabTaxes_data.Controls.Add(this.taxes_idLabel);
             this.panel_tabTaxes_data.Controls.Add(this.taxes_idTextBox);
             this.panel_tabTaxes_data.Location = new System.Drawing.Point(6, 42);
             this.panel_tabTaxes_data.Name = "panel_tabTaxes_data";
@@ -297,36 +324,6 @@
             this.panel_data.Size = new System.Drawing.Size(500, 562);
             this.panel_data.TabIndex = 6;
             // 
-            // taxesidDataGridViewTextBoxColumn
-            // 
-            this.taxesidDataGridViewTextBoxColumn.DataPropertyName = "taxes_id";
-            this.taxesidDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.taxesidDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.taxesidDataGridViewTextBoxColumn.Name = "taxesidDataGridViewTextBoxColumn";
-            this.taxesidDataGridViewTextBoxColumn.ReadOnly = true;
-            this.taxesidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.taxesidDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // nameDataGridViewTextBoxColumn
-            // 
-            this.nameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "name";
-            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
-            this.nameDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
-            this.nameDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // isdefaultDataGridViewCheckBoxColumn
-            // 
-            this.isdefaultDataGridViewCheckBoxColumn.DataPropertyName = "isdefault";
-            this.isdefaultDataGridViewCheckBoxColumn.HeaderText = "D";
-            this.isdefaultDataGridViewCheckBoxColumn.MinimumWidth = 22;
-            this.isdefaultDataGridViewCheckBoxColumn.Name = "isdefaultDataGridViewCheckBoxColumn";
-            this.isdefaultDataGridViewCheckBoxColumn.ReadOnly = true;
-            this.isdefaultDataGridViewCheckBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.isdefaultDataGridViewCheckBoxColumn.Width = 50;
-            // 
             // FormTaxes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -380,5 +377,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn taxesidDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn isdefaultDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.Label taxes_idLabel;
+        private System.Windows.Forms.Label taxes_nameLabel;
+        private System.Windows.Forms.Label taxes_rateLabel;
     }
 }

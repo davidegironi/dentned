@@ -266,6 +266,14 @@
           <Property Name="paymentstypes_doctext" Type="varchar" MaxLength="512" Nullable="false" />
           <Property Name="paymentstypes_isdefault" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="reports">
+          <Key>
+            <PropertyRef Name="reports_id" />
+          </Key>
+          <Property Name="reports_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="reports_name" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="reports_query" Type="text" Nullable="false" />
+        </EntityType>
         <EntityType Name="rooms">
           <Key>
             <PropertyRef Name="rooms_id" />
@@ -685,6 +693,7 @@
           <EntitySet Name="patientstreatments" EntityType="Self.patientstreatments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="payments" EntityType="Self.payments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="paymentstypes" EntityType="Self.paymentstypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="reports" EntityType="Self.reports" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="rooms" EntityType="Self.rooms" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="taxes" EntityType="Self.taxes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="taxesdeductions" EntityType="Self.taxesdeductions" Schema="dbo" store:Type="Tables" />
@@ -950,6 +959,7 @@
             <End Role="treatmentspriceslists" EntitySet="treatmentspriceslists" />
             <End Role="treatmentsprices" EntitySet="treatmentsprices" />
           </AssociationSet>
+          <EntitySet Name="reports" EntityType="dentnedModel.reports" />
         </EntityContainer>
         <EntityType Name="addressestypes">
           <Key>
@@ -1665,6 +1675,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="reports">
+          <Key>
+            <PropertyRef Name="reports_id" />
+          </Key>
+          <Property Name="reports_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="reports_name" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="reports_query" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2018,6 +2036,15 @@
               <MappingFragment StoreEntitySet="treatmentstypes">
                 <ScalarProperty Name="treatmentstypes_name" ColumnName="treatmentstypes_name" />
                 <ScalarProperty Name="treatmentstypes_id" ColumnName="treatmentstypes_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="reports">
+            <EntityTypeMapping TypeName="dentnedModel.reports">
+              <MappingFragment StoreEntitySet="reports">
+                <ScalarProperty Name="reports_query" ColumnName="reports_query" />
+                <ScalarProperty Name="reports_name" ColumnName="reports_name" />
+                <ScalarProperty Name="reports_id" ColumnName="reports_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

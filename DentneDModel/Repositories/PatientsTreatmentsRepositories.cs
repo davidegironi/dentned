@@ -16,6 +16,27 @@ namespace DG.DentneD.Model.Repositories
         public PatientsTreatmentsRepository() : base() { }
 
         /// <summary>
+        /// Repository language dictionary
+        /// </summary>
+        public class RepositoryLanguage : IGenericDataRepositoryLanguage
+        {
+            public string text001 = "Invalid price. Can not be less than zero.";
+            public string text002 = "Doctors is mandatory.";
+            public string text003 = "Patient is mandatory.";
+            public string text004 = "Treatments type is mandatory.";
+            public string text005 = "Invalid sex. Can be 'M' or 'F'.";
+            public string text101 = "All";
+            public string text102 = "Up";
+            public string text103 = "Down";
+            public string text104 = "None";
+        }
+
+        /// <summary>
+        /// Repository language
+        /// </summary>
+        public RepositoryLanguage language = new RepositoryLanguage();
+
+        /// <summary>
         /// Check if an item can be added
         /// </summary>
         /// <param name="errors"></param>
@@ -69,7 +90,7 @@ namespace DG.DentneD.Model.Repositories
                 if (item.patientstreatments_price < 0)
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Invalid price. Can not be less than zero." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text001 }).ToArray();
                 }
 
                 if (!ret)
@@ -78,17 +99,17 @@ namespace DG.DentneD.Model.Repositories
                 if (BaseModel.Doctors.Find(item.doctors_id) == null)
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Doctors is mandatory." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text002 }).ToArray();
                 }
                 if (BaseModel.Patients.Find(item.patients_id) == null)
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Patient is mandatory." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text003 }).ToArray();
                 }
                 if (BaseModel.Treatments.Find(item.treatments_id) == null)
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { "Treatments type is mandatory." }).ToArray();
+                    errors = errors.Concat(new string[] { language.text004 }).ToArray();
                 }
 
                 if (!ret)
@@ -131,19 +152,19 @@ namespace DG.DentneD.Model.Repositories
             string ret = (item.patientstreatments_t11 && item.patientstreatments_t12 && item.patientstreatments_t13 && item.patientstreatments_t14 && item.patientstreatments_t15 && item.patientstreatments_t16 && item.patientstreatments_t17 && item.patientstreatments_t18 &&
                     item.patientstreatments_t21 && item.patientstreatments_t22 && item.patientstreatments_t23 && item.patientstreatments_t24 && item.patientstreatments_t25 && item.patientstreatments_t26 && item.patientstreatments_t27 && item.patientstreatments_t28 &&
                     item.patientstreatments_t31 && item.patientstreatments_t32 && item.patientstreatments_t33 && item.patientstreatments_t34 && item.patientstreatments_t35 && item.patientstreatments_t36 && item.patientstreatments_t37 && item.patientstreatments_t38 &&
-                    item.patientstreatments_t41 && item.patientstreatments_t42 && item.patientstreatments_t43 && item.patientstreatments_t44 && item.patientstreatments_t45 && item.patientstreatments_t46 && item.patientstreatments_t47 && item.patientstreatments_t48 ? "All" : 
+                    item.patientstreatments_t41 && item.patientstreatments_t42 && item.patientstreatments_t43 && item.patientstreatments_t44 && item.patientstreatments_t45 && item.patientstreatments_t46 && item.patientstreatments_t47 && item.patientstreatments_t48 ? language.text101 : 
                         (item.patientstreatments_t11 && item.patientstreatments_t12 && item.patientstreatments_t13 && item.patientstreatments_t14 && item.patientstreatments_t15 && item.patientstreatments_t16 && item.patientstreatments_t17 && item.patientstreatments_t18 &&
                         item.patientstreatments_t21 && item.patientstreatments_t22 && item.patientstreatments_t23 && item.patientstreatments_t24 && item.patientstreatments_t25 && item.patientstreatments_t26 && item.patientstreatments_t27 && item.patientstreatments_t28 &&
                         !item.patientstreatments_t31 && !item.patientstreatments_t32 && !item.patientstreatments_t33 && !item.patientstreatments_t34 && !item.patientstreatments_t35 && !item.patientstreatments_t36 && !item.patientstreatments_t37 && !item.patientstreatments_t38 &&
-                        !item.patientstreatments_t41 && !item.patientstreatments_t42 && !item.patientstreatments_t43 && !item.patientstreatments_t44 && !item.patientstreatments_t45 && !item.patientstreatments_t46 && !item.patientstreatments_t47 && !item.patientstreatments_t48 ? "Up" : 
+                        !item.patientstreatments_t41 && !item.patientstreatments_t42 && !item.patientstreatments_t43 && !item.patientstreatments_t44 && !item.patientstreatments_t45 && !item.patientstreatments_t46 && !item.patientstreatments_t47 && !item.patientstreatments_t48 ? language.text102 : 
                             (!item.patientstreatments_t11 && !item.patientstreatments_t12 && !item.patientstreatments_t13 && !item.patientstreatments_t14 && !item.patientstreatments_t15 && !item.patientstreatments_t16 && !item.patientstreatments_t17 && !item.patientstreatments_t18 &&
                             !item.patientstreatments_t21 && !item.patientstreatments_t22 && !item.patientstreatments_t23 && !item.patientstreatments_t24 && !item.patientstreatments_t25 && !item.patientstreatments_t26 && !item.patientstreatments_t27 && !item.patientstreatments_t28 &&
                             item.patientstreatments_t31 && item.patientstreatments_t32 && item.patientstreatments_t33 && item.patientstreatments_t34 && item.patientstreatments_t35 && item.patientstreatments_t36 && item.patientstreatments_t37 && item.patientstreatments_t38 &&
-                            item.patientstreatments_t41 && item.patientstreatments_t42 && item.patientstreatments_t43 && item.patientstreatments_t44 && item.patientstreatments_t45 && item.patientstreatments_t46 && item.patientstreatments_t47 && item.patientstreatments_t48 ? "Down" :
+                            item.patientstreatments_t41 && item.patientstreatments_t42 && item.patientstreatments_t43 && item.patientstreatments_t44 && item.patientstreatments_t45 && item.patientstreatments_t46 && item.patientstreatments_t47 && item.patientstreatments_t48 ? language.text103 :
                                 (!item.patientstreatments_t11 && !item.patientstreatments_t12 && !item.patientstreatments_t13 && !item.patientstreatments_t14 && !item.patientstreatments_t15 && !item.patientstreatments_t16 && !item.patientstreatments_t17 && !item.patientstreatments_t18 &&
                                 !item.patientstreatments_t21 && !item.patientstreatments_t22 && !item.patientstreatments_t23 && !item.patientstreatments_t24 && !item.patientstreatments_t25 && !item.patientstreatments_t26 && !item.patientstreatments_t27 && !item.patientstreatments_t28 &&
                                 !item.patientstreatments_t31 && !item.patientstreatments_t32 && !item.patientstreatments_t33 && !item.patientstreatments_t34 && !item.patientstreatments_t35 && !item.patientstreatments_t36 && !item.patientstreatments_t37 && !item.patientstreatments_t28 &&
-                                !item.patientstreatments_t41 && !item.patientstreatments_t42 && !item.patientstreatments_t43 && !item.patientstreatments_t44 && !item.patientstreatments_t45 && !item.patientstreatments_t46 && !item.patientstreatments_t47 && !item.patientstreatments_t48 ? "None" :
+                                !item.patientstreatments_t41 && !item.patientstreatments_t42 && !item.patientstreatments_t43 && !item.patientstreatments_t44 && !item.patientstreatments_t45 && !item.patientstreatments_t46 && !item.patientstreatments_t47 && !item.patientstreatments_t48 ? language.text104 :
                                     (item.patientstreatments_t11 ? "11," : "") +
                                     (item.patientstreatments_t12 ? "12," : "") +
                                     (item.patientstreatments_t13 ? "13," : "") +

@@ -4,6 +4,8 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
+using DG.DentneD.Forms;
+using DG.DentneD.Helpers;
 using DG.UI.GHF;
 using NDesk.Options;
 using System;
@@ -42,6 +44,16 @@ namespace DG.DentneD
         private const int ATTACH_PARENT_PROCESS = -1;
         
         /// <summary>
+        /// Reports password public logger
+        /// </summary>
+        public static bool isPasswordLogged = false;
+
+        /// <summary>
+        /// Secure delete filename
+        /// </summary>
+        public const string SRMFileName = "srm.exe";
+
+        /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
@@ -57,7 +69,7 @@ namespace DG.DentneD
                     v => languagerebuild = v != null },
                 { "r|defaultlanguagerebuild", "rebuild the default language file",
                     v => defaultlanguagerebuild = v != null },
-                { "d|cleandatadir", "clean the data folder",
+                { "d|cleandatadir", "clean data directories",
                     v => cleandatadir = v != null },
                 { "h|help",  "show help", 
                     v => showhelp = v != null }
@@ -126,7 +138,40 @@ namespace DG.DentneD
                 }
                 else if (cleandatadir)
                 {
-                    //clean the datadir
+                    string[] messages = new string[] { };
+                    string[] errors = new string[] { };
+
+                    string tmpdir = ConfigurationManager.AppSettings["tmpdir"];
+                    string patientsDatadir = ConfigurationManager.AppSettings["patientsDatadir"];
+                    string patientsAttachmentsdir = ConfigurationManager.AppSettings["patientsAttachmentsdir"];
+                    bool doSecureDelete = Convert.ToBoolean(ConfigurationManager.AppSettings["doSecureDelete"]);
+
+                    //clean the tmpdir
+                    Console.WriteLine("Cleaning folder \"" + tmpdir + "\"...");
+                    FileHelper.PurgeFolder(tmpdir, true, -1);
+                    Console.WriteLine("Folder processed.");
+
+                    Console.WriteLine();
+
+                    //clean the patient datadir
+                    Console.WriteLine("Cleaning folder \"" + patientsDatadir + "\"...");
+                    FormPatients.CleanPatientDir(patientsDatadir, doSecureDelete, ref messages, ref errors);
+                    foreach (string message in messages)
+                        Console.WriteLine("  " + message);
+                    foreach (string error in errors)
+                        Console.WriteLine("  " + error);
+                    Console.WriteLine("Folder processed.");
+
+                    Console.WriteLine();
+
+                    //clean the patient attachment dir
+                    Console.WriteLine("Cleaning folder \"" + patientsAttachmentsdir + "\"...");
+                    FormPatients.CleanPatientDir(patientsAttachmentsdir, doSecureDelete, ref messages, ref errors);
+                    foreach (string message in messages)
+                        Console.WriteLine("  " + message);
+                    foreach (string error in errors)
+                        Console.WriteLine("  " + error);
+                    Console.WriteLine("Folder processed.");
                 }
 
                 Console.WriteLine();

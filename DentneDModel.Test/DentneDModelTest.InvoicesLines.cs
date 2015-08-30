@@ -39,7 +39,9 @@ namespace DG.DentneD.Model.Test
             {
                 doctors_name = "XX1",
                 doctors_surname = "XX1",
-                doctors_doctext = "XXXXX"
+                doctors_doctext = "XXXXX",
+                doctors_username = "xxxx1236",
+                doctors_password = "123456"
             };
             _dentnedModel.Doctors.Add(t_doctors);
 
@@ -50,7 +52,9 @@ namespace DG.DentneD.Model.Test
                 patients_birthdate = DateTime.Now,
                 patients_birthcity = "xxx",
                 patients_doctext = "xxx",
-                patients_sex = "M"
+                patients_sex = "M",
+                patients_username = "xxxx1234",
+                patients_password = "123456"
             };
             _dentnedModel.Patients.Add(t_patients);
 
@@ -89,7 +93,9 @@ namespace DG.DentneD.Model.Test
                 invoices_patient = "patient",
                 invoices_footer = "footer",
                 invoices_payment = "payment",
-                invoices_total = 0,
+                invoices_totalnet = 0,
+                invoices_totalgross = 0,
+                invoices_totaldue = 0,
                 invoices_deductiontaxrate = 20
             };
             _dentnedModel.Invoices.Add(t_invoices);
@@ -102,6 +108,7 @@ namespace DG.DentneD.Model.Test
                 invoiceslines_quantity = 1,
                 invoiceslines_unitprice = 10,
                 invoiceslines_taxrate = 22,
+                invoiceslines_istaxesdeductionsable = true,
                 patientstreatments_id = t_patientstreatments.patientstreatments_id
             };
             Assert.IsTrue(_dentnedModel.InvoicesLines.CanAdd(t_invoiceslines));
@@ -114,6 +121,7 @@ namespace DG.DentneD.Model.Test
                 invoiceslines_quantity = 1,
                 invoiceslines_unitprice = 10,
                 invoiceslines_taxrate = 22,
+                invoiceslines_istaxesdeductionsable = true,
                 patientstreatments_id = t_patientstreatments.patientstreatments_id
             };
             Assert.IsFalse(_dentnedModel.InvoicesLines.CanAdd(t_invoiceslines));
@@ -126,6 +134,7 @@ namespace DG.DentneD.Model.Test
                 invoiceslines_quantity = 1,
                 invoiceslines_unitprice = 10,
                 invoiceslines_taxrate = 22,
+                invoiceslines_istaxesdeductionsable = true,
                 patientstreatments_id = t_patientstreatments.patientstreatments_id
             };
             Assert.IsFalse(_dentnedModel.InvoicesLines.CanAdd(t_invoiceslines));
@@ -138,6 +147,7 @@ namespace DG.DentneD.Model.Test
                 invoiceslines_quantity = 1,
                 invoiceslines_unitprice = 10,
                 invoiceslines_taxrate = 22,
+                invoiceslines_istaxesdeductionsable = true,
                 patientstreatments_id = t_patientstreatments.patientstreatments_id
             };
             Assert.IsFalse(_dentnedModel.InvoicesLines.CanAdd(t_invoiceslines));
@@ -150,6 +160,7 @@ namespace DG.DentneD.Model.Test
                 invoiceslines_quantity = -1,
                 invoiceslines_unitprice = 10,
                 invoiceslines_taxrate = 22,
+                invoiceslines_istaxesdeductionsable = true,
                 patientstreatments_id = t_patientstreatments.patientstreatments_id
             };
             Assert.IsFalse(_dentnedModel.InvoicesLines.CanAdd(t_invoiceslines));
@@ -162,6 +173,7 @@ namespace DG.DentneD.Model.Test
                 invoiceslines_quantity = 1,
                 invoiceslines_unitprice = 10,
                 invoiceslines_taxrate = 22,
+                invoiceslines_istaxesdeductionsable = true,
                 patientstreatments_id = -999
             };
             Assert.IsFalse(_dentnedModel.InvoicesLines.CanAdd(t_invoiceslines));
@@ -174,6 +186,7 @@ namespace DG.DentneD.Model.Test
                 invoiceslines_quantity = 1,
                 invoiceslines_unitprice = 10,
                 invoiceslines_taxrate = 22,
+                invoiceslines_istaxesdeductionsable = true,
                 //patientstreatments_id = t_patientstreatments.patientstreatments_id
             };
             Assert.IsTrue(_dentnedModel.InvoicesLines.CanAdd(t_invoiceslines));
@@ -186,6 +199,7 @@ namespace DG.DentneD.Model.Test
                 invoiceslines_quantity = 1,
                 invoiceslines_unitprice = 10,
                 invoiceslines_taxrate = 22,
+                invoiceslines_istaxesdeductionsable = true,
                 patientstreatments_id = t_patientstreatments.patientstreatments_id
             };
             Assert.IsTrue(_dentnedModel.InvoicesLines.CanAdd(t_invoiceslines));
@@ -199,6 +213,7 @@ namespace DG.DentneD.Model.Test
                 invoiceslines_quantity = 2,
                 invoiceslines_unitprice = 12,
                 invoiceslines_taxrate = 22,
+                invoiceslines_istaxesdeductionsable = true,
                 patientstreatments_id = t_patientstreatments.patientstreatments_id
             };
             Assert.IsTrue(_dentnedModel.InvoicesLines.CanAdd(t_invoiceslines));
@@ -212,6 +227,7 @@ namespace DG.DentneD.Model.Test
                 invoiceslines_quantity = 1,
                 invoiceslines_unitprice = -10,
                 invoiceslines_taxrate = 22,
+                invoiceslines_istaxesdeductionsable = true,
                 patientstreatments_id = t_patientstreatments.patientstreatments_id
             };
             Assert.IsTrue(_dentnedModel.InvoicesLines.CanAdd(t_invoiceslines));
@@ -223,8 +239,9 @@ namespace DG.DentneD.Model.Test
                 invoiceslines_code = "XXY",
                 invoiceslines_description = "test",
                 invoiceslines_quantity = 1,
-                invoiceslines_unitprice = -21,
+                invoiceslines_unitprice = -25,
                 invoiceslines_taxrate = 22,
+                invoiceslines_istaxesdeductionsable = true,
                 patientstreatments_id = t_patientstreatments.patientstreatments_id
             };
             Assert.IsFalse(_dentnedModel.InvoicesLines.CanAdd(t_invoiceslines));

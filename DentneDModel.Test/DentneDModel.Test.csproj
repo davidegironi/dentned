@@ -63,6 +63,8 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="DentneDModelTest.Estimates.cs" />
+    <Compile Include="DentneDModelTest.EstimatesLines.cs" />
     <Compile Include="DentneDModelTest.Reports.cs" />
     <Compile Include="DentneDModelTest.EstimatesFooters.cs" />
     <Compile Include="DentneDModelTest.InvoicesLines.cs" />
@@ -82,6 +84,7 @@
     <Compile Include="DentneDModelTest.PaymentsTypes.cs" />
     <Compile Include="DentneDModelTest.AddressesTypes.cs" />
     <Compile Include="DentneDModelTest.Patients.cs" />
+    <Compile Include="DentneDModelTest.ComputedLines.cs" />
     <Compile Include="DentneDModelTest.TreatmentsPrices.cs" />
     <Compile Include="DentneDModelTest.Treatments.cs" />
     <Compile Include="DentneDModelTest.TreatmentsPricesLists.cs" />

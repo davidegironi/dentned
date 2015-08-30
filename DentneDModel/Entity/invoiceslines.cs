@@ -22,6 +22,7 @@ namespace DG.DentneD.Model.Entity
         public int invoiceslines_quantity { get; set; }
         public decimal invoiceslines_unitprice { get; set; }
         public decimal invoiceslines_taxrate { get; set; }
+        public bool invoiceslines_istaxesdeductionsable { get; set; }
     
         public virtual invoices invoices { get; set; }
         public virtual patientstreatments patientstreatments { get; set; }

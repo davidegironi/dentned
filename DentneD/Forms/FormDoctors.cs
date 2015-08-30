@@ -14,6 +14,9 @@ using DG.DentneD.Model;
 using DG.DentneD.Model.Entity;
 using DG.DentneD.Forms.Objects;
 using Zuby.ADGV;
+using DG.DentneD.Helpers;
+using System.Data;
+using SMcMaster;
 
 namespace DG.DentneD.Forms
 {
@@ -29,6 +32,7 @@ namespace DG.DentneD.Forms
         public FormDoctors()
         {
             InitializeComponent();
+            (new TabOrderManager(this)).SetTabOrder(TabOrderManager.TabScheme.AcrossFirst);
 
             Initialize(Program.uighfApplication);
 
@@ -56,6 +60,10 @@ namespace DG.DentneD.Forms
             LanguageHelper.AddComponent(doctors_nameLabel);
             LanguageHelper.AddComponent(doctors_surnameLabel);
             LanguageHelper.AddComponent(doctors_doctextLabel);
+            LanguageHelper.AddComponent(doctors_usernameLabel);
+            LanguageHelper.AddComponent(doctors_passwordLabel);
+            LanguageHelper.AddComponent(doctors_lastloginLabel);
+            LanguageHelper.AddComponent(button_tabDoctors_resetusernamepassword);
         }
 
         /// <summary>
@@ -75,7 +83,7 @@ namespace DG.DentneD.Forms
             TabControlMain = tabControl_main;
 
             //set Main Panels
-            PanelFiltersMain = null;
+            PanelFiltersMain = panel_filters;
             PanelListMain = panel_list;
             PanelsExtraMain = null;
 
@@ -97,6 +105,7 @@ namespace DG.DentneD.Forms
                     AfterSaveAction = AfterSaveAction_tabDoctors,
 
                     AddButton = button_tabDoctors_new,
+                    IsAddButtonDefaultClickEventAttached = false,
                     UpdateButton = button_tabDoctors_edit,
                     RemoveButton = button_tabDoctors_delete,
                     SaveButton = button_tabDoctors_save,
@@ -119,11 +128,13 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void FormDoctors_Load(object sender, EventArgs e)
         {
-            ReloadView();
-
             IsBindingSourceLoading = true;
             advancedDataGridView_main.SortASC(advancedDataGridView_main.Columns[1]);
             IsBindingSourceLoading = false;
+
+            ReloadView();
+
+            vDoctorsBindingSource_CurrentChanged(sender, e);
         }
 
         /// <summary>
@@ -161,6 +172,36 @@ namespace DG.DentneD.Forms
         private void advancedDataGridView_main_SortStringChanged(object sender, EventArgs e)
         {
             vDoctorsBindingSource.Sort = advancedDataGridView_main.SortString;
+        }
+
+
+        /// <summary>
+        /// Main BindingSource changed handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void vDoctorsBindingSource_CurrentChanged(object sender, EventArgs e)
+        {
+            if (IsBindingSourceLoading)
+                return;
+
+            int doctors_id = -1;
+            if (vDoctorsBindingSource.Current != null)
+            {
+                doctors_id = (((DataRowView)vDoctorsBindingSource.Current).Row).Field<int>("doctors_id");
+            }
+
+            doctors_lastloginDateTimePicker.Visible = false;
+            doctors_lastloginLabel.Visible = false;
+            if (doctors_id != -1)
+            {
+                doctors doctor = _dentnedModel.Doctors.Find(doctors_id);
+                if (doctor.doctors_lastlogin != null)
+                {
+                    doctors_lastloginDateTimePicker.Visible = true;
+                    doctors_lastloginLabel.Visible = true;
+                }
+            }
         }
 
 
@@ -211,7 +252,42 @@ namespace DG.DentneD.Forms
             DGUIGHFData.Remove<doctors, DentneDModel>(_dentnedModel.Doctors, item);
         }
 
+        /// <summary>
+        /// New doctor handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button_tabDoctors_new_Click(object sender, EventArgs e)
+        {
+            if (AddClick(tabElement_tabDoctors))
+            {
+                ((doctors)doctorsBindingSource.Current).doctors_username = Randomizer.BuildRandomNumberString(8).ToLower();
+                ((doctors)doctorsBindingSource.Current).doctors_password = Randomizer.BuildRandomNumber(6);
+                ((doctors)doctorsBindingSource.Current).doctors_token = null;
+                ((doctors)doctorsBindingSource.Current).doctors_lastlogin = null;
+                doctorsBindingSource.ResetBindings(true);
+            }
+        }
+
+        /// <summary>
+        /// Reset username and password
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button_tabDoctors_resetusernamepassword_Click(object sender, EventArgs e)
+        {
+            ((doctors)doctorsBindingSource.Current).doctors_username = Randomizer.BuildRandomNumberString(8).ToLower();
+            ((doctors)doctorsBindingSource.Current).doctors_password = Randomizer.BuildRandomNumber(6);
+            ((doctors)doctorsBindingSource.Current).doctors_token = null;
+            ((doctors)doctorsBindingSource.Current).doctors_lastlogin = null;
+            doctorsBindingSource.ResetBindings(true);
+
+            doctors_lastloginDateTimePicker.Visible = false;
+            doctors_lastloginLabel.Visible = false;
+        }
+
         #endregion
 
+                       
     }
 }

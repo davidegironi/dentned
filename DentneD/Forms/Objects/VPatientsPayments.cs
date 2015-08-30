@@ -5,6 +5,7 @@
 #endregion
 
 using System;
+
 namespace DG.DentneD.Forms.Objects
 {
     public class VPatientsPayments

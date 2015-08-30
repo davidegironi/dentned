@@ -35,7 +35,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormEstimates));
             this.treatments_idLabel = new System.Windows.Forms.Label();
-            this.estimates_totalLabel = new System.Windows.Forms.Label();
             this.estimates_deductiontaxrateLabel = new System.Windows.Forms.Label();
             this.estimates_footerLabel = new System.Windows.Forms.Label();
             this.estimates_paymentLabel = new System.Windows.Forms.Label();
@@ -61,7 +60,6 @@
             this.panel_tabEstimatesLines_updates = new System.Windows.Forms.Panel();
             this.panel_tabEstimatesLines_list = new System.Windows.Forms.Panel();
             this.advancedDataGridView_tabEstimatesLines_list = new Zuby.ADGV.AdvancedDataGridView();
-            this.estimateslinesidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.codeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.quantityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -70,6 +68,8 @@
             this.totalpriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.vEstimatesLinesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox_tabEstimatesLines_filler = new System.Windows.Forms.GroupBox();
+            this.computedlines_idComboBox = new System.Windows.Forms.ComboBox();
+            this.computedlines_idLabel = new System.Windows.Forms.Label();
             this.estimateslines_unitpriceTextBox = new System.Windows.Forms.TextBox();
             this.estimateslinesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.estimateslines_quantityTextBox = new System.Windows.Forms.TextBox();
@@ -87,20 +87,33 @@
             this.comboBox_filterYears = new System.Windows.Forms.ComboBox();
             this.label_filterYears = new System.Windows.Forms.Label();
             this.comboBox_filterDoctors = new System.Windows.Forms.ComboBox();
-            this.totalinvoicedTextBox = new System.Windows.Forms.TextBox();
-            this.totalinvoicedLabel = new System.Windows.Forms.Label();
-            this.totalTextBox = new System.Windows.Forms.TextBox();
-            this.totalLabel = new System.Windows.Forms.Label();
+            this.totaldueinvoicedTextBox = new System.Windows.Forms.TextBox();
+            this.totaldueinvoicedLabel = new System.Windows.Forms.Label();
+            this.totaldueTextBox = new System.Windows.Forms.TextBox();
+            this.totaldueLabel = new System.Windows.Forms.Label();
             this.panel_listtotal = new System.Windows.Forms.Panel();
+            this.totalgrossTextBox = new System.Windows.Forms.TextBox();
+            this.totalgrossLabel = new System.Windows.Forms.Label();
+            this.totalnetTextBox = new System.Windows.Forms.TextBox();
+            this.totalnetLabel = new System.Windows.Forms.Label();
             this.advancedDataGridView_main = new Zuby.ADGV.AdvancedDataGridView();
+            this.numberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.patientDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isinvoicedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.vEstimatesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel_list = new System.Windows.Forms.Panel();
             this.button_tabEstimates_new = new System.Windows.Forms.Button();
             this.panel_tabEstimates_data = new System.Windows.Forms.Panel();
+            this.estimates_totaldueLabel = new System.Windows.Forms.Label();
+            this.estimates_totaldueTextBox = new System.Windows.Forms.TextBox();
+            this.estimatesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.estimates_totalgrossLabel = new System.Windows.Forms.Label();
+            this.estimates_totalgrossTextBox = new System.Windows.Forms.TextBox();
+            this.estimates_totalnetLabel = new System.Windows.Forms.Label();
+            this.estimates_totalnetTextBox = new System.Windows.Forms.TextBox();
             this.estimates_invoiceTextBox = new System.Windows.Forms.TextBox();
             this.estimates_invoiceLabel = new System.Windows.Forms.Label();
-            this.estimates_totalTextBox = new System.Windows.Forms.TextBox();
-            this.estimatesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.patients_idComboBox = new System.Windows.Forms.ComboBox();
             this.doctors_idComboBox = new System.Windows.Forms.ComboBox();
             this.estimates_deductiontaxrateComboBox = new System.Windows.Forms.ComboBox();
@@ -124,11 +137,7 @@
             this.button_tabEstimates_invoice = new System.Windows.Forms.Button();
             this.tabPage_tabEstimatesLines = new System.Windows.Forms.TabPage();
             this.panel_tabEstimatesLines_data = new System.Windows.Forms.Panel();
-            this.estimatesidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.numberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.patientDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.isinvoicedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.estimateslines_istaxesdeductionsableCheckBox = new System.Windows.Forms.CheckBox();
             this.panel_tabEstimatesLines_actions.SuspendLayout();
             this.panel_tabEstimatesLines_updates.SuspendLayout();
             this.panel_tabEstimatesLines_list.SuspendLayout();
@@ -160,15 +169,6 @@
             this.treatments_idLabel.Size = new System.Drawing.Size(58, 13);
             this.treatments_idLabel.TabIndex = 13;
             this.treatments_idLabel.Text = "Treatment:";
-            // 
-            // estimates_totalLabel
-            // 
-            this.estimates_totalLabel.AutoSize = true;
-            this.estimates_totalLabel.Location = new System.Drawing.Point(296, 48);
-            this.estimates_totalLabel.Name = "estimates_totalLabel";
-            this.estimates_totalLabel.Size = new System.Drawing.Size(34, 13);
-            this.estimates_totalLabel.TabIndex = 24;
-            this.estimates_totalLabel.Text = "Total:";
             // 
             // estimates_deductiontaxrateLabel
             // 
@@ -236,7 +236,7 @@
             // estimateslines_unitpriceLabel
             // 
             this.estimateslines_unitpriceLabel.AutoSize = true;
-            this.estimateslines_unitpriceLabel.Location = new System.Drawing.Point(180, 89);
+            this.estimateslines_unitpriceLabel.Location = new System.Drawing.Point(65, 166);
             this.estimateslines_unitpriceLabel.Name = "estimateslines_unitpriceLabel";
             this.estimateslines_unitpriceLabel.Size = new System.Drawing.Size(34, 13);
             this.estimateslines_unitpriceLabel.TabIndex = 10;
@@ -245,7 +245,7 @@
             // estimateslines_taxrateLabel
             // 
             this.estimateslines_taxrateLabel.AutoSize = true;
-            this.estimateslines_taxrateLabel.Location = new System.Drawing.Point(282, 89);
+            this.estimateslines_taxrateLabel.Location = new System.Drawing.Point(141, 166);
             this.estimateslines_taxrateLabel.Name = "estimateslines_taxrateLabel";
             this.estimateslines_taxrateLabel.Size = new System.Drawing.Size(54, 13);
             this.estimateslines_taxrateLabel.TabIndex = 8;
@@ -254,7 +254,7 @@
             // estimateslines_quantityLabel
             // 
             this.estimateslines_quantityLabel.AutoSize = true;
-            this.estimateslines_quantityLabel.Location = new System.Drawing.Point(100, 89);
+            this.estimateslines_quantityLabel.Location = new System.Drawing.Point(9, 166);
             this.estimateslines_quantityLabel.Name = "estimateslines_quantityLabel";
             this.estimateslines_quantityLabel.Size = new System.Drawing.Size(49, 13);
             this.estimateslines_quantityLabel.TabIndex = 6;
@@ -315,7 +315,6 @@
             this.treatments_idComboBox.Size = new System.Drawing.Size(150, 21);
             this.treatments_idComboBox.TabIndex = 14;
             this.treatments_idComboBox.SelectedIndexChanged += new System.EventHandler(this.treatments_idComboBox_SelectedIndexChanged);
-            this.treatments_idComboBox.Leave += new System.EventHandler(this.treatments_idComboBox_Leave);
             // 
             // button_tabEstimatesLines_delete
             // 
@@ -378,7 +377,7 @@
             // 
             this.panel_tabEstimatesLines_updates.Controls.Add(this.button_tabEstimatesLines_cancel);
             this.panel_tabEstimatesLines_updates.Controls.Add(this.button_tabEstimatesLines_save);
-            this.panel_tabEstimatesLines_updates.Location = new System.Drawing.Point(6, 426);
+            this.panel_tabEstimatesLines_updates.Location = new System.Drawing.Point(6, 466);
             this.panel_tabEstimatesLines_updates.Name = "panel_tabEstimatesLines_updates";
             this.panel_tabEstimatesLines_updates.Size = new System.Drawing.Size(480, 30);
             this.panel_tabEstimatesLines_updates.TabIndex = 8;
@@ -401,7 +400,6 @@
             this.advancedDataGridView_tabEstimatesLines_list.AutoGenerateColumns = false;
             this.advancedDataGridView_tabEstimatesLines_list.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.advancedDataGridView_tabEstimatesLines_list.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.estimateslinesidDataGridViewTextBoxColumn,
             this.codeDataGridViewTextBoxColumn,
             this.descriptionDataGridViewTextBoxColumn,
             this.quantityDataGridViewTextBoxColumn,
@@ -421,16 +419,6 @@
             this.advancedDataGridView_tabEstimatesLines_list.TabIndex = 1;
             this.advancedDataGridView_tabEstimatesLines_list.SortStringChanged += new System.EventHandler(this.advancedDataGridView_tabEstimatesLines_list_SortStringChanged);
             this.advancedDataGridView_tabEstimatesLines_list.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_tabEstimatesLines_list_FilterStringChanged);
-            // 
-            // estimateslinesidDataGridViewTextBoxColumn
-            // 
-            this.estimateslinesidDataGridViewTextBoxColumn.DataPropertyName = "estimateslines_id";
-            this.estimateslinesidDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.estimateslinesidDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.estimateslinesidDataGridViewTextBoxColumn.Name = "estimateslinesidDataGridViewTextBoxColumn";
-            this.estimateslinesidDataGridViewTextBoxColumn.ReadOnly = true;
-            this.estimateslinesidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.estimateslinesidDataGridViewTextBoxColumn.Width = 80;
             // 
             // codeDataGridViewTextBoxColumn
             // 
@@ -500,19 +488,42 @@
             // 
             // groupBox_tabEstimatesLines_filler
             // 
+            this.groupBox_tabEstimatesLines_filler.Controls.Add(this.computedlines_idComboBox);
+            this.groupBox_tabEstimatesLines_filler.Controls.Add(this.computedlines_idLabel);
             this.groupBox_tabEstimatesLines_filler.Controls.Add(this.treatments_idLabel);
             this.groupBox_tabEstimatesLines_filler.Controls.Add(this.treatments_idComboBox);
-            this.groupBox_tabEstimatesLines_filler.Location = new System.Drawing.Point(270, 23);
+            this.groupBox_tabEstimatesLines_filler.Location = new System.Drawing.Point(267, 33);
             this.groupBox_tabEstimatesLines_filler.Name = "groupBox_tabEstimatesLines_filler";
-            this.groupBox_tabEstimatesLines_filler.Size = new System.Drawing.Size(172, 63);
+            this.groupBox_tabEstimatesLines_filler.Size = new System.Drawing.Size(172, 103);
             this.groupBox_tabEstimatesLines_filler.TabIndex = 18;
             this.groupBox_tabEstimatesLines_filler.TabStop = false;
             this.groupBox_tabEstimatesLines_filler.Text = "Autofill from";
             // 
+            // computedlines_idComboBox
+            // 
+            this.computedlines_idComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.computedlines_idComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.computedlines_idComboBox.FormattingEnabled = true;
+            this.computedlines_idComboBox.Location = new System.Drawing.Point(10, 72);
+            this.computedlines_idComboBox.Name = "computedlines_idComboBox";
+            this.computedlines_idComboBox.Size = new System.Drawing.Size(150, 21);
+            this.computedlines_idComboBox.TabIndex = 16;
+            this.computedlines_idComboBox.SelectedIndexChanged += new System.EventHandler(this.computedlines_idComboBox_SelectedIndexChanged);
+            this.computedlines_idComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.computedlines_idComboBox_KeyPress);
+            // 
+            // computedlines_idLabel
+            // 
+            this.computedlines_idLabel.AutoSize = true;
+            this.computedlines_idLabel.Location = new System.Drawing.Point(6, 56);
+            this.computedlines_idLabel.Name = "computedlines_idLabel";
+            this.computedlines_idLabel.Size = new System.Drawing.Size(81, 13);
+            this.computedlines_idLabel.TabIndex = 15;
+            this.computedlines_idLabel.Text = "Computed Line:";
+            // 
             // estimateslines_unitpriceTextBox
             // 
             this.estimateslines_unitpriceTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.estimateslinesBindingSource, "estimateslines_unitprice", true));
-            this.estimateslines_unitpriceTextBox.Location = new System.Drawing.Point(184, 105);
+            this.estimateslines_unitpriceTextBox.Location = new System.Drawing.Point(68, 182);
             this.estimateslines_unitpriceTextBox.Name = "estimateslines_unitpriceTextBox";
             this.estimateslines_unitpriceTextBox.Size = new System.Drawing.Size(70, 20);
             this.estimateslines_unitpriceTextBox.TabIndex = 11;
@@ -524,7 +535,7 @@
             // estimateslines_quantityTextBox
             // 
             this.estimateslines_quantityTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.estimateslinesBindingSource, "estimateslines_quantity", true));
-            this.estimateslines_quantityTextBox.Location = new System.Drawing.Point(103, 105);
+            this.estimateslines_quantityTextBox.Location = new System.Drawing.Point(12, 182);
             this.estimateslines_quantityTextBox.Name = "estimateslines_quantityTextBox";
             this.estimateslines_quantityTextBox.Size = new System.Drawing.Size(50, 20);
             this.estimateslines_quantityTextBox.TabIndex = 7;
@@ -551,7 +562,7 @@
             this.estimateslines_taxrateComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.estimateslines_taxrateComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.estimateslines_taxrateComboBox.FormattingEnabled = true;
-            this.estimateslines_taxrateComboBox.Location = new System.Drawing.Point(342, 104);
+            this.estimateslines_taxrateComboBox.Location = new System.Drawing.Point(200, 182);
             this.estimateslines_taxrateComboBox.Name = "estimateslines_taxrateComboBox";
             this.estimateslines_taxrateComboBox.Size = new System.Drawing.Size(100, 21);
             this.estimateslines_taxrateComboBox.TabIndex = 12;
@@ -577,6 +588,7 @@
             this.button_tabEstimates_print.TabIndex = 4;
             this.button_tabEstimates_print.Text = "Print";
             this.button_tabEstimates_print.UseVisualStyleBackColor = true;
+            this.button_tabEstimates_print.Click += new System.EventHandler(this.button_tabEstimates_print_Click);
             // 
             // button_tabEstimates_delete
             // 
@@ -600,7 +612,7 @@
             // estimateslines_taxrateTextBox
             // 
             this.estimateslines_taxrateTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.estimateslinesBindingSource, "estimateslines_taxrate", true));
-            this.estimateslines_taxrateTextBox.Location = new System.Drawing.Point(285, 105);
+            this.estimateslines_taxrateTextBox.Location = new System.Drawing.Point(144, 182);
             this.estimateslines_taxrateTextBox.Name = "estimateslines_taxrateTextBox";
             this.estimateslines_taxrateTextBox.Size = new System.Drawing.Size(50, 20);
             this.estimateslines_taxrateTextBox.TabIndex = 9;
@@ -638,7 +650,7 @@
             // 
             this.comboBox_filterYears.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_filterYears.FormattingEnabled = true;
-            this.comboBox_filterYears.Location = new System.Drawing.Point(172, 25);
+            this.comboBox_filterYears.Location = new System.Drawing.Point(173, 25);
             this.comboBox_filterYears.Name = "comboBox_filterYears";
             this.comboBox_filterYears.Size = new System.Drawing.Size(70, 21);
             this.comboBox_filterYears.TabIndex = 7;
@@ -647,7 +659,7 @@
             // label_filterYears
             // 
             this.label_filterYears.AutoSize = true;
-            this.label_filterYears.Location = new System.Drawing.Point(169, 9);
+            this.label_filterYears.Location = new System.Drawing.Point(170, 9);
             this.label_filterYears.Name = "label_filterYears";
             this.label_filterYears.Size = new System.Drawing.Size(32, 13);
             this.label_filterYears.TabIndex = 6;
@@ -663,55 +675,97 @@
             this.comboBox_filterDoctors.TabIndex = 5;
             this.comboBox_filterDoctors.SelectedIndexChanged += new System.EventHandler(this.comboBox_tabEstimatesLines_filterPriceslists_SelectedIndexChanged);
             // 
-            // totalinvoicedTextBox
+            // totaldueinvoicedTextBox
             // 
-            this.totalinvoicedTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.totalinvoicedTextBox.Location = new System.Drawing.Point(208, 32);
-            this.totalinvoicedTextBox.Name = "totalinvoicedTextBox";
-            this.totalinvoicedTextBox.ReadOnly = true;
-            this.totalinvoicedTextBox.Size = new System.Drawing.Size(70, 20);
-            this.totalinvoicedTextBox.TabIndex = 3;
+            this.totaldueinvoicedTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.totaldueinvoicedTextBox.Location = new System.Drawing.Point(188, 85);
+            this.totaldueinvoicedTextBox.Name = "totaldueinvoicedTextBox";
+            this.totaldueinvoicedTextBox.ReadOnly = true;
+            this.totaldueinvoicedTextBox.Size = new System.Drawing.Size(90, 20);
+            this.totaldueinvoicedTextBox.TabIndex = 3;
             // 
-            // totalinvoicedLabel
+            // totaldueinvoicedLabel
             // 
-            this.totalinvoicedLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.totalinvoicedLabel.Location = new System.Drawing.Point(52, 35);
-            this.totalinvoicedLabel.Name = "totalinvoicedLabel";
-            this.totalinvoicedLabel.Size = new System.Drawing.Size(150, 13);
-            this.totalinvoicedLabel.TabIndex = 2;
-            this.totalinvoicedLabel.Text = "Total Invoiced:";
-            this.totalinvoicedLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.totaldueinvoicedLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.totaldueinvoicedLabel.Location = new System.Drawing.Point(32, 87);
+            this.totaldueinvoicedLabel.Name = "totaldueinvoicedLabel";
+            this.totaldueinvoicedLabel.Size = new System.Drawing.Size(150, 13);
+            this.totaldueinvoicedLabel.TabIndex = 2;
+            this.totaldueinvoicedLabel.Text = "Total Due Invoiced:";
+            this.totaldueinvoicedLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // totalTextBox
+            // totaldueTextBox
             // 
-            this.totalTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.totalTextBox.Location = new System.Drawing.Point(208, 6);
-            this.totalTextBox.Name = "totalTextBox";
-            this.totalTextBox.ReadOnly = true;
-            this.totalTextBox.Size = new System.Drawing.Size(70, 20);
-            this.totalTextBox.TabIndex = 1;
+            this.totaldueTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.totaldueTextBox.Location = new System.Drawing.Point(188, 58);
+            this.totaldueTextBox.Name = "totaldueTextBox";
+            this.totaldueTextBox.ReadOnly = true;
+            this.totaldueTextBox.Size = new System.Drawing.Size(90, 20);
+            this.totaldueTextBox.TabIndex = 1;
             // 
-            // totalLabel
+            // totaldueLabel
             // 
-            this.totalLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.totalLabel.Location = new System.Drawing.Point(52, 9);
-            this.totalLabel.Name = "totalLabel";
-            this.totalLabel.Size = new System.Drawing.Size(150, 13);
-            this.totalLabel.TabIndex = 0;
-            this.totalLabel.Text = "Total:";
-            this.totalLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.totaldueLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.totaldueLabel.Location = new System.Drawing.Point(32, 61);
+            this.totaldueLabel.Name = "totaldueLabel";
+            this.totaldueLabel.Size = new System.Drawing.Size(150, 13);
+            this.totaldueLabel.TabIndex = 0;
+            this.totaldueLabel.Text = "Total Due:";
+            this.totaldueLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // panel_listtotal
             // 
-            this.panel_listtotal.Controls.Add(this.totalinvoicedTextBox);
-            this.panel_listtotal.Controls.Add(this.totalinvoicedLabel);
-            this.panel_listtotal.Controls.Add(this.totalTextBox);
-            this.panel_listtotal.Controls.Add(this.totalLabel);
+            this.panel_listtotal.Controls.Add(this.totalgrossTextBox);
+            this.panel_listtotal.Controls.Add(this.totalgrossLabel);
+            this.panel_listtotal.Controls.Add(this.totalnetTextBox);
+            this.panel_listtotal.Controls.Add(this.totalnetLabel);
+            this.panel_listtotal.Controls.Add(this.totaldueinvoicedTextBox);
+            this.panel_listtotal.Controls.Add(this.totaldueinvoicedLabel);
+            this.panel_listtotal.Controls.Add(this.totaldueTextBox);
+            this.panel_listtotal.Controls.Add(this.totaldueLabel);
             this.panel_listtotal.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_listtotal.Location = new System.Drawing.Point(0, 446);
+            this.panel_listtotal.Location = new System.Drawing.Point(0, 390);
             this.panel_listtotal.Name = "panel_listtotal";
-            this.panel_listtotal.Size = new System.Drawing.Size(284, 56);
+            this.panel_listtotal.Size = new System.Drawing.Size(284, 112);
             this.panel_listtotal.TabIndex = 2;
+            // 
+            // totalgrossTextBox
+            // 
+            this.totalgrossTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.totalgrossTextBox.Location = new System.Drawing.Point(188, 32);
+            this.totalgrossTextBox.Name = "totalgrossTextBox";
+            this.totalgrossTextBox.ReadOnly = true;
+            this.totalgrossTextBox.Size = new System.Drawing.Size(90, 20);
+            this.totalgrossTextBox.TabIndex = 7;
+            // 
+            // totalgrossLabel
+            // 
+            this.totalgrossLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.totalgrossLabel.Location = new System.Drawing.Point(32, 35);
+            this.totalgrossLabel.Name = "totalgrossLabel";
+            this.totalgrossLabel.Size = new System.Drawing.Size(150, 13);
+            this.totalgrossLabel.TabIndex = 6;
+            this.totalgrossLabel.Text = "Total Gross:";
+            this.totalgrossLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // totalnetTextBox
+            // 
+            this.totalnetTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.totalnetTextBox.Location = new System.Drawing.Point(188, 6);
+            this.totalnetTextBox.Name = "totalnetTextBox";
+            this.totalnetTextBox.ReadOnly = true;
+            this.totalnetTextBox.Size = new System.Drawing.Size(90, 20);
+            this.totalnetTextBox.TabIndex = 5;
+            // 
+            // totalnetLabel
+            // 
+            this.totalnetLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.totalnetLabel.Location = new System.Drawing.Point(32, 9);
+            this.totalnetLabel.Name = "totalnetLabel";
+            this.totalnetLabel.Size = new System.Drawing.Size(150, 13);
+            this.totalnetLabel.TabIndex = 4;
+            this.totalnetLabel.Text = "Total Net:";
+            this.totalnetLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // advancedDataGridView_main
             // 
@@ -723,7 +777,6 @@
             this.advancedDataGridView_main.AutoGenerateColumns = false;
             this.advancedDataGridView_main.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.advancedDataGridView_main.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.estimatesidDataGridViewTextBoxColumn,
             this.numberDataGridViewTextBoxColumn,
             this.dateDataGridViewTextBoxColumn,
             this.patientDataGridViewTextBoxColumn,
@@ -737,10 +790,52 @@
             this.advancedDataGridView_main.ReadOnly = true;
             this.advancedDataGridView_main.RowHeadersVisible = false;
             this.advancedDataGridView_main.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.advancedDataGridView_main.Size = new System.Drawing.Size(284, 446);
+            this.advancedDataGridView_main.Size = new System.Drawing.Size(284, 390);
             this.advancedDataGridView_main.TabIndex = 0;
             this.advancedDataGridView_main.SortStringChanged += new System.EventHandler(this.advancedDataGridView_main_SortStringChanged);
             this.advancedDataGridView_main.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_main_FilterStringChanged);
+            // 
+            // numberDataGridViewTextBoxColumn
+            // 
+            this.numberDataGridViewTextBoxColumn.DataPropertyName = "number";
+            this.numberDataGridViewTextBoxColumn.HeaderText = "Number";
+            this.numberDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.numberDataGridViewTextBoxColumn.Name = "numberDataGridViewTextBoxColumn";
+            this.numberDataGridViewTextBoxColumn.ReadOnly = true;
+            this.numberDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.numberDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // dateDataGridViewTextBoxColumn
+            // 
+            this.dateDataGridViewTextBoxColumn.DataPropertyName = "date";
+            dataGridViewCellStyle4.Format = "d";
+            this.dateDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dateDataGridViewTextBoxColumn.HeaderText = "Date";
+            this.dateDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
+            this.dateDataGridViewTextBoxColumn.ReadOnly = true;
+            this.dateDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.dateDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // patientDataGridViewTextBoxColumn
+            // 
+            this.patientDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.patientDataGridViewTextBoxColumn.DataPropertyName = "patient";
+            this.patientDataGridViewTextBoxColumn.HeaderText = "Patient";
+            this.patientDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.patientDataGridViewTextBoxColumn.Name = "patientDataGridViewTextBoxColumn";
+            this.patientDataGridViewTextBoxColumn.ReadOnly = true;
+            this.patientDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // isinvoicedDataGridViewCheckBoxColumn
+            // 
+            this.isinvoicedDataGridViewCheckBoxColumn.DataPropertyName = "isinvoiced";
+            this.isinvoicedDataGridViewCheckBoxColumn.HeaderText = "I";
+            this.isinvoicedDataGridViewCheckBoxColumn.MinimumWidth = 22;
+            this.isinvoicedDataGridViewCheckBoxColumn.Name = "isinvoicedDataGridViewCheckBoxColumn";
+            this.isinvoicedDataGridViewCheckBoxColumn.ReadOnly = true;
+            this.isinvoicedDataGridViewCheckBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.isinvoicedDataGridViewCheckBoxColumn.Width = 50;
             // 
             // vEstimatesBindingSource
             // 
@@ -769,10 +864,14 @@
             // 
             // panel_tabEstimates_data
             // 
+            this.panel_tabEstimates_data.Controls.Add(this.estimates_totaldueLabel);
+            this.panel_tabEstimates_data.Controls.Add(this.estimates_totaldueTextBox);
+            this.panel_tabEstimates_data.Controls.Add(this.estimates_totalgrossLabel);
+            this.panel_tabEstimates_data.Controls.Add(this.estimates_totalgrossTextBox);
+            this.panel_tabEstimates_data.Controls.Add(this.estimates_totalnetLabel);
+            this.panel_tabEstimates_data.Controls.Add(this.estimates_totalnetTextBox);
             this.panel_tabEstimates_data.Controls.Add(this.estimates_invoiceTextBox);
             this.panel_tabEstimates_data.Controls.Add(this.estimates_invoiceLabel);
-            this.panel_tabEstimates_data.Controls.Add(this.estimates_totalLabel);
-            this.panel_tabEstimates_data.Controls.Add(this.estimates_totalTextBox);
             this.panel_tabEstimates_data.Controls.Add(this.patients_idComboBox);
             this.panel_tabEstimates_data.Controls.Add(this.doctors_idComboBox);
             this.panel_tabEstimates_data.Controls.Add(this.estimates_deductiontaxrateComboBox);
@@ -796,38 +895,83 @@
             this.panel_tabEstimates_data.Controls.Add(this.estimates_idTextBox);
             this.panel_tabEstimates_data.Location = new System.Drawing.Point(6, 42);
             this.panel_tabEstimates_data.Name = "panel_tabEstimates_data";
-            this.panel_tabEstimates_data.Size = new System.Drawing.Size(480, 444);
+            this.panel_tabEstimates_data.Size = new System.Drawing.Size(480, 442);
             this.panel_tabEstimates_data.TabIndex = 2;
+            // 
+            // estimates_totaldueLabel
+            // 
+            this.estimates_totaldueLabel.AutoSize = true;
+            this.estimates_totaldueLabel.Location = new System.Drawing.Point(379, 48);
+            this.estimates_totaldueLabel.Name = "estimates_totaldueLabel";
+            this.estimates_totaldueLabel.Size = new System.Drawing.Size(30, 13);
+            this.estimates_totaldueLabel.TabIndex = 29;
+            this.estimates_totaldueLabel.Text = "Due:";
+            // 
+            // estimates_totaldueTextBox
+            // 
+            this.estimates_totaldueTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.estimatesBindingSource, "estimates_totaldue", true));
+            this.estimates_totaldueTextBox.Enabled = false;
+            this.estimates_totaldueTextBox.Location = new System.Drawing.Point(382, 64);
+            this.estimates_totaldueTextBox.Name = "estimates_totaldueTextBox";
+            this.estimates_totaldueTextBox.Size = new System.Drawing.Size(60, 20);
+            this.estimates_totaldueTextBox.TabIndex = 30;
+            // 
+            // estimatesBindingSource
+            // 
+            this.estimatesBindingSource.DataSource = typeof(DG.DentneD.Model.Entity.estimates);
+            // 
+            // estimates_totalgrossLabel
+            // 
+            this.estimates_totalgrossLabel.AutoSize = true;
+            this.estimates_totalgrossLabel.Location = new System.Drawing.Point(313, 48);
+            this.estimates_totalgrossLabel.Name = "estimates_totalgrossLabel";
+            this.estimates_totalgrossLabel.Size = new System.Drawing.Size(37, 13);
+            this.estimates_totalgrossLabel.TabIndex = 28;
+            this.estimates_totalgrossLabel.Text = "Gross:";
+            // 
+            // estimates_totalgrossTextBox
+            // 
+            this.estimates_totalgrossTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.estimatesBindingSource, "estimates_totalgross", true));
+            this.estimates_totalgrossTextBox.Enabled = false;
+            this.estimates_totalgrossTextBox.Location = new System.Drawing.Point(316, 64);
+            this.estimates_totalgrossTextBox.Name = "estimates_totalgrossTextBox";
+            this.estimates_totalgrossTextBox.Size = new System.Drawing.Size(60, 20);
+            this.estimates_totalgrossTextBox.TabIndex = 29;
+            // 
+            // estimates_totalnetLabel
+            // 
+            this.estimates_totalnetLabel.AutoSize = true;
+            this.estimates_totalnetLabel.Location = new System.Drawing.Point(247, 48);
+            this.estimates_totalnetLabel.Name = "estimates_totalnetLabel";
+            this.estimates_totalnetLabel.Size = new System.Drawing.Size(27, 13);
+            this.estimates_totalnetLabel.TabIndex = 27;
+            this.estimates_totalnetLabel.Text = "Net:";
+            // 
+            // estimates_totalnetTextBox
+            // 
+            this.estimates_totalnetTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.estimatesBindingSource, "estimates_totalnet", true));
+            this.estimates_totalnetTextBox.Enabled = false;
+            this.estimates_totalnetTextBox.Location = new System.Drawing.Point(250, 64);
+            this.estimates_totalnetTextBox.Name = "estimates_totalnetTextBox";
+            this.estimates_totalnetTextBox.Size = new System.Drawing.Size(60, 20);
+            this.estimates_totalnetTextBox.TabIndex = 28;
             // 
             // estimates_invoiceTextBox
             // 
             this.estimates_invoiceTextBox.Enabled = false;
-            this.estimates_invoiceTextBox.Location = new System.Drawing.Point(299, 25);
+            this.estimates_invoiceTextBox.Location = new System.Drawing.Point(250, 25);
             this.estimates_invoiceTextBox.Name = "estimates_invoiceTextBox";
-            this.estimates_invoiceTextBox.Size = new System.Drawing.Size(100, 20);
+            this.estimates_invoiceTextBox.Size = new System.Drawing.Size(150, 20);
             this.estimates_invoiceTextBox.TabIndex = 27;
             // 
             // estimates_invoiceLabel
             // 
             this.estimates_invoiceLabel.AutoSize = true;
-            this.estimates_invoiceLabel.Location = new System.Drawing.Point(296, 9);
+            this.estimates_invoiceLabel.Location = new System.Drawing.Point(247, 9);
             this.estimates_invoiceLabel.Name = "estimates_invoiceLabel";
             this.estimates_invoiceLabel.Size = new System.Drawing.Size(42, 13);
             this.estimates_invoiceLabel.TabIndex = 26;
             this.estimates_invoiceLabel.Text = "Invoice";
-            // 
-            // estimates_totalTextBox
-            // 
-            this.estimates_totalTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.estimatesBindingSource, "estimates_total", true));
-            this.estimates_totalTextBox.Enabled = false;
-            this.estimates_totalTextBox.Location = new System.Drawing.Point(299, 64);
-            this.estimates_totalTextBox.Name = "estimates_totalTextBox";
-            this.estimates_totalTextBox.Size = new System.Drawing.Size(60, 20);
-            this.estimates_totalTextBox.TabIndex = 25;
-            // 
-            // estimatesBindingSource
-            // 
-            this.estimatesBindingSource.DataSource = typeof(DG.DentneD.Model.Entity.estimates);
             // 
             // patients_idComboBox
             // 
@@ -840,6 +984,7 @@
             this.patients_idComboBox.Size = new System.Drawing.Size(121, 21);
             this.patients_idComboBox.TabIndex = 24;
             this.patients_idComboBox.SelectedIndexChanged += new System.EventHandler(this.patients_idComboBox_SelectedIndexChanged);
+            this.patients_idComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.patients_idComboBox_KeyPress);
             // 
             // doctors_idComboBox
             // 
@@ -852,6 +997,7 @@
             this.doctors_idComboBox.Size = new System.Drawing.Size(121, 21);
             this.doctors_idComboBox.TabIndex = 23;
             this.doctors_idComboBox.SelectedIndexChanged += new System.EventHandler(this.doctors_idComboBox_SelectedIndexChanged);
+            this.doctors_idComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.doctors_idComboBox_KeyPress);
             // 
             // estimates_deductiontaxrateComboBox
             // 
@@ -863,6 +1009,7 @@
             this.estimates_deductiontaxrateComboBox.Size = new System.Drawing.Size(100, 21);
             this.estimates_deductiontaxrateComboBox.TabIndex = 22;
             this.estimates_deductiontaxrateComboBox.SelectedIndexChanged += new System.EventHandler(this.estimates_deductiontaxrateComboBox_SelectedIndexChanged);
+            this.estimates_deductiontaxrateComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.estimates_deductiontaxrateComboBox_KeyPress);
             // 
             // estimates_deductiontaxrateTextBox
             // 
@@ -882,6 +1029,7 @@
             this.estimates_footerComboBox.Size = new System.Drawing.Size(121, 21);
             this.estimates_footerComboBox.TabIndex = 17;
             this.estimates_footerComboBox.SelectedIndexChanged += new System.EventHandler(this.estimates_footerComboBox_SelectedIndexChanged);
+            this.estimates_footerComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.estimates_footerComboBox_KeyPress);
             // 
             // estimates_footerTextBox
             // 
@@ -904,6 +1052,7 @@
             this.estimates_paymentComboBox.Size = new System.Drawing.Size(121, 21);
             this.estimates_paymentComboBox.TabIndex = 14;
             this.estimates_paymentComboBox.SelectedIndexChanged += new System.EventHandler(this.estimates_paymentComboBox_SelectedIndexChanged);
+            this.estimates_paymentComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.estimates_paymentComboBox_KeyPress);
             // 
             // estimates_paymentTextBox
             // 
@@ -1064,6 +1213,7 @@
             // 
             // panel_tabEstimatesLines_data
             // 
+            this.panel_tabEstimatesLines_data.Controls.Add(this.estimateslines_istaxesdeductionsableCheckBox);
             this.panel_tabEstimatesLines_data.Controls.Add(this.groupBox_tabEstimatesLines_filler);
             this.panel_tabEstimatesLines_data.Controls.Add(this.estimateslines_taxrateComboBox);
             this.panel_tabEstimatesLines_data.Controls.Add(this.patientstreatments_idLabel);
@@ -1082,61 +1232,19 @@
             this.panel_tabEstimatesLines_data.Controls.Add(this.estimateslines_idTextBox);
             this.panel_tabEstimatesLines_data.Location = new System.Drawing.Point(6, 249);
             this.panel_tabEstimatesLines_data.Name = "panel_tabEstimatesLines_data";
-            this.panel_tabEstimatesLines_data.Size = new System.Drawing.Size(480, 171);
+            this.panel_tabEstimatesLines_data.Size = new System.Drawing.Size(480, 211);
             this.panel_tabEstimatesLines_data.TabIndex = 9;
             // 
-            // estimatesidDataGridViewTextBoxColumn
+            // estimateslines_istaxesdeductionsableCheckBox
             // 
-            this.estimatesidDataGridViewTextBoxColumn.DataPropertyName = "estimates_id";
-            this.estimatesidDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.estimatesidDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.estimatesidDataGridViewTextBoxColumn.Name = "estimatesidDataGridViewTextBoxColumn";
-            this.estimatesidDataGridViewTextBoxColumn.ReadOnly = true;
-            this.estimatesidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.estimatesidDataGridViewTextBoxColumn.Visible = false;
-            this.estimatesidDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // numberDataGridViewTextBoxColumn
-            // 
-            this.numberDataGridViewTextBoxColumn.DataPropertyName = "number";
-            this.numberDataGridViewTextBoxColumn.HeaderText = "Number";
-            this.numberDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.numberDataGridViewTextBoxColumn.Name = "numberDataGridViewTextBoxColumn";
-            this.numberDataGridViewTextBoxColumn.ReadOnly = true;
-            this.numberDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.numberDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // dateDataGridViewTextBoxColumn
-            // 
-            this.dateDataGridViewTextBoxColumn.DataPropertyName = "date";
-            dataGridViewCellStyle4.Format = "d";
-            this.dateDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
-            this.dateDataGridViewTextBoxColumn.HeaderText = "Date";
-            this.dateDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
-            this.dateDataGridViewTextBoxColumn.ReadOnly = true;
-            this.dateDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.dateDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // patientDataGridViewTextBoxColumn
-            // 
-            this.patientDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.patientDataGridViewTextBoxColumn.DataPropertyName = "patient";
-            this.patientDataGridViewTextBoxColumn.HeaderText = "Patient";
-            this.patientDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.patientDataGridViewTextBoxColumn.Name = "patientDataGridViewTextBoxColumn";
-            this.patientDataGridViewTextBoxColumn.ReadOnly = true;
-            this.patientDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // isinvoicedDataGridViewCheckBoxColumn
-            // 
-            this.isinvoicedDataGridViewCheckBoxColumn.DataPropertyName = "isinvoiced";
-            this.isinvoicedDataGridViewCheckBoxColumn.HeaderText = "I";
-            this.isinvoicedDataGridViewCheckBoxColumn.MinimumWidth = 22;
-            this.isinvoicedDataGridViewCheckBoxColumn.Name = "isinvoicedDataGridViewCheckBoxColumn";
-            this.isinvoicedDataGridViewCheckBoxColumn.ReadOnly = true;
-            this.isinvoicedDataGridViewCheckBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.isinvoicedDataGridViewCheckBoxColumn.Width = 40;
+            this.estimateslines_istaxesdeductionsableCheckBox.AutoSize = true;
+            this.estimateslines_istaxesdeductionsableCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.estimateslinesBindingSource, "estimateslines_istaxesdeductionsable", true));
+            this.estimateslines_istaxesdeductionsableCheckBox.Location = new System.Drawing.Point(312, 183);
+            this.estimateslines_istaxesdeductionsableCheckBox.Name = "estimateslines_istaxesdeductionsableCheckBox";
+            this.estimateslines_istaxesdeductionsableCheckBox.Size = new System.Drawing.Size(124, 17);
+            this.estimateslines_istaxesdeductionsableCheckBox.TabIndex = 19;
+            this.estimateslines_istaxesdeductionsableCheckBox.Text = "Is tax deduction able";
+            this.estimateslines_istaxesdeductionsableCheckBox.UseVisualStyleBackColor = true;
             // 
             // FormEstimates
             // 
@@ -1209,16 +1317,15 @@
         private System.Windows.Forms.Label label_filterDoctors;
         private System.Windows.Forms.Panel panel_filters;
         private System.Windows.Forms.ComboBox comboBox_filterDoctors;
-        private System.Windows.Forms.TextBox totalinvoicedTextBox;
-        private System.Windows.Forms.Label totalinvoicedLabel;
-        private System.Windows.Forms.TextBox totalTextBox;
-        private System.Windows.Forms.Label totalLabel;
+        private System.Windows.Forms.TextBox totaldueinvoicedTextBox;
+        private System.Windows.Forms.Label totaldueinvoicedLabel;
+        private System.Windows.Forms.TextBox totaldueTextBox;
+        private System.Windows.Forms.Label totaldueLabel;
         private System.Windows.Forms.Panel panel_listtotal;
         private Zuby.ADGV.AdvancedDataGridView advancedDataGridView_main;
         private System.Windows.Forms.Panel panel_list;
         private System.Windows.Forms.Button button_tabEstimates_new;
         private System.Windows.Forms.Panel panel_tabEstimates_data;
-        private System.Windows.Forms.TextBox estimates_totalTextBox;
         private System.Windows.Forms.BindingSource estimatesBindingSource;
         private System.Windows.Forms.ComboBox patients_idComboBox;
         private System.Windows.Forms.ComboBox doctors_idComboBox;
@@ -1248,16 +1355,8 @@
         private System.Windows.Forms.Button button_tabEstimates_invoice;
         private System.Windows.Forms.TextBox estimates_invoiceTextBox;
         private System.Windows.Forms.Label estimates_invoiceLabel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn estimateslinesidDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn codeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn quantityDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn unitpriceDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn taxrateDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn totalpriceDataGridViewTextBoxColumn;
         private System.Windows.Forms.ComboBox comboBox_filterYears;
         private System.Windows.Forms.Label label_filterYears;
-        private System.Windows.Forms.Label estimates_totalLabel;
         private System.Windows.Forms.Label estimates_deductiontaxrateLabel;
         private System.Windows.Forms.Label estimates_footerLabel;
         private System.Windows.Forms.Label estimates_paymentLabel;
@@ -1273,10 +1372,28 @@
         private System.Windows.Forms.Label estimateslines_codeLabel;
         private System.Windows.Forms.Label estimateslines_idLabel;
         private System.Windows.Forms.Label patientstreatments_idLabel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn estimatesidDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn numberDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn patientDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn isinvoicedDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn codeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn quantityDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn unitpriceDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn taxrateDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn totalpriceDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Label estimates_totaldueLabel;
+        private System.Windows.Forms.TextBox estimates_totaldueTextBox;
+        private System.Windows.Forms.Label estimates_totalgrossLabel;
+        private System.Windows.Forms.TextBox estimates_totalgrossTextBox;
+        private System.Windows.Forms.Label estimates_totalnetLabel;
+        private System.Windows.Forms.TextBox estimates_totalnetTextBox;
+        private System.Windows.Forms.CheckBox estimateslines_istaxesdeductionsableCheckBox;
+        private System.Windows.Forms.ComboBox computedlines_idComboBox;
+        private System.Windows.Forms.Label computedlines_idLabel;
+        private System.Windows.Forms.TextBox totalgrossTextBox;
+        private System.Windows.Forms.Label totalgrossLabel;
+        private System.Windows.Forms.TextBox totalnetTextBox;
+        private System.Windows.Forms.Label totalnetLabel;
     }
 }

@@ -18,9 +18,10 @@ using Zuby.ADGV;
 using System.Data;
 using System.Configuration;
 using System.Diagnostics;
-using System.Text;
 using System.Linq.Expressions;
 using System.Drawing;
+using DG.DentneD.Helpers;
+using SMcMaster;
 
 namespace DG.DentneD.Forms
 {
@@ -42,13 +43,16 @@ namespace DG.DentneD.Forms
         private TabElement tabElement_tabPatientsNotes = new TabElement();
 
         private const int MaxRowValueLength = 60;
-        private const string SRMBinaryFileName = "srm.exe";
 
         private enum FilterShow { NotArchived, Archived, All };
 
         private readonly string _patientsDatadir = "";
         private readonly string _patientsAttachmentsdir = "";
         private readonly bool _doSecureDelete = false;
+        private readonly bool _resetPatientstreatmentsFilterOnChange = false;
+
+        private enum PaymentsReference { Treatments, Invoices };
+        private readonly PaymentsReference _paymentsReference = PaymentsReference.Treatments;
 
         public int invoices_id_toload = -1;
         public int estimates_id_toload = -1;
@@ -59,6 +63,7 @@ namespace DG.DentneD.Forms
         public FormPatients()
         {
             InitializeComponent();
+            (new TabOrderManager(this)).SetTabOrder(TabOrderManager.TabScheme.AcrossFirst);
 
             Initialize(Program.uighfApplication);
 
@@ -68,6 +73,11 @@ namespace DG.DentneD.Forms
             _patientsDatadir = ConfigurationManager.AppSettings["patientsDatadir"];
             _patientsAttachmentsdir = ConfigurationManager.AppSettings["patientsAttachmentsdir"];
             _doSecureDelete = Convert.ToBoolean(ConfigurationManager.AppSettings["doSecureDelete"]);
+            if (ConfigurationManager.AppSettings["paymentReference"] == "T")
+                _paymentsReference = PaymentsReference.Treatments;
+            else if (ConfigurationManager.AppSettings["paymentReference"] == "I")
+                _paymentsReference = PaymentsReference.Invoices;
+            _resetPatientstreatmentsFilterOnChange = Convert.ToBoolean(ConfigurationManager.AppSettings["resetPatientstreatmentsFilterOnChange"]);
         }
 
         /// <summary>
@@ -105,6 +115,10 @@ namespace DG.DentneD.Forms
             LanguageHelper.AddComponent(patients_sexMRadioButton);
             LanguageHelper.AddComponent(patients_sexFRadioButton);
             LanguageHelper.AddComponent(button_tabPatients_tabPatients_priceslistsreset);
+            LanguageHelper.AddComponent(patients_usernameLabel);
+            LanguageHelper.AddComponent(patients_passwordLabel);
+            LanguageHelper.AddComponent(patients_lastloginLabel);
+            LanguageHelper.AddComponent(button_tabPatients_tabPatients_resetusernamepassword);
             //tabPatients_tabPatientsContacts
             LanguageHelper.AddComponent(tabPage_tabPatients_tabPatientsContacts);
             LanguageHelper.AddComponent(patientscontactsidDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
@@ -151,7 +165,6 @@ namespace DG.DentneD.Forms
             LanguageHelper.AddComponent(patientstreatments_filtertdwLabel);
             LanguageHelper.AddComponent(patientstreatments_filtertnoLabel);
             LanguageHelper.AddComponent(patientstreatments_filtertanyLabel);
-            LanguageHelper.AddComponent(patientstreatmentsidDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
             LanguageHelper.AddComponent(dateDataGridViewTextBoxColumn1, this.GetType().Name, "HeaderText");
             LanguageHelper.AddComponent(treatmentDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
             LanguageHelper.AddComponent(toothsDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
@@ -171,6 +184,7 @@ namespace DG.DentneD.Forms
             LanguageHelper.AddComponent(doctors_idLabel1);
             LanguageHelper.AddComponent(treatments_idLabel);
             LanguageHelper.AddComponent(patientstreatments_priceLabel);
+            LanguageHelper.AddComponent(patientstreatments_taxrateLabel);
             LanguageHelper.AddComponent(patientstreatments_descriptionLabel);
             LanguageHelper.AddComponent(patientstreatments_notesLabel);
             LanguageHelper.AddComponent(patientstreatments_talLabel);
@@ -184,9 +198,9 @@ namespace DG.DentneD.Forms
             LanguageHelper.AddComponent(dateDataGridViewTextBoxColumn2, this.GetType().Name, "HeaderText");
             LanguageHelper.AddComponent(noteDataGridViewTextBoxColumn1, this.GetType().Name, "HeaderText");
             LanguageHelper.AddComponent(amountDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
-            LanguageHelper.AddComponent(label_tabPayments_payedtotal);
-            LanguageHelper.AddComponent(label_tabPayments_treatmentstotal);
-            LanguageHelper.AddComponent(label_tabPayments_treatmentslefttotal);
+            LanguageHelper.AddComponent(label_tabPayments_paidtotal);
+            LanguageHelper.AddComponent(label_tabPayments_total);
+            LanguageHelper.AddComponent(label_tabPayments_lefttotal);
             LanguageHelper.AddComponent(button_tabPayments_new);
             LanguageHelper.AddComponent(button_tabPayments_edit);
             LanguageHelper.AddComponent(button_tabPayments_delete);
@@ -195,6 +209,7 @@ namespace DG.DentneD.Forms
             LanguageHelper.AddComponent(payments_idLabel);
             LanguageHelper.AddComponent(payments_dateLabel);
             LanguageHelper.AddComponent(payments_amountLabel);
+            LanguageHelper.AddComponent(label_tabPayments_inforeference);
             LanguageHelper.AddComponent(payments_notesLabel);
             //tabAppointments
             LanguageHelper.AddComponent(tabPage_tabAppointments);
@@ -228,27 +243,25 @@ namespace DG.DentneD.Forms
             LanguageHelper.AddComponent(button_tabPatientsAttachments_filepathdelete);
             //tabInvoices
             LanguageHelper.AddComponent(tabPage_tabInvoices);
-            LanguageHelper.AddComponent(invoicesidDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
             LanguageHelper.AddComponent(numberDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
             LanguageHelper.AddComponent(dateDataGridViewTextBoxColumn3, this.GetType().Name, "HeaderText");
             LanguageHelper.AddComponent(doctorDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
             LanguageHelper.AddComponent(ispaidDataGridViewCheckBoxColumn1, this.GetType().Name, "HeaderText");
             LanguageHelper.AddComponent(totalDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
-            LanguageHelper.AddComponent(label_tabInvoices_paidtotal);
-            LanguageHelper.AddComponent(label_tabInvoices_invoicestotal);
-            LanguageHelper.AddComponent(label_tabInvoices_invoiceslefttotal);
+            LanguageHelper.AddComponent(label_tabInvoices_paidtotaldue);
+            LanguageHelper.AddComponent(label_tabInvoices_invoicestotaldue);
+            LanguageHelper.AddComponent(label_tabInvoices_invoiceslefttotaldue);
             LanguageHelper.AddComponent(button_tabInvoices_view);
             //tabEstimates
             LanguageHelper.AddComponent(tabPage_tabEstimates);
-            LanguageHelper.AddComponent(estimatesidDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
             LanguageHelper.AddComponent(numberDataGridViewTextBoxColumn1, this.GetType().Name, "HeaderText");
             LanguageHelper.AddComponent(dateDataGridViewTextBoxColumn4, this.GetType().Name, "HeaderText");
             LanguageHelper.AddComponent(doctorDataGridViewTextBoxColumn1, this.GetType().Name, "HeaderText");
             LanguageHelper.AddComponent(isinvoicedDataGridViewCheckBoxColumn, this.GetType().Name, "HeaderText");
             LanguageHelper.AddComponent(totalDataGridViewTextBoxColumn1, this.GetType().Name, "HeaderText");
-            LanguageHelper.AddComponent(label_tabEstimates_invoicedtotal);
-            LanguageHelper.AddComponent(label_tabEstimates_estimatestotal);
-            LanguageHelper.AddComponent(label_tabEstimates_estimateslefttotal);
+            LanguageHelper.AddComponent(label_tabEstimates_invoicedtotaldue);
+            LanguageHelper.AddComponent(label_tabEstimates_estimatestotaldue);
+            LanguageHelper.AddComponent(label_tabEstimates_estimateslefttotaldue);
             LanguageHelper.AddComponent(button_tabEstimates_view);
             //tabPatientsNotes
             LanguageHelper.AddComponent(tabPage_tabPatientsNotes);
@@ -264,6 +277,36 @@ namespace DG.DentneD.Forms
             LanguageHelper.AddComponent(patientsnotes_dateLabel);
             LanguageHelper.AddComponent(patientsnotes_textLabel);
         }
+
+        /// <summary>
+        /// Form language dictionary
+        /// </summary>
+        public class FormLanguage : IDGUIGHFLanguage
+        {
+            public string filtershowNotarchived = "Not Archived";
+            public string filtershowArchived = "Archived";
+            public string filtershowAll = "All";
+            public string filedeleteerrorMessage = "Error deleting file from folder.";
+            public string filedeleteerrorTitle = "Error";
+            public string folderdeleteerrorMessage = "Can not remove folder '{0}'.";
+            public string folderdeleteerrorTitle = "Error";
+            public string foldercreateerrorMessage = "Can not create folder '{0}'.";
+            public string foldercreateerrorTitle = "Error";
+            public string attachmentselectTitle = "Select a file";
+            public string attachmentcopyerrorMessage = "Error copying file to folder.";
+            public string attachmentcopyerrorTitle = "Error";
+            public string paymentsInfoReferenceLabelTreatments = "Payments above are referred to patient treatments total.";
+            public string paymentsInfoReferenceLabelInvoices = "Payments above are referred to patient invoices due.";
+            public string paymentsTotalLabelTreatments = "Treatments total:";
+            public string paymentsLeftTotalLabelTreatments = "Treatments to be paid:";
+            public string paymentsTotalLabelInvoices = "Invoices total:";
+            public string paymentsLeftTotalLabelInvoices = "Invoices to be paid:";
+        }
+
+        /// <summary>
+        /// Form language
+        /// </summary>
+        public FormLanguage language = new FormLanguage();
 
         /// <summary>
         /// Initialize TabElements
@@ -282,7 +325,7 @@ namespace DG.DentneD.Forms
             TabControlMain = tabControl_main;
 
             //set Main Panels
-            PanelFiltersMain = null;
+            PanelFiltersMain = panel_filters;
             PanelListMain = panel_list;
             PanelsExtraMain = null;
 
@@ -306,6 +349,7 @@ namespace DG.DentneD.Forms
                     AddButton = button_tabPatients_tabPatients_new,
                     IsAddButtonDefaultClickEventAttached = false,
                     UpdateButton = button_tabPatients_tabPatients_edit,
+                    IsUpdateButtonDefaultClickEventAttached = false,
                     RemoveButton = button_tabPatients_tabPatients_delete,
                     SaveButton = button_tabPatients_tabPatients_save,
                     CancelButton = button_tabPatients_tabPatients_cancel,
@@ -449,6 +493,7 @@ namespace DG.DentneD.Forms
                 }
             };
             tabElement_tabPatientsTreatments.ElementListItem.BindingSourceListChanged += tabPatientsTreatments_BindingSourceListChanged;
+
             //set tabPayments
             tabElement_tabPayments = new TabElement()
             {
@@ -682,19 +727,34 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void FormPatients_Load(object sender, EventArgs e)
         {
-            PreloadView();
-
-            ReloadView();
-
             IsBindingSourceLoading = true;
             advancedDataGridView_main.SortASC(advancedDataGridView_main.Columns[1]);
             IsBindingSourceLoading = false;
 
+            PreloadView();
+
+            ReloadView();
+            
             ResetTabsDataGrid();
 
             IsBindingSourceLoading = true;
             patientstreatments_filtertanyCheckBox.Checked = true;
             IsBindingSourceLoading = false;
+
+            if(_paymentsReference == PaymentsReference.Treatments)
+            {
+                label_tabPayments_inforeference.Text = language.paymentsInfoReferenceLabelTreatments;
+                label_tabPayments_total.Text = language.paymentsTotalLabelTreatments;
+                label_tabPayments_lefttotal.Text = language.paymentsLeftTotalLabelTreatments;
+            }
+            else if (_paymentsReference == PaymentsReference.Invoices)
+            {
+                label_tabPayments_inforeference.Text = language.paymentsInfoReferenceLabelInvoices;
+                label_tabPayments_total.Text = language.paymentsTotalLabelInvoices;
+                label_tabPayments_lefttotal.Text = language.paymentsLeftTotalLabelInvoices;
+            }
+
+            vPatientsBindingSource_CurrentChanged(sender, e);
         }
 
         /// <summary>
@@ -706,9 +766,9 @@ namespace DG.DentneD.Forms
 
             //load filter doctors
             comboBox_filterArchived.Items.Clear();
-            comboBox_filterArchived.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(FilterShow.NotArchived.ToString(), "Not Archived"));
-            comboBox_filterArchived.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(FilterShow.Archived.ToString(), "Archived"));
-            comboBox_filterArchived.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(FilterShow.All.ToString(), "All"));
+            comboBox_filterArchived.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(FilterShow.NotArchived.ToString(), language.filtershowNotarchived));
+            comboBox_filterArchived.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(FilterShow.Archived.ToString(), language.filtershowArchived));
+            comboBox_filterArchived.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(FilterShow.All.ToString(), language.filtershowAll));
             comboBox_filterArchived.SelectedIndex = 0;
 
             //load prices lists
@@ -777,6 +837,8 @@ namespace DG.DentneD.Forms
             advancedDataGridView_tabPatientsTreatments_list.CleanFilterAndSort();
             advancedDataGridView_tabPatientsTreatments_list.SortDESC(advancedDataGridView_tabPatientsTreatments_list.Columns[1]);
             advancedDataGridView_tabPatientsTreatments_list.DisableFilterAndSort(advancedDataGridView_tabPatientsTreatments_list.Columns["toothsDataGridViewTextBoxColumn"]);
+            advancedDataGridView_tabPayments_list.CleanFilterAndSort();
+            advancedDataGridView_tabPayments_list.SortDESC(advancedDataGridView_tabPayments_list.Columns[1]);
             advancedDataGridView_tabAppointments_list.CleanFilterAndSort();
             advancedDataGridView_tabAppointments_list.SortDESC(advancedDataGridView_tabAppointments_list.Columns[1]);
             advancedDataGridView_tabPatientsAttachments_list.CleanFilterAndSort();
@@ -855,6 +917,8 @@ namespace DG.DentneD.Forms
                 return;
 
             ReloadView();
+            
+            vPatientsBindingSource_CurrentChanged(sender, e);
         }
 
         /// <summary>
@@ -867,7 +931,11 @@ namespace DG.DentneD.Forms
             if (IsBindingSourceLoading)
                 return;
 
-            ResetPatientstreatmentsFiltert();
+            if (_resetPatientstreatmentsFilterOnChange)
+                ResetPatientstreatmentsFilter();
+
+            if (IsBindingSourceLoading)
+                return;
 
             int patients_id = -1;
             if (vPatientsBindingSource.Current != null)
@@ -875,6 +943,8 @@ namespace DG.DentneD.Forms
                 patients_id = (((DataRowView)vPatientsBindingSource.Current).Row).Field<int>("patients_id");
             }
 
+            patients_lastloginDateTimePicker.Visible = false;
+            patients_lastloginLabel.Visible = false;
             if (patients_id != -1)
             {
                 patients patient = _dentnedModel.Patients.Find(patients_id);
@@ -882,6 +952,11 @@ namespace DG.DentneD.Forms
                     patients_sexFRadioButton.Checked = true;
                 else
                     patients_sexMRadioButton.Checked = true;
+                if (patient.patients_lastlogin != null)
+                {
+                    patients_lastloginDateTimePicker.Visible = true;
+                    patients_lastloginLabel.Visible = true;
+                }
             }
         }
 
@@ -895,45 +970,9 @@ namespace DG.DentneD.Forms
             countTextBox.Text = vPatientsBindingSource.Count.ToString();
         }
         
+
         #region various
-
-
-        /// <summary>
-        /// Build a random string of a given size
-        /// </summary>
-        /// <param name="size"></param>
-        /// <returns></returns>
-        private static string BuildRandomString(int size)
-        {
-            Random r = new Random();
-            StringBuilder builder = new StringBuilder();
-            for (int i = 0; i < size; i++)
-            {
-                //26 letters in the alfabet, ascii + 65 for the capital letters
-                builder.Append(Convert.ToChar(Convert.ToInt32(Math.Floor(26 * r.NextDouble() + 65))));
-            }
-            return builder.ToString();
-        }
-
-        /// <summary>
-        /// Find a random filename that does not exists on a folder
-        /// </summary>
-        /// <param name="folder"></param>
-        /// <param name="prefix"></param>
-        /// <param name="extension"></param>
-        /// <returns></returns>
-        private static string FindRandomFileName(string folder, string prefix, string extension)
-        {
-            string filename = null;
-            int tries = 0;
-            do
-            {
-                filename = folder + "\\" + (!String.IsNullOrEmpty(prefix) ? prefix + "_" : "") + String.Format("{0:yyyyMMddHHmm}", DateTime.Now) + "-" + BuildRandomString(12) + "." + extension;
-                tries++;
-            } while (File.Exists(filename) || tries < 100);
-            return filename;
-        }
-
+                
         /// <summary>
         /// Delete a file
         /// </summary>
@@ -951,8 +990,8 @@ namespace DG.DentneD.Forms
                         ProcessStartInfo startInfo = new ProcessStartInfo();
                         startInfo.CreateNoWindow = true;
                         startInfo.UseShellExecute = false;
-                        startInfo.FileName = SRMBinaryFileName;
-                        startInfo.Arguments = "-r -s " + filename;
+                        startInfo.FileName = Program.SRMFileName;
+                        startInfo.Arguments = "-s -f \"" + filename + "\"";
                         startInfo.WindowStyle = ProcessWindowStyle.Hidden;
                         Process exeProcess = Process.Start(startInfo);
                         exeProcess.WaitForExit();
@@ -961,14 +1000,20 @@ namespace DG.DentneD.Forms
                     {
                         File.Delete(filename);
                     }
-
-                    patientsattachments_filenameTextBox.Text = "";
                 }
                 catch
                 {
+                }
+
+                if (File.Exists(filename))
+                {
                     if (displayerrors)
-                        MessageBox.Show("Error deleting file from folder.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(language.filedeleteerrorMessage, language.filedeleteerrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
+                }
+                else
+                {
+                    patientsattachments_filenameTextBox.Text = "";
                 }
             }
             return true;
@@ -991,8 +1036,8 @@ namespace DG.DentneD.Forms
                         ProcessStartInfo startInfo = new ProcessStartInfo();
                         startInfo.CreateNoWindow = true;
                         startInfo.UseShellExecute = false;
-                        startInfo.FileName = SRMBinaryFileName;
-                        startInfo.Arguments = "-r -s " + foldername;
+                        startInfo.FileName = Program.SRMFileName;
+                        startInfo.Arguments = "-r -s -f \"" + foldername + "\"";
                         startInfo.WindowStyle = ProcessWindowStyle.Hidden;
                         Process exeProcess = Process.Start(startInfo);
                         exeProcess.WaitForExit();
@@ -1003,9 +1048,12 @@ namespace DG.DentneD.Forms
                     }
                 }
                 catch
+                { }
+
+                if(Directory.Exists(foldername))
                 {
                     if (displayerrors)
-                        MessageBox.Show("Can not remove folder \"" + foldername + "\"", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(String.Format(language.folderdeleteerrorMessage, foldername), language.filedeleteerrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
             }
@@ -1096,11 +1144,47 @@ namespace DG.DentneD.Forms
             if (AddClick(tabElement_tabPatients_tabPatients))
             {
                 ((patients)patientsBindingSource.Current).patients_birthdate = new DateTime(1970, 1, 1, 0, 0, 0);
+                ((patients)patientsBindingSource.Current).patients_username = Randomizer.BuildRandomNumberString(8).ToLower();
+                ((patients)patientsBindingSource.Current).patients_password = Randomizer.BuildRandomNumber(6);
+                ((patients)patientsBindingSource.Current).patients_token = null;
+                ((patients)patientsBindingSource.Current).patients_lastlogin = null;
                 patients_sexMRadioButton.Checked = true;
                 patientsBindingSource.ResetBindings(true);
+
+                patients_lastloginDateTimePicker.Enabled = false;
             }
         }
-        
+
+        /// <summary>
+        /// Edit tab button handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button_tabPatients_tabPatients_edit_Click(object sender, EventArgs e)
+        {
+            if (UpdateClick(tabElement_tabPatients_tabPatients))
+            {
+                patients_lastloginDateTimePicker.Enabled = false;
+            }
+        }
+
+        /// <summary>
+        /// Reset username and password
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button_tabPatients_tabPatients_resetusernamepassword_Click(object sender, EventArgs e)
+        {
+            ((patients)patientsBindingSource.Current).patients_username = Randomizer.BuildRandomNumberString(8).ToLower();
+            ((patients)patientsBindingSource.Current).patients_password = Randomizer.BuildRandomNumber(6);
+            ((patients)patientsBindingSource.Current).patients_token = null;
+            ((patients)patientsBindingSource.Current).patients_lastlogin = null;
+            patientsBindingSource.ResetBindings(true);
+
+            patients_lastloginDateTimePicker.Visible = false;
+            patients_lastloginLabel.Visible = false;
+        }
+
         /// <summary>
         /// Price lists reset to default
         /// </summary>
@@ -1128,7 +1212,7 @@ namespace DG.DentneD.Forms
                     }
                     catch
                     {
-                        MessageBox.Show(String.Format("Can not create folder \"{0}\"", _patientsDatadir), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(String.Format(language.foldercreateerrorMessage, _patientsDatadir), language.foldercreateerrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                 }
@@ -1141,7 +1225,7 @@ namespace DG.DentneD.Forms
                     }
                     catch
                     {
-                        MessageBox.Show(String.Format("Can not create folder \"{0}\"", _patientsDatadir), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(String.Format(language.foldercreateerrorMessage, _patientsDatadir), language.foldercreateerrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                 }
@@ -1157,6 +1241,91 @@ namespace DG.DentneD.Forms
         private void treatmentspriceslists_idComboBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             DGUIGHFUtilsUI.DGComboBoxAutoComplete.OnKeyPress((ComboBox)sender, e);
+        }
+
+        /// <summary>
+        /// Delete sub folders without patients attached
+        /// </summary>
+        /// <param name="folder"></param>
+        /// <param name="doSecureDelete"></param>
+        /// <param name="messages"></param>
+        /// <param name="errors"></param>
+        public static void CleanPatientDir(string folder, bool doSecureDelete, ref string[] messages, ref string[] errors)
+        {
+            messages = new string[] { };
+            errors = new string[] { };
+
+            DentneDModel dentnedModel = new DentneDModel();
+
+            DirectoryInfo directoryInfo = new DirectoryInfo(folder);
+            DirectoryInfo[] subDirectoriesInfo = directoryInfo.GetDirectories();
+
+            //clean files
+            foreach (FileInfo file in directoryInfo.GetFiles())
+            {
+                try
+                {
+                    file.Delete();
+                }
+                catch { }
+            }
+
+            //clean folder
+            foreach (DirectoryInfo subDirectoryInfo in subDirectoriesInfo)
+            {
+                int patients_id = -1;
+                try
+                {
+                    patients_id = Convert.ToInt32(subDirectoryInfo.Name);
+                }
+                catch { }
+                bool deleteFolder = false;
+                if(patients_id != -1)
+                {
+                    //check if folder patient exists
+                    if (dentnedModel.Patients.Find(patients_id) == null)
+                    {
+                        deleteFolder = true;
+                    }
+                }
+                else
+                {
+                    deleteFolder = true;
+                }                    
+                if(deleteFolder)
+                {
+                    try
+                    {
+                        //try to delete the folder
+                        if (doSecureDelete)
+                        {
+                            ProcessStartInfo startInfo = new ProcessStartInfo();
+                            startInfo.CreateNoWindow = true;
+                            startInfo.UseShellExecute = false;
+                            startInfo.FileName = Program.SRMFileName;
+                            startInfo.Arguments = "-r -s -f \"" + subDirectoryInfo.FullName + "\"";
+                            startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                            Process exeProcess = Process.Start(startInfo);
+                            exeProcess.WaitForExit();
+                        }
+                        else
+                        {
+                            subDirectoryInfo.Delete(true);
+                        }
+                    }
+                    catch
+                    { }
+
+                    if (!Directory.Exists(subDirectoryInfo.FullName))
+                    {
+                        messages = messages.Concat(new string[] { String.Format("Folder \"{0}\" does not have any patient attached, it was deleted successfully.", subDirectoryInfo.FullName) }).ToArray();
+                    }
+                    else
+                    {
+                        errors = errors.Concat(new string[] { String.Format("Error: Can not delete folder \"{0}\".", subDirectoryInfo.FullName) }).ToArray();
+                    }
+                }
+            }
         }
 
         #endregion
@@ -2041,7 +2210,7 @@ namespace DG.DentneD.Forms
                 patientstreatments_id = r.patientstreatments_id,
                 treatment = _dentnedModel.Treatments.Find(r.treatments_id).treatments_code,
                 isfulfilled = (r.patientstreatments_fulfilldate != null ? true : false),
-                ispaid = r.patientstreatments_ispayed,
+                ispaid = r.patientstreatments_ispaid,
                 date = r.patientstreatments_creationdate,
                 tooths = _dentnedModel.PatientsTreatments.GetTreatmentsToothsString(r)
             }).ToList();
@@ -2104,8 +2273,11 @@ namespace DG.DentneD.Forms
             //scroll up
             tabPage_tabPatientsTreatments.AutoScrollPosition = new Point(0, 0);
 
-            //unset lazy load for payments tab, to reload totals
-            tabElement_tabPayments.IsLaziLoaded = false;
+            if (_paymentsReference == PaymentsReference.Treatments)
+            {
+                //unset lazy load for payments tab, to reload totals
+                tabElement_tabPayments.IsLazyLoaded = false;
+            }
 
             DGUIGHFData.Add<patientstreatments, DentneDModel>(_dentnedModel.PatientsTreatments, item);
         }
@@ -2125,8 +2297,11 @@ namespace DG.DentneD.Forms
             //scroll up
             tabPage_tabPatientsTreatments.AutoScrollPosition = new Point(0, 0);
 
-            //unset lazy load for payments tab, to reload totals
-            tabElement_tabPayments.IsLaziLoaded = false;
+            if (_paymentsReference == PaymentsReference.Treatments)
+            {
+                //unset lazy load for payments tab, to reload totals
+                tabElement_tabPayments.IsLazyLoaded = false;
+            }
 
             DGUIGHFData.Update<patientstreatments, DentneDModel>(_dentnedModel.PatientsTreatments, item);
         }
@@ -2141,8 +2316,11 @@ namespace DG.DentneD.Forms
             advancedDataGridView_tabPatientsTreatments_list.CleanFilterAndSort();
             IsBindingSourceLoading = false;
 
-            //unset lazy load for payments tab, to reload totals
-            tabElement_tabPayments.IsLaziLoaded = false;
+            if (_paymentsReference == PaymentsReference.Treatments)
+            {
+                //unset lazy load for payments tab, to reload totals
+                tabElement_tabPayments.IsLazyLoaded = false;
+            }
 
             DGUIGHFData.Remove<patientstreatments, DentneDModel>(_dentnedModel.PatientsTreatments, item);
         }
@@ -2211,6 +2389,12 @@ namespace DG.DentneD.Forms
                 patientstreatment.patientstreatments_fulfilldate = DateTime.Now;
                 _dentnedModel.PatientsTreatments.Update(patientstreatment);
 
+                if (_paymentsReference == PaymentsReference.Treatments)
+                {
+                    //unset lazy load for payments tab, to reload totals
+                    tabElement_tabPayments.IsLazyLoaded = false;
+                }
+
                 //reload tab
                 ReloadTab(tabElement_tabPatientsTreatments);
             }
@@ -2232,7 +2416,7 @@ namespace DG.DentneD.Forms
             if (patientstreatments_id != -1)
             {
                 patientstreatments patientstreatment = _dentnedModel.PatientsTreatments.Find(patientstreatments_id);
-                patientstreatment.patientstreatments_ispayed = true;
+                patientstreatment.patientstreatments_ispaid = true;
                 _dentnedModel.PatientsTreatments.Update(patientstreatment);
 
                 //reload tab
@@ -2378,53 +2562,52 @@ namespace DG.DentneD.Forms
             if (IsBindingSourceLoading)
                 return;
 
-            if (tabElement_tabPatientsTreatments.CurrentEditingMode == EditingMode.C || tabElement_tabPatientsTreatments.CurrentEditingMode == EditingMode.U)
+            if (treatments_idComboBox.SelectedIndex != -1 && tabElement_tabPatientsTreatments.CurrentEditingMode == EditingMode.C || tabElement_tabPatientsTreatments.CurrentEditingMode == EditingMode.U)
             {
-                if (patientstreatmentsBindingSource.Current != null && treatments_idComboBox.SelectedIndex != -1)
+                int patients_id = -1;
+                if (vPatientsBindingSource.Current != null)
                 {
-                    int patients_id = -1;
-                    if (vPatientsBindingSource.Current != null)
+                    patients_id = (((DataRowView)vPatientsBindingSource.Current).Row).Field<int>("patients_id");
+                }
+                if (patients_id != -1)
+                {
+                    treatments treatment = _dentnedModel.Treatments.Find(treatments_idComboBox.SelectedValue);
+                    if (treatment != null)
                     {
-                        patients_id = (((DataRowView)vPatientsBindingSource.Current).Row).Field<int>("patients_id");
-                    }
-                    if (patients_id != -1)
-                    {
-                        treatments treatment = _dentnedModel.Treatments.Find(treatments_idComboBox.SelectedValue);
-                        if (treatment != null)
+                        string description = treatment.treatments_name;
+                        decimal price = treatment.treatments_price;
+                        decimal taxrate = (treatment.taxes_id != null ? _dentnedModel.Taxes.Find((int)treatment.taxes_id).taxes_rate : 0);
+                        byte expirationmonths = 0;
+                        if (treatment.treatments_mexpiration != null)
+                            expirationmonths = (byte)treatment.treatments_mexpiration;
+                        if (patients_id != -1)
                         {
-                            string description = treatment.treatments_name;
-                            decimal price = treatment.treatments_price;
-                            byte expirationmonths = 0;
-                            if (treatment.treatments_mexpiration != null)
-                                expirationmonths = (byte)treatment.treatments_mexpiration;
-                            if (patients_id != -1)
+                            patients patient = _dentnedModel.Patients.Find(patients_id);
+                            if (patient != null)
                             {
-                                patients patient = _dentnedModel.Patients.Find(patients_id);
-                                if (patient != null)
+                                treatmentsprices treatmentsprice = _dentnedModel.TreatmentsPrices.List(r => r.treatments_id == treatment.treatments_id && r.treatmentspriceslists_id == patient.treatmentspriceslists_id).FirstOrDefault();
+                                if (treatmentsprice != null)
                                 {
-                                    treatmentsprices treatmentsprice = _dentnedModel.TreatmentsPrices.List(r => r.treatments_id == treatment.treatments_id && r.treatmentspriceslists_id == patient.treatmentspriceslists_id).FirstOrDefault();
-                                    if (treatmentsprice != null)
-                                    {
-                                        price = treatmentsprice.treatmentsprices_price;
-                                    }
+                                    price = treatmentsprice.treatmentsprices_price;
                                 }
                             }
-
-                            if (expirationmonths != 0)
-                            {
-                                patientstreatments_expirationdateDateTimePicker.Value = ((patientstreatments)patientstreatmentsBindingSource.Current).patientstreatments_creationdate.AddMonths((int)expirationmonths);
-                                patientstreatments_expirationdateenabledCheckBox.Checked = true;
-                            }
-                            else
-                                patientstreatments_expirationdateenabledCheckBox.Checked = false;
-
-                            ((patientstreatments)patientstreatmentsBindingSource.Current).treatments_id = treatment.treatments_id;
-                            ((patientstreatments)patientstreatmentsBindingSource.Current).patientstreatments_price = price;
-                            ((patientstreatments)patientstreatmentsBindingSource.Current).patientstreatments_description = description;
                         }
+
+                        if (expirationmonths != 0)
+                        {
+                            patientstreatments_expirationdateDateTimePicker.Value = ((patientstreatments)patientstreatmentsBindingSource.Current).patientstreatments_creationdate.AddMonths((int)expirationmonths);
+                            patientstreatments_expirationdateenabledCheckBox.Checked = true;
+                        }
+                        else
+                            patientstreatments_expirationdateenabledCheckBox.Checked = false;
+
+                        ((patientstreatments)patientstreatmentsBindingSource.Current).treatments_id = treatment.treatments_id;
+                        ((patientstreatments)patientstreatmentsBindingSource.Current).patientstreatments_price = price;
+                        ((patientstreatments)patientstreatmentsBindingSource.Current).patientstreatments_taxrate = taxrate;
+                        ((patientstreatments)patientstreatmentsBindingSource.Current).patientstreatments_description = description;
                     }
+                    patientstreatmentsBindingSource.ResetBindings(true);
                 }
-                patientstreatmentsBindingSource.ResetBindings(true);
             }
         }
 
@@ -3159,10 +3342,12 @@ namespace DG.DentneD.Forms
         /// <summary>
         /// Reset the current patient treatments filter text
         /// </summary>
-        private void ResetPatientstreatmentsFiltert()
+        private void ResetPatientstreatmentsFilter()
         {
-            patientstreatments_filtertnoCheckBox.Checked = false;
-            patientstreatments_filtertnoCheckBox_CheckedChanged(null, null);
+            IsBindingSourceLoading = true;
+            patientstreatments_filtertanyCheckBox.Checked = true;
+            patientstreatments_filtertanyCheckBox_CheckedChanged(null, null);
+            IsBindingSourceLoading = false;
         }
 
         /// <summary>
@@ -3836,12 +4021,22 @@ namespace DG.DentneD.Forms
             }
 
             //update totals
-            double paidtotalnum = Convert.ToDouble(_dentnedModel.Payments.List(r => r.patients_id == patients_id).Sum(r => r.payments_amount));
-            double treatmentstotalnum = Convert.ToDouble(_dentnedModel.PatientsTreatments.List(r => r.patients_id == patients_id && !r.patientstreatments_ispayed && r.patientstreatments_fulfilldate != null).Sum(r => r.patientstreatments_price));
-            double treatmentslefttotalnum = treatmentstotalnum - paidtotalnum;
-            label_tabPayments_paidtotalnum.Text = String.Format("{0:0.00}", paidtotalnum);
-            label_tabPayments_treatmentstotalnum.Text = String.Format("{0:0.00}", treatmentstotalnum);
-            label_tabPayments_treatmentslefttotalnum.Text = String.Format("{0:0.00}", treatmentslefttotalnum);
+            double paidtotalnum = Math.Round(Convert.ToDouble(_dentnedModel.Payments.List(r => r.patients_id == patients_id).Sum(r => r.payments_amount)), 2);
+            double totalvalue = 0;
+            double lefttotalvalue = 0;
+            if(_paymentsReference == PaymentsReference.Treatments)
+            {
+                totalvalue = Math.Round(Convert.ToDouble(_dentnedModel.PatientsTreatments.List(r => r.patients_id == patients_id && r.patientstreatments_fulfilldate != null).Sum(r => r.patientstreatments_price + (r.patientstreatments_price * r.patientstreatments_taxrate / 100))), 2);
+                lefttotalvalue = Math.Round(totalvalue - paidtotalnum);
+            }
+            else if (_paymentsReference == PaymentsReference.Invoices)
+            {
+                totalvalue = Math.Round(Convert.ToDouble(_dentnedModel.Invoices.List(r => r.patients_id == patients_id).Sum(r => r.invoices_totaldue)), 2);
+                lefttotalvalue = Math.Round(totalvalue - paidtotalnum);
+            }
+            label_tabPayments_paidtotalvalue.Text = String.Format("{0:0.00}", paidtotalnum);
+            label_tabPayments_totalvalue.Text = String.Format("{0:0.00}", totalvalue);
+            label_tabPayments_lefttotalvalue.Text = String.Format("{0:0.00}", lefttotalvalue);
 
             IEnumerable<VPatientsPayments> vPayments =
             _dentnedModel.Payments.List(r => r.patients_id == patients_id).Select(
@@ -4190,7 +4385,7 @@ namespace DG.DentneD.Forms
                     string patientsAttachmentsdir = _patientsAttachmentsdir + "\\" + patients_id + "\\" + patientsattachmentstypes_id;
                     using (OpenFileDialog openFileDialog = new OpenFileDialog())
                     {
-                        openFileDialog.Title = "Select a file";
+                        openFileDialog.Title = language.attachmentselectTitle;
                         openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
                         openFileDialog.Filter = "JPEG|*.jpg|ZIP|*.zip";
                         if (openFileDialog.ShowDialog() == DialogResult.OK)
@@ -4207,13 +4402,13 @@ namespace DG.DentneD.Forms
                                 //build a new file
                                 string destinationFilePath = patientsAttachmentsdir + "\\" + Path.GetFileName(openFileDialog.FileName);
                                 string extention = Path.GetExtension(openFileDialog.FileName);
-                                destinationFilePath = FindRandomFileName(patientsAttachmentsdir, null, extention.Substring(1, extention.Length - 1));
+                                destinationFilePath = FileHelper.FindRandomFileName(patientsAttachmentsdir, null, extention.Substring(1, extention.Length - 1));
                                 File.Copy(openFileDialog.FileName, destinationFilePath);
                                 patientsattachments_filenameTextBox.Text = Path.GetFileName(destinationFilePath);
                             }
                             catch
                             {
-                                MessageBox.Show("Error copying file to folder.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show(language.attachmentcopyerrorMessage, language.attachmentcopyerrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
                     }
@@ -4276,12 +4471,12 @@ namespace DG.DentneD.Forms
             }
 
             //update totals
-            double paidtotalnum = Convert.ToDouble(_dentnedModel.Invoices.List(r => r.patients_id == patients_id && r.invoices_ispaid).Sum(r => r.invoices_total));
-            double invoicestotalnum = Convert.ToDouble(_dentnedModel.Invoices.List(r => r.patients_id == patients_id).Sum(r => r.invoices_total));
-            double invoiceslefttotalnum = Convert.ToDouble(_dentnedModel.Invoices.List(r => r.patients_id == patients_id && !r.invoices_ispaid).Sum(r => r.invoices_total));
-            label_tabInvoices_paidtotalnum.Text = String.Format("{0:0.00}", paidtotalnum);
-            label_tabInvoices_invoicestotalnum.Text = String.Format("{0:0.00}", invoicestotalnum);
-            label_tabInvoices_invoiceslefttotalnum.Text = String.Format("{0:0.00}", invoiceslefttotalnum);
+            double paidtotalnum = Convert.ToDouble(_dentnedModel.Invoices.List(r => r.patients_id == patients_id && r.invoices_ispaid).Sum(r => r.invoices_totaldue));
+            double invoicestotalnum = Convert.ToDouble(_dentnedModel.Invoices.List(r => r.patients_id == patients_id).Sum(r => r.invoices_totaldue));
+            double invoiceslefttotalnum = Convert.ToDouble(_dentnedModel.Invoices.List(r => r.patients_id == patients_id && !r.invoices_ispaid).Sum(r => r.invoices_totaldue));
+            label_tabInvoices_paidtotalduevalue.Text = String.Format("{0:0.00}", paidtotalnum);
+            label_tabInvoices_invoicestotalduevalue.Text = String.Format("{0:0.00}", invoicestotalnum);
+            label_tabInvoices_invoiceslefttotalduevalue.Text = String.Format("{0:0.00}", invoiceslefttotalnum);
 
             IEnumerable<VPatientsInvoices> vPatientsInvoices =
             _dentnedModel.Invoices.List(r => r.patients_id == patients_id).Select(
@@ -4291,7 +4486,7 @@ namespace DG.DentneD.Forms
                 date = r.invoices_date,
                 doctor = (r.doctors_id != null ? _dentnedModel.Doctors.Find(r.doctors_id).doctors_surname + " " + _dentnedModel.Doctors.Find(r.doctors_id).doctors_name : ""),
                 number = r.invoices_number,
-                total = (double)r.invoices_total,
+                total = (double)r.invoices_totaldue,
                 ispaid = r.invoices_ispaid
             }).ToList();
 
@@ -4373,12 +4568,12 @@ namespace DG.DentneD.Forms
             }
 
             //update totals
-            double invoicedtotalnum = Convert.ToDouble(_dentnedModel.Estimates.List(r => r.patients_id == patients_id && r.invoices_id == null).Sum(r => r.estimates_total));
-            double estimatestotalnum = Convert.ToDouble(_dentnedModel.Estimates.List(r => r.patients_id == patients_id).Sum(r => r.estimates_total));
-            double estimateslefttotalnum = Convert.ToDouble(_dentnedModel.Estimates.List(r => r.patients_id == patients_id && r.invoices_id != null).Sum(r => r.estimates_total));
-            label_tabEstimates_invoicedtotalnum.Text = String.Format("{0:0.00}", invoicedtotalnum);
-            label_tabEstimates_estimatestotalnum.Text = String.Format("{0:0.00}", estimatestotalnum);
-            label_tabEstimates_estimateslefttotalnum.Text = String.Format("{0:0.00}", estimateslefttotalnum);
+            double invoicedtotalnum = Convert.ToDouble(_dentnedModel.Estimates.List(r => r.patients_id == patients_id && r.invoices_id == null).Sum(r => r.estimates_totaldue));
+            double estimatestotalnum = Convert.ToDouble(_dentnedModel.Estimates.List(r => r.patients_id == patients_id).Sum(r => r.estimates_totaldue));
+            double estimateslefttotalnum = Convert.ToDouble(_dentnedModel.Estimates.List(r => r.patients_id == patients_id && r.invoices_id != null).Sum(r => r.estimates_totaldue));
+            label_tabEstimates_invoicedtotalduevalue.Text = String.Format("{0:0.00}", invoicedtotalnum);
+            label_tabEstimates_estimatestotalduevalue.Text = String.Format("{0:0.00}", estimatestotalnum);
+            label_tabEstimates_estimateslefttotalduevalue.Text = String.Format("{0:0.00}", estimateslefttotalnum);
 
             IEnumerable<VPatientsEstimates> vPatientsEstimates =
             _dentnedModel.Estimates.List(r => r.patients_id == patients_id).Select(
@@ -4388,7 +4583,7 @@ namespace DG.DentneD.Forms
                 date = r.estimates_date,
                 doctor = (r.doctors_id != null ? _dentnedModel.Doctors.Find(r.doctors_id).doctors_surname + " " + _dentnedModel.Doctors.Find(r.doctors_id).doctors_name : ""),
                 number = r.estimates_number,
-                total = (double)r.estimates_total,
+                total = (double)r.estimates_totaldue,
                 isinvoiced = (r.invoices_id != null ? true : false)
             }).ToList();
 
@@ -4567,6 +4762,6 @@ namespace DG.DentneD.Forms
         }
 
         #endregion
-               
+         
     }
 }

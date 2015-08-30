@@ -22,6 +22,7 @@ namespace DG.DentneD.Model.Entity
         public int estimateslines_quantity { get; set; }
         public decimal estimateslines_unitprice { get; set; }
         public decimal estimateslines_taxrate { get; set; }
+        public bool estimateslines_istaxesdeductionsable { get; set; }
     
         public virtual estimates estimates { get; set; }
         public virtual patientstreatments patientstreatments { get; set; }

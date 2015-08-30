@@ -4,11 +4,14 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
+using DG.DentneD.Helpers;
 using DG.DentneD.Model;
 using DG.DentneD.Model.Entity;
 using DG.UI.GHF;
+using SMcMaster;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity;
 using System.Data.SqlClient;
@@ -30,6 +33,7 @@ namespace DG.DentneD.Forms
         public FormReportsrun()
         {
             InitializeComponent();
+            (new TabOrderManager(this)).SetTabOrder(TabOrderManager.TabScheme.AcrossFirst);
 
             Initialize(Program.uighfApplication);
 
@@ -52,8 +56,23 @@ namespace DG.DentneD.Forms
             LanguageHelper.AddComponent(this);
             LanguageHelper.AddComponent(label_reports);
             LanguageHelper.AddComponent(button_execute);
-            LanguageHelper.AddComponent(label_info);
         }
+
+        /// <summary>
+        /// Form language dictionary
+        /// </summary>
+        public class FormLanguage : IDGUIGHFLanguage
+        {
+            public string reportsPasswordInputMessage = "Insert password:";
+            public string reportsPasswordInputTitle = "Password";
+            public string reportsPasswordErrorMessage = "Wrong password.";
+            public string reportsPasswordErrorTitle = "Error";
+        }
+        
+        /// <summary>
+        /// Form language
+        /// </summary>
+        public FormLanguage language = new FormLanguage();
 
         /// <summary>
         /// Loader
@@ -73,6 +92,8 @@ namespace DG.DentneD.Forms
             dataGridView_reportsparameters.Columns[1].ReadOnly = false;
 
             advancedDataGridView_main.DataSource = null;
+
+            textBox_info.Text = "";
 
             PreloadView();
         }
@@ -102,11 +123,15 @@ namespace DG.DentneD.Forms
         {
             advancedDataGridView_main.DataSource = null;
             _datatableReportsParameters.Clear();
+            textBox_info.Text = "";
 
             if (comboBox_reports.SelectedIndex != -1 && comboBox_reports.SelectedIndex != 0)
             {
                 int reports_id = Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_reports.SelectedItem).Id);
                 reports report = _dentnedModel.Reports.Find(reports_id);
+
+                if (!String.IsNullOrEmpty(report.reports_infotext))
+                    textBox_info.Text = report.reports_infotext;
 
                 string query = report.reports_query;
                 List<string> pl = Regex.Matches(query, @"\@\w+").Cast<Match>().Select(m => m.Value).ToList();
@@ -137,6 +162,27 @@ namespace DG.DentneD.Forms
 
                 int reports_id = Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_reports.SelectedItem).Id);
                 reports report = _dentnedModel.Reports.Find(reports_id);
+
+                if(report.reports_ispasswordprotected && !Program.isPasswordLogged)
+                {
+                    string input = null;
+                    if (InputBox.Show(language.reportsPasswordInputMessage, language.reportsPasswordInputTitle, ref input) == DialogResult.OK)
+                    {
+                        if (input == ConfigurationManager.AppSettings["formspassword"])
+                        {
+                            Program.isPasswordLogged = true;
+                        }
+                        else
+                        {
+                            MessageBox.Show(language.reportsPasswordErrorMessage, language.reportsPasswordErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
 
                 string query = report.reports_query;
 

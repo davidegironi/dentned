@@ -15,6 +15,7 @@ using DG.DentneD.Model.Entity;
 using DG.DentneD.Forms.Objects;
 using System.Data;
 using Zuby.ADGV;
+using SMcMaster;
 
 namespace DG.DentneD.Forms
 {
@@ -31,6 +32,7 @@ namespace DG.DentneD.Forms
         public FormTreatments()
         {
             InitializeComponent();
+            (new TabOrderManager(this)).SetTabOrder(TabOrderManager.TabScheme.AcrossFirst);
 
             Initialize(Program.uighfApplication);
 
@@ -64,6 +66,8 @@ namespace DG.DentneD.Forms
             LanguageHelper.AddComponent(treatments_mexpirationinfoLabel);
             LanguageHelper.AddComponent(treatments_priceLabel);
             LanguageHelper.AddComponent(treatments_notesLabel);
+            LanguageHelper.AddComponent(taxes_idLabel);
+            LanguageHelper.AddComponent(button_tabTreatments_unsettaxesid);
             //tabTreatmentsPrices
             LanguageHelper.AddComponent(tabPage_tabTreatmentsPrices);
             LanguageHelper.AddComponent(label_tabTreatmentsPrices_filterpriceslists);
@@ -97,7 +101,7 @@ namespace DG.DentneD.Forms
             TabControlMain = tabControl_main;
 
             //set Main Panels
-            PanelFiltersMain = null;
+            PanelFiltersMain = panel_filters;
             PanelListMain = panel_list;
             PanelsExtraMain = null;
 
@@ -175,14 +179,14 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void FormTreatments_Load(object sender, EventArgs e)
         {
-            PreloadView();
-
-            ReloadView();
-
             IsBindingSourceLoading = true;
             advancedDataGridView_main.SortASC(advancedDataGridView_main.Columns[1]);
             IsBindingSourceLoading = false;
 
+            PreloadView();
+
+            ReloadView();
+            
             ResetTabsDataGrid();
         }
 
@@ -209,6 +213,11 @@ namespace DG.DentneD.Forms
                 comboBox_tabTreatmentsPrices_filterPriceslists.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(a.treatmentspriceslists_id.ToString(), a.treatmentspriceslists_name));
             }
             comboBox_tabTreatmentsPrices_filterPriceslists.SelectedIndex = -1;
+
+            //load tax rates
+            taxes_idComboBox.DataSource = _dentnedModel.Taxes.List().OrderBy(r => r.taxes_name).ToList();
+            taxes_idComboBox.DisplayMember = "taxes_name";
+            taxes_idComboBox.ValueMember = "taxes_id";
         }
 
         /// <summary>
@@ -353,11 +362,31 @@ namespace DG.DentneD.Forms
         }
 
         /// <summary>
+        /// Unset taxes_id
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button_tabTreatments_unsettaxesid_Click(object sender, EventArgs e)
+        {
+            taxes_idComboBox.SelectedIndex = -1;
+        }
+
+        /// <summary>
         /// Combobox autocomplete
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void treatmentstypes_idComboBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            DGUIGHFUtilsUI.DGComboBoxAutoComplete.OnKeyPress((ComboBox)sender, e);
+        }
+
+        /// <summary>
+        /// Combobox autocomplete
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void taxes_idComboBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             DGUIGHFUtilsUI.DGComboBoxAutoComplete.OnKeyPress((ComboBox)sender, e);
         }
@@ -499,11 +528,52 @@ namespace DG.DentneD.Forms
             if (IsBindingSourceLoading)
                 return;
 
-            tabElement_tabTreatmentsPrices.IsLaziLoaded = false;
-            TabControl_SelectedIndexChanged(null, null, TabElements, tabControl_main);
+            ReloadTab(tabElement_tabTreatmentsPrices);
+        }
+
+        /// <summary>
+        /// Treatments lists changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void treatmentspriceslists_idComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (IsBindingSourceLoading)
+                return;
+
+            if(treatmentspriceslists_idComboBox.SelectedIndex != -1 && (tabElement_tabTreatmentsPrices.CurrentEditingMode == EditingMode.C || tabElement_tabTreatmentsPrices.CurrentEditingMode == EditingMode.U))
+            {
+                int treatments_id = -1;
+                if (vTreatmentsBindingSource.Current != null)
+                {
+                    treatments_id = (((DataRowView)vTreatmentsBindingSource.Current).Row).Field<int>("treatments_id");
+                }
+                if (treatments_id != -1)
+                {
+                    treatments treatments = _dentnedModel.Treatments.Find(treatments_id);
+                    treatmentspriceslists treatmentspriceslist = _dentnedModel.TreatmentsPricesLists.Find(treatmentspriceslists_idComboBox.SelectedValue);
+                    if (treatments != null && treatmentspriceslist != null)
+                    {
+                        ((treatmentsprices)treatmentspricesBindingSource.Current).treatmentspriceslists_id = treatmentspriceslist.treatmentspriceslists_id;
+                        ((treatmentsprices)treatmentspricesBindingSource.Current).treatmentsprices_price = Math.Round(treatments.treatments_price * treatmentspriceslist.treatmentspriceslists_multiplier, 2);
+                    }
+                    treatmentspricesBindingSource.ResetBindings(true);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Combobox autocomplete
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void treatmentspriceslists_idComboBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            DGUIGHFUtilsUI.DGComboBoxAutoComplete.OnKeyPress((ComboBox)sender, e);
         }
 
         #endregion
+
 
     }
 }

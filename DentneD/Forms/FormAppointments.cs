@@ -15,6 +15,7 @@ using System.Drawing;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Data;
+using SMcMaster;
 
 namespace DG.DentneD.Forms
 {
@@ -40,12 +41,90 @@ namespace DG.DentneD.Forms
         private const int CalendarTitleWeekMaxLengh = 50;
         private const int CalendarTitleMonthMaxLengh = 20;
 
+        #region Calendar custom objects
+
+        /// <summary>
+        /// Custom appointment item
+        /// </summary>
+        private class CustomAppointmentItem
+        {
+            /// <summary>
+            /// Item date from
+            /// </summary>
+            public DateTime DateFrom { get; set; }
+
+            /// <summary>
+            /// Item date to
+            /// </summary>
+            public DateTime DateTo { get; set; }
+
+            /// <summary>
+            /// Item title for days calendar
+            /// </summary>
+            public String TitleDay { get; set; }
+
+            /// <summary>
+            /// Item title for weeks calendar
+            /// </summary>
+            public String TitleWeek { get; set; }
+
+            /// <summary>
+            /// Item title for moths calendar
+            /// </summary>
+            public String TitleMonth { get; set; }
+
+            /// <summary>
+            /// Item color
+            /// </summary>
+            public Color Color { get; set; }
+
+            /// <summary>
+            /// Item appointment id
+            /// </summary>
+            public int AppointmentId { get; set; }
+
+            /// <summary>
+            /// Item patient treatment id
+            /// </summary>
+            public int PatientTreatmentId { get; set; }
+        }
+
+        /// <summary>
+        /// Custom calendar item
+        /// </summary>
+        private class CustomCalendarItem : CalendarItem
+        {
+            /// <summary>
+            /// Custom costructor
+            /// </summary>
+            /// <param name="calendar"></param>
+            /// <param name="startDate"></param>
+            /// <param name="endDate"></param>
+            /// <param name="text"></param>
+            public CustomCalendarItem(Calendar calendar, DateTime startDate, DateTime endDate, string text)
+                : base(calendar, startDate, endDate, text)
+            { }
+
+            /// <summary>
+            /// Item appointment id
+            /// </summary>
+            public int AppointmentId { get; set; }
+
+            /// <summary>
+            /// Item patient treatment id
+            /// </summary>
+            public int PatientTreatmentId { get; set; }
+        }
+
+        #endregion
+
         /// <summary>
         /// Constructor
         /// </summary>
         public FormAppointments()
         {
             InitializeComponent();
+            (new TabOrderManager(this)).SetTabOrder(TabOrderManager.TabScheme.AcrossFirst);
 
             Initialize(Program.uighfApplication);
 
@@ -462,7 +541,6 @@ namespace DG.DentneD.Forms
         /// Set components status
         /// </summary>
         /// <param name="isEditing"></param>
-        /// 
         private void SetCustomEditingMode(bool isEditing)
         {
             if (isEditing)
@@ -599,10 +677,12 @@ namespace DG.DentneD.Forms
             catch (ArgumentException ex)
             {
                 new DGUIGHFFormErrors(ex.Message, true).ShowDialog();
+                return;
             }
             catch (DataException ex)
             {
                 new DGUIGHFFormErrors(ex.Message, false).ShowDialog();
+                return;
             }
 
             _currentEditingMode = EditingMode.R;
@@ -965,81 +1045,5 @@ namespace DG.DentneD.Forms
 
     }
 
-    #region Calendar custom objects
-
-    /// <summary>
-    /// Custom appointment item
-    /// </summary>
-    public class CustomAppointmentItem
-    {
-        /// <summary>
-        /// Item date from
-        /// </summary>
-        public DateTime DateFrom { get; set; }
-
-        /// <summary>
-        /// Item date to
-        /// </summary>
-        public DateTime DateTo { get; set; }
-
-        /// <summary>
-        /// Item title for days calendar
-        /// </summary>
-        public String TitleDay { get; set; }
-
-        /// <summary>
-        /// Item title for weeks calendar
-        /// </summary>
-        public String TitleWeek { get; set; }
-
-        /// <summary>
-        /// Item title for moths calendar
-        /// </summary>
-        public String TitleMonth { get; set; }
-
-        /// <summary>
-        /// Item color
-        /// </summary>
-        public Color Color { get; set; }
-
-        /// <summary>
-        /// Item appointment id
-        /// </summary>
-        public int AppointmentId { get; set; }
-
-        /// <summary>
-        /// Item patient treatment id
-        /// </summary>
-        public int PatientTreatmentId { get; set; }
-    }
-
-    /// <summary>
-    /// Custom calendar item
-    /// </summary>
-    public class CustomCalendarItem : CalendarItem
-    {
-        /// <summary>
-        /// Custom costructor
-        /// </summary>
-        /// <param name="calendar"></param>
-        /// <param name="startDate"></param>
-        /// <param name="endDate"></param>
-        /// <param name="text"></param>
-        public CustomCalendarItem(Calendar calendar, DateTime startDate, DateTime endDate, string text)
-            : base(calendar, startDate, endDate, text)
-        { }
-
-        /// <summary>
-        /// Item appointment id
-        /// </summary>
-        public int AppointmentId { get; set; }
-
-        /// <summary>
-        /// Item patient treatment id
-        /// </summary>
-        public int PatientTreatmentId { get; set; }
-    }
-
-    #endregion
 
 }

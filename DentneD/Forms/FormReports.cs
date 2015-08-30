@@ -14,6 +14,7 @@ using DG.DentneD.Model;
 using DG.DentneD.Model.Entity;
 using DG.DentneD.Forms.Objects;
 using Zuby.ADGV;
+using SMcMaster;
 
 namespace DG.DentneD.Forms
 {
@@ -29,6 +30,7 @@ namespace DG.DentneD.Forms
         public FormReports()
         {
             InitializeComponent();
+            (new TabOrderManager(this)).SetTabOrder(TabOrderManager.TabScheme.AcrossFirst);
 
             Initialize(Program.uighfApplication);
 
@@ -54,6 +56,7 @@ namespace DG.DentneD.Forms
             LanguageHelper.AddComponent(button_tabReports_cancel);
             LanguageHelper.AddComponent(reports_idLabel);
             LanguageHelper.AddComponent(reports_nameLabel);
+            LanguageHelper.AddComponent(reports_ispasswordprotectedCheckBox);
         }
 
         /// <summary>
@@ -73,7 +76,7 @@ namespace DG.DentneD.Forms
             TabControlMain = tabControl_main;
 
             //set Main Panels
-            PanelFiltersMain = null;
+            PanelFiltersMain = panel_filters;
             PanelListMain = panel_list;
             PanelsExtraMain = null;
 
@@ -117,11 +120,11 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void FormReports_Load(object sender, EventArgs e)
         {
-            ReloadView();
-
             IsBindingSourceLoading = true;
             advancedDataGridView_main.SortASC(advancedDataGridView_main.Columns[1]);
             IsBindingSourceLoading = false;
+
+            ReloadView();
         }
 
         /// <summary>

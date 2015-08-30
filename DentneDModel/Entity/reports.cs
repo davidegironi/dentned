@@ -17,5 +17,7 @@ namespace DG.DentneD.Model.Entity
         public int reports_id { get; set; }
         public string reports_name { get; set; }
         public string reports_query { get; set; }
+        public string reports_infotext { get; set; }
+        public bool reports_ispasswordprotected { get; set; }
     }
 }

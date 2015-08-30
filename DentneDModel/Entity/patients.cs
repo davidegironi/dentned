@@ -24,7 +24,6 @@ namespace DG.DentneD.Model.Entity
             this.patientscontacts = new HashSet<patientscontacts>();
             this.patientsmedicalrecords = new HashSet<patientsmedicalrecords>();
             this.patientsnotes = new HashSet<patientsnotes>();
-            this.patientstreatments = new HashSet<patientstreatments>();
         }
     
         public int patients_id { get; set; }
@@ -37,6 +36,10 @@ namespace DG.DentneD.Model.Entity
         public string patients_doctext { get; set; }
         public string patients_notes { get; set; }
         public bool patients_isarchived { get; set; }
+        public string patients_username { get; set; }
+        public string patients_password { get; set; }
+        public string patients_token { get; set; }
+        public Nullable<System.DateTime> patients_lastlogin { get; set; }
     
         public virtual ICollection<appointments> appointments { get; set; }
         public virtual ICollection<estimates> estimates { get; set; }
@@ -47,6 +50,5 @@ namespace DG.DentneD.Model.Entity
         public virtual ICollection<patientscontacts> patientscontacts { get; set; }
         public virtual ICollection<patientsmedicalrecords> patientsmedicalrecords { get; set; }
         public virtual ICollection<patientsnotes> patientsnotes { get; set; }
-        public virtual ICollection<patientstreatments> patientstreatments { get; set; }
     }
 }

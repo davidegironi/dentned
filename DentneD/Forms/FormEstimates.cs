@@ -15,6 +15,11 @@ using DG.DentneD.Model.Entity;
 using DG.DentneD.Forms.Objects;
 using Zuby.ADGV;
 using System.Data;
+using System.Diagnostics;
+using System.Configuration;
+using DG.DentneD.Helpers;
+using SMcMaster;
+using DG.DentneD.Model.Repositories;
 
 namespace DG.DentneD.Forms
 {
@@ -33,11 +38,14 @@ namespace DG.DentneD.Forms
         public FormEstimates()
         {
             InitializeComponent();
+            (new TabOrderManager(this)).SetTabOrder(TabOrderManager.TabScheme.AcrossFirst);
 
             Initialize(Program.uighfApplication);
 
             _dentnedModel = new DentneDModel();
             _dentnedModel.LanguageHelper.LoadFromFile(Program.uighfApplication.LanguageFilename);
+
+            panel_listtotal.Visible = Convert.ToBoolean(ConfigurationManager.AppSettings["showInvoicesEstimatesTotal"]);
         }
 
         /// <summary>
@@ -49,9 +57,10 @@ namespace DG.DentneD.Forms
             LanguageHelper.AddComponent(this);
             LanguageHelper.AddComponent(label_filterDoctors);
             LanguageHelper.AddComponent(label_filterYears);
-            LanguageHelper.AddComponent(totalLabel);
-            LanguageHelper.AddComponent(totalinvoicedLabel);
-            LanguageHelper.AddComponent(estimatesidDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(totalnetLabel);
+            LanguageHelper.AddComponent(totalgrossLabel);
+            LanguageHelper.AddComponent(totaldueLabel);
+            LanguageHelper.AddComponent(totaldueinvoicedLabel);
             LanguageHelper.AddComponent(numberDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
             LanguageHelper.AddComponent(dateDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
             LanguageHelper.AddComponent(patientDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
@@ -68,7 +77,9 @@ namespace DG.DentneD.Forms
             LanguageHelper.AddComponent(estimates_idLabel);
             LanguageHelper.AddComponent(estimates_numberLabel);
             LanguageHelper.AddComponent(estimates_invoiceLabel);
-            LanguageHelper.AddComponent(estimates_totalLabel);
+            LanguageHelper.AddComponent(estimates_totalnetLabel);
+            LanguageHelper.AddComponent(estimates_totalgrossLabel);
+            LanguageHelper.AddComponent(estimates_totaldueLabel);
             LanguageHelper.AddComponent(estimates_dateLabel);
             LanguageHelper.AddComponent(estimates_doctorLabel);
             LanguageHelper.AddComponent(estimates_patientLabel);
@@ -77,7 +88,6 @@ namespace DG.DentneD.Forms
             LanguageHelper.AddComponent(estimates_deductiontaxrateLabel);
             //tabEstimatesLines
             LanguageHelper.AddComponent(tabPage_tabEstimatesLines);
-            LanguageHelper.AddComponent(estimateslinesidDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
             LanguageHelper.AddComponent(codeDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
             LanguageHelper.AddComponent(descriptionDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
             LanguageHelper.AddComponent(quantityDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
@@ -97,8 +107,40 @@ namespace DG.DentneD.Forms
             LanguageHelper.AddComponent(estimateslines_taxrateLabel);
             LanguageHelper.AddComponent(estimateslines_descriptionLabel);
             LanguageHelper.AddComponent(treatments_idLabel);
+            LanguageHelper.AddComponent(computedlines_idLabel);
+            LanguageHelper.AddComponent(estimateslines_istaxesdeductionsableCheckBox);
             LanguageHelper.AddComponent(groupBox_tabEstimatesLines_filler);
         }
+
+        /// <summary>
+        /// Form language dictionary
+        /// </summary>
+        public class FormLanguage : IDGUIGHFLanguage
+        {
+            public string doctorselectMessage = "Please select a Doctor.";
+            public string doctorselectTitle = "Warning";
+            public string invoicerequestMessage = "Invoice this item?";
+            public string invoicerequestTitle = "Invoice";
+            public string invoicerequestsuccessfulMessage = "Successfully invoiced to invoice number {0} of date {1}.";
+            public string invoicerequestsuccessfulTitle = "Info";
+            public string invoicerequestalreadyexistsMessage = "Already invoiced. Invoice number {0} of date {1}.";
+            public string invoicerequestalreadyexistsTitle = "Info";
+            public string printmodelerrorMessage = "Can not instantiate the print model.";
+            public string printmodelerrorTitle = "Error";
+            public string printcreatefoldererrorMessage = "Can not create destination folder '{0}'.";
+            public string printcreatefoldererrorTitle = "Error";
+            public string printvalidfilenameerrorMessage = "Can not found a valid filename.";
+            public string printvalidfilenameerrorTitle = "Error";
+            public string printbuildpdferrorMessage = "Can not build the PDF file '{0}'.";
+            public string printbuildpdferrorTitle = "Error";
+            public string printopenfilenameMessage = "File '{0}' built successful.";
+            public string printopenfilenameTitle = "Info";
+        }
+
+        /// <summary>
+        /// Form language
+        /// </summary>
+        public FormLanguage language = new FormLanguage();
 
         /// <summary>
         /// Initialize TabElements
@@ -117,7 +159,7 @@ namespace DG.DentneD.Forms
             TabControlMain = tabControl_main;
 
             //set Main Panels
-            PanelFiltersMain = null;
+            PanelFiltersMain = panel_filters;
             PanelListMain = panel_list;
             PanelsExtraMain = null;
 
@@ -198,6 +240,10 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void FormEstimates_Load(object sender, EventArgs e)
         {
+            IsBindingSourceLoading = true;
+            advancedDataGridView_main.SortDESC(advancedDataGridView_main.Columns[1]);
+            IsBindingSourceLoading = false;
+
             PreloadView();
 
             //select an estimate on load estimate
@@ -229,11 +275,7 @@ namespace DG.DentneD.Forms
             }
 
             ReloadView();
-
-            IsBindingSourceLoading = true;
-            advancedDataGridView_main.SortASC(advancedDataGridView_main.Columns[1]);
-            IsBindingSourceLoading = false;
-
+            
             ResetTabsDataGrid();
 
             //select an estiamte on load invoice
@@ -292,13 +334,21 @@ namespace DG.DentneD.Forms
             }
             estimateslines_taxrateComboBox.SelectedIndex = -1;
 
-            //local treatments
+            //load treatments
             treatments_idComboBox.Items.Clear();
             foreach (treatments a in _dentnedModel.Treatments.List())
             {
                 treatments_idComboBox.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(a.treatments_id.ToString(), a.treatments_code + " - " + a.treatments_name));
             }
             treatments_idComboBox.SelectedIndex = -1;
+
+            //load computed lines
+            computedlines_idComboBox.Items.Clear();
+            foreach (computedlines a in _dentnedModel.ComputedLines.List())
+            {
+                computedlines_idComboBox.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(a.computedlines_id.ToString(), a.computedlines_name));
+            }
+            computedlines_idComboBox.SelectedIndex = -1;
 
             //load filter doctors
             comboBox_filterDoctors.Items.Clear();
@@ -372,13 +422,15 @@ namespace DG.DentneD.Forms
                 doctors_id = Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_filterDoctors.SelectedItem).Id);
             }
             int year = -1;
-            if (comboBox_filterDoctors.SelectedIndex != -1)
+            if (comboBox_filterYears.SelectedIndex != -1)
             {
                 year = Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_filterYears.SelectedItem).Id);
             }
 
-            totalTextBox.Text = "0";
-            totalinvoicedTextBox.Text = "0";
+            totalnetTextBox.Text = "0";
+            totalgrossTextBox.Text = "0";
+            totaldueTextBox.Text = "0";
+            totaldueinvoicedTextBox.Text = "0";
 
             //reset list total
             SetListTotal();
@@ -453,8 +505,10 @@ namespace DG.DentneD.Forms
                 doctors_id = Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_filterDoctors.SelectedItem).Id);
             }
 
-            totalTextBox.Text = Math.Round(_dentnedModel.Estimates.List(r => r.doctors_id == doctors_id).Sum(r => r.estimates_total), 2).ToString();
-            totalinvoicedTextBox.Text = Math.Round(_dentnedModel.Estimates.List(r => r.doctors_id == doctors_id && r.invoices_id != null).Sum(r => r.estimates_total), 2).ToString();
+            totalnetTextBox.Text = Math.Round(_dentnedModel.Estimates.List(r => r.doctors_id == doctors_id).Sum(r => r.estimates_totalnet), 2).ToString();
+            totalgrossTextBox.Text = Math.Round(_dentnedModel.Estimates.List(r => r.doctors_id == doctors_id).Sum(r => r.estimates_totalgross), 2).ToString();
+            totaldueTextBox.Text = Math.Round(_dentnedModel.Estimates.List(r => r.doctors_id == doctors_id).Sum(r => r.estimates_totaldue), 2).ToString();
+            totaldueinvoicedTextBox.Text = Math.Round(_dentnedModel.Estimates.List(r => r.doctors_id == doctors_id && r.invoices_id != null).Sum(r => r.estimates_totaldue), 2).ToString();
         }
         
         /// <summary>
@@ -555,7 +609,7 @@ namespace DG.DentneD.Forms
         {
             if (comboBox_filterDoctors.SelectedIndex == -1 || comboBox_filterDoctors.SelectedIndex == 0)
             {
-                MessageBox.Show("Please select a Doctor", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(language.doctorselectMessage, language.doctorselectTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             IsBindingSourceLoading = true;
@@ -564,10 +618,22 @@ namespace DG.DentneD.Forms
                 //set default values
                 int doctors_id = Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_filterDoctors.SelectedItem).Id);
                 int maxnumber = 1;
+                int year = DateTime.Now.Year;
+                if (comboBox_filterYears.SelectedIndex != -1)
+                {
+                    year = Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_filterYears.SelectedItem).Id);
+                }
+                string[] numbers = _dentnedModel.Estimates.List(r => r.doctors_id == doctors_id && r.estimates_date.Year == year).Select(r => r.estimates_number).ToArray();
                 try
                 {
-                    maxnumber = Convert.ToInt32(_dentnedModel.Estimates.List(r => r.doctors_id == doctors_id && r.estimates_date.Year == DateTime.Now.Year).Max(r => r.estimates_number));
-                    maxnumber++;
+                    foreach (string number in numbers)
+                    {
+                        int n = Convert.ToInt32(number);
+                        if (n > maxnumber)
+                            maxnumber = n;
+                    }
+                    if(maxnumber != 1)
+                        maxnumber++;
                 }
                 catch { }
                 ((estimates)estimatesBindingSource.Current).doctors_id = doctors_id;
@@ -607,7 +673,7 @@ namespace DG.DentneD.Forms
         }
 
         /// <summary>
-        /// Payed button click
+        /// Invoiced button handler
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -615,67 +681,166 @@ namespace DG.DentneD.Forms
         {
             if (vEstimatesBindingSource.Current != null)
             {
-                if (MessageBox.Show("Invoice this item?", "Invoice", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                int estimates_id = -1;
+                if (vEstimatesBindingSource.Current != null)
                 {
-                    int estimates_id = -1;
-                    if (vEstimatesBindingSource.Current != null)
-                    {
-                        estimates_id = (((DataRowView)vEstimatesBindingSource.Current).Row).Field<int>("estimates_id");
-                    }
-                    
-                    if(estimates_id != -1)
-                    {
-                        estimates estimate = _dentnedModel.Estimates.Find(estimates_id);
+                    estimates_id = (((DataRowView)vEstimatesBindingSource.Current).Row).Field<int>("estimates_id");
+                }
 
-                        //add the new invoice
-                        int maxnumber = 1;
-                        try
+                if (estimates_id != -1)
+                {
+                    estimates estimate = _dentnedModel.Estimates.Find(estimates_id);
+                    if(estimate.invoices_id == null)
+                    {
+                        if (MessageBox.Show(language.invoicerequestMessage, language.invoicerequestTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                         {
-                            maxnumber = Convert.ToInt32(_dentnedModel.Invoices.List(r => r.doctors_id == estimate.doctors_id && r.invoices_date.Year == DateTime.Now.Year).Max(r => r.invoices_number));
-                            maxnumber++;
-                        }
-                        catch { }
-                        invoices invoice = new invoices()
-                        {
-                            doctors_id = estimate.doctors_id,
-                            patients_id = estimate.patients_id,
-                            invoices_number = maxnumber.ToString(),
-                            invoices_date = DateTime.Now,
-                            invoices_doctor = estimate.estimates_doctor,
-                            invoices_footer = estimate.estimates_footer,
-                            invoices_deductiontaxrate = estimate.estimates_deductiontaxrate,
-                            invoices_patient = estimate.estimates_patient,
-                            invoices_payment = estimate.estimates_payment,
-                            invoices_ispaid = false,
-                            invoices_total = estimate.estimates_total
-                        };
-                        _dentnedModel.Invoices.Add(invoice);
-                        //add invoices lines
-                        foreach (estimateslines estimatesline in _dentnedModel.EstimatesLines.List(r => r.estimates_id == estimate.estimates_id))
-                        {
-                            invoiceslines invoicesline = new invoiceslines()
+                            //add the new invoice
+                            int maxnumber = 1;
+                            int year = DateTime.Now.Year;
+                            if (comboBox_filterYears.SelectedIndex != -1)
                             {
-                                invoices_id = invoice.invoices_id,
-                                invoiceslines_code = estimatesline.estimateslines_code,
-                                invoiceslines_description = estimatesline.estimateslines_description,
-                                invoiceslines_quantity = estimatesline.estimateslines_quantity,
-                                invoiceslines_taxrate = estimatesline.estimateslines_taxrate,
-                                invoiceslines_unitprice = estimatesline.estimateslines_unitprice,
-                                patientstreatments_id = estimatesline.patientstreatments_id
+                                year = Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_filterYears.SelectedItem).Id);
+                            }
+                            string[] numbers = _dentnedModel.Invoices.List(r => r.doctors_id == estimate.doctors_id && r.invoices_date.Year == DateTime.Now.Year).Select(r => r.invoices_number).ToArray();
+                            try
+                            {
+                                foreach (string number in numbers)
+                                {
+                                    int n = Convert.ToInt32(number);
+                                    if (n > maxnumber)
+                                        maxnumber = n;
+                                }
+                                if (maxnumber != 1)
+                                    maxnumber++;
+                            }
+                            catch { }
+                            invoices invoice = new invoices()
+                            {
+                                doctors_id = estimate.doctors_id,
+                                patients_id = estimate.patients_id,
+                                invoices_number = maxnumber.ToString(),
+                                invoices_date = DateTime.Now,
+                                invoices_doctor = estimate.estimates_doctor,
+                                invoices_footer = estimate.estimates_footer,
+                                invoices_deductiontaxrate = estimate.estimates_deductiontaxrate,
+                                invoices_patient = estimate.estimates_patient,
+                                invoices_payment = estimate.estimates_payment,
+                                invoices_ispaid = false,
+                                invoices_totalnet = estimate.estimates_totalnet,
+                                invoices_totalgross = estimate.estimates_totalgross,
+                                invoices_totaldue = estimate.estimates_totaldue
                             };
-                            _dentnedModel.InvoicesLines.Add(invoicesline);
+                            _dentnedModel.Invoices.Add(invoice);
+                            //add invoices lines
+                            foreach (estimateslines estimatesline in _dentnedModel.EstimatesLines.List(r => r.estimates_id == estimate.estimates_id))
+                            {
+                                invoiceslines invoicesline = new invoiceslines()
+                                {
+                                    invoices_id = invoice.invoices_id,
+                                    invoiceslines_code = estimatesline.estimateslines_code,
+                                    invoiceslines_description = estimatesline.estimateslines_description,
+                                    invoiceslines_quantity = estimatesline.estimateslines_quantity,
+                                    invoiceslines_taxrate = estimatesline.estimateslines_taxrate,
+                                    invoiceslines_unitprice = estimatesline.estimateslines_unitprice,
+                                    patientstreatments_id = estimatesline.patientstreatments_id,
+                                    invoiceslines_istaxesdeductionsable = estimatesline.estimateslines_istaxesdeductionsable
+                                };
+                                _dentnedModel.InvoicesLines.Add(invoicesline);
+                            }
+
+                            //set the invoice number
+                            estimate.invoices_id = invoice.invoices_id;
+                            _dentnedModel.Estimates.Update(estimate);
+
+                            MessageBox.Show(String.Format(language.invoicerequestsuccessfulMessage, invoice.invoices_number, invoice.invoices_date.ToString()), language.invoicerequestsuccessfulTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            ReloadAfterSave(tabElement_tabEstimates, estimate);
                         }
+                    }
+                    else
+                    {
+                        invoices invoice = _dentnedModel.Invoices.Find(estimate.invoices_id);
 
-                        //set the invoice number
-                        estimate.invoices_id = invoice.invoices_id;
-                        _dentnedModel.Estimates.Update(estimate);
-
-                        MessageBox.Show("Successfully invoiced to invoice number " + maxnumber + ".", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        ReloadAfterSave(tabElement_tabEstimates, estimate);
+                        MessageBox.Show(String.Format(language.invoicerequestalreadyexistsMessage, invoice.invoices_number, invoice.invoices_date.ToString()), language.invoicerequestalreadyexistsTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     
                 }
+            }
+                
+        }
+
+        /// <summary>
+        /// Print button click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button_tabEstimates_print_Click(object sender, EventArgs e)
+        {
+            if (vEstimatesBindingSource.Current != null)
+            {
+                int estimates_id = -1;
+                if (vEstimatesBindingSource.Current != null)
+                {
+                    estimates_id = (((DataRowView)vEstimatesBindingSource.Current).Row).Field<int>("estimates_id");
+                }
+
+                if (estimates_id != -1)
+                {
+                    PrintEstimates(estimates_id);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Print an estimate
+        /// </summary>
+        /// <param name="estimates_id"></param>
+        private void PrintEstimates(int estimates_id)
+        {
+            estimates estimate = _dentnedModel.Estimates.Find(estimates_id);
+            if (estimate == null)
+                return;
+
+            //instantiate the printmodel
+            string assemblyPath = ConfigurationManager.AppSettings["printModel"];
+            IDentneDPrintModel printModel = DentneDPrintModelHelper.DentneDPrintModelInstance(assemblyPath);
+            if (printModel == null)
+            {
+                MessageBox.Show(language.printmodelerrorMessage, language.printmodelerrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            //prepare folders
+            string destfolder = ConfigurationManager.AppSettings["tmpdir"];
+            if (!FileHelper.CreateFolder(destfolder))
+            {
+                MessageBox.Show(String.Format(language.printcreatefoldererrorMessage, destfolder), language.printcreatefoldererrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            //make new filename
+            string filename = FileHelper.FindRandomFileName(destfolder, "E", "pdf");
+            if (String.IsNullOrEmpty(filename))
+            {
+                MessageBox.Show(language.printvalidfilenameerrorMessage, language.printvalidfilenameerrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            //build PDF
+            if (!printModel.BuildEstimatePDF(_dentnedModel, estimates_id, filename, ConfigurationManager.AppSettings["language"]))
+            {
+                MessageBox.Show(String.Format(language.printbuildpdferrorMessage, filename), language.printbuildpdferrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            //try to start the process
+            try
+            {
+                Process.Start(filename);
+            }
+            catch
+            {
+                MessageBox.Show(String.Format(language.printopenfilenameMessage, filename), language.printopenfilenameTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -689,7 +854,7 @@ namespace DG.DentneD.Forms
             if (IsBindingSourceLoading)
                 return;
 
-            if (doctors_idComboBox.SelectedValue != null)
+            if (doctors_idComboBox.SelectedValue != null && (tabElement_tabEstimates.CurrentEditingMode == EditingMode.C || tabElement_tabEstimates.CurrentEditingMode == EditingMode.U))
             {
                 ((estimates)estimatesBindingSource.Current).estimates_doctor = "";
                 doctors doctor = _dentnedModel.Doctors.Find((int)doctors_idComboBox.SelectedValue);
@@ -710,7 +875,7 @@ namespace DG.DentneD.Forms
             if (IsBindingSourceLoading)
                 return;
 
-            if (patients_idComboBox.SelectedValue != null)
+            if (patients_idComboBox.SelectedValue != null && (tabElement_tabEstimates.CurrentEditingMode == EditingMode.C || tabElement_tabEstimates.CurrentEditingMode == EditingMode.U))
             {
                 ((estimates)estimatesBindingSource.Current).estimates_patient = "";
                 patients patient = _dentnedModel.Patients.Find((int)patients_idComboBox.SelectedValue);
@@ -731,7 +896,7 @@ namespace DG.DentneD.Forms
             if (IsBindingSourceLoading)
                 return;
 
-            if (estimates_paymentComboBox.SelectedIndex != -1)
+            if (estimates_paymentComboBox.SelectedIndex != -1 && (tabElement_tabEstimates.CurrentEditingMode == EditingMode.C || tabElement_tabEstimates.CurrentEditingMode == EditingMode.U))
             {
                 int paymentstypes_id = -1;
                 try
@@ -761,7 +926,7 @@ namespace DG.DentneD.Forms
             if (IsBindingSourceLoading)
                 return;
 
-            if (estimates_footerComboBox.SelectedIndex != -1)
+            if (estimates_footerComboBox.SelectedIndex != -1 && (tabElement_tabEstimates.CurrentEditingMode == EditingMode.C || tabElement_tabEstimates.CurrentEditingMode == EditingMode.U))
             {
                 int estimatesfooters_id = -1;
                 try
@@ -791,7 +956,7 @@ namespace DG.DentneD.Forms
             if (IsBindingSourceLoading)
                 return;
 
-            if (estimates_deductiontaxrateComboBox.SelectedIndex != -1)
+            if (estimates_deductiontaxrateComboBox.SelectedIndex != -1 && (tabElement_tabEstimates.CurrentEditingMode == EditingMode.C || tabElement_tabEstimates.CurrentEditingMode == EditingMode.U))
             {
                 int taxesdeductions_id = -1;
                 try
@@ -955,6 +1120,9 @@ namespace DG.DentneD.Forms
         /// <param name="item"></param>
         private void Add_tabEstimatesLines(object item)
         {
+            //unset lazy load for estimate tab, to reload total
+            tabElement_tabEstimates.IsLazyLoaded = false;
+
             DGUIGHFData.Add<estimateslines, DentneDModel>(_dentnedModel.EstimatesLines, item);
         }
 
@@ -964,6 +1132,9 @@ namespace DG.DentneD.Forms
         /// <param name="item"></param>
         private void Update_tabEstimatesLines(object item)
         {
+            //unset lazy load for estimate tab, to reload total
+            tabElement_tabEstimates.IsLazyLoaded = false;
+
             DGUIGHFData.Update<estimateslines, DentneDModel>(_dentnedModel.EstimatesLines, item);
         }
 
@@ -973,6 +1144,9 @@ namespace DG.DentneD.Forms
         /// <param name="item"></param>
         private void Remove_tabEstimatesLines(object item)
         {
+            //unset lazy load for estimate tab, to reload total
+            tabElement_tabEstimates.IsLazyLoaded = false;
+
             DGUIGHFData.Remove<estimateslines, DentneDModel>(_dentnedModel.EstimatesLines, item);
         }
 
@@ -998,6 +1172,7 @@ namespace DG.DentneD.Forms
                     ((estimateslines)estimateslinesBindingSource.Current).estimateslines_unitprice = 0;
                     if (_dentnedModel.Taxes.List(r => r.taxes_isdefault).Count > 0)
                         ((estimateslines)estimateslinesBindingSource.Current).estimateslines_taxrate = _dentnedModel.Taxes.List(r => r.taxes_isdefault).FirstOrDefault().taxes_rate;
+                    ((estimateslines)estimateslinesBindingSource.Current).estimateslines_istaxesdeductionsable = true;
                     estimateslinesBindingSource.ResetBindings(true);
                 }
             }
@@ -1014,6 +1189,9 @@ namespace DG.DentneD.Forms
             {
                 if (UpdateClick(tabElement_tabEstimatesLines))
                 {
+                    ((estimateslines)estimateslinesBindingSource.Current).estimateslines_istaxesdeductionsable = true;
+                    estimateslinesBindingSource.ResetBindings(true);
+
                     groupBox_tabEstimatesLines_filler.Enabled = false;
                     patientstreatments_idComboBox.Enabled = false;
                 }
@@ -1030,8 +1208,7 @@ namespace DG.DentneD.Forms
             if (IsBindingSourceLoading)
                 return;
 
-            tabElement_tabEstimatesLines.IsLaziLoaded = false;
-            TabControl_SelectedIndexChanged(null, null, TabElements, tabControl_main);
+            ReloadTab(tabElement_tabEstimatesLines);
         }
 
         /// <summary>
@@ -1047,18 +1224,28 @@ namespace DG.DentneD.Forms
             {
                 if (!loadall)
                 {
-                    //do not load already inserted treatments and yet payed
-                    patientstreatmentsl = _dentnedModel.PatientsTreatments.List(r => r.patients_id == patients_id && !r.patientstreatments_ispayed).ToList();
-                    foreach (estimateslines estimatesline in _dentnedModel.EstimatesLines.List())
+                    //do not load already inserted treatments and yet paid or invoices
+                    patientstreatmentsl = _dentnedModel.PatientsTreatments.List(r => r.patients_id == patients_id && !r.patientstreatments_ispaid).ToList();
+                    int[] patientstreatmentsids = patientstreatmentsl.Select(r => r.patientstreatments_id).ToArray();
+                    foreach (estimateslines estimatesline in _dentnedModel.EstimatesLines.List().Join(
+                            _dentnedModel.Estimates.List(), a => a.estimates_id, b => b.estimates_id, (a, b) => a).ToList())
                     {
                         patientstreatments patientstreatment = patientstreatmentsl.Where(r => r.patientstreatments_id == estimatesline.patientstreatments_id).FirstOrDefault();
+                        if (patientstreatment != null)
+                            patientstreatmentsl.Remove(patientstreatment);
+                    }
+                    foreach (invoiceslines invoicesline in _dentnedModel.InvoicesLines.List(
+                        r => r.patientstreatments_id != null && patientstreatmentsids.Contains((int)r.patientstreatments_id)).Join(
+                            _dentnedModel.Invoices.List(), a => a.invoices_id, b => b.invoices_id, (a, b) => a).ToList())
+                    {
+                        patientstreatments patientstreatment = patientstreatmentsl.Where(r => r.patientstreatments_id == invoicesline.patientstreatments_id).FirstOrDefault();
                         if (patientstreatment != null)
                             patientstreatmentsl.Remove(patientstreatment);
                     }
                 }
                 else
                 {
-                    patientstreatmentsl = _dentnedModel.PatientsTreatments.List(r => r.patients_id == patients_id && !r.patientstreatments_ispayed).ToList();
+                    patientstreatmentsl = _dentnedModel.PatientsTreatments.List(r => r.patients_id == patients_id && !r.patientstreatments_ispaid).ToList();
                 }
             }
             else
@@ -1067,7 +1254,7 @@ namespace DG.DentneD.Forms
             }
             //local patients treatments
             IsBindingSourceLoading = true;
-            patientstreatments_idComboBox.DataSource = patientstreatmentsl.Select(r => new { name = _dentnedModel.Treatments.Find(r.treatments_id).treatments_code + " [" + _dentnedModel.PatientsTreatments.GetTreatmentsToothsString(r) + "] " + r.patientstreatments_creationdate.ToShortDateString(), r.patientstreatments_id }).OrderBy(r => r.name).ToList();
+            patientstreatments_idComboBox.DataSource = patientstreatmentsl.Select(r => new { name = _dentnedModel.Treatments.Find(r.treatments_id).treatments_code + (tabElement_tabEstimatesLines.CurrentEditingMode == EditingMode.C || tabElement_tabEstimatesLines.CurrentEditingMode == EditingMode.U ? " [" + _dentnedModel.PatientsTreatments.GetTreatmentsToothsString(r) + "] " : " ") + r.patientstreatments_creationdate.ToShortDateString(), r.patientstreatments_id }).OrderBy(r => r.name).ToList();
             patientstreatments_idComboBox.DisplayMember = "name";
             patientstreatments_idComboBox.ValueMember = "patientstreatments_id";
             IsBindingSourceLoading = false;
@@ -1083,7 +1270,7 @@ namespace DG.DentneD.Forms
             if (IsBindingSourceLoading)
                 return;
 
-            if (estimateslinesBindingSource.Current != null && estimateslines_taxrateComboBox.SelectedIndex != -1)
+            if (estimateslines_taxrateComboBox.SelectedIndex != -1 && (tabElement_tabEstimatesLines.CurrentEditingMode == EditingMode.C || tabElement_tabEstimatesLines.CurrentEditingMode == EditingMode.U))
             {
                 int taxes_id = -1;
                 try
@@ -1113,118 +1300,155 @@ namespace DG.DentneD.Forms
             if (IsBindingSourceLoading)
                 return;
 
-            if (tabElement_tabEstimatesLines.CurrentEditingMode == EditingMode.C)
+            if (treatments_idComboBox.SelectedIndex != -1 && (tabElement_tabEstimatesLines.CurrentEditingMode == EditingMode.C || tabElement_tabEstimatesLines.CurrentEditingMode == EditingMode.U))
             {
-                if (estimateslinesBindingSource.Current != null && treatments_idComboBox.SelectedIndex != -1)
+                int estimates_id = -1;
+                if (vEstimatesBindingSource.Current != null)
                 {
-                    int estimates_id = -1;
-                    if (vEstimatesBindingSource.Current != null)
-                    {
-                        estimates_id = (((DataRowView)vEstimatesBindingSource.Current).Row).Field<int>("estimates_id");
-                    }
-                    if (estimates_id != -1)
-                    {
-                        estimates estimate = _dentnedModel.Estimates.Find(estimates_id);
-                        int patients_id = -1;
+                    estimates_id = (((DataRowView)vEstimatesBindingSource.Current).Row).Field<int>("estimates_id");
+                }
+                if (estimates_id != -1)
+                {
+                    estimates estimate = _dentnedModel.Estimates.Find(estimates_id);
+                    int patients_id = -1;
 
-                        if (estimate.patients_id != null)
-                            patients_id = (int)estimate.patients_id;
+                    if (estimate.patients_id != null)
+                        patients_id = (int)estimate.patients_id;
 
-                        if (patients_id != -1)
+                    if (patients_id != -1)
+                    {
+                        treatments treatment = _dentnedModel.Treatments.Find(Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)treatments_idComboBox.SelectedItem).Id));
+                        if (treatment != null)
                         {
-                            treatments treatment = _dentnedModel.Treatments.Find(Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)treatments_idComboBox.SelectedItem).Id));
-                            if (treatment != null)
+                            string code = treatment.treatments_code;
+                            string description = treatment.treatments_name;
+                            decimal price = treatment.treatments_price;
+                            decimal taxrate = (treatment.taxes_id != null ? _dentnedModel.Taxes.Find((int)treatment.taxes_id).taxes_rate : 0);
+                            if (patients_id != -1)
                             {
-                                string code = treatment.treatments_code;
-                                string description = treatment.treatments_name;
-                                decimal price = treatment.treatments_price;
-                                if (patients_id != -1)
+                                patients patient = _dentnedModel.Patients.Find(patients_id);
+                                if (patient != null)
                                 {
-                                    patients patient = _dentnedModel.Patients.Find(patients_id);
-                                    if (patient != null)
+                                    treatmentsprices treatmentsprice = _dentnedModel.TreatmentsPrices.List(r => r.treatments_id == treatment.treatments_id && r.treatmentspriceslists_id == patient.treatmentspriceslists_id).FirstOrDefault();
+                                    if (treatmentsprice != null)
                                     {
-                                        treatmentsprices treatmentsprice = _dentnedModel.TreatmentsPrices.List(r => r.treatments_id == treatment.treatments_id && r.treatmentspriceslists_id == patient.treatmentspriceslists_id).FirstOrDefault();
-                                        if (treatmentsprice != null)
-                                        {
-                                            price = treatmentsprice.treatmentsprices_price;
-                                        }
+                                        price = treatmentsprice.treatmentsprices_price;
                                     }
                                 }
-                                ((estimateslines)estimateslinesBindingSource.Current).estimateslines_code = code;
-                                ((estimateslines)estimateslinesBindingSource.Current).estimateslines_description = description;
-                                ((estimateslines)estimateslinesBindingSource.Current).estimateslines_quantity = 1;
-                                ((estimateslines)estimateslinesBindingSource.Current).estimateslines_unitprice = price;
                             }
+                            ((estimateslines)estimateslinesBindingSource.Current).estimateslines_code = code;
+                            ((estimateslines)estimateslinesBindingSource.Current).estimateslines_description = description;
+                            ((estimateslines)estimateslinesBindingSource.Current).estimateslines_quantity = 1;
+                            ((estimateslines)estimateslinesBindingSource.Current).estimateslines_unitprice = price;
+                            ((estimateslines)estimateslinesBindingSource.Current).estimateslines_taxrate = taxrate;
+                        }
+                    }
+                }
+                estimateslinesBindingSource.ResetBindings(true);
+            }            
+            IsBindingSourceLoading = true;
+            treatments_idComboBox.SelectedIndex = -1;
+            IsBindingSourceLoading = false;
+        }
+        
+        /// <summary>
+        /// Computed lines changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void computedlines_idComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (IsBindingSourceLoading)
+                return;
+
+            if (computedlines_idComboBox.SelectedIndex != -1 && (tabElement_tabEstimatesLines.CurrentEditingMode == EditingMode.C || tabElement_tabEstimatesLines.CurrentEditingMode == EditingMode.U))
+            {
+                int estimates_id = -1;
+                if (vEstimatesBindingSource.Current != null)
+                {
+                    estimates_id = (((DataRowView)vEstimatesBindingSource.Current).Row).Field<int>("estimates_id");
+                }
+                if (estimates_id != -1)
+                {
+                    estimates estimate = _dentnedModel.Estimates.Find(estimates_id);
+                    int patients_id = -1;
+
+                    if (estimate.patients_id != null)
+                        patients_id = (int)estimate.patients_id;
+
+                    if (patients_id != -1)
+                    {
+                        computedlines computedline = _dentnedModel.ComputedLines.Find(Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)computedlines_idComboBox.SelectedItem).Id));
+                        if (computedline != null)
+                        {
+                            decimal totallines = _dentnedModel.EstimatesLines.List(r => r.estimates_id == estimates_id).Sum(r => r.estimateslines_quantity * r.estimateslines_unitprice);
+                            string code = computedline.computedlines_code;
+                            string description = computedline.computedlines_name;
+                            decimal price = totallines * (computedline.computedlines_rate / 100);
+                            decimal taxrate = (computedline.taxes_id != null ? _dentnedModel.Taxes.Find((int)computedline.taxes_id).taxes_rate : 0);
+                            ((estimateslines)estimateslinesBindingSource.Current).estimateslines_code = code;
+                            ((estimateslines)estimateslinesBindingSource.Current).estimateslines_description = description;
+                            ((estimateslines)estimateslinesBindingSource.Current).estimateslines_quantity = 1;
+                            ((estimateslines)estimateslinesBindingSource.Current).estimateslines_unitprice = price;
+                            ((estimateslines)estimateslinesBindingSource.Current).estimateslines_taxrate = taxrate;
                         }
                     }
                 }
                 estimateslinesBindingSource.ResetBindings(true);
             }
             IsBindingSourceLoading = true;
-            patientstreatments_idComboBox.SelectedIndex = -1;
+            computedlines_idComboBox.SelectedIndex = -1;
             IsBindingSourceLoading = false;
         }
-
+        
         /// <summary>
-        /// Treatments leaved
+        /// Patient treatments changed
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void treatments_idComboBox_Leave(object sender, EventArgs e)
-        {
-            if (IsBindingSourceLoading)
-                return;
-
-            IsBindingSourceLoading = true;
-            treatments_idComboBox.SelectedIndex = -1;
-            IsBindingSourceLoading = false;
-        }
-
-        //Patient treatments changed
         private void patientstreatments_idComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (IsBindingSourceLoading)
                 return;
 
-            if (tabElement_tabEstimatesLines.CurrentEditingMode == EditingMode.C)
+            if (patientstreatments_idComboBox.SelectedIndex != -1 && (tabElement_tabEstimatesLines.CurrentEditingMode == EditingMode.C || tabElement_tabEstimatesLines.CurrentEditingMode == EditingMode.U))
             {
-                if (estimateslinesBindingSource.Current != null && patientstreatments_idComboBox.SelectedIndex != -1)
+                int estimates_id = -1;
+                if (vEstimatesBindingSource.Current != null)
                 {
-                    int estimates_id = -1;
-                    if (vEstimatesBindingSource.Current != null)
-                    {
-                        estimates_id = (((DataRowView)vEstimatesBindingSource.Current).Row).Field<int>("estimates_id");
-                    }
-                    if (estimates_id != -1)
-                    {
-                        estimates estimate = _dentnedModel.Estimates.Find(estimates_id);
-                        int patients_id = -1;
+                    estimates_id = (((DataRowView)vEstimatesBindingSource.Current).Row).Field<int>("estimates_id");
+                }
+                if (estimates_id != -1)
+                {
+                    estimates estimate = _dentnedModel.Estimates.Find(estimates_id);
+                    int patients_id = -1;
 
-                        if (estimate.patients_id != null)
-                            patients_id = (int)estimate.patients_id;
+                    if (estimate.patients_id != null)
+                        patients_id = (int)estimate.patients_id;
 
-                        if (patients_id != -1)
+                    if (patients_id != -1)
+                    {
+                        patientstreatments patientstreatments = null;
+                        try
                         {
-                            patientstreatments patientstreatments = null;
-                            try
+                            patientstreatments = _dentnedModel.PatientsTreatments.Find((int)patientstreatments_idComboBox.SelectedValue);
+                        }
+                        catch { }
+                        if (patientstreatments != null)
+                        {
+                            treatments treatments = _dentnedModel.Treatments.Find(patientstreatments.treatments_id);
+                            if (treatments != null)
                             {
-                                patientstreatments = _dentnedModel.PatientsTreatments.Find((int)patientstreatments_idComboBox.SelectedValue);
-                            }
-                            catch { }
-                            if (patientstreatments != null)
-                            {
-                                treatments treatments = _dentnedModel.Treatments.Find(patientstreatments.treatments_id);
-                                if (treatments != null)
-                                {
-                                    string code = treatments.treatments_code;
-                                    string description = treatments.treatments_name;
-                                    decimal price = patientstreatments.patientstreatments_price;
-                                    ((estimateslines)estimateslinesBindingSource.Current).patientstreatments_id = patientstreatments.patientstreatments_id;
-                                    ((estimateslines)estimateslinesBindingSource.Current).estimateslines_code = code;
-                                    ((estimateslines)estimateslinesBindingSource.Current).estimateslines_description = description;
-                                    ((estimateslines)estimateslinesBindingSource.Current).estimateslines_quantity = 1;
-                                    ((estimateslines)estimateslinesBindingSource.Current).estimateslines_unitprice = price;
-                                }
+                                string code = treatments.treatments_code;
+                                string description = treatments.treatments_name;
+                                decimal price = patientstreatments.patientstreatments_price;
+                                decimal taxrate = patientstreatments.patientstreatments_taxrate;
+                                ((estimateslines)estimateslinesBindingSource.Current).patientstreatments_id = patientstreatments.patientstreatments_id;
+                                ((estimateslines)estimateslinesBindingSource.Current).estimateslines_code = code;
+                                ((estimateslines)estimateslinesBindingSource.Current).estimateslines_description = description;
+                                ((estimateslines)estimateslinesBindingSource.Current).estimateslines_quantity = 1;
+                                ((estimateslines)estimateslinesBindingSource.Current).estimateslines_unitprice = price;
+                                ((estimateslines)estimateslinesBindingSource.Current).estimateslines_taxrate = taxrate;
                             }
                         }
                     }
@@ -1251,6 +1475,16 @@ namespace DG.DentneD.Forms
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void computedlines_idComboBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            DGUIGHFUtilsUI.DGComboBoxAutoComplete.OnKeyPress((ComboBox)sender, e);
+        }
+        
+        /// <summary>
+        /// Combobox autocomplete
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void patientstreatments_idComboBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             DGUIGHFUtilsUI.DGComboBoxAutoComplete.OnKeyPress((ComboBox)sender, e);
@@ -1267,6 +1501,6 @@ namespace DG.DentneD.Forms
         }
 
         #endregion
-                
+      
     }
 }

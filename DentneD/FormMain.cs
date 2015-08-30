@@ -5,9 +5,15 @@
 #endregion
 
 using DG.DentneD.Forms;
+using DG.DentneD.Helpers;
 using DG.DentneD.Model;
 using DG.UI.GHF;
 using System;
+using System.Configuration;
+using System.Diagnostics;
+using System.Drawing;
+using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace DG.DentneD
@@ -31,7 +37,7 @@ namespace DG.DentneD
         /// <param name="e"></param>
         private void FormMain_Load(object sender, EventArgs e)
         {
-            // Perform the first connection
+            //perform the first connection
             try
             {
                 DentneDModel dentnedModel = new DentneDModel();
@@ -42,6 +48,35 @@ namespace DG.DentneD
                 MessageBox.Show("Database connection error. This application will be closed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
             }
+
+            //purge temporary folder
+            try
+            {
+                FileHelper.PurgeFolder(ConfigurationManager.AppSettings["tmpdir"], false, 1);
+            }
+            catch { }
+
+            //eventually maximize
+            try
+            {
+                string sizeOnStartup = ConfigurationManager.AppSettings["sizeOnStartup"];
+                if (sizeOnStartup == "maximized")
+                {
+                    this.WindowState = FormWindowState.Maximized;
+                }
+                else
+                {
+                    int width = Convert.ToInt16(sizeOnStartup.Split('x')[0]);
+                    int height = Convert.ToInt16(sizeOnStartup.Split('x')[1]);
+                    if (width > Screen.PrimaryScreen.WorkingArea.Width)
+                        width = Screen.PrimaryScreen.WorkingArea.Width - 5;
+                    if (height > Screen.PrimaryScreen.WorkingArea.Height)
+                        height = Screen.PrimaryScreen.WorkingArea.Height - 5;
+                    this.Size = new Size(width, height);
+                    this.CenterToScreen();
+                }
+            }
+            catch { }
         }
 
         /// <summary>
@@ -67,6 +102,7 @@ namespace DG.DentneD
             LanguageHelper.AddComponent(addressesTypesToolStripMenuItem);
             LanguageHelper.AddComponent(contactTypesToolStripMenuItem);
             LanguageHelper.AddComponent(doctorsToolStripMenuItem);
+            LanguageHelper.AddComponent(documentComputedLinesToolStripMenuItem);
             LanguageHelper.AddComponent(estimatesFootersToolStripMenuItem);
             LanguageHelper.AddComponent(medicalRecordTypesToolStripMenuItem);
             LanguageHelper.AddComponent(invoicesFootersToolStripMenuItem);
@@ -80,9 +116,30 @@ namespace DG.DentneD
             LanguageHelper.AddComponent(treatmentsTypesToolStripMenuItem);
             LanguageHelper.AddComponent(treatmentsPricesListToolStripMenuItem);
             LanguageHelper.AddComponent(backupToolStripMenuItem);
+            LanguageHelper.AddComponent(cleanDatadirToolStripMenuItem);
             LanguageHelper.AddComponent(minimizeAllToolStripMenuItem);
             LanguageHelper.AddComponent(closeAllToolStripMenuItem);
         }
+
+        /// <summary>
+        /// Form language dictionary
+        /// </summary>
+        public class FormLanguage : IDGUIGHFLanguage
+        {
+            public string backupToolMessage = "Do you want to run the full Backup?";
+            public string backupToolTitle = "Backup";
+            public string cleandatadirToolMessage = "Do you want to run the clean data directories tool?";
+            public string cleandatadirToolTitle = "Clean Datadir";
+            public string reportsPasswordInputMessage = "Insert password:";
+            public string reportsPasswordInputTitle = "Password";
+            public string reportsPasswordErrorMessage = "Wrong password.";
+            public string reportsPasswordErrorTitle = "Error";
+        }
+
+        /// <summary>
+        /// Form language
+        /// </summary>
+        public FormLanguage language = new FormLanguage();
 
         /// <summary>
         /// Add additional language
@@ -171,6 +228,16 @@ namespace DG.DentneD
         private void taxesDeductionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowForm(this, typeof(FormTaxesDeductions));
+        }
+
+        /// <summary>
+        /// FormComputedLines form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void documentComputedLinesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowForm(this, typeof(FormComputedLines));
         }
 
         /// <summary>
@@ -330,9 +397,94 @@ namespace DG.DentneD
         /// <param name="e"></param>
         private void setReportsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!Program.isPasswordLogged)
+            {
+                string input = null;
+                if (InputBox.Show(language.reportsPasswordInputMessage, language.reportsPasswordInputTitle, ref input) == DialogResult.OK)
+                {
+                    if (input == ConfigurationManager.AppSettings["formspassword"])
+                    {
+                        Program.isPasswordLogged = true;
+                    }
+                    else
+                    {
+                        MessageBox.Show(language.reportsPasswordErrorMessage, language.reportsPasswordErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+                else
+                {
+                    return;
+                }
+            }
+
             ShowForm(this, typeof(FormReports));
         }
+
+        /// <summary>
+        /// Backup tool
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void backupToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (UIGHFApplication.IsEditing)
+                return;
+
+            if(MessageBox.Show(language.backupToolMessage, language.backupToolTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                try
+                {
+                    string filename = ConfigurationManager.AppSettings["backupscript"];
+                    if(File.Exists(filename))
+                    {
+                        ProcessStartInfo startInfo = new ProcessStartInfo();
+                        startInfo.UseShellExecute = true;
+                        startInfo.FileName = Path.GetFileName(filename);
+                        startInfo.WindowStyle = ProcessWindowStyle.Normal;
+                        startInfo.WorkingDirectory = Path.GetDirectoryName(Path.GetFullPath(filename));
+                        Process exeProcess = Process.Start(startInfo);
+                        exeProcess.WaitForExit();
+                    }
+                }
+                catch
+                { }
+            }
+        }
+
+        /// <summary>
+        /// Clean DataDir tool
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cleanDatadirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (UIGHFApplication.IsEditing)
+                return;
+
+            if (MessageBox.Show(language.cleandatadirToolMessage, language.cleandatadirToolTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                try
+                {
+                    string filename = Assembly.GetExecutingAssembly().Location;
+                    if (File.Exists(filename))
+                    {
+                        ProcessStartInfo startInfo = new ProcessStartInfo();
+                        startInfo.UseShellExecute = true;
+                        startInfo.FileName = Path.GetFileName(filename);
+                        startInfo.Arguments = "-d";
+                        startInfo.WindowStyle = ProcessWindowStyle.Normal;
+                        startInfo.WorkingDirectory = Path.GetDirectoryName(Path.GetFullPath(filename));
+                        Process exeProcess = Process.Start(startInfo);
+                        exeProcess.WaitForExit();
+                    }
+                }
+                catch
+                { }
+            }
+        }
+
+            
         
-                
     }
 }

@@ -26,8 +26,9 @@ namespace DG.DentneD.Model.Entity
         public int treatments_id { get; set; }
         public System.DateTime patientstreatments_creationdate { get; set; }
         public Nullable<System.DateTime> patientstreatments_fulfilldate { get; set; }
-        public bool patientstreatments_ispayed { get; set; }
+        public bool patientstreatments_ispaid { get; set; }
         public decimal patientstreatments_price { get; set; }
+        public decimal patientstreatments_taxrate { get; set; }
         public string patientstreatments_description { get; set; }
         public string patientstreatments_notes { get; set; }
         public Nullable<System.DateTime> patientstreatments_expirationdate { get; set; }
@@ -64,10 +65,7 @@ namespace DG.DentneD.Model.Entity
         public bool patientstreatments_t47 { get; set; }
         public bool patientstreatments_t48 { get; set; }
     
-        public virtual doctors doctors { get; set; }
         public virtual ICollection<estimateslines> estimateslines { get; set; }
         public virtual ICollection<invoiceslines> invoiceslines { get; set; }
-        public virtual patients patients { get; set; }
-        public virtual treatments treatments { get; set; }
     }
 }

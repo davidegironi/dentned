@@ -29,7 +29,9 @@ namespace DG.DentneD.Model.Entity
         public string estimates_patient { get; set; }
         public string estimates_payment { get; set; }
         public string estimates_footer { get; set; }
-        public decimal estimates_total { get; set; }
+        public decimal estimates_totalnet { get; set; }
+        public decimal estimates_totalgross { get; set; }
+        public decimal estimates_totaldue { get; set; }
         public decimal estimates_deductiontaxrate { get; set; }
     
         public virtual doctors doctors { get; set; }

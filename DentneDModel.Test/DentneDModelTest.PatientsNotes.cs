@@ -30,7 +30,9 @@ namespace DG.DentneD.Model.Test
                 patients_birthdate = DateTime.Now,
                 patients_birthcity = "xxx",
                 patients_doctext = "xxx",
-                patients_sex = "M"
+                patients_sex = "M",
+                patients_username = "xxxx1234",
+                patients_password = "123456"
             };
             _dentnedModel.Patients.Add(t_patients);
             

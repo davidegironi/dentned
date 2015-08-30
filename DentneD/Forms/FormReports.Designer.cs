@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.Label reports_infotextLabel;
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormReports));
             this.reports_idLabel = new System.Windows.Forms.Label();
@@ -46,30 +47,42 @@
             this.panel_tabReports_actions = new System.Windows.Forms.Panel();
             this.button_tabReports_cancel = new System.Windows.Forms.Button();
             this.button_tabReports_save = new System.Windows.Forms.Button();
-            this.addressestypesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel_tabReports_data = new System.Windows.Forms.Panel();
-            this.reports_queryTextBox = new System.Windows.Forms.TextBox();
+            this.reports_ispasswordprotectedCheckBox = new System.Windows.Forms.CheckBox();
             this.reportsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.reports_infotextTextBox = new System.Windows.Forms.TextBox();
+            this.reports_queryTextBox = new System.Windows.Forms.TextBox();
             this.reports_nameTextBox = new System.Windows.Forms.TextBox();
             this.reports_idTextBox = new System.Windows.Forms.TextBox();
             this.tabControl_main = new System.Windows.Forms.TabControl();
             this.tabPage_tabReports = new System.Windows.Forms.TabPage();
             this.panel_tabReports_updates = new System.Windows.Forms.Panel();
             this.panel_data = new System.Windows.Forms.Panel();
+            this.addressestypesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.vAddressesTypesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            reports_infotextLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_main)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.vReportsBindingSource)).BeginInit();
             this.panel_list.SuspendLayout();
             this.panel_tabReports_actions.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.addressestypesBindingSource)).BeginInit();
             this.panel_tabReports_data.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.reportsBindingSource)).BeginInit();
             this.tabControl_main.SuspendLayout();
             this.tabPage_tabReports.SuspendLayout();
             this.panel_tabReports_updates.SuspendLayout();
             this.panel_data.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.addressestypesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.vAddressesTypesBindingSource)).BeginInit();
             this.SuspendLayout();
+            // 
+            // reports_infotextLabel
+            // 
+            reports_infotextLabel.AutoSize = true;
+            reports_infotextLabel.Location = new System.Drawing.Point(9, 306);
+            reports_infotextLabel.Name = "reports_infotextLabel";
+            reports_infotextLabel.Size = new System.Drawing.Size(52, 13);
+            reports_infotextLabel.TabIndex = 6;
+            reports_infotextLabel.Text = "Info Text:";
             // 
             // reports_idLabel
             // 
@@ -129,6 +142,8 @@
             this.advancedDataGridView_main.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.advancedDataGridView_main.Size = new System.Drawing.Size(284, 502);
             this.advancedDataGridView_main.TabIndex = 0;
+            this.advancedDataGridView_main.SortStringChanged += new System.EventHandler(this.advancedDataGridView_main_SortStringChanged);
+            this.advancedDataGridView_main.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_main_FilterStringChanged);
             // 
             // reportsidDataGridViewTextBoxColumn
             // 
@@ -218,12 +233,11 @@
             this.button_tabReports_save.Text = "Save";
             this.button_tabReports_save.UseVisualStyleBackColor = true;
             // 
-            // addressestypesBindingSource
-            // 
-            this.addressestypesBindingSource.DataSource = typeof(DG.DentneD.Model.Entity.addressestypes);
-            // 
             // panel_tabReports_data
             // 
+            this.panel_tabReports_data.Controls.Add(this.reports_ispasswordprotectedCheckBox);
+            this.panel_tabReports_data.Controls.Add(reports_infotextLabel);
+            this.panel_tabReports_data.Controls.Add(this.reports_infotextTextBox);
             this.panel_tabReports_data.Controls.Add(this.reports_queryLabel);
             this.panel_tabReports_data.Controls.Add(this.reports_queryTextBox);
             this.panel_tabReports_data.Controls.Add(this.reports_nameLabel);
@@ -232,22 +246,46 @@
             this.panel_tabReports_data.Controls.Add(this.reports_idTextBox);
             this.panel_tabReports_data.Location = new System.Drawing.Point(6, 42);
             this.panel_tabReports_data.Name = "panel_tabReports_data";
-            this.panel_tabReports_data.Size = new System.Drawing.Size(480, 263);
+            this.panel_tabReports_data.Size = new System.Drawing.Size(480, 431);
             this.panel_tabReports_data.TabIndex = 2;
             // 
-            // reports_queryTextBox
+            // reports_ispasswordprotectedCheckBox
             // 
-            this.reports_queryTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.reportsBindingSource, "reports_query", true));
-            this.reports_queryTextBox.Location = new System.Drawing.Point(12, 103);
-            this.reports_queryTextBox.Multiline = true;
-            this.reports_queryTextBox.Name = "reports_queryTextBox";
-            this.reports_queryTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.reports_queryTextBox.Size = new System.Drawing.Size(430, 150);
-            this.reports_queryTextBox.TabIndex = 5;
+            this.reports_ispasswordprotectedCheckBox.AutoSize = true;
+            this.reports_ispasswordprotectedCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.reportsBindingSource, "reports_ispasswordprotected", true));
+            this.reports_ispasswordprotectedCheckBox.Location = new System.Drawing.Point(221, 27);
+            this.reports_ispasswordprotectedCheckBox.Name = "reports_ispasswordprotectedCheckBox";
+            this.reports_ispasswordprotectedCheckBox.Size = new System.Drawing.Size(130, 17);
+            this.reports_ispasswordprotectedCheckBox.TabIndex = 9;
+            this.reports_ispasswordprotectedCheckBox.Text = "Is password protected";
+            this.reports_ispasswordprotectedCheckBox.UseVisualStyleBackColor = true;
             // 
             // reportsBindingSource
             // 
             this.reportsBindingSource.DataSource = typeof(DG.DentneD.Model.Entity.reports);
+            // 
+            // reports_infotextTextBox
+            // 
+            this.reports_infotextTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.reportsBindingSource, "reports_infotext", true));
+            this.reports_infotextTextBox.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.reports_infotextTextBox.Location = new System.Drawing.Point(12, 322);
+            this.reports_infotextTextBox.Multiline = true;
+            this.reports_infotextTextBox.Name = "reports_infotextTextBox";
+            this.reports_infotextTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.reports_infotextTextBox.Size = new System.Drawing.Size(430, 100);
+            this.reports_infotextTextBox.TabIndex = 7;
+            // 
+            // reports_queryTextBox
+            // 
+            this.reports_queryTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.reportsBindingSource, "reports_query", true));
+            this.reports_queryTextBox.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.reports_queryTextBox.Location = new System.Drawing.Point(12, 103);
+            this.reports_queryTextBox.Multiline = true;
+            this.reports_queryTextBox.Name = "reports_queryTextBox";
+            this.reports_queryTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.reports_queryTextBox.Size = new System.Drawing.Size(430, 200);
+            this.reports_queryTextBox.TabIndex = 5;
+            this.reports_queryTextBox.WordWrap = false;
             // 
             // reports_nameTextBox
             // 
@@ -293,7 +331,7 @@
             // 
             this.panel_tabReports_updates.Controls.Add(this.button_tabReports_cancel);
             this.panel_tabReports_updates.Controls.Add(this.button_tabReports_save);
-            this.panel_tabReports_updates.Location = new System.Drawing.Point(6, 311);
+            this.panel_tabReports_updates.Location = new System.Drawing.Point(6, 479);
             this.panel_tabReports_updates.Name = "panel_tabReports_updates";
             this.panel_tabReports_updates.Size = new System.Drawing.Size(480, 30);
             this.panel_tabReports_updates.TabIndex = 1;
@@ -306,6 +344,10 @@
             this.panel_data.Name = "panel_data";
             this.panel_data.Size = new System.Drawing.Size(500, 562);
             this.panel_data.TabIndex = 12;
+            // 
+            // addressestypesBindingSource
+            // 
+            this.addressestypesBindingSource.DataSource = typeof(DG.DentneD.Model.Entity.addressestypes);
             // 
             // vAddressesTypesBindingSource
             // 
@@ -328,7 +370,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.vReportsBindingSource)).EndInit();
             this.panel_list.ResumeLayout(false);
             this.panel_tabReports_actions.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.addressestypesBindingSource)).EndInit();
             this.panel_tabReports_data.ResumeLayout(false);
             this.panel_tabReports_data.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.reportsBindingSource)).EndInit();
@@ -336,6 +377,7 @@
             this.tabPage_tabReports.ResumeLayout(false);
             this.panel_tabReports_updates.ResumeLayout(false);
             this.panel_data.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.addressestypesBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.vAddressesTypesBindingSource)).EndInit();
             this.ResumeLayout(false);
 
@@ -369,6 +411,8 @@
         private System.Windows.Forms.Label reports_idLabel;
         private System.Windows.Forms.Label reports_nameLabel;
         private System.Windows.Forms.Label reports_queryLabel;
+        private System.Windows.Forms.TextBox reports_infotextTextBox;
+        private System.Windows.Forms.CheckBox reports_ispasswordprotectedCheckBox;
 
     }
 }

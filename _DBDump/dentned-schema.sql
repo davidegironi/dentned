@@ -102,6 +102,10 @@ CREATE TABLE [dbo].[doctors](
 	[doctors_name] [varchar](128) COLLATE Latin1_General_CI_AS NOT NULL,
 	[doctors_surname] [varchar](128) COLLATE Latin1_General_CI_AS NOT NULL,
 	[doctors_doctext] [varchar](512) COLLATE Latin1_General_CI_AS NOT NULL,
+	[doctors_username] [varchar](8) COLLATE Latin1_General_CI_AS NOT NULL,
+	[doctors_password] [varchar](6) COLLATE Latin1_General_CI_AS NOT NULL,
+	[doctors_token] [varchar](64) COLLATE Latin1_General_CI_AS NULL,
+	[doctors_lastlogin] [datetime] NULL,
  CONSTRAINT [PK_doctors] PRIMARY KEY CLUSTERED 
 (
 	[doctors_id] ASC
@@ -258,6 +262,10 @@ CREATE TABLE [dbo].[patients](
 	[patients_doctext] [varchar](512) COLLATE Latin1_General_CI_AS NOT NULL,
 	[patients_notes] [text] COLLATE Latin1_General_CI_AS NULL,
 	[patients_isarchived] [bit] NOT NULL,
+	[patients_username] [varchar](8) COLLATE Latin1_General_CI_AS NOT NULL,
+	[patients_password] [varchar](6) COLLATE Latin1_General_CI_AS NOT NULL,
+	[patients_token] [varchar](64) COLLATE Latin1_General_CI_AS NULL,
+	[patients_lastlogin] [datetime] NULL,
  CONSTRAINT [PK_patients] PRIMARY KEY CLUSTERED 
 (
 	[patients_id] ASC
@@ -376,7 +384,7 @@ CREATE TABLE [dbo].[patientstreatments](
 	[treatments_id] [int] NOT NULL,
 	[patientstreatments_creationdate] [date] NOT NULL,
 	[patientstreatments_fulfilldate] [date] NULL,
-	[patientstreatments_ispayed] [bit] NOT NULL,
+	[patientstreatments_ispaid] [bit] NOT NULL,
 	[patientstreatments_price] [decimal](10, 2) NOT NULL,
 	[patientstreatments_description] [varchar](128) COLLATE Latin1_General_CI_AS NULL,
 	[patientstreatments_notes] [text] COLLATE Latin1_General_CI_AS NULL,
@@ -461,6 +469,7 @@ CREATE TABLE [dbo].[reports](
 	[reports_id] [int] IDENTITY(1,1) NOT NULL,
 	[reports_name] [varchar](32) COLLATE Latin1_General_CI_AS NOT NULL,
 	[reports_query] [text] COLLATE Latin1_General_CI_AS NOT NULL,
+	[reports_infotext] [text] COLLATE Latin1_General_CI_AS NULL,
  CONSTRAINT [PK_reports] PRIMARY KEY CLUSTERED 
 (
 	[reports_id] ASC
@@ -713,7 +722,7 @@ IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[
 ALTER TABLE [dbo].[patientstreatments] CHECK CONSTRAINT [FK_patientstreatments_treatments];
 IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_patientstreatments_patientstreatments_ispayed]') AND type = 'D')
 BEGIN
-ALTER TABLE [dbo].[patientstreatments] ADD  CONSTRAINT [DF_patientstreatments_patientstreatments_ispayed]  DEFAULT ((0)) FOR [patientstreatments_ispayed]
+ALTER TABLE [dbo].[patientstreatments] ADD  CONSTRAINT [DF_patientstreatments_patientstreatments_ispayed]  DEFAULT ((0)) FOR [patientstreatments_ispaid]
 END;
 IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_patientstreatments_patientstreatments_t11]') AND type = 'D')
 BEGIN

@@ -27,6 +27,7 @@ namespace DG.DentneD.Model.Entity
     
         public virtual DbSet<addressestypes> addressestypes { get; set; }
         public virtual DbSet<appointments> appointments { get; set; }
+        public virtual DbSet<computedlines> computedlines { get; set; }
         public virtual DbSet<contactstypes> contactstypes { get; set; }
         public virtual DbSet<doctors> doctors { get; set; }
         public virtual DbSet<estimates> estimates { get; set; }
@@ -46,6 +47,7 @@ namespace DG.DentneD.Model.Entity
         public virtual DbSet<patientstreatments> patientstreatments { get; set; }
         public virtual DbSet<payments> payments { get; set; }
         public virtual DbSet<paymentstypes> paymentstypes { get; set; }
+        public virtual DbSet<reports> reports { get; set; }
         public virtual DbSet<rooms> rooms { get; set; }
         public virtual DbSet<taxes> taxes { get; set; }
         public virtual DbSet<taxesdeductions> taxesdeductions { get; set; }
@@ -53,6 +55,5 @@ namespace DG.DentneD.Model.Entity
         public virtual DbSet<treatmentsprices> treatmentsprices { get; set; }
         public virtual DbSet<treatmentspriceslists> treatmentspriceslists { get; set; }
         public virtual DbSet<treatmentstypes> treatmentstypes { get; set; }
-        public virtual DbSet<reports> reports { get; set; }
     }
 }

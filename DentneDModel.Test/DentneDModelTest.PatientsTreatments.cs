@@ -37,7 +37,9 @@ namespace DG.DentneD.Model.Test
                 patients_birthdate = DateTime.Now,
                 patients_birthcity = "xxx",
                 patients_doctext = "xxx",
-                patients_sex = "M"
+                patients_sex = "M",
+                patients_username = "xxxx1234",
+                patients_password = "123456"
             };
             _dentnedModel.Patients.Add(t_patients);
             
@@ -45,7 +47,9 @@ namespace DG.DentneD.Model.Test
             {
                 doctors_name = "XX1",
                 doctors_surname = "XX1",
-                doctors_doctext = "XXXXX"
+                doctors_doctext = "XXXXX",
+                doctors_username = "xxxx1236",
+                doctors_password = "123456"
             };
             _dentnedModel.Doctors.Add(t_doctors);
 
@@ -70,7 +74,8 @@ namespace DG.DentneD.Model.Test
                 patients_id = t_patients.patients_id,
                 treatments_id = t_treatments.treatments_id,
                 patientstreatments_creationdate = DateTime.Now,
-                patientstreatments_price = 10
+                patientstreatments_price = 10,
+                patientstreatments_taxrate = 0,
             };
             Assert.IsFalse(_dentnedModel.PatientsTreatments.CanAdd(t_patientstreatments));
 
@@ -80,7 +85,8 @@ namespace DG.DentneD.Model.Test
                 //patients_id = t_patients.patients_id,
                 treatments_id = t_treatments.treatments_id,
                 patientstreatments_creationdate = DateTime.Now,
-                patientstreatments_price = 10
+                patientstreatments_price = 10,
+                patientstreatments_taxrate = 0,
             };
             Assert.IsFalse(_dentnedModel.PatientsTreatments.CanAdd(t_patientstreatments));
 
@@ -90,7 +96,8 @@ namespace DG.DentneD.Model.Test
                 patients_id = t_patients.patients_id,
                 //treatments_id = t_treatments.treatments_id,
                 patientstreatments_creationdate = DateTime.Now,
-                patientstreatments_price = 10
+                patientstreatments_price = 10,
+                patientstreatments_taxrate = 0,
             };
             Assert.IsFalse(_dentnedModel.PatientsTreatments.CanAdd(t_patientstreatments));
             
@@ -100,7 +107,8 @@ namespace DG.DentneD.Model.Test
                 patients_id = t_patients.patients_id,
                 treatments_id = t_treatments.treatments_id,
                 //patientstreatments_creationdate = DateTime.Now,
-                patientstreatments_price = -10
+                patientstreatments_price = -10,
+                patientstreatments_taxrate = 0,
             };
             Assert.IsFalse(_dentnedModel.PatientsTreatments.CanAdd(t_patientstreatments));
 
@@ -110,7 +118,19 @@ namespace DG.DentneD.Model.Test
                 patients_id = t_patients.patients_id,
                 treatments_id = t_treatments.treatments_id,
                 patientstreatments_creationdate = DateTime.Now,
-                patientstreatments_price = 10
+                patientstreatments_price = 10,
+                patientstreatments_taxrate = -10,
+            };
+            Assert.IsFalse(_dentnedModel.PatientsTreatments.CanAdd(t_patientstreatments));
+
+            t_patientstreatments = new patientstreatments()
+            {
+                doctors_id = t_doctors.doctors_id,
+                patients_id = t_patients.patients_id,
+                treatments_id = t_treatments.treatments_id,
+                patientstreatments_creationdate = DateTime.Now,
+                patientstreatments_price = 10,
+                patientstreatments_taxrate = 0,
             };
             Assert.IsTrue(_dentnedModel.PatientsTreatments.CanAdd(t_patientstreatments));
             _dentnedModel.PatientsTreatments.Add(t_patientstreatments);

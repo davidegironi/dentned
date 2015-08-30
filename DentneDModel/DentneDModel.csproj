@@ -59,6 +59,9 @@
     <Compile Include="Entity\appointments.cs">
       <DependentUpon>Model_dentned.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\computedlines.cs">
+      <DependentUpon>Model_dentned.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\contactstypes.cs">
       <DependentUpon>Model_dentned.tt</DependentUpon>
     </Compile>
@@ -155,36 +158,38 @@
     <Compile Include="Entity\treatmentstypes.cs">
       <DependentUpon>Model_dentned.tt</DependentUpon>
     </Compile>
+    <Compile Include="IDentneDPrintModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\ReportsRepositories.cs" />
-    <Compile Include="Repositories\EstimatesFootersRepositories.cs" />
-    <Compile Include="Repositories\EstimatesRepositories.cs" />
-    <Compile Include="Repositories\EstimatesLinesRepositories.cs" />
-    <Compile Include="Repositories\InvoicesRepositories.cs" />
-    <Compile Include="Repositories\InvoicesLinesRepositories.cs" />
-    <Compile Include="Repositories\PaymentsRepositories.cs" />
-    <Compile Include="Repositories\PatientsTreatmentsRepositories.cs" />
-    <Compile Include="Repositories\PatientsAttachementsTypesRepositories.cs" />
-    <Compile Include="Repositories\InvoicesFootersRepositories.cs" />
-    <Compile Include="Repositories\PatientsAttachmentsRepositories.cs" />
-    <Compile Include="Repositories\PatientsNotesRepositories.cs" />
-    <Compile Include="Repositories\PatientsMedicalrecordsRepositories.cs" />
-    <Compile Include="Repositories\PatientsContactsRepositories.cs" />
-    <Compile Include="Repositories\PatientsAddressesRepositories.cs" />
-    <Compile Include="Repositories\MedicalrecordsTypesRepositories.cs" />
-    <Compile Include="Repositories\ContactsTypesRepositories.cs" />
-    <Compile Include="Repositories\PaymentsTypesRepositories.cs" />
-    <Compile Include="Repositories\AddressesTypesRepositories.cs" />
-    <Compile Include="Repositories\PatientsRepositories.cs" />
-    <Compile Include="Repositories\AppointmentsRepositories.cs" />
-    <Compile Include="Repositories\TreatmentsRepositories.cs" />
-    <Compile Include="Repositories\TreatmentsPricesRepositories.cs" />
-    <Compile Include="Repositories\TreatmentsPricesListsRepositories.cs" />
-    <Compile Include="Repositories\TreatmentsTypesRepositories.cs" />
-    <Compile Include="Repositories\TaxesDeductionsRepositories.cs" />
-    <Compile Include="Repositories\TaxesRepositories.cs" />
-    <Compile Include="Repositories\RoomsRepositories.cs" />
-    <Compile Include="Repositories\DoctorsRepositories.cs" />
+    <Compile Include="Repositories\ReportsRepository.cs" />
+    <Compile Include="Repositories\EstimatesFootersRepository.cs" />
+    <Compile Include="Repositories\EstimatesRepository.cs" />
+    <Compile Include="Repositories\EstimatesLinesRepository.cs" />
+    <Compile Include="Repositories\InvoicesRepository.cs" />
+    <Compile Include="Repositories\InvoicesLinesRepository.cs" />
+    <Compile Include="Repositories\PaymentsRepository.cs" />
+    <Compile Include="Repositories\PatientsTreatmentsRepository.cs" />
+    <Compile Include="Repositories\PatientsAttachmentsTypesRepository.cs" />
+    <Compile Include="Repositories\InvoicesFootersRepository.cs" />
+    <Compile Include="Repositories\PatientsAttachmentsRepository.cs" />
+    <Compile Include="Repositories\PatientsNotesRepository.cs" />
+    <Compile Include="Repositories\PatientsMedicalrecordsRepository.cs" />
+    <Compile Include="Repositories\PatientsContactsRepository.cs" />
+    <Compile Include="Repositories\PatientsAddressesRepository.cs" />
+    <Compile Include="Repositories\MedicalrecordsTypesRepository.cs" />
+    <Compile Include="Repositories\ContactsTypesRepository.cs" />
+    <Compile Include="Repositories\PaymentsTypesRepository.cs" />
+    <Compile Include="Repositories\AddressesTypesRepository.cs" />
+    <Compile Include="Repositories\PatientsRepository.cs" />
+    <Compile Include="Repositories\AppointmentsRepository.cs" />
+    <Compile Include="Repositories\ComputedLinesReporitory.cs" />
+    <Compile Include="Repositories\TreatmentsRepository.cs" />
+    <Compile Include="Repositories\TreatmentsPricesRepository.cs" />
+    <Compile Include="Repositories\TreatmentsPricesListsRepository.cs" />
+    <Compile Include="Repositories\TreatmentsTypesRepository.cs" />
+    <Compile Include="Repositories\TaxesDeductionsRepository.cs" />
+    <Compile Include="Repositories\TaxesRepository.cs" />
+    <Compile Include="Repositories\RoomsRepository.cs" />
+    <Compile Include="Repositories\DoctorsRepositorys.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

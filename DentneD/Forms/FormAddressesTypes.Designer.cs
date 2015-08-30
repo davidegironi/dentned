@@ -132,7 +132,7 @@
             this.addressestypes_nameTextBox.Location = new System.Drawing.Point(12, 64);
             this.addressestypes_nameTextBox.Name = "addressestypes_nameTextBox";
             this.addressestypes_nameTextBox.Size = new System.Drawing.Size(100, 20);
-            this.addressestypes_nameTextBox.TabIndex = 3;
+            this.addressestypes_nameTextBox.TabIndex = 1;
             // 
             // addressestypesBindingSource
             // 
@@ -145,7 +145,7 @@
             this.addressestypes_idTextBox.Location = new System.Drawing.Point(12, 25);
             this.addressestypes_idTextBox.Name = "addressestypes_idTextBox";
             this.addressestypes_idTextBox.Size = new System.Drawing.Size(100, 20);
-            this.addressestypes_idTextBox.TabIndex = 1;
+            this.addressestypes_idTextBox.TabIndex = 0;
             // 
             // panel_tabAddressesTypes_updates
             // 
@@ -161,7 +161,7 @@
             this.button_tabAddressesTypes_cancel.Location = new System.Drawing.Point(402, 3);
             this.button_tabAddressesTypes_cancel.Name = "button_tabAddressesTypes_cancel";
             this.button_tabAddressesTypes_cancel.Size = new System.Drawing.Size(75, 23);
-            this.button_tabAddressesTypes_cancel.TabIndex = 2;
+            this.button_tabAddressesTypes_cancel.TabIndex = 1;
             this.button_tabAddressesTypes_cancel.Text = "Cancel";
             this.button_tabAddressesTypes_cancel.UseVisualStyleBackColor = true;
             // 
@@ -170,7 +170,7 @@
             this.button_tabAddressesTypes_save.Location = new System.Drawing.Point(321, 3);
             this.button_tabAddressesTypes_save.Name = "button_tabAddressesTypes_save";
             this.button_tabAddressesTypes_save.Size = new System.Drawing.Size(75, 23);
-            this.button_tabAddressesTypes_save.TabIndex = 1;
+            this.button_tabAddressesTypes_save.TabIndex = 0;
             this.button_tabAddressesTypes_save.Text = "Save";
             this.button_tabAddressesTypes_save.UseVisualStyleBackColor = true;
             // 
@@ -198,7 +198,7 @@
             this.button_tabAddressesTypes_edit.Location = new System.Drawing.Point(84, 3);
             this.button_tabAddressesTypes_edit.Name = "button_tabAddressesTypes_edit";
             this.button_tabAddressesTypes_edit.Size = new System.Drawing.Size(75, 23);
-            this.button_tabAddressesTypes_edit.TabIndex = 1;
+            this.button_tabAddressesTypes_edit.TabIndex = 2;
             this.button_tabAddressesTypes_edit.Text = "Edit";
             this.button_tabAddressesTypes_edit.UseVisualStyleBackColor = true;
             // 
@@ -207,7 +207,7 @@
             this.button_tabAddressesTypes_new.Location = new System.Drawing.Point(3, 3);
             this.button_tabAddressesTypes_new.Name = "button_tabAddressesTypes_new";
             this.button_tabAddressesTypes_new.Size = new System.Drawing.Size(75, 23);
-            this.button_tabAddressesTypes_new.TabIndex = 0;
+            this.button_tabAddressesTypes_new.TabIndex = 1;
             this.button_tabAddressesTypes_new.Text = "New";
             this.button_tabAddressesTypes_new.UseVisualStyleBackColor = true;
             // 
@@ -276,7 +276,7 @@
             this.panel_filters.Location = new System.Drawing.Point(0, 0);
             this.panel_filters.Name = "panel_filters";
             this.panel_filters.Size = new System.Drawing.Size(284, 60);
-            this.panel_filters.TabIndex = 10;
+            this.panel_filters.TabIndex = 1;
             // 
             // FormAddressesTypes
             // 

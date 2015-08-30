@@ -29,9 +29,11 @@ namespace DG.DentneD.Model.Entity
         public string invoices_patient { get; set; }
         public string invoices_payment { get; set; }
         public string invoices_footer { get; set; }
-        public decimal invoices_total { get; set; }
-        public bool invoices_ispaid { get; set; }
+        public decimal invoices_totalnet { get; set; }
+        public decimal invoices_totalgross { get; set; }
+        public decimal invoices_totaldue { get; set; }
         public decimal invoices_deductiontaxrate { get; set; }
+        public bool invoices_ispaid { get; set; }
     
         public virtual doctors doctors { get; set; }
         public virtual ICollection<estimates> estimates { get; set; }

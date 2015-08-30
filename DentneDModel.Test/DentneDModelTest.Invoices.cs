@@ -34,7 +34,9 @@ namespace DG.DentneD.Model.Test
             {
                 doctors_name = "XX1",
                 doctors_surname = "XX1",
-                doctors_doctext = "XXXXX"
+                doctors_doctext = "XXXXX",
+                doctors_username = "xxxx1236",
+                doctors_password = "123456"
             };
             _dentnedModel.Doctors.Add(t_doctors);
 
@@ -45,7 +47,9 @@ namespace DG.DentneD.Model.Test
                 patients_birthdate = DateTime.Now,
                 patients_birthcity = "xxx",
                 patients_doctext = "xxx",
-                patients_sex = "M"
+                patients_sex = "M",
+                patients_username = "xxxx1234",
+                patients_password = "123456"
             };
             _dentnedModel.Patients.Add(t_patients);
 
@@ -59,7 +63,9 @@ namespace DG.DentneD.Model.Test
                 invoices_patient = "patient",
                 invoices_footer = "footer",
                 invoices_payment = "payment",
-                invoices_total = 0,
+                invoices_totalnet = 0,
+                invoices_totalgross = 0,
+                invoices_totaldue = 0,
                 invoices_deductiontaxrate = 0
             };
             Assert.IsFalse(_dentnedModel.Invoices.CanAdd(t_invoices));
@@ -74,7 +80,9 @@ namespace DG.DentneD.Model.Test
                 invoices_patient = "patient",
                 invoices_footer = "footer",
                 invoices_payment = "payment",
-                invoices_total = 0,
+                invoices_totalnet = 0,
+                invoices_totalgross = 0,
+                invoices_totaldue = 0,
                 invoices_deductiontaxrate = 0
             };
             Assert.IsFalse(_dentnedModel.Invoices.CanAdd(t_invoices));
@@ -89,7 +97,9 @@ namespace DG.DentneD.Model.Test
                 invoices_patient = "patient",
                 invoices_footer = "footer",
                 invoices_payment = "payment",
-                invoices_total = 0,
+                invoices_totalnet = 0,
+                invoices_totalgross = 0,
+                invoices_totaldue = 0,
                 invoices_deductiontaxrate = 0
             };
             Assert.IsFalse(_dentnedModel.Invoices.CanAdd(t_invoices));
@@ -104,7 +114,9 @@ namespace DG.DentneD.Model.Test
                 invoices_patient = "patient",
                 invoices_footer = "footer",
                 invoices_payment = "payment",
-                invoices_total = 0,
+                invoices_totalnet = 0,
+                invoices_totalgross = 0,
+                invoices_totaldue = 0,
                 invoices_deductiontaxrate = 0
             };
             Assert.IsFalse(_dentnedModel.Invoices.CanAdd(t_invoices));
@@ -119,7 +131,9 @@ namespace DG.DentneD.Model.Test
                 invoices_patient = "patient",
                 invoices_footer = "footer",
                 invoices_payment = "payment",
-                invoices_total = 0,
+                invoices_totalnet = 0,
+                invoices_totalgross = 0,
+                invoices_totaldue = 0,
                 invoices_deductiontaxrate = 0
             };
             Assert.IsFalse(_dentnedModel.Invoices.CanAdd(t_invoices));
@@ -134,7 +148,9 @@ namespace DG.DentneD.Model.Test
                 invoices_patient = "patient",
                 invoices_footer = "footer",
                 invoices_payment = "payment",
-                invoices_total = 0,
+                invoices_totalnet = 0,
+                invoices_totalgross = 0,
+                invoices_totaldue = 0,
                 invoices_deductiontaxrate = 0
             };
             Assert.IsFalse(_dentnedModel.Invoices.CanAdd(t_invoices));
@@ -149,7 +165,9 @@ namespace DG.DentneD.Model.Test
                 //invoices_patient = "patient",
                 invoices_footer = "footer",
                 invoices_payment = "payment",
-                invoices_total = 0,
+                invoices_totalnet = 0,
+                invoices_totalgross = 0,
+                invoices_totaldue = 0,
                 invoices_deductiontaxrate = 0
             };
             Assert.IsFalse(_dentnedModel.Invoices.CanAdd(t_invoices));
@@ -164,7 +182,9 @@ namespace DG.DentneD.Model.Test
                 invoices_patient = "patient",
                 invoices_footer = "footer",
                 //invoices_payment = "payment",
-                invoices_total = 0,
+                invoices_totalnet = 0,
+                invoices_totalgross = 0,
+                invoices_totaldue = 0,
                 invoices_deductiontaxrate = 0
             };
             Assert.IsFalse(_dentnedModel.Invoices.CanAdd(t_invoices));
@@ -179,7 +199,9 @@ namespace DG.DentneD.Model.Test
                 invoices_patient = "patient",
                 invoices_footer = "footer",
                 invoices_payment = "payment",
-                invoices_total = -10,
+                invoices_totalnet = -10,
+                invoices_totalgross = 0,
+                invoices_totaldue = 0,
                 invoices_deductiontaxrate = 0
             };
             Assert.IsFalse(_dentnedModel.Invoices.CanAdd(t_invoices));
@@ -194,7 +216,26 @@ namespace DG.DentneD.Model.Test
                 invoices_patient = "patient",
                 invoices_footer = "footer",
                 invoices_payment = "payment",
-                invoices_total = 0,
+                invoices_totalnet = 10,
+                invoices_totalgross = 8,
+                invoices_totaldue = 0,
+                invoices_deductiontaxrate = 0
+            };
+            Assert.IsFalse(_dentnedModel.Invoices.CanAdd(t_invoices));
+            
+            t_invoices = new invoices()
+            {
+                invoices_date = today,
+                invoices_number = "XX1",
+                doctors_id = t_doctors.doctors_id,
+                patients_id = t_patients.patients_id,
+                invoices_doctor = "test",
+                invoices_patient = "patient",
+                invoices_footer = "footer",
+                invoices_payment = "payment",
+                invoices_totalnet = 0,
+                invoices_totalgross = 0,
+                invoices_totaldue = 0,
                 invoices_deductiontaxrate = 0
             };
             Assert.IsTrue(_dentnedModel.Invoices.CanAdd(t_invoices));
@@ -210,7 +251,9 @@ namespace DG.DentneD.Model.Test
                 invoices_patient = "patient",
                 invoices_footer = "footer",
                 invoices_payment = "payment",
-                invoices_total = 0,
+                invoices_totalnet = 0,
+                invoices_totalgross = 0,
+                invoices_totaldue = 0,
                 invoices_deductiontaxrate = 0
             };
             Assert.IsTrue(_dentnedModel.Invoices.CanAdd(t_invoices));
@@ -225,7 +268,9 @@ namespace DG.DentneD.Model.Test
                 invoices_patient = "patient",
                 invoices_footer = "footer",
                 invoices_payment = "payment",
-                invoices_total = 0,
+                invoices_totalnet = 0,
+                invoices_totalgross = 0,
+                invoices_totaldue = 0,
                 invoices_deductiontaxrate = 0
             };
             Assert.IsTrue(_dentnedModel.Invoices.CanAdd(t_invoices));
@@ -272,7 +317,9 @@ namespace DG.DentneD.Model.Test
             {
                 doctors_name = "XX1",
                 doctors_surname = "XX1",
-                doctors_doctext = "XXXXX"
+                doctors_doctext = "XXXXX",
+                doctors_username = "xxxx1236",
+                doctors_password = "123456"
             };
             _dentnedModel.Doctors.Add(t_doctors);
 
@@ -283,7 +330,9 @@ namespace DG.DentneD.Model.Test
                 patients_birthdate = DateTime.Now,
                 patients_birthcity = "xxx",
                 patients_doctext = "xxx",
-                patients_sex = "M"
+                patients_sex = "M",
+                patients_username = "xxxx1234",
+                patients_password = "123456"
             };
             _dentnedModel.Patients.Add(t_patients);
 
@@ -322,7 +371,9 @@ namespace DG.DentneD.Model.Test
                 invoices_patient = "patient",
                 invoices_footer = "footer",
                 invoices_payment = "payment",
-                invoices_total = 0,
+                invoices_totalnet = 0,
+                invoices_totalgross = 0,
+                invoices_totaldue = 0,
                 invoices_deductiontaxrate = 20
             };
             _dentnedModel.Invoices.Add(t_invoices);
@@ -335,6 +386,7 @@ namespace DG.DentneD.Model.Test
                 invoiceslines_quantity = 1,
                 invoiceslines_unitprice = 10,
                 invoiceslines_taxrate = 22,
+                invoiceslines_istaxesdeductionsable = true,
                 patientstreatments_id = t_patientstreatments.patientstreatments_id
             };
             _dentnedModel.InvoicesLines.Add(t_invoiceslines);
@@ -347,12 +399,15 @@ namespace DG.DentneD.Model.Test
                 invoiceslines_quantity = 2,
                 invoiceslines_unitprice = 12,
                 invoiceslines_taxrate = 22,
+                invoiceslines_istaxesdeductionsable = true,
                 patientstreatments_id = t_patientstreatments.patientstreatments_id
             };
             _dentnedModel.InvoicesLines.Add(t_invoiceslines);
 
             t_invoices = _dentnedModel.Invoices.List(r => r.invoices_number == "XX1" && r.invoices_date == today.Date).FirstOrDefault();
-            Assert.That(t_invoices.invoices_total, Is.EqualTo(34.68));
+            Assert.That(t_invoices.invoices_totalnet, Is.EqualTo(34));
+            Assert.That(t_invoices.invoices_totalgross, Is.EqualTo(41.48));
+            Assert.That(t_invoices.invoices_totaldue, Is.EqualTo(34.68));
 
             t_invoiceslines = new invoiceslines()
             {
@@ -362,12 +417,13 @@ namespace DG.DentneD.Model.Test
                 invoiceslines_quantity = 1,
                 invoiceslines_unitprice = -10,
                 invoiceslines_taxrate = 22,
+                invoiceslines_istaxesdeductionsable = true,
                 patientstreatments_id = t_patientstreatments.patientstreatments_id
             };
             _dentnedModel.InvoicesLines.Add(t_invoiceslines);
 
             t_invoices = _dentnedModel.Invoices.List(r => r.invoices_number == "XX1" && r.invoices_date == today.Date).FirstOrDefault();
-            Assert.That(t_invoices.invoices_total, Is.EqualTo(24.48));
+            Assert.That(t_invoices.invoices_totalnet, Is.EqualTo(24));
 
             _dentnedModel.Invoices.Remove(_dentnedModel.Invoices.List(r => r.invoices_number == "XX1" && r.invoices_date == today.Date).ToArray());
             _dentnedModel.Patients.Remove(_dentnedModel.Patients.List(r => r.patients_name == "XX1" && r.patients_surname == "XX1").ToArray());

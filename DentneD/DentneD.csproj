@@ -92,6 +92,12 @@
     <Compile Include="Forms\FormAppointments.Designer.cs">
       <DependentUpon>FormAppointments.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormComputedLines.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormComputedLines.Designer.cs">
+      <DependentUpon>FormComputedLines.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormContactsTypes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -200,6 +206,7 @@
     <Compile Include="Forms\FormTreatmentsPricesLists.Designer.cs">
       <DependentUpon>FormTreatmentsPricesLists.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Objects\VComputedLines.cs" />
     <Compile Include="Forms\Objects\VReports.cs" />
     <Compile Include="Forms\Objects\VEstimatesFooters.cs" />
     <Compile Include="Forms\Objects\VEstimates.cs" />
@@ -231,7 +238,12 @@
     <Compile Include="Forms\Objects\VTaxesDeductions.cs" />
     <Compile Include="Forms\Objects\VTaxes.cs" />
     <Compile Include="Forms\Objects\VDoctors.cs" />
+    <Compile Include="Helpers\DentneDPrintModelHelper.cs" />
+    <Compile Include="Helpers\FileHelper.cs" />
+    <Compile Include="Helpers\Randomizer.cs" />
+    <Compile Include="Helpers\InputBox.cs" />
     <Compile Include="Libs\NDesk.Options\Options.cs" />
+    <Compile Include="Libs\TabOrderManager\TabOrderManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormMain.resx">
@@ -242,6 +254,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormAppointments.resx">
       <DependentUpon>FormAppointments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormComputedLines.resx">
+      <DependentUpon>FormComputedLines.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormContactsTypes.resx">
       <DependentUpon>FormContactsTypes.cs</DependentUpon>
@@ -307,6 +322,14 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="..\packages\Int\DentneDPrintModelDefault\DentneDPrintModel-en.json">
+      <Link>lang\DentneDPrintModel-en.json</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\packages\Int\DentneDPrintModelDefault\DentneDPrintModel-it.json">
+      <Link>lang\DentneDPrintModel-it.json</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="CleanDatadir.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -315,6 +338,7 @@
     </None>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VAddressesTypes.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VComputedLines.datasource" />
     <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VContactsTypes.datasource" />
     <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VDoctors.datasource" />
     <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VEstimates.datasource" />
@@ -347,6 +371,7 @@
     <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VTreatmentsTypes.datasource" />
     <None Include="Properties\DataSources\DG.DentneD.Model.Entity.addressestypes.datasource" />
     <None Include="Properties\DataSources\DG.DentneD.Model.Entity.appointments.datasource" />
+    <None Include="Properties\DataSources\DG.DentneD.Model.Entity.computedlines.datasource" />
     <None Include="Properties\DataSources\DG.DentneD.Model.Entity.contactstypes.datasource" />
     <None Include="Properties\DataSources\DG.DentneD.Model.Entity.dentnedEntities.datasource" />
     <None Include="Properties\DataSources\DG.DentneD.Model.Entity.doctors.datasource" />
@@ -410,12 +435,28 @@
       <Link>srm.exe</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="..\packages\Int\DentneDPrintModelDefault\DentneDPrintModelDefault.dll">
+      <Link>DentneDPrintModelDefault.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\packages\Int\DentneDPrintModelDefault\itextsharp.dll">
+      <Link>itextsharp.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="ico_dentned.ico" />
     <None Include="RebuildDefaultLanguage.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>rmdir "$(TargetDir)www\" /s
+xcopy "$(ProjectDir)www" "$(TargetDir)www\" /v /y /e
+rmdir "$(TargetDir)backup\" /s
+xcopy "$(ProjectDir)backup" "$(TargetDir)backup\" /v /y  /e
+</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

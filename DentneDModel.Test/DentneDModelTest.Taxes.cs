@@ -28,7 +28,14 @@ namespace DG.DentneD.Model.Test
                 taxes_rate = 20
             };
             Assert.IsFalse(_dentnedModel.Taxes.CanAdd(t_taxes));
-            
+
+            t_taxes = new taxes()
+            {
+                taxes_name = "XX1",
+                taxes_rate = -20
+            };
+            Assert.IsFalse(_dentnedModel.Taxes.CanAdd(t_taxes));
+
             t_taxes = new taxes()
             {
                 taxes_name = "XX1",

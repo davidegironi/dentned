@@ -18,6 +18,7 @@ namespace DG.DentneD.Model
         public RoomsRepository Rooms { get; private set; }
         public TaxesRepository Taxes { get; private set; }
         public TaxesDeductionsRepository TaxesDeductions { get; private set; }
+        public ComputedLinesRepository ComputedLines { get; private set; }
         public TreatmentsTypesRepository TreatmentsTypes { get; private set; }
         public TreatmentsPricesListsRepository TreatmentsPricesLists { get; private set; }
         public TreatmentsRepository Treatments { get; private set; }

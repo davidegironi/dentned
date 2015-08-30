@@ -47,10 +47,13 @@
             this.tabControl_main = new System.Windows.Forms.TabControl();
             this.tabPage_tabTreatments = new System.Windows.Forms.TabPage();
             this.panel_tabTreatments_data = new System.Windows.Forms.Panel();
+            this.taxes_idLabel = new System.Windows.Forms.Label();
+            this.taxes_idComboBox = new System.Windows.Forms.ComboBox();
+            this.treatmentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.button_tabTreatments_unsettaxesid = new System.Windows.Forms.Button();
             this.treatments_mexpirationinfoLabel = new System.Windows.Forms.Label();
             this.treatments_mexpirationTextBox = new System.Windows.Forms.TextBox();
             this.treatments_notesTextBox = new System.Windows.Forms.TextBox();
-            this.treatmentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.treatmentstypes_idComboBox = new System.Windows.Forms.ComboBox();
             this.treatments_priceTextBox = new System.Windows.Forms.TextBox();
             this.treatments_nameTextBox = new System.Windows.Forms.TextBox();
@@ -162,7 +165,7 @@
             // treatments_notesLabel
             // 
             this.treatments_notesLabel.AutoSize = true;
-            this.treatments_notesLabel.Location = new System.Drawing.Point(10, 166);
+            this.treatments_notesLabel.Location = new System.Drawing.Point(10, 206);
             this.treatments_notesLabel.Name = "treatments_notesLabel";
             this.treatments_notesLabel.Size = new System.Drawing.Size(38, 13);
             this.treatments_notesLabel.TabIndex = 12;
@@ -240,6 +243,9 @@
             // 
             // panel_tabTreatments_data
             // 
+            this.panel_tabTreatments_data.Controls.Add(this.taxes_idLabel);
+            this.panel_tabTreatments_data.Controls.Add(this.taxes_idComboBox);
+            this.panel_tabTreatments_data.Controls.Add(this.button_tabTreatments_unsettaxesid);
             this.panel_tabTreatments_data.Controls.Add(this.treatments_mexpirationinfoLabel);
             this.panel_tabTreatments_data.Controls.Add(this.treatments_mexpirationLabel);
             this.panel_tabTreatments_data.Controls.Add(this.treatments_mexpirationTextBox);
@@ -257,8 +263,44 @@
             this.panel_tabTreatments_data.Controls.Add(this.treatments_idTextBox);
             this.panel_tabTreatments_data.Location = new System.Drawing.Point(6, 42);
             this.panel_tabTreatments_data.Name = "panel_tabTreatments_data";
-            this.panel_tabTreatments_data.Size = new System.Drawing.Size(480, 239);
+            this.panel_tabTreatments_data.Size = new System.Drawing.Size(480, 279);
             this.panel_tabTreatments_data.TabIndex = 2;
+            // 
+            // taxes_idLabel
+            // 
+            this.taxes_idLabel.AutoSize = true;
+            this.taxes_idLabel.Location = new System.Drawing.Point(10, 166);
+            this.taxes_idLabel.Name = "taxes_idLabel";
+            this.taxes_idLabel.Size = new System.Drawing.Size(65, 13);
+            this.taxes_idLabel.TabIndex = 16;
+            this.taxes_idLabel.Text = "Default Tax:";
+            // 
+            // taxes_idComboBox
+            // 
+            this.taxes_idComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.taxes_idComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.taxes_idComboBox.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.treatmentsBindingSource, "taxes_id", true));
+            this.taxes_idComboBox.FormattingEnabled = true;
+            this.taxes_idComboBox.Location = new System.Drawing.Point(12, 182);
+            this.taxes_idComboBox.Name = "taxes_idComboBox";
+            this.taxes_idComboBox.Size = new System.Drawing.Size(100, 21);
+            this.taxes_idComboBox.TabIndex = 17;
+            this.taxes_idComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.taxes_idComboBox_KeyPress);
+            // 
+            // treatmentsBindingSource
+            // 
+            this.treatmentsBindingSource.DataSource = typeof(DG.DentneD.Model.Entity.treatments);
+            // 
+            // button_tabTreatments_unsettaxesid
+            // 
+            this.button_tabTreatments_unsettaxesid.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_tabTreatments_unsettaxesid.Location = new System.Drawing.Point(118, 181);
+            this.button_tabTreatments_unsettaxesid.Name = "button_tabTreatments_unsettaxesid";
+            this.button_tabTreatments_unsettaxesid.Size = new System.Drawing.Size(75, 23);
+            this.button_tabTreatments_unsettaxesid.TabIndex = 16;
+            this.button_tabTreatments_unsettaxesid.Text = "Unset";
+            this.button_tabTreatments_unsettaxesid.UseVisualStyleBackColor = true;
+            this.button_tabTreatments_unsettaxesid.Click += new System.EventHandler(this.button_tabTreatments_unsettaxesid_Click);
             // 
             // treatments_mexpirationinfoLabel
             // 
@@ -280,16 +322,12 @@
             // treatments_notesTextBox
             // 
             this.treatments_notesTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.treatmentsBindingSource, "treatments_notes", true));
-            this.treatments_notesTextBox.Location = new System.Drawing.Point(12, 182);
+            this.treatments_notesTextBox.Location = new System.Drawing.Point(12, 222);
             this.treatments_notesTextBox.Multiline = true;
             this.treatments_notesTextBox.Name = "treatments_notesTextBox";
             this.treatments_notesTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.treatments_notesTextBox.Size = new System.Drawing.Size(430, 50);
             this.treatments_notesTextBox.TabIndex = 13;
-            // 
-            // treatmentsBindingSource
-            // 
-            this.treatmentsBindingSource.DataSource = typeof(DG.DentneD.Model.Entity.treatments);
             // 
             // treatmentstypes_idComboBox
             // 
@@ -340,7 +378,7 @@
             // 
             this.panel_tabTreatments_updates.Controls.Add(this.button_tabTreatments_cancel);
             this.panel_tabTreatments_updates.Controls.Add(this.button_tabTreatments_save);
-            this.panel_tabTreatments_updates.Location = new System.Drawing.Point(6, 287);
+            this.panel_tabTreatments_updates.Location = new System.Drawing.Point(6, 327);
             this.panel_tabTreatments_updates.Name = "panel_tabTreatments_updates";
             this.panel_tabTreatments_updates.Size = new System.Drawing.Size(480, 30);
             this.panel_tabTreatments_updates.TabIndex = 1;
@@ -489,6 +527,8 @@
             this.treatmentspriceslists_idComboBox.Name = "treatmentspriceslists_idComboBox";
             this.treatmentspriceslists_idComboBox.Size = new System.Drawing.Size(180, 21);
             this.treatmentspriceslists_idComboBox.TabIndex = 1;
+            this.treatmentspriceslists_idComboBox.SelectedIndexChanged += new System.EventHandler(this.treatmentspriceslists_idComboBox_SelectedIndexChanged);
+            this.treatmentspriceslists_idComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.treatmentspriceslists_idComboBox_KeyPress);
             // 
             // panel_tabTreatmentsPrices_updates
             // 
@@ -817,5 +857,8 @@
         private System.Windows.Forms.Label treatmentspriceslists_idLabel;
         private System.Windows.Forms.Label treatmentsprices_idLabel;
         private System.Windows.Forms.Label treatmentsprices_priceLabel;
+        private System.Windows.Forms.Button button_tabTreatments_unsettaxesid;
+        private System.Windows.Forms.ComboBox taxes_idComboBox;
+        private System.Windows.Forms.Label taxes_idLabel;
     }
 }

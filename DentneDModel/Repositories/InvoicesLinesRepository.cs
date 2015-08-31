@@ -171,6 +171,23 @@ namespace DG.DentneD.Model.Repositories
                 BaseModel.Invoices.UpdateTotal(BaseModel.Invoices.Find(item.invoices_id));
             }
         }
+
+        /// <summary>
+        /// Remove an item
+        /// </summary>
+        /// <param name="items"></param>
+        public override void Remove(params invoiceslines[] items)
+        {
+            int[] invoices_ids = items.Select(r => r.invoices_id).ToArray();
+
+            base.Remove(items);
+
+            //update invoices total
+            foreach (int invoices_id in invoices_ids)
+            {
+                BaseModel.Invoices.UpdateTotal(BaseModel.Invoices.Find(invoices_id));
+            }
+        }
     }
 
 }

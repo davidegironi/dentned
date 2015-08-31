@@ -222,7 +222,6 @@ namespace DG.DentneD.Model.Repositories
             {
                 UpdateTotal(item);
             }
-
         }
 
         /// <summary>

@@ -60,7 +60,7 @@ namespace DG.DentneD.Model.Test
 
             t_treatmentsprices = new treatmentsprices()
             {
-                //treatments_id = t_treatments.treatments_id,
+                //treatments_id = t_treatments1.treatments_id,
                 treatmentspriceslists_id = t_treatmentspriceslists.treatmentspriceslists_id,
                 treatmentsprices_price = 10
             };

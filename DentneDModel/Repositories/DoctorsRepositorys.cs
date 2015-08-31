@@ -22,7 +22,7 @@ namespace DG.DentneD.Model.Repositories
         public class RepositoryLanguage : IGenericDataRepositoryLanguage
         {
             public string text001 = "Invoice text can not be empty.";
-            public string text002 = "Remove doctor's appointments before deleting this item.";
+            public string text002 = "This item can not be removed. Appointments depends it.";
             public string text003 = "Name can not be empty.";
             public string text004 = "Surname can not be empty.";
             public string text005 = "Doctor already inserted.";
@@ -199,6 +199,26 @@ namespace DG.DentneD.Model.Repositories
             }
 
             return ret;
+        }
+
+        public override void Remove(params doctors[] items)
+        {
+            base.Remove(items);
+
+            //remove all related items
+            foreach (doctors item in items)
+            {
+                foreach (invoices invoice in BaseModel.Invoices.List(r => r.doctors_id == item.doctors_id))
+                {
+                    invoice.doctors_id = null;
+                    BaseModel.Invoices.Update(invoice);
+                }
+                foreach (estimates estimate in BaseModel.Estimates.List(r => r.doctors_id == item.doctors_id))
+                {
+                    estimate.doctors_id = null;
+                    BaseModel.Estimates.Update(estimate);
+                }
+            }
         }
     }
 

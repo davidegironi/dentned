@@ -122,6 +122,26 @@ namespace DG.DentneD.Model.Repositories
 
             return ret;
         }
+
+        /// <summary>
+        /// Remove an item
+        /// </summary>
+        /// <param name="items"></param>
+        public override void Remove(params treatmentspriceslists[] items)
+        {
+            //remove or unset all related items
+            foreach (treatmentspriceslists item in items)
+            {
+                BaseModel.TreatmentsPrices.Remove(BaseModel.TreatmentsPrices.List(r => r.treatmentspriceslists_id == item.treatmentspriceslists_id).ToArray());
+                foreach (patients patient in BaseModel.Patients.List(r => r.treatmentspriceslists_id == item.treatmentspriceslists_id))
+                {
+                    patient.treatmentspriceslists_id = null;
+                    BaseModel.Patients.Update(patient);
+                }
+            }
+
+            base.Remove(items);
+        }
     }
 
 }

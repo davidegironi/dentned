@@ -171,6 +171,23 @@ namespace DG.DentneD.Model.Repositories
                 BaseModel.Estimates.UpdateTotal(BaseModel.Estimates.Find(item.estimates_id));
             }
         }
+
+        /// <summary>
+        /// Remove an item
+        /// </summary>
+        /// <param name="items"></param>
+        public override void Remove(params estimateslines[] items)
+        {
+            int[] estimates_ids = items.Select(r => r.estimates_id).ToArray();
+
+            base.Remove(items);
+
+            //update estimates total
+            foreach (int estimates_id in estimates_ids)
+            {
+                BaseModel.Estimates.UpdateTotal(BaseModel.Estimates.Find(estimates_id));
+            }
+        }
     }
 
 }

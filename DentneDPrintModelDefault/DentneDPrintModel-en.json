@@ -12,7 +12,7 @@
     "estimatesTotals":"Totals",
     "estimatesTotalsTotalnotax":"Net",
     "estimatesTotalsTotaltax":"Tax",
-    "estimatesTotasTotaldocument":"Estimate total",
+    "estimatesTotalsTotaldocument":"Estimate total",
     "estimatesTotalsTotaldeductiontax":"Deduction tax total",
     "estimatesTotalsTotalamountdue":"Total",
     "invoicesTitle":"Invoice",
@@ -28,7 +28,7 @@
     "invoicesTotals":"Totals",
     "invoicesTotalsTotalnotax":"Net",
     "invoicesTotalsTotaltax":"Tax",
-    "invoicesTotasTotaldocument":"Invoice total",
+    "invoicesTotalsTotaldocument":"Invoice total",
     "invoicesTotalsTotaldeductiontax":"Deduction tax total",
     "invoicesTotalsTotalamountdue":"Total"
 }

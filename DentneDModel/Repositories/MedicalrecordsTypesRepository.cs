@@ -22,6 +22,7 @@ namespace DG.DentneD.Model.Repositories
         {
             public string text001 = "Name can not be empty.";
             public string text002 = "Medical record type already inserted.";
+            public string text003 = "This item can not be removed. A medical record depends it.";
         }
 
         /// <summary>
@@ -109,6 +110,40 @@ namespace DG.DentneD.Model.Repositories
                 if (!ret)
                     break;
             }
+
+            return ret;
+        }
+
+        /// <summary>
+        /// Check if an item can be removed
+        /// </summary>
+        /// <param name="checkForeingKeys"></param>
+        /// <param name="excludedForeingKeys"></param>
+        /// <param name="errors"></param>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public override bool CanRemove(bool checkForeingKeys, string[] excludedForeingKeys, ref string[] errors, params medicalrecordstypes[] items)
+        {
+            bool ret = true;
+
+            errors = new string[] { };
+
+            foreach (medicalrecordstypes item in items)
+            {
+                if (BaseModel.PatientsMedicalrecords.List(r => r.medicalrecordstypes_id == item.medicalrecordstypes_id).Count > 0)
+                {
+                    ret = false;
+                    errors = errors.Concat(new string[] { language.text003 }).ToArray();
+                }
+
+                if (!ret)
+                    break;
+            }
+
+            if (!ret)
+                return ret;
+
+            ret = base.CanRemove(checkForeingKeys, excludedForeingKeys, ref errors, items);
 
             return ret;
         }

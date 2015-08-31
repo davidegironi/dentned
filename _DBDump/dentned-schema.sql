@@ -3,9 +3,9 @@
 IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = N'dentned')
 BEGIN
 CREATE DATABASE [dentned] ON  PRIMARY 
-( NAME = N'dentned', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\DATA\dentned.mdf' , SIZE = 4096KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
+( NAME = N'dentned', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\DATA\dentned.mdf' , SIZE = 10240KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
  LOG ON 
-( NAME = N'dentned_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\DATA\dentned_1.ldf' , SIZE = 9216KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
+( NAME = N'dentned_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\DATA\dentned_1.ldf' , SIZE = 123648KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
  COLLATE Latin1_General_CI_AS
 END;
 ALTER DATABASE [dentned] SET COMPATIBILITY_LEVEL = 100;
@@ -81,6 +81,23 @@ END;
  ALTER AUTHORIZATION ON [dbo].[appointments] TO  SCHEMA OWNER;
 SET ANSI_NULLS ON;
 SET QUOTED_IDENTIFIER ON;
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[computedlines]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[computedlines](
+	[computedlines_id] [int] IDENTITY(1,1) NOT NULL,
+	[taxes_id] [int] NULL,
+	[computedlines_code] [char](3) COLLATE Latin1_General_CI_AS NOT NULL,
+	[computedlines_name] [varchar](16) COLLATE Latin1_General_CI_AS NOT NULL,
+	[computedlines_rate] [decimal](10, 2) NOT NULL,
+ CONSTRAINT [PK_computedlines] PRIMARY KEY CLUSTERED 
+(
+	[computedlines_id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END;
+ ALTER AUTHORIZATION ON [dbo].[computedlines] TO  SCHEMA OWNER;
+SET ANSI_NULLS ON;
+SET QUOTED_IDENTIFIER ON;
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[contactstypes]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [dbo].[contactstypes](
@@ -128,7 +145,9 @@ CREATE TABLE [dbo].[estimates](
 	[estimates_patient] [varchar](512) COLLATE Latin1_General_CI_AS NOT NULL,
 	[estimates_payment] [varchar](512) COLLATE Latin1_General_CI_AS NOT NULL,
 	[estimates_footer] [varchar](512) COLLATE Latin1_General_CI_AS NULL,
-	[estimates_total] [decimal](10, 2) NOT NULL,
+	[estimates_totalnet] [decimal](10, 2) NOT NULL,
+	[estimates_totalgross] [decimal](10, 2) NOT NULL,
+	[estimates_totaldue] [decimal](10, 2) NOT NULL,
 	[estimates_deductiontaxrate] [decimal](10, 2) NOT NULL,
  CONSTRAINT [PK_estimates] PRIMARY KEY CLUSTERED 
 (
@@ -166,6 +185,7 @@ CREATE TABLE [dbo].[estimateslines](
 	[estimateslines_quantity] [int] NOT NULL,
 	[estimateslines_unitprice] [decimal](10, 2) NOT NULL,
 	[estimateslines_taxrate] [decimal](10, 2) NOT NULL,
+	[estimateslines_istaxesdeductionsable] [bit] NOT NULL,
  CONSTRAINT [PK_estimateslines] PRIMARY KEY CLUSTERED 
 (
 	[estimateslines_id] ASC
@@ -187,9 +207,11 @@ CREATE TABLE [dbo].[invoices](
 	[invoices_patient] [varchar](512) COLLATE Latin1_General_CI_AS NOT NULL,
 	[invoices_payment] [varchar](512) COLLATE Latin1_General_CI_AS NOT NULL,
 	[invoices_footer] [varchar](512) COLLATE Latin1_General_CI_AS NULL,
-	[invoices_total] [decimal](10, 2) NOT NULL,
-	[invoices_ispaid] [bit] NOT NULL,
+	[invoices_totalnet] [decimal](10, 2) NOT NULL,
+	[invoices_totalgross] [decimal](10, 2) NOT NULL,
+	[invoices_totaldue] [decimal](10, 2) NOT NULL,
 	[invoices_deductiontaxrate] [decimal](10, 2) NOT NULL,
+	[invoices_ispaid] [bit] NOT NULL,
  CONSTRAINT [PK_invoices] PRIMARY KEY CLUSTERED 
 (
 	[invoices_id] ASC
@@ -226,6 +248,7 @@ CREATE TABLE [dbo].[invoiceslines](
 	[invoiceslines_quantity] [int] NOT NULL,
 	[invoiceslines_unitprice] [decimal](10, 2) NOT NULL,
 	[invoiceslines_taxrate] [decimal](10, 2) NOT NULL,
+	[invoiceslines_istaxesdeductionsable] [bit] NOT NULL,
  CONSTRAINT [PK_invoiceslines] PRIMARY KEY CLUSTERED 
 (
 	[invoiceslines_id] ASC
@@ -386,6 +409,7 @@ CREATE TABLE [dbo].[patientstreatments](
 	[patientstreatments_fulfilldate] [date] NULL,
 	[patientstreatments_ispaid] [bit] NOT NULL,
 	[patientstreatments_price] [decimal](10, 2) NOT NULL,
+	[patientstreatments_taxrate] [decimal](10, 2) NOT NULL,
 	[patientstreatments_description] [varchar](128) COLLATE Latin1_General_CI_AS NULL,
 	[patientstreatments_notes] [text] COLLATE Latin1_General_CI_AS NULL,
 	[patientstreatments_expirationdate] [date] NULL,
@@ -467,9 +491,10 @@ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[re
 BEGIN
 CREATE TABLE [dbo].[reports](
 	[reports_id] [int] IDENTITY(1,1) NOT NULL,
-	[reports_name] [varchar](32) COLLATE Latin1_General_CI_AS NOT NULL,
+	[reports_name] [varchar](64) COLLATE Latin1_General_CI_AS NOT NULL,
 	[reports_query] [text] COLLATE Latin1_General_CI_AS NOT NULL,
 	[reports_infotext] [text] COLLATE Latin1_General_CI_AS NULL,
+	[reports_ispasswordprotected] [bit] NOT NULL,
  CONSTRAINT [PK_reports] PRIMARY KEY CLUSTERED 
 (
 	[reports_id] ASC
@@ -491,6 +516,28 @@ CREATE TABLE [dbo].[rooms](
 ) ON [PRIMARY]
 END;
  ALTER AUTHORIZATION ON [dbo].[rooms] TO  SCHEMA OWNER;
+SET ANSI_NULLS ON;
+SET QUOTED_IDENTIFIER ON;
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sysdiagrams]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[sysdiagrams](
+	[name] [sysname] COLLATE Latin1_General_CI_AS NOT NULL,
+	[principal_id] [int] NOT NULL,
+	[diagram_id] [int] IDENTITY(1,1) NOT NULL,
+	[version] [int] NULL,
+	[definition] [varbinary](max) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[diagram_id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
+ CONSTRAINT [UK_principal_name] UNIQUE NONCLUSTERED 
+(
+	[principal_id] ASC,
+	[name] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END;
+ ALTER AUTHORIZATION ON [dbo].[sysdiagrams] TO  SCHEMA OWNER;
 SET ANSI_NULLS ON;
 SET QUOTED_IDENTIFIER ON;
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[taxes]') AND type in (N'U'))
@@ -529,6 +576,7 @@ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[tr
 BEGIN
 CREATE TABLE [dbo].[treatments](
 	[treatments_id] [int] IDENTITY(1,1) NOT NULL,
+	[taxes_id] [int] NULL,
 	[treatmentstypes_id] [int] NOT NULL,
 	[treatments_code] [char](3) COLLATE Latin1_General_CI_AS NOT NULL,
 	[treatments_name] [varchar](32) COLLATE Latin1_General_CI_AS NOT NULL,
@@ -631,6 +679,10 @@ ALTER TABLE [dbo].[estimateslines]  WITH CHECK ADD  CONSTRAINT [FK_estimatesline
 REFERENCES [patientstreatments] ([patientstreatments_id]);
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_estimateslines_patientstreatments]') AND parent_object_id = OBJECT_ID(N'[dbo].[estimateslines]'))
 ALTER TABLE [dbo].[estimateslines] CHECK CONSTRAINT [FK_estimateslines_patientstreatments];
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_estimateslines_estimateslines_istaxesdeductionsable]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[estimateslines] ADD  CONSTRAINT [DF_estimateslines_estimateslines_istaxesdeductionsable]  DEFAULT ((1)) FOR [estimateslines_istaxesdeductionsable]
+END;
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_invoices_doctors]') AND parent_object_id = OBJECT_ID(N'[dbo].[invoices]'))
 ALTER TABLE [dbo].[invoices]  WITH CHECK ADD  CONSTRAINT [FK_invoices_doctors] FOREIGN KEY([doctors_id])
 REFERENCES [doctors] ([doctors_id]);
@@ -655,6 +707,10 @@ ALTER TABLE [dbo].[invoiceslines]  WITH CHECK ADD  CONSTRAINT [FK_invoiceslines_
 REFERENCES [patientstreatments] ([patientstreatments_id]);
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_invoiceslines_patientstreatments]') AND parent_object_id = OBJECT_ID(N'[dbo].[invoiceslines]'))
 ALTER TABLE [dbo].[invoiceslines] CHECK CONSTRAINT [FK_invoiceslines_patientstreatments];
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_invoiceslines_invoiceslines_istaxesdeductionsable]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[invoiceslines] ADD  CONSTRAINT [DF_invoiceslines_invoiceslines_istaxesdeductionsable]  DEFAULT ((1)) FOR [invoiceslines_istaxesdeductionsable]
+END;
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_patients_treatmentspriceslists]') AND parent_object_id = OBJECT_ID(N'[dbo].[patients]'))
 ALTER TABLE [dbo].[patients]  WITH CHECK ADD  CONSTRAINT [FK_patients_treatmentspriceslists] FOREIGN KEY([treatmentspriceslists_id])
 REFERENCES [treatmentspriceslists] ([treatmentspriceslists_id]);
@@ -705,21 +761,6 @@ ALTER TABLE [dbo].[patientsnotes]  WITH CHECK ADD  CONSTRAINT [FK_patientsnotes_
 REFERENCES [patients] ([patients_id]);
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_patientsnotes_patients]') AND parent_object_id = OBJECT_ID(N'[dbo].[patientsnotes]'))
 ALTER TABLE [dbo].[patientsnotes] CHECK CONSTRAINT [FK_patientsnotes_patients];
-IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_patientstreatments_doctors]') AND parent_object_id = OBJECT_ID(N'[dbo].[patientstreatments]'))
-ALTER TABLE [dbo].[patientstreatments]  WITH CHECK ADD  CONSTRAINT [FK_patientstreatments_doctors] FOREIGN KEY([doctors_id])
-REFERENCES [doctors] ([doctors_id]);
-IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_patientstreatments_doctors]') AND parent_object_id = OBJECT_ID(N'[dbo].[patientstreatments]'))
-ALTER TABLE [dbo].[patientstreatments] CHECK CONSTRAINT [FK_patientstreatments_doctors];
-IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_patientstreatments_patients]') AND parent_object_id = OBJECT_ID(N'[dbo].[patientstreatments]'))
-ALTER TABLE [dbo].[patientstreatments]  WITH CHECK ADD  CONSTRAINT [FK_patientstreatments_patients] FOREIGN KEY([patients_id])
-REFERENCES [patients] ([patients_id]);
-IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_patientstreatments_patients]') AND parent_object_id = OBJECT_ID(N'[dbo].[patientstreatments]'))
-ALTER TABLE [dbo].[patientstreatments] CHECK CONSTRAINT [FK_patientstreatments_patients];
-IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_patientstreatments_treatments]') AND parent_object_id = OBJECT_ID(N'[dbo].[patientstreatments]'))
-ALTER TABLE [dbo].[patientstreatments]  WITH CHECK ADD  CONSTRAINT [FK_patientstreatments_treatments] FOREIGN KEY([treatments_id])
-REFERENCES [treatments] ([treatments_id]);
-IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_patientstreatments_treatments]') AND parent_object_id = OBJECT_ID(N'[dbo].[patientstreatments]'))
-ALTER TABLE [dbo].[patientstreatments] CHECK CONSTRAINT [FK_patientstreatments_treatments];
 IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_patientstreatments_patientstreatments_ispayed]') AND type = 'D')
 BEGIN
 ALTER TABLE [dbo].[patientstreatments] ADD  CONSTRAINT [DF_patientstreatments_patientstreatments_ispayed]  DEFAULT ((0)) FOR [patientstreatments_ispaid]
@@ -855,6 +896,10 @@ END;
 IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_paymentstypes_paymentstypes_isdefault]') AND type = 'D')
 BEGIN
 ALTER TABLE [dbo].[paymentstypes] ADD  CONSTRAINT [DF_paymentstypes_paymentstypes_isdefault]  DEFAULT ((0)) FOR [paymentstypes_isdefault]
+END;
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_reports_reports_ispasswordprotected]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[reports] ADD  CONSTRAINT [DF_reports_reports_ispasswordprotected]  DEFAULT ((0)) FOR [reports_ispasswordprotected]
 END;
 IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_taxes_taxes_isdefault]') AND type = 'D')
 BEGIN

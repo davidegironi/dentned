@@ -24,16 +24,15 @@ if ($enableErrorDisplay) {
 include ("lang/".$language.".php");
 
 //load functions
+include ("mssqlwrapper.php");
+include ("login.php");
 include ("functions.php");
 
 //open db connection
-$mssqlConnection = mssql_pconnect($mssql_hostname, $mssql_username, $mssql_password)
-  or die("Couldn't connect to SQL Server."); 
-$mssqlDatabase = mssql_select_db($mssql_database, $mssqlConnection)
-  or die("Couldn't open database."); 
+$mssql = new MSSQLWrapper($mssql_driver, $mssql_hostname, $mssql_database, $mssql_username, $mssql_password);
 
 //set the login class
-$login = new Login($mssqlConnection, $isPatientLoginEnabled, $cookieHashSecret, $cookieTime, $tokenPurgeTime, $lang['LOGIN_LOGINSUCCESS'], $lang['LOGIN_LOGINERROR'], $lang['LOGIN_LOGOUTSUCCESS']);
+$login = new Login($mssql, $isPatientLoginEnabled, $cookieHashSecret, $cookieTime, $tokenPurgeTime, $lang['LOGIN_LOGINSUCCESS'], $lang['LOGIN_LOGINERROR'], $lang['LOGIN_LOGOUTSUCCESS']);
 
 //perfor requests
 if(isset($_GET['ajax']) && $_GET['ajax'] == "1") {
@@ -45,6 +44,6 @@ if(isset($_GET['ajax']) && $_GET['ajax'] == "1") {
 }
 
 //close db connection
-mssql_close($mssqlConnection);
+$mssql->close();
 
 ?>

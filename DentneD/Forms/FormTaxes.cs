@@ -140,7 +140,8 @@ namespace DG.DentneD.Forms
                 r => new VTaxes
                 {
                     taxes_id = r.taxes_id,
-                    name = r.taxes_name
+                    name = r.taxes_name,
+                    isdefault = r.taxes_isdefault
                 }).ToList();
 
             return DGDataTableUtils.ToDataTable<VTaxes>(vTaxes);

@@ -186,8 +186,6 @@ namespace DG.DentneD.Forms
             PreloadView();
 
             ReloadView();
-            
-            ResetTabsDataGrid();
         }
 
         /// <summary>

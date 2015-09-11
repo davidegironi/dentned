@@ -140,7 +140,8 @@ namespace DG.DentneD.Forms
                 r => new VEstimatesFooters
                 {
                     estimatesfooters_id = r.estimatesfooters_id,
-                    name = r.estimatesfooters_name
+                    name = r.estimatesfooters_name,
+                    isdefault = r.estimatesfooters_isdefault
                 }).ToList();
 
             return DGDataTableUtils.ToDataTable<VEstimatesFooters>(vEstimatesFooters);

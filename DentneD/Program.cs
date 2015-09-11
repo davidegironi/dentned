@@ -47,12 +47,7 @@ namespace DG.DentneD
         /// Reports password public logger
         /// </summary>
         public static bool isPasswordLogged = false;
-
-        /// <summary>
-        /// Secure delete filename
-        /// </summary>
-        public const string SRMFileName = "srm.exe";
-
+        
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -114,7 +109,7 @@ namespace DG.DentneD
                 else if (defaultlanguagerebuild)
                 {
                     //rebuilt the default language
-                    Console.WriteLine("Rebuilding the default language file \"" + DGUIGHFLanguageHelper.DefaultLanguageFilename + "\"...");
+                    Console.WriteLine("Rebuilding the default language file to \"" + DGUIGHFLanguageHelper.DefaultLanguageFilename + "\"...");
                     if (DGUIGHFLanguageHelper.RebuiltDefaultLanguage(DGUIGHFLanguageHelper.DefaultLanguageFilename))
                         Console.WriteLine("File successfully rebuilt.");
                     else
@@ -124,7 +119,7 @@ namespace DG.DentneD
                 {
                     //rebuilt the loaded language
                     string[] messages = new string[] { };
-                    Console.WriteLine("Rebuilt the language file \"" + Program.uighfApplication.LanguageFilename + "\"...");
+                    Console.WriteLine("Rebuilt the current language file to \"" + Program.uighfApplication.LanguageFilename + "\"...");
                     if (DGUIGHFLanguageHelper.RebuiltLanguage(Program.uighfApplication.LanguageFilename, false, ref messages))
                     {
                         foreach (string message in messages)
@@ -147,14 +142,14 @@ namespace DG.DentneD
                     bool doSecureDelete = Convert.ToBoolean(ConfigurationManager.AppSettings["doSecureDelete"]);
 
                     //clean the tmpdir
-                    Console.WriteLine("Cleaning folder \"" + tmpdir + "\"...");
+                    Console.WriteLine("Cleaning Temp folder \"" + tmpdir + "\"...");
                     FileHelper.PurgeFolder(tmpdir, true, -1);
                     Console.WriteLine("Folder processed.");
 
                     Console.WriteLine();
 
                     //clean the patient datadir
-                    Console.WriteLine("Cleaning folder \"" + patientsDatadir + "\"...");
+                    Console.WriteLine("Cleaning Patient Data folder \"" + patientsDatadir + "\"...");
                     FormPatients.CleanPatientDir(patientsDatadir, doSecureDelete, ref messages, ref errors);
                     foreach (string message in messages)
                         Console.WriteLine("  " + message);
@@ -165,8 +160,8 @@ namespace DG.DentneD
                     Console.WriteLine();
 
                     //clean the patient attachment dir
-                    Console.WriteLine("Cleaning folder \"" + patientsAttachmentsdir + "\"...");
-                    FormPatients.CleanPatientDir(patientsAttachmentsdir, doSecureDelete, ref messages, ref errors);
+                    Console.WriteLine("Cleaning Patient Attachments folder \"" + patientsAttachmentsdir + "\"...");
+                    FormPatients.CleanPatientAttachmentsDir(patientsAttachmentsdir, doSecureDelete, ref messages, ref errors);
                     foreach (string message in messages)
                         Console.WriteLine("  " + message);
                     foreach (string error in errors)

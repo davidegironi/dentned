@@ -21,6 +21,7 @@ using System.Diagnostics;
 using System.IO;
 using SMcMaster;
 using DG.DentneD.Model.Repositories;
+using System.Collections;
 
 namespace DG.DentneD.Forms
 {
@@ -274,13 +275,12 @@ namespace DG.DentneD.Forms
             }
 
             ReloadView();
-
-            ResetTabsDataGrid();
-
+            
             //select an invoice on load invoice
             if (invoice != null)
             {
                 DGUIGHFData.SetBindingSourcePosition<invoices, DentneDModel>(_dentnedModel.Invoices, invoice, vInvoicesBindingSource);
+                tabControl_main.SelectedTab = tabPage_tabInvoices;
             }
         }
 
@@ -432,8 +432,13 @@ namespace DG.DentneD.Forms
             totalduepaidTextBox.Text = "0";
 
             //reset list total
-            SetListTotal();
+            SetListTotal(year);
 
+            Hashtable patientsnames = new Hashtable();
+            foreach (patients patient in _dentnedModel.Patients.List())
+            {
+                patientsnames[patient.patients_id] = patient.patients_surname + " " + patient.patients_name;
+            }
             IEnumerable<VInvoices> vInvoices = _dentnedModel.Invoices.List(r => r.invoices_date.Year == year && r.doctors_id == (doctors_id == -1 ? null : (Nullable<int>)doctors_id)).Select(
                 r => new VInvoices
                 {
@@ -441,7 +446,7 @@ namespace DG.DentneD.Forms
                     date = r.invoices_date,
                     ispaid = r.invoices_ispaid,
                     number = r.invoices_number,
-                    patient = (_dentnedModel.Patients.Find(r.patients_id) != null ? _dentnedModel.Patients.Find(r.patients_id).patients_surname + " " + _dentnedModel.Patients.Find(r.patients_id).patients_name : "")
+                    patient = (patientsnames.ContainsKey(r.patients_id) ? patientsnames[r.patients_id].ToString() : "")
                 }).ToList();
 
             return DGDataTableUtils.ToDataTable<VInvoices>(vInvoices);
@@ -496,7 +501,8 @@ namespace DG.DentneD.Forms
         /// <summary>
         /// Set the main list total
         /// </summary>
-        private void SetListTotal()
+        /// <param name="year"></param>
+        private void SetListTotal(int year)
         {
             int doctors_id = -1;
             if (comboBox_filterDoctors.SelectedIndex != -1)
@@ -504,10 +510,10 @@ namespace DG.DentneD.Forms
                 doctors_id = Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_filterDoctors.SelectedItem).Id);
             }
 
-            totalnetTextBox.Text = Math.Round(_dentnedModel.Invoices.List(r => r.doctors_id == doctors_id).Sum(r => r.invoices_totalnet), 2).ToString();
-            totalgrossTextBox.Text = Math.Round(_dentnedModel.Invoices.List(r => r.doctors_id == doctors_id).Sum(r => r.invoices_totalgross), 2).ToString();
-            totaldueTextBox.Text = Math.Round(_dentnedModel.Invoices.List(r => r.doctors_id == doctors_id).Sum(r => r.invoices_totaldue), 2).ToString();
-            totalduepaidTextBox.Text = Math.Round(_dentnedModel.Invoices.List(r => r.doctors_id == doctors_id && r.invoices_ispaid).Sum(r => r.invoices_totaldue), 2).ToString();
+            totalnetTextBox.Text = Math.Round(_dentnedModel.Invoices.List(r => r.doctors_id == doctors_id && r.invoices_date.Year == year).Sum(r => r.invoices_totalnet), 2).ToString();
+            totalgrossTextBox.Text = Math.Round(_dentnedModel.Invoices.List(r => r.doctors_id == doctors_id && r.invoices_date.Year == year).Sum(r => r.invoices_totalgross), 2).ToString();
+            totaldueTextBox.Text = Math.Round(_dentnedModel.Invoices.List(r => r.doctors_id == doctors_id && r.invoices_date.Year == year).Sum(r => r.invoices_totaldue), 2).ToString();
+            totalduepaidTextBox.Text = Math.Round(_dentnedModel.Invoices.List(r => r.doctors_id == doctors_id && r.invoices_date.Year == year && r.invoices_ispaid).Sum(r => r.invoices_totaldue), 2).ToString();
         }
 
 
@@ -975,12 +981,12 @@ namespace DG.DentneD.Forms
                 //reload patientstreatments tab
                 invoices invoice = _dentnedModel.Invoices.Find(invoices_id);
                 ReloadPatientsTreatments(invoice.patients_id, true);
+
+                //reset list total
+                SetListTotal(invoice.invoices_date.Year);
             }
             else
                 ReloadPatientsTreatments(null, true);
-
-            //reset list total
-            SetListTotal();
 
             IEnumerable<VInvoicesLines> vInvoicesLines =
             _dentnedModel.InvoicesLines.List(r => r.invoices_id == invoices_id).Select(
@@ -1144,7 +1150,7 @@ namespace DG.DentneD.Forms
         {
             //get only treatments not yet invoiced
             List<patientstreatments> patientstreatmentsl = new List<patientstreatments>();
-            if (patients_id != null && !loadall)
+            if (patients_id != null)
             {
                 if (!loadall)
                 {
@@ -1163,10 +1169,7 @@ namespace DG.DentneD.Forms
                     patientstreatmentsl = _dentnedModel.PatientsTreatments.List(r => r.patients_id == patients_id).ToList();
                 }
             }
-            else
-            {
-                patientstreatmentsl = _dentnedModel.PatientsTreatments.List().ToList();
-            }
+
             //local patients treatments
             IsBindingSourceLoading = true;
             patientstreatments_idComboBox.DataSource = patientstreatmentsl.Select(r => new { name = _dentnedModel.Treatments.Find(r.treatments_id).treatments_code + (tabElement_tabInvoicesLines.CurrentEditingMode == EditingMode.C || tabElement_tabInvoicesLines.CurrentEditingMode == EditingMode.U ? " [" + _dentnedModel.PatientsTreatments.GetTreatmentsToothsString(r) + "] " : " " ) + r.patientstreatments_creationdate.ToShortDateString(), r.patientstreatments_id }).OrderBy(r => r.name).ToList();

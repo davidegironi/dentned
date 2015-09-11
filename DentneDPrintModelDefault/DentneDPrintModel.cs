@@ -71,7 +71,7 @@ namespace DG.DentneD
         /// <summary>
         /// Default language prefix
         /// </summary>
-        private const string languageFilenamePrefix = "DentneDPrintModel-";
+        private const string languageFilenamePrefix = "DentneDPrintModelDefault-";
 
         /// <summary>
         /// Load language from a file

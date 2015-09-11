@@ -24,7 +24,9 @@ namespace DG.DentneD.Helpers
             string assemblyType = "DG.DentneD.DentneDPrintModel";
             try
             {
-                Assembly a = Assembly.LoadFile(Path.GetFullPath(assemblyPath));
+                Assembly a = Assembly.Load(File.ReadAllBytes(Path.GetFullPath(assemblyPath)));
+
+                //Assembly a = Assembly.LoadFile(Path.GetFullPath(assemblyPath));
                 Type t = a.GetType(assemblyType);
                 printModel = (IDentneDPrintModel)Activator.CreateInstance(t, null);
             }

@@ -683,6 +683,7 @@
             this.totaldueinvoicedTextBox.ReadOnly = true;
             this.totaldueinvoicedTextBox.Size = new System.Drawing.Size(90, 20);
             this.totaldueinvoicedTextBox.TabIndex = 3;
+            this.totaldueinvoicedTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // totaldueinvoicedLabel
             // 
@@ -702,6 +703,7 @@
             this.totaldueTextBox.ReadOnly = true;
             this.totaldueTextBox.Size = new System.Drawing.Size(90, 20);
             this.totaldueTextBox.TabIndex = 1;
+            this.totaldueTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // totaldueLabel
             // 
@@ -737,6 +739,7 @@
             this.totalgrossTextBox.ReadOnly = true;
             this.totalgrossTextBox.Size = new System.Drawing.Size(90, 20);
             this.totalgrossTextBox.TabIndex = 7;
+            this.totalgrossTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // totalgrossLabel
             // 
@@ -756,6 +759,7 @@
             this.totalnetTextBox.ReadOnly = true;
             this.totalnetTextBox.Size = new System.Drawing.Size(90, 20);
             this.totalnetTextBox.TabIndex = 5;
+            this.totalnetTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // totalnetLabel
             // 

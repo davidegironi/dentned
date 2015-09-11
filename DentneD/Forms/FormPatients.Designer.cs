@@ -33,20 +33,20 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPatients));
             this.patientstreatments_idLabel = new System.Windows.Forms.Label();
             this.treatments_idLabel = new System.Windows.Forms.Label();
@@ -147,10 +147,6 @@
             this.button_tabPatients_tabPatientsContacts_new = new System.Windows.Forms.Button();
             this.panel_tabPatients_tabPatientsContacts_list = new System.Windows.Forms.Panel();
             this.advancedDataGridView_tabPatients_tabPatientsContacts_list = new Zuby.ADGV.AdvancedDataGridView();
-            this.patientscontactsidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contactstypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contactDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vPatientsContactsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabPage_tabPatients_tabPatientsAddresses = new System.Windows.Forms.TabPage();
             this.panel_tabPatients_tabPatientsAddresses_data = new System.Windows.Forms.Panel();
             this.patientsaddresses_streetTextBox = new System.Windows.Forms.TextBox();
@@ -169,10 +165,6 @@
             this.button_tabPatients_tabPatientsAddresses_new = new System.Windows.Forms.Button();
             this.panel_tabPatients_tabPatientsAddresses_list = new System.Windows.Forms.Panel();
             this.advancedDataGridView_tabPatients_tabPatientsAddresses_list = new Zuby.ADGV.AdvancedDataGridView();
-            this.patientsaddressesidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.addresstypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.addressDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vPatientsAddressesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabPage_tabPatientsMedicalrecords = new System.Windows.Forms.TabPage();
             this.panel_tabPatientsMedicalrecords_data = new System.Windows.Forms.Panel();
             this.patientsmedicalrecords_valueTextBox = new System.Windows.Forms.TextBox();
@@ -188,10 +180,6 @@
             this.button_tabPatientsMedicalrecords_new = new System.Windows.Forms.Button();
             this.panel_tabPatientsMedicalrecords_list = new System.Windows.Forms.Panel();
             this.advancedDataGridView_tabPatientsMedicalrecords_list = new Zuby.ADGV.AdvancedDataGridView();
-            this.patientsmedicalrecordsidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.medicalrecordstypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.valueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vPatientsMedicalrecordsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabPage_tabPatientsTreatments = new System.Windows.Forms.TabPage();
             this.panel_tabPatientsTreatments_filters = new System.Windows.Forms.Panel();
             this.groupBox_tabPatientsTreatments_filtert = new System.Windows.Forms.GroupBox();
@@ -407,12 +395,6 @@
             this.button_tabPatientsTreatments_new = new System.Windows.Forms.Button();
             this.panel_tabPatientsTreatments_list = new System.Windows.Forms.Panel();
             this.advancedDataGridView_tabPatientsTreatments_list = new Zuby.ADGV.AdvancedDataGridView();
-            this.dateDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.treatmentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.toothsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.isfulfilledDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.ispaidDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.vPatientsTreatmentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabPage_tabPayments = new System.Windows.Forms.TabPage();
             this.panel_tabPayments_data = new System.Windows.Forms.Panel();
             this.label_tabPayments_inforeference = new System.Windows.Forms.Label();
@@ -436,11 +418,6 @@
             this.label_tabPayments_total = new System.Windows.Forms.Label();
             this.label_tabPayments_paidtotal = new System.Windows.Forms.Label();
             this.advancedDataGridView_tabPayments_list = new Zuby.ADGV.AdvancedDataGridView();
-            this.paymentsidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.noteDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vPatientsPaymentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabPage_tabAppointments = new System.Windows.Forms.TabPage();
             this.panel_tabAppointments_data = new System.Windows.Forms.Panel();
             this.appointments_notesTextBox = new System.Windows.Forms.TextBox();
@@ -451,11 +428,6 @@
             this.appointments_idTextBox = new System.Windows.Forms.TextBox();
             this.panel_tabAppointments_list = new System.Windows.Forms.Panel();
             this.advancedDataGridView_tabAppointments_list = new Zuby.ADGV.AdvancedDataGridView();
-            this.appointmentsidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fromDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.toDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vPatientsAppointmentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabPage_tabPatientsAttachments = new System.Windows.Forms.TabPage();
             this.panel_tabPatientsAttachments_data = new System.Windows.Forms.Panel();
             this.patientsattachments_noteTextBox = new System.Windows.Forms.TextBox();
@@ -477,10 +449,6 @@
             this.button_tabPatientsAttachments_new = new System.Windows.Forms.Button();
             this.panel_tabPatientsAttachments_list = new System.Windows.Forms.Panel();
             this.advancedDataGridView_tabPatientsAttachments_list = new Zuby.ADGV.AdvancedDataGridView();
-            this.patientsattachmentsidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.attachmetnstypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.attachmentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vPatientsAttachmentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabPage_tabInvoices = new System.Windows.Forms.TabPage();
             this.panel_tabInvoices_actions = new System.Windows.Forms.Panel();
             this.button_tabInvoices_view = new System.Windows.Forms.Button();
@@ -492,12 +460,6 @@
             this.label_tabInvoices_invoicestotaldue = new System.Windows.Forms.Label();
             this.label_tabInvoices_paidtotaldue = new System.Windows.Forms.Label();
             this.advancedDataGridView_tabInvoices_list = new Zuby.ADGV.AdvancedDataGridView();
-            this.numberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateDataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.doctorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ispaidDataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.totalDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vPatientsInvoicesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabPage_tabEstimates = new System.Windows.Forms.TabPage();
             this.panel_tabEstimates_actions = new System.Windows.Forms.Panel();
             this.button_tabEstimates_view = new System.Windows.Forms.Button();
@@ -509,12 +471,6 @@
             this.label_tabEstimates_estimatestotaldue = new System.Windows.Forms.Label();
             this.label_tabEstimates_invoicedtotaldue = new System.Windows.Forms.Label();
             this.advancedDataGridView_tabEstimates_list = new Zuby.ADGV.AdvancedDataGridView();
-            this.numberDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateDataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.doctorDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.isinvoicedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.totalDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vPatientsEstimatesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabPage_tabPatientsNotes = new System.Windows.Forms.TabPage();
             this.panel_tabPatientsNotes_data = new System.Windows.Forms.Panel();
             this.patientsnotes_textTextBox = new System.Windows.Forms.TextBox();
@@ -530,24 +486,69 @@
             this.button_tabPatientsNotes_new = new System.Windows.Forms.Button();
             this.panel_tabPatientsNotes_list = new System.Windows.Forms.Panel();
             this.advancedDataGridView_tabPatientsNotes_list = new Zuby.ADGV.AdvancedDataGridView();
-            this.patientsnotesidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.noteDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vPatientsNotesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel_list = new System.Windows.Forms.Panel();
             this.advancedDataGridView_main = new Zuby.ADGV.AdvancedDataGridView();
-            this.patientsidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.isarchivedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.vPatientsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel_listtotal = new System.Windows.Forms.Panel();
             this.countTextBox = new System.Windows.Forms.TextBox();
             this.countLabel = new System.Windows.Forms.Label();
             this.panel_filters = new System.Windows.Forms.Panel();
+            this.textBox_filterPatient = new System.Windows.Forms.TextBox();
             this.label_filterShow = new System.Windows.Forms.Label();
             this.comboBox_filterArchived = new System.Windows.Forms.ComboBox();
             this.invoicesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.estimatesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.patientsidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isarchivedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.vPatientsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.patientscontactsidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contactstypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contactDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vPatientsContactsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.patientsaddressesidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.addresstypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.addressDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vPatientsAddressesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.patientsmedicalrecordsidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.medicalrecordstypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.valueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vPatientsMedicalrecordsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dateDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.treatmentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toothsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isfulfilledDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.ispaidDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.vPatientsTreatmentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.paymentsidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.noteDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vPatientsPaymentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.appointmentsidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fromDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vPatientsAppointmentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.patientsattachmentsidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.attachmetnstypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.attachmentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vPatientsAttachmentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.numberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateDataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.doctorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ispaidDataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.totalDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vPatientsInvoicesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.numberDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateDataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.doctorDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isinvoicedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.totalDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vPatientsEstimatesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.patientsnotesidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.noteDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vPatientsNotesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel_data.SuspendLayout();
             this.tabControl_main.SuspendLayout();
             this.tabPage_tabPatients.SuspendLayout();
@@ -566,7 +567,6 @@
             this.panel_tabPatients_tabPatientsContacts_actions.SuspendLayout();
             this.panel_tabPatients_tabPatientsContacts_list.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabPatients_tabPatientsContacts_list)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsContactsBindingSource)).BeginInit();
             this.tabPage_tabPatients_tabPatientsAddresses.SuspendLayout();
             this.panel_tabPatients_tabPatientsAddresses_data.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.patientsaddressesBindingSource)).BeginInit();
@@ -574,7 +574,6 @@
             this.panel_tabPatients_tabPatientsAddresses_actions.SuspendLayout();
             this.panel_tabPatients_tabPatientsAddresses_list.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabPatients_tabPatientsAddresses_list)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsAddressesBindingSource)).BeginInit();
             this.tabPage_tabPatientsMedicalrecords.SuspendLayout();
             this.panel_tabPatientsMedicalrecords_data.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.patientsmedicalrecordsBindingSource)).BeginInit();
@@ -582,7 +581,6 @@
             this.panel_tabPatientsMedicalrecords_actions.SuspendLayout();
             this.panel_tabPatientsMedicalrecords_list.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabPatientsMedicalrecords_list)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsMedicalrecordsBindingSource)).BeginInit();
             this.tabPage_tabPatientsTreatments.SuspendLayout();
             this.panel_tabPatientsTreatments_filters.SuspendLayout();
             this.groupBox_tabPatientsTreatments_filtert.SuspendLayout();
@@ -593,7 +591,6 @@
             this.panel_tabPatientsTreatments_actions.SuspendLayout();
             this.panel_tabPatientsTreatments_list.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabPatientsTreatments_list)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsTreatmentsBindingSource)).BeginInit();
             this.tabPage_tabPayments.SuspendLayout();
             this.panel_tabPayments_data.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.paymentsBindingSource)).BeginInit();
@@ -601,13 +598,11 @@
             this.panel_tabPayments_actions.SuspendLayout();
             this.panel_tabPayments_list.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabPayments_list)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsPaymentsBindingSource)).BeginInit();
             this.tabPage_tabAppointments.SuspendLayout();
             this.panel_tabAppointments_data.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.appointmentsBindingSource)).BeginInit();
             this.panel_tabAppointments_list.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabAppointments_list)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsAppointmentsBindingSource)).BeginInit();
             this.tabPage_tabPatientsAttachments.SuspendLayout();
             this.panel_tabPatientsAttachments_data.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.patientsattachmentsBindingSource)).BeginInit();
@@ -615,17 +610,14 @@
             this.panel_tabPatientsAttachments_actions.SuspendLayout();
             this.panel_tabPatientsAttachments_list.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabPatientsAttachments_list)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsAttachmentsBindingSource)).BeginInit();
             this.tabPage_tabInvoices.SuspendLayout();
             this.panel_tabInvoices_actions.SuspendLayout();
             this.panel_tabInvoices_list.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabInvoices_list)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsInvoicesBindingSource)).BeginInit();
             this.tabPage_tabEstimates.SuspendLayout();
             this.panel_tabEstimates_actions.SuspendLayout();
             this.panel_tabEstimates_list.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabEstimates_list)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsEstimatesBindingSource)).BeginInit();
             this.tabPage_tabPatientsNotes.SuspendLayout();
             this.panel_tabPatientsNotes_data.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.patientsnotesBindingSource)).BeginInit();
@@ -633,14 +625,23 @@
             this.panel_tabPatientsNotes_actions.SuspendLayout();
             this.panel_tabPatientsNotes_list.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabPatientsNotes_list)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsNotesBindingSource)).BeginInit();
             this.panel_list.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_main)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsBindingSource)).BeginInit();
             this.panel_listtotal.SuspendLayout();
             this.panel_filters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.invoicesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.estimatesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsContactsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsAddressesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsMedicalrecordsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsTreatmentsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsPaymentsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsAppointmentsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsAttachmentsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsInvoicesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsEstimatesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsNotesBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // patientstreatments_idLabel
@@ -1623,40 +1624,6 @@
             this.advancedDataGridView_tabPatients_tabPatientsContacts_list.SortStringChanged += new System.EventHandler(this.advancedDataGridView_tabPatients_tabPatientsContacts_list_SortStringChanged);
             this.advancedDataGridView_tabPatients_tabPatientsContacts_list.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_tabPatients_tabPatientsContacts_list_FilterStringChanged);
             // 
-            // patientscontactsidDataGridViewTextBoxColumn
-            // 
-            this.patientscontactsidDataGridViewTextBoxColumn.DataPropertyName = "patientscontacts_id";
-            this.patientscontactsidDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.patientscontactsidDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.patientscontactsidDataGridViewTextBoxColumn.Name = "patientscontactsidDataGridViewTextBoxColumn";
-            this.patientscontactsidDataGridViewTextBoxColumn.ReadOnly = true;
-            this.patientscontactsidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.patientscontactsidDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // contactstypeDataGridViewTextBoxColumn
-            // 
-            this.contactstypeDataGridViewTextBoxColumn.DataPropertyName = "contactstype";
-            this.contactstypeDataGridViewTextBoxColumn.HeaderText = "Type";
-            this.contactstypeDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.contactstypeDataGridViewTextBoxColumn.Name = "contactstypeDataGridViewTextBoxColumn";
-            this.contactstypeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.contactstypeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.contactstypeDataGridViewTextBoxColumn.Width = 120;
-            // 
-            // contactDataGridViewTextBoxColumn
-            // 
-            this.contactDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.contactDataGridViewTextBoxColumn.DataPropertyName = "contact";
-            this.contactDataGridViewTextBoxColumn.HeaderText = "Contact";
-            this.contactDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.contactDataGridViewTextBoxColumn.Name = "contactDataGridViewTextBoxColumn";
-            this.contactDataGridViewTextBoxColumn.ReadOnly = true;
-            this.contactDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // vPatientsContactsBindingSource
-            // 
-            this.vPatientsContactsBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatientsContacts);
-            // 
             // tabPage_tabPatients_tabPatientsAddresses
             // 
             this.tabPage_tabPatients_tabPatientsAddresses.Controls.Add(this.panel_tabPatients_tabPatientsAddresses_data);
@@ -1847,40 +1814,6 @@
             this.advancedDataGridView_tabPatients_tabPatientsAddresses_list.SortStringChanged += new System.EventHandler(this.advancedDataGridView_tabPatients_tabPatientsAddresses_list_SortStringChanged);
             this.advancedDataGridView_tabPatients_tabPatientsAddresses_list.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_tabPatients_tabPatientsAddresses_list_FilterStringChanged);
             // 
-            // patientsaddressesidDataGridViewTextBoxColumn
-            // 
-            this.patientsaddressesidDataGridViewTextBoxColumn.DataPropertyName = "patientsaddresses_id";
-            this.patientsaddressesidDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.patientsaddressesidDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.patientsaddressesidDataGridViewTextBoxColumn.Name = "patientsaddressesidDataGridViewTextBoxColumn";
-            this.patientsaddressesidDataGridViewTextBoxColumn.ReadOnly = true;
-            this.patientsaddressesidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.patientsaddressesidDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // addresstypeDataGridViewTextBoxColumn
-            // 
-            this.addresstypeDataGridViewTextBoxColumn.DataPropertyName = "addresstype";
-            this.addresstypeDataGridViewTextBoxColumn.HeaderText = "Type";
-            this.addresstypeDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.addresstypeDataGridViewTextBoxColumn.Name = "addresstypeDataGridViewTextBoxColumn";
-            this.addresstypeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.addresstypeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.addresstypeDataGridViewTextBoxColumn.Width = 120;
-            // 
-            // addressDataGridViewTextBoxColumn
-            // 
-            this.addressDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.addressDataGridViewTextBoxColumn.DataPropertyName = "address";
-            this.addressDataGridViewTextBoxColumn.HeaderText = "Address";
-            this.addressDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.addressDataGridViewTextBoxColumn.Name = "addressDataGridViewTextBoxColumn";
-            this.addressDataGridViewTextBoxColumn.ReadOnly = true;
-            this.addressDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // vPatientsAddressesBindingSource
-            // 
-            this.vPatientsAddressesBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatientsAddresses);
-            // 
             // tabPage_tabPatientsMedicalrecords
             // 
             this.tabPage_tabPatientsMedicalrecords.Controls.Add(this.panel_tabPatientsMedicalrecords_data);
@@ -2040,40 +1973,6 @@
             this.advancedDataGridView_tabPatientsMedicalrecords_list.TabIndex = 1;
             this.advancedDataGridView_tabPatientsMedicalrecords_list.SortStringChanged += new System.EventHandler(this.advancedDataGridView_tabPatientsMedicalrecords_list_SortStringChanged);
             this.advancedDataGridView_tabPatientsMedicalrecords_list.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_tabPatientsMedicalrecords_list_FilterStringChanged);
-            // 
-            // patientsmedicalrecordsidDataGridViewTextBoxColumn
-            // 
-            this.patientsmedicalrecordsidDataGridViewTextBoxColumn.DataPropertyName = "patientsmedicalrecords_id";
-            this.patientsmedicalrecordsidDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.patientsmedicalrecordsidDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.patientsmedicalrecordsidDataGridViewTextBoxColumn.Name = "patientsmedicalrecordsidDataGridViewTextBoxColumn";
-            this.patientsmedicalrecordsidDataGridViewTextBoxColumn.ReadOnly = true;
-            this.patientsmedicalrecordsidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.patientsmedicalrecordsidDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // medicalrecordstypeDataGridViewTextBoxColumn
-            // 
-            this.medicalrecordstypeDataGridViewTextBoxColumn.DataPropertyName = "medicalrecordstype";
-            this.medicalrecordstypeDataGridViewTextBoxColumn.HeaderText = "Type";
-            this.medicalrecordstypeDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.medicalrecordstypeDataGridViewTextBoxColumn.Name = "medicalrecordstypeDataGridViewTextBoxColumn";
-            this.medicalrecordstypeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.medicalrecordstypeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.medicalrecordstypeDataGridViewTextBoxColumn.Width = 120;
-            // 
-            // valueDataGridViewTextBoxColumn
-            // 
-            this.valueDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.valueDataGridViewTextBoxColumn.DataPropertyName = "value";
-            this.valueDataGridViewTextBoxColumn.HeaderText = "Info";
-            this.valueDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.valueDataGridViewTextBoxColumn.Name = "valueDataGridViewTextBoxColumn";
-            this.valueDataGridViewTextBoxColumn.ReadOnly = true;
-            this.valueDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // vPatientsMedicalrecordsBindingSource
-            // 
-            this.vPatientsMedicalrecordsBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatientsMedicalrecords);
             // 
             // tabPage_tabPatientsTreatments
             // 
@@ -4508,62 +4407,6 @@
             this.advancedDataGridView_tabPatientsTreatments_list.SortStringChanged += new System.EventHandler(this.advancedDataGridView_tabPatientsTreatments_list_SortStringChanged);
             this.advancedDataGridView_tabPatientsTreatments_list.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_tabPatientsTreatments_list_FilterStringChanged);
             // 
-            // dateDataGridViewTextBoxColumn1
-            // 
-            this.dateDataGridViewTextBoxColumn1.DataPropertyName = "date";
-            dataGridViewCellStyle5.Format = "d";
-            this.dateDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle5;
-            this.dateDataGridViewTextBoxColumn1.HeaderText = "Date";
-            this.dateDataGridViewTextBoxColumn1.MinimumWidth = 22;
-            this.dateDataGridViewTextBoxColumn1.Name = "dateDataGridViewTextBoxColumn1";
-            this.dateDataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dateDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.dateDataGridViewTextBoxColumn1.Width = 80;
-            // 
-            // treatmentDataGridViewTextBoxColumn
-            // 
-            this.treatmentDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.treatmentDataGridViewTextBoxColumn.DataPropertyName = "treatment";
-            this.treatmentDataGridViewTextBoxColumn.HeaderText = "Treatment";
-            this.treatmentDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.treatmentDataGridViewTextBoxColumn.Name = "treatmentDataGridViewTextBoxColumn";
-            this.treatmentDataGridViewTextBoxColumn.ReadOnly = true;
-            this.treatmentDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // toothsDataGridViewTextBoxColumn
-            // 
-            this.toothsDataGridViewTextBoxColumn.DataPropertyName = "tooths";
-            this.toothsDataGridViewTextBoxColumn.HeaderText = "Tooths";
-            this.toothsDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.toothsDataGridViewTextBoxColumn.Name = "toothsDataGridViewTextBoxColumn";
-            this.toothsDataGridViewTextBoxColumn.ReadOnly = true;
-            this.toothsDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // isfulfilledDataGridViewCheckBoxColumn
-            // 
-            this.isfulfilledDataGridViewCheckBoxColumn.DataPropertyName = "isfulfilled";
-            this.isfulfilledDataGridViewCheckBoxColumn.HeaderText = "F";
-            this.isfulfilledDataGridViewCheckBoxColumn.MinimumWidth = 22;
-            this.isfulfilledDataGridViewCheckBoxColumn.Name = "isfulfilledDataGridViewCheckBoxColumn";
-            this.isfulfilledDataGridViewCheckBoxColumn.ReadOnly = true;
-            this.isfulfilledDataGridViewCheckBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.isfulfilledDataGridViewCheckBoxColumn.Width = 40;
-            // 
-            // ispaidDataGridViewCheckBoxColumn
-            // 
-            this.ispaidDataGridViewCheckBoxColumn.DataPropertyName = "ispaid";
-            this.ispaidDataGridViewCheckBoxColumn.HeaderText = "P";
-            this.ispaidDataGridViewCheckBoxColumn.MinimumWidth = 22;
-            this.ispaidDataGridViewCheckBoxColumn.Name = "ispaidDataGridViewCheckBoxColumn";
-            this.ispaidDataGridViewCheckBoxColumn.ReadOnly = true;
-            this.ispaidDataGridViewCheckBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.ispaidDataGridViewCheckBoxColumn.Width = 40;
-            // 
-            // vPatientsTreatmentsBindingSource
-            // 
-            this.vPatientsTreatmentsBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatientsTreatments);
-            this.vPatientsTreatmentsBindingSource.CurrentChanged += new System.EventHandler(this.vPatientsTreatmentsBindingSource_CurrentChanged);
-            // 
             // tabPage_tabPayments
             // 
             this.tabPage_tabPayments.Controls.Add(this.panel_tabPayments_data);
@@ -4807,53 +4650,6 @@
             this.advancedDataGridView_tabPayments_list.SortStringChanged += new System.EventHandler(this.advancedDataGridView_tabPayments_list_SortStringChanged);
             this.advancedDataGridView_tabPayments_list.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_tabPayments_list_FilterStringChanged);
             // 
-            // paymentsidDataGridViewTextBoxColumn
-            // 
-            this.paymentsidDataGridViewTextBoxColumn.DataPropertyName = "payments_id";
-            this.paymentsidDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.paymentsidDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.paymentsidDataGridViewTextBoxColumn.Name = "paymentsidDataGridViewTextBoxColumn";
-            this.paymentsidDataGridViewTextBoxColumn.ReadOnly = true;
-            this.paymentsidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.paymentsidDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // dateDataGridViewTextBoxColumn2
-            // 
-            this.dateDataGridViewTextBoxColumn2.DataPropertyName = "date";
-            dataGridViewCellStyle7.Format = "d";
-            this.dateDataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle7;
-            this.dateDataGridViewTextBoxColumn2.HeaderText = "Date";
-            this.dateDataGridViewTextBoxColumn2.MinimumWidth = 22;
-            this.dateDataGridViewTextBoxColumn2.Name = "dateDataGridViewTextBoxColumn2";
-            this.dateDataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dateDataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.dateDataGridViewTextBoxColumn2.Width = 80;
-            // 
-            // noteDataGridViewTextBoxColumn1
-            // 
-            this.noteDataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.noteDataGridViewTextBoxColumn1.DataPropertyName = "note";
-            this.noteDataGridViewTextBoxColumn1.HeaderText = "Note";
-            this.noteDataGridViewTextBoxColumn1.MinimumWidth = 22;
-            this.noteDataGridViewTextBoxColumn1.Name = "noteDataGridViewTextBoxColumn1";
-            this.noteDataGridViewTextBoxColumn1.ReadOnly = true;
-            this.noteDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // amountDataGridViewTextBoxColumn
-            // 
-            this.amountDataGridViewTextBoxColumn.DataPropertyName = "amount";
-            dataGridViewCellStyle8.Format = "0.00";
-            this.amountDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle8;
-            this.amountDataGridViewTextBoxColumn.HeaderText = "Total";
-            this.amountDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.amountDataGridViewTextBoxColumn.Name = "amountDataGridViewTextBoxColumn";
-            this.amountDataGridViewTextBoxColumn.ReadOnly = true;
-            this.amountDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // vPatientsPaymentsBindingSource
-            // 
-            this.vPatientsPaymentsBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatientsPayments);
-            // 
             // tabPage_tabAppointments
             // 
             this.tabPage_tabAppointments.Controls.Add(this.panel_tabAppointments_data);
@@ -4970,50 +4766,6 @@
             this.advancedDataGridView_tabAppointments_list.SortStringChanged += new System.EventHandler(this.advancedDataGridView_tabAppointments_list_SortStringChanged);
             this.advancedDataGridView_tabAppointments_list.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_tabAppointments_list_FilterStringChanged);
             // 
-            // appointmentsidDataGridViewTextBoxColumn
-            // 
-            this.appointmentsidDataGridViewTextBoxColumn.DataPropertyName = "appointments_id";
-            this.appointmentsidDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.appointmentsidDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.appointmentsidDataGridViewTextBoxColumn.Name = "appointmentsidDataGridViewTextBoxColumn";
-            this.appointmentsidDataGridViewTextBoxColumn.ReadOnly = true;
-            this.appointmentsidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.appointmentsidDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // fromDataGridViewTextBoxColumn
-            // 
-            this.fromDataGridViewTextBoxColumn.DataPropertyName = "from";
-            this.fromDataGridViewTextBoxColumn.HeaderText = "From";
-            this.fromDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.fromDataGridViewTextBoxColumn.Name = "fromDataGridViewTextBoxColumn";
-            this.fromDataGridViewTextBoxColumn.ReadOnly = true;
-            this.fromDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.fromDataGridViewTextBoxColumn.Width = 120;
-            // 
-            // toDataGridViewTextBoxColumn
-            // 
-            this.toDataGridViewTextBoxColumn.DataPropertyName = "to";
-            this.toDataGridViewTextBoxColumn.HeaderText = "To";
-            this.toDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.toDataGridViewTextBoxColumn.Name = "toDataGridViewTextBoxColumn";
-            this.toDataGridViewTextBoxColumn.ReadOnly = true;
-            this.toDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.toDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // titleDataGridViewTextBoxColumn
-            // 
-            this.titleDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.titleDataGridViewTextBoxColumn.DataPropertyName = "title";
-            this.titleDataGridViewTextBoxColumn.HeaderText = "Title";
-            this.titleDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
-            this.titleDataGridViewTextBoxColumn.ReadOnly = true;
-            this.titleDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // vPatientsAppointmentsBindingSource
-            // 
-            this.vPatientsAppointmentsBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatientsAppointments);
-            // 
             // tabPage_tabPatientsAttachments
             // 
             this.tabPage_tabPatientsAttachments.Controls.Add(this.panel_tabPatientsAttachments_data);
@@ -5073,6 +4825,7 @@
             this.patientsattachmentstypes_idComboBox.Name = "patientsattachmentstypes_idComboBox";
             this.patientsattachmentstypes_idComboBox.Size = new System.Drawing.Size(150, 21);
             this.patientsattachmentstypes_idComboBox.TabIndex = 11;
+            this.patientsattachmentstypes_idComboBox.SelectedIndexChanged += new System.EventHandler(this.patientsattachmentstypes_idComboBox_SelectedIndexChanged);
             this.patientsattachmentstypes_idComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.patientsattachmentstypes_idComboBox_KeyPress);
             // 
             // button_tabPatientsAttachments_filepathdelete
@@ -5171,7 +4924,7 @@
             // 
             // button_tabPatientsAttachments_filepathopenfolder
             // 
-            this.button_tabPatientsAttachments_filepathopenfolder.Location = new System.Drawing.Point(482, 4);
+            this.button_tabPatientsAttachments_filepathopenfolder.Location = new System.Drawing.Point(482, 3);
             this.button_tabPatientsAttachments_filepathopenfolder.Name = "button_tabPatientsAttachments_filepathopenfolder";
             this.button_tabPatientsAttachments_filepathopenfolder.Size = new System.Drawing.Size(75, 23);
             this.button_tabPatientsAttachments_filepathopenfolder.TabIndex = 14;
@@ -5242,40 +4995,6 @@
             this.advancedDataGridView_tabPatientsAttachments_list.TabIndex = 1;
             this.advancedDataGridView_tabPatientsAttachments_list.SortStringChanged += new System.EventHandler(this.advancedDataGridView_tabPatientsAttachments_list_SortStringChanged);
             this.advancedDataGridView_tabPatientsAttachments_list.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_tabPatientsAttachments_list_FilterStringChanged);
-            // 
-            // patientsattachmentsidDataGridViewTextBoxColumn
-            // 
-            this.patientsattachmentsidDataGridViewTextBoxColumn.DataPropertyName = "patientsattachments_id";
-            this.patientsattachmentsidDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.patientsattachmentsidDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.patientsattachmentsidDataGridViewTextBoxColumn.Name = "patientsattachmentsidDataGridViewTextBoxColumn";
-            this.patientsattachmentsidDataGridViewTextBoxColumn.ReadOnly = true;
-            this.patientsattachmentsidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.patientsattachmentsidDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // attachmetnstypeDataGridViewTextBoxColumn
-            // 
-            this.attachmetnstypeDataGridViewTextBoxColumn.DataPropertyName = "attachmetnstype";
-            this.attachmetnstypeDataGridViewTextBoxColumn.HeaderText = "Type";
-            this.attachmetnstypeDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.attachmetnstypeDataGridViewTextBoxColumn.Name = "attachmetnstypeDataGridViewTextBoxColumn";
-            this.attachmetnstypeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.attachmetnstypeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.attachmetnstypeDataGridViewTextBoxColumn.Width = 120;
-            // 
-            // attachmentDataGridViewTextBoxColumn
-            // 
-            this.attachmentDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.attachmentDataGridViewTextBoxColumn.DataPropertyName = "attachment";
-            this.attachmentDataGridViewTextBoxColumn.HeaderText = "Attachment";
-            this.attachmentDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.attachmentDataGridViewTextBoxColumn.Name = "attachmentDataGridViewTextBoxColumn";
-            this.attachmentDataGridViewTextBoxColumn.ReadOnly = true;
-            this.attachmentDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // vPatientsAttachmentsBindingSource
-            // 
-            this.vPatientsAttachmentsBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatientsAttachments);
             // 
             // tabPage_tabInvoices
             // 
@@ -5408,61 +5127,6 @@
             this.advancedDataGridView_tabInvoices_list.SortStringChanged += new System.EventHandler(this.advancedDataGridView_tabInvoices_list_SortStringChanged);
             this.advancedDataGridView_tabInvoices_list.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_tabInvoices_list_FilterStringChanged);
             // 
-            // numberDataGridViewTextBoxColumn
-            // 
-            this.numberDataGridViewTextBoxColumn.DataPropertyName = "number";
-            this.numberDataGridViewTextBoxColumn.HeaderText = "Number";
-            this.numberDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.numberDataGridViewTextBoxColumn.Name = "numberDataGridViewTextBoxColumn";
-            this.numberDataGridViewTextBoxColumn.ReadOnly = true;
-            this.numberDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.numberDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // dateDataGridViewTextBoxColumn3
-            // 
-            this.dateDataGridViewTextBoxColumn3.DataPropertyName = "date";
-            dataGridViewCellStyle12.Format = "d";
-            this.dateDataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle12;
-            this.dateDataGridViewTextBoxColumn3.HeaderText = "Date";
-            this.dateDataGridViewTextBoxColumn3.MinimumWidth = 22;
-            this.dateDataGridViewTextBoxColumn3.Name = "dateDataGridViewTextBoxColumn3";
-            this.dateDataGridViewTextBoxColumn3.ReadOnly = true;
-            this.dateDataGridViewTextBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.dateDataGridViewTextBoxColumn3.Width = 80;
-            // 
-            // doctorDataGridViewTextBoxColumn
-            // 
-            this.doctorDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.doctorDataGridViewTextBoxColumn.DataPropertyName = "doctor";
-            this.doctorDataGridViewTextBoxColumn.HeaderText = "Doctor";
-            this.doctorDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.doctorDataGridViewTextBoxColumn.Name = "doctorDataGridViewTextBoxColumn";
-            this.doctorDataGridViewTextBoxColumn.ReadOnly = true;
-            this.doctorDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // ispaidDataGridViewCheckBoxColumn1
-            // 
-            this.ispaidDataGridViewCheckBoxColumn1.DataPropertyName = "ispaid";
-            this.ispaidDataGridViewCheckBoxColumn1.HeaderText = "P";
-            this.ispaidDataGridViewCheckBoxColumn1.MinimumWidth = 22;
-            this.ispaidDataGridViewCheckBoxColumn1.Name = "ispaidDataGridViewCheckBoxColumn1";
-            this.ispaidDataGridViewCheckBoxColumn1.ReadOnly = true;
-            this.ispaidDataGridViewCheckBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.ispaidDataGridViewCheckBoxColumn1.Width = 50;
-            // 
-            // totalDataGridViewTextBoxColumn
-            // 
-            this.totalDataGridViewTextBoxColumn.DataPropertyName = "total";
-            this.totalDataGridViewTextBoxColumn.HeaderText = "Total Due";
-            this.totalDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.totalDataGridViewTextBoxColumn.Name = "totalDataGridViewTextBoxColumn";
-            this.totalDataGridViewTextBoxColumn.ReadOnly = true;
-            this.totalDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // vPatientsInvoicesBindingSource
-            // 
-            this.vPatientsInvoicesBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatientsInvoices);
-            // 
             // tabPage_tabEstimates
             // 
             this.tabPage_tabEstimates.Controls.Add(this.panel_tabEstimates_actions);
@@ -5592,63 +5256,6 @@
             this.advancedDataGridView_tabEstimates_list.TabIndex = 1;
             this.advancedDataGridView_tabEstimates_list.SortStringChanged += new System.EventHandler(this.advancedDataGridView_tabEstimates_list_SortStringChanged);
             this.advancedDataGridView_tabEstimates_list.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_tabEstimates_list_FilterStringChanged);
-            // 
-            // numberDataGridViewTextBoxColumn1
-            // 
-            this.numberDataGridViewTextBoxColumn1.DataPropertyName = "number";
-            this.numberDataGridViewTextBoxColumn1.HeaderText = "Number";
-            this.numberDataGridViewTextBoxColumn1.MinimumWidth = 22;
-            this.numberDataGridViewTextBoxColumn1.Name = "numberDataGridViewTextBoxColumn1";
-            this.numberDataGridViewTextBoxColumn1.ReadOnly = true;
-            this.numberDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.numberDataGridViewTextBoxColumn1.Width = 80;
-            // 
-            // dateDataGridViewTextBoxColumn4
-            // 
-            this.dateDataGridViewTextBoxColumn4.DataPropertyName = "date";
-            dataGridViewCellStyle14.Format = "d";
-            this.dateDataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle14;
-            this.dateDataGridViewTextBoxColumn4.HeaderText = "Date";
-            this.dateDataGridViewTextBoxColumn4.MinimumWidth = 22;
-            this.dateDataGridViewTextBoxColumn4.Name = "dateDataGridViewTextBoxColumn4";
-            this.dateDataGridViewTextBoxColumn4.ReadOnly = true;
-            this.dateDataGridViewTextBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.dateDataGridViewTextBoxColumn4.Width = 80;
-            // 
-            // doctorDataGridViewTextBoxColumn1
-            // 
-            this.doctorDataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.doctorDataGridViewTextBoxColumn1.DataPropertyName = "doctor";
-            this.doctorDataGridViewTextBoxColumn1.HeaderText = "Doctor";
-            this.doctorDataGridViewTextBoxColumn1.MinimumWidth = 22;
-            this.doctorDataGridViewTextBoxColumn1.Name = "doctorDataGridViewTextBoxColumn1";
-            this.doctorDataGridViewTextBoxColumn1.ReadOnly = true;
-            this.doctorDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // isinvoicedDataGridViewCheckBoxColumn
-            // 
-            this.isinvoicedDataGridViewCheckBoxColumn.DataPropertyName = "isinvoiced";
-            this.isinvoicedDataGridViewCheckBoxColumn.HeaderText = "I";
-            this.isinvoicedDataGridViewCheckBoxColumn.MinimumWidth = 22;
-            this.isinvoicedDataGridViewCheckBoxColumn.Name = "isinvoicedDataGridViewCheckBoxColumn";
-            this.isinvoicedDataGridViewCheckBoxColumn.ReadOnly = true;
-            this.isinvoicedDataGridViewCheckBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.isinvoicedDataGridViewCheckBoxColumn.Width = 50;
-            // 
-            // totalDataGridViewTextBoxColumn1
-            // 
-            this.totalDataGridViewTextBoxColumn1.DataPropertyName = "total";
-            dataGridViewCellStyle15.Format = "0.00";
-            this.totalDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle15;
-            this.totalDataGridViewTextBoxColumn1.HeaderText = "Total Due";
-            this.totalDataGridViewTextBoxColumn1.MinimumWidth = 22;
-            this.totalDataGridViewTextBoxColumn1.Name = "totalDataGridViewTextBoxColumn1";
-            this.totalDataGridViewTextBoxColumn1.ReadOnly = true;
-            this.totalDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // vPatientsEstimatesBindingSource
-            // 
-            this.vPatientsEstimatesBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatientsEstimates);
             // 
             // tabPage_tabPatientsNotes
             // 
@@ -5809,42 +5416,6 @@
             this.advancedDataGridView_tabPatientsNotes_list.SortStringChanged += new System.EventHandler(this.advancedDataGridView_tabPatientsNotes_list_SortStringChanged);
             this.advancedDataGridView_tabPatientsNotes_list.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_tabPatientsNotes_list_FilterStringChanged);
             // 
-            // patientsnotesidDataGridViewTextBoxColumn
-            // 
-            this.patientsnotesidDataGridViewTextBoxColumn.DataPropertyName = "patientsnotes_id";
-            this.patientsnotesidDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.patientsnotesidDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.patientsnotesidDataGridViewTextBoxColumn.Name = "patientsnotesidDataGridViewTextBoxColumn";
-            this.patientsnotesidDataGridViewTextBoxColumn.ReadOnly = true;
-            this.patientsnotesidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.patientsnotesidDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // dateDataGridViewTextBoxColumn
-            // 
-            this.dateDataGridViewTextBoxColumn.DataPropertyName = "date";
-            dataGridViewCellStyle17.Format = "d";
-            this.dateDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle17;
-            this.dateDataGridViewTextBoxColumn.HeaderText = "Date";
-            this.dateDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
-            this.dateDataGridViewTextBoxColumn.ReadOnly = true;
-            this.dateDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.dateDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // noteDataGridViewTextBoxColumn
-            // 
-            this.noteDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.noteDataGridViewTextBoxColumn.DataPropertyName = "note";
-            this.noteDataGridViewTextBoxColumn.HeaderText = "Note";
-            this.noteDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.noteDataGridViewTextBoxColumn.Name = "noteDataGridViewTextBoxColumn";
-            this.noteDataGridViewTextBoxColumn.ReadOnly = true;
-            this.noteDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // vPatientsNotesBindingSource
-            // 
-            this.vPatientsNotesBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatientsNotes);
-            // 
             // panel_list
             // 
             this.panel_list.Controls.Add(this.advancedDataGridView_main);
@@ -5882,6 +5453,82 @@
             this.advancedDataGridView_main.SortStringChanged += new System.EventHandler(this.advancedDataGridView_main_SortStringChanged);
             this.advancedDataGridView_main.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_main_FilterStringChanged);
             // 
+            // panel_listtotal
+            // 
+            this.panel_listtotal.Controls.Add(this.countTextBox);
+            this.panel_listtotal.Controls.Add(this.countLabel);
+            this.panel_listtotal.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel_listtotal.Location = new System.Drawing.Point(0, 470);
+            this.panel_listtotal.Name = "panel_listtotal";
+            this.panel_listtotal.Size = new System.Drawing.Size(204, 32);
+            this.panel_listtotal.TabIndex = 1;
+            // 
+            // countTextBox
+            // 
+            this.countTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.countTextBox.Location = new System.Drawing.Point(128, 6);
+            this.countTextBox.Name = "countTextBox";
+            this.countTextBox.ReadOnly = true;
+            this.countTextBox.Size = new System.Drawing.Size(70, 20);
+            this.countTextBox.TabIndex = 1;
+            this.countTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // countLabel
+            // 
+            this.countLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.countLabel.Location = new System.Drawing.Point(-28, 9);
+            this.countLabel.Name = "countLabel";
+            this.countLabel.Size = new System.Drawing.Size(150, 13);
+            this.countLabel.TabIndex = 0;
+            this.countLabel.Text = "Count:";
+            this.countLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // panel_filters
+            // 
+            this.panel_filters.Controls.Add(this.textBox_filterPatient);
+            this.panel_filters.Controls.Add(this.label_filterShow);
+            this.panel_filters.Controls.Add(this.comboBox_filterArchived);
+            this.panel_filters.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel_filters.Location = new System.Drawing.Point(0, 0);
+            this.panel_filters.Name = "panel_filters";
+            this.panel_filters.Size = new System.Drawing.Size(204, 60);
+            this.panel_filters.TabIndex = 10;
+            // 
+            // textBox_filterPatient
+            // 
+            this.textBox_filterPatient.Location = new System.Drawing.Point(81, 37);
+            this.textBox_filterPatient.Name = "textBox_filterPatient";
+            this.textBox_filterPatient.Size = new System.Drawing.Size(120, 20);
+            this.textBox_filterPatient.TabIndex = 2;
+            this.textBox_filterPatient.TextChanged += new System.EventHandler(this.textBox_filterPatient_TextChanged);
+            // 
+            // label_filterShow
+            // 
+            this.label_filterShow.Location = new System.Drawing.Point(5, 9);
+            this.label_filterShow.Name = "label_filterShow";
+            this.label_filterShow.Size = new System.Drawing.Size(70, 13);
+            this.label_filterShow.TabIndex = 1;
+            this.label_filterShow.Text = "Show:";
+            this.label_filterShow.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // comboBox_filterArchived
+            // 
+            this.comboBox_filterArchived.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_filterArchived.FormattingEnabled = true;
+            this.comboBox_filterArchived.Location = new System.Drawing.Point(81, 6);
+            this.comboBox_filterArchived.Name = "comboBox_filterArchived";
+            this.comboBox_filterArchived.Size = new System.Drawing.Size(100, 21);
+            this.comboBox_filterArchived.TabIndex = 0;
+            this.comboBox_filterArchived.SelectedIndexChanged += new System.EventHandler(this.comboBox_filterArchived_SelectedIndexChanged);
+            // 
+            // invoicesBindingSource
+            // 
+            this.invoicesBindingSource.DataSource = typeof(DG.DentneD.Model.Entity.invoices);
+            // 
+            // estimatesBindingSource
+            // 
+            this.estimatesBindingSource.DataSource = typeof(DG.DentneD.Model.Entity.estimates);
+            // 
             // patientsidDataGridViewTextBoxColumn
             // 
             this.patientsidDataGridViewTextBoxColumn.DataPropertyName = "patients_id";
@@ -5918,72 +5565,436 @@
             this.vPatientsBindingSource.CurrentChanged += new System.EventHandler(this.vPatientsBindingSource_CurrentChanged);
             this.vPatientsBindingSource.ListChanged += new System.ComponentModel.ListChangedEventHandler(this.vPatientsBindingSource_ListChanged);
             // 
-            // panel_listtotal
+            // patientscontactsidDataGridViewTextBoxColumn
             // 
-            this.panel_listtotal.Controls.Add(this.countTextBox);
-            this.panel_listtotal.Controls.Add(this.countLabel);
-            this.panel_listtotal.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_listtotal.Location = new System.Drawing.Point(0, 470);
-            this.panel_listtotal.Name = "panel_listtotal";
-            this.panel_listtotal.Size = new System.Drawing.Size(204, 32);
-            this.panel_listtotal.TabIndex = 1;
+            this.patientscontactsidDataGridViewTextBoxColumn.DataPropertyName = "patientscontacts_id";
+            this.patientscontactsidDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.patientscontactsidDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.patientscontactsidDataGridViewTextBoxColumn.Name = "patientscontactsidDataGridViewTextBoxColumn";
+            this.patientscontactsidDataGridViewTextBoxColumn.ReadOnly = true;
+            this.patientscontactsidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.patientscontactsidDataGridViewTextBoxColumn.Width = 80;
             // 
-            // countTextBox
+            // contactstypeDataGridViewTextBoxColumn
             // 
-            this.countTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.countTextBox.Location = new System.Drawing.Point(128, 6);
-            this.countTextBox.Name = "countTextBox";
-            this.countTextBox.ReadOnly = true;
-            this.countTextBox.Size = new System.Drawing.Size(70, 20);
-            this.countTextBox.TabIndex = 1;
-            this.countTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.contactstypeDataGridViewTextBoxColumn.DataPropertyName = "contactstype";
+            this.contactstypeDataGridViewTextBoxColumn.HeaderText = "Type";
+            this.contactstypeDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.contactstypeDataGridViewTextBoxColumn.Name = "contactstypeDataGridViewTextBoxColumn";
+            this.contactstypeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.contactstypeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.contactstypeDataGridViewTextBoxColumn.Width = 120;
             // 
-            // countLabel
+            // contactDataGridViewTextBoxColumn
             // 
-            this.countLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.countLabel.Location = new System.Drawing.Point(-28, 9);
-            this.countLabel.Name = "countLabel";
-            this.countLabel.Size = new System.Drawing.Size(150, 13);
-            this.countLabel.TabIndex = 0;
-            this.countLabel.Text = "Count:";
-            this.countLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.contactDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.contactDataGridViewTextBoxColumn.DataPropertyName = "contact";
+            this.contactDataGridViewTextBoxColumn.HeaderText = "Contact";
+            this.contactDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.contactDataGridViewTextBoxColumn.Name = "contactDataGridViewTextBoxColumn";
+            this.contactDataGridViewTextBoxColumn.ReadOnly = true;
+            this.contactDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
-            // panel_filters
+            // vPatientsContactsBindingSource
             // 
-            this.panel_filters.Controls.Add(this.label_filterShow);
-            this.panel_filters.Controls.Add(this.comboBox_filterArchived);
-            this.panel_filters.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel_filters.Location = new System.Drawing.Point(0, 0);
-            this.panel_filters.Name = "panel_filters";
-            this.panel_filters.Size = new System.Drawing.Size(204, 60);
-            this.panel_filters.TabIndex = 10;
+            this.vPatientsContactsBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatientsContacts);
             // 
-            // label_filterShow
+            // patientsaddressesidDataGridViewTextBoxColumn
             // 
-            this.label_filterShow.AutoSize = true;
-            this.label_filterShow.Location = new System.Drawing.Point(3, 9);
-            this.label_filterShow.Name = "label_filterShow";
-            this.label_filterShow.Size = new System.Drawing.Size(37, 13);
-            this.label_filterShow.TabIndex = 1;
-            this.label_filterShow.Text = "Show:";
+            this.patientsaddressesidDataGridViewTextBoxColumn.DataPropertyName = "patientsaddresses_id";
+            this.patientsaddressesidDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.patientsaddressesidDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.patientsaddressesidDataGridViewTextBoxColumn.Name = "patientsaddressesidDataGridViewTextBoxColumn";
+            this.patientsaddressesidDataGridViewTextBoxColumn.ReadOnly = true;
+            this.patientsaddressesidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.patientsaddressesidDataGridViewTextBoxColumn.Width = 80;
             // 
-            // comboBox_filterArchived
+            // addresstypeDataGridViewTextBoxColumn
             // 
-            this.comboBox_filterArchived.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_filterArchived.FormattingEnabled = true;
-            this.comboBox_filterArchived.Location = new System.Drawing.Point(6, 25);
-            this.comboBox_filterArchived.Name = "comboBox_filterArchived";
-            this.comboBox_filterArchived.Size = new System.Drawing.Size(100, 21);
-            this.comboBox_filterArchived.TabIndex = 0;
-            this.comboBox_filterArchived.SelectedIndexChanged += new System.EventHandler(this.comboBox_filterArchived_SelectedIndexChanged);
+            this.addresstypeDataGridViewTextBoxColumn.DataPropertyName = "addresstype";
+            this.addresstypeDataGridViewTextBoxColumn.HeaderText = "Type";
+            this.addresstypeDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.addresstypeDataGridViewTextBoxColumn.Name = "addresstypeDataGridViewTextBoxColumn";
+            this.addresstypeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.addresstypeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.addresstypeDataGridViewTextBoxColumn.Width = 120;
             // 
-            // invoicesBindingSource
+            // addressDataGridViewTextBoxColumn
             // 
-            this.invoicesBindingSource.DataSource = typeof(DG.DentneD.Model.Entity.invoices);
+            this.addressDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.addressDataGridViewTextBoxColumn.DataPropertyName = "address";
+            this.addressDataGridViewTextBoxColumn.HeaderText = "Address";
+            this.addressDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.addressDataGridViewTextBoxColumn.Name = "addressDataGridViewTextBoxColumn";
+            this.addressDataGridViewTextBoxColumn.ReadOnly = true;
+            this.addressDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
-            // estimatesBindingSource
+            // vPatientsAddressesBindingSource
             // 
-            this.estimatesBindingSource.DataSource = typeof(DG.DentneD.Model.Entity.estimates);
+            this.vPatientsAddressesBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatientsAddresses);
+            // 
+            // patientsmedicalrecordsidDataGridViewTextBoxColumn
+            // 
+            this.patientsmedicalrecordsidDataGridViewTextBoxColumn.DataPropertyName = "patientsmedicalrecords_id";
+            this.patientsmedicalrecordsidDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.patientsmedicalrecordsidDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.patientsmedicalrecordsidDataGridViewTextBoxColumn.Name = "patientsmedicalrecordsidDataGridViewTextBoxColumn";
+            this.patientsmedicalrecordsidDataGridViewTextBoxColumn.ReadOnly = true;
+            this.patientsmedicalrecordsidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.patientsmedicalrecordsidDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // medicalrecordstypeDataGridViewTextBoxColumn
+            // 
+            this.medicalrecordstypeDataGridViewTextBoxColumn.DataPropertyName = "medicalrecordstype";
+            this.medicalrecordstypeDataGridViewTextBoxColumn.HeaderText = "Type";
+            this.medicalrecordstypeDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.medicalrecordstypeDataGridViewTextBoxColumn.Name = "medicalrecordstypeDataGridViewTextBoxColumn";
+            this.medicalrecordstypeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.medicalrecordstypeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.medicalrecordstypeDataGridViewTextBoxColumn.Width = 120;
+            // 
+            // valueDataGridViewTextBoxColumn
+            // 
+            this.valueDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.valueDataGridViewTextBoxColumn.DataPropertyName = "value";
+            this.valueDataGridViewTextBoxColumn.HeaderText = "Info";
+            this.valueDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.valueDataGridViewTextBoxColumn.Name = "valueDataGridViewTextBoxColumn";
+            this.valueDataGridViewTextBoxColumn.ReadOnly = true;
+            this.valueDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // vPatientsMedicalrecordsBindingSource
+            // 
+            this.vPatientsMedicalrecordsBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatientsMedicalrecords);
+            // 
+            // dateDataGridViewTextBoxColumn1
+            // 
+            this.dateDataGridViewTextBoxColumn1.DataPropertyName = "date";
+            dataGridViewCellStyle5.Format = "d";
+            this.dateDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle5;
+            this.dateDataGridViewTextBoxColumn1.HeaderText = "Date";
+            this.dateDataGridViewTextBoxColumn1.MinimumWidth = 22;
+            this.dateDataGridViewTextBoxColumn1.Name = "dateDataGridViewTextBoxColumn1";
+            this.dateDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dateDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.dateDataGridViewTextBoxColumn1.Width = 80;
+            // 
+            // treatmentDataGridViewTextBoxColumn
+            // 
+            this.treatmentDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.treatmentDataGridViewTextBoxColumn.DataPropertyName = "treatment";
+            this.treatmentDataGridViewTextBoxColumn.HeaderText = "Treatment";
+            this.treatmentDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.treatmentDataGridViewTextBoxColumn.Name = "treatmentDataGridViewTextBoxColumn";
+            this.treatmentDataGridViewTextBoxColumn.ReadOnly = true;
+            this.treatmentDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // toothsDataGridViewTextBoxColumn
+            // 
+            this.toothsDataGridViewTextBoxColumn.DataPropertyName = "tooths";
+            this.toothsDataGridViewTextBoxColumn.HeaderText = "Tooths";
+            this.toothsDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.toothsDataGridViewTextBoxColumn.Name = "toothsDataGridViewTextBoxColumn";
+            this.toothsDataGridViewTextBoxColumn.ReadOnly = true;
+            this.toothsDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // isfulfilledDataGridViewCheckBoxColumn
+            // 
+            this.isfulfilledDataGridViewCheckBoxColumn.DataPropertyName = "isfulfilled";
+            this.isfulfilledDataGridViewCheckBoxColumn.HeaderText = "F";
+            this.isfulfilledDataGridViewCheckBoxColumn.MinimumWidth = 22;
+            this.isfulfilledDataGridViewCheckBoxColumn.Name = "isfulfilledDataGridViewCheckBoxColumn";
+            this.isfulfilledDataGridViewCheckBoxColumn.ReadOnly = true;
+            this.isfulfilledDataGridViewCheckBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.isfulfilledDataGridViewCheckBoxColumn.Width = 40;
+            // 
+            // ispaidDataGridViewCheckBoxColumn
+            // 
+            this.ispaidDataGridViewCheckBoxColumn.DataPropertyName = "ispaid";
+            this.ispaidDataGridViewCheckBoxColumn.HeaderText = "P";
+            this.ispaidDataGridViewCheckBoxColumn.MinimumWidth = 22;
+            this.ispaidDataGridViewCheckBoxColumn.Name = "ispaidDataGridViewCheckBoxColumn";
+            this.ispaidDataGridViewCheckBoxColumn.ReadOnly = true;
+            this.ispaidDataGridViewCheckBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.ispaidDataGridViewCheckBoxColumn.Width = 40;
+            // 
+            // vPatientsTreatmentsBindingSource
+            // 
+            this.vPatientsTreatmentsBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatientsTreatments);
+            this.vPatientsTreatmentsBindingSource.CurrentChanged += new System.EventHandler(this.vPatientsTreatmentsBindingSource_CurrentChanged);
+            // 
+            // paymentsidDataGridViewTextBoxColumn
+            // 
+            this.paymentsidDataGridViewTextBoxColumn.DataPropertyName = "payments_id";
+            this.paymentsidDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.paymentsidDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.paymentsidDataGridViewTextBoxColumn.Name = "paymentsidDataGridViewTextBoxColumn";
+            this.paymentsidDataGridViewTextBoxColumn.ReadOnly = true;
+            this.paymentsidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.paymentsidDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // dateDataGridViewTextBoxColumn2
+            // 
+            this.dateDataGridViewTextBoxColumn2.DataPropertyName = "date";
+            dataGridViewCellStyle7.Format = "d";
+            this.dateDataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle7;
+            this.dateDataGridViewTextBoxColumn2.HeaderText = "Date";
+            this.dateDataGridViewTextBoxColumn2.MinimumWidth = 22;
+            this.dateDataGridViewTextBoxColumn2.Name = "dateDataGridViewTextBoxColumn2";
+            this.dateDataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dateDataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.dateDataGridViewTextBoxColumn2.Width = 80;
+            // 
+            // noteDataGridViewTextBoxColumn1
+            // 
+            this.noteDataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.noteDataGridViewTextBoxColumn1.DataPropertyName = "note";
+            this.noteDataGridViewTextBoxColumn1.HeaderText = "Note";
+            this.noteDataGridViewTextBoxColumn1.MinimumWidth = 22;
+            this.noteDataGridViewTextBoxColumn1.Name = "noteDataGridViewTextBoxColumn1";
+            this.noteDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.noteDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // amountDataGridViewTextBoxColumn
+            // 
+            this.amountDataGridViewTextBoxColumn.DataPropertyName = "amount";
+            dataGridViewCellStyle8.Format = "0.00";
+            this.amountDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle8;
+            this.amountDataGridViewTextBoxColumn.HeaderText = "Total";
+            this.amountDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.amountDataGridViewTextBoxColumn.Name = "amountDataGridViewTextBoxColumn";
+            this.amountDataGridViewTextBoxColumn.ReadOnly = true;
+            this.amountDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // vPatientsPaymentsBindingSource
+            // 
+            this.vPatientsPaymentsBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatientsPayments);
+            // 
+            // appointmentsidDataGridViewTextBoxColumn
+            // 
+            this.appointmentsidDataGridViewTextBoxColumn.DataPropertyName = "appointments_id";
+            this.appointmentsidDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.appointmentsidDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.appointmentsidDataGridViewTextBoxColumn.Name = "appointmentsidDataGridViewTextBoxColumn";
+            this.appointmentsidDataGridViewTextBoxColumn.ReadOnly = true;
+            this.appointmentsidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.appointmentsidDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // fromDataGridViewTextBoxColumn
+            // 
+            this.fromDataGridViewTextBoxColumn.DataPropertyName = "from";
+            this.fromDataGridViewTextBoxColumn.HeaderText = "From";
+            this.fromDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.fromDataGridViewTextBoxColumn.Name = "fromDataGridViewTextBoxColumn";
+            this.fromDataGridViewTextBoxColumn.ReadOnly = true;
+            this.fromDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.fromDataGridViewTextBoxColumn.Width = 120;
+            // 
+            // toDataGridViewTextBoxColumn
+            // 
+            this.toDataGridViewTextBoxColumn.DataPropertyName = "to";
+            this.toDataGridViewTextBoxColumn.HeaderText = "To";
+            this.toDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.toDataGridViewTextBoxColumn.Name = "toDataGridViewTextBoxColumn";
+            this.toDataGridViewTextBoxColumn.ReadOnly = true;
+            this.toDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.toDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // titleDataGridViewTextBoxColumn
+            // 
+            this.titleDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.titleDataGridViewTextBoxColumn.DataPropertyName = "title";
+            this.titleDataGridViewTextBoxColumn.HeaderText = "Title";
+            this.titleDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
+            this.titleDataGridViewTextBoxColumn.ReadOnly = true;
+            this.titleDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // vPatientsAppointmentsBindingSource
+            // 
+            this.vPatientsAppointmentsBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatientsAppointments);
+            // 
+            // patientsattachmentsidDataGridViewTextBoxColumn
+            // 
+            this.patientsattachmentsidDataGridViewTextBoxColumn.DataPropertyName = "patientsattachments_id";
+            this.patientsattachmentsidDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.patientsattachmentsidDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.patientsattachmentsidDataGridViewTextBoxColumn.Name = "patientsattachmentsidDataGridViewTextBoxColumn";
+            this.patientsattachmentsidDataGridViewTextBoxColumn.ReadOnly = true;
+            this.patientsattachmentsidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.patientsattachmentsidDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // attachmetnstypeDataGridViewTextBoxColumn
+            // 
+            this.attachmetnstypeDataGridViewTextBoxColumn.DataPropertyName = "attachmetnstype";
+            this.attachmetnstypeDataGridViewTextBoxColumn.HeaderText = "Type";
+            this.attachmetnstypeDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.attachmetnstypeDataGridViewTextBoxColumn.Name = "attachmetnstypeDataGridViewTextBoxColumn";
+            this.attachmetnstypeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.attachmetnstypeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.attachmetnstypeDataGridViewTextBoxColumn.Width = 120;
+            // 
+            // attachmentDataGridViewTextBoxColumn
+            // 
+            this.attachmentDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.attachmentDataGridViewTextBoxColumn.DataPropertyName = "attachment";
+            this.attachmentDataGridViewTextBoxColumn.HeaderText = "Attachment";
+            this.attachmentDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.attachmentDataGridViewTextBoxColumn.Name = "attachmentDataGridViewTextBoxColumn";
+            this.attachmentDataGridViewTextBoxColumn.ReadOnly = true;
+            this.attachmentDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // vPatientsAttachmentsBindingSource
+            // 
+            this.vPatientsAttachmentsBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatientsAttachments);
+            // 
+            // numberDataGridViewTextBoxColumn
+            // 
+            this.numberDataGridViewTextBoxColumn.DataPropertyName = "number";
+            this.numberDataGridViewTextBoxColumn.HeaderText = "Number";
+            this.numberDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.numberDataGridViewTextBoxColumn.Name = "numberDataGridViewTextBoxColumn";
+            this.numberDataGridViewTextBoxColumn.ReadOnly = true;
+            this.numberDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.numberDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // dateDataGridViewTextBoxColumn3
+            // 
+            this.dateDataGridViewTextBoxColumn3.DataPropertyName = "date";
+            dataGridViewCellStyle12.Format = "d";
+            this.dateDataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle12;
+            this.dateDataGridViewTextBoxColumn3.HeaderText = "Date";
+            this.dateDataGridViewTextBoxColumn3.MinimumWidth = 22;
+            this.dateDataGridViewTextBoxColumn3.Name = "dateDataGridViewTextBoxColumn3";
+            this.dateDataGridViewTextBoxColumn3.ReadOnly = true;
+            this.dateDataGridViewTextBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.dateDataGridViewTextBoxColumn3.Width = 80;
+            // 
+            // doctorDataGridViewTextBoxColumn
+            // 
+            this.doctorDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.doctorDataGridViewTextBoxColumn.DataPropertyName = "doctor";
+            this.doctorDataGridViewTextBoxColumn.HeaderText = "Doctor";
+            this.doctorDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.doctorDataGridViewTextBoxColumn.Name = "doctorDataGridViewTextBoxColumn";
+            this.doctorDataGridViewTextBoxColumn.ReadOnly = true;
+            this.doctorDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // ispaidDataGridViewCheckBoxColumn1
+            // 
+            this.ispaidDataGridViewCheckBoxColumn1.DataPropertyName = "ispaid";
+            this.ispaidDataGridViewCheckBoxColumn1.HeaderText = "P";
+            this.ispaidDataGridViewCheckBoxColumn1.MinimumWidth = 22;
+            this.ispaidDataGridViewCheckBoxColumn1.Name = "ispaidDataGridViewCheckBoxColumn1";
+            this.ispaidDataGridViewCheckBoxColumn1.ReadOnly = true;
+            this.ispaidDataGridViewCheckBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.ispaidDataGridViewCheckBoxColumn1.Width = 50;
+            // 
+            // totalDataGridViewTextBoxColumn
+            // 
+            this.totalDataGridViewTextBoxColumn.DataPropertyName = "total";
+            this.totalDataGridViewTextBoxColumn.HeaderText = "Total Due";
+            this.totalDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.totalDataGridViewTextBoxColumn.Name = "totalDataGridViewTextBoxColumn";
+            this.totalDataGridViewTextBoxColumn.ReadOnly = true;
+            this.totalDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // vPatientsInvoicesBindingSource
+            // 
+            this.vPatientsInvoicesBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatientsInvoices);
+            // 
+            // numberDataGridViewTextBoxColumn1
+            // 
+            this.numberDataGridViewTextBoxColumn1.DataPropertyName = "number";
+            this.numberDataGridViewTextBoxColumn1.HeaderText = "Number";
+            this.numberDataGridViewTextBoxColumn1.MinimumWidth = 22;
+            this.numberDataGridViewTextBoxColumn1.Name = "numberDataGridViewTextBoxColumn1";
+            this.numberDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.numberDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.numberDataGridViewTextBoxColumn1.Width = 80;
+            // 
+            // dateDataGridViewTextBoxColumn4
+            // 
+            this.dateDataGridViewTextBoxColumn4.DataPropertyName = "date";
+            dataGridViewCellStyle14.Format = "d";
+            this.dateDataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle14;
+            this.dateDataGridViewTextBoxColumn4.HeaderText = "Date";
+            this.dateDataGridViewTextBoxColumn4.MinimumWidth = 22;
+            this.dateDataGridViewTextBoxColumn4.Name = "dateDataGridViewTextBoxColumn4";
+            this.dateDataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dateDataGridViewTextBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.dateDataGridViewTextBoxColumn4.Width = 80;
+            // 
+            // doctorDataGridViewTextBoxColumn1
+            // 
+            this.doctorDataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.doctorDataGridViewTextBoxColumn1.DataPropertyName = "doctor";
+            this.doctorDataGridViewTextBoxColumn1.HeaderText = "Doctor";
+            this.doctorDataGridViewTextBoxColumn1.MinimumWidth = 22;
+            this.doctorDataGridViewTextBoxColumn1.Name = "doctorDataGridViewTextBoxColumn1";
+            this.doctorDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.doctorDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // isinvoicedDataGridViewCheckBoxColumn
+            // 
+            this.isinvoicedDataGridViewCheckBoxColumn.DataPropertyName = "isinvoiced";
+            this.isinvoicedDataGridViewCheckBoxColumn.HeaderText = "I";
+            this.isinvoicedDataGridViewCheckBoxColumn.MinimumWidth = 22;
+            this.isinvoicedDataGridViewCheckBoxColumn.Name = "isinvoicedDataGridViewCheckBoxColumn";
+            this.isinvoicedDataGridViewCheckBoxColumn.ReadOnly = true;
+            this.isinvoicedDataGridViewCheckBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.isinvoicedDataGridViewCheckBoxColumn.Width = 50;
+            // 
+            // totalDataGridViewTextBoxColumn1
+            // 
+            this.totalDataGridViewTextBoxColumn1.DataPropertyName = "total";
+            dataGridViewCellStyle15.Format = "0.00";
+            this.totalDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle15;
+            this.totalDataGridViewTextBoxColumn1.HeaderText = "Total Due";
+            this.totalDataGridViewTextBoxColumn1.MinimumWidth = 22;
+            this.totalDataGridViewTextBoxColumn1.Name = "totalDataGridViewTextBoxColumn1";
+            this.totalDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.totalDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // vPatientsEstimatesBindingSource
+            // 
+            this.vPatientsEstimatesBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatientsEstimates);
+            // 
+            // patientsnotesidDataGridViewTextBoxColumn
+            // 
+            this.patientsnotesidDataGridViewTextBoxColumn.DataPropertyName = "patientsnotes_id";
+            this.patientsnotesidDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.patientsnotesidDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.patientsnotesidDataGridViewTextBoxColumn.Name = "patientsnotesidDataGridViewTextBoxColumn";
+            this.patientsnotesidDataGridViewTextBoxColumn.ReadOnly = true;
+            this.patientsnotesidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.patientsnotesidDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // dateDataGridViewTextBoxColumn
+            // 
+            this.dateDataGridViewTextBoxColumn.DataPropertyName = "date";
+            dataGridViewCellStyle17.Format = "d";
+            this.dateDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle17;
+            this.dateDataGridViewTextBoxColumn.HeaderText = "Date";
+            this.dateDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
+            this.dateDataGridViewTextBoxColumn.ReadOnly = true;
+            this.dateDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.dateDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // noteDataGridViewTextBoxColumn
+            // 
+            this.noteDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.noteDataGridViewTextBoxColumn.DataPropertyName = "note";
+            this.noteDataGridViewTextBoxColumn.HeaderText = "Note";
+            this.noteDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.noteDataGridViewTextBoxColumn.Name = "noteDataGridViewTextBoxColumn";
+            this.noteDataGridViewTextBoxColumn.ReadOnly = true;
+            this.noteDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // vPatientsNotesBindingSource
+            // 
+            this.vPatientsNotesBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatientsNotes);
             // 
             // FormPatients
             // 
@@ -6020,7 +6031,6 @@
             this.panel_tabPatients_tabPatientsContacts_actions.ResumeLayout(false);
             this.panel_tabPatients_tabPatientsContacts_list.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabPatients_tabPatientsContacts_list)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsContactsBindingSource)).EndInit();
             this.tabPage_tabPatients_tabPatientsAddresses.ResumeLayout(false);
             this.panel_tabPatients_tabPatientsAddresses_data.ResumeLayout(false);
             this.panel_tabPatients_tabPatientsAddresses_data.PerformLayout();
@@ -6029,7 +6039,6 @@
             this.panel_tabPatients_tabPatientsAddresses_actions.ResumeLayout(false);
             this.panel_tabPatients_tabPatientsAddresses_list.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabPatients_tabPatientsAddresses_list)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsAddressesBindingSource)).EndInit();
             this.tabPage_tabPatientsMedicalrecords.ResumeLayout(false);
             this.panel_tabPatientsMedicalrecords_data.ResumeLayout(false);
             this.panel_tabPatientsMedicalrecords_data.PerformLayout();
@@ -6038,7 +6047,6 @@
             this.panel_tabPatientsMedicalrecords_actions.ResumeLayout(false);
             this.panel_tabPatientsMedicalrecords_list.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabPatientsMedicalrecords_list)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsMedicalrecordsBindingSource)).EndInit();
             this.tabPage_tabPatientsTreatments.ResumeLayout(false);
             this.panel_tabPatientsTreatments_filters.ResumeLayout(false);
             this.groupBox_tabPatientsTreatments_filtert.ResumeLayout(false);
@@ -6052,7 +6060,6 @@
             this.panel_tabPatientsTreatments_actions.ResumeLayout(false);
             this.panel_tabPatientsTreatments_list.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabPatientsTreatments_list)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsTreatmentsBindingSource)).EndInit();
             this.tabPage_tabPayments.ResumeLayout(false);
             this.panel_tabPayments_data.ResumeLayout(false);
             this.panel_tabPayments_data.PerformLayout();
@@ -6061,14 +6068,12 @@
             this.panel_tabPayments_actions.ResumeLayout(false);
             this.panel_tabPayments_list.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabPayments_list)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsPaymentsBindingSource)).EndInit();
             this.tabPage_tabAppointments.ResumeLayout(false);
             this.panel_tabAppointments_data.ResumeLayout(false);
             this.panel_tabAppointments_data.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.appointmentsBindingSource)).EndInit();
             this.panel_tabAppointments_list.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabAppointments_list)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsAppointmentsBindingSource)).EndInit();
             this.tabPage_tabPatientsAttachments.ResumeLayout(false);
             this.panel_tabPatientsAttachments_data.ResumeLayout(false);
             this.panel_tabPatientsAttachments_data.PerformLayout();
@@ -6077,17 +6082,14 @@
             this.panel_tabPatientsAttachments_actions.ResumeLayout(false);
             this.panel_tabPatientsAttachments_list.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabPatientsAttachments_list)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsAttachmentsBindingSource)).EndInit();
             this.tabPage_tabInvoices.ResumeLayout(false);
             this.panel_tabInvoices_actions.ResumeLayout(false);
             this.panel_tabInvoices_list.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabInvoices_list)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsInvoicesBindingSource)).EndInit();
             this.tabPage_tabEstimates.ResumeLayout(false);
             this.panel_tabEstimates_actions.ResumeLayout(false);
             this.panel_tabEstimates_list.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabEstimates_list)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsEstimatesBindingSource)).EndInit();
             this.tabPage_tabPatientsNotes.ResumeLayout(false);
             this.panel_tabPatientsNotes_data.ResumeLayout(false);
             this.panel_tabPatientsNotes_data.PerformLayout();
@@ -6096,16 +6098,25 @@
             this.panel_tabPatientsNotes_actions.ResumeLayout(false);
             this.panel_tabPatientsNotes_list.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabPatientsNotes_list)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsNotesBindingSource)).EndInit();
             this.panel_list.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_main)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsBindingSource)).EndInit();
             this.panel_listtotal.ResumeLayout(false);
             this.panel_listtotal.PerformLayout();
             this.panel_filters.ResumeLayout(false);
             this.panel_filters.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.invoicesBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.estimatesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsContactsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsAddressesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsMedicalrecordsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsTreatmentsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsPaymentsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsAppointmentsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsAttachmentsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsInvoicesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsEstimatesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsNotesBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -6612,5 +6623,6 @@
         private System.Windows.Forms.TextBox patientstreatments_taxrateTextBox;
         private System.Windows.Forms.Label patientstreatments_taxrateLabel;
         private System.Windows.Forms.Label label_tabPayments_inforeference;
+        private System.Windows.Forms.TextBox textBox_filterPatient;
     }
 }

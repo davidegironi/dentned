@@ -140,7 +140,8 @@ namespace DG.DentneD.Forms
                 r => new VInvoicesFooters
                 {
                     invoicesfooters_id = r.invoicesfooters_id,
-                    name = r.invoicesfooters_name
+                    name = r.invoicesfooters_name,
+                    isdefault = r.invoicesfooters_isdefault
                 }).ToList();
 
             return DGDataTableUtils.ToDataTable<VInvoicesFooters>(vInvoicesFooters);

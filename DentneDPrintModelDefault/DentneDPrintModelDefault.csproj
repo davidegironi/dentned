@@ -67,10 +67,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="DentneDPrintModel-en.json">
+    <None Include="DentneDPrintModelDefault-en.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="DentneDPrintModel-it.json">
+    <None Include="DentneDPrintModelDefault-it.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />

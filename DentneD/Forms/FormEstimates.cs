@@ -20,6 +20,7 @@ using System.Configuration;
 using DG.DentneD.Helpers;
 using SMcMaster;
 using DG.DentneD.Model.Repositories;
+using System.Collections;
 
 namespace DG.DentneD.Forms
 {
@@ -276,12 +277,11 @@ namespace DG.DentneD.Forms
 
             ReloadView();
             
-            ResetTabsDataGrid();
-
             //select an estiamte on load invoice
             if (estimate != null)
             {
                 DGUIGHFData.SetBindingSourcePosition<estimates, DentneDModel>(_dentnedModel.Estimates, estimate, vEstimatesBindingSource);
+                tabControl_main.SelectedTab = tabPage_tabEstimates;
             }
         }
 
@@ -433,8 +433,13 @@ namespace DG.DentneD.Forms
             totaldueinvoicedTextBox.Text = "0";
 
             //reset list total
-            SetListTotal();
+            SetListTotal(year);
 
+            Hashtable patientsnames = new Hashtable();
+            foreach (patients patient in _dentnedModel.Patients.List())
+            {
+                patientsnames[patient.patients_id] = patient.patients_surname + " " + patient.patients_name;
+            }
             IEnumerable<VEstimates> vEstimates = _dentnedModel.Estimates.List(r => r.estimates_date.Year == year && r.doctors_id == (doctors_id == -1 ? null : (Nullable<int>)doctors_id)).Select(
                 r => new VEstimates
                 {
@@ -442,7 +447,7 @@ namespace DG.DentneD.Forms
                     date = r.estimates_date,
                     isinvoiced = (r.invoices_id != null ? true : false),
                     number = r.estimates_number,
-                    patient = (_dentnedModel.Patients.Find(r.patients_id) != null ? _dentnedModel.Patients.Find(r.patients_id).patients_surname + " " + _dentnedModel.Patients.Find(r.patients_id).patients_name : "")
+                    patient = (patientsnames.ContainsKey(r.patients_id) ? patientsnames[r.patients_id].ToString() : "")
                 }).ToList();
 
             return DGDataTableUtils.ToDataTable<VEstimates>(vEstimates);
@@ -497,7 +502,8 @@ namespace DG.DentneD.Forms
         /// <summary>
         /// Set the main list total
         /// </summary>
-        private void SetListTotal()
+        /// <param name="year"></param>
+        private void SetListTotal(int year)
         {
             int doctors_id = -1;
             if (comboBox_filterDoctors.SelectedIndex != -1)
@@ -505,10 +511,10 @@ namespace DG.DentneD.Forms
                 doctors_id = Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_filterDoctors.SelectedItem).Id);
             }
 
-            totalnetTextBox.Text = Math.Round(_dentnedModel.Estimates.List(r => r.doctors_id == doctors_id).Sum(r => r.estimates_totalnet), 2).ToString();
-            totalgrossTextBox.Text = Math.Round(_dentnedModel.Estimates.List(r => r.doctors_id == doctors_id).Sum(r => r.estimates_totalgross), 2).ToString();
-            totaldueTextBox.Text = Math.Round(_dentnedModel.Estimates.List(r => r.doctors_id == doctors_id).Sum(r => r.estimates_totaldue), 2).ToString();
-            totaldueinvoicedTextBox.Text = Math.Round(_dentnedModel.Estimates.List(r => r.doctors_id == doctors_id && r.invoices_id != null).Sum(r => r.estimates_totaldue), 2).ToString();
+            totalnetTextBox.Text = Math.Round(_dentnedModel.Estimates.List(r => r.doctors_id == doctors_id && r.estimates_date.Year == year).Sum(r => r.estimates_totalnet), 2).ToString();
+            totalgrossTextBox.Text = Math.Round(_dentnedModel.Estimates.List(r => r.doctors_id == doctors_id && r.estimates_date.Year == year).Sum(r => r.estimates_totalgross), 2).ToString();
+            totaldueTextBox.Text = Math.Round(_dentnedModel.Estimates.List(r => r.doctors_id == doctors_id && r.estimates_date.Year == year).Sum(r => r.estimates_totaldue), 2).ToString();
+            totaldueinvoicedTextBox.Text = Math.Round(_dentnedModel.Estimates.List(r => r.doctors_id == doctors_id && r.estimates_date.Year == year && r.invoices_id != null).Sum(r => r.estimates_totaldue), 2).ToString();
         }
         
         /// <summary>
@@ -1051,13 +1057,13 @@ namespace DG.DentneD.Forms
                 //reload patientstreatments tab
                 estimates estimate = _dentnedModel.Estimates.Find(estimates_id);
                 ReloadPatientsTreatments(estimate.patients_id, true);
+                
+                //reset list total
+                SetListTotal(estimate.estimates_date.Year);
             }
             else
                 ReloadPatientsTreatments(null, true);
-
-            //reset list total
-            SetListTotal();
-
+            
             IEnumerable<VEstimatesLines> vEstimatesLines =
             _dentnedModel.EstimatesLines.List(r => r.estimates_id == estimates_id).Select(
             r => new VEstimatesLines
@@ -1220,7 +1226,7 @@ namespace DG.DentneD.Forms
         {
             //get only treatments not yet estimated
             List<patientstreatments> patientstreatmentsl = new List<patientstreatments>();
-            if (patients_id != null && !loadall)
+            if (patients_id != null)
             {
                 if (!loadall)
                 {
@@ -1245,13 +1251,10 @@ namespace DG.DentneD.Forms
                 }
                 else
                 {
-                    patientstreatmentsl = _dentnedModel.PatientsTreatments.List(r => r.patients_id == patients_id && !r.patientstreatments_ispaid).ToList();
+                    patientstreatmentsl = _dentnedModel.PatientsTreatments.List(r => r.patients_id == patients_id).ToList();
                 }
             }
-            else
-            {
-                patientstreatmentsl = _dentnedModel.PatientsTreatments.List().ToList();
-            }
+
             //local patients treatments
             IsBindingSourceLoading = true;
             patientstreatments_idComboBox.DataSource = patientstreatmentsl.Select(r => new { name = _dentnedModel.Treatments.Find(r.treatments_id).treatments_code + (tabElement_tabEstimatesLines.CurrentEditingMode == EditingMode.C || tabElement_tabEstimatesLines.CurrentEditingMode == EditingMode.U ? " [" + _dentnedModel.PatientsTreatments.GetTreatmentsToothsString(r) + "] " : " ") + r.patientstreatments_creationdate.ToShortDateString(), r.patientstreatments_id }).OrderBy(r => r.name).ToList();

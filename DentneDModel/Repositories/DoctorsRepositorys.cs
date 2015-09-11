@@ -29,7 +29,7 @@ namespace DG.DentneD.Model.Repositories
             public string text006 = "Username can not be empty.";
             public string text007 = "Password can not be empty.";
             public string text008 = "Invalid username format. 8 character, lower letters [a-z] or numbers [0-9].";
-            public string text009 = "Invalid password format. 6 character numbers [0-9].";
+            public string text009 = "Invalid password format. 6 numbers [0-9].";
             public string text010 = "A patient already exists with this username.";
         }
 

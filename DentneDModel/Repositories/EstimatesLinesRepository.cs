@@ -24,9 +24,9 @@ namespace DG.DentneD.Model.Repositories
             public string text001 = "Code can not be empty.";
             public string text002 = "Description can not be empty.";
             public string text003 = "Invalid quantity. Can not be less or equal than zero.";
-            public string text004 = "Invoice is mandatory.";
+            public string text004 = "Estimate is mandatory.";
             public string text005 = "Invalid code format. 3 character, uppercase letters [A-Z] or numbers [0-9], or minus '-'.";
-            public string text006 = "Invalid price. Invoice total can not be less than zero.";
+            public string text006 = "Invalid price. Estimate total can not be less than zero.";
             public string text007 = "Treatment is mandatory if not empty.";
         }
 

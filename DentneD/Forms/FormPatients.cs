@@ -50,8 +50,12 @@ namespace DG.DentneD.Forms
         private readonly string _patientsAttachmentsdir = "";
         private readonly bool _doSecureDelete = false;
         private readonly bool _resetPatientstreatmentsFilterOnChange = false;
+        private readonly bool _patientsAttachmentsFindMaxValue = false;
 
-        private enum PaymentsReference { Treatments, Invoices };
+        private enum PatientsFilter { All, NotArchived, Archived };
+        private readonly PatientsFilter _patientsFilter = PatientsFilter.NotArchived;
+
+        private enum PaymentsReference { Nothing, Treatments, Invoices };
         private readonly PaymentsReference _paymentsReference = PaymentsReference.Treatments;
 
         public int invoices_id_toload = -1;
@@ -73,11 +77,20 @@ namespace DG.DentneD.Forms
             _patientsDatadir = ConfigurationManager.AppSettings["patientsDatadir"];
             _patientsAttachmentsdir = ConfigurationManager.AppSettings["patientsAttachmentsdir"];
             _doSecureDelete = Convert.ToBoolean(ConfigurationManager.AppSettings["doSecureDelete"]);
-            if (ConfigurationManager.AppSettings["paymentReference"] == "T")
+            if (ConfigurationManager.AppSettings["paymentReference"] == "N")
+                _paymentsReference = PaymentsReference.Nothing;
+            else if (ConfigurationManager.AppSettings["paymentReference"] == "T")
                 _paymentsReference = PaymentsReference.Treatments;
             else if (ConfigurationManager.AppSettings["paymentReference"] == "I")
                 _paymentsReference = PaymentsReference.Invoices;
             _resetPatientstreatmentsFilterOnChange = Convert.ToBoolean(ConfigurationManager.AppSettings["resetPatientstreatmentsFilterOnChange"]);
+            if (ConfigurationManager.AppSettings["patientsDefaultFilter"] == "A")
+                _patientsFilter = PatientsFilter.All;
+            else if (ConfigurationManager.AppSettings["patientsDefaultFilter"] == "N")
+                _patientsFilter = PatientsFilter.NotArchived;
+            else if (ConfigurationManager.AppSettings["patientsDefaultFilter"] == "C")
+                _patientsFilter = PatientsFilter.Archived;
+            _patientsAttachmentsFindMaxValue = Convert.ToBoolean(ConfigurationManager.AppSettings["patientsAttachmentsFindMaxValue"]);
         }
 
         /// <summary>
@@ -735,13 +748,22 @@ namespace DG.DentneD.Forms
 
             ReloadView();
             
-            ResetTabsDataGrid();
-
             IsBindingSourceLoading = true;
             patientstreatments_filtertanyCheckBox.Checked = true;
             IsBindingSourceLoading = false;
 
-            if(_paymentsReference == PaymentsReference.Treatments)
+            if (_paymentsReference == PaymentsReference.Nothing)
+            {
+                label_tabPayments_inforeference.Text = "";
+                label_tabPayments_total.Text = "";
+                label_tabPayments_lefttotal.Text = "";
+                label_tabPayments_inforeference.Visible = false;
+                label_tabPayments_total.Visible = false;
+                label_tabPayments_lefttotal.Visible = false;
+                label_tabPayments_totalvalue.Visible = false;
+                label_tabPayments_lefttotalvalue.Visible = false;
+            }
+            else if(_paymentsReference == PaymentsReference.Treatments)
             {
                 label_tabPayments_inforeference.Text = language.paymentsInfoReferenceLabelTreatments;
                 label_tabPayments_total.Text = language.paymentsTotalLabelTreatments;
@@ -770,6 +792,12 @@ namespace DG.DentneD.Forms
             comboBox_filterArchived.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(FilterShow.Archived.ToString(), language.filtershowArchived));
             comboBox_filterArchived.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(FilterShow.All.ToString(), language.filtershowAll));
             comboBox_filterArchived.SelectedIndex = 0;
+            if (_patientsFilter == PatientsFilter.NotArchived)
+                comboBox_filterArchived.SelectedIndex = 0;
+            else if (_patientsFilter == PatientsFilter.Archived)
+                comboBox_filterArchived.SelectedIndex = 1;
+            else if (_patientsFilter == PatientsFilter.All)
+                comboBox_filterArchived.SelectedIndex = 2;
 
             //load prices lists
             treatmentspriceslists_idComboBox.DataSource = _dentnedModel.TreatmentsPricesLists.List().OrderBy(r => r.treatmentspriceslists_name).ToList();
@@ -893,7 +921,13 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void advancedDataGridView_main_FilterStringChanged(object sender, EventArgs e)
         {
-            vPatientsBindingSource.Filter = advancedDataGridView_main.FilterString;
+            string filter = advancedDataGridView_main.FilterString;
+            if(!String.IsNullOrEmpty(textBox_filterPatient.Text))
+            {
+                filter += (!String.IsNullOrEmpty(filter) ? " AND " : "") + String.Format("name LIKE '%{0}%'", textBox_filterPatient.Text);
+            }
+
+            vPatientsBindingSource.Filter = filter;
         }
 
         /// <summary>
@@ -969,99 +1003,20 @@ namespace DG.DentneD.Forms
         {
             countTextBox.Text = vPatientsBindingSource.Count.ToString();
         }
-        
 
-        #region various
+        /// <summary>
+        /// Search a patient name
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBox_filterPatient_TextChanged(object sender, EventArgs e)
+        {
+            if (IsBindingSourceLoading)
+                return;
+
+            advancedDataGridView_main_FilterStringChanged(sender, e);
+        }
                 
-        /// <summary>
-        /// Delete a file
-        /// </summary>
-        /// <param name="filename"></param>
-        /// <param name="displayerrors"></param>
-        /// <returns></returns>
-        private bool DeleteFile(string filename, bool displayerrors)
-        {
-            if (File.Exists(filename))
-            {
-                try
-                {
-                    if (_doSecureDelete)
-                    {
-                        ProcessStartInfo startInfo = new ProcessStartInfo();
-                        startInfo.CreateNoWindow = true;
-                        startInfo.UseShellExecute = false;
-                        startInfo.FileName = Program.SRMFileName;
-                        startInfo.Arguments = "-s -f \"" + filename + "\"";
-                        startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                        Process exeProcess = Process.Start(startInfo);
-                        exeProcess.WaitForExit();
-                    }
-                    else
-                    {
-                        File.Delete(filename);
-                    }
-                }
-                catch
-                {
-                }
-
-                if (File.Exists(filename))
-                {
-                    if (displayerrors)
-                        MessageBox.Show(language.filedeleteerrorMessage, language.filedeleteerrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return false;
-                }
-                else
-                {
-                    patientsattachments_filenameTextBox.Text = "";
-                }
-            }
-            return true;
-        }
-
-        /// <summary>
-        /// Delete a folder
-        /// </summary>
-        /// <param name="foldername"></param>
-        /// <param name="displayerrors"></param>
-        /// <returns></returns>
-        private bool DeleteFolder(string foldername, bool displayerrors)
-        {
-            if (Directory.Exists(foldername))
-            {
-                try
-                {
-                    if (_doSecureDelete)
-                    {
-                        ProcessStartInfo startInfo = new ProcessStartInfo();
-                        startInfo.CreateNoWindow = true;
-                        startInfo.UseShellExecute = false;
-                        startInfo.FileName = Program.SRMFileName;
-                        startInfo.Arguments = "-r -s -f \"" + foldername + "\"";
-                        startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                        Process exeProcess = Process.Start(startInfo);
-                        exeProcess.WaitForExit();
-                    }
-                    else
-                    {
-                        Directory.Delete(foldername, true);
-                    }
-                }
-                catch
-                { }
-
-                if(Directory.Exists(foldername))
-                {
-                    if (displayerrors)
-                        MessageBox.Show(String.Format(language.folderdeleteerrorMessage, foldername), language.filedeleteerrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        #endregion
-
 
         #region tabPatients_tabPatients
 
@@ -1095,6 +1050,8 @@ namespace DG.DentneD.Forms
                 ((patients)patientsBindingSource.Current).patients_sex = "M";
 
             DGUIGHFData.Add<patients, DentneDModel>(_dentnedModel.Patients, item);
+
+            textBox_filterPatient.Text = "";
         }
 
         /// <summary>
@@ -1119,17 +1076,17 @@ namespace DG.DentneD.Forms
         {
             patients patient = (patients)item;
 
-            foreach(patientsattachments patientattachment in _dentnedModel.PatientsAttachments.List(r => r.patients_id == patient.patients_id))
+            if (!FileHelper.DeleteFolder(_patientsAttachmentsdir + "\\" + patient.patients_id, _doSecureDelete))
             {
-                if (!DeleteFile(_patientsAttachmentsdir + "\\" + patientattachment.patients_id + "\\" + patientattachment.patientsattachmentstypes_id + "\\" + patientsattachments_filenameTextBox.Text, true))
-                    return;
+                MessageBox.Show(String.Format(language.folderdeleteerrorMessage, _patientsAttachmentsdir + "\\" + patient.patients_id), language.filedeleteerrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-
-            if (!DeleteFolder(_patientsAttachmentsdir + "\\" + patient.patients_id, true))
+            
+            if (!FileHelper.DeleteFolder(_patientsDatadir + "\\" + patient.patients_id, _doSecureDelete))
+            {
+                MessageBox.Show(String.Format(language.folderdeleteerrorMessage, _patientsDatadir + "\\" + patient.patients_id), language.filedeleteerrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
-
-            if (!DeleteFolder(_patientsDatadir + "\\" + patient.patients_id, true))
-                return;
+            }
             
             DGUIGHFData.Remove<patients, DentneDModel>(false, _dentnedModel.Patients, item);
         }
@@ -1263,11 +1220,7 @@ namespace DG.DentneD.Forms
             //clean files
             foreach (FileInfo file in directoryInfo.GetFiles())
             {
-                try
-                {
-                    file.Delete();
-                }
-                catch { }
+                FileHelper.DeleteFile(file.FullName, doSecureDelete);
             }
 
             //clean folder
@@ -1294,27 +1247,7 @@ namespace DG.DentneD.Forms
                 }                    
                 if(deleteFolder)
                 {
-                    try
-                    {
-                        //try to delete the folder
-                        if (doSecureDelete)
-                        {
-                            ProcessStartInfo startInfo = new ProcessStartInfo();
-                            startInfo.CreateNoWindow = true;
-                            startInfo.UseShellExecute = false;
-                            startInfo.FileName = Program.SRMFileName;
-                            startInfo.Arguments = "-r -s -f \"" + subDirectoryInfo.FullName + "\"";
-                            startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                            Process exeProcess = Process.Start(startInfo);
-                            exeProcess.WaitForExit();
-                        }
-                        else
-                        {
-                            subDirectoryInfo.Delete(true);
-                        }
-                    }
-                    catch
-                    { }
+                    FileHelper.DeleteFolder(subDirectoryInfo.FullName, doSecureDelete);
 
                     if (!Directory.Exists(subDirectoryInfo.FullName))
                     {
@@ -1323,6 +1256,96 @@ namespace DG.DentneD.Forms
                     else
                     {
                         errors = errors.Concat(new string[] { String.Format("Error: Can not delete folder \"{0}\".", subDirectoryInfo.FullName) }).ToArray();
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Delete sub folders without patients attachment attached
+        /// </summary>
+        /// <param name="folder"></param>
+        /// <param name="doSecureDelete"></param>
+        /// <param name="messages"></param>
+        /// <param name="errors"></param>
+        public static void CleanPatientAttachmentsDir(string folder, bool doSecureDelete, ref string[] messages, ref string[] errors)
+        {
+            messages = new string[] { };
+            errors = new string[] { };
+
+            DentneDModel dentnedModel = new DentneDModel();
+
+            DirectoryInfo directoryInfo = new DirectoryInfo(folder);
+            DirectoryInfo[] subDirectoriesInfo = directoryInfo.GetDirectories();
+
+            //clean files
+            foreach (FileInfo file in directoryInfo.GetFiles())
+            {
+                FileHelper.DeleteFile(file.FullName, doSecureDelete);
+            }
+
+            //clean folder
+            foreach (DirectoryInfo subDirectoryInfo in subDirectoriesInfo)
+            {
+                int patients_id = -1;
+                try
+                {
+                    patients_id = Convert.ToInt32(subDirectoryInfo.Name);
+                }
+                catch { }
+                bool deleteFolder = false;
+                if (patients_id != -1)
+                {
+                    //check if folder patient exists
+                    if (dentnedModel.Patients.Find(patients_id) == null)
+                    {
+                        deleteFolder = true;
+                    }
+                }
+                else
+                {
+                    deleteFolder = true;
+                }
+                if (deleteFolder)
+                {
+                    FileHelper.DeleteFolder(subDirectoryInfo.FullName, doSecureDelete);
+                    
+                    if (!Directory.Exists(subDirectoryInfo.FullName))
+                    {
+                        messages = messages.Concat(new string[] { String.Format("Folder \"{0}\" does not have any patient attached, it was deleted successfully.", subDirectoryInfo.FullName) }).ToArray();
+                    }
+                    else
+                    {
+                        errors = errors.Concat(new string[] { String.Format("Error: Can not delete folder \"{0}\".", subDirectoryInfo.FullName) }).ToArray();
+                    }
+                }
+                else
+                {   
+                    //check attachments
+                    DirectoryInfo sdirectoryInfo = new DirectoryInfo(subDirectoryInfo.FullName);
+                    DirectoryInfo[] subsDirectoriesInfo = sdirectoryInfo.GetDirectories();
+
+                    foreach (DirectoryInfo subsDirectoryInfo in subsDirectoriesInfo)
+                    {
+                        FileHelper.DeleteFolder(subsDirectoryInfo.FullName, doSecureDelete);
+                    }
+                    
+                    //clean attachments if needed
+                    foreach (FileInfo file in sdirectoryInfo.GetFiles())
+                    {
+                        if(dentnedModel.PatientsAttachments.List(r => r.patients_id == patients_id && r.patientsattachments_filename == file.Name).Count == 0)
+                        {
+                            FileHelper.DeleteFile(file.FullName, doSecureDelete);
+
+                            if (!File.Exists(file.FullName))
+                            {
+                                messages = messages.Concat(new string[] { String.Format("File \"{0}\" does not belong to any patient attachment, it was deleted successfully.", file.FullName) }).ToArray();
+                            }
+                            else
+                            {
+                                errors = errors.Concat(new string[] { String.Format("Error: Can not delete file \"{0}\".", file.FullName) }).ToArray();
+                            }
+                        }
                     }
                 }
             }
@@ -4302,9 +4325,14 @@ namespace DG.DentneD.Forms
         /// <param name="item"></param>
         private void Remove_tabPatientsAttachments(object item)
         {
-            patientsattachments patientsattachment = (patientsattachments)item;
-            if (!DeleteFile(_patientsAttachmentsdir + "\\" + patientsattachment.patients_id + "\\" + patientsattachment.patientsattachmentstypes_id + "\\" + patientsattachments_filenameTextBox.Text, true))
-                return;
+            patientsattachments patientsattachments = (patientsattachments)item;
+            if (!String.IsNullOrEmpty(patientsattachments.patientsattachments_filename))
+            {
+                if (!FileHelper.DeleteFile(_patientsAttachmentsdir + "\\" + patientsattachments.patients_id + "\\" + patientsattachments.patientsattachments_filename, _doSecureDelete))
+                {
+                    MessageBox.Show(language.filedeleteerrorMessage, language.filedeleteerrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
 
             DGUIGHFData.Remove<patientsattachments, DentneDModel>(_dentnedModel.PatientsAttachments, item);
         }
@@ -4343,6 +4371,7 @@ namespace DG.DentneD.Forms
                 if (UpdateClick(tabElement_tabPatientsAttachments))
                 {
                     patientsattachmentstypes_idComboBox.Enabled = false;
+                    patientsattachments_filenameTextBox.Enabled = false;
                 }
             }
         }
@@ -4357,14 +4386,14 @@ namespace DG.DentneD.Forms
             string patients_id = (((patientsattachments)patientsattachmentsBindingSource.Current).patients_id).ToString();
             if (!String.IsNullOrEmpty(patients_id))
             {
-                string patientsattachmentstypes_id = (((patientsattachments)patientsattachmentsBindingSource.Current).patientsattachmentstypes_id).ToString();
-                if (!String.IsNullOrEmpty(patientsattachmentstypes_id))
+                if (patientsattachments_filenameTextBox.Text != "")
                 {
-                    if (patientsattachments_filenameTextBox.Text != "")
+                    if (!FileHelper.DeleteFile(_patientsAttachmentsdir + "\\" + patients_id + "\\" + patientsattachments_filenameTextBox.Text, _doSecureDelete))
                     {
-                        if (!DeleteFile(_patientsAttachmentsdir + "\\" + patients_id + "\\" + patientsattachmentstypes_id + "\\" + patientsattachments_filenameTextBox.Text, true))
-                            return;
+                        MessageBox.Show(language.filedeleteerrorMessage, language.filedeleteerrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
                     }
+                    patientsattachments_filenameTextBox.Text = "";
                 }
             }
         }
@@ -4379,37 +4408,35 @@ namespace DG.DentneD.Forms
             string patients_id = (((patientsattachments)patientsattachmentsBindingSource.Current).patients_id).ToString();
             if (!String.IsNullOrEmpty(patients_id))
             {
-                string patientsattachmentstypes_id = (((patientsattachments)patientsattachmentsBindingSource.Current).patientsattachmentstypes_id).ToString();
-                if (!String.IsNullOrEmpty(patientsattachmentstypes_id))
+                using (OpenFileDialog openFileDialog = new OpenFileDialog())
                 {
-                    string patientsAttachmentsdir = _patientsAttachmentsdir + "\\" + patients_id + "\\" + patientsattachmentstypes_id;
-                    using (OpenFileDialog openFileDialog = new OpenFileDialog())
+                    openFileDialog.Title = language.attachmentselectTitle;
+                    openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                    openFileDialog.Filter = "JPEG|*.jpg|ZIP|*.zip";
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
                     {
-                        openFileDialog.Title = language.attachmentselectTitle;
-                        openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-                        openFileDialog.Filter = "JPEG|*.jpg|ZIP|*.zip";
-                        if (openFileDialog.ShowDialog() == DialogResult.OK)
+                        if (!Directory.Exists(_patientsAttachmentsdir + "\\" + patients_id))
+                            Directory.CreateDirectory(_patientsAttachmentsdir + "\\" + patients_id);
+
+                        //delete old file
+                        if(!String.IsNullOrEmpty(patientsattachments_filenameTextBox.Text))
                         {
-                            if (!Directory.Exists(patientsAttachmentsdir))
-                                Directory.CreateDirectory(patientsAttachmentsdir);
+                            FileHelper.DeleteFile(_patientsAttachmentsdir + "\\" + patients_id + "\\" + patientsattachments_filenameTextBox.Text, _doSecureDelete);
+                            patientsattachments_filenameTextBox.Text = "";
+                        }
 
-                            //delete old file
-                            if (!DeleteFile(_patientsAttachmentsdir + "\\" + patients_id + "\\" + patientsattachmentstypes_id + "\\" + patientsattachments_filenameTextBox.Text, true))
-                                return;                       
-
-                            try
-                            {
-                                //build a new file
-                                string destinationFilePath = patientsAttachmentsdir + "\\" + Path.GetFileName(openFileDialog.FileName);
-                                string extention = Path.GetExtension(openFileDialog.FileName);
-                                destinationFilePath = FileHelper.FindRandomFileName(patientsAttachmentsdir, null, extention.Substring(1, extention.Length - 1));
-                                File.Copy(openFileDialog.FileName, destinationFilePath);
-                                patientsattachments_filenameTextBox.Text = Path.GetFileName(destinationFilePath);
-                            }
-                            catch
-                            {
-                                MessageBox.Show(language.attachmentcopyerrorMessage, language.attachmentcopyerrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
+                        try
+                        {
+                            //build a new file
+                            string destinationFilePath = _patientsAttachmentsdir + "\\" + patients_id + "\\" + Path.GetFileName(openFileDialog.FileName);
+                            string extention = Path.GetExtension(openFileDialog.FileName);
+                            destinationFilePath = FileHelper.FindRandomFileName(_patientsAttachmentsdir + "\\" + patients_id, null, extention.Substring(1, extention.Length - 1));
+                            File.Copy(openFileDialog.FileName, destinationFilePath);
+                            patientsattachments_filenameTextBox.Text = Path.GetFileName(destinationFilePath);
+                        }
+                        catch
+                        {
+                            MessageBox.Show(language.attachmentcopyerrorMessage, language.attachmentcopyerrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                 }
@@ -4426,20 +4453,66 @@ namespace DG.DentneD.Forms
             string patients_id = (((patientsattachments)patientsattachmentsBindingSource.Current).patients_id).ToString();
             if (!String.IsNullOrEmpty(patients_id))
             {
-                string patientsattachmentstypes_id = (((patientsattachments)patientsattachmentsBindingSource.Current).patientsattachmentstypes_id).ToString();
-                if (!String.IsNullOrEmpty(patientsattachmentstypes_id))
+                if (patientsattachments_filenameTextBox.Text != "")
                 {
-                    if (patientsattachments_filenameTextBox.Text != "")
+                    if (File.Exists(_patientsAttachmentsdir + "\\" + patients_id + "\\" + patientsattachments_filenameTextBox.Text))
                     {
-                        string patientsAttachmentsdir = _patientsAttachmentsdir + "\\" + patients_id + "\\" + patientsattachmentstypes_id;
-                        if (File.Exists(patientsAttachmentsdir + "\\" + patientsattachments_filenameTextBox.Text))
+                        try
                         {
-                            Process.Start("explorer.exe", patientsAttachmentsdir);
+                            Process.Start(_patientsAttachmentsdir + "\\" + patients_id + "\\" + patientsattachments_filenameTextBox.Text);
                         }
-                    }                    
+                        catch
+                        { }
+                    }
                 }
             }
         }
+
+        /// <summary>
+        /// Attachement type changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void patientsattachmentstypes_idComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (IsBindingSourceLoading)
+                return;
+
+            if(_patientsAttachmentsFindMaxValue)
+            {
+                if (patientsattachmentstypes_idComboBox.SelectedIndex != -1 && tabElement_tabPatientsAttachments.CurrentEditingMode == EditingMode.C || tabElement_tabPatientsAttachments.CurrentEditingMode == EditingMode.U)
+                {
+                    int patients_id = -1;
+                    if (vPatientsBindingSource.Current != null)
+                    {
+                        patients_id = (((DataRowView)vPatientsBindingSource.Current).Row).Field<int>("patients_id");
+                    }
+
+                    if(patients_id != -1)
+                    {
+                        patientsattachmentstypes patientsattachmentstype = _dentnedModel.PatientsAttachmentsTypes.Find(patientsattachmentstypes_idComboBox.SelectedValue);
+                        if (patientsattachmentstype != null)
+                        {
+                            int maxvalue = 0;
+                            foreach(patientsattachments patientsattachment in _dentnedModel.PatientsAttachments.List(r => r.patients_id == patients_id && r.patientsattachmentstypes_id == patientsattachmentstype.patientsattachmentstypes_id))
+                            {
+                                try
+                                {
+                                    int n = Convert.ToInt32(patientsattachment.patientsattachments_value);
+                                    if (n > maxvalue)
+                                        maxvalue = n;
+                                }
+                                catch { }
+                            }
+                            maxvalue++;
+                            patientsattachmentsBindingSource.EndEdit();
+                            ((patientsattachments)patientsattachmentsBindingSource.Current).patientsattachments_value = maxvalue.ToString();
+                            patientsattachmentsBindingSource.ResetBindings(true);
+                        }
+                    }
+                }
+            }
+        }         
 
         /// <summary>
         /// Combobox autocomplete
@@ -4762,6 +4835,6 @@ namespace DG.DentneD.Forms
         }
 
         #endregion
-         
+                
     }
 }

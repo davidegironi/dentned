@@ -8,14 +8,14 @@ defined( '_VALID_' ) or die( 'Restricted access' );
 //set timezone
 date_default_timezone_set('Europe/Rome');
 
-//set page baseurl
-$baseuri = "http://localhost/dentned";
-
 //set database credentials
 $mssql_hostname = '192.168.1.57';
 $mssql_database = 'dentned';
 $mssql_username = 'sa';
 $mssql_password = '123456';
+
+//set the type of database driver: sqlsrv OR mssql
+$mssql_driver = 'sqlsrv';
 
 //set language
 $language = 'en';
@@ -33,7 +33,7 @@ $isPatientLoginEnabled = false;
 $patientEventShowDoctorName = true;
 
 //set the login cookie secret key
-$cookieHashSecret = 'a982SokLA';
+$cookieHashSecret = 'sj28sDt1';
 
 //set the login cookie expire time (in seconds)
 $cookieTime = 3600*24*60; //60 days

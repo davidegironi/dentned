@@ -27,13 +27,12 @@ namespace DG.DentneD.Model.Repositories
             public string text004 = "Invoices text can not be empty.";
             public string text005 = "Invalid sex. Can be 'M' or 'F'.";
             public string text006 = "Invalid treatment price list.";
-            public string text007 = "Remove appointments before deleting this item.";
+            public string text007 = "Patient already inserted.";
             public string text008 = "Username can not be empty.";
             public string text009 = "Password can not be empty.";
             public string text010 = "Invalid username format. 8 character, lower letters [a-z] or numbers [0-9].";
-            public string text011 = "Invalid password format. 6 character numbers [0-9].";
+            public string text011 = "Invalid password format. 6 numbers [0-9].";
             public string text012 = "A doctor already exists with this username.";
-            public string text013 = "Patient already inserted.";
         }
 
         /// <summary>
@@ -78,34 +77,7 @@ namespace DG.DentneD.Model.Repositories
 
             return ret;
         }
-
-        /// <summary>
-        /// Check if an item can be removed
-        /// </summary>
-        /// <param name="checkForeingKeys"></param>
-        /// <param name="excludedForeingKeys"></param>
-        /// <param name="errors"></param>
-        /// <param name="items"></param>
-        /// <returns></returns>
-        public override bool CanRemove(bool checkForeingKeys, string[] excludedForeingKeys, ref string[] errors, params patients[] items)
-        {
-            bool ret = true;
-
-            foreach (patients item in items)
-            {
-                if (BaseModel.Appointments.List(r => r.patients_id == item.patients_id).Count() > 0)
-                {
-                    ret = false;
-                    errors = errors.Concat(new string[] { language.text007 }).ToArray();
-                }
-
-                if (!ret)
-                    break;
-            }
-
-            return base.CanRemove(checkForeingKeys, excludedForeingKeys, ref errors, items);
-        }
-
+        
         /// <summary>
         /// Validate an item
         /// </summary>
@@ -188,7 +160,7 @@ namespace DG.DentneD.Model.Repositories
                     if (List(r => r.patients_username == item.patients_username).Count() > 0)
                     {
                         ret = false;
-                        errors = errors.Concat(new string[] { language.text013 }).ToArray();
+                        errors = errors.Concat(new string[] { language.text007 }).ToArray();
                     }
                 }
                 else
@@ -196,7 +168,7 @@ namespace DG.DentneD.Model.Repositories
                     if (List(r => r.patients_id != item.patients_id && r.patients_username == item.patients_username).Count() > 0)
                     {
                         ret = false;
-                        errors = errors.Concat(new string[] { language.text013 }).ToArray();
+                        errors = errors.Concat(new string[] { language.text007 }).ToArray();
                     }
                 }
 

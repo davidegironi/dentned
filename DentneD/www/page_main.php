@@ -66,21 +66,21 @@ defined( '_VALID_' ) or die( 'Restricted access' );
         <div id="navbar" class="navbar-collapse collapse">
           <form class="navbar-form navbar-right" method="POST">
 <?php if(!$login->isLoggedIn) { ?>
-            <div class="form-group">
+            <div class="form-group text-right">
               <input type="text" placeholder="<?php echo $lang['MENU_LOGINUSERNAME']; ?>" name="username" class="form-control">
             </div>
-            <div class="form-group">
+            <div class="form-group text-right">
               <input type="password" placeholder="<?php echo $lang['MENU_LOGINPASSWORD']; ?>" name="password" class="form-control">
             </div>
-            <div class="form-group">
+            <div class="form-group text-right">
               <label class="navbar-text checkbox inline" style="font-weight: normal;">
-                <input type="checkbox" name="remindme" class="form-control">&nbsp;<?php echo $lang['MENU_LOGINREMINDME']; ?>
+                <input type="checkbox" name="remindme">&nbsp;<?php echo $lang['MENU_LOGINREMINDME']; ?>
               </label>
             </div>
             <input type="hidden" value="1" name="login">
             <button type="submit" class="btn btn-success"><?php echo $lang['MENU_LOGINBUTTONIN']; ?></button>
 <?php } else { ?>
-            <div class="form-group">
+            <div class="form-group text-right">
               <div class="navbar-text" style="margin-top: 0px; margin-bottom: 0px;">
                 <?php echo "<b>".$lang['MENU_LOGINLOGGEDAS'] . "</b> " . $login->userName; ?>
               </div>

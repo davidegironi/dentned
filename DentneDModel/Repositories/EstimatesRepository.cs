@@ -27,7 +27,7 @@ namespace DG.DentneD.Model.Repositories
             public string text005 = "Invalid net total. Can not be less than zero.";
             public string text006 = "Doctor is mandatory.";
             public string text007 = "Patient is mandatory.";
-            public string text008 = "Estimate footer already inserted within this year.";
+            public string text008 = "Estimate already inserted within this year.";
             public string text009 = "Invalid gross total. Can not be less than zero.";
             public string text010 = "Invalid due total. Can not be less than zero.";
             public string text011 = "Gross total can not be less than net total.";

@@ -140,7 +140,8 @@ namespace DG.DentneD.Forms
                 r => new VPaymentsTypes
                 {
                     paymentstypes_id = r.paymentstypes_id,
-                    name = r.paymentstypes_name
+                    name = r.paymentstypes_name,
+                    isdefault = r.paymentstypes_isdefault
                 }).ToList();
 
             return DGDataTableUtils.ToDataTable<VPaymentsTypes>(vPaymentsTypes);

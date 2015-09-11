@@ -124,11 +124,6 @@
             this.ispaidDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.vInvoicesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel_listtotal = new System.Windows.Forms.Panel();
-            this.panel_filters = new System.Windows.Forms.Panel();
-            this.label_filterYears = new System.Windows.Forms.Label();
-            this.comboBox_filterYears = new System.Windows.Forms.ComboBox();
-            this.comboBox_filterDoctors = new System.Windows.Forms.ComboBox();
-            this.label_filterDoctors = new System.Windows.Forms.Label();
             this.totalgrossTextBox = new System.Windows.Forms.TextBox();
             this.totalgrossLabel = new System.Windows.Forms.Label();
             this.totalnetTextBox = new System.Windows.Forms.TextBox();
@@ -137,6 +132,11 @@
             this.totalduepaidLabel = new System.Windows.Forms.Label();
             this.totaldueTextBox = new System.Windows.Forms.TextBox();
             this.totaldueLabel = new System.Windows.Forms.Label();
+            this.panel_filters = new System.Windows.Forms.Panel();
+            this.label_filterYears = new System.Windows.Forms.Label();
+            this.comboBox_filterYears = new System.Windows.Forms.ComboBox();
+            this.comboBox_filterDoctors = new System.Windows.Forms.ComboBox();
+            this.label_filterDoctors = new System.Windows.Forms.Label();
             this.panel_data.SuspendLayout();
             this.tabControl_main.SuspendLayout();
             this.tabPage_tabInvoices.SuspendLayout();
@@ -1114,6 +1114,86 @@
             this.panel_listtotal.Size = new System.Drawing.Size(284, 112);
             this.panel_listtotal.TabIndex = 2;
             // 
+            // totalgrossTextBox
+            // 
+            this.totalgrossTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.totalgrossTextBox.Location = new System.Drawing.Point(188, 32);
+            this.totalgrossTextBox.Name = "totalgrossTextBox";
+            this.totalgrossTextBox.ReadOnly = true;
+            this.totalgrossTextBox.Size = new System.Drawing.Size(90, 20);
+            this.totalgrossTextBox.TabIndex = 15;
+            this.totalgrossTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // totalgrossLabel
+            // 
+            this.totalgrossLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.totalgrossLabel.Location = new System.Drawing.Point(32, 35);
+            this.totalgrossLabel.Name = "totalgrossLabel";
+            this.totalgrossLabel.Size = new System.Drawing.Size(150, 13);
+            this.totalgrossLabel.TabIndex = 14;
+            this.totalgrossLabel.Text = "Total Gross:";
+            this.totalgrossLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // totalnetTextBox
+            // 
+            this.totalnetTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.totalnetTextBox.Location = new System.Drawing.Point(188, 6);
+            this.totalnetTextBox.Name = "totalnetTextBox";
+            this.totalnetTextBox.ReadOnly = true;
+            this.totalnetTextBox.Size = new System.Drawing.Size(90, 20);
+            this.totalnetTextBox.TabIndex = 13;
+            this.totalnetTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // totalnetLabel
+            // 
+            this.totalnetLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.totalnetLabel.Location = new System.Drawing.Point(32, 9);
+            this.totalnetLabel.Name = "totalnetLabel";
+            this.totalnetLabel.Size = new System.Drawing.Size(150, 13);
+            this.totalnetLabel.TabIndex = 12;
+            this.totalnetLabel.Text = "Total Net:";
+            this.totalnetLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // totalduepaidTextBox
+            // 
+            this.totalduepaidTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.totalduepaidTextBox.Location = new System.Drawing.Point(188, 85);
+            this.totalduepaidTextBox.Name = "totalduepaidTextBox";
+            this.totalduepaidTextBox.ReadOnly = true;
+            this.totalduepaidTextBox.Size = new System.Drawing.Size(90, 20);
+            this.totalduepaidTextBox.TabIndex = 11;
+            this.totalduepaidTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // totalduepaidLabel
+            // 
+            this.totalduepaidLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.totalduepaidLabel.Location = new System.Drawing.Point(32, 87);
+            this.totalduepaidLabel.Name = "totalduepaidLabel";
+            this.totalduepaidLabel.Size = new System.Drawing.Size(150, 13);
+            this.totalduepaidLabel.TabIndex = 10;
+            this.totalduepaidLabel.Text = "Total Due Paid:";
+            this.totalduepaidLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // totaldueTextBox
+            // 
+            this.totaldueTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.totaldueTextBox.Location = new System.Drawing.Point(188, 58);
+            this.totaldueTextBox.Name = "totaldueTextBox";
+            this.totaldueTextBox.ReadOnly = true;
+            this.totaldueTextBox.Size = new System.Drawing.Size(90, 20);
+            this.totaldueTextBox.TabIndex = 9;
+            this.totaldueTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // totaldueLabel
+            // 
+            this.totaldueLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.totaldueLabel.Location = new System.Drawing.Point(32, 61);
+            this.totaldueLabel.Name = "totaldueLabel";
+            this.totaldueLabel.Size = new System.Drawing.Size(150, 13);
+            this.totaldueLabel.TabIndex = 8;
+            this.totaldueLabel.Text = "Total Due:";
+            this.totaldueLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
             // panel_filters
             // 
             this.panel_filters.Controls.Add(this.label_filterYears);
@@ -1163,82 +1243,6 @@
             this.label_filterDoctors.Size = new System.Drawing.Size(42, 13);
             this.label_filterDoctors.TabIndex = 4;
             this.label_filterDoctors.Text = "Doctor:";
-            // 
-            // totalgrossTextBox
-            // 
-            this.totalgrossTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.totalgrossTextBox.Location = new System.Drawing.Point(188, 32);
-            this.totalgrossTextBox.Name = "totalgrossTextBox";
-            this.totalgrossTextBox.ReadOnly = true;
-            this.totalgrossTextBox.Size = new System.Drawing.Size(90, 20);
-            this.totalgrossTextBox.TabIndex = 15;
-            // 
-            // totalgrossLabel
-            // 
-            this.totalgrossLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.totalgrossLabel.Location = new System.Drawing.Point(32, 35);
-            this.totalgrossLabel.Name = "totalgrossLabel";
-            this.totalgrossLabel.Size = new System.Drawing.Size(150, 13);
-            this.totalgrossLabel.TabIndex = 14;
-            this.totalgrossLabel.Text = "Total Gross:";
-            this.totalgrossLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // totalnetTextBox
-            // 
-            this.totalnetTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.totalnetTextBox.Location = new System.Drawing.Point(188, 6);
-            this.totalnetTextBox.Name = "totalnetTextBox";
-            this.totalnetTextBox.ReadOnly = true;
-            this.totalnetTextBox.Size = new System.Drawing.Size(90, 20);
-            this.totalnetTextBox.TabIndex = 13;
-            // 
-            // totalnetLabel
-            // 
-            this.totalnetLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.totalnetLabel.Location = new System.Drawing.Point(32, 9);
-            this.totalnetLabel.Name = "totalnetLabel";
-            this.totalnetLabel.Size = new System.Drawing.Size(150, 13);
-            this.totalnetLabel.TabIndex = 12;
-            this.totalnetLabel.Text = "Total Net:";
-            this.totalnetLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // totalduepaidTextBox
-            // 
-            this.totalduepaidTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.totalduepaidTextBox.Location = new System.Drawing.Point(188, 85);
-            this.totalduepaidTextBox.Name = "totalduepaidTextBox";
-            this.totalduepaidTextBox.ReadOnly = true;
-            this.totalduepaidTextBox.Size = new System.Drawing.Size(90, 20);
-            this.totalduepaidTextBox.TabIndex = 11;
-            // 
-            // totalduepaidLabel
-            // 
-            this.totalduepaidLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.totalduepaidLabel.Location = new System.Drawing.Point(32, 87);
-            this.totalduepaidLabel.Name = "totalduepaidLabel";
-            this.totalduepaidLabel.Size = new System.Drawing.Size(150, 13);
-            this.totalduepaidLabel.TabIndex = 10;
-            this.totalduepaidLabel.Text = "Total Due Paid:";
-            this.totalduepaidLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // totaldueTextBox
-            // 
-            this.totaldueTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.totaldueTextBox.Location = new System.Drawing.Point(188, 58);
-            this.totaldueTextBox.Name = "totaldueTextBox";
-            this.totaldueTextBox.ReadOnly = true;
-            this.totaldueTextBox.Size = new System.Drawing.Size(90, 20);
-            this.totaldueTextBox.TabIndex = 9;
-            // 
-            // totaldueLabel
-            // 
-            this.totaldueLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.totaldueLabel.Location = new System.Drawing.Point(32, 61);
-            this.totaldueLabel.Name = "totaldueLabel";
-            this.totaldueLabel.Size = new System.Drawing.Size(150, 13);
-            this.totaldueLabel.TabIndex = 8;
-            this.totaldueLabel.Text = "Total Due:";
-            this.totaldueLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // FormInvoices
             // 

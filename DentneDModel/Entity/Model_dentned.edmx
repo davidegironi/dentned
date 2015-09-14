@@ -235,6 +235,7 @@
           <Property Name="patientstreatments_fulfilldate" Type="date" />
           <Property Name="patientstreatments_ispaid" Type="bit" Nullable="false" />
           <Property Name="patientstreatments_price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="patientstreatments_isunitprice" Type="bit" Nullable="false" />
           <Property Name="patientstreatments_taxrate" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="patientstreatments_description" Type="varchar" MaxLength="128" />
           <Property Name="patientstreatments_notes" Type="text" />
@@ -308,6 +309,16 @@
           <Property Name="rooms_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="rooms_name" Type="varchar" MaxLength="16" Nullable="false" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="taxes">
           <Key>
             <PropertyRef Name="taxes_id" />
@@ -336,6 +347,7 @@
           <Property Name="treatments_code" Type="char" MaxLength="3" Nullable="false" />
           <Property Name="treatments_name" Type="varchar" MaxLength="32" Nullable="false" />
           <Property Name="treatments_price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="treatments_isunitprice" Type="bit" Nullable="false" />
           <Property Name="treatments_mexpiration" Type="tinyint" />
           <Property Name="treatments_notes" Type="text" />
         </EntityType>
@@ -688,6 +700,7 @@
           <EntitySet Name="paymentstypes" EntityType="Self.paymentstypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="reports" EntityType="Self.reports" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="rooms" EntityType="Self.rooms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="taxes" EntityType="Self.taxes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="taxesdeductions" EntityType="Self.taxesdeductions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="treatments" EntityType="Self.treatments" Schema="dbo" store:Type="Tables" />
@@ -824,6 +837,7 @@
           <EntitySet Name="paymentstypes" EntityType="dentnedModel.paymentstypes" />
           <EntitySet Name="reports" EntityType="dentnedModel.reports" />
           <EntitySet Name="rooms" EntityType="dentnedModel.rooms" />
+          <EntitySet Name="sysdiagrams" EntityType="dentnedModel.sysdiagrams" />
           <EntitySet Name="taxes" EntityType="dentnedModel.taxes" />
           <EntitySet Name="taxesdeductions" EntityType="dentnedModel.taxesdeductions" />
           <EntitySet Name="treatments" EntityType="dentnedModel.treatments" />
@@ -1201,6 +1215,7 @@
           <Property Name="patientstreatments_fulfilldate" Type="DateTime" Precision="0" />
           <Property Name="patientstreatments_ispaid" Type="Boolean" Nullable="false" />
           <Property Name="patientstreatments_price" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="patientstreatments_isunitprice" Type="Boolean" Nullable="false" />
           <Property Name="patientstreatments_taxrate" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
           <Property Name="patientstreatments_description" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
           <Property Name="patientstreatments_notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -1277,6 +1292,16 @@
           <Property Name="rooms_name" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="appointments" Relationship="dentnedModel.FK_appointments_rooms" FromRole="rooms" ToRole="appointments" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <EntityType Name="taxes">
           <Key>
             <PropertyRef Name="taxes_id" />
@@ -1305,6 +1330,7 @@
           <Property Name="treatments_code" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
           <Property Name="treatments_name" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
           <Property Name="treatments_price" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="treatments_isunitprice" Type="Boolean" Nullable="false" />
           <Property Name="treatments_mexpiration" Type="Byte" />
           <Property Name="treatments_notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="treatmentstypes" Relationship="dentnedModel.FK_treatments_treatmentstypes" FromRole="treatments" ToRole="treatmentstypes" />
@@ -1921,6 +1947,7 @@
                 <ScalarProperty Name="patientstreatments_notes" ColumnName="patientstreatments_notes" />
                 <ScalarProperty Name="patientstreatments_description" ColumnName="patientstreatments_description" />
                 <ScalarProperty Name="patientstreatments_taxrate" ColumnName="patientstreatments_taxrate" />
+                <ScalarProperty Name="patientstreatments_isunitprice" ColumnName="patientstreatments_isunitprice" />
                 <ScalarProperty Name="patientstreatments_price" ColumnName="patientstreatments_price" />
                 <ScalarProperty Name="patientstreatments_ispaid" ColumnName="patientstreatments_ispaid" />
                 <ScalarProperty Name="patientstreatments_fulfilldate" ColumnName="patientstreatments_fulfilldate" />
@@ -1972,6 +1999,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="dentnedModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="taxes">
             <EntityTypeMapping TypeName="dentnedModel.taxes">
               <MappingFragment StoreEntitySet="taxes">
@@ -1997,6 +2035,7 @@
               <MappingFragment StoreEntitySet="treatments">
                 <ScalarProperty Name="treatments_notes" ColumnName="treatments_notes" />
                 <ScalarProperty Name="treatments_mexpiration" ColumnName="treatments_mexpiration" />
+                <ScalarProperty Name="treatments_isunitprice" ColumnName="treatments_isunitprice" />
                 <ScalarProperty Name="treatments_price" ColumnName="treatments_price" />
                 <ScalarProperty Name="treatments_name" ColumnName="treatments_name" />
                 <ScalarProperty Name="treatments_code" ColumnName="treatments_code" />

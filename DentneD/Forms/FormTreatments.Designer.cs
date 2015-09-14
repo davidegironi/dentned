@@ -47,9 +47,10 @@
             this.tabControl_main = new System.Windows.Forms.TabControl();
             this.tabPage_tabTreatments = new System.Windows.Forms.TabPage();
             this.panel_tabTreatments_data = new System.Windows.Forms.Panel();
+            this.treatments_isunitpriceCheckBox = new System.Windows.Forms.CheckBox();
+            this.treatmentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.taxes_idLabel = new System.Windows.Forms.Label();
             this.taxes_idComboBox = new System.Windows.Forms.ComboBox();
-            this.treatmentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.button_tabTreatments_unsettaxesid = new System.Windows.Forms.Button();
             this.treatments_mexpirationinfoLabel = new System.Windows.Forms.Label();
             this.treatments_mexpirationTextBox = new System.Windows.Forms.TextBox();
@@ -147,7 +148,7 @@
             // treatments_priceLabel
             // 
             this.treatments_priceLabel.AutoSize = true;
-            this.treatments_priceLabel.Location = new System.Drawing.Point(10, 127);
+            this.treatments_priceLabel.Location = new System.Drawing.Point(9, 127);
             this.treatments_priceLabel.Name = "treatments_priceLabel";
             this.treatments_priceLabel.Size = new System.Drawing.Size(34, 13);
             this.treatments_priceLabel.TabIndex = 6;
@@ -243,6 +244,7 @@
             // 
             // panel_tabTreatments_data
             // 
+            this.panel_tabTreatments_data.Controls.Add(this.treatments_isunitpriceCheckBox);
             this.panel_tabTreatments_data.Controls.Add(this.taxes_idLabel);
             this.panel_tabTreatments_data.Controls.Add(this.taxes_idComboBox);
             this.panel_tabTreatments_data.Controls.Add(this.button_tabTreatments_unsettaxesid);
@@ -266,6 +268,21 @@
             this.panel_tabTreatments_data.Size = new System.Drawing.Size(480, 279);
             this.panel_tabTreatments_data.TabIndex = 2;
             // 
+            // treatments_isunitpriceCheckBox
+            // 
+            this.treatments_isunitpriceCheckBox.AutoSize = true;
+            this.treatments_isunitpriceCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.treatmentsBindingSource, "treatments_isunitprice", true));
+            this.treatments_isunitpriceCheckBox.Location = new System.Drawing.Point(118, 145);
+            this.treatments_isunitpriceCheckBox.Name = "treatments_isunitpriceCheckBox";
+            this.treatments_isunitpriceCheckBox.Size = new System.Drawing.Size(105, 17);
+            this.treatments_isunitpriceCheckBox.TabIndex = 19;
+            this.treatments_isunitpriceCheckBox.Text = "Is price per tooth";
+            this.treatments_isunitpriceCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // treatmentsBindingSource
+            // 
+            this.treatmentsBindingSource.DataSource = typeof(DG.DentneD.Model.Entity.treatments);
+            // 
             // taxes_idLabel
             // 
             this.taxes_idLabel.AutoSize = true;
@@ -286,10 +303,6 @@
             this.taxes_idComboBox.Size = new System.Drawing.Size(100, 21);
             this.taxes_idComboBox.TabIndex = 17;
             this.taxes_idComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.taxes_idComboBox_KeyPress);
-            // 
-            // treatmentsBindingSource
-            // 
-            this.treatmentsBindingSource.DataSource = typeof(DG.DentneD.Model.Entity.treatments);
             // 
             // button_tabTreatments_unsettaxesid
             // 
@@ -344,7 +357,7 @@
             // treatments_priceTextBox
             // 
             this.treatments_priceTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.treatmentsBindingSource, "treatments_price", true));
-            this.treatments_priceTextBox.Location = new System.Drawing.Point(13, 143);
+            this.treatments_priceTextBox.Location = new System.Drawing.Point(12, 143);
             this.treatments_priceTextBox.Name = "treatments_priceTextBox";
             this.treatments_priceTextBox.Size = new System.Drawing.Size(60, 20);
             this.treatments_priceTextBox.TabIndex = 7;
@@ -860,5 +873,6 @@
         private System.Windows.Forms.Button button_tabTreatments_unsettaxesid;
         private System.Windows.Forms.ComboBox taxes_idComboBox;
         private System.Windows.Forms.Label taxes_idLabel;
+        private System.Windows.Forms.CheckBox treatments_isunitpriceCheckBox;
     }
 }

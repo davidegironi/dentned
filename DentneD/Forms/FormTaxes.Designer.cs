@@ -255,7 +255,7 @@
             // 
             this.panel_tabTaxes_updates.Controls.Add(this.button_tabTaxes_cancel);
             this.panel_tabTaxes_updates.Controls.Add(this.button_tabTaxes_save);
-            this.panel_tabTaxes_updates.Location = new System.Drawing.Point(6, 177);
+            this.panel_tabTaxes_updates.Location = new System.Drawing.Point(6, 180);
             this.panel_tabTaxes_updates.Name = "panel_tabTaxes_updates";
             this.panel_tabTaxes_updates.Size = new System.Drawing.Size(480, 30);
             this.panel_tabTaxes_updates.TabIndex = 1;

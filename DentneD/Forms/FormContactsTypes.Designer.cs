@@ -151,7 +151,7 @@
             // 
             this.panel_tabContactsTypes_updates.Controls.Add(this.button_tabContactsTypes_cancel);
             this.panel_tabContactsTypes_updates.Controls.Add(this.button_tabContactsTypes_save);
-            this.panel_tabContactsTypes_updates.Location = new System.Drawing.Point(6, 139);
+            this.panel_tabContactsTypes_updates.Location = new System.Drawing.Point(6, 142);
             this.panel_tabContactsTypes_updates.Name = "panel_tabContactsTypes_updates";
             this.panel_tabContactsTypes_updates.Size = new System.Drawing.Size(480, 30);
             this.panel_tabContactsTypes_updates.TabIndex = 1;

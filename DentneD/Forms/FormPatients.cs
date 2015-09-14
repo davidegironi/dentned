@@ -147,6 +147,9 @@ namespace DG.DentneD.Forms
             LanguageHelper.AddComponent(patientscontacts_valueLabel);
             //tabPatients_tabPatientsAddresses
             LanguageHelper.AddComponent(tabPage_tabPatients_tabPatientsAddresses);
+            LanguageHelper.AddComponent(patientsaddressesidDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(addresstypeDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(addressDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
             LanguageHelper.AddComponent(button_tabPatients_tabPatientsAddresses_new);
             LanguageHelper.AddComponent(button_tabPatients_tabPatientsAddresses_edit);
             LanguageHelper.AddComponent(button_tabPatients_tabPatientsAddresses_delete);
@@ -181,6 +184,7 @@ namespace DG.DentneD.Forms
             LanguageHelper.AddComponent(dateDataGridViewTextBoxColumn1, this.GetType().Name, "HeaderText");
             LanguageHelper.AddComponent(treatmentDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
             LanguageHelper.AddComponent(toothsDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(isfulfilledDataGridViewCheckBoxColumn, this.GetType().Name, "HeaderText");
             LanguageHelper.AddComponent(ispaidDataGridViewCheckBoxColumn, this.GetType().Name, "HeaderText");
             LanguageHelper.AddComponent(button_tabPatientsTreatments_new);
             LanguageHelper.AddComponent(button_tabPatientsTreatments_edit);
@@ -205,6 +209,7 @@ namespace DG.DentneD.Forms
             LanguageHelper.AddComponent(patientstreatments_tdwLabel);
             LanguageHelper.AddComponent(patientstreatments_tnoLabel);
             LanguageHelper.AddComponent(patientstreatments_ispaidCheckBox);
+            LanguageHelper.AddComponent(patientstreatments_isunitpriceCheckBox);
             //tabPayments
             LanguageHelper.AddComponent(tabPage_tabPayments);
             LanguageHelper.AddComponent(paymentsidDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
@@ -2345,7 +2350,7 @@ namespace DG.DentneD.Forms
                 tabElement_tabPayments.IsLazyLoaded = false;
             }
 
-            DGUIGHFData.Remove<patientstreatments, DentneDModel>(_dentnedModel.PatientsTreatments, item);
+            DGUIGHFData.Remove<patientstreatments, DentneDModel>(false, _dentnedModel.PatientsTreatments, item);
         }
 
         /// <summary>
@@ -2364,6 +2369,8 @@ namespace DG.DentneD.Forms
                     doctors doctor = _dentnedModel.Doctors.List().FirstOrDefault();
                     if (doctor != null)
                         ((patientstreatments)patientstreatmentsBindingSource.Current).doctors_id = doctor.doctors_id;
+                    ((patientstreatments)patientstreatmentsBindingSource.Current).patientstreatments_ispaid = false;
+                    ((patientstreatments)patientstreatmentsBindingSource.Current).patientstreatments_isunitprice = true;
                     patientstreatmentsBindingSource.ResetBindings(true);
 
                     patientstreatments_invoiceTextBox.Text = "";
@@ -2628,6 +2635,7 @@ namespace DG.DentneD.Forms
                         ((patientstreatments)patientstreatmentsBindingSource.Current).patientstreatments_price = price;
                         ((patientstreatments)patientstreatmentsBindingSource.Current).patientstreatments_taxrate = taxrate;
                         ((patientstreatments)patientstreatmentsBindingSource.Current).patientstreatments_description = description;
+                        ((patientstreatments)patientstreatmentsBindingSource.Current).patientstreatments_isunitprice = treatment.treatments_isunitprice;
                     }
                     patientstreatmentsBindingSource.ResetBindings(true);
                 }
@@ -4044,18 +4052,30 @@ namespace DG.DentneD.Forms
             }
 
             //update totals
-            double paidtotalnum = Math.Round(Convert.ToDouble(_dentnedModel.Payments.List(r => r.patients_id == patients_id).Sum(r => r.payments_amount)), 2);
-            double totalvalue = 0;
-            double lefttotalvalue = 0;
+            decimal paidtotalnum = Math.Round(_dentnedModel.Payments.List(r => r.patients_id == patients_id).Sum(r => r.payments_amount), 2);
+            decimal totalvalue = 0;
+            decimal lefttotalvalue = 0;
             if(_paymentsReference == PaymentsReference.Treatments)
             {
-                totalvalue = Math.Round(Convert.ToDouble(_dentnedModel.PatientsTreatments.List(r => r.patients_id == patients_id && r.patientstreatments_fulfilldate != null).Sum(r => r.patientstreatments_price + (r.patientstreatments_price * r.patientstreatments_taxrate / 100))), 2);
-                lefttotalvalue = Math.Round(totalvalue - paidtotalnum);
+                foreach(patientstreatments patientstreatment in _dentnedModel.PatientsTreatments.List(r => r.patients_id == patients_id && r.patientstreatments_fulfilldate != null))
+                {
+                    if(!patientstreatment.patientstreatments_isunitprice)
+                        totalvalue += patientstreatment.patientstreatments_price + (patientstreatment.patientstreatments_price * patientstreatment.patientstreatments_taxrate / 100);
+                    else
+                    {
+                        int tooths =_dentnedModel.PatientsTreatments.GetNumberOfTooths(patientstreatment);
+                        if (tooths == 0)
+                            tooths = 1;
+                        totalvalue += tooths * (patientstreatment.patientstreatments_price + (patientstreatment.patientstreatments_price * patientstreatment.patientstreatments_taxrate / 100));
+                    }
+                }
+                totalvalue = Math.Round(totalvalue, 2);
+                lefttotalvalue = Math.Round(totalvalue - paidtotalnum, 2);
             }
             else if (_paymentsReference == PaymentsReference.Invoices)
             {
-                totalvalue = Math.Round(Convert.ToDouble(_dentnedModel.Invoices.List(r => r.patients_id == patients_id).Sum(r => r.invoices_totaldue)), 2);
-                lefttotalvalue = Math.Round(totalvalue - paidtotalnum);
+                totalvalue = Math.Round(_dentnedModel.Invoices.List(r => r.patients_id == patients_id).Sum(r => r.invoices_totaldue), 2);
+                lefttotalvalue = Math.Round(totalvalue - paidtotalnum, 2);
             }
             label_tabPayments_paidtotalvalue.Text = String.Format("{0:0.00}", paidtotalnum);
             label_tabPayments_totalvalue.Text = String.Format("{0:0.00}", totalvalue);

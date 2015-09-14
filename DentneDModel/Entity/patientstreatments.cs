@@ -28,6 +28,7 @@ namespace DG.DentneD.Model.Entity
         public Nullable<System.DateTime> patientstreatments_fulfilldate { get; set; }
         public bool patientstreatments_ispaid { get; set; }
         public decimal patientstreatments_price { get; set; }
+        public bool patientstreatments_isunitprice { get; set; }
         public decimal patientstreatments_taxrate { get; set; }
         public string patientstreatments_description { get; set; }
         public string patientstreatments_notes { get; set; }

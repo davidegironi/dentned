@@ -25,9 +25,9 @@ namespace DG.DentneD.Model.Repositories
             public string text004 = "Treatments type is mandatory.";
             public string text005 = "Invalid sex. Can be 'M' or 'F'.";
             public string text006 = "Invalid tax rate. Can not be less than zero.";
-            public string text101 = "All";
-            public string text102 = "Up";
-            public string text103 = "Down";
+            public string text101 = "Arches";
+            public string text102 = "Upper Arch";
+            public string text103 = "Lower Arch";
             public string text104 = "None";
         }
 
@@ -209,6 +209,49 @@ namespace DG.DentneD.Model.Repositories
                         )
                     );
             ret = (ret.EndsWith(",") ? ret.Substring(0, ret.Length-1) : ret);
+            return ret;
+        }
+
+        /// <summary>
+        /// Get the number of tooth for a treatment
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public int GetNumberOfTooths(patientstreatments item)
+        {
+            int ret = 0;
+            ret += (item.patientstreatments_t11 ? 1 : 0);
+            ret += (item.patientstreatments_t12 ? 1 : 0);
+            ret += (item.patientstreatments_t13 ? 1 : 0);
+            ret += (item.patientstreatments_t14 ? 1 : 0);
+            ret += (item.patientstreatments_t15 ? 1 : 0);
+            ret += (item.patientstreatments_t16 ? 1 : 0);
+            ret += (item.patientstreatments_t17 ? 1 : 0);
+            ret += (item.patientstreatments_t18 ? 1 : 0);
+            ret += (item.patientstreatments_t21 ? 1 : 0);
+            ret += (item.patientstreatments_t22 ? 1 : 0);
+            ret += (item.patientstreatments_t23 ? 1 : 0);
+            ret += (item.patientstreatments_t24 ? 1 : 0);
+            ret += (item.patientstreatments_t25 ? 1 : 0);
+            ret += (item.patientstreatments_t26 ? 1 : 0);
+            ret += (item.patientstreatments_t27 ? 1 : 0);
+            ret += (item.patientstreatments_t28 ? 1 : 0);
+            ret += (item.patientstreatments_t31 ? 1 : 0);
+            ret += (item.patientstreatments_t32 ? 1 : 0);
+            ret += (item.patientstreatments_t33 ? 1 : 0);
+            ret += (item.patientstreatments_t34 ? 1 : 0);
+            ret += (item.patientstreatments_t35 ? 1 : 0);
+            ret += (item.patientstreatments_t36 ? 1 : 0);
+            ret += (item.patientstreatments_t37 ? 1 : 0);
+            ret += (item.patientstreatments_t38 ? 1 : 0);
+            ret += (item.patientstreatments_t41 ? 1 : 0);
+            ret += (item.patientstreatments_t42 ? 1 : 0);
+            ret += (item.patientstreatments_t43 ? 1 : 0);
+            ret += (item.patientstreatments_t44 ? 1 : 0);
+            ret += (item.patientstreatments_t45 ? 1 : 0);
+            ret += (item.patientstreatments_t46 ? 1 : 0);
+            ret += (item.patientstreatments_t47 ? 1 : 0);
+            ret += (item.patientstreatments_t48 ? 1 : 0);
             return ret;
         }
     }

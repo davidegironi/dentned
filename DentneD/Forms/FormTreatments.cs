@@ -67,6 +67,7 @@ namespace DG.DentneD.Forms
             LanguageHelper.AddComponent(treatments_priceLabel);
             LanguageHelper.AddComponent(treatments_notesLabel);
             LanguageHelper.AddComponent(taxes_idLabel);
+            LanguageHelper.AddComponent(treatments_isunitpriceCheckBox);
             LanguageHelper.AddComponent(button_tabTreatments_unsettaxesid);
             //tabTreatmentsPrices
             LanguageHelper.AddComponent(tabPage_tabTreatmentsPrices);

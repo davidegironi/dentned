@@ -350,10 +350,13 @@
       <Link>lang\DentneDPrintModelDefault-it.json</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="..\packages\Int\DentneDPrintModelDefault\DentneDPrintModelDefault.json">
+      <Link>DentneDPrintModelDefault.json</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="CleanDatadir.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="dentned.snk" />
     <None Include="lang\en.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

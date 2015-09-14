@@ -49,6 +49,7 @@ namespace DG.DentneD.Model.Entity
         public virtual DbSet<paymentstypes> paymentstypes { get; set; }
         public virtual DbSet<reports> reports { get; set; }
         public virtual DbSet<rooms> rooms { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<taxes> taxes { get; set; }
         public virtual DbSet<taxesdeductions> taxesdeductions { get; set; }
         public virtual DbSet<treatments> treatments { get; set; }

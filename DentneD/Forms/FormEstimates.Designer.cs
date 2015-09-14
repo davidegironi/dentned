@@ -173,7 +173,7 @@
             // estimates_deductiontaxrateLabel
             // 
             this.estimates_deductiontaxrateLabel.AutoSize = true;
-            this.estimates_deductiontaxrateLabel.Location = new System.Drawing.Point(11, 399);
+            this.estimates_deductiontaxrateLabel.Location = new System.Drawing.Point(9, 399);
             this.estimates_deductiontaxrateLabel.Name = "estimates_deductiontaxrateLabel";
             this.estimates_deductiontaxrateLabel.Size = new System.Drawing.Size(106, 13);
             this.estimates_deductiontaxrateLabel.TabIndex = 18;
@@ -191,7 +191,7 @@
             // estimates_paymentLabel
             // 
             this.estimates_paymentLabel.AutoSize = true;
-            this.estimates_paymentLabel.Location = new System.Drawing.Point(11, 304);
+            this.estimates_paymentLabel.Location = new System.Drawing.Point(9, 304);
             this.estimates_paymentLabel.Name = "estimates_paymentLabel";
             this.estimates_paymentLabel.Size = new System.Drawing.Size(51, 13);
             this.estimates_paymentLabel.TabIndex = 12;
@@ -209,7 +209,7 @@
             // estimates_patientLabel
             // 
             this.estimates_patientLabel.AutoSize = true;
-            this.estimates_patientLabel.Location = new System.Drawing.Point(11, 201);
+            this.estimates_patientLabel.Location = new System.Drawing.Point(9, 201);
             this.estimates_patientLabel.Name = "estimates_patientLabel";
             this.estimates_patientLabel.Size = new System.Drawing.Size(43, 13);
             this.estimates_patientLabel.TabIndex = 6;
@@ -299,7 +299,7 @@
             // estimates_doctorLabel
             // 
             this.estimates_doctorLabel.AutoSize = true;
-            this.estimates_doctorLabel.Location = new System.Drawing.Point(11, 98);
+            this.estimates_doctorLabel.Location = new System.Drawing.Point(9, 98);
             this.estimates_doctorLabel.Name = "estimates_doctorLabel";
             this.estimates_doctorLabel.Size = new System.Drawing.Size(42, 13);
             this.estimates_doctorLabel.TabIndex = 4;
@@ -315,6 +315,7 @@
             this.treatments_idComboBox.Size = new System.Drawing.Size(150, 21);
             this.treatments_idComboBox.TabIndex = 14;
             this.treatments_idComboBox.SelectedIndexChanged += new System.EventHandler(this.treatments_idComboBox_SelectedIndexChanged);
+            this.treatments_idComboBox.Leave += new System.EventHandler(this.treatments_idComboBox_Leave);
             // 
             // button_tabEstimatesLines_delete
             // 
@@ -510,6 +511,7 @@
             this.computedlines_idComboBox.TabIndex = 16;
             this.computedlines_idComboBox.SelectedIndexChanged += new System.EventHandler(this.computedlines_idComboBox_SelectedIndexChanged);
             this.computedlines_idComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.computedlines_idComboBox_KeyPress);
+            this.computedlines_idComboBox.Leave += new System.EventHandler(this.computedlines_idComboBox_Leave);
             // 
             // computedlines_idLabel
             // 
@@ -567,6 +569,7 @@
             this.estimateslines_taxrateComboBox.Size = new System.Drawing.Size(100, 21);
             this.estimateslines_taxrateComboBox.TabIndex = 12;
             this.estimateslines_taxrateComboBox.SelectedIndexChanged += new System.EventHandler(this.estimateslines_taxrateComboBox_SelectedIndexChanged);
+            this.estimateslines_taxrateComboBox.Leave += new System.EventHandler(this.estimateslines_taxrateComboBox_Leave);
             // 
             // patientstreatments_idComboBox
             // 
@@ -1014,6 +1017,7 @@
             this.estimates_deductiontaxrateComboBox.TabIndex = 22;
             this.estimates_deductiontaxrateComboBox.SelectedIndexChanged += new System.EventHandler(this.estimates_deductiontaxrateComboBox_SelectedIndexChanged);
             this.estimates_deductiontaxrateComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.estimates_deductiontaxrateComboBox_KeyPress);
+            this.estimates_deductiontaxrateComboBox.Leave += new System.EventHandler(this.estimates_deductiontaxrateComboBox_Leave);
             // 
             // estimates_deductiontaxrateTextBox
             // 
@@ -1034,6 +1038,7 @@
             this.estimates_footerComboBox.TabIndex = 17;
             this.estimates_footerComboBox.SelectedIndexChanged += new System.EventHandler(this.estimates_footerComboBox_SelectedIndexChanged);
             this.estimates_footerComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.estimates_footerComboBox_KeyPress);
+            this.estimates_footerComboBox.Leave += new System.EventHandler(this.estimates_footerComboBox_Leave);
             // 
             // estimates_footerTextBox
             // 
@@ -1057,6 +1062,7 @@
             this.estimates_paymentComboBox.TabIndex = 14;
             this.estimates_paymentComboBox.SelectedIndexChanged += new System.EventHandler(this.estimates_paymentComboBox_SelectedIndexChanged);
             this.estimates_paymentComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.estimates_paymentComboBox_KeyPress);
+            this.estimates_paymentComboBox.Leave += new System.EventHandler(this.estimates_paymentComboBox_Leave);
             // 
             // estimates_paymentTextBox
             // 

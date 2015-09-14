@@ -11,6 +11,10 @@ using System.Linq;
 using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Text;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
+using System.Configuration;
 
 namespace DG.DentneD.Test
 {
@@ -20,6 +24,9 @@ namespace DG.DentneD.Test
         private string _connectionString = null;
         private Random _r = new Random();
 
+        private readonly string _patientsDatadir = null;
+        private readonly string _patientsAttachmentsdir = null;
+
         public PopulateTestDatabase()
         {
             _dentnedModel = new DentneDModel();
@@ -27,6 +34,9 @@ namespace DG.DentneD.Test
             {
                 _connectionString = context.Database.Connection.ConnectionString.ToString();
             }
+
+            _patientsDatadir = ConfigurationManager.AppSettings["patientsDatadir"];
+            _patientsAttachmentsdir = ConfigurationManager.AppSettings["patientsAttachmentsdir"];
         }
 
         public void Empty()
@@ -54,6 +64,20 @@ EXEC sp_msforeachtable 'DBCC CHECKIDENT(''?'', RESEED, 0)'; DECLARE @max int; SE
                     cmd.ExecuteNonQuery();
                 }
 
+                try
+                {
+                    Directory.Delete(_patientsDatadir, true);
+                    Directory.CreateDirectory(_patientsDatadir);
+                }
+                catch { }
+
+                try
+                {
+                    Directory.Delete(_patientsAttachmentsdir, true);
+                    Directory.CreateDirectory(_patientsAttachmentsdir);
+                }
+                catch { }
+
                 sourceSqlConnection.Close();
             }
         }
@@ -66,7 +90,8 @@ EXEC sp_msforeachtable 'DBCC CHECKIDENT(''?'', RESEED, 0)'; DECLARE @max int; SE
             int treatmentstypesNum = 3;
             int treatmentspriceslistsNum = 2;
             int treatmentsNum = 100;
-            int patientsNum = 10;
+            int patientsNum = 500;
+            bool generatedatafiles = true;
 
             Console.WriteLine("Add AddressesTypes...");
             addressestypes addressestypesHome = new addressestypes()
@@ -228,6 +253,7 @@ EXEC sp_msforeachtable 'DBCC CHECKIDENT(''?'', RESEED, 0)'; DECLARE @max int; SE
                     treatments_mexpiration = (_r.Next(0, 100) >= 80 ? (Nullable<byte>)_r.Next(1, 12) : null),
                     treatments_price = (decimal)(_r.NextDouble() * (300 - 1) + 300),
                     taxes_id = taxesT22.taxes_id,
+                    treatments_isunitprice = (_r.Next(0, 100) >= 50 ? true : false)
                 };
                 _dentnedModel.Treatments.Add(treatmentstmp);
                 treatments = treatments.Concat(new treatments[] { treatmentstmp }).ToArray();
@@ -270,6 +296,16 @@ EXEC sp_msforeachtable 'DBCC CHECKIDENT(''?'', RESEED, 0)'; DECLARE @max int; SE
                 };
                 _dentnedModel.Patients.Add(patientstmp);
                 patients = patients.Concat(new patients[] { patientstmp }).ToArray();
+
+                if (generatedatafiles)
+                {
+                    if(_r.Next(0, 100) > 50)
+                    {
+                        if(!Directory.Exists(_patientsDatadir + "\\" + patientstmp.patients_id))
+                            Directory.CreateDirectory(_patientsDatadir + "\\" + patientstmp.patients_id);
+                        GenerateImage(_patientsDatadir + "\\" + patientstmp.patients_id + "\\" + BuildRandomString(12) + ".png");
+                    }
+                }
             }
 
             Console.WriteLine("Add PatientsAddresses...");
@@ -341,13 +377,30 @@ EXEC sp_msforeachtable 'DBCC CHECKIDENT(''?'', RESEED, 0)'; DECLARE @max int; SE
                 {
                     do
                     {
+                        string filename = null;
+                        
+                        if (generatedatafiles)
+                        {
+                            if (_r.Next(0, 100) > 50)
+                            {
+                                filename = BuildRandomString(12) + ".png";
+                                if (!Directory.Exists(_patientsAttachmentsdir + "\\" + patient.patients_id))
+                                    Directory.CreateDirectory(_patientsAttachmentsdir + "\\" + patient.patients_id);
+                                GenerateImage(_patientsAttachmentsdir + "\\" + patient.patients_id + "\\" + filename);
+                            }
+                        }
+
                         _dentnedModel.PatientsAttachments.Add(new patientsattachments()
                         {
                             patients_id = patient.patients_id,
                             patientsattachmentstypes_id = patientsattachmentstypes[_r.Next(patientsattachmentstypes.Count())].patientsattachmentstypes_id,
                             patientsattachments_value = BuildRandomString(_r.Next(10, 50)),
-                            patientsattachments_date = GetRandomDate(new DateTime(2013, 1, 1), new DateTime(2015, 12, 31))
+                            patientsattachments_date = GetRandomDate(new DateTime(2013, 1, 1), new DateTime(2015, 12, 31)),
+                            patientsattachments_filename = filename
                         });
+
+                        
+
                     } while (_r.Next(0, 100) > 50);
                 }
             }
@@ -393,38 +446,39 @@ EXEC sp_msforeachtable 'DBCC CHECKIDENT(''?'', RESEED, 0)'; DECLARE @max int; SE
                         patientstreatments_fulfilldate = (_r.Next(0, 100) > 50 ? (Nullable<DateTime>)creationdate.AddDays(_r.Next(0, 10)) : null),
                         patientstreatments_expirationdate = (treatment.treatments_mexpiration != null ? (Nullable<DateTime>)creationdate.AddMonths((byte)treatment.treatments_mexpiration) : null),
                         patientstreatments_ispaid = (_r.Next(0, 100) > 20 ? true : false),
-                        patientstreatments_t11 = (_r.Next(0, 100) > 80 ? true : false),
-                        patientstreatments_t12 = (_r.Next(0, 100) > 80 ? true : false),
-                        patientstreatments_t13 = (_r.Next(0, 100) > 80 ? true : false),
-                        patientstreatments_t14 = (_r.Next(0, 100) > 80 ? true : false),
-                        patientstreatments_t15 = (_r.Next(0, 100) > 80 ? true : false),
-                        patientstreatments_t16 = (_r.Next(0, 100) > 80 ? true : false),
-                        patientstreatments_t17 = (_r.Next(0, 100) > 80 ? true : false),
-                        patientstreatments_t18 = (_r.Next(0, 100) > 80 ? true : false),
-                        patientstreatments_t21 = (_r.Next(0, 100) > 80 ? true : false),
-                        patientstreatments_t22 = (_r.Next(0, 100) > 80 ? true : false),
-                        patientstreatments_t23 = (_r.Next(0, 100) > 80 ? true : false),
-                        patientstreatments_t24 = (_r.Next(0, 100) > 80 ? true : false),
-                        patientstreatments_t25 = (_r.Next(0, 100) > 80 ? true : false),
-                        patientstreatments_t26 = (_r.Next(0, 100) > 80 ? true : false),
-                        patientstreatments_t27 = (_r.Next(0, 100) > 80 ? true : false),
-                        patientstreatments_t28 = (_r.Next(0, 100) > 80 ? true : false),
-                        patientstreatments_t31 = (_r.Next(0, 100) > 80 ? true : false),
-                        patientstreatments_t32 = (_r.Next(0, 100) > 80 ? true : false),
-                        patientstreatments_t33 = (_r.Next(0, 100) > 80 ? true : false),
-                        patientstreatments_t34 = (_r.Next(0, 100) > 80 ? true : false),
-                        patientstreatments_t35 = (_r.Next(0, 100) > 80 ? true : false),
-                        patientstreatments_t36 = (_r.Next(0, 100) > 80 ? true : false),
-                        patientstreatments_t37 = (_r.Next(0, 100) > 80 ? true : false),
-                        patientstreatments_t38 = (_r.Next(0, 100) > 80 ? true : false),
-                        patientstreatments_t41 = (_r.Next(0, 100) > 80 ? true : false),
-                        patientstreatments_t42 = (_r.Next(0, 100) > 80 ? true : false),
-                        patientstreatments_t43 = (_r.Next(0, 100) > 80 ? true : false),
-                        patientstreatments_t44 = (_r.Next(0, 100) > 80 ? true : false),
-                        patientstreatments_t45 = (_r.Next(0, 100) > 80 ? true : false),
-                        patientstreatments_t46 = (_r.Next(0, 100) > 80 ? true : false),
-                        patientstreatments_t47 = (_r.Next(0, 100) > 80 ? true : false),
-                        patientstreatments_t48 = (_r.Next(0, 100) > 80 ? true : false)
+                        patientstreatments_isunitprice = treatment.treatments_isunitprice,
+                        patientstreatments_t11 = (_r.Next(0, 100) > 90 ? true : false),
+                        patientstreatments_t12 = (_r.Next(0, 100) > 90 ? true : false),
+                        patientstreatments_t13 = (_r.Next(0, 100) > 90 ? true : false),
+                        patientstreatments_t14 = (_r.Next(0, 100) > 90 ? true : false),
+                        patientstreatments_t15 = (_r.Next(0, 100) > 90 ? true : false),
+                        patientstreatments_t16 = (_r.Next(0, 100) > 90 ? true : false),
+                        patientstreatments_t17 = (_r.Next(0, 100) > 90 ? true : false),
+                        patientstreatments_t18 = (_r.Next(0, 100) > 90 ? true : false),
+                        patientstreatments_t21 = (_r.Next(0, 100) > 90 ? true : false),
+                        patientstreatments_t22 = (_r.Next(0, 100) > 90 ? true : false),
+                        patientstreatments_t23 = (_r.Next(0, 100) > 90 ? true : false),
+                        patientstreatments_t24 = (_r.Next(0, 100) > 90 ? true : false),
+                        patientstreatments_t25 = (_r.Next(0, 100) > 90 ? true : false),
+                        patientstreatments_t26 = (_r.Next(0, 100) > 90 ? true : false),
+                        patientstreatments_t27 = (_r.Next(0, 100) > 90 ? true : false),
+                        patientstreatments_t28 = (_r.Next(0, 100) > 90 ? true : false),
+                        patientstreatments_t31 = (_r.Next(0, 100) > 90 ? true : false),
+                        patientstreatments_t32 = (_r.Next(0, 100) > 90 ? true : false),
+                        patientstreatments_t33 = (_r.Next(0, 100) > 90 ? true : false),
+                        patientstreatments_t34 = (_r.Next(0, 100) > 90 ? true : false),
+                        patientstreatments_t35 = (_r.Next(0, 100) > 90 ? true : false),
+                        patientstreatments_t36 = (_r.Next(0, 100) > 90 ? true : false),
+                        patientstreatments_t37 = (_r.Next(0, 100) > 90 ? true : false),
+                        patientstreatments_t38 = (_r.Next(0, 100) > 90 ? true : false),
+                        patientstreatments_t41 = (_r.Next(0, 100) > 90 ? true : false),
+                        patientstreatments_t42 = (_r.Next(0, 100) > 90 ? true : false),
+                        patientstreatments_t43 = (_r.Next(0, 100) > 90 ? true : false),
+                        patientstreatments_t44 = (_r.Next(0, 100) > 90 ? true : false),
+                        patientstreatments_t45 = (_r.Next(0, 100) > 90 ? true : false),
+                        patientstreatments_t46 = (_r.Next(0, 100) > 90 ? true : false),
+                        patientstreatments_t47 = (_r.Next(0, 100) > 90 ? true : false),
+                        patientstreatments_t48 = (_r.Next(0, 100) > 90 ? true : false)
                     });
                 } while (_r.Next(0, 100) > 30);
             }
@@ -436,9 +490,17 @@ EXEC sp_msforeachtable 'DBCC CHECKIDENT(''?'', RESEED, 0)'; DECLARE @max int; SE
                 {
                     if (_r.Next(0, 100) > 20)
                     {
+                        int quantity = 1;
+                        if (patientstreatment.patientstreatments_isunitprice)
+                        {
+                            quantity = _dentnedModel.PatientsTreatments.GetNumberOfTooths(patientstreatment);
+                            if (quantity == 0)
+                                quantity = 1;
+                        }
+
                         _dentnedModel.Payments.Add(new payments()
                         {
-                            payments_amount = patientstreatment.patientstreatments_price + (decimal)(_r.NextDouble()*2),
+                            payments_amount = quantity * (patientstreatment.patientstreatments_price + (patientstreatment.patientstreatments_price * patientstreatment.patientstreatments_taxrate / 100)) + (_r.Next(0, 100) > 50 ? (decimal)(_r.NextDouble() * 2) : 0),
                             payments_date = ((DateTime)patientstreatment.patientstreatments_fulfilldate).AddDays(_r.Next(1, 30)),
                             patients_id = patientstreatment.patients_id
                         });
@@ -473,21 +535,30 @@ EXEC sp_msforeachtable 'DBCC CHECKIDENT(''?'', RESEED, 0)'; DECLARE @max int; SE
                     {
                         treatments treatment = null;
                         patientstreatments patientstreatment = null;
+                        int quantity = _r.Next(1, 3);
                         if (_r.Next(0, 100) > 80)
                         {
                             patientstreatment = _dentnedModel.PatientsTreatments.List(r => r.patients_id == patient.patients_id).FirstOrDefault();
                             if(patientstreatment != null)
+                            {
                                 treatment = _dentnedModel.Treatments.Find(patientstreatment.treatments_id);
+                                if (patientstreatment.patientstreatments_isunitprice)
+                                {
+                                    quantity = _dentnedModel.PatientsTreatments.GetNumberOfTooths(patientstreatment);
+                                    if (quantity == 0)
+                                        quantity = 1;
+                                }
+                            }
                         }
                         if (treatment == null)
                             treatment = treatments[_r.Next(treatments.Count())];
-                        
+
                         _dentnedModel.EstimatesLines.Add(new estimateslines()
                         {
                             estimates_id = estimate.estimates_id,
                             estimateslines_code = treatment.treatments_code,
                             estimateslines_description = treatment.treatments_code + " " + treatment.treatments_name,
-                            estimateslines_quantity = (_r.Next(0, 100) > 50 ? 1 : _r.Next(2, 3)),
+                            estimateslines_quantity = quantity,
                             estimateslines_unitprice = treatment.treatments_price,
                             estimateslines_taxrate = (_r.Next(0, 100) > 50 ? 0 : (_r.Next(0, 100) > 50 ? taxesT22.taxes_rate : taxesT04.taxes_rate)),
                             estimateslines_istaxesdeductionsable = true,
@@ -527,21 +598,30 @@ EXEC sp_msforeachtable 'DBCC CHECKIDENT(''?'', RESEED, 0)'; DECLARE @max int; SE
                     {
                         treatments treatment = null;
                         patientstreatments patientstreatment = null;
+                        int quantity = _r.Next(1, 3);
                         if (_r.Next(0, 100) > 80)
                         {
                             patientstreatment = _dentnedModel.PatientsTreatments.List(r => r.patients_id == patient.patients_id).FirstOrDefault();
                             if (patientstreatment != null)
+                            {
+                                if (patientstreatment.patientstreatments_isunitprice)
+                                {
+                                    quantity = _dentnedModel.PatientsTreatments.GetNumberOfTooths(patientstreatment);
+                                    if (quantity == 0)
+                                        quantity = 1;
+                                }
                                 treatment = _dentnedModel.Treatments.Find(patientstreatment.treatments_id);
+                            }
                         }
                         if (treatment == null)
                             treatment = treatments[_r.Next(treatments.Count())];
-
+                        
                         _dentnedModel.InvoicesLines.Add(new invoiceslines()
                         {
                             invoices_id = invoice.invoices_id,
                             invoiceslines_code = treatment.treatments_code,
                             invoiceslines_description = treatment.treatments_code + " " + treatment.treatments_name,
-                            invoiceslines_quantity = (_r.Next(0, 100) > 50 ? 1 : _r.Next(2, 3)),
+                            invoiceslines_quantity = quantity,
                             invoiceslines_unitprice = treatment.treatments_price,
                             invoiceslines_taxrate = (_r.Next(0, 100) > 50 ? 0 : (_r.Next(0, 100) > 50 ? taxesT22.taxes_rate : taxesT04.taxes_rate)),
                             invoiceslines_istaxesdeductionsable = true,
@@ -574,6 +654,18 @@ EXEC sp_msforeachtable 'DBCC CHECKIDENT(''?'', RESEED, 0)'; DECLARE @max int; SE
                 builder.Append(ch);
             }
             return builder.ToString();
+        }
+
+        public static void GenerateImage(string filename)
+        {
+            using (Bitmap b = new Bitmap(50, 50))
+            {
+                using (Graphics g = Graphics.FromImage(b))
+                {
+                    g.Clear(Color.Green);
+                }
+                b.Save(filename, ImageFormat.Png);
+            }
         }
     }
 }

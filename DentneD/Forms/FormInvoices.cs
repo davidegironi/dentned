@@ -33,6 +33,7 @@ namespace DG.DentneD.Forms
         private TabElement tabElement_tabInvoicesLines = new TabElement();
 
         private const int MaxRowValueLength = 60;
+        private readonly bool _addToothsToDocumentDescription = false;
 
         /// <summary>
         /// Constructor
@@ -48,6 +49,7 @@ namespace DG.DentneD.Forms
             _dentnedModel.LanguageHelper.LoadFromFile(Program.uighfApplication.LanguageFilename);
 
             panel_listtotal.Visible = Convert.ToBoolean(ConfigurationManager.AppSettings["showInvoicesEstimatesTotal"]);
+            _addToothsToDocumentDescription = Convert.ToBoolean(ConfigurationManager.AppSettings["addToothsToDocumentDescription"]);
         }
 
         /// <summary>
@@ -842,11 +844,8 @@ namespace DG.DentneD.Forms
                 }
                 invoicesBindingSource.ResetBindings(true);
             }
-            IsBindingSourceLoading = true;
-            invoices_paymentComboBox.SelectedIndex = -1;
-            IsBindingSourceLoading = false;
         }
-
+        
         /// <summary>
         /// Footer changed handler
         /// </summary>
@@ -872,9 +871,6 @@ namespace DG.DentneD.Forms
                 }
                 invoicesBindingSource.ResetBindings(true);
             }
-            IsBindingSourceLoading = true;
-            invoices_footerComboBox.SelectedIndex = -1;
-            IsBindingSourceLoading = false;
         }
 
         /// <summary>
@@ -902,6 +898,39 @@ namespace DG.DentneD.Forms
                 }
                 invoicesBindingSource.ResetBindings(true);
             }
+        }
+
+        /// <summary>
+        /// Payment Type leaved
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void invoices_paymentComboBox_Leave(object sender, EventArgs e)
+        {
+            IsBindingSourceLoading = true;
+            invoices_paymentComboBox.SelectedIndex = -1;
+            IsBindingSourceLoading = false;
+        }
+
+        /// <summary>
+        /// Footer leaved
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void invoices_footerComboBox_Leave(object sender, EventArgs e)
+        {
+            IsBindingSourceLoading = true;
+            invoices_footerComboBox.SelectedIndex = -1;
+            IsBindingSourceLoading = false;
+        }
+
+        /// <summary>
+        /// Deduction tax leaved
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void invoices_deductiontaxrateComboBox_Leave(object sender, EventArgs e)
+        {
             IsBindingSourceLoading = true;
             invoices_deductiontaxrateComboBox.SelectedIndex = -1;
             IsBindingSourceLoading = false;
@@ -1098,7 +1127,7 @@ namespace DG.DentneD.Forms
                     ((invoiceslines)invoiceslinesBindingSource.Current).invoices_id = invoices_id;
                     ((invoiceslines)invoiceslinesBindingSource.Current).invoiceslines_code = "";
                     ((invoiceslines)invoiceslinesBindingSource.Current).invoiceslines_description = "";
-                    ((invoiceslines)invoiceslinesBindingSource.Current).invoiceslines_quantity = 0;
+                    ((invoiceslines)invoiceslinesBindingSource.Current).invoiceslines_quantity = 1;
                     ((invoiceslines)invoiceslinesBindingSource.Current).invoiceslines_unitprice = 0;
                     if (_dentnedModel.Taxes.List(r => r.taxes_isdefault).Count > 0)
                         ((invoiceslines)invoiceslinesBindingSource.Current).invoiceslines_taxrate = _dentnedModel.Taxes.List(r => r.taxes_isdefault).FirstOrDefault().taxes_rate;
@@ -1172,7 +1201,7 @@ namespace DG.DentneD.Forms
 
             //local patients treatments
             IsBindingSourceLoading = true;
-            patientstreatments_idComboBox.DataSource = patientstreatmentsl.Select(r => new { name = _dentnedModel.Treatments.Find(r.treatments_id).treatments_code + (tabElement_tabInvoicesLines.CurrentEditingMode == EditingMode.C || tabElement_tabInvoicesLines.CurrentEditingMode == EditingMode.U ? " [" + _dentnedModel.PatientsTreatments.GetTreatmentsToothsString(r) + "] " : " " ) + r.patientstreatments_creationdate.ToShortDateString(), r.patientstreatments_id }).OrderBy(r => r.name).ToList();
+            patientstreatments_idComboBox.DataSource = patientstreatmentsl.Select(r => new { name = _dentnedModel.Treatments.Find(r.treatments_id).treatments_code + " [" + _dentnedModel.PatientsTreatments.GetTreatmentsToothsString(r) + "] " + r.patientstreatments_creationdate.ToShortDateString(), r.patientstreatments_id }).OrderBy(r => r.name).ToList();
             patientstreatments_idComboBox.DisplayMember = "name";
             patientstreatments_idComboBox.ValueMember = "patientstreatments_id";
             IsBindingSourceLoading = false;
@@ -1203,9 +1232,6 @@ namespace DG.DentneD.Forms
                 }
                 invoiceslinesBindingSource.ResetBindings(true);
             }
-            IsBindingSourceLoading = true;
-            invoiceslines_taxrateComboBox.SelectedIndex = -1;
-            IsBindingSourceLoading = false;
         }
 
         /// <summary>
@@ -1254,6 +1280,7 @@ namespace DG.DentneD.Forms
                                     }
                                 }
                             }
+                            ((invoiceslines)invoiceslinesBindingSource.Current).patientstreatments_id = null;
                             ((invoiceslines)invoiceslinesBindingSource.Current).invoiceslines_code = code;
                             ((invoiceslines)invoiceslinesBindingSource.Current).invoiceslines_description = description;
                             ((invoiceslines)invoiceslinesBindingSource.Current).invoiceslines_quantity = 1;
@@ -1264,9 +1291,6 @@ namespace DG.DentneD.Forms
                 }
                 invoiceslinesBindingSource.ResetBindings(true);
             }
-            IsBindingSourceLoading = true;
-            treatments_idComboBox.SelectedIndex = -1;
-            IsBindingSourceLoading = false;
         }
         
         /// <summary>
@@ -1304,6 +1328,7 @@ namespace DG.DentneD.Forms
                             string description = computedline.computedlines_name;
                             decimal price = totallines * (computedline.computedlines_rate / 100);
                             decimal taxrate = (computedline.taxes_id != null ? _dentnedModel.Taxes.Find((int)computedline.taxes_id).taxes_rate : 0);
+                            ((invoiceslines)invoiceslinesBindingSource.Current).patientstreatments_id = null;
                             ((invoiceslines)invoiceslinesBindingSource.Current).invoiceslines_code = code;
                             ((invoiceslines)invoiceslinesBindingSource.Current).invoiceslines_description = description;
                             ((invoiceslines)invoiceslinesBindingSource.Current).invoiceslines_quantity = 1;
@@ -1314,9 +1339,6 @@ namespace DG.DentneD.Forms
                 }
                 invoiceslinesBindingSource.ResetBindings(true);
             }
-            IsBindingSourceLoading = true;
-            computedlines_idComboBox.SelectedIndex = -1;
-            IsBindingSourceLoading = false;
         }
         
         /// <summary>
@@ -1346,25 +1368,32 @@ namespace DG.DentneD.Forms
 
                     if (patients_id != -1)
                     {
-                        patientstreatments patientstreatments = null;
+                        patientstreatments patientstreatment = null;
                         try
                         {
-                            patientstreatments = _dentnedModel.PatientsTreatments.Find((int)patientstreatments_idComboBox.SelectedValue);
+                            patientstreatment = _dentnedModel.PatientsTreatments.Find((int)patientstreatments_idComboBox.SelectedValue);
                         }
                         catch { }
-                        if (patientstreatments != null)
+                        if (patientstreatment != null)
                         {
-                            treatments treatments = _dentnedModel.Treatments.Find(patientstreatments.treatments_id);
+                            treatments treatments = _dentnedModel.Treatments.Find(patientstreatment.treatments_id);
                             if (treatments != null)
                             {
+                                int quantity = 1;
+                                if (patientstreatment.patientstreatments_isunitprice)
+                                {
+                                    quantity = _dentnedModel.PatientsTreatments.GetNumberOfTooths(patientstreatment);
+                                    if (quantity == 0)
+                                        quantity = 1;
+                                }
                                 string code = treatments.treatments_code;
-                                string description = treatments.treatments_name;
-                                decimal price = patientstreatments.patientstreatments_price;
-                                decimal taxrate = patientstreatments.patientstreatments_taxrate;
-                                ((invoiceslines)invoiceslinesBindingSource.Current).patientstreatments_id = patientstreatments.patientstreatments_id;
+                                string description = treatments.treatments_name + (_addToothsToDocumentDescription ? " [" + _dentnedModel.PatientsTreatments.GetTreatmentsToothsString(patientstreatment) + "]" : "");
+                                decimal price = patientstreatment.patientstreatments_price;
+                                decimal taxrate = patientstreatment.patientstreatments_taxrate;
+                                ((invoiceslines)invoiceslinesBindingSource.Current).patientstreatments_id = patientstreatment.patientstreatments_id;
                                 ((invoiceslines)invoiceslinesBindingSource.Current).invoiceslines_code = code;
                                 ((invoiceslines)invoiceslinesBindingSource.Current).invoiceslines_description = description;
-                                ((invoiceslines)invoiceslinesBindingSource.Current).invoiceslines_quantity = 1;
+                                ((invoiceslines)invoiceslinesBindingSource.Current).invoiceslines_quantity = quantity;
                                 ((invoiceslines)invoiceslinesBindingSource.Current).invoiceslines_unitprice = price;
                                 ((invoiceslines)invoiceslinesBindingSource.Current).invoiceslines_taxrate = taxrate;
                             }
@@ -1373,11 +1402,45 @@ namespace DG.DentneD.Forms
                 }
                 invoiceslinesBindingSource.ResetBindings(true);
             }
+        }
+
+        /// <summary>
+        /// Tax rate leaved
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void invoiceslines_taxrateComboBox_Leave(object sender, EventArgs e)
+        {
+            IsBindingSourceLoading = true;
+            invoiceslines_taxrateComboBox.SelectedIndex = -1;
+            IsBindingSourceLoading = false;
+        }
+
+        /// <summary>
+        /// Treatments leaved
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void treatments_idComboBox_Leave(object sender, EventArgs e)
+        {
+
             IsBindingSourceLoading = true;
             treatments_idComboBox.SelectedIndex = -1;
             IsBindingSourceLoading = false;
         }
-        
+
+        /// <summary>
+        /// Computed lines leaved
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void computedlines_idComboBox_Leave(object sender, EventArgs e)
+        {
+            IsBindingSourceLoading = true;
+            computedlines_idComboBox.SelectedIndex = -1;
+            IsBindingSourceLoading = false;
+        }
+
         /// <summary>
         /// Combobox autocomplete
         /// </summary>
@@ -1419,6 +1482,6 @@ namespace DG.DentneD.Forms
         }
 
         #endregion
-                               
+                    
     }
 }

@@ -255,7 +255,7 @@
             // 
             this.panel_tabTaxesDeductions_updates.Controls.Add(this.button_tabTaxesDeductions_cancel);
             this.panel_tabTaxesDeductions_updates.Controls.Add(this.button_tabTaxesDeductions_save);
-            this.panel_tabTaxesDeductions_updates.Location = new System.Drawing.Point(6, 177);
+            this.panel_tabTaxesDeductions_updates.Location = new System.Drawing.Point(6, 180);
             this.panel_tabTaxesDeductions_updates.Name = "panel_tabTaxesDeductions_updates";
             this.panel_tabTaxesDeductions_updates.Size = new System.Drawing.Size(480, 30);
             this.panel_tabTaxesDeductions_updates.TabIndex = 1;

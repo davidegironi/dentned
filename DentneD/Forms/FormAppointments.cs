@@ -235,7 +235,7 @@ namespace DG.DentneD.Forms
             LanguageHelper.AddComponent(appointments_titleLabel);
             LanguageHelper.AddComponent(appointments_notesLabel);
         }
-
+        
         /// <summary>
         /// Loader
         /// </summary>
@@ -676,12 +676,12 @@ namespace DG.DentneD.Forms
             }
             catch (ArgumentException ex)
             {
-                new DGUIGHFFormErrors(ex.Message, true).ShowDialog();
+                new DGUIGHFFormErrors(ex.Message, true, languageBase).ShowDialog();
                 return;
             }
             catch (DataException ex)
             {
-                new DGUIGHFFormErrors(ex.Message, false).ShowDialog();
+                new DGUIGHFFormErrors(ex.Message, false, languageBase).ShowDialog();
                 return;
             }
 

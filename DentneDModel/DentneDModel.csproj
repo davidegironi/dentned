@@ -140,6 +140,9 @@
     <Compile Include="Entity\rooms.cs">
       <DependentUpon>Model_dentned.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\sysdiagrams.cs">
+      <DependentUpon>Model_dentned.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\taxes.cs">
       <DependentUpon>Model_dentned.tt</DependentUpon>
     </Compile>

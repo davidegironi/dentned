@@ -151,7 +151,7 @@
             // 
             this.panel_tabAddressesTypes_updates.Controls.Add(this.button_tabAddressesTypes_cancel);
             this.panel_tabAddressesTypes_updates.Controls.Add(this.button_tabAddressesTypes_save);
-            this.panel_tabAddressesTypes_updates.Location = new System.Drawing.Point(6, 139);
+            this.panel_tabAddressesTypes_updates.Location = new System.Drawing.Point(6, 142);
             this.panel_tabAddressesTypes_updates.Name = "panel_tabAddressesTypes_updates";
             this.panel_tabAddressesTypes_updates.Size = new System.Drawing.Size(480, 30);
             this.panel_tabAddressesTypes_updates.TabIndex = 1;

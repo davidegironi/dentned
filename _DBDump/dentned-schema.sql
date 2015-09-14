@@ -3,9 +3,9 @@
 IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = N'dentned')
 BEGIN
 CREATE DATABASE [dentned] ON  PRIMARY 
-( NAME = N'dentned', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\DATA\dentned.mdf' , SIZE = 11264KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
+( NAME = N'dentned', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\DATA\dentned.mdf' , SIZE = 75776KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
  LOG ON 
-( NAME = N'dentned_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\DATA\dentned_1.ldf' , SIZE = 265344KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
+( NAME = N'dentned_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\DATA\dentned_1.ldf' , SIZE = 69760KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
  COLLATE Latin1_General_CI_AS
 END;
 ALTER DATABASE [dentned] SET COMPATIBILITY_LEVEL = 100;
@@ -409,6 +409,7 @@ CREATE TABLE [dbo].[patientstreatments](
 	[patientstreatments_fulfilldate] [date] NULL,
 	[patientstreatments_ispaid] [bit] NOT NULL,
 	[patientstreatments_price] [decimal](10, 2) NOT NULL,
+	[patientstreatments_isunitprice] [bit] NOT NULL,
 	[patientstreatments_taxrate] [decimal](10, 2) NOT NULL,
 	[patientstreatments_description] [varchar](128) COLLATE Latin1_General_CI_AS NULL,
 	[patientstreatments_notes] [text] COLLATE Latin1_General_CI_AS NULL,
@@ -581,6 +582,7 @@ CREATE TABLE [dbo].[treatments](
 	[treatments_code] [char](3) COLLATE Latin1_General_CI_AS NOT NULL,
 	[treatments_name] [varchar](32) COLLATE Latin1_General_CI_AS NOT NULL,
 	[treatments_price] [decimal](10, 2) NOT NULL,
+	[treatments_isunitprice] [bit] NOT NULL,
 	[treatments_mexpiration] [tinyint] NULL,
 	[treatments_notes] [text] COLLATE Latin1_General_CI_AS NULL,
  CONSTRAINT [PK_treatments] PRIMARY KEY CLUSTERED 
@@ -765,6 +767,10 @@ IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_patientst
 BEGIN
 ALTER TABLE [dbo].[patientstreatments] ADD  CONSTRAINT [DF_patientstreatments_patientstreatments_ispayed]  DEFAULT ((0)) FOR [patientstreatments_ispaid]
 END;
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_patientstreatments_patientstreatments_isunitprice]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[patientstreatments] ADD  CONSTRAINT [DF_patientstreatments_patientstreatments_isunitprice]  DEFAULT ((1)) FOR [patientstreatments_isunitprice]
+END;
 IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_patientstreatments_patientstreatments_t11]') AND type = 'D')
 BEGIN
 ALTER TABLE [dbo].[patientstreatments] ADD  CONSTRAINT [DF_patientstreatments_patientstreatments_t11]  DEFAULT ((0)) FOR [patientstreatments_t11]
@@ -914,6 +920,10 @@ ALTER TABLE [dbo].[treatments]  WITH CHECK ADD  CONSTRAINT [FK_treatments_treatm
 REFERENCES [treatmentstypes] ([treatmentstypes_id]);
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_treatments_treatmentstypes]') AND parent_object_id = OBJECT_ID(N'[dbo].[treatments]'))
 ALTER TABLE [dbo].[treatments] CHECK CONSTRAINT [FK_treatments_treatmentstypes];
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_treatments_treatments_isunitprice]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[treatments] ADD  CONSTRAINT [DF_treatments_treatments_isunitprice]  DEFAULT ((1)) FOR [treatments_isunitprice]
+END;
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_treatmentsprices_treatments]') AND parent_object_id = OBJECT_ID(N'[dbo].[treatmentsprices]'))
 ALTER TABLE [dbo].[treatmentsprices]  WITH CHECK ADD  CONSTRAINT [FK_treatmentsprices_treatments] FOREIGN KEY([treatments_id])
 REFERENCES [treatments] ([treatments_id]);

@@ -49,10 +49,10 @@
             this.button_tabTreatmentsTypes_new = new System.Windows.Forms.Button();
             this.panel_list = new System.Windows.Forms.Panel();
             this.advancedDataGridView_main = new Zuby.ADGV.AdvancedDataGridView();
-            this.vTreatmentsTypesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.panel_filters = new System.Windows.Forms.Panel();
             this.treatmentstypesidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vTreatmentsTypesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.panel_filters = new System.Windows.Forms.Panel();
             this.panel_data.SuspendLayout();
             this.tabControl_main.SuspendLayout();
             this.tabPage_tabTreatmentsTypes.SuspendLayout();
@@ -151,7 +151,7 @@
             // 
             this.panel_tabTreatmentsTypes_updates.Controls.Add(this.button_tabTreatmentsTypes_cancel);
             this.panel_tabTreatmentsTypes_updates.Controls.Add(this.button_tabTreatmentsTypes_save);
-            this.panel_tabTreatmentsTypes_updates.Location = new System.Drawing.Point(6, 139);
+            this.panel_tabTreatmentsTypes_updates.Location = new System.Drawing.Point(6, 142);
             this.panel_tabTreatmentsTypes_updates.Name = "panel_tabTreatmentsTypes_updates";
             this.panel_tabTreatmentsTypes_updates.Size = new System.Drawing.Size(480, 30);
             this.panel_tabTreatmentsTypes_updates.TabIndex = 1;
@@ -246,18 +246,6 @@
             this.advancedDataGridView_main.SortStringChanged += new System.EventHandler(this.advancedDataGridView_main_SortStringChanged);
             this.advancedDataGridView_main.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_main_FilterStringChanged);
             // 
-            // vTreatmentsTypesBindingSource
-            // 
-            this.vTreatmentsTypesBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VTreatmentsTypes);
-            // 
-            // panel_filters
-            // 
-            this.panel_filters.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel_filters.Location = new System.Drawing.Point(0, 0);
-            this.panel_filters.Name = "panel_filters";
-            this.panel_filters.Size = new System.Drawing.Size(284, 60);
-            this.panel_filters.TabIndex = 10;
-            // 
             // treatmentstypesidDataGridViewTextBoxColumn
             // 
             this.treatmentstypesidDataGridViewTextBoxColumn.DataPropertyName = "treatmentstypes_id";
@@ -277,6 +265,18 @@
             this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
             this.nameDataGridViewTextBoxColumn.ReadOnly = true;
             this.nameDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // vTreatmentsTypesBindingSource
+            // 
+            this.vTreatmentsTypesBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VTreatmentsTypes);
+            // 
+            // panel_filters
+            // 
+            this.panel_filters.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel_filters.Location = new System.Drawing.Point(0, 0);
+            this.panel_filters.Name = "panel_filters";
+            this.panel_filters.Size = new System.Drawing.Size(284, 60);
+            this.panel_filters.TabIndex = 10;
             // 
             // FormTreatmentsTypes
             // 

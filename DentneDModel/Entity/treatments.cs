@@ -25,6 +25,7 @@ namespace DG.DentneD.Model.Entity
         public string treatments_code { get; set; }
         public string treatments_name { get; set; }
         public decimal treatments_price { get; set; }
+        public bool treatments_isunitprice { get; set; }
         public Nullable<byte> treatments_mexpiration { get; set; }
         public string treatments_notes { get; set; }
     

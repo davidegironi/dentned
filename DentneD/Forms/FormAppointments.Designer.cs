@@ -115,7 +115,7 @@
             // rooms_idLabel
             // 
             this.rooms_idLabel.AutoSize = true;
-            this.rooms_idLabel.Location = new System.Drawing.Point(10, 206);
+            this.rooms_idLabel.Location = new System.Drawing.Point(9, 206);
             this.rooms_idLabel.Name = "rooms_idLabel";
             this.rooms_idLabel.Size = new System.Drawing.Size(38, 13);
             this.rooms_idLabel.TabIndex = 6;
@@ -124,7 +124,7 @@
             // doctors_idLabel
             // 
             this.doctors_idLabel.AutoSize = true;
-            this.doctors_idLabel.Location = new System.Drawing.Point(8, 166);
+            this.doctors_idLabel.Location = new System.Drawing.Point(9, 166);
             this.doctors_idLabel.Name = "doctors_idLabel";
             this.doctors_idLabel.Size = new System.Drawing.Size(42, 13);
             this.doctors_idLabel.TabIndex = 8;
@@ -160,7 +160,7 @@
             // appointments_fromLabel
             // 
             this.appointments_fromLabel.AutoSize = true;
-            this.appointments_fromLabel.Location = new System.Drawing.Point(10, 88);
+            this.appointments_fromLabel.Location = new System.Drawing.Point(9, 88);
             this.appointments_fromLabel.Name = "appointments_fromLabel";
             this.appointments_fromLabel.Size = new System.Drawing.Size(33, 13);
             this.appointments_fromLabel.TabIndex = 16;
@@ -169,7 +169,7 @@
             // appointments_toLabel
             // 
             this.appointments_toLabel.AutoSize = true;
-            this.appointments_toLabel.Location = new System.Drawing.Point(10, 127);
+            this.appointments_toLabel.Location = new System.Drawing.Point(9, 127);
             this.appointments_toLabel.Name = "appointments_toLabel";
             this.appointments_toLabel.Size = new System.Drawing.Size(23, 13);
             this.appointments_toLabel.TabIndex = 17;
@@ -235,7 +235,7 @@
             // appointments_dateDateTimePicker
             // 
             this.appointments_dateDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.appointments_dateDateTimePicker.Location = new System.Drawing.Point(13, 104);
+            this.appointments_dateDateTimePicker.Location = new System.Drawing.Point(12, 104);
             this.appointments_dateDateTimePicker.Name = "appointments_dateDateTimePicker";
             this.appointments_dateDateTimePicker.Size = new System.Drawing.Size(100, 20);
             this.appointments_dateDateTimePicker.TabIndex = 19;
@@ -244,7 +244,7 @@
             // 
             this.appointments_toDateTimePicker.CustomFormat = "HH:mm";
             this.appointments_toDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.appointments_toDateTimePicker.Location = new System.Drawing.Point(119, 143);
+            this.appointments_toDateTimePicker.Location = new System.Drawing.Point(118, 143);
             this.appointments_toDateTimePicker.Name = "appointments_toDateTimePicker";
             this.appointments_toDateTimePicker.ShowUpDown = true;
             this.appointments_toDateTimePicker.Size = new System.Drawing.Size(60, 20);
@@ -254,7 +254,7 @@
             // 
             this.appointments_fromDateTimePicker.CustomFormat = "HH:mm";
             this.appointments_fromDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.appointments_fromDateTimePicker.Location = new System.Drawing.Point(119, 104);
+            this.appointments_fromDateTimePicker.Location = new System.Drawing.Point(118, 104);
             this.appointments_fromDateTimePicker.Name = "appointments_fromDateTimePicker";
             this.appointments_fromDateTimePicker.ShowUpDown = true;
             this.appointments_fromDateTimePicker.Size = new System.Drawing.Size(60, 20);
@@ -263,11 +263,11 @@
             // appointments_notesTextBox
             // 
             this.appointments_notesTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.appointmentsBindingSource, "appointments_notes", true));
-            this.appointments_notesTextBox.Location = new System.Drawing.Point(11, 301);
+            this.appointments_notesTextBox.Location = new System.Drawing.Point(12, 301);
             this.appointments_notesTextBox.Multiline = true;
             this.appointments_notesTextBox.Name = "appointments_notesTextBox";
             this.appointments_notesTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.appointments_notesTextBox.Size = new System.Drawing.Size(200, 50);
+            this.appointments_notesTextBox.Size = new System.Drawing.Size(250, 50);
             this.appointments_notesTextBox.TabIndex = 15;
             // 
             // appointmentsBindingSource
@@ -301,7 +301,7 @@
             this.doctors_idComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.doctors_idComboBox.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.appointmentsBindingSource, "doctors_id", true));
             this.doctors_idComboBox.FormattingEnabled = true;
-            this.doctors_idComboBox.Location = new System.Drawing.Point(11, 182);
+            this.doctors_idComboBox.Location = new System.Drawing.Point(12, 182);
             this.doctors_idComboBox.Name = "doctors_idComboBox";
             this.doctors_idComboBox.Size = new System.Drawing.Size(250, 21);
             this.doctors_idComboBox.TabIndex = 9;

@@ -19,10 +19,9 @@ namespace DG.DentneD.Model.Repositories
         /// </summary>
         public class RepositoryLanguage : IGenericDataRepositoryLanguage
         {
-            public string text001 = "Invalid price. Can not be less than zero.";
-            public string text002 = "Treatment type is mandatory.";
-            public string text003 = "Treatment price list is mandatory.";
-            public string text004 = "Treatment price already inserted.";
+            public string text001 = "Treatment type is mandatory.";
+            public string text002 = "Treatment price list is mandatory.";
+            public string text003 = "Treatment price already inserted.";
         }
 
         /// <summary>
@@ -81,24 +80,15 @@ namespace DG.DentneD.Model.Repositories
 
             foreach (treatmentsprices item in items)
             {
-                if (item.treatmentsprices_price < 0)
+                if (BaseModel.Treatments.Find(item.treatments_id) == null)
                 {
                     ret = false;
                     errors = errors.Concat(new string[] { language.text001 }).ToArray();
                 }
-                
-                if (!ret)
-                    break;
-                
-                if (BaseModel.Treatments.Find(item.treatments_id) == null)
-                {
-                    ret = false;
-                    errors = errors.Concat(new string[] { language.text002 }).ToArray();
-                }
                 if (BaseModel.TreatmentsPricesLists.Find(item.treatmentspriceslists_id) == null)
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { language.text003 }).ToArray();
+                    errors = errors.Concat(new string[] { language.text002 }).ToArray();
                 }
 
                 if (!ret)
@@ -109,7 +99,7 @@ namespace DG.DentneD.Model.Repositories
                     if (List(r => r.treatments_id == item.treatments_id && r.treatmentspriceslists_id == item.treatmentspriceslists_id).Count() > 0)
                     {
                         ret = false;
-                        errors = errors.Concat(new string[] { language.text004 }).ToArray();
+                        errors = errors.Concat(new string[] { language.text003 }).ToArray();
                     }
                 }
                 else
@@ -117,7 +107,7 @@ namespace DG.DentneD.Model.Repositories
                     if (List(r => r.treatmentsprices_id != item.treatmentsprices_id && r.treatments_id == item.treatments_id && r.treatmentspriceslists_id == item.treatmentspriceslists_id).Count() > 0)
                     {
                         ret = false;
-                        errors = errors.Concat(new string[] { language.text004 }).ToArray();
+                        errors = errors.Concat(new string[] { language.text003 }).ToArray();
                     }
                 }
 

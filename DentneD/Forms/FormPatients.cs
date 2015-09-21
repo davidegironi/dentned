@@ -44,6 +44,8 @@ namespace DG.DentneD.Forms
 
         private const int MaxRowValueLength = 60;
 
+        private const string ExplorerBinary = "explorer.exe";
+
         private enum FilterShow { NotArchived, Archived, All };
 
         private readonly string _patientsDatadir = "";
@@ -57,6 +59,9 @@ namespace DG.DentneD.Forms
 
         private enum PaymentsReference { Nothing, Treatments, Invoices };
         private readonly PaymentsReference _paymentsReference = PaymentsReference.Treatments;
+
+        private enum AttachmentsOpenMode { Application, Folder };
+        private readonly AttachmentsOpenMode _attachmentsOpenMode = AttachmentsOpenMode.Folder;
 
         public int invoices_id_toload = -1;
         public int estimates_id_toload = -1;
@@ -91,6 +96,38 @@ namespace DG.DentneD.Forms
             else if (ConfigurationManager.AppSettings["patientsDefaultFilter"] == "C")
                 _patientsFilter = PatientsFilter.Archived;
             _patientsAttachmentsFindMaxValue = Convert.ToBoolean(ConfigurationManager.AppSettings["patientsAttachmentsFindMaxValue"]);
+            if (ConfigurationManager.AppSettings["patientsAttachmentsOpenMode"] == "A")
+                _attachmentsOpenMode = AttachmentsOpenMode.Application;
+            else if (ConfigurationManager.AppSettings["patientsAttachmentsOpenMode"] == "F")
+                _attachmentsOpenMode = AttachmentsOpenMode.Folder;           
+
+            IsBindingSourceLoading = true;
+            patientstreatments_filtertanyCheckBox.Checked = true;
+            IsBindingSourceLoading = false;
+
+            if (_paymentsReference == PaymentsReference.Nothing)
+            {
+                label_tabPayments_inforeference.Text = "";
+                label_tabPayments_total.Text = "";
+                label_tabPayments_lefttotal.Text = "";
+                label_tabPayments_inforeference.Visible = false;
+                label_tabPayments_total.Visible = false;
+                label_tabPayments_lefttotal.Visible = false;
+                label_tabPayments_totalvalue.Visible = false;
+                label_tabPayments_lefttotalvalue.Visible = false;
+            }
+            else if (_paymentsReference == PaymentsReference.Treatments)
+            {
+                label_tabPayments_inforeference.Text = language.paymentsInfoReferenceLabelTreatments;
+                label_tabPayments_total.Text = language.paymentsTotalLabelTreatments;
+                label_tabPayments_lefttotal.Text = language.paymentsLeftTotalLabelTreatments;
+            }
+            else if (_paymentsReference == PaymentsReference.Invoices)
+            {
+                label_tabPayments_inforeference.Text = language.paymentsInfoReferenceLabelInvoices;
+                label_tabPayments_total.Text = language.paymentsTotalLabelInvoices;
+                label_tabPayments_lefttotal.Text = language.paymentsLeftTotalLabelInvoices;
+            }
         }
 
         /// <summary>
@@ -753,34 +790,6 @@ namespace DG.DentneD.Forms
 
             ReloadView();
             
-            IsBindingSourceLoading = true;
-            patientstreatments_filtertanyCheckBox.Checked = true;
-            IsBindingSourceLoading = false;
-
-            if (_paymentsReference == PaymentsReference.Nothing)
-            {
-                label_tabPayments_inforeference.Text = "";
-                label_tabPayments_total.Text = "";
-                label_tabPayments_lefttotal.Text = "";
-                label_tabPayments_inforeference.Visible = false;
-                label_tabPayments_total.Visible = false;
-                label_tabPayments_lefttotal.Visible = false;
-                label_tabPayments_totalvalue.Visible = false;
-                label_tabPayments_lefttotalvalue.Visible = false;
-            }
-            else if(_paymentsReference == PaymentsReference.Treatments)
-            {
-                label_tabPayments_inforeference.Text = language.paymentsInfoReferenceLabelTreatments;
-                label_tabPayments_total.Text = language.paymentsTotalLabelTreatments;
-                label_tabPayments_lefttotal.Text = language.paymentsLeftTotalLabelTreatments;
-            }
-            else if (_paymentsReference == PaymentsReference.Invoices)
-            {
-                label_tabPayments_inforeference.Text = language.paymentsInfoReferenceLabelInvoices;
-                label_tabPayments_total.Text = language.paymentsTotalLabelInvoices;
-                label_tabPayments_lefttotal.Text = language.paymentsLeftTotalLabelInvoices;
-            }
-
             vPatientsBindingSource_CurrentChanged(sender, e);
         }
 
@@ -1191,7 +1200,11 @@ namespace DG.DentneD.Forms
                         return;
                     }
                 }
-                Process.Start("explorer.exe", patientsDatadir);
+                try
+                {
+                    Process.Start(ExplorerBinary, patientsDatadir);
+                }
+                catch { }
             }
         }
         
@@ -4477,12 +4490,23 @@ namespace DG.DentneD.Forms
                 {
                     if (File.Exists(_patientsAttachmentsdir + "\\" + patients_id + "\\" + patientsattachments_filenameTextBox.Text))
                     {
-                        try
+                        if (_attachmentsOpenMode == AttachmentsOpenMode.Application)
                         {
-                            Process.Start(_patientsAttachmentsdir + "\\" + patients_id + "\\" + patientsattachments_filenameTextBox.Text);
+                            try
+                            {
+                                Process.Start(_patientsAttachmentsdir + "\\" + patients_id + "\\" + patientsattachments_filenameTextBox.Text);
+                            }
+                            catch
+                            { }
                         }
-                        catch
-                        { }
+                        else if (_attachmentsOpenMode == AttachmentsOpenMode.Folder)
+                        {
+                            try
+                            {
+                                Process.Start(ExplorerBinary, _patientsAttachmentsdir + "\\" + patients_id);
+                            }
+                            catch { }
+                        }
                     }
                 }
             }
@@ -4525,6 +4549,8 @@ namespace DG.DentneD.Forms
                                 catch { }
                             }
                             maxvalue++;
+                            if (maxvalue == 0)
+                                maxvalue++;
                             patientsattachmentsBindingSource.EndEdit();
                             ((patientsattachments)patientsattachmentsBindingSource.Current).patientsattachments_value = maxvalue.ToString();
                             patientsattachmentsBindingSource.ResetBindings(true);

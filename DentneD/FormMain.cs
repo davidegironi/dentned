@@ -400,7 +400,7 @@ namespace DG.DentneD
             if (!Program.isPasswordLogged)
             {
                 string input = null;
-                if (InputBox.Show(language.reportsPasswordInputMessage, language.reportsPasswordInputTitle, ref input) == DialogResult.OK)
+                if (InputBox.ShowPassword(language.reportsPasswordInputMessage, language.reportsPasswordInputTitle, ref input) == DialogResult.OK)
                 {
                     if (input == ConfigurationManager.AppSettings["formspassword"])
                     {

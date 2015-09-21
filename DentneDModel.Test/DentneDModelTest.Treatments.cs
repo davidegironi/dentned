@@ -82,17 +82,7 @@ namespace DG.DentneD.Model.Test
                 treatments_price = 10
             };
             Assert.IsTrue(_dentnedModel.Treatments.CanAdd(t_treatments));
-
-            t_treatments = new treatments()
-            {
-                treatmentstypes_id = t_treatmentstypes.treatmentstypes_id,
-                taxes_id = t_taxes.taxes_id,
-                treatments_code = "XX1",
-                treatments_name = "XX1",
-                treatments_price = -10
-            };
-            Assert.IsFalse(_dentnedModel.Treatments.CanAdd(t_treatments));
-
+            
             t_treatments = new treatments()
             {
                 treatmentstypes_id = t_treatmentstypes.treatmentstypes_id,

@@ -246,6 +246,7 @@ namespace DG.DentneD.Forms
         {
             IsBindingSourceLoading = true;
             advancedDataGridView_main.SortDESC(advancedDataGridView_main.Columns[1]);
+            advancedDataGridView_main.SortDESC(advancedDataGridView_main.Columns[0]);
             IsBindingSourceLoading = false;
 
             PreloadView();
@@ -450,7 +451,7 @@ namespace DG.DentneD.Forms
                     date = r.estimates_date,
                     isinvoiced = (r.invoices_id != null ? true : false),
                     number = r.estimates_number,
-                    patient = (patientsnames.ContainsKey(r.patients_id) ? patientsnames[r.patients_id].ToString() : "")
+                    patient = (r.patients_id != null ? (patientsnames.ContainsKey(r.patients_id) ? patientsnames[r.patients_id].ToString() : "") : "")
                 }).ToList();
 
             return DGDataTableUtils.ToDataTable<VEstimates>(vEstimates);
@@ -626,7 +627,7 @@ namespace DG.DentneD.Forms
             {
                 //set default values
                 int doctors_id = Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_filterDoctors.SelectedItem).Id);
-                int maxnumber = 1;
+                int maxnumber = 0;
                 int year = DateTime.Now.Year;
                 if (comboBox_filterYears.SelectedIndex != -1)
                 {
@@ -641,10 +642,11 @@ namespace DG.DentneD.Forms
                         if (n > maxnumber)
                             maxnumber = n;
                     }
-                    if(maxnumber != 1)
-                        maxnumber++;
+                    maxnumber++;
                 }
                 catch { }
+                if (maxnumber == 0)
+                    maxnumber++;
                 ((estimates)estimatesBindingSource.Current).doctors_id = doctors_id;
                 ((estimates)estimatesBindingSource.Current).patients_id = null;
                 if (_dentnedModel.PaymentsTypes.List(r => r.paymentstypes_isdefault).Count > 0)

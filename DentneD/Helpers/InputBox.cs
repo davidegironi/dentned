@@ -25,6 +25,31 @@ namespace DG.DentneD.Helpers
         /// <returns></returns>
         public static DialogResult Show(string message, string title, ref string value)
         {
+            return Show(message, title, ref value, false);
+        }
+
+        /// <summary>
+        /// Show an InputBox for password
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="title"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static DialogResult ShowPassword(string message, string title, ref string value)
+        {
+            return Show(message, title, ref value, true);
+        }
+
+        /// <summary>
+        /// Show an InputBox
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="title"></param>
+        /// <param name="value"></param>
+        /// <param name="ispassword"></param>
+        /// <returns></returns>
+        private static DialogResult Show(string message, string title, ref string value, bool ispassword)
+        {
             Form form = new Form();
             Label label = new Label();
             TextBox textBox = new TextBox();
@@ -35,6 +60,8 @@ namespace DG.DentneD.Helpers
             label.Text = message;
             textBox.Text = value;
 
+            if (ispassword)
+                textBox.PasswordChar = '*';
             buttonOk.Text = "OK";
             buttonCancel.Text = "Cancel";
             buttonOk.DialogResult = DialogResult.OK;

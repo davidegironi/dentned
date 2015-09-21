@@ -16,6 +16,8 @@ using DG.DentneD.Forms.Objects;
 using System.Data;
 using Zuby.ADGV;
 using SMcMaster;
+using DG.DentneD.Helpers;
+using System.Diagnostics;
 
 namespace DG.DentneD.Forms
 {
@@ -51,6 +53,7 @@ namespace DG.DentneD.Forms
             LanguageHelper.AddComponent(nameDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
             LanguageHelper.AddComponent(codeDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
             LanguageHelper.AddComponent(typeDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(button_export);
             //tabTreatments
             LanguageHelper.AddComponent(tabPage_tabTreatments);
             LanguageHelper.AddComponent(button_tabTreatments_new);
@@ -84,6 +87,27 @@ namespace DG.DentneD.Forms
             LanguageHelper.AddComponent(treatmentspriceslists_idLabel);
             LanguageHelper.AddComponent(treatmentsprices_priceLabel);
         }
+
+        /// <summary>
+        /// Form language dictionary
+        /// </summary>
+        public class FormLanguage : IDGUIGHFLanguage
+        {
+            public string exportColumnCode = "Code";
+            public string exportColumnType = "Type";
+            public string exportColumnName = "Name";
+            public string exportColumnPrice = "Price";
+            public string exportSaveFileDialogTitle = "Save an Excel File";
+            public string exportErrorMessage = "Error writing file '{0}'.";
+            public string exportErrorTitle = "Error";
+            public string exportSuccessMessage = "File created. Do you want to open it with your default application?";
+            public string exportSuccessTitle = "Open";
+        }
+
+        /// <summary>
+        /// Form language
+        /// </summary>
+        public FormLanguage language = new FormLanguage();
 
         /// <summary>
         /// Initialize TabElements
@@ -298,6 +322,84 @@ namespace DG.DentneD.Forms
 
             //reset treatments prices filter
             comboBox_tabTreatmentsPrices_filterPriceslists.SelectedIndex = -1;
+        }
+
+        /// <summary>
+        /// Export click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button_export_Click(object sender, EventArgs e)
+        {
+            string filename = null;
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Excel|*.xls";
+            saveFileDialog.Title = language.exportSaveFileDialogTitle;;
+            saveFileDialog.ShowDialog();
+            filename = saveFileDialog.FileName;
+            if (!String.IsNullOrEmpty(filename))
+            {
+                Cursor.Current = Cursors.WaitCursor;
+
+                DataTable datatable = new DataTable();
+                datatable.Clear();
+                datatable.Columns.Add(language.exportColumnCode);
+                datatable.Columns.Add(language.exportColumnType);
+                datatable.Columns.Add(language.exportColumnName);
+                datatable.Columns.Add(language.exportColumnPrice);
+                foreach (treatmentspriceslists treatmentspriceslist in _dentnedModel.TreatmentsPricesLists.List().OrderBy(r => r.treatmentspriceslists_name))
+                {
+                    datatable.Columns.Add(language.exportColumnPrice + "-" + treatmentspriceslist.treatmentspriceslists_id);
+                }
+
+                //add datatable columns
+                foreach (treatments treatment in _dentnedModel.Treatments.List().OrderBy(r => r.treatments_code))
+                {
+                    DataRow row = datatable.NewRow();
+                    row[language.exportColumnCode] = treatment.treatments_code;
+                    row[language.exportColumnType] = _dentnedModel.TreatmentsTypes.Find(treatment.treatmentstypes_id).treatmentstypes_name;
+                    row[language.exportColumnName] = treatment.treatments_name;
+                    row[language.exportColumnPrice] = treatment.treatments_price;
+                    foreach (treatmentspriceslists treatmentspriceslist in _dentnedModel.TreatmentsPricesLists.List().OrderBy(r => r.treatmentspriceslists_name))
+                    {
+                        Nullable<decimal> price = null;
+                        treatmentsprices treatmentsprice = _dentnedModel.TreatmentsPrices.List(r => r.treatments_id == treatment.treatments_id && r.treatmentspriceslists_id == treatmentspriceslist.treatmentspriceslists_id).FirstOrDefault();
+                        if (treatmentsprice != null)
+                        {
+                            price = treatmentsprice.treatmentsprices_price;
+                        }
+                        row[language.exportColumnPrice + "-" + treatmentspriceslist.treatmentspriceslists_id] = price;
+                    }
+                    datatable.Rows.Add(row);
+                }
+
+                Cursor.Current = Cursors.Default;
+
+                //export to excel
+                DataSet dataset = new DataSet();
+                dataset.Tables.Add(datatable);
+                if (!String.IsNullOrEmpty(filename))
+                {
+                    try
+                    {
+                        ExcelExporter.CreateWorkbook(filename, dataset);
+                    }
+                    catch
+                    {
+                        MessageBox.Show(String.Format(language.exportErrorMessage, filename), language.exportErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    if (MessageBox.Show(language.exportSuccessMessage, language.exportSuccessTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                    {
+                        try
+                        {
+                            Process.Start(filename);
+                        }
+                        catch { }
+                    }
+                }
+            }
         }
 
 
@@ -572,6 +674,7 @@ namespace DG.DentneD.Forms
         }
 
         #endregion
+
 
 
     }

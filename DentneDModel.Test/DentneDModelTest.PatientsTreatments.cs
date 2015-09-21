@@ -106,17 +106,6 @@ namespace DG.DentneD.Model.Test
                 doctors_id = t_doctors.doctors_id,
                 patients_id = t_patients.patients_id,
                 treatments_id = t_treatments.treatments_id,
-                //patientstreatments_creationdate = DateTime.Now,
-                patientstreatments_price = -10,
-                patientstreatments_taxrate = 0,
-            };
-            Assert.IsFalse(_dentnedModel.PatientsTreatments.CanAdd(t_patientstreatments));
-
-            t_patientstreatments = new patientstreatments()
-            {
-                doctors_id = t_doctors.doctors_id,
-                patients_id = t_patients.patients_id,
-                treatments_id = t_treatments.treatments_id,
                 patientstreatments_creationdate = DateTime.Now,
                 patientstreatments_price = 10,
                 patientstreatments_taxrate = -10,

@@ -19,12 +19,11 @@ namespace DG.DentneD.Model.Repositories
         /// </summary>
         public class RepositoryLanguage : IGenericDataRepositoryLanguage
         {
-            public string text001 = "Invalid price. Can not be less than zero.";
-            public string text002 = "Doctors is mandatory.";
-            public string text003 = "Patient is mandatory.";
-            public string text004 = "Treatments type is mandatory.";
-            public string text005 = "Invalid sex. Can be 'M' or 'F'.";
-            public string text006 = "Invalid tax rate. Can not be less than zero.";
+            public string text001 = "Doctors is mandatory.";
+            public string text002 = "Patient is mandatory.";
+            public string text003 = "Treatments type is mandatory.";
+            public string text004 = "Invalid sex. Can be 'M' or 'F'.";
+            public string text005 = "Invalid tax rate. Can not be less than zero.";
             public string text101 = "Arches";
             public string text102 = "Upper Arch";
             public string text103 = "Lower Arch";
@@ -87,16 +86,10 @@ namespace DG.DentneD.Model.Repositories
 
             foreach (patientstreatments item in items)
             {
-                if (item.patientstreatments_price < 0)
-                {
-                    ret = false;
-                    errors = errors.Concat(new string[] { language.text001 }).ToArray();
-                }
-
                 if(item.patientstreatments_taxrate < 0)
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { language.text006 }).ToArray();
+                    errors = errors.Concat(new string[] { language.text005 }).ToArray();
                 }
 
                 if (!ret)
@@ -105,17 +98,17 @@ namespace DG.DentneD.Model.Repositories
                 if (BaseModel.Doctors.Find(item.doctors_id) == null)
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { language.text002 }).ToArray();
+                    errors = errors.Concat(new string[] { language.text001 }).ToArray();
                 }
                 if (BaseModel.Patients.Find(item.patients_id) == null)
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { language.text003 }).ToArray();
+                    errors = errors.Concat(new string[] { language.text002 }).ToArray();
                 }
                 if (BaseModel.Treatments.Find(item.treatments_id) == null)
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { language.text004 }).ToArray();
+                    errors = errors.Concat(new string[] { language.text003 }).ToArray();
                 }
 
                 if (!ret)

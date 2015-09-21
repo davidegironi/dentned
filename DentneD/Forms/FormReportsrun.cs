@@ -166,7 +166,7 @@ namespace DG.DentneD.Forms
                 if(report.reports_ispasswordprotected && !Program.isPasswordLogged)
                 {
                     string input = null;
-                    if (InputBox.Show(language.reportsPasswordInputMessage, language.reportsPasswordInputTitle, ref input) == DialogResult.OK)
+                    if (InputBox.ShowPassword(language.reportsPasswordInputMessage, language.reportsPasswordInputTitle, ref input) == DialogResult.OK)
                     {
                         if (input == ConfigurationManager.AppSettings["formspassword"])
                         {
@@ -201,10 +201,13 @@ namespace DG.DentneD.Forms
                     sql_cm1.CommandText = query;
                     foreach (DataRow dr in _datatableReportsParameters.Rows)
                     {
-                        SqlParameter param = new SqlParameter();
-                        param.ParameterName = dr["Name"].ToString();
-                        param.Value = dr["Value"].ToString();
-                        sql_cm1.Parameters.Add(param);
+                        if(!String.IsNullOrEmpty(dr["Value"].ToString()))
+                        {
+                            SqlParameter param = new SqlParameter();
+                            param.ParameterName = dr["Name"].ToString();
+                            param.Value = dr["Value"].ToString();
+                            sql_cm1.Parameters.Add(param);
+                        }
                     }
                     sql_rd1 = sql_cm1.ExecuteReader();
                     

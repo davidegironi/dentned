@@ -97,6 +97,7 @@
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.vTreatmentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel_filters = new System.Windows.Forms.Panel();
+            this.button_export = new System.Windows.Forms.Button();
             this.panel_data.SuspendLayout();
             this.tabControl_main.SuspendLayout();
             this.tabPage_tabTreatments.SuspendLayout();
@@ -116,6 +117,7 @@
             this.panel_list.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_main)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.vTreatmentsBindingSource)).BeginInit();
+            this.panel_filters.SuspendLayout();
             this.SuspendLayout();
             // 
             // treatments_idLabel
@@ -762,11 +764,23 @@
             // 
             // panel_filters
             // 
+            this.panel_filters.Controls.Add(this.button_export);
             this.panel_filters.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel_filters.Location = new System.Drawing.Point(0, 0);
             this.panel_filters.Name = "panel_filters";
             this.panel_filters.Size = new System.Drawing.Size(284, 60);
             this.panel_filters.TabIndex = 10;
+            // 
+            // button_export
+            // 
+            this.button_export.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_export.Location = new System.Drawing.Point(203, 31);
+            this.button_export.Name = "button_export";
+            this.button_export.Size = new System.Drawing.Size(75, 23);
+            this.button_export.TabIndex = 0;
+            this.button_export.Text = "Export";
+            this.button_export.UseVisualStyleBackColor = true;
+            this.button_export.Click += new System.EventHandler(this.button_export_Click);
             // 
             // FormTreatments
             // 
@@ -804,6 +818,7 @@
             this.panel_list.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_main)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.vTreatmentsBindingSource)).EndInit();
+            this.panel_filters.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -874,5 +889,6 @@
         private System.Windows.Forms.ComboBox taxes_idComboBox;
         private System.Windows.Forms.Label taxes_idLabel;
         private System.Windows.Forms.CheckBox treatments_isunitpriceCheckBox;
+        private System.Windows.Forms.Button button_export;
     }
 }

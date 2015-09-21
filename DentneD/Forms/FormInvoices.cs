@@ -34,6 +34,7 @@ namespace DG.DentneD.Forms
 
         private const int MaxRowValueLength = 60;
         private readonly bool _addToothsToDocumentDescription = false;
+        private readonly bool _invoicesIsPaidDefault = false;
 
         /// <summary>
         /// Constructor
@@ -50,6 +51,7 @@ namespace DG.DentneD.Forms
 
             panel_listtotal.Visible = Convert.ToBoolean(ConfigurationManager.AppSettings["showInvoicesEstimatesTotal"]);
             _addToothsToDocumentDescription = Convert.ToBoolean(ConfigurationManager.AppSettings["addToothsToDocumentDescription"]);
+            _invoicesIsPaidDefault = Convert.ToBoolean(ConfigurationManager.AppSettings["invoicesIsPaidDefault"]);
         }
 
         /// <summary>
@@ -244,6 +246,7 @@ namespace DG.DentneD.Forms
         {
             IsBindingSourceLoading = true;
             advancedDataGridView_main.SortDESC(advancedDataGridView_main.Columns[1]);
+            advancedDataGridView_main.SortDESC(advancedDataGridView_main.Columns[0]);
             IsBindingSourceLoading = false;
 
             PreloadView();
@@ -448,7 +451,7 @@ namespace DG.DentneD.Forms
                     date = r.invoices_date,
                     ispaid = r.invoices_ispaid,
                     number = r.invoices_number,
-                    patient = (patientsnames.ContainsKey(r.patients_id) ? patientsnames[r.patients_id].ToString() : "")
+                    patient = (r.patients_id != null ? (patientsnames.ContainsKey(r.patients_id) ? patientsnames[r.patients_id].ToString() : "") : "")
                 }).ToList();
 
             return DGDataTableUtils.ToDataTable<VInvoices>(vInvoices);
@@ -592,7 +595,7 @@ namespace DG.DentneD.Forms
             {
                 //set default values
                 int doctors_id = Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_filterDoctors.SelectedItem).Id);
-                int maxnumber = 1;
+                int maxnumber = 0;
                 int year = DateTime.Now.Year;
                 if (comboBox_filterYears.SelectedIndex != -1)
                 {
@@ -607,10 +610,12 @@ namespace DG.DentneD.Forms
                         if(n > maxnumber)
                             maxnumber = n;
                     }
-                    if (maxnumber != 1)
-                        maxnumber++;
+                    maxnumber++;
                 }
                 catch { }
+                if (maxnumber == 0)
+                    maxnumber++;
+                ((invoices)invoicesBindingSource.Current).invoices_ispaid = _invoicesIsPaidDefault;
                 ((invoices)invoicesBindingSource.Current).doctors_id = doctors_id;
                 ((invoices)invoicesBindingSource.Current).patients_id = null;
                 if (_dentnedModel.PaymentsTypes.List(r => r.paymentstypes_isdefault).Count > 0)
@@ -619,7 +624,7 @@ namespace DG.DentneD.Forms
                     ((invoices)invoicesBindingSource.Current).invoices_footer = _dentnedModel.InvoicesFooters.List(r => r.invoicesfooters_isdefault).FirstOrDefault().invoicesfooters_doctext;
                 if (_dentnedModel.TaxesDeductions.List(r => r.taxesdeductions_isdefault).Count > 0)
                     ((invoices)invoicesBindingSource.Current).invoices_deductiontaxrate = _dentnedModel.TaxesDeductions.List(r => r.taxesdeductions_isdefault).FirstOrDefault().taxesdeductions_rate;
-                ((invoices)invoicesBindingSource.Current).invoices_date = DateTime.Now;
+                ((invoices)invoicesBindingSource.Current).invoices_date = new DateTime(year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, DateTime.Now.Minute, 0);
                 ((invoices)invoicesBindingSource.Current).invoices_number = maxnumber.ToString();
                 //reset BindingSource
                 invoicesBindingSource.ResetBindings(true);

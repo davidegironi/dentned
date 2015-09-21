@@ -25,11 +25,10 @@ namespace DG.DentneD.Model.Repositories
             public string text002 = "Code can not be empty.";
             public string text003 = "Invalid code format. 3 character, uppercase letters [A-Z] or numbers [0-9], or minus '-'.";
             public string text004 = "Invalid expiration period. Insert from 1 to 48 month, or leave empty.";
-            public string text005 = "Invalid price. Can not be less than zero.";
-            public string text006 = "Treatment type is mandatory.";
-            public string text007 = "Treatment already inserted.";
-            public string text008 = "Invalid tax.";
-            public string text009 = "A computed line already has this code.";
+            public string text005 = "Treatment type is mandatory.";
+            public string text006 = "Treatment already inserted.";
+            public string text007 = "Invalid tax.";
+            public string text008 = "A computed line already has this code.";
         }
 
         /// <summary>
@@ -112,11 +111,6 @@ namespace DG.DentneD.Model.Repositories
                     ret = false;
                     errors = errors.Concat(new string[] { language.text004 }).ToArray();
                 }
-                if (item.treatments_price < 0)
-                {
-                    ret = false;
-                    errors = errors.Concat(new string[] { language.text005 }).ToArray();
-                }
 
                 if (!ret)
                     break;
@@ -124,13 +118,13 @@ namespace DG.DentneD.Model.Repositories
                 if (BaseModel.TreatmentsTypes.Find(item.treatmentstypes_id) == null)
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { language.text006 }).ToArray();
+                    errors = errors.Concat(new string[] { language.text005 }).ToArray();
                 }
                 
                 if (item.taxes_id != null && BaseModel.Taxes.Find(item.taxes_id) == null)
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { language.text008 }).ToArray();
+                    errors = errors.Concat(new string[] { language.text007 }).ToArray();
                 }
 
                 if (!ret)
@@ -139,7 +133,7 @@ namespace DG.DentneD.Model.Repositories
                 if (BaseModel.ComputedLines.List(r => r.computedlines_code == item.treatments_code).Count() > 0)
                 {
                     ret = false;
-                    errors = errors.Concat(new string[] { language.text009 }).ToArray();
+                    errors = errors.Concat(new string[] { language.text008 }).ToArray();
                 }
 
                 if (!isUpdate)
@@ -148,7 +142,7 @@ namespace DG.DentneD.Model.Repositories
                         List(r => r.treatments_name == item.treatments_name).Count() > 0)
                     {
                         ret = false;
-                        errors = errors.Concat(new string[] { language.text007 }).ToArray();
+                        errors = errors.Concat(new string[] { language.text006 }).ToArray();
                     }
                 }
                 else
@@ -157,7 +151,7 @@ namespace DG.DentneD.Model.Repositories
                         List(r => r.treatments_id != item.treatments_id && r.treatments_name == item.treatments_name).Count() > 0)
                     {
                         ret = false;
-                        errors = errors.Concat(new string[] { language.text007 }).ToArray();
+                        errors = errors.Concat(new string[] { language.text006 }).ToArray();
                     }
                 }
 

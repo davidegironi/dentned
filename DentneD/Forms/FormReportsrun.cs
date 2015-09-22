@@ -134,11 +134,11 @@ namespace DG.DentneD.Forms
                     textBox_info.Text = report.reports_infotext;
 
                 string query = report.reports_query;
-                List<string> pl = Regex.Matches(query, @"\@\w+").Cast<Match>().Select(m => m.Value).ToList();
+                List<string> pl = Regex.Matches(query, @"(?<!\@)\@\w+").Cast<Match>().Select(m => m.Value).ToList();
                 List<string> pinserted = new List<string>();
                 foreach (string p in pl)
                 {
-                    if(!pinserted.Contains(p.ToString()))
+                    if (!pinserted.Contains(p.ToString()) && !p.StartsWith("@NOT"))
                     {
                         pinserted.Add(p.ToString());
                         DataRow dr = _datatableReportsParameters.NewRow();
@@ -201,13 +201,10 @@ namespace DG.DentneD.Forms
                     sql_cm1.CommandText = query;
                     foreach (DataRow dr in _datatableReportsParameters.Rows)
                     {
-                        if(!String.IsNullOrEmpty(dr["Value"].ToString()))
-                        {
-                            SqlParameter param = new SqlParameter();
-                            param.ParameterName = dr["Name"].ToString();
-                            param.Value = dr["Value"].ToString();
-                            sql_cm1.Parameters.Add(param);
-                        }
+                        SqlParameter param = new SqlParameter();
+                        param.ParameterName = dr["Name"].ToString();
+                        param.Value = dr["Value"].ToString();
+                        sql_cm1.Parameters.Add(param);
                     }
                     sql_rd1 = sql_cm1.ExecuteReader();
                     

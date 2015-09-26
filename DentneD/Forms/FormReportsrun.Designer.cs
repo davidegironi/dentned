@@ -199,6 +199,7 @@
             this.Name = "FormReportsrun";
             this.Text = "Reports Run";
             this.Load += new System.EventHandler(this.FormReportsrun_Load);
+            this.Shown += new System.EventHandler(this.FormReportsrun_Shown);
             this.panel_filter.ResumeLayout(false);
             this.panel_left_fill.ResumeLayout(false);
             this.panel_left_right_fill.ResumeLayout(false);

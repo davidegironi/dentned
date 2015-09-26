@@ -37,9 +37,6 @@
             this.reports_queryLabel = new System.Windows.Forms.Label();
             this.panel_filters = new System.Windows.Forms.Panel();
             this.advancedDataGridView_main = new Zuby.ADGV.AdvancedDataGridView();
-            this.reportsidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vReportsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel_list = new System.Windows.Forms.Panel();
             this.button_tabReports_delete = new System.Windows.Forms.Button();
             this.button_tabReports_edit = new System.Windows.Forms.Button();
@@ -59,10 +56,12 @@
             this.panel_tabReports_updates = new System.Windows.Forms.Panel();
             this.panel_data = new System.Windows.Forms.Panel();
             this.addressestypesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.reportsidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vReportsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.vAddressesTypesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             reports_infotextLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_main)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vReportsBindingSource)).BeginInit();
             this.panel_list.SuspendLayout();
             this.panel_tabReports_actions.SuspendLayout();
             this.panel_tabReports_data.SuspendLayout();
@@ -72,6 +71,7 @@
             this.panel_tabReports_updates.SuspendLayout();
             this.panel_data.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.addressestypesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vReportsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.vAddressesTypesBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -144,30 +144,6 @@
             this.advancedDataGridView_main.TabIndex = 0;
             this.advancedDataGridView_main.SortStringChanged += new System.EventHandler(this.advancedDataGridView_main_SortStringChanged);
             this.advancedDataGridView_main.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_main_FilterStringChanged);
-            // 
-            // reportsidDataGridViewTextBoxColumn
-            // 
-            this.reportsidDataGridViewTextBoxColumn.DataPropertyName = "reports_id";
-            this.reportsidDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.reportsidDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.reportsidDataGridViewTextBoxColumn.Name = "reportsidDataGridViewTextBoxColumn";
-            this.reportsidDataGridViewTextBoxColumn.ReadOnly = true;
-            this.reportsidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.reportsidDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // nameDataGridViewTextBoxColumn
-            // 
-            this.nameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "name";
-            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
-            this.nameDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
-            this.nameDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // vReportsBindingSource
-            // 
-            this.vReportsBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VReports);
             // 
             // panel_list
             // 
@@ -349,6 +325,30 @@
             // 
             this.addressestypesBindingSource.DataSource = typeof(DG.DentneD.Model.Entity.addressestypes);
             // 
+            // reportsidDataGridViewTextBoxColumn
+            // 
+            this.reportsidDataGridViewTextBoxColumn.DataPropertyName = "reports_id";
+            this.reportsidDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.reportsidDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.reportsidDataGridViewTextBoxColumn.Name = "reportsidDataGridViewTextBoxColumn";
+            this.reportsidDataGridViewTextBoxColumn.ReadOnly = true;
+            this.reportsidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.reportsidDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            this.nameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            this.nameDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.nameDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // vReportsBindingSource
+            // 
+            this.vReportsBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VReports);
+            // 
             // vAddressesTypesBindingSource
             // 
             this.vAddressesTypesBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VAddressesTypes);
@@ -366,8 +366,8 @@
             this.Name = "FormReports";
             this.Text = "Reports";
             this.Load += new System.EventHandler(this.FormReports_Load);
+            this.Shown += new System.EventHandler(this.FormReports_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_main)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vReportsBindingSource)).EndInit();
             this.panel_list.ResumeLayout(false);
             this.panel_tabReports_actions.ResumeLayout(false);
             this.panel_tabReports_data.ResumeLayout(false);
@@ -378,6 +378,7 @@
             this.panel_tabReports_updates.ResumeLayout(false);
             this.panel_data.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.addressestypesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vReportsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.vAddressesTypesBindingSource)).EndInit();
             this.ResumeLayout(false);
 

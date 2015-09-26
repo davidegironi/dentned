@@ -27,6 +27,8 @@ namespace DG.DentneD.Forms
         private DataTable _datatableReportsParameters = null;
         private SqlConnection _sqlConnection = new SqlConnection();
 
+        private bool _isPasswordLogged = false;
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -98,6 +100,16 @@ namespace DG.DentneD.Forms
             PreloadView();
         }
 
+        /// <summary>
+        /// Form is shown
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FormReportsrun_Shown(object sender, EventArgs e)
+        {
+            //reset password logged status
+            _isPasswordLogged = false;
+        }
 
         /// <summary>
         /// Preload reports
@@ -163,14 +175,14 @@ namespace DG.DentneD.Forms
                 int reports_id = Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_reports.SelectedItem).Id);
                 reports report = _dentnedModel.Reports.Find(reports_id);
 
-                if(report.reports_ispasswordprotected && !Program.isPasswordLogged)
+                if (report.reports_ispasswordprotected && !_isPasswordLogged)
                 {
                     string input = null;
                     if (InputBox.ShowPassword(language.reportsPasswordInputMessage, language.reportsPasswordInputTitle, ref input) == DialogResult.OK)
                     {
                         if (input == ConfigurationManager.AppSettings["formspassword"])
                         {
-                            Program.isPasswordLogged = true;
+                            _isPasswordLogged = true;
                         }
                         else
                         {
@@ -272,6 +284,6 @@ namespace DG.DentneD.Forms
 
             return ret;
         }
-
+        
     }
 }

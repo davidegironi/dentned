@@ -15,6 +15,8 @@ using DG.DentneD.Model.Entity;
 using DG.DentneD.Forms.Objects;
 using Zuby.ADGV;
 using SMcMaster;
+using DG.DentneD.Helpers;
+using System.Configuration;
 
 namespace DG.DentneD.Forms
 {
@@ -58,6 +60,22 @@ namespace DG.DentneD.Forms
             LanguageHelper.AddComponent(reports_nameLabel);
             LanguageHelper.AddComponent(reports_ispasswordprotectedCheckBox);
         }
+
+        /// <summary>
+        /// Form language dictionary
+        /// </summary>
+        public class FormLanguage : IDGUIGHFLanguage
+        {
+            public string reportsPasswordInputMessage = "Insert password:";
+            public string reportsPasswordInputTitle = "Password";
+            public string reportsPasswordErrorMessage = "Wrong password.";
+            public string reportsPasswordErrorTitle = "Error";
+        }
+
+        /// <summary>
+        /// Form language
+        /// </summary>
+        public FormLanguage language = new FormLanguage();
 
         /// <summary>
         /// Initialize TabElements
@@ -125,6 +143,31 @@ namespace DG.DentneD.Forms
             IsBindingSourceLoading = false;
 
             ReloadView();
+        }
+        
+        /// <summary>
+        /// Form is shown
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FormReports_Shown(object sender, EventArgs e)
+        {
+            bool isPasswordLogged = false;
+            string input = null;
+            if (InputBox.ShowPassword(language.reportsPasswordInputMessage, language.reportsPasswordInputTitle, ref input) == DialogResult.OK)
+            {
+                if (input == ConfigurationManager.AppSettings["formspassword"])
+                {
+                    isPasswordLogged = true;
+                }
+                else
+                {
+                    MessageBox.Show(language.reportsPasswordErrorMessage, language.reportsPasswordErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+            if (!isPasswordLogged)
+                this.Close();
         }
 
         /// <summary>
@@ -213,6 +256,6 @@ namespace DG.DentneD.Forms
         }
 
         #endregion
-
+        
     }
 }

@@ -130,10 +130,6 @@ namespace DG.DentneD
             public string backupToolTitle = "Backup";
             public string cleandatadirToolMessage = "Do you want to run the clean data directories tool?";
             public string cleandatadirToolTitle = "Clean Datadir";
-            public string reportsPasswordInputMessage = "Insert password:";
-            public string reportsPasswordInputTitle = "Password";
-            public string reportsPasswordErrorMessage = "Wrong password.";
-            public string reportsPasswordErrorTitle = "Error";
         }
 
         /// <summary>
@@ -397,27 +393,6 @@ namespace DG.DentneD
         /// <param name="e"></param>
         private void setReportsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!Program.isPasswordLogged)
-            {
-                string input = null;
-                if (InputBox.ShowPassword(language.reportsPasswordInputMessage, language.reportsPasswordInputTitle, ref input) == DialogResult.OK)
-                {
-                    if (input == ConfigurationManager.AppSettings["formspassword"])
-                    {
-                        Program.isPasswordLogged = true;
-                    }
-                    else
-                    {
-                        MessageBox.Show(language.reportsPasswordErrorMessage, language.reportsPasswordErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-                }
-                else
-                {
-                    return;
-                }
-            }
-
             ShowForm(this, typeof(FormReports));
         }
 

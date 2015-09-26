@@ -125,6 +125,7 @@ namespace DG.DentneD.Forms
         {
             IsBindingSourceLoading = true;
             advancedDataGridView_main.SortASC(advancedDataGridView_main.Columns[1]);
+            advancedDataGridView_main.SortASC(advancedDataGridView_main.Columns[2]);
             IsBindingSourceLoading = false;
 
             PreloadView();
@@ -156,6 +157,7 @@ namespace DG.DentneD.Forms
                 r => new VComputedLines
                 {
                     computedlines_id = r.computedlines_id,
+                    code = r.computedlines_code,
                     name = r.computedlines_name
                 }).ToList();
 

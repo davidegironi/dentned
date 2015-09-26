@@ -63,6 +63,12 @@ namespace DG.DentneD.Forms
         private enum AttachmentsOpenMode { Application, Folder };
         private readonly AttachmentsOpenMode _attachmentsOpenMode = AttachmentsOpenMode.Folder;
 
+        private enum PatientsTreatmentsFulfilledFilter { All, NotFulfilled, Fulfilled };
+        private readonly PatientsTreatmentsFulfilledFilter _patientsTreatmentsFulfilledFilter = PatientsTreatmentsFulfilledFilter.All;
+        
+        private enum PatientsTreatmentsPaidFilter { All, NotPaid, Paid };
+        private readonly PatientsTreatmentsPaidFilter _patientsTreatmentsPaidFilter = PatientsTreatmentsPaidFilter.All;
+
         public int invoices_id_toload = -1;
         public int estimates_id_toload = -1;
         
@@ -218,6 +224,8 @@ namespace DG.DentneD.Forms
             LanguageHelper.AddComponent(patientstreatments_filtertdwLabel);
             LanguageHelper.AddComponent(patientstreatments_filtertnoLabel);
             LanguageHelper.AddComponent(patientstreatments_filtertanyLabel);
+            LanguageHelper.AddComponent(label_tabPatientsTreatments_filterfulfilled);
+            LanguageHelper.AddComponent(label_tabPatientsTreatments_filterpaid);
             LanguageHelper.AddComponent(dateDataGridViewTextBoxColumn1, this.GetType().Name, "HeaderText");
             LanguageHelper.AddComponent(treatmentDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
             LanguageHelper.AddComponent(toothsDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
@@ -338,9 +346,9 @@ namespace DG.DentneD.Forms
         /// </summary>
         public class FormLanguage : IDGUIGHFLanguage
         {
+            public string filtershowAll = "All";
             public string filtershowNotarchived = "Not Archived";
             public string filtershowArchived = "Archived";
-            public string filtershowAll = "All";
             public string filedeleteerrorMessage = "Error deleting file from folder.";
             public string filedeleteerrorTitle = "Error";
             public string folderdeleteerrorMessage = "Can not remove folder '{0}'.";
@@ -356,6 +364,12 @@ namespace DG.DentneD.Forms
             public string paymentsLeftTotalLabelTreatments = "Treatments to be paid:";
             public string paymentsTotalLabelInvoices = "Invoices total:";
             public string paymentsLeftTotalLabelInvoices = "Invoices to be paid:";
+            public string patientstreatmentsfilterfulfilledAll = "All";
+            public string patientstreatmentsfilterfulfilledN = "Not fullfilled";
+            public string patientstreatmentsfilterfulfilledY = "Fullfilled";
+            public string patientstreatmentsfilterpaidAll = "All";
+            public string patientstreatmentsfilterpaidN = "Not paid";
+            public string patientstreatmentsfilterpaidY = "Paid";
         }
 
         /// <summary>
@@ -802,15 +816,15 @@ namespace DG.DentneD.Forms
 
             //load filter doctors
             comboBox_filterArchived.Items.Clear();
+            comboBox_filterArchived.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(FilterShow.All.ToString(), language.filtershowAll));
             comboBox_filterArchived.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(FilterShow.NotArchived.ToString(), language.filtershowNotarchived));
             comboBox_filterArchived.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(FilterShow.Archived.ToString(), language.filtershowArchived));
-            comboBox_filterArchived.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(FilterShow.All.ToString(), language.filtershowAll));
             comboBox_filterArchived.SelectedIndex = 0;
-            if (_patientsFilter == PatientsFilter.NotArchived)
+            if (_patientsFilter == PatientsFilter.All)
                 comboBox_filterArchived.SelectedIndex = 0;
-            else if (_patientsFilter == PatientsFilter.Archived)
+            else if (_patientsFilter == PatientsFilter.NotArchived)
                 comboBox_filterArchived.SelectedIndex = 1;
-            else if (_patientsFilter == PatientsFilter.All)
+            else if (_patientsFilter == PatientsFilter.Archived)
                 comboBox_filterArchived.SelectedIndex = 2;
 
             //load prices lists
@@ -833,22 +847,22 @@ namespace DG.DentneD.Forms
             addressestypes_idComboBox.DisplayMember = "addressestypes_name";
             addressestypes_idComboBox.ValueMember = "addressestypes_id";
 
-            //local medicalrecords types
+            //load medicalrecords types
             medicalrecordstypes_idComboBox.DataSource = _dentnedModel.MedicalrecordsTypes.List().OrderBy(r => r.medicalrecordstypes_name).ToList();
             medicalrecordstypes_idComboBox.DisplayMember = "medicalrecordstypes_name";
             medicalrecordstypes_idComboBox.ValueMember = "medicalrecordstypes_id";
 
-            //local patientsattachments types
+            //load patientsattachments types
             patientsattachmentstypes_idComboBox.DataSource = _dentnedModel.PatientsAttachmentsTypes.List().OrderBy(r => r.patientsattachmentstypes_name).ToList();
             patientsattachmentstypes_idComboBox.DisplayMember = "patientsattachmentstypes_name";
             patientsattachmentstypes_idComboBox.ValueMember = "patientsattachmentstypes_id";
 
-            //local rooms
+            //load rooms
             rooms_idComboBox.DataSource = _dentnedModel.Rooms.List().OrderBy(r => r.rooms_name).ToList();
             rooms_idComboBox.DisplayMember = "rooms_name";
             rooms_idComboBox.ValueMember = "rooms_id";
             
-            //local doctors
+            //load doctors
             doctors_idComboBox.DataSource = _dentnedModel.Doctors.List().Select(r => new { name = r.doctors_surname + " " + r.doctors_name, r.doctors_id}).OrderBy(r => r.name).ToList();
             doctors_idComboBox.DisplayMember = "name";
             doctors_idComboBox.ValueMember = "doctors_id";
@@ -856,10 +870,36 @@ namespace DG.DentneD.Forms
             doctors_idComboBox1.DisplayMember = "name";
             doctors_idComboBox1.ValueMember = "doctors_id";
 
-            //local treatments
+            //load treatments
             treatments_idComboBox.DataSource = _dentnedModel.Treatments.List().Select(r => new { name = r.treatments_code + " - " + r.treatments_name, r.treatments_id }).OrderBy(r => r.name).ToList();
             treatments_idComboBox.DisplayMember = "name";
             treatments_idComboBox.ValueMember = "treatments_id";
+
+            //load patientstreatments filter fullfilled
+            comboBox_tabPatientsTreatments_filterfulfilled.Items.Clear();
+            comboBox_tabPatientsTreatments_filterfulfilled.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(PatientsTreatmentsFulfilledFilter.All.ToString(), language.patientstreatmentsfilterfulfilledAll));
+            comboBox_tabPatientsTreatments_filterfulfilled.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(PatientsTreatmentsFulfilledFilter.NotFulfilled.ToString(), language.patientstreatmentsfilterfulfilledN));
+            comboBox_tabPatientsTreatments_filterfulfilled.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(PatientsTreatmentsFulfilledFilter.Fulfilled.ToString(), language.patientstreatmentsfilterfulfilledY));
+            comboBox_tabPatientsTreatments_filterfulfilled.SelectedIndex = 0;
+            if (_patientsTreatmentsFulfilledFilter == PatientsTreatmentsFulfilledFilter.All)
+                comboBox_tabPatientsTreatments_filterfulfilled.SelectedIndex = 0;
+            else if (_patientsTreatmentsFulfilledFilter == PatientsTreatmentsFulfilledFilter.NotFulfilled)
+                comboBox_tabPatientsTreatments_filterfulfilled.SelectedIndex = 1;
+            else if (_patientsTreatmentsFulfilledFilter == PatientsTreatmentsFulfilledFilter.Fulfilled)
+                comboBox_tabPatientsTreatments_filterfulfilled.SelectedIndex = 2;
+
+            //load patientstreatments filter paid
+            comboBox_tabPatientsTreatments_filterpaid.Items.Clear();
+            comboBox_tabPatientsTreatments_filterpaid.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(PatientsTreatmentsPaidFilter.All.ToString(), language.patientstreatmentsfilterpaidAll));
+            comboBox_tabPatientsTreatments_filterpaid.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(PatientsTreatmentsPaidFilter.NotPaid.ToString(), language.patientstreatmentsfilterpaidN));
+            comboBox_tabPatientsTreatments_filterpaid.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(PatientsTreatmentsPaidFilter.Paid.ToString(), language.patientstreatmentsfilterpaidY));
+            comboBox_tabPatientsTreatments_filterpaid.SelectedIndex = 0;
+            if (_patientsTreatmentsPaidFilter == PatientsTreatmentsPaidFilter.All)
+                comboBox_tabPatientsTreatments_filterpaid.SelectedIndex = 0;
+            else if (_patientsTreatmentsPaidFilter == PatientsTreatmentsPaidFilter.NotPaid)
+                comboBox_tabPatientsTreatments_filterpaid.SelectedIndex = 1;
+            else if (_patientsTreatmentsPaidFilter == PatientsTreatmentsPaidFilter.Paid)
+                comboBox_tabPatientsTreatments_filterpaid.SelectedIndex = 2;
 
             IsBindingSourceLoading = false;
         }
@@ -877,7 +917,8 @@ namespace DG.DentneD.Forms
             advancedDataGridView_tabPatientsMedicalrecords_list.CleanFilterAndSort();
             advancedDataGridView_tabPatientsMedicalrecords_list.SortASC(advancedDataGridView_tabPatientsMedicalrecords_list.Columns[1]);
             advancedDataGridView_tabPatientsTreatments_list.CleanFilterAndSort();
-            advancedDataGridView_tabPatientsTreatments_list.SortDESC(advancedDataGridView_tabPatientsTreatments_list.Columns[1]);
+            advancedDataGridView_tabPatientsTreatments_list.SortDESC(advancedDataGridView_tabPatientsTreatments_list.Columns[0]);
+            advancedDataGridView_tabPatientsTreatments_list.SortASC(advancedDataGridView_tabPatientsTreatments_list.Columns[1]);
             advancedDataGridView_tabPatientsTreatments_list.DisableFilterAndSort(advancedDataGridView_tabPatientsTreatments_list.Columns["toothsDataGridViewTextBoxColumn"]);
             advancedDataGridView_tabPayments_list.CleanFilterAndSort();
             advancedDataGridView_tabPayments_list.SortDESC(advancedDataGridView_tabPayments_list.Columns[1]);
@@ -886,11 +927,11 @@ namespace DG.DentneD.Forms
             advancedDataGridView_tabPatientsAttachments_list.CleanFilterAndSort();
             advancedDataGridView_tabPatientsAttachments_list.SortASC(advancedDataGridView_tabPatientsAttachments_list.Columns[1]);
             advancedDataGridView_tabInvoices_list.CleanFilterAndSort();
-            advancedDataGridView_tabInvoices_list.SortASC(advancedDataGridView_tabInvoices_list.Columns[2]);
+            advancedDataGridView_tabInvoices_list.SortDESC(advancedDataGridView_tabInvoices_list.Columns[1]);
             advancedDataGridView_tabEstimates_list.CleanFilterAndSort();
-            advancedDataGridView_tabEstimates_list.SortASC(advancedDataGridView_tabEstimates_list.Columns[2]);
+            advancedDataGridView_tabEstimates_list.SortDESC(advancedDataGridView_tabEstimates_list.Columns[1]);
             advancedDataGridView_tabPatientsNotes_list.CleanFilterAndSort();
-            advancedDataGridView_tabPatientsNotes_list.SortASC(advancedDataGridView_tabPatientsNotes_list.Columns[1]);
+            advancedDataGridView_tabPatientsNotes_list.SortDESC(advancedDataGridView_tabPatientsNotes_list.Columns[1]);
             IsBindingSourceLoading = false;
         }
 
@@ -1767,6 +1808,22 @@ namespace DG.DentneD.Forms
             Expression<Func<patientstreatments, bool>> predicate = DGPredicateBuilder.True<patientstreatments>();
             Expression<Func<patientstreatments, bool>> predicateor = DGPredicateBuilder.False<patientstreatments>();
             predicate = predicate.And(r => r.patients_id == patients_id);
+            if (comboBox_tabPatientsTreatments_filterfulfilled.SelectedIndex != -1)
+            {
+                string filterfulfilled = ((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_tabPatientsTreatments_filterfulfilled.SelectedItem).Id;
+                if (filterfulfilled == PatientsTreatmentsFulfilledFilter.NotFulfilled.ToString())
+                    predicate = predicate.And(r => r.patientstreatments_fulfilldate == null);
+                else if (filterfulfilled == PatientsTreatmentsFulfilledFilter.Fulfilled.ToString())
+                    predicate = predicate.And(r => r.patientstreatments_fulfilldate != null);
+            }
+            if (comboBox_tabPatientsTreatments_filterpaid.SelectedIndex != -1)
+            {
+                string filterpaid = ((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_tabPatientsTreatments_filterpaid.SelectedItem).Id;
+                if (filterpaid == PatientsTreatmentsPaidFilter.NotPaid.ToString())
+                    predicate = predicate.And(r => r.patientstreatments_ispaid == false);
+                else if (filterpaid == PatientsTreatmentsPaidFilter.Paid.ToString())
+                    predicate = predicate.And(r => r.patientstreatments_ispaid == true);
+            }
             if(!patientstreatments_filtertanyCheckBox.Checked)
             {
                 if (
@@ -2306,11 +2363,7 @@ namespace DG.DentneD.Forms
         private void Add_tabPatientsTreatments(object item)
         {
             SetCurrentPatientstreatmentsBindingSource();
-
-            IsBindingSourceLoading = true;
-            advancedDataGridView_tabPatientsTreatments_list.CleanFilterAndSort();
-            IsBindingSourceLoading = false;
-
+            
             //scroll up
             tabPage_tabPatientsTreatments.AutoScrollPosition = new Point(0, 0);
 
@@ -2330,11 +2383,7 @@ namespace DG.DentneD.Forms
         private void Update_tabPatientsTreatments(object item)
         {
             SetCurrentPatientstreatmentsBindingSource();
-
-            IsBindingSourceLoading = true;
-            advancedDataGridView_tabPatientsTreatments_list.CleanFilterAndSort();
-            IsBindingSourceLoading = false;
-
+            
             //scroll up
             tabPage_tabPatientsTreatments.AutoScrollPosition = new Point(0, 0);
 
@@ -2353,10 +2402,6 @@ namespace DG.DentneD.Forms
         /// <param name="item"></param>
         private void Remove_tabPatientsTreatments(object item)
         {
-            IsBindingSourceLoading = true;
-            advancedDataGridView_tabPatientsTreatments_list.CleanFilterAndSort();
-            IsBindingSourceLoading = false;
-
             if (_paymentsReference == PaymentsReference.Treatments)
             {
                 //unset lazy load for payments tab, to reload totals
@@ -2981,7 +3026,28 @@ namespace DG.DentneD.Forms
                 patients_id = (((DataRowView)vPatientsBindingSource.Current).Row).Field<int>("patients_id");
             }
 
-            int patientstreatments_talnum = _dentnedModel.PatientsTreatments.List(r => r.patients_id == patients_id &&
+            //set predicate
+            Expression<Func<patientstreatments, bool>> predicate = DGPredicateBuilder.True<patientstreatments>();
+            predicate = predicate.And(r => r.patients_id == patients_id);
+            if (comboBox_tabPatientsTreatments_filterfulfilled.SelectedIndex != -1)
+            {
+                string filterfulfilled = ((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_tabPatientsTreatments_filterfulfilled.SelectedItem).Id;
+                if (filterfulfilled == PatientsTreatmentsFulfilledFilter.NotFulfilled.ToString())
+                    predicate = predicate.And(r => r.patientstreatments_fulfilldate == null);
+                else if (filterfulfilled == PatientsTreatmentsFulfilledFilter.Fulfilled.ToString())
+                    predicate = predicate.And(r => r.patientstreatments_fulfilldate != null);
+            }
+            if (comboBox_tabPatientsTreatments_filterpaid.SelectedIndex != -1)
+            {
+                string filterpaid = ((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_tabPatientsTreatments_filterpaid.SelectedItem).Id;
+                if (filterpaid == PatientsTreatmentsPaidFilter.NotPaid.ToString())
+                    predicate = predicate.And(r => r.patientstreatments_ispaid == false);
+                else if (filterpaid == PatientsTreatmentsPaidFilter.Paid.ToString())
+                    predicate = predicate.And(r => r.patientstreatments_ispaid == true);
+            }
+
+            Expression<Func<patientstreatments, bool>> predicatetalnum = DGPredicateBuilder.True<patientstreatments>();
+            predicatetalnum = predicate.And(r =>
                 r.patientstreatments_t11 &&
                 r.patientstreatments_t12 &&
                 r.patientstreatments_t13 &&
@@ -3013,8 +3079,10 @@ namespace DG.DentneD.Forms
                 r.patientstreatments_t45 &&
                 r.patientstreatments_t46 &&
                 r.patientstreatments_t47 &&
-                r.patientstreatments_t48).Count;
-            int patientstreatments_tnonum = _dentnedModel.PatientsTreatments.List(r => r.patients_id == patients_id &&
+                r.patientstreatments_t48);
+
+            Expression<Func<patientstreatments, bool>> predicatetnonum = DGPredicateBuilder.True<patientstreatments>();
+            predicatetnonum = predicate.And(r =>
                 !r.patientstreatments_t11 &&
                 !r.patientstreatments_t12 &&
                 !r.patientstreatments_t13 &&
@@ -3046,8 +3114,10 @@ namespace DG.DentneD.Forms
                 !r.patientstreatments_t45 &&
                 !r.patientstreatments_t46 &&
                 !r.patientstreatments_t47 &&
-                !r.patientstreatments_t48).Count;
-            int patientstreatments_tupnum = _dentnedModel.PatientsTreatments.List(r => r.patients_id == patients_id &&
+                !r.patientstreatments_t48);
+
+            Expression<Func<patientstreatments, bool>> predicatetupnum = DGPredicateBuilder.True<patientstreatments>();
+            predicatetupnum = predicate.And(r =>
                 r.patientstreatments_t11 &&
                 r.patientstreatments_t12 &&
                 r.patientstreatments_t13 &&
@@ -3079,8 +3149,10 @@ namespace DG.DentneD.Forms
                 !r.patientstreatments_t45 &&
                 !r.patientstreatments_t46 &&
                 !r.patientstreatments_t47 &&
-                !r.patientstreatments_t48).Count;
-            int patientstreatments_tdwnum = _dentnedModel.PatientsTreatments.List(r => r.patients_id == patients_id &&
+                !r.patientstreatments_t48);
+
+            Expression<Func<patientstreatments, bool>> predicatetdwnum = DGPredicateBuilder.True<patientstreatments>();
+            predicatetdwnum = predicate.And(r =>
                 !r.patientstreatments_t11 &&
                 !r.patientstreatments_t12 &&
                 !r.patientstreatments_t13 &&
@@ -3112,7 +3184,148 @@ namespace DG.DentneD.Forms
                 r.patientstreatments_t45 &&
                 r.patientstreatments_t46 &&
                 r.patientstreatments_t47 &&
-                r.patientstreatments_t48).Count;
+                r.patientstreatments_t48);
+
+            Expression<Func<patientstreatments, bool>> predicatetoothnum = DGPredicateBuilder.True<patientstreatments>();
+            predicatetoothnum = predicate.And(r => !(
+                //exclude all, none, up, down
+                (r.patientstreatments_t11 &&
+                r.patientstreatments_t12 &&
+                r.patientstreatments_t13 &&
+                r.patientstreatments_t14 &&
+                r.patientstreatments_t15 &&
+                r.patientstreatments_t16 &&
+                r.patientstreatments_t17 &&
+                r.patientstreatments_t18 &&
+                r.patientstreatments_t21 &&
+                r.patientstreatments_t22 &&
+                r.patientstreatments_t23 &&
+                r.patientstreatments_t24 &&
+                r.patientstreatments_t25 &&
+                r.patientstreatments_t26 &&
+                r.patientstreatments_t27 &&
+                r.patientstreatments_t28 &&
+                r.patientstreatments_t31 &&
+                r.patientstreatments_t32 &&
+                r.patientstreatments_t33 &&
+                r.patientstreatments_t34 &&
+                r.patientstreatments_t35 &&
+                r.patientstreatments_t36 &&
+                r.patientstreatments_t37 &&
+                r.patientstreatments_t38 &&
+                r.patientstreatments_t41 &&
+                r.patientstreatments_t42 &&
+                r.patientstreatments_t43 &&
+                r.patientstreatments_t44 &&
+                r.patientstreatments_t45 &&
+                r.patientstreatments_t46 &&
+                r.patientstreatments_t47 &&
+                r.patientstreatments_t48)
+                ||
+                (r.patientstreatments_t11 &&
+                r.patientstreatments_t12 &&
+                r.patientstreatments_t13 &&
+                r.patientstreatments_t14 &&
+                r.patientstreatments_t15 &&
+                r.patientstreatments_t16 &&
+                r.patientstreatments_t17 &&
+                r.patientstreatments_t18 &&
+                r.patientstreatments_t21 &&
+                r.patientstreatments_t22 &&
+                r.patientstreatments_t23 &&
+                r.patientstreatments_t24 &&
+                r.patientstreatments_t25 &&
+                r.patientstreatments_t26 &&
+                r.patientstreatments_t27 &&
+                r.patientstreatments_t28 &&
+                !r.patientstreatments_t31 &&
+                !r.patientstreatments_t32 &&
+                !r.patientstreatments_t33 &&
+                !r.patientstreatments_t34 &&
+                !r.patientstreatments_t35 &&
+                !r.patientstreatments_t36 &&
+                !r.patientstreatments_t37 &&
+                !r.patientstreatments_t38 &&
+                !r.patientstreatments_t41 &&
+                !r.patientstreatments_t42 &&
+                !r.patientstreatments_t43 &&
+                !r.patientstreatments_t44 &&
+                !r.patientstreatments_t45 &&
+                !r.patientstreatments_t46 &&
+                !r.patientstreatments_t47 &&
+                !r.patientstreatments_t48)
+                ||
+                (!r.patientstreatments_t11 &&
+                !r.patientstreatments_t12 &&
+                !r.patientstreatments_t13 &&
+                !r.patientstreatments_t14 &&
+                !r.patientstreatments_t15 &&
+                !r.patientstreatments_t16 &&
+                !r.patientstreatments_t17 &&
+                !r.patientstreatments_t18 &&
+                !r.patientstreatments_t21 &&
+                !r.patientstreatments_t22 &&
+                !r.patientstreatments_t23 &&
+                !r.patientstreatments_t24 &&
+                !r.patientstreatments_t25 &&
+                !r.patientstreatments_t26 &&
+                !r.patientstreatments_t27 &&
+                !r.patientstreatments_t28 &&
+                r.patientstreatments_t31 &&
+                r.patientstreatments_t32 &&
+                r.patientstreatments_t33 &&
+                r.patientstreatments_t34 &&
+                r.patientstreatments_t35 &&
+                r.patientstreatments_t36 &&
+                r.patientstreatments_t37 &&
+                r.patientstreatments_t38 &&
+                r.patientstreatments_t41 &&
+                r.patientstreatments_t42 &&
+                r.patientstreatments_t43 &&
+                r.patientstreatments_t44 &&
+                r.patientstreatments_t45 &&
+                r.patientstreatments_t46 &&
+                r.patientstreatments_t47 &&
+                r.patientstreatments_t48)
+                ||
+                (!r.patientstreatments_t11 &&
+                !r.patientstreatments_t12 &&
+                !r.patientstreatments_t13 &&
+                !r.patientstreatments_t14 &&
+                !r.patientstreatments_t15 &&
+                !r.patientstreatments_t16 &&
+                !r.patientstreatments_t17 &&
+                !r.patientstreatments_t18 &&
+                !r.patientstreatments_t21 &&
+                !r.patientstreatments_t22 &&
+                !r.patientstreatments_t23 &&
+                !r.patientstreatments_t24 &&
+                !r.patientstreatments_t25 &&
+                !r.patientstreatments_t26 &&
+                !r.patientstreatments_t27 &&
+                !r.patientstreatments_t28 &&
+                !r.patientstreatments_t31 &&
+                !r.patientstreatments_t32 &&
+                !r.patientstreatments_t33 &&
+                !r.patientstreatments_t34 &&
+                !r.patientstreatments_t35 &&
+                !r.patientstreatments_t36 &&
+                !r.patientstreatments_t37 &&
+                !r.patientstreatments_t38 &&
+                !r.patientstreatments_t41 &&
+                !r.patientstreatments_t42 &&
+                !r.patientstreatments_t43 &&
+                !r.patientstreatments_t44 &&
+                !r.patientstreatments_t45 &&
+                !r.patientstreatments_t46 &&
+                !r.patientstreatments_t47 &&
+                !r.patientstreatments_t48)
+                ));
+
+            int patientstreatments_talnum = _dentnedModel.PatientsTreatments.List(predicatetalnum.Compile()).Count;
+            int patientstreatments_tnonum = _dentnedModel.PatientsTreatments.List(predicatetnonum.Compile()).Count;
+            int patientstreatments_tupnum = _dentnedModel.PatientsTreatments.List(predicatetupnum.Compile()).Count;
+            int patientstreatments_tdwnum = _dentnedModel.PatientsTreatments.List(predicatetdwnum.Compile()).Count;
             int patientstreatments_t11num = 0;
             int patientstreatments_t12num = 0;
             int patientstreatments_t13num = 0;
@@ -3145,140 +3358,7 @@ namespace DG.DentneD.Forms
             int patientstreatments_t46num = 0;
             int patientstreatments_t47num = 0;
             int patientstreatments_t48num = 0;
-            foreach (patientstreatments patientstreatment in _dentnedModel.PatientsTreatments.List(r => r.patients_id == patients_id && !(
-                        //exclude all, none, up, down
-                        (r.patientstreatments_t11 &&
-                        r.patientstreatments_t12 &&
-                        r.patientstreatments_t13 &&
-                        r.patientstreatments_t14 &&
-                        r.patientstreatments_t15 &&
-                        r.patientstreatments_t16 &&
-                        r.patientstreatments_t17 &&
-                        r.patientstreatments_t18 &&
-                        r.patientstreatments_t21 &&
-                        r.patientstreatments_t22 &&
-                        r.patientstreatments_t23 &&
-                        r.patientstreatments_t24 &&
-                        r.patientstreatments_t25 &&
-                        r.patientstreatments_t26 &&
-                        r.patientstreatments_t27 &&
-                        r.patientstreatments_t28 &&
-                        r.patientstreatments_t31 &&
-                        r.patientstreatments_t32 &&
-                        r.patientstreatments_t33 &&
-                        r.patientstreatments_t34 &&
-                        r.patientstreatments_t35 &&
-                        r.patientstreatments_t36 &&
-                        r.patientstreatments_t37 &&
-                        r.patientstreatments_t38 &&
-                        r.patientstreatments_t41 &&
-                        r.patientstreatments_t42 &&
-                        r.patientstreatments_t43 &&
-                        r.patientstreatments_t44 &&
-                        r.patientstreatments_t45 &&
-                        r.patientstreatments_t46 &&
-                        r.patientstreatments_t47 &&
-                        r.patientstreatments_t48)
-                        ||
-                        (r.patientstreatments_t11 &&
-                        r.patientstreatments_t12 &&
-                        r.patientstreatments_t13 &&
-                        r.patientstreatments_t14 &&
-                        r.patientstreatments_t15 &&
-                        r.patientstreatments_t16 &&
-                        r.patientstreatments_t17 &&
-                        r.patientstreatments_t18 &&
-                        r.patientstreatments_t21 &&
-                        r.patientstreatments_t22 &&
-                        r.patientstreatments_t23 &&
-                        r.patientstreatments_t24 &&
-                        r.patientstreatments_t25 &&
-                        r.patientstreatments_t26 &&
-                        r.patientstreatments_t27 &&
-                        r.patientstreatments_t28 &&
-                        !r.patientstreatments_t31 &&
-                        !r.patientstreatments_t32 &&
-                        !r.patientstreatments_t33 &&
-                        !r.patientstreatments_t34 &&
-                        !r.patientstreatments_t35 &&
-                        !r.patientstreatments_t36 &&
-                        !r.patientstreatments_t37 &&
-                        !r.patientstreatments_t38 &&
-                        !r.patientstreatments_t41 &&
-                        !r.patientstreatments_t42 &&
-                        !r.patientstreatments_t43 &&
-                        !r.patientstreatments_t44 &&
-                        !r.patientstreatments_t45 &&
-                        !r.patientstreatments_t46 &&
-                        !r.patientstreatments_t47 &&
-                        !r.patientstreatments_t48)
-                        ||
-                        (!r.patientstreatments_t11 &&
-                        !r.patientstreatments_t12 &&
-                        !r.patientstreatments_t13 &&
-                        !r.patientstreatments_t14 &&
-                        !r.patientstreatments_t15 &&
-                        !r.patientstreatments_t16 &&
-                        !r.patientstreatments_t17 &&
-                        !r.patientstreatments_t18 &&
-                        !r.patientstreatments_t21 &&
-                        !r.patientstreatments_t22 &&
-                        !r.patientstreatments_t23 &&
-                        !r.patientstreatments_t24 &&
-                        !r.patientstreatments_t25 &&
-                        !r.patientstreatments_t26 &&
-                        !r.patientstreatments_t27 &&
-                        !r.patientstreatments_t28 &&
-                        r.patientstreatments_t31 &&
-                        r.patientstreatments_t32 &&
-                        r.patientstreatments_t33 &&
-                        r.patientstreatments_t34 &&
-                        r.patientstreatments_t35 &&
-                        r.patientstreatments_t36 &&
-                        r.patientstreatments_t37 &&
-                        r.patientstreatments_t38 &&
-                        r.patientstreatments_t41 &&
-                        r.patientstreatments_t42 &&
-                        r.patientstreatments_t43 &&
-                        r.patientstreatments_t44 &&
-                        r.patientstreatments_t45 &&
-                        r.patientstreatments_t46 &&
-                        r.patientstreatments_t47 &&
-                        r.patientstreatments_t48)
-                        ||
-                        (!r.patientstreatments_t11 &&
-                        !r.patientstreatments_t12 &&
-                        !r.patientstreatments_t13 &&
-                        !r.patientstreatments_t14 &&
-                        !r.patientstreatments_t15 &&
-                        !r.patientstreatments_t16 &&
-                        !r.patientstreatments_t17 &&
-                        !r.patientstreatments_t18 &&
-                        !r.patientstreatments_t21 &&
-                        !r.patientstreatments_t22 &&
-                        !r.patientstreatments_t23 &&
-                        !r.patientstreatments_t24 &&
-                        !r.patientstreatments_t25 &&
-                        !r.patientstreatments_t26 &&
-                        !r.patientstreatments_t27 &&
-                        !r.patientstreatments_t28 &&
-                        !r.patientstreatments_t31 &&
-                        !r.patientstreatments_t32 &&
-                        !r.patientstreatments_t33 &&
-                        !r.patientstreatments_t34 &&
-                        !r.patientstreatments_t35 &&
-                        !r.patientstreatments_t36 &&
-                        !r.patientstreatments_t37 &&
-                        !r.patientstreatments_t38 &&
-                        !r.patientstreatments_t41 &&
-                        !r.patientstreatments_t42 &&
-                        !r.patientstreatments_t43 &&
-                        !r.patientstreatments_t44 &&
-                        !r.patientstreatments_t45 &&
-                        !r.patientstreatments_t46 &&
-                        !r.patientstreatments_t47 &&
-                        !r.patientstreatments_t48)
-                        )))
+            foreach (patientstreatments patientstreatment in _dentnedModel.PatientsTreatments.List(predicatetoothnum.Compile()))
             {
                 if (patientstreatment.patientstreatments_t11)
                     patientstreatments_t11num++;
@@ -3445,6 +3525,26 @@ namespace DG.DentneD.Forms
             ReloadTab(tabElement_tabPatientsTreatments);
         }
 
+        /// <summary>
+        /// Treatments filter changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBox_tabPatientsTreatments_filterfulfilled_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PatientsTreatmentsFilter();
+        }
+
+        /// <summary>
+        /// Treatments filter changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBox_tabPatientsTreatments_filterpaid_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PatientsTreatmentsFilter();
+        }
+        
         /// <summary>
         /// Treatments filter all checked handler
         /// </summary>
@@ -4881,6 +4981,6 @@ namespace DG.DentneD.Forms
         }
 
         #endregion
-                
+                        
     }
 }

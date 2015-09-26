@@ -72,6 +72,7 @@ CREATE TABLE [dbo].[appointments](
 	[appointments_to] [datetime] NOT NULL,
 	[appointments_title] [varchar](128) COLLATE Latin1_General_CI_AS NOT NULL,
 	[appointments_notes] [text] COLLATE Latin1_General_CI_AS NULL,
+	[appointments_color] [char](7) COLLATE Latin1_General_CI_AS NULL,
  CONSTRAINT [PK_appointments] PRIMARY KEY CLUSTERED 
 (
 	[appointments_id] ASC
@@ -510,6 +511,7 @@ BEGIN
 CREATE TABLE [dbo].[rooms](
 	[rooms_id] [int] IDENTITY(1,1) NOT NULL,
 	[rooms_name] [varchar](16) COLLATE Latin1_General_CI_AS NOT NULL,
+	[rooms_color] [char](7) COLLATE Latin1_General_CI_AS NULL,
  CONSTRAINT [PK_rooms] PRIMARY KEY CLUSTERED 
 (
 	[rooms_id] ASC

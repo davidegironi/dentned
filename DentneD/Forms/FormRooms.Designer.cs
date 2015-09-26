@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormRooms));
+            this.rooms_colorLabel = new System.Windows.Forms.Label();
             this.rooms_idLabel = new System.Windows.Forms.Label();
             this.rooms_nameLabel = new System.Windows.Forms.Label();
             this.panel_filters = new System.Windows.Forms.Panel();
@@ -42,8 +43,10 @@
             this.tabControl_main = new System.Windows.Forms.TabControl();
             this.tabPage_tabRooms = new System.Windows.Forms.TabPage();
             this.panel_tabRooms_data = new System.Windows.Forms.Panel();
-            this.rooms_nameTextBox = new System.Windows.Forms.TextBox();
+            this.button_tabRooms_colorselect = new System.Windows.Forms.Button();
+            this.rooms_colorTextBox = new System.Windows.Forms.TextBox();
             this.roomsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.rooms_nameTextBox = new System.Windows.Forms.TextBox();
             this.rooms_idTextBox = new System.Windows.Forms.TextBox();
             this.panel_tabRooms_updates = new System.Windows.Forms.Panel();
             this.button_tabRooms_cancel = new System.Windows.Forms.Button();
@@ -64,6 +67,15 @@
             this.panel_tabRooms_actions.SuspendLayout();
             this.panel_data.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // rooms_colorLabel
+            // 
+            this.rooms_colorLabel.AutoSize = true;
+            this.rooms_colorLabel.Location = new System.Drawing.Point(9, 87);
+            this.rooms_colorLabel.Name = "rooms_colorLabel";
+            this.rooms_colorLabel.Size = new System.Drawing.Size(34, 13);
+            this.rooms_colorLabel.TabIndex = 4;
+            this.rooms_colorLabel.Text = "Color:";
             // 
             // rooms_idLabel
             // 
@@ -175,14 +187,41 @@
             // 
             // panel_tabRooms_data
             // 
+            this.panel_tabRooms_data.Controls.Add(this.button_tabRooms_colorselect);
+            this.panel_tabRooms_data.Controls.Add(this.rooms_colorLabel);
+            this.panel_tabRooms_data.Controls.Add(this.rooms_colorTextBox);
             this.panel_tabRooms_data.Controls.Add(this.rooms_nameLabel);
             this.panel_tabRooms_data.Controls.Add(this.rooms_nameTextBox);
             this.panel_tabRooms_data.Controls.Add(this.rooms_idLabel);
             this.panel_tabRooms_data.Controls.Add(this.rooms_idTextBox);
             this.panel_tabRooms_data.Location = new System.Drawing.Point(6, 42);
             this.panel_tabRooms_data.Name = "panel_tabRooms_data";
-            this.panel_tabRooms_data.Size = new System.Drawing.Size(480, 91);
+            this.panel_tabRooms_data.Size = new System.Drawing.Size(480, 141);
             this.panel_tabRooms_data.TabIndex = 2;
+            // 
+            // button_tabRooms_colorselect
+            // 
+            this.button_tabRooms_colorselect.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_tabRooms_colorselect.Location = new System.Drawing.Point(78, 100);
+            this.button_tabRooms_colorselect.Name = "button_tabRooms_colorselect";
+            this.button_tabRooms_colorselect.Size = new System.Drawing.Size(75, 23);
+            this.button_tabRooms_colorselect.TabIndex = 6;
+            this.button_tabRooms_colorselect.Text = "Select";
+            this.button_tabRooms_colorselect.UseVisualStyleBackColor = true;
+            this.button_tabRooms_colorselect.Click += new System.EventHandler(this.button_tabRooms_colorselect_Click);
+            // 
+            // rooms_colorTextBox
+            // 
+            this.rooms_colorTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.roomsBindingSource, "rooms_color", true));
+            this.rooms_colorTextBox.Location = new System.Drawing.Point(12, 103);
+            this.rooms_colorTextBox.Name = "rooms_colorTextBox";
+            this.rooms_colorTextBox.Size = new System.Drawing.Size(60, 20);
+            this.rooms_colorTextBox.TabIndex = 5;
+            this.rooms_colorTextBox.TextChanged += new System.EventHandler(this.rooms_colorTextBox_TextChanged);
+            // 
+            // roomsBindingSource
+            // 
+            this.roomsBindingSource.DataSource = typeof(DG.DentneD.Model.Entity.rooms);
             // 
             // rooms_nameTextBox
             // 
@@ -191,10 +230,6 @@
             this.rooms_nameTextBox.Name = "rooms_nameTextBox";
             this.rooms_nameTextBox.Size = new System.Drawing.Size(100, 20);
             this.rooms_nameTextBox.TabIndex = 3;
-            // 
-            // roomsBindingSource
-            // 
-            this.roomsBindingSource.DataSource = typeof(DG.DentneD.Model.Entity.rooms);
             // 
             // rooms_idTextBox
             // 
@@ -209,7 +244,7 @@
             // 
             this.panel_tabRooms_updates.Controls.Add(this.button_tabRooms_cancel);
             this.panel_tabRooms_updates.Controls.Add(this.button_tabRooms_save);
-            this.panel_tabRooms_updates.Location = new System.Drawing.Point(6, 139);
+            this.panel_tabRooms_updates.Location = new System.Drawing.Point(6, 189);
             this.panel_tabRooms_updates.Name = "panel_tabRooms_updates";
             this.panel_tabRooms_updates.Size = new System.Drawing.Size(480, 30);
             this.panel_tabRooms_updates.TabIndex = 1;
@@ -330,5 +365,8 @@
         private System.Windows.Forms.TextBox rooms_idTextBox;
         private System.Windows.Forms.Label rooms_idLabel;
         private System.Windows.Forms.Label rooms_nameLabel;
+        private System.Windows.Forms.Button button_tabRooms_colorselect;
+        private System.Windows.Forms.TextBox rooms_colorTextBox;
+        private System.Windows.Forms.Label rooms_colorLabel;
     }
 }

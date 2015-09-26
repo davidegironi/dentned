@@ -159,50 +159,54 @@ namespace DG.DentneD
                 iTextSharp.text.Font b12Font = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 12, iTextSharp.text.Font.BOLD);
                 iTextSharp.text.Font n10Font = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 10, iTextSharp.text.Font.NORMAL);
                 iTextSharp.text.Font n8Font = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 8, iTextSharp.text.Font.NORMAL);
+                
+                PdfPTable titleTable = null;
+                PdfPTable preheaderTable = null;
+                PdfPTable headerTable = null;
+                PdfPTable itemsTable = null;
+                PdfPTable paymentTable = null;
+                PdfPTable footerTable = null;
 
-                PdfPTable aTable = null;
                 PdfPTable bTable = null;
                 PdfPCell aCell = null;
                 Phrase phrase = null;
 
-                //title
-                aTable = new PdfPTable(new float[] { 1 });
-                aTable.TotalWidth = PageSize.A4.Width - document.RightMargin - document.LeftMargin;
-                aTable.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
-                aTable.DefaultCell.HorizontalAlignment = Element.ALIGN_CENTER;
+                //titleTable
+                titleTable = new PdfPTable(new float[] { 1 });
+                titleTable.TotalWidth = PageSize.A4.Width - document.RightMargin - document.LeftMargin;
+                titleTable.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                titleTable.DefaultCell.HorizontalAlignment = Element.ALIGN_CENTER;
                 phrase = new Phrase();
                 phrase.Add(new Chunk(_language.estimatesTitle, b12Font));
                 aCell = new PdfPCell(phrase);
                 aCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
                 aCell.PaddingBottom = 10;
                 aCell.HorizontalAlignment = Element.ALIGN_CENTER;
-                aTable.AddCell(aCell);
-                document.Add(aTable);
+                titleTable.AddCell(aCell);
 
-                //number data
-                aTable = new PdfPTable(new float[] { 1, 1 });
-                aTable.TotalWidth = PageSize.A4.Width - document.RightMargin - document.LeftMargin;
-                aTable.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
-                aTable.DefaultCell.HorizontalAlignment = Element.ALIGN_CENTER;
-                aTable.SetTotalWidth(new float[] { aTable.TotalWidth / 2, aTable.TotalWidth / 2 });
+                //preheaderTable
+                preheaderTable = new PdfPTable(new float[] { 1, 1 });
+                preheaderTable.TotalWidth = PageSize.A4.Width - document.RightMargin - document.LeftMargin;
+                preheaderTable.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                preheaderTable.DefaultCell.HorizontalAlignment = Element.ALIGN_CENTER;
+                preheaderTable.SetTotalWidth(new float[] { preheaderTable.TotalWidth / 2, preheaderTable.TotalWidth / 2 });
                 phrase = new Phrase();
                 phrase.Add(new Chunk(_language.estimatesNumber + ": ", b10Font));
                 phrase.Add(new Chunk(estimate.estimates_number, n10Font));
                 phrase.Add(new Chunk("/", n10Font));
                 phrase.Add(new Chunk(estimate.estimates_date.Year.ToString(), n10Font));
-                aTable.AddCell(phrase);
+                preheaderTable.AddCell(phrase);
                 phrase = new Phrase();
                 phrase.Add(new Chunk(_language.estimatesDate + ": ", b10Font));
                 phrase.Add(new Chunk(estimate.estimates_date.ToShortDateString(), n10Font));
-                aTable.AddCell(phrase);
-                document.Add(aTable);
+                preheaderTable.AddCell(phrase);
 
-                //doctor patient
-                aTable = new PdfPTable(new float[] { 1, 1 });
-                aTable.TotalWidth = PageSize.A4.Width - document.RightMargin - document.LeftMargin;
-                aTable.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
-                aTable.DefaultCell.HorizontalAlignment = Element.ALIGN_LEFT;
-                aTable.SetTotalWidth(new float[] { aTable.TotalWidth / 2, aTable.TotalWidth / 2 });
+                //headerTable
+                headerTable = new PdfPTable(new float[] { 1, 1 });
+                headerTable.TotalWidth = PageSize.A4.Width - document.RightMargin - document.LeftMargin;
+                headerTable.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                headerTable.DefaultCell.HorizontalAlignment = Element.ALIGN_LEFT;
+                headerTable.SetTotalWidth(new float[] { headerTable.TotalWidth / 2, headerTable.TotalWidth / 2 });
                 bTable = new PdfPTable(new float[] { 1 });
                 bTable.TotalWidth = PageSize.A4.Width - document.RightMargin - document.LeftMargin;
                 bTable.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
@@ -220,7 +224,7 @@ namespace DG.DentneD
                 aCell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER + iTextSharp.text.Rectangle.TOP_BORDER + iTextSharp.text.Rectangle.LEFT_BORDER + iTextSharp.text.Rectangle.RIGHT_BORDER;
                 aCell.PaddingBottom = 5;
                 bTable.AddCell(aCell);
-                aTable.AddCell(bTable);
+                headerTable.AddCell(bTable);
                 bTable = new PdfPTable(new float[] { 1 });
                 bTable.TotalWidth = PageSize.A4.Width - document.RightMargin - document.LeftMargin;
                 bTable.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
@@ -235,10 +239,7 @@ namespace DG.DentneD
                 phrase = new Phrase();
                 phrase.Add(new Chunk(estimate.estimates_patient, n10Font));
                 bTable.AddCell(phrase);
-                aTable.AddCell(bTable);
-                document.Add(aTable);
-
-                document.Add(new Paragraph(" "));
+                headerTable.AddCell(bTable);
 
                 bool hastax = false;
                 foreach (estimateslines estimateline in estimatelines)
@@ -250,37 +251,37 @@ namespace DG.DentneD
                     }
                 }
 
-                //items
+                //itemsTable
                 if (hastax)
                 {
                     if(_settings.printCode)
-                        aTable = new PdfPTable(new float[] { 1, 1, 1, 1, 1 });
+                        itemsTable = new PdfPTable(new float[] { 1, 1, 1, 1, 1 });
                     else
-                        aTable = new PdfPTable(new float[] { 1, 1, 1, 1 });
+                        itemsTable = new PdfPTable(new float[] { 1, 1, 1, 1 });
                 }
                 else
                 {
                     if (_settings.printCode)
-                        aTable = new PdfPTable(new float[] { 1, 1, 1, 1 });
+                        itemsTable = new PdfPTable(new float[] { 1, 1, 1, 1 });
                     else
-                        aTable = new PdfPTable(new float[] { 1, 1, 1 });
+                        itemsTable = new PdfPTable(new float[] { 1, 1, 1 });
                 }
-                aTable.TotalWidth = PageSize.A4.Width - document.RightMargin - document.LeftMargin;
-                aTable.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
-                aTable.DefaultCell.HorizontalAlignment = Element.ALIGN_LEFT;
+                itemsTable.TotalWidth = PageSize.A4.Width - document.RightMargin - document.LeftMargin;
+                itemsTable.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                itemsTable.DefaultCell.HorizontalAlignment = Element.ALIGN_LEFT;
                 if (hastax)
                 {
                     if (_settings.printCode)
-                        aTable.SetTotalWidth(new float[] { 70, aTable.TotalWidth - 170, 40, 70, 70 });
+                        itemsTable.SetTotalWidth(new float[] { 70, itemsTable.TotalWidth - 170, 40, 70, 70 });
                     else
-                        aTable.SetTotalWidth(new float[] { aTable.TotalWidth - 100, 40, 70, 70 });
+                        itemsTable.SetTotalWidth(new float[] { itemsTable.TotalWidth - 100, 40, 70, 70 });
                 }
                 else
                 {
                     if (_settings.printCode)
-                        aTable.SetTotalWidth(new float[] { 70, aTable.TotalWidth - 100, 40, 70 });
+                        itemsTable.SetTotalWidth(new float[] { 70, itemsTable.TotalWidth - 100, 40, 70 });
                     else
-                        aTable.SetTotalWidth(new float[] { aTable.TotalWidth - 30, 40, 70 });
+                        itemsTable.SetTotalWidth(new float[] { itemsTable.TotalWidth - 30, 40, 70 });
                 }
 
                 if (_settings.printCode)
@@ -288,26 +289,26 @@ namespace DG.DentneD
                     aCell = new PdfPCell(new Paragraph(_language.estimatesItemsCodeTH, b10Font));
                     aCell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
                     aCell.PaddingBottom = 5;
-                    aTable.AddCell(aCell);
+                    itemsTable.AddCell(aCell);
                 }
                 aCell = new PdfPCell(new Paragraph(_language.estimatesItemsDescriptionTH, b10Font));
                 aCell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
                 aCell.PaddingBottom = 5;
-                aTable.AddCell(aCell);
+                itemsTable.AddCell(aCell);
                 aCell = new PdfPCell(new Paragraph(_language.estimatesItemsQuantityTH, b10Font));
                 aCell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
                 aCell.PaddingBottom = 5;
-                aTable.AddCell(aCell);
+                itemsTable.AddCell(aCell);
                 aCell = new PdfPCell(new Paragraph(_language.estimatesItemsPriceTH, b10Font));
                 aCell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
                 aCell.PaddingBottom = 5;
-                aTable.AddCell(aCell);
+                itemsTable.AddCell(aCell);
                 if (hastax)
                 {
                     aCell = new PdfPCell(new Paragraph(_language.estimatesItemsTaxrateTH, b10Font));
                     aCell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
                     aCell.PaddingBottom = 5;
-                    aTable.AddCell(aCell);
+                    itemsTable.AddCell(aCell);
                 }
                 foreach (estimateslines estimateline in estimatelines)
                 {
@@ -315,47 +316,35 @@ namespace DG.DentneD
                     {
                         if (!String.IsNullOrEmpty(estimateline.estimateslines_code))
                             if (estimateline.estimateslines_code.Trim() != "")
-                                aTable.AddCell(new Paragraph(estimateline.estimateslines_code, n10Font));
+                                itemsTable.AddCell(new Paragraph(estimateline.estimateslines_code, n10Font));
                             else
-                                aTable.AddCell(new Paragraph("/"));
+                                itemsTable.AddCell(new Paragraph("/"));
                         else
-                            aTable.AddCell(new Paragraph("/"));
+                            itemsTable.AddCell(new Paragraph("/"));
                     }
-                    aTable.AddCell(new Paragraph(estimateline.estimateslines_description, n10Font));
-                    aTable.AddCell(new Paragraph(estimateline.estimateslines_quantity.ToString(), n10Font));
-                    aTable.AddCell(new Paragraph(Math.Round(estimateline.estimateslines_unitprice, 2).ToString(), n10Font));
+                    itemsTable.AddCell(new Paragraph(estimateline.estimateslines_description, n10Font));
+                    itemsTable.AddCell(new Paragraph(estimateline.estimateslines_quantity.ToString(), n10Font));
+                    itemsTable.AddCell(new Paragraph(Math.Round(estimateline.estimateslines_unitprice, 2).ToString(), n10Font));
                     if (hastax)
                     {
                         if (estimateline.estimateslines_taxrate != 0)
-                            aTable.AddCell(new Paragraph(Math.Round(estimateline.estimateslines_taxrate, 2) + "%", n10Font));
+                            itemsTable.AddCell(new Paragraph(Math.Round(estimateline.estimateslines_taxrate, 2) + "%", n10Font));
                         else
-                            aTable.AddCell(new Paragraph("/"));
+                            itemsTable.AddCell(new Paragraph("/"));
                     }
                 }
-                document.Add(aTable);
-
-                if (writer.GetVerticalPosition(false) < 220)
-                {
-                    float currentvert = writer.GetVerticalPosition(false);
-                    document.Add(new Paragraph(" "));
-                    while (writer.GetVerticalPosition(false) < currentvert)
-                        document.Add(new Paragraph(" "));
-                }
-                while (writer.GetVerticalPosition(false) > (float)220)
-                    document.Add(new Paragraph(" "));
-
 
                 decimal totalnotax = 0;
                 decimal totaltax = 0;
                 decimal totaldeductiontax = 0;
                 dentnedModel.Estimates.CalculateTotal(estimate, ref totaltax, ref totaldeductiontax, ref totalnotax);
-                
-                //payment
-                aTable = new PdfPTable(new float[] { 1, 1 });
-                aTable.TotalWidth = PageSize.A4.Width - document.RightMargin - document.LeftMargin;
-                aTable.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
-                aTable.DefaultCell.HorizontalAlignment = Element.ALIGN_LEFT;
-                aTable.SetTotalWidth(new float[] { aTable.TotalWidth / 2, aTable.TotalWidth / 2 });
+
+                //paymentTable
+                paymentTable = new PdfPTable(new float[] { 1, 1 });
+                paymentTable.TotalWidth = PageSize.A4.Width - document.RightMargin - document.LeftMargin;
+                paymentTable.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                paymentTable.DefaultCell.HorizontalAlignment = Element.ALIGN_LEFT;
+                paymentTable.SetTotalWidth(new float[] { paymentTable.TotalWidth / 2, paymentTable.TotalWidth / 2 });
 
                 bTable = new PdfPTable(new float[] { 1 });
                 bTable.TotalWidth = PageSize.A4.Width - document.RightMargin - document.LeftMargin;
@@ -379,7 +368,7 @@ namespace DG.DentneD
                     }
                 }
 
-                aTable.AddCell(bTable);
+                paymentTable.AddCell(bTable);
 
                 bTable = new PdfPTable(new float[] { 1 });
                 bTable.TotalWidth = PageSize.A4.Width - document.RightMargin - document.LeftMargin;
@@ -467,30 +456,45 @@ namespace DG.DentneD
                 aCell.PaddingTop = 4;
                 aCell.PaddingBottom = 4;
                 bTable.AddCell(aCell);
+                paymentTable.AddCell(bTable);
 
-                aTable.AddCell(bTable);
-
-                document.Add(aTable);
-
-                //footer
+                //footerTable
+                footerTable = new PdfPTable(new float[] { 1 });
+                footerTable.TotalWidth = PageSize.A4.Width - document.RightMargin - document.LeftMargin;
+                footerTable.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                footerTable.DefaultCell.HorizontalAlignment = Element.ALIGN_LEFT;
                 if (!String.IsNullOrEmpty(estimate.estimates_footer))
                 {
                     if (estimate.estimates_footer.Trim() != "")
                     {
-                        aTable = new PdfPTable(new float[] { 1 });
-                        aTable.TotalWidth = PageSize.A4.Width - document.RightMargin - document.LeftMargin;
-                        aTable.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
-                        aTable.DefaultCell.HorizontalAlignment = Element.ALIGN_LEFT;
                         phrase = new Phrase();
                         phrase.Add(new Chunk(estimate.estimates_footer, n8Font));
                         aCell = new PdfPCell(phrase);
                         aCell.Border = iTextSharp.text.Rectangle.TOP_BORDER;
                         aCell.PaddingTop = 5;
-                        aTable.AddCell(aCell);
-                        document.Add(aTable);
+                        footerTable.AddCell(aCell);
                     }
                 }
 
+                //add tables
+                document.Add(titleTable);
+                document.Add(preheaderTable);
+                document.Add(headerTable);
+                document.Add(new Paragraph(" "));
+                document.Add(itemsTable);
+                if (writer.GetVerticalPosition(false) < paymentTable.TotalHeight + footerTable.TotalHeight + (float)80)
+                {
+                    float currentvert = writer.GetVerticalPosition(false);
+                    document.Add(new Paragraph(" "));
+                    while (writer.GetVerticalPosition(false) < currentvert)
+                        document.Add(new Paragraph(" "));
+                }
+                while (writer.GetVerticalPosition(false) > paymentTable.TotalHeight + footerTable.TotalHeight + (float)80)
+                    document.Add(new Paragraph(" "));
+                document.Add(paymentTable);
+                if (footerTable != null)
+                    document.Add(footerTable);
+                
                 document.Close();
 
                 ret = true;
@@ -537,49 +541,53 @@ namespace DG.DentneD
                 iTextSharp.text.Font n10Font = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 10, iTextSharp.text.Font.NORMAL);
                 iTextSharp.text.Font n8Font = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 8, iTextSharp.text.Font.NORMAL);
 
-                PdfPTable aTable = null;
+                PdfPTable titleTable = null;
+                PdfPTable preheaderTable = null;
+                PdfPTable headerTable = null;
+                PdfPTable itemsTable = null;
+                PdfPTable paymentTable = null;
+                PdfPTable footerTable = null;
+
                 PdfPTable bTable = null;
                 PdfPCell aCell = null;
                 Phrase phrase = null;
 
-                //title
-                aTable = new PdfPTable(new float[] { 1 });
-                aTable.TotalWidth = PageSize.A4.Width - document.RightMargin - document.LeftMargin;
-                aTable.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
-                aTable.DefaultCell.HorizontalAlignment = Element.ALIGN_CENTER;
+                //titleTable
+                titleTable = new PdfPTable(new float[] { 1 });
+                titleTable.TotalWidth = PageSize.A4.Width - document.RightMargin - document.LeftMargin;
+                titleTable.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                titleTable.DefaultCell.HorizontalAlignment = Element.ALIGN_CENTER;
                 phrase = new Phrase();
                 phrase.Add(new Chunk(_language.invoicesTitle, b12Font));
                 aCell = new PdfPCell(phrase);
                 aCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
                 aCell.PaddingBottom = 10;
                 aCell.HorizontalAlignment = Element.ALIGN_CENTER;
-                aTable.AddCell(aCell);
-                document.Add(aTable);
+                titleTable.AddCell(aCell);
 
-                //number data
-                aTable = new PdfPTable(new float[] { 1, 1 });
-                aTable.TotalWidth = PageSize.A4.Width - document.RightMargin - document.LeftMargin;
-                aTable.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
-                aTable.DefaultCell.HorizontalAlignment = Element.ALIGN_CENTER;
-                aTable.SetTotalWidth(new float[] { aTable.TotalWidth / 2, aTable.TotalWidth / 2 });
+                //preheaderTable
+                preheaderTable = new PdfPTable(new float[] { 1, 1 });
+                preheaderTable.TotalWidth = PageSize.A4.Width - document.RightMargin - document.LeftMargin;
+                preheaderTable.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                preheaderTable.DefaultCell.HorizontalAlignment = Element.ALIGN_CENTER;
+                preheaderTable.SetTotalWidth(new float[] { preheaderTable.TotalWidth / 2, preheaderTable.TotalWidth / 2 });
                 phrase = new Phrase();
                 phrase.Add(new Chunk(_language.invoicesNumber + ": ", b10Font));
                 phrase.Add(new Chunk(invoice.invoices_number, n10Font));
                 phrase.Add(new Chunk("/", n10Font));
                 phrase.Add(new Chunk(invoice.invoices_date.Year.ToString(), n10Font));
-                aTable.AddCell(phrase);
+                preheaderTable.AddCell(phrase);
                 phrase = new Phrase();
                 phrase.Add(new Chunk(_language.invoicesDate + ": ", b10Font));
                 phrase.Add(new Chunk(invoice.invoices_date.ToShortDateString(), n10Font));
-                aTable.AddCell(phrase);
-                document.Add(aTable);
+                preheaderTable.AddCell(phrase);
 
-                //doctor patient
-                aTable = new PdfPTable(new float[] { 1, 1 });
-                aTable.TotalWidth = PageSize.A4.Width - document.RightMargin - document.LeftMargin;
-                aTable.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
-                aTable.DefaultCell.HorizontalAlignment = Element.ALIGN_LEFT;
-                aTable.SetTotalWidth(new float[] { aTable.TotalWidth / 2, aTable.TotalWidth / 2 });
+                //headerTable
+                headerTable = new PdfPTable(new float[] { 1, 1 });
+                headerTable.TotalWidth = PageSize.A4.Width - document.RightMargin - document.LeftMargin;
+                headerTable.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                headerTable.DefaultCell.HorizontalAlignment = Element.ALIGN_LEFT;
+                headerTable.SetTotalWidth(new float[] { headerTable.TotalWidth / 2, headerTable.TotalWidth / 2 });
                 bTable = new PdfPTable(new float[] { 1 });
                 bTable.TotalWidth = PageSize.A4.Width - document.RightMargin - document.LeftMargin;
                 bTable.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
@@ -597,7 +605,7 @@ namespace DG.DentneD
                 aCell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER + iTextSharp.text.Rectangle.TOP_BORDER + iTextSharp.text.Rectangle.LEFT_BORDER + iTextSharp.text.Rectangle.RIGHT_BORDER;
                 aCell.PaddingBottom = 5;
                 bTable.AddCell(aCell);
-                aTable.AddCell(bTable);
+                headerTable.AddCell(bTable);
                 bTable = new PdfPTable(new float[] { 1 });
                 bTable.TotalWidth = PageSize.A4.Width - document.RightMargin - document.LeftMargin;
                 bTable.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
@@ -612,11 +620,8 @@ namespace DG.DentneD
                 phrase = new Phrase();
                 phrase.Add(new Chunk(invoice.invoices_patient, n10Font));
                 bTable.AddCell(phrase);
-                aTable.AddCell(bTable);
-                document.Add(aTable);
-
-                document.Add(new Paragraph(" "));
-
+                headerTable.AddCell(bTable);
+                
                 bool hastax = false;
                 foreach (invoiceslines invoiceline in invoicelines)
                 {
@@ -627,37 +632,37 @@ namespace DG.DentneD
                     }
                 }
 
-                //items
+                //itemsTable
                 if (hastax)
                 {
                     if (_settings.printCode)
-                        aTable = new PdfPTable(new float[] { 1, 1, 1, 1, 1 });
+                        itemsTable = new PdfPTable(new float[] { 1, 1, 1, 1, 1 });
                     else
-                        aTable = new PdfPTable(new float[] { 1, 1, 1, 1 });
+                        itemsTable = new PdfPTable(new float[] { 1, 1, 1, 1 });
                 }
                 else
                 {
                     if (_settings.printCode)
-                        aTable = new PdfPTable(new float[] { 1, 1, 1, 1 });
+                        itemsTable = new PdfPTable(new float[] { 1, 1, 1, 1 });
                     else
-                        aTable = new PdfPTable(new float[] { 1, 1, 1 });
+                        itemsTable = new PdfPTable(new float[] { 1, 1, 1 });
                 }
-                aTable.TotalWidth = PageSize.A4.Width - document.RightMargin - document.LeftMargin;
-                aTable.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
-                aTable.DefaultCell.HorizontalAlignment = Element.ALIGN_LEFT;
+                itemsTable.TotalWidth = PageSize.A4.Width - document.RightMargin - document.LeftMargin;
+                itemsTable.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                itemsTable.DefaultCell.HorizontalAlignment = Element.ALIGN_LEFT;
                 if (hastax)
                 {
                     if (_settings.printCode)
-                        aTable.SetTotalWidth(new float[] { 70, aTable.TotalWidth - 170, 40, 70, 70 });
+                        itemsTable.SetTotalWidth(new float[] { 70, itemsTable.TotalWidth - 170, 40, 70, 70 });
                     else
-                        aTable.SetTotalWidth(new float[] { aTable.TotalWidth - 100, 40, 70, 70 });
+                        itemsTable.SetTotalWidth(new float[] { itemsTable.TotalWidth - 100, 40, 70, 70 });
                 }
                 else
                 {
                     if (_settings.printCode)
-                        aTable.SetTotalWidth(new float[] { 70, aTable.TotalWidth - 100, 40, 70 });
+                        itemsTable.SetTotalWidth(new float[] { 70, itemsTable.TotalWidth - 100, 40, 70 });
                     else
-                        aTable.SetTotalWidth(new float[] { aTable.TotalWidth - 30, 40, 70 });
+                        itemsTable.SetTotalWidth(new float[] { itemsTable.TotalWidth - 30, 40, 70 });
                 }
 
                 if (_settings.printCode)
@@ -665,26 +670,26 @@ namespace DG.DentneD
                     aCell = new PdfPCell(new Paragraph(_language.invoicesItemsCodeTH, b10Font));
                     aCell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
                     aCell.PaddingBottom = 5;
-                    aTable.AddCell(aCell);
+                    itemsTable.AddCell(aCell);
                 }                
                 aCell = new PdfPCell(new Paragraph(_language.invoicesItemsDescriptionTH, b10Font));
                 aCell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
                 aCell.PaddingBottom = 5;
-                aTable.AddCell(aCell);
+                itemsTable.AddCell(aCell);
                 aCell = new PdfPCell(new Paragraph(_language.invoicesItemsQuantityTH, b10Font));
                 aCell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
                 aCell.PaddingBottom = 5;
-                aTable.AddCell(aCell);
+                itemsTable.AddCell(aCell);
                 aCell = new PdfPCell(new Paragraph(_language.invoicesItemsPriceTH, b10Font));
                 aCell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
                 aCell.PaddingBottom = 5;
-                aTable.AddCell(aCell);
+                itemsTable.AddCell(aCell);
                 if (hastax)
                 {
                     aCell = new PdfPCell(new Paragraph(_language.invoicesItemsTaxrateTH, b10Font));
                     aCell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
                     aCell.PaddingBottom = 5;
-                    aTable.AddCell(aCell);
+                    itemsTable.AddCell(aCell);
                 }
                 foreach (invoiceslines invoiceline in invoicelines)
                 {
@@ -692,46 +697,35 @@ namespace DG.DentneD
                     {
                         if (!String.IsNullOrEmpty(invoiceline.invoiceslines_code))
                             if (invoiceline.invoiceslines_code.Trim() != "")
-                                aTable.AddCell(new Paragraph(invoiceline.invoiceslines_code, n10Font));
+                                itemsTable.AddCell(new Paragraph(invoiceline.invoiceslines_code, n10Font));
                             else
-                                aTable.AddCell(new Paragraph("/"));
+                                itemsTable.AddCell(new Paragraph("/"));
                         else
-                            aTable.AddCell(new Paragraph("/"));
+                            itemsTable.AddCell(new Paragraph("/"));
                     }
-                    aTable.AddCell(new Paragraph(invoiceline.invoiceslines_description, n10Font));
-                    aTable.AddCell(new Paragraph(invoiceline.invoiceslines_quantity.ToString(), n10Font));
-                    aTable.AddCell(new Paragraph(Math.Round(invoiceline.invoiceslines_unitprice, 2).ToString(), n10Font));
+                    itemsTable.AddCell(new Paragraph(invoiceline.invoiceslines_description, n10Font));
+                    itemsTable.AddCell(new Paragraph(invoiceline.invoiceslines_quantity.ToString(), n10Font));
+                    itemsTable.AddCell(new Paragraph(Math.Round(invoiceline.invoiceslines_unitprice, 2).ToString(), n10Font));
                     if (hastax)
                     {
                         if (invoiceline.invoiceslines_taxrate != 0)
-                            aTable.AddCell(new Paragraph(Math.Round(invoiceline.invoiceslines_taxrate, 2) + "%", n10Font));
+                            itemsTable.AddCell(new Paragraph(Math.Round(invoiceline.invoiceslines_taxrate, 2) + "%", n10Font));
                         else
-                            aTable.AddCell(new Paragraph("/"));
+                            itemsTable.AddCell(new Paragraph("/"));
                     }
                 }
-                document.Add(aTable);
-
-                if (writer.GetVerticalPosition(false) < 230)
-                {
-                    float currentvert = writer.GetVerticalPosition(false);
-                    document.Add(new Paragraph(" "));
-                    while (writer.GetVerticalPosition(false) < currentvert)
-                        document.Add(new Paragraph(" "));
-                }
-                while (writer.GetVerticalPosition(false) > (float)230)
-                    document.Add(new Paragraph(" "));
                 
                 decimal totalnotax = 0;
                 decimal totaltax = 0;
                 decimal totaldeductiontax = 0;
                 dentnedModel.Invoices.CalculateTotal(invoice, ref totaltax, ref totaldeductiontax, ref totalnotax);
 
-                //payment
-                aTable = new PdfPTable(new float[] { 1, 1 });
-                aTable.TotalWidth = PageSize.A4.Width - document.RightMargin - document.LeftMargin;
-                aTable.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
-                aTable.DefaultCell.HorizontalAlignment = Element.ALIGN_LEFT;
-                aTable.SetTotalWidth(new float[] { aTable.TotalWidth / 2, aTable.TotalWidth / 2 });
+                //paymentTable
+                paymentTable = new PdfPTable(new float[] { 1, 1 });
+                paymentTable.TotalWidth = PageSize.A4.Width - document.RightMargin - document.LeftMargin;
+                paymentTable.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                paymentTable.DefaultCell.HorizontalAlignment = Element.ALIGN_LEFT;
+                paymentTable.SetTotalWidth(new float[] { paymentTable.TotalWidth / 2, paymentTable.TotalWidth / 2 });
 
                 bTable = new PdfPTable(new float[] { 1 });
                 bTable.TotalWidth = PageSize.A4.Width - document.RightMargin - document.LeftMargin;
@@ -755,7 +749,7 @@ namespace DG.DentneD
                     }
                 }
 
-                aTable.AddCell(bTable);
+                paymentTable.AddCell(bTable);
 
                 bTable = new PdfPTable(new float[] { 1 });
                 bTable.TotalWidth = PageSize.A4.Width - document.RightMargin - document.LeftMargin;
@@ -843,29 +837,44 @@ namespace DG.DentneD
                 aCell.PaddingTop = 4;
                 aCell.PaddingBottom = 4;
                 bTable.AddCell(aCell);
+                paymentTable.AddCell(bTable);
 
-                aTable.AddCell(bTable);
-
-                document.Add(aTable);
-
-                //footer
+                //footerTable
+                footerTable = new PdfPTable(new float[] { 1 });
+                footerTable.TotalWidth = PageSize.A4.Width - document.RightMargin - document.LeftMargin;
+                footerTable.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                footerTable.DefaultCell.HorizontalAlignment = Element.ALIGN_LEFT;
                 if (!String.IsNullOrEmpty(invoice.invoices_footer))
                 {
                     if (invoice.invoices_footer.Trim() != "")
                     {
-                        aTable = new PdfPTable(new float[] { 1 });
-                        aTable.TotalWidth = PageSize.A4.Width - document.RightMargin - document.LeftMargin;
-                        aTable.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
-                        aTable.DefaultCell.HorizontalAlignment = Element.ALIGN_LEFT;
                         phrase = new Phrase();
                         phrase.Add(new Chunk(invoice.invoices_footer, n8Font));
                         aCell = new PdfPCell(phrase);
                         aCell.Border = iTextSharp.text.Rectangle.TOP_BORDER;
                         aCell.PaddingTop = 5;
-                        aTable.AddCell(aCell);
-                        document.Add(aTable);
+                        footerTable.AddCell(aCell);
                     }
                 }
+
+                //add tables
+                document.Add(titleTable);
+                document.Add(preheaderTable);
+                document.Add(headerTable);
+                document.Add(new Paragraph(" "));
+                document.Add(itemsTable);
+                if (writer.GetVerticalPosition(false) < paymentTable.TotalHeight + footerTable.TotalHeight + (float)80)
+                {
+                    float currentvert = writer.GetVerticalPosition(false);
+                    document.Add(new Paragraph(" "));
+                    while (writer.GetVerticalPosition(false) < currentvert)
+                        document.Add(new Paragraph(" "));
+                }
+                while (writer.GetVerticalPosition(false) > paymentTable.TotalHeight + footerTable.TotalHeight + (float)80)
+                    document.Add(new Paragraph(" "));
+                document.Add(paymentTable);
+                if (footerTable != null)
+                    document.Add(footerTable);
 
                 document.Close();
 

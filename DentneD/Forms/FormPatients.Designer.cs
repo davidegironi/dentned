@@ -33,20 +33,20 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPatients));
             this.patientstreatments_idLabel = new System.Windows.Forms.Label();
             this.treatments_idLabel = new System.Windows.Forms.Label();
@@ -147,10 +147,6 @@
             this.button_tabPatients_tabPatientsContacts_new = new System.Windows.Forms.Button();
             this.panel_tabPatients_tabPatientsContacts_list = new System.Windows.Forms.Panel();
             this.advancedDataGridView_tabPatients_tabPatientsContacts_list = new Zuby.ADGV.AdvancedDataGridView();
-            this.patientscontactsidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contactstypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contactDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vPatientsContactsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabPage_tabPatients_tabPatientsAddresses = new System.Windows.Forms.TabPage();
             this.panel_tabPatients_tabPatientsAddresses_data = new System.Windows.Forms.Panel();
             this.patientsaddresses_streetTextBox = new System.Windows.Forms.TextBox();
@@ -169,10 +165,6 @@
             this.button_tabPatients_tabPatientsAddresses_new = new System.Windows.Forms.Button();
             this.panel_tabPatients_tabPatientsAddresses_list = new System.Windows.Forms.Panel();
             this.advancedDataGridView_tabPatients_tabPatientsAddresses_list = new Zuby.ADGV.AdvancedDataGridView();
-            this.patientsaddressesidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.addresstypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.addressDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vPatientsAddressesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabPage_tabPatientsMedicalrecords = new System.Windows.Forms.TabPage();
             this.panel_tabPatientsMedicalrecords_data = new System.Windows.Forms.Panel();
             this.patientsmedicalrecords_valueTextBox = new System.Windows.Forms.TextBox();
@@ -188,13 +180,8 @@
             this.button_tabPatientsMedicalrecords_new = new System.Windows.Forms.Button();
             this.panel_tabPatientsMedicalrecords_list = new System.Windows.Forms.Panel();
             this.advancedDataGridView_tabPatientsMedicalrecords_list = new Zuby.ADGV.AdvancedDataGridView();
-            this.patientsmedicalrecordsidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.medicalrecordstypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.valueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vPatientsMedicalrecordsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabPage_tabPatientsTreatments = new System.Windows.Forms.TabPage();
-            this.panel_tabPatientsTreatments_filters = new System.Windows.Forms.Panel();
-            this.groupBox_tabPatientsTreatments_filtert = new System.Windows.Forms.GroupBox();
+            this.groupBox_t = new System.Windows.Forms.GroupBox();
             this.patientstreatments_filtertanyLabel = new System.Windows.Forms.Label();
             this.patientstreatments_filtertanyCheckBox = new System.Windows.Forms.CheckBox();
             this.patientstreatments_filtertnonumLabel = new System.Windows.Forms.Label();
@@ -305,6 +292,11 @@
             this.patientstreatments_filtert33CheckBox = new System.Windows.Forms.CheckBox();
             this.patientstreatments_filtert31CheckBox = new System.Windows.Forms.CheckBox();
             this.patientstreatments_filtert32CheckBox = new System.Windows.Forms.CheckBox();
+            this.panel_tabPatientsTreatments_filters = new System.Windows.Forms.Panel();
+            this.comboBox_tabPatientsTreatments_filterpaid = new System.Windows.Forms.ComboBox();
+            this.label_tabPatientsTreatments_filterpaid = new System.Windows.Forms.Label();
+            this.comboBox_tabPatientsTreatments_filterfulfilled = new System.Windows.Forms.ComboBox();
+            this.label_tabPatientsTreatments_filterfulfilled = new System.Windows.Forms.Label();
             this.panel_tabPatientsTreatments_data = new System.Windows.Forms.Panel();
             this.patientstreatments_isunitpriceCheckBox = new System.Windows.Forms.CheckBox();
             this.patientstreatmentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -408,12 +400,6 @@
             this.button_tabPatientsTreatments_new = new System.Windows.Forms.Button();
             this.panel_tabPatientsTreatments_list = new System.Windows.Forms.Panel();
             this.advancedDataGridView_tabPatientsTreatments_list = new Zuby.ADGV.AdvancedDataGridView();
-            this.dateDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.treatmentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.toothsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.isfulfilledDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.ispaidDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.vPatientsTreatmentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabPage_tabPayments = new System.Windows.Forms.TabPage();
             this.panel_tabPayments_data = new System.Windows.Forms.Panel();
             this.label_tabPayments_inforeference = new System.Windows.Forms.Label();
@@ -437,11 +423,6 @@
             this.label_tabPayments_total = new System.Windows.Forms.Label();
             this.label_tabPayments_paidtotal = new System.Windows.Forms.Label();
             this.advancedDataGridView_tabPayments_list = new Zuby.ADGV.AdvancedDataGridView();
-            this.paymentsidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.noteDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vPatientsPaymentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabPage_tabAppointments = new System.Windows.Forms.TabPage();
             this.panel_tabAppointments_data = new System.Windows.Forms.Panel();
             this.appointments_notesTextBox = new System.Windows.Forms.TextBox();
@@ -452,11 +433,6 @@
             this.appointments_idTextBox = new System.Windows.Forms.TextBox();
             this.panel_tabAppointments_list = new System.Windows.Forms.Panel();
             this.advancedDataGridView_tabAppointments_list = new Zuby.ADGV.AdvancedDataGridView();
-            this.appointmentsidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fromDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.toDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vPatientsAppointmentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabPage_tabPatientsAttachments = new System.Windows.Forms.TabPage();
             this.panel_tabPatientsAttachments_data = new System.Windows.Forms.Panel();
             this.patientsattachments_noteTextBox = new System.Windows.Forms.TextBox();
@@ -478,10 +454,6 @@
             this.button_tabPatientsAttachments_new = new System.Windows.Forms.Button();
             this.panel_tabPatientsAttachments_list = new System.Windows.Forms.Panel();
             this.advancedDataGridView_tabPatientsAttachments_list = new Zuby.ADGV.AdvancedDataGridView();
-            this.patientsattachmentsidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.attachmetnstypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.attachmentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vPatientsAttachmentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabPage_tabInvoices = new System.Windows.Forms.TabPage();
             this.panel_tabInvoices_actions = new System.Windows.Forms.Panel();
             this.button_tabInvoices_view = new System.Windows.Forms.Button();
@@ -493,12 +465,6 @@
             this.label_tabInvoices_invoicestotaldue = new System.Windows.Forms.Label();
             this.label_tabInvoices_paidtotaldue = new System.Windows.Forms.Label();
             this.advancedDataGridView_tabInvoices_list = new Zuby.ADGV.AdvancedDataGridView();
-            this.numberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateDataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.doctorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ispaidDataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.totalDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vPatientsInvoicesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabPage_tabEstimates = new System.Windows.Forms.TabPage();
             this.panel_tabEstimates_actions = new System.Windows.Forms.Panel();
             this.button_tabEstimates_view = new System.Windows.Forms.Button();
@@ -510,12 +476,6 @@
             this.label_tabEstimates_estimatestotaldue = new System.Windows.Forms.Label();
             this.label_tabEstimates_invoicedtotaldue = new System.Windows.Forms.Label();
             this.advancedDataGridView_tabEstimates_list = new Zuby.ADGV.AdvancedDataGridView();
-            this.numberDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateDataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.doctorDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.isinvoicedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.totalDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vPatientsEstimatesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabPage_tabPatientsNotes = new System.Windows.Forms.TabPage();
             this.panel_tabPatientsNotes_data = new System.Windows.Forms.Panel();
             this.patientsnotes_textTextBox = new System.Windows.Forms.TextBox();
@@ -531,16 +491,8 @@
             this.button_tabPatientsNotes_new = new System.Windows.Forms.Button();
             this.panel_tabPatientsNotes_list = new System.Windows.Forms.Panel();
             this.advancedDataGridView_tabPatientsNotes_list = new Zuby.ADGV.AdvancedDataGridView();
-            this.patientsnotesidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.noteDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vPatientsNotesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel_list = new System.Windows.Forms.Panel();
             this.advancedDataGridView_main = new Zuby.ADGV.AdvancedDataGridView();
-            this.patientsidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.isarchivedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.vPatientsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel_listtotal = new System.Windows.Forms.Panel();
             this.countTextBox = new System.Windows.Forms.TextBox();
             this.countLabel = new System.Windows.Forms.Label();
@@ -550,6 +502,58 @@
             this.comboBox_filterArchived = new System.Windows.Forms.ComboBox();
             this.invoicesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.estimatesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.patientsidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isarchivedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.vPatientsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.patientscontactsidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contactstypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contactDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vPatientsContactsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.patientsaddressesidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.addresstypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.addressDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vPatientsAddressesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.patientsmedicalrecordsidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.medicalrecordstypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.valueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vPatientsMedicalrecordsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dateDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.treatmentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toothsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isfulfilledDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.ispaidDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.vPatientsTreatmentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.paymentsidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.noteDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vPatientsPaymentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.appointmentsidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fromDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vPatientsAppointmentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.patientsattachmentsidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.attachmetnstypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.attachmentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vPatientsAttachmentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.numberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateDataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.doctorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ispaidDataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.totalDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vPatientsInvoicesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.numberDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateDataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.doctorDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isinvoicedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.totalDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vPatientsEstimatesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.patientsnotesidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.noteDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vPatientsNotesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel_data.SuspendLayout();
             this.tabControl_main.SuspendLayout();
             this.tabPage_tabPatients.SuspendLayout();
@@ -568,7 +572,6 @@
             this.panel_tabPatients_tabPatientsContacts_actions.SuspendLayout();
             this.panel_tabPatients_tabPatientsContacts_list.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabPatients_tabPatientsContacts_list)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsContactsBindingSource)).BeginInit();
             this.tabPage_tabPatients_tabPatientsAddresses.SuspendLayout();
             this.panel_tabPatients_tabPatientsAddresses_data.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.patientsaddressesBindingSource)).BeginInit();
@@ -576,7 +579,6 @@
             this.panel_tabPatients_tabPatientsAddresses_actions.SuspendLayout();
             this.panel_tabPatients_tabPatientsAddresses_list.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabPatients_tabPatientsAddresses_list)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsAddressesBindingSource)).BeginInit();
             this.tabPage_tabPatientsMedicalrecords.SuspendLayout();
             this.panel_tabPatientsMedicalrecords_data.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.patientsmedicalrecordsBindingSource)).BeginInit();
@@ -584,10 +586,9 @@
             this.panel_tabPatientsMedicalrecords_actions.SuspendLayout();
             this.panel_tabPatientsMedicalrecords_list.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabPatientsMedicalrecords_list)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsMedicalrecordsBindingSource)).BeginInit();
             this.tabPage_tabPatientsTreatments.SuspendLayout();
+            this.groupBox_t.SuspendLayout();
             this.panel_tabPatientsTreatments_filters.SuspendLayout();
-            this.groupBox_tabPatientsTreatments_filtert.SuspendLayout();
             this.panel_tabPatientsTreatments_data.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.patientstreatmentsBindingSource)).BeginInit();
             this.groupBox_tabPatientsTreatments_tooths.SuspendLayout();
@@ -595,7 +596,6 @@
             this.panel_tabPatientsTreatments_actions.SuspendLayout();
             this.panel_tabPatientsTreatments_list.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabPatientsTreatments_list)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsTreatmentsBindingSource)).BeginInit();
             this.tabPage_tabPayments.SuspendLayout();
             this.panel_tabPayments_data.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.paymentsBindingSource)).BeginInit();
@@ -603,13 +603,11 @@
             this.panel_tabPayments_actions.SuspendLayout();
             this.panel_tabPayments_list.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabPayments_list)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsPaymentsBindingSource)).BeginInit();
             this.tabPage_tabAppointments.SuspendLayout();
             this.panel_tabAppointments_data.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.appointmentsBindingSource)).BeginInit();
             this.panel_tabAppointments_list.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabAppointments_list)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsAppointmentsBindingSource)).BeginInit();
             this.tabPage_tabPatientsAttachments.SuspendLayout();
             this.panel_tabPatientsAttachments_data.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.patientsattachmentsBindingSource)).BeginInit();
@@ -617,17 +615,14 @@
             this.panel_tabPatientsAttachments_actions.SuspendLayout();
             this.panel_tabPatientsAttachments_list.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabPatientsAttachments_list)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsAttachmentsBindingSource)).BeginInit();
             this.tabPage_tabInvoices.SuspendLayout();
             this.panel_tabInvoices_actions.SuspendLayout();
             this.panel_tabInvoices_list.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabInvoices_list)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsInvoicesBindingSource)).BeginInit();
             this.tabPage_tabEstimates.SuspendLayout();
             this.panel_tabEstimates_actions.SuspendLayout();
             this.panel_tabEstimates_list.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabEstimates_list)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsEstimatesBindingSource)).BeginInit();
             this.tabPage_tabPatientsNotes.SuspendLayout();
             this.panel_tabPatientsNotes_data.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.patientsnotesBindingSource)).BeginInit();
@@ -635,14 +630,23 @@
             this.panel_tabPatientsNotes_actions.SuspendLayout();
             this.panel_tabPatientsNotes_list.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabPatientsNotes_list)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsNotesBindingSource)).BeginInit();
             this.panel_list.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_main)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsBindingSource)).BeginInit();
             this.panel_listtotal.SuspendLayout();
             this.panel_filters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.invoicesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.estimatesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsContactsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsAddressesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsMedicalrecordsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsTreatmentsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsPaymentsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsAppointmentsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsAttachmentsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsInvoicesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsEstimatesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsNotesBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // patientstreatments_idLabel
@@ -1625,40 +1629,6 @@
             this.advancedDataGridView_tabPatients_tabPatientsContacts_list.SortStringChanged += new System.EventHandler(this.advancedDataGridView_tabPatients_tabPatientsContacts_list_SortStringChanged);
             this.advancedDataGridView_tabPatients_tabPatientsContacts_list.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_tabPatients_tabPatientsContacts_list_FilterStringChanged);
             // 
-            // patientscontactsidDataGridViewTextBoxColumn
-            // 
-            this.patientscontactsidDataGridViewTextBoxColumn.DataPropertyName = "patientscontacts_id";
-            this.patientscontactsidDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.patientscontactsidDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.patientscontactsidDataGridViewTextBoxColumn.Name = "patientscontactsidDataGridViewTextBoxColumn";
-            this.patientscontactsidDataGridViewTextBoxColumn.ReadOnly = true;
-            this.patientscontactsidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.patientscontactsidDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // contactstypeDataGridViewTextBoxColumn
-            // 
-            this.contactstypeDataGridViewTextBoxColumn.DataPropertyName = "contactstype";
-            this.contactstypeDataGridViewTextBoxColumn.HeaderText = "Type";
-            this.contactstypeDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.contactstypeDataGridViewTextBoxColumn.Name = "contactstypeDataGridViewTextBoxColumn";
-            this.contactstypeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.contactstypeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.contactstypeDataGridViewTextBoxColumn.Width = 120;
-            // 
-            // contactDataGridViewTextBoxColumn
-            // 
-            this.contactDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.contactDataGridViewTextBoxColumn.DataPropertyName = "contact";
-            this.contactDataGridViewTextBoxColumn.HeaderText = "Contact";
-            this.contactDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.contactDataGridViewTextBoxColumn.Name = "contactDataGridViewTextBoxColumn";
-            this.contactDataGridViewTextBoxColumn.ReadOnly = true;
-            this.contactDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // vPatientsContactsBindingSource
-            // 
-            this.vPatientsContactsBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatientsContacts);
-            // 
             // tabPage_tabPatients_tabPatientsAddresses
             // 
             this.tabPage_tabPatients_tabPatientsAddresses.Controls.Add(this.panel_tabPatients_tabPatientsAddresses_data);
@@ -1849,40 +1819,6 @@
             this.advancedDataGridView_tabPatients_tabPatientsAddresses_list.SortStringChanged += new System.EventHandler(this.advancedDataGridView_tabPatients_tabPatientsAddresses_list_SortStringChanged);
             this.advancedDataGridView_tabPatients_tabPatientsAddresses_list.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_tabPatients_tabPatientsAddresses_list_FilterStringChanged);
             // 
-            // patientsaddressesidDataGridViewTextBoxColumn
-            // 
-            this.patientsaddressesidDataGridViewTextBoxColumn.DataPropertyName = "patientsaddresses_id";
-            this.patientsaddressesidDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.patientsaddressesidDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.patientsaddressesidDataGridViewTextBoxColumn.Name = "patientsaddressesidDataGridViewTextBoxColumn";
-            this.patientsaddressesidDataGridViewTextBoxColumn.ReadOnly = true;
-            this.patientsaddressesidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.patientsaddressesidDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // addresstypeDataGridViewTextBoxColumn
-            // 
-            this.addresstypeDataGridViewTextBoxColumn.DataPropertyName = "addresstype";
-            this.addresstypeDataGridViewTextBoxColumn.HeaderText = "Type";
-            this.addresstypeDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.addresstypeDataGridViewTextBoxColumn.Name = "addresstypeDataGridViewTextBoxColumn";
-            this.addresstypeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.addresstypeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.addresstypeDataGridViewTextBoxColumn.Width = 120;
-            // 
-            // addressDataGridViewTextBoxColumn
-            // 
-            this.addressDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.addressDataGridViewTextBoxColumn.DataPropertyName = "address";
-            this.addressDataGridViewTextBoxColumn.HeaderText = "Address";
-            this.addressDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.addressDataGridViewTextBoxColumn.Name = "addressDataGridViewTextBoxColumn";
-            this.addressDataGridViewTextBoxColumn.ReadOnly = true;
-            this.addressDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // vPatientsAddressesBindingSource
-            // 
-            this.vPatientsAddressesBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatientsAddresses);
-            // 
             // tabPage_tabPatientsMedicalrecords
             // 
             this.tabPage_tabPatientsMedicalrecords.Controls.Add(this.panel_tabPatientsMedicalrecords_data);
@@ -2043,43 +1979,10 @@
             this.advancedDataGridView_tabPatientsMedicalrecords_list.SortStringChanged += new System.EventHandler(this.advancedDataGridView_tabPatientsMedicalrecords_list_SortStringChanged);
             this.advancedDataGridView_tabPatientsMedicalrecords_list.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_tabPatientsMedicalrecords_list_FilterStringChanged);
             // 
-            // patientsmedicalrecordsidDataGridViewTextBoxColumn
-            // 
-            this.patientsmedicalrecordsidDataGridViewTextBoxColumn.DataPropertyName = "patientsmedicalrecords_id";
-            this.patientsmedicalrecordsidDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.patientsmedicalrecordsidDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.patientsmedicalrecordsidDataGridViewTextBoxColumn.Name = "patientsmedicalrecordsidDataGridViewTextBoxColumn";
-            this.patientsmedicalrecordsidDataGridViewTextBoxColumn.ReadOnly = true;
-            this.patientsmedicalrecordsidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.patientsmedicalrecordsidDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // medicalrecordstypeDataGridViewTextBoxColumn
-            // 
-            this.medicalrecordstypeDataGridViewTextBoxColumn.DataPropertyName = "medicalrecordstype";
-            this.medicalrecordstypeDataGridViewTextBoxColumn.HeaderText = "Type";
-            this.medicalrecordstypeDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.medicalrecordstypeDataGridViewTextBoxColumn.Name = "medicalrecordstypeDataGridViewTextBoxColumn";
-            this.medicalrecordstypeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.medicalrecordstypeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.medicalrecordstypeDataGridViewTextBoxColumn.Width = 120;
-            // 
-            // valueDataGridViewTextBoxColumn
-            // 
-            this.valueDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.valueDataGridViewTextBoxColumn.DataPropertyName = "value";
-            this.valueDataGridViewTextBoxColumn.HeaderText = "Info";
-            this.valueDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.valueDataGridViewTextBoxColumn.Name = "valueDataGridViewTextBoxColumn";
-            this.valueDataGridViewTextBoxColumn.ReadOnly = true;
-            this.valueDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // vPatientsMedicalrecordsBindingSource
-            // 
-            this.vPatientsMedicalrecordsBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatientsMedicalrecords);
-            // 
             // tabPage_tabPatientsTreatments
             // 
             this.tabPage_tabPatientsTreatments.AutoScroll = true;
+            this.tabPage_tabPatientsTreatments.Controls.Add(this.groupBox_t);
             this.tabPage_tabPatientsTreatments.Controls.Add(this.panel_tabPatientsTreatments_filters);
             this.tabPage_tabPatientsTreatments.Controls.Add(this.panel_tabPatientsTreatments_data);
             this.tabPage_tabPatientsTreatments.Controls.Add(this.panel_tabPatientsTreatments_updates);
@@ -2093,137 +1996,129 @@
             this.tabPage_tabPatientsTreatments.Text = "Treatments";
             this.tabPage_tabPatientsTreatments.UseVisualStyleBackColor = true;
             // 
-            // panel_tabPatientsTreatments_filters
+            // groupBox_t
             // 
-            this.panel_tabPatientsTreatments_filters.Controls.Add(this.groupBox_tabPatientsTreatments_filtert);
-            this.panel_tabPatientsTreatments_filters.Location = new System.Drawing.Point(6, 6);
-            this.panel_tabPatientsTreatments_filters.Name = "panel_tabPatientsTreatments_filters";
-            this.panel_tabPatientsTreatments_filters.Size = new System.Drawing.Size(540, 116);
-            this.panel_tabPatientsTreatments_filters.TabIndex = 14;
-            // 
-            // groupBox_tabPatientsTreatments_filtert
-            // 
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtertanyLabel);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtertanyCheckBox);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtertnonumLabel);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtertdwnumLabel);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtertupnumLabel);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtertalnumLabel);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert31numLabel);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert32numLabel);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert33numLabel);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert34numLabel);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert35numLabel);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert36numLabel);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert37numLabel);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert38numLabel);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert21numLabel);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert22numLabel);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert23numLabel);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert24numLabel);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert25numLabel);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert26numLabel);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert27numLabel);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert28numLabel);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert48numLabel);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert47numLabel);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert46numLabel);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert45numLabel);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert44numLabel);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert43numLabel);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert42numLabel);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert41numLabel);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert18numLabel);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert17numLabel);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert16numLabel);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert15numLabel);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert14numLabel);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert13numLabel);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert12numLabel);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert11numLabel);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtertnoLabel);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtertalLabel);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtertdwLabel);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtertupLabel);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert31Label);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert32Label);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert33Label);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert34Label);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert35Label);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert36Label);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert37Label);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert38Label);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert48Label);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert47Label);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert46Label);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert45Label);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert44Label);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert43Label);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert42Label);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert41Label);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert21Label);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert22Label);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert23Label);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert24Label);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert25Label);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert26Label);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert27Label);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert28Label);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert18Label);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert17Label);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert16Label);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert15Label);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert14Label);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert13Label);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert12Label);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert11Label);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtertnoCheckBox);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtertalCheckBox);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtertdwCheckBox);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtertupCheckBox);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert18CheckBox);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert11CheckBox);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert12CheckBox);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert48CheckBox);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert13CheckBox);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert47CheckBox);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert14CheckBox);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert46CheckBox);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert15CheckBox);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert45CheckBox);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert16CheckBox);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert44CheckBox);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert17CheckBox);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert43CheckBox);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert21CheckBox);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert42CheckBox);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert22CheckBox);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert41CheckBox);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert23CheckBox);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert38CheckBox);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert24CheckBox);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert37CheckBox);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert25CheckBox);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert36CheckBox);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert26CheckBox);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert35CheckBox);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert27CheckBox);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert34CheckBox);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert28CheckBox);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert33CheckBox);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert31CheckBox);
-            this.groupBox_tabPatientsTreatments_filtert.Controls.Add(this.patientstreatments_filtert32CheckBox);
-            this.groupBox_tabPatientsTreatments_filtert.Location = new System.Drawing.Point(35, 3);
-            this.groupBox_tabPatientsTreatments_filtert.Name = "groupBox_tabPatientsTreatments_filtert";
-            this.groupBox_tabPatientsTreatments_filtert.Size = new System.Drawing.Size(473, 111);
-            this.groupBox_tabPatientsTreatments_filtert.TabIndex = 47;
-            this.groupBox_tabPatientsTreatments_filtert.TabStop = false;
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtertanyLabel);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtertanyCheckBox);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtertnonumLabel);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtertdwnumLabel);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtertupnumLabel);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtertalnumLabel);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert31numLabel);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert32numLabel);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert33numLabel);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert34numLabel);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert35numLabel);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert36numLabel);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert37numLabel);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert38numLabel);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert21numLabel);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert22numLabel);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert23numLabel);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert24numLabel);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert25numLabel);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert26numLabel);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert27numLabel);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert28numLabel);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert48numLabel);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert47numLabel);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert46numLabel);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert45numLabel);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert44numLabel);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert43numLabel);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert42numLabel);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert41numLabel);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert18numLabel);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert17numLabel);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert16numLabel);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert15numLabel);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert14numLabel);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert13numLabel);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert12numLabel);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert11numLabel);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtertnoLabel);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtertalLabel);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtertdwLabel);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtertupLabel);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert31Label);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert32Label);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert33Label);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert34Label);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert35Label);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert36Label);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert37Label);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert38Label);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert48Label);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert47Label);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert46Label);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert45Label);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert44Label);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert43Label);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert42Label);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert41Label);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert21Label);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert22Label);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert23Label);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert24Label);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert25Label);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert26Label);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert27Label);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert28Label);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert18Label);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert17Label);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert16Label);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert15Label);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert14Label);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert13Label);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert12Label);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert11Label);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtertnoCheckBox);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtertalCheckBox);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtertdwCheckBox);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtertupCheckBox);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert18CheckBox);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert11CheckBox);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert12CheckBox);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert48CheckBox);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert13CheckBox);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert47CheckBox);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert14CheckBox);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert46CheckBox);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert15CheckBox);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert45CheckBox);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert16CheckBox);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert44CheckBox);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert17CheckBox);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert43CheckBox);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert21CheckBox);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert42CheckBox);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert22CheckBox);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert41CheckBox);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert23CheckBox);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert38CheckBox);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert24CheckBox);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert37CheckBox);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert25CheckBox);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert36CheckBox);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert26CheckBox);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert35CheckBox);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert27CheckBox);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert34CheckBox);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert28CheckBox);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert33CheckBox);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert31CheckBox);
+            this.groupBox_t.Controls.Add(this.patientstreatments_filtert32CheckBox);
+            this.groupBox_t.Location = new System.Drawing.Point(94, 5);
+            this.groupBox_t.Name = "groupBox_t";
+            this.groupBox_t.Size = new System.Drawing.Size(443, 109);
+            this.groupBox_t.TabIndex = 47;
+            this.groupBox_t.TabStop = false;
             // 
             // patientstreatments_filtertanyLabel
             // 
             this.patientstreatments_filtertanyLabel.AutoSize = true;
             this.patientstreatments_filtertanyLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patientstreatments_filtertanyLabel.Location = new System.Drawing.Point(410, 85);
+            this.patientstreatments_filtertanyLabel.Location = new System.Drawing.Point(384, 85);
             this.patientstreatments_filtertanyLabel.Name = "patientstreatments_filtertanyLabel";
             this.patientstreatments_filtertanyLabel.Size = new System.Drawing.Size(20, 12);
             this.patientstreatments_filtertanyLabel.TabIndex = 123;
@@ -2233,7 +2128,7 @@
             // patientstreatments_filtertanyCheckBox
             // 
             this.patientstreatments_filtertanyCheckBox.AutoSize = true;
-            this.patientstreatments_filtertanyCheckBox.Location = new System.Drawing.Point(394, 85);
+            this.patientstreatments_filtertanyCheckBox.Location = new System.Drawing.Point(368, 85);
             this.patientstreatments_filtertanyCheckBox.Name = "patientstreatments_filtertanyCheckBox";
             this.patientstreatments_filtertanyCheckBox.Size = new System.Drawing.Size(15, 14);
             this.patientstreatments_filtertanyCheckBox.TabIndex = 122;
@@ -2244,7 +2139,7 @@
             // 
             this.patientstreatments_filtertnonumLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patientstreatments_filtertnonumLabel.ForeColor = System.Drawing.Color.Blue;
-            this.patientstreatments_filtertnonumLabel.Location = new System.Drawing.Point(445, 69);
+            this.patientstreatments_filtertnonumLabel.Location = new System.Drawing.Point(419, 69);
             this.patientstreatments_filtertnonumLabel.Name = "patientstreatments_filtertnonumLabel";
             this.patientstreatments_filtertnonumLabel.Size = new System.Drawing.Size(20, 12);
             this.patientstreatments_filtertnonumLabel.TabIndex = 121;
@@ -2255,7 +2150,7 @@
             // 
             this.patientstreatments_filtertdwnumLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patientstreatments_filtertdwnumLabel.ForeColor = System.Drawing.Color.Blue;
-            this.patientstreatments_filtertdwnumLabel.Location = new System.Drawing.Point(445, 52);
+            this.patientstreatments_filtertdwnumLabel.Location = new System.Drawing.Point(419, 52);
             this.patientstreatments_filtertdwnumLabel.Name = "patientstreatments_filtertdwnumLabel";
             this.patientstreatments_filtertdwnumLabel.Size = new System.Drawing.Size(20, 12);
             this.patientstreatments_filtertdwnumLabel.TabIndex = 120;
@@ -2266,7 +2161,7 @@
             // 
             this.patientstreatments_filtertupnumLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patientstreatments_filtertupnumLabel.ForeColor = System.Drawing.Color.Blue;
-            this.patientstreatments_filtertupnumLabel.Location = new System.Drawing.Point(445, 37);
+            this.patientstreatments_filtertupnumLabel.Location = new System.Drawing.Point(419, 37);
             this.patientstreatments_filtertupnumLabel.Name = "patientstreatments_filtertupnumLabel";
             this.patientstreatments_filtertupnumLabel.Size = new System.Drawing.Size(20, 12);
             this.patientstreatments_filtertupnumLabel.TabIndex = 119;
@@ -2277,7 +2172,7 @@
             // 
             this.patientstreatments_filtertalnumLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patientstreatments_filtertalnumLabel.ForeColor = System.Drawing.Color.Blue;
-            this.patientstreatments_filtertalnumLabel.Location = new System.Drawing.Point(445, 20);
+            this.patientstreatments_filtertalnumLabel.Location = new System.Drawing.Point(419, 20);
             this.patientstreatments_filtertalnumLabel.Name = "patientstreatments_filtertalnumLabel";
             this.patientstreatments_filtertalnumLabel.Size = new System.Drawing.Size(20, 12);
             this.patientstreatments_filtertalnumLabel.TabIndex = 118;
@@ -2288,7 +2183,7 @@
             // 
             this.patientstreatments_filtert31numLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patientstreatments_filtert31numLabel.ForeColor = System.Drawing.Color.Blue;
-            this.patientstreatments_filtert31numLabel.Location = new System.Drawing.Point(209, 90);
+            this.patientstreatments_filtert31numLabel.Location = new System.Drawing.Point(187, 90);
             this.patientstreatments_filtert31numLabel.Name = "patientstreatments_filtert31numLabel";
             this.patientstreatments_filtert31numLabel.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert31numLabel.TabIndex = 117;
@@ -2299,7 +2194,7 @@
             // 
             this.patientstreatments_filtert32numLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patientstreatments_filtert32numLabel.ForeColor = System.Drawing.Color.Blue;
-            this.patientstreatments_filtert32numLabel.Location = new System.Drawing.Point(230, 90);
+            this.patientstreatments_filtert32numLabel.Location = new System.Drawing.Point(208, 90);
             this.patientstreatments_filtert32numLabel.Name = "patientstreatments_filtert32numLabel";
             this.patientstreatments_filtert32numLabel.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert32numLabel.TabIndex = 116;
@@ -2310,7 +2205,7 @@
             // 
             this.patientstreatments_filtert33numLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patientstreatments_filtert33numLabel.ForeColor = System.Drawing.Color.Blue;
-            this.patientstreatments_filtert33numLabel.Location = new System.Drawing.Point(251, 90);
+            this.patientstreatments_filtert33numLabel.Location = new System.Drawing.Point(229, 90);
             this.patientstreatments_filtert33numLabel.Name = "patientstreatments_filtert33numLabel";
             this.patientstreatments_filtert33numLabel.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert33numLabel.TabIndex = 115;
@@ -2321,7 +2216,7 @@
             // 
             this.patientstreatments_filtert34numLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patientstreatments_filtert34numLabel.ForeColor = System.Drawing.Color.Blue;
-            this.patientstreatments_filtert34numLabel.Location = new System.Drawing.Point(272, 90);
+            this.patientstreatments_filtert34numLabel.Location = new System.Drawing.Point(250, 90);
             this.patientstreatments_filtert34numLabel.Name = "patientstreatments_filtert34numLabel";
             this.patientstreatments_filtert34numLabel.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert34numLabel.TabIndex = 114;
@@ -2332,7 +2227,7 @@
             // 
             this.patientstreatments_filtert35numLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patientstreatments_filtert35numLabel.ForeColor = System.Drawing.Color.Blue;
-            this.patientstreatments_filtert35numLabel.Location = new System.Drawing.Point(293, 90);
+            this.patientstreatments_filtert35numLabel.Location = new System.Drawing.Point(271, 90);
             this.patientstreatments_filtert35numLabel.Name = "patientstreatments_filtert35numLabel";
             this.patientstreatments_filtert35numLabel.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert35numLabel.TabIndex = 113;
@@ -2343,7 +2238,7 @@
             // 
             this.patientstreatments_filtert36numLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patientstreatments_filtert36numLabel.ForeColor = System.Drawing.Color.Blue;
-            this.patientstreatments_filtert36numLabel.Location = new System.Drawing.Point(314, 90);
+            this.patientstreatments_filtert36numLabel.Location = new System.Drawing.Point(292, 90);
             this.patientstreatments_filtert36numLabel.Name = "patientstreatments_filtert36numLabel";
             this.patientstreatments_filtert36numLabel.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert36numLabel.TabIndex = 112;
@@ -2354,7 +2249,7 @@
             // 
             this.patientstreatments_filtert37numLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patientstreatments_filtert37numLabel.ForeColor = System.Drawing.Color.Blue;
-            this.patientstreatments_filtert37numLabel.Location = new System.Drawing.Point(335, 90);
+            this.patientstreatments_filtert37numLabel.Location = new System.Drawing.Point(313, 90);
             this.patientstreatments_filtert37numLabel.Name = "patientstreatments_filtert37numLabel";
             this.patientstreatments_filtert37numLabel.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert37numLabel.TabIndex = 111;
@@ -2365,7 +2260,7 @@
             // 
             this.patientstreatments_filtert38numLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patientstreatments_filtert38numLabel.ForeColor = System.Drawing.Color.Blue;
-            this.patientstreatments_filtert38numLabel.Location = new System.Drawing.Point(356, 90);
+            this.patientstreatments_filtert38numLabel.Location = new System.Drawing.Point(334, 90);
             this.patientstreatments_filtert38numLabel.Name = "patientstreatments_filtert38numLabel";
             this.patientstreatments_filtert38numLabel.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert38numLabel.TabIndex = 110;
@@ -2376,7 +2271,7 @@
             // 
             this.patientstreatments_filtert21numLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patientstreatments_filtert21numLabel.ForeColor = System.Drawing.Color.Blue;
-            this.patientstreatments_filtert21numLabel.Location = new System.Drawing.Point(208, 14);
+            this.patientstreatments_filtert21numLabel.Location = new System.Drawing.Point(186, 14);
             this.patientstreatments_filtert21numLabel.Name = "patientstreatments_filtert21numLabel";
             this.patientstreatments_filtert21numLabel.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert21numLabel.TabIndex = 109;
@@ -2387,7 +2282,7 @@
             // 
             this.patientstreatments_filtert22numLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patientstreatments_filtert22numLabel.ForeColor = System.Drawing.Color.Blue;
-            this.patientstreatments_filtert22numLabel.Location = new System.Drawing.Point(229, 14);
+            this.patientstreatments_filtert22numLabel.Location = new System.Drawing.Point(207, 14);
             this.patientstreatments_filtert22numLabel.Name = "patientstreatments_filtert22numLabel";
             this.patientstreatments_filtert22numLabel.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert22numLabel.TabIndex = 108;
@@ -2398,7 +2293,7 @@
             // 
             this.patientstreatments_filtert23numLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patientstreatments_filtert23numLabel.ForeColor = System.Drawing.Color.Blue;
-            this.patientstreatments_filtert23numLabel.Location = new System.Drawing.Point(250, 14);
+            this.patientstreatments_filtert23numLabel.Location = new System.Drawing.Point(228, 14);
             this.patientstreatments_filtert23numLabel.Name = "patientstreatments_filtert23numLabel";
             this.patientstreatments_filtert23numLabel.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert23numLabel.TabIndex = 107;
@@ -2409,7 +2304,7 @@
             // 
             this.patientstreatments_filtert24numLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patientstreatments_filtert24numLabel.ForeColor = System.Drawing.Color.Blue;
-            this.patientstreatments_filtert24numLabel.Location = new System.Drawing.Point(271, 14);
+            this.patientstreatments_filtert24numLabel.Location = new System.Drawing.Point(249, 14);
             this.patientstreatments_filtert24numLabel.Name = "patientstreatments_filtert24numLabel";
             this.patientstreatments_filtert24numLabel.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert24numLabel.TabIndex = 106;
@@ -2420,7 +2315,7 @@
             // 
             this.patientstreatments_filtert25numLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patientstreatments_filtert25numLabel.ForeColor = System.Drawing.Color.Blue;
-            this.patientstreatments_filtert25numLabel.Location = new System.Drawing.Point(292, 14);
+            this.patientstreatments_filtert25numLabel.Location = new System.Drawing.Point(270, 14);
             this.patientstreatments_filtert25numLabel.Name = "patientstreatments_filtert25numLabel";
             this.patientstreatments_filtert25numLabel.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert25numLabel.TabIndex = 105;
@@ -2431,7 +2326,7 @@
             // 
             this.patientstreatments_filtert26numLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patientstreatments_filtert26numLabel.ForeColor = System.Drawing.Color.Blue;
-            this.patientstreatments_filtert26numLabel.Location = new System.Drawing.Point(313, 14);
+            this.patientstreatments_filtert26numLabel.Location = new System.Drawing.Point(291, 14);
             this.patientstreatments_filtert26numLabel.Name = "patientstreatments_filtert26numLabel";
             this.patientstreatments_filtert26numLabel.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert26numLabel.TabIndex = 104;
@@ -2442,7 +2337,7 @@
             // 
             this.patientstreatments_filtert27numLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patientstreatments_filtert27numLabel.ForeColor = System.Drawing.Color.Blue;
-            this.patientstreatments_filtert27numLabel.Location = new System.Drawing.Point(334, 14);
+            this.patientstreatments_filtert27numLabel.Location = new System.Drawing.Point(312, 14);
             this.patientstreatments_filtert27numLabel.Name = "patientstreatments_filtert27numLabel";
             this.patientstreatments_filtert27numLabel.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert27numLabel.TabIndex = 103;
@@ -2453,7 +2348,7 @@
             // 
             this.patientstreatments_filtert28numLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patientstreatments_filtert28numLabel.ForeColor = System.Drawing.Color.Blue;
-            this.patientstreatments_filtert28numLabel.Location = new System.Drawing.Point(355, 14);
+            this.patientstreatments_filtert28numLabel.Location = new System.Drawing.Point(333, 14);
             this.patientstreatments_filtert28numLabel.Name = "patientstreatments_filtert28numLabel";
             this.patientstreatments_filtert28numLabel.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert28numLabel.TabIndex = 102;
@@ -2464,7 +2359,7 @@
             // 
             this.patientstreatments_filtert48numLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patientstreatments_filtert48numLabel.ForeColor = System.Drawing.Color.Blue;
-            this.patientstreatments_filtert48numLabel.Location = new System.Drawing.Point(30, 90);
+            this.patientstreatments_filtert48numLabel.Location = new System.Drawing.Point(8, 90);
             this.patientstreatments_filtert48numLabel.Name = "patientstreatments_filtert48numLabel";
             this.patientstreatments_filtert48numLabel.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert48numLabel.TabIndex = 101;
@@ -2475,7 +2370,7 @@
             // 
             this.patientstreatments_filtert47numLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patientstreatments_filtert47numLabel.ForeColor = System.Drawing.Color.Blue;
-            this.patientstreatments_filtert47numLabel.Location = new System.Drawing.Point(51, 90);
+            this.patientstreatments_filtert47numLabel.Location = new System.Drawing.Point(29, 90);
             this.patientstreatments_filtert47numLabel.Name = "patientstreatments_filtert47numLabel";
             this.patientstreatments_filtert47numLabel.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert47numLabel.TabIndex = 100;
@@ -2486,7 +2381,7 @@
             // 
             this.patientstreatments_filtert46numLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patientstreatments_filtert46numLabel.ForeColor = System.Drawing.Color.Blue;
-            this.patientstreatments_filtert46numLabel.Location = new System.Drawing.Point(72, 90);
+            this.patientstreatments_filtert46numLabel.Location = new System.Drawing.Point(50, 90);
             this.patientstreatments_filtert46numLabel.Name = "patientstreatments_filtert46numLabel";
             this.patientstreatments_filtert46numLabel.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert46numLabel.TabIndex = 99;
@@ -2497,7 +2392,7 @@
             // 
             this.patientstreatments_filtert45numLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patientstreatments_filtert45numLabel.ForeColor = System.Drawing.Color.Blue;
-            this.patientstreatments_filtert45numLabel.Location = new System.Drawing.Point(93, 90);
+            this.patientstreatments_filtert45numLabel.Location = new System.Drawing.Point(71, 90);
             this.patientstreatments_filtert45numLabel.Name = "patientstreatments_filtert45numLabel";
             this.patientstreatments_filtert45numLabel.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert45numLabel.TabIndex = 98;
@@ -2508,7 +2403,7 @@
             // 
             this.patientstreatments_filtert44numLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patientstreatments_filtert44numLabel.ForeColor = System.Drawing.Color.Blue;
-            this.patientstreatments_filtert44numLabel.Location = new System.Drawing.Point(114, 90);
+            this.patientstreatments_filtert44numLabel.Location = new System.Drawing.Point(92, 90);
             this.patientstreatments_filtert44numLabel.Name = "patientstreatments_filtert44numLabel";
             this.patientstreatments_filtert44numLabel.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert44numLabel.TabIndex = 97;
@@ -2519,7 +2414,7 @@
             // 
             this.patientstreatments_filtert43numLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patientstreatments_filtert43numLabel.ForeColor = System.Drawing.Color.Blue;
-            this.patientstreatments_filtert43numLabel.Location = new System.Drawing.Point(135, 90);
+            this.patientstreatments_filtert43numLabel.Location = new System.Drawing.Point(113, 90);
             this.patientstreatments_filtert43numLabel.Name = "patientstreatments_filtert43numLabel";
             this.patientstreatments_filtert43numLabel.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert43numLabel.TabIndex = 96;
@@ -2530,7 +2425,7 @@
             // 
             this.patientstreatments_filtert42numLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patientstreatments_filtert42numLabel.ForeColor = System.Drawing.Color.Blue;
-            this.patientstreatments_filtert42numLabel.Location = new System.Drawing.Point(156, 90);
+            this.patientstreatments_filtert42numLabel.Location = new System.Drawing.Point(134, 90);
             this.patientstreatments_filtert42numLabel.Name = "patientstreatments_filtert42numLabel";
             this.patientstreatments_filtert42numLabel.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert42numLabel.TabIndex = 95;
@@ -2541,7 +2436,7 @@
             // 
             this.patientstreatments_filtert41numLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patientstreatments_filtert41numLabel.ForeColor = System.Drawing.Color.Blue;
-            this.patientstreatments_filtert41numLabel.Location = new System.Drawing.Point(177, 90);
+            this.patientstreatments_filtert41numLabel.Location = new System.Drawing.Point(155, 90);
             this.patientstreatments_filtert41numLabel.Name = "patientstreatments_filtert41numLabel";
             this.patientstreatments_filtert41numLabel.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert41numLabel.TabIndex = 94;
@@ -2552,7 +2447,7 @@
             // 
             this.patientstreatments_filtert18numLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patientstreatments_filtert18numLabel.ForeColor = System.Drawing.Color.Blue;
-            this.patientstreatments_filtert18numLabel.Location = new System.Drawing.Point(31, 14);
+            this.patientstreatments_filtert18numLabel.Location = new System.Drawing.Point(9, 14);
             this.patientstreatments_filtert18numLabel.Name = "patientstreatments_filtert18numLabel";
             this.patientstreatments_filtert18numLabel.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert18numLabel.TabIndex = 93;
@@ -2563,7 +2458,7 @@
             // 
             this.patientstreatments_filtert17numLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patientstreatments_filtert17numLabel.ForeColor = System.Drawing.Color.Blue;
-            this.patientstreatments_filtert17numLabel.Location = new System.Drawing.Point(52, 14);
+            this.patientstreatments_filtert17numLabel.Location = new System.Drawing.Point(30, 14);
             this.patientstreatments_filtert17numLabel.Name = "patientstreatments_filtert17numLabel";
             this.patientstreatments_filtert17numLabel.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert17numLabel.TabIndex = 92;
@@ -2574,7 +2469,7 @@
             // 
             this.patientstreatments_filtert16numLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patientstreatments_filtert16numLabel.ForeColor = System.Drawing.Color.Blue;
-            this.patientstreatments_filtert16numLabel.Location = new System.Drawing.Point(73, 14);
+            this.patientstreatments_filtert16numLabel.Location = new System.Drawing.Point(51, 14);
             this.patientstreatments_filtert16numLabel.Name = "patientstreatments_filtert16numLabel";
             this.patientstreatments_filtert16numLabel.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert16numLabel.TabIndex = 91;
@@ -2585,7 +2480,7 @@
             // 
             this.patientstreatments_filtert15numLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patientstreatments_filtert15numLabel.ForeColor = System.Drawing.Color.Blue;
-            this.patientstreatments_filtert15numLabel.Location = new System.Drawing.Point(94, 14);
+            this.patientstreatments_filtert15numLabel.Location = new System.Drawing.Point(72, 14);
             this.patientstreatments_filtert15numLabel.Name = "patientstreatments_filtert15numLabel";
             this.patientstreatments_filtert15numLabel.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert15numLabel.TabIndex = 90;
@@ -2596,7 +2491,7 @@
             // 
             this.patientstreatments_filtert14numLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patientstreatments_filtert14numLabel.ForeColor = System.Drawing.Color.Blue;
-            this.patientstreatments_filtert14numLabel.Location = new System.Drawing.Point(115, 14);
+            this.patientstreatments_filtert14numLabel.Location = new System.Drawing.Point(93, 14);
             this.patientstreatments_filtert14numLabel.Name = "patientstreatments_filtert14numLabel";
             this.patientstreatments_filtert14numLabel.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert14numLabel.TabIndex = 89;
@@ -2607,7 +2502,7 @@
             // 
             this.patientstreatments_filtert13numLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patientstreatments_filtert13numLabel.ForeColor = System.Drawing.Color.Blue;
-            this.patientstreatments_filtert13numLabel.Location = new System.Drawing.Point(136, 14);
+            this.patientstreatments_filtert13numLabel.Location = new System.Drawing.Point(114, 14);
             this.patientstreatments_filtert13numLabel.Name = "patientstreatments_filtert13numLabel";
             this.patientstreatments_filtert13numLabel.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert13numLabel.TabIndex = 88;
@@ -2618,7 +2513,7 @@
             // 
             this.patientstreatments_filtert12numLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patientstreatments_filtert12numLabel.ForeColor = System.Drawing.Color.Blue;
-            this.patientstreatments_filtert12numLabel.Location = new System.Drawing.Point(157, 14);
+            this.patientstreatments_filtert12numLabel.Location = new System.Drawing.Point(135, 14);
             this.patientstreatments_filtert12numLabel.Name = "patientstreatments_filtert12numLabel";
             this.patientstreatments_filtert12numLabel.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert12numLabel.TabIndex = 87;
@@ -2629,7 +2524,7 @@
             // 
             this.patientstreatments_filtert11numLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patientstreatments_filtert11numLabel.ForeColor = System.Drawing.Color.Blue;
-            this.patientstreatments_filtert11numLabel.Location = new System.Drawing.Point(178, 14);
+            this.patientstreatments_filtert11numLabel.Location = new System.Drawing.Point(156, 14);
             this.patientstreatments_filtert11numLabel.Name = "patientstreatments_filtert11numLabel";
             this.patientstreatments_filtert11numLabel.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert11numLabel.TabIndex = 86;
@@ -2640,7 +2535,7 @@
             // 
             this.patientstreatments_filtertnoLabel.AutoSize = true;
             this.patientstreatments_filtertnoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patientstreatments_filtertnoLabel.Location = new System.Drawing.Point(410, 69);
+            this.patientstreatments_filtertnoLabel.Location = new System.Drawing.Point(384, 69);
             this.patientstreatments_filtertnoLabel.Name = "patientstreatments_filtertnoLabel";
             this.patientstreatments_filtertnoLabel.Size = new System.Drawing.Size(25, 12);
             this.patientstreatments_filtertnoLabel.TabIndex = 85;
@@ -2651,7 +2546,7 @@
             // 
             this.patientstreatments_filtertalLabel.AutoSize = true;
             this.patientstreatments_filtertalLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patientstreatments_filtertalLabel.Location = new System.Drawing.Point(410, 21);
+            this.patientstreatments_filtertalLabel.Location = new System.Drawing.Point(384, 21);
             this.patientstreatments_filtertalLabel.Name = "patientstreatments_filtertalLabel";
             this.patientstreatments_filtertalLabel.Size = new System.Drawing.Size(14, 12);
             this.patientstreatments_filtertalLabel.TabIndex = 84;
@@ -2662,7 +2557,7 @@
             // 
             this.patientstreatments_filtertdwLabel.AutoSize = true;
             this.patientstreatments_filtertdwLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patientstreatments_filtertdwLabel.Location = new System.Drawing.Point(409, 53);
+            this.patientstreatments_filtertdwLabel.Location = new System.Drawing.Point(383, 53);
             this.patientstreatments_filtertdwLabel.Name = "patientstreatments_filtertdwLabel";
             this.patientstreatments_filtertdwLabel.Size = new System.Drawing.Size(28, 12);
             this.patientstreatments_filtertdwLabel.TabIndex = 83;
@@ -2673,7 +2568,7 @@
             // 
             this.patientstreatments_filtertupLabel.AutoSize = true;
             this.patientstreatments_filtertupLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patientstreatments_filtertupLabel.Location = new System.Drawing.Point(409, 37);
+            this.patientstreatments_filtertupLabel.Location = new System.Drawing.Point(383, 37);
             this.patientstreatments_filtertupLabel.Name = "patientstreatments_filtertupLabel";
             this.patientstreatments_filtertupLabel.Size = new System.Drawing.Size(28, 12);
             this.patientstreatments_filtertupLabel.TabIndex = 82;
@@ -2684,7 +2579,7 @@
             // 
             this.patientstreatments_filtert31Label.AutoSize = true;
             this.patientstreatments_filtert31Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patientstreatments_filtert31Label.Location = new System.Drawing.Point(209, 78);
+            this.patientstreatments_filtert31Label.Location = new System.Drawing.Point(187, 78);
             this.patientstreatments_filtert31Label.Name = "patientstreatments_filtert31Label";
             this.patientstreatments_filtert31Label.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert31Label.TabIndex = 81;
@@ -2695,7 +2590,7 @@
             // 
             this.patientstreatments_filtert32Label.AutoSize = true;
             this.patientstreatments_filtert32Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patientstreatments_filtert32Label.Location = new System.Drawing.Point(230, 78);
+            this.patientstreatments_filtert32Label.Location = new System.Drawing.Point(208, 78);
             this.patientstreatments_filtert32Label.Name = "patientstreatments_filtert32Label";
             this.patientstreatments_filtert32Label.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert32Label.TabIndex = 80;
@@ -2706,7 +2601,7 @@
             // 
             this.patientstreatments_filtert33Label.AutoSize = true;
             this.patientstreatments_filtert33Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patientstreatments_filtert33Label.Location = new System.Drawing.Point(251, 78);
+            this.patientstreatments_filtert33Label.Location = new System.Drawing.Point(229, 78);
             this.patientstreatments_filtert33Label.Name = "patientstreatments_filtert33Label";
             this.patientstreatments_filtert33Label.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert33Label.TabIndex = 79;
@@ -2717,7 +2612,7 @@
             // 
             this.patientstreatments_filtert34Label.AutoSize = true;
             this.patientstreatments_filtert34Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patientstreatments_filtert34Label.Location = new System.Drawing.Point(272, 78);
+            this.patientstreatments_filtert34Label.Location = new System.Drawing.Point(250, 78);
             this.patientstreatments_filtert34Label.Name = "patientstreatments_filtert34Label";
             this.patientstreatments_filtert34Label.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert34Label.TabIndex = 78;
@@ -2728,7 +2623,7 @@
             // 
             this.patientstreatments_filtert35Label.AutoSize = true;
             this.patientstreatments_filtert35Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patientstreatments_filtert35Label.Location = new System.Drawing.Point(293, 78);
+            this.patientstreatments_filtert35Label.Location = new System.Drawing.Point(271, 78);
             this.patientstreatments_filtert35Label.Name = "patientstreatments_filtert35Label";
             this.patientstreatments_filtert35Label.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert35Label.TabIndex = 77;
@@ -2739,7 +2634,7 @@
             // 
             this.patientstreatments_filtert36Label.AutoSize = true;
             this.patientstreatments_filtert36Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patientstreatments_filtert36Label.Location = new System.Drawing.Point(314, 78);
+            this.patientstreatments_filtert36Label.Location = new System.Drawing.Point(292, 78);
             this.patientstreatments_filtert36Label.Name = "patientstreatments_filtert36Label";
             this.patientstreatments_filtert36Label.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert36Label.TabIndex = 76;
@@ -2750,7 +2645,7 @@
             // 
             this.patientstreatments_filtert37Label.AutoSize = true;
             this.patientstreatments_filtert37Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patientstreatments_filtert37Label.Location = new System.Drawing.Point(335, 78);
+            this.patientstreatments_filtert37Label.Location = new System.Drawing.Point(313, 78);
             this.patientstreatments_filtert37Label.Name = "patientstreatments_filtert37Label";
             this.patientstreatments_filtert37Label.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert37Label.TabIndex = 75;
@@ -2761,7 +2656,7 @@
             // 
             this.patientstreatments_filtert38Label.AutoSize = true;
             this.patientstreatments_filtert38Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patientstreatments_filtert38Label.Location = new System.Drawing.Point(356, 78);
+            this.patientstreatments_filtert38Label.Location = new System.Drawing.Point(334, 78);
             this.patientstreatments_filtert38Label.Name = "patientstreatments_filtert38Label";
             this.patientstreatments_filtert38Label.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert38Label.TabIndex = 74;
@@ -2772,7 +2667,7 @@
             // 
             this.patientstreatments_filtert48Label.AutoSize = true;
             this.patientstreatments_filtert48Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patientstreatments_filtert48Label.Location = new System.Drawing.Point(30, 78);
+            this.patientstreatments_filtert48Label.Location = new System.Drawing.Point(8, 78);
             this.patientstreatments_filtert48Label.Name = "patientstreatments_filtert48Label";
             this.patientstreatments_filtert48Label.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert48Label.TabIndex = 73;
@@ -2783,7 +2678,7 @@
             // 
             this.patientstreatments_filtert47Label.AutoSize = true;
             this.patientstreatments_filtert47Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patientstreatments_filtert47Label.Location = new System.Drawing.Point(51, 78);
+            this.patientstreatments_filtert47Label.Location = new System.Drawing.Point(29, 78);
             this.patientstreatments_filtert47Label.Name = "patientstreatments_filtert47Label";
             this.patientstreatments_filtert47Label.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert47Label.TabIndex = 72;
@@ -2794,7 +2689,7 @@
             // 
             this.patientstreatments_filtert46Label.AutoSize = true;
             this.patientstreatments_filtert46Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patientstreatments_filtert46Label.Location = new System.Drawing.Point(72, 78);
+            this.patientstreatments_filtert46Label.Location = new System.Drawing.Point(50, 78);
             this.patientstreatments_filtert46Label.Name = "patientstreatments_filtert46Label";
             this.patientstreatments_filtert46Label.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert46Label.TabIndex = 71;
@@ -2805,7 +2700,7 @@
             // 
             this.patientstreatments_filtert45Label.AutoSize = true;
             this.patientstreatments_filtert45Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patientstreatments_filtert45Label.Location = new System.Drawing.Point(93, 78);
+            this.patientstreatments_filtert45Label.Location = new System.Drawing.Point(71, 78);
             this.patientstreatments_filtert45Label.Name = "patientstreatments_filtert45Label";
             this.patientstreatments_filtert45Label.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert45Label.TabIndex = 70;
@@ -2816,7 +2711,7 @@
             // 
             this.patientstreatments_filtert44Label.AutoSize = true;
             this.patientstreatments_filtert44Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patientstreatments_filtert44Label.Location = new System.Drawing.Point(114, 78);
+            this.patientstreatments_filtert44Label.Location = new System.Drawing.Point(92, 78);
             this.patientstreatments_filtert44Label.Name = "patientstreatments_filtert44Label";
             this.patientstreatments_filtert44Label.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert44Label.TabIndex = 69;
@@ -2827,7 +2722,7 @@
             // 
             this.patientstreatments_filtert43Label.AutoSize = true;
             this.patientstreatments_filtert43Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patientstreatments_filtert43Label.Location = new System.Drawing.Point(135, 78);
+            this.patientstreatments_filtert43Label.Location = new System.Drawing.Point(113, 78);
             this.patientstreatments_filtert43Label.Name = "patientstreatments_filtert43Label";
             this.patientstreatments_filtert43Label.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert43Label.TabIndex = 68;
@@ -2838,7 +2733,7 @@
             // 
             this.patientstreatments_filtert42Label.AutoSize = true;
             this.patientstreatments_filtert42Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patientstreatments_filtert42Label.Location = new System.Drawing.Point(156, 78);
+            this.patientstreatments_filtert42Label.Location = new System.Drawing.Point(134, 78);
             this.patientstreatments_filtert42Label.Name = "patientstreatments_filtert42Label";
             this.patientstreatments_filtert42Label.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert42Label.TabIndex = 67;
@@ -2849,7 +2744,7 @@
             // 
             this.patientstreatments_filtert41Label.AutoSize = true;
             this.patientstreatments_filtert41Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patientstreatments_filtert41Label.Location = new System.Drawing.Point(177, 78);
+            this.patientstreatments_filtert41Label.Location = new System.Drawing.Point(155, 78);
             this.patientstreatments_filtert41Label.Name = "patientstreatments_filtert41Label";
             this.patientstreatments_filtert41Label.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert41Label.TabIndex = 66;
@@ -2860,7 +2755,7 @@
             // 
             this.patientstreatments_filtert21Label.AutoSize = true;
             this.patientstreatments_filtert21Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patientstreatments_filtert21Label.Location = new System.Drawing.Point(208, 26);
+            this.patientstreatments_filtert21Label.Location = new System.Drawing.Point(186, 26);
             this.patientstreatments_filtert21Label.Name = "patientstreatments_filtert21Label";
             this.patientstreatments_filtert21Label.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert21Label.TabIndex = 65;
@@ -2871,7 +2766,7 @@
             // 
             this.patientstreatments_filtert22Label.AutoSize = true;
             this.patientstreatments_filtert22Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patientstreatments_filtert22Label.Location = new System.Drawing.Point(229, 26);
+            this.patientstreatments_filtert22Label.Location = new System.Drawing.Point(207, 26);
             this.patientstreatments_filtert22Label.Name = "patientstreatments_filtert22Label";
             this.patientstreatments_filtert22Label.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert22Label.TabIndex = 64;
@@ -2882,7 +2777,7 @@
             // 
             this.patientstreatments_filtert23Label.AutoSize = true;
             this.patientstreatments_filtert23Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patientstreatments_filtert23Label.Location = new System.Drawing.Point(250, 26);
+            this.patientstreatments_filtert23Label.Location = new System.Drawing.Point(228, 26);
             this.patientstreatments_filtert23Label.Name = "patientstreatments_filtert23Label";
             this.patientstreatments_filtert23Label.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert23Label.TabIndex = 63;
@@ -2893,7 +2788,7 @@
             // 
             this.patientstreatments_filtert24Label.AutoSize = true;
             this.patientstreatments_filtert24Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patientstreatments_filtert24Label.Location = new System.Drawing.Point(271, 26);
+            this.patientstreatments_filtert24Label.Location = new System.Drawing.Point(249, 26);
             this.patientstreatments_filtert24Label.Name = "patientstreatments_filtert24Label";
             this.patientstreatments_filtert24Label.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert24Label.TabIndex = 62;
@@ -2904,7 +2799,7 @@
             // 
             this.patientstreatments_filtert25Label.AutoSize = true;
             this.patientstreatments_filtert25Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patientstreatments_filtert25Label.Location = new System.Drawing.Point(292, 26);
+            this.patientstreatments_filtert25Label.Location = new System.Drawing.Point(270, 26);
             this.patientstreatments_filtert25Label.Name = "patientstreatments_filtert25Label";
             this.patientstreatments_filtert25Label.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert25Label.TabIndex = 61;
@@ -2915,7 +2810,7 @@
             // 
             this.patientstreatments_filtert26Label.AutoSize = true;
             this.patientstreatments_filtert26Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patientstreatments_filtert26Label.Location = new System.Drawing.Point(313, 26);
+            this.patientstreatments_filtert26Label.Location = new System.Drawing.Point(291, 26);
             this.patientstreatments_filtert26Label.Name = "patientstreatments_filtert26Label";
             this.patientstreatments_filtert26Label.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert26Label.TabIndex = 60;
@@ -2926,7 +2821,7 @@
             // 
             this.patientstreatments_filtert27Label.AutoSize = true;
             this.patientstreatments_filtert27Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patientstreatments_filtert27Label.Location = new System.Drawing.Point(334, 26);
+            this.patientstreatments_filtert27Label.Location = new System.Drawing.Point(312, 26);
             this.patientstreatments_filtert27Label.Name = "patientstreatments_filtert27Label";
             this.patientstreatments_filtert27Label.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert27Label.TabIndex = 59;
@@ -2937,7 +2832,7 @@
             // 
             this.patientstreatments_filtert28Label.AutoSize = true;
             this.patientstreatments_filtert28Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patientstreatments_filtert28Label.Location = new System.Drawing.Point(355, 26);
+            this.patientstreatments_filtert28Label.Location = new System.Drawing.Point(333, 26);
             this.patientstreatments_filtert28Label.Name = "patientstreatments_filtert28Label";
             this.patientstreatments_filtert28Label.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert28Label.TabIndex = 58;
@@ -2948,7 +2843,7 @@
             // 
             this.patientstreatments_filtert18Label.AutoSize = true;
             this.patientstreatments_filtert18Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patientstreatments_filtert18Label.Location = new System.Drawing.Point(31, 26);
+            this.patientstreatments_filtert18Label.Location = new System.Drawing.Point(9, 26);
             this.patientstreatments_filtert18Label.Name = "patientstreatments_filtert18Label";
             this.patientstreatments_filtert18Label.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert18Label.TabIndex = 56;
@@ -2959,7 +2854,7 @@
             // 
             this.patientstreatments_filtert17Label.AutoSize = true;
             this.patientstreatments_filtert17Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patientstreatments_filtert17Label.Location = new System.Drawing.Point(52, 26);
+            this.patientstreatments_filtert17Label.Location = new System.Drawing.Point(30, 26);
             this.patientstreatments_filtert17Label.Name = "patientstreatments_filtert17Label";
             this.patientstreatments_filtert17Label.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert17Label.TabIndex = 55;
@@ -2970,7 +2865,7 @@
             // 
             this.patientstreatments_filtert16Label.AutoSize = true;
             this.patientstreatments_filtert16Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patientstreatments_filtert16Label.Location = new System.Drawing.Point(73, 26);
+            this.patientstreatments_filtert16Label.Location = new System.Drawing.Point(51, 26);
             this.patientstreatments_filtert16Label.Name = "patientstreatments_filtert16Label";
             this.patientstreatments_filtert16Label.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert16Label.TabIndex = 54;
@@ -2981,7 +2876,7 @@
             // 
             this.patientstreatments_filtert15Label.AutoSize = true;
             this.patientstreatments_filtert15Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patientstreatments_filtert15Label.Location = new System.Drawing.Point(94, 26);
+            this.patientstreatments_filtert15Label.Location = new System.Drawing.Point(72, 26);
             this.patientstreatments_filtert15Label.Name = "patientstreatments_filtert15Label";
             this.patientstreatments_filtert15Label.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert15Label.TabIndex = 53;
@@ -2992,7 +2887,7 @@
             // 
             this.patientstreatments_filtert14Label.AutoSize = true;
             this.patientstreatments_filtert14Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patientstreatments_filtert14Label.Location = new System.Drawing.Point(115, 26);
+            this.patientstreatments_filtert14Label.Location = new System.Drawing.Point(93, 26);
             this.patientstreatments_filtert14Label.Name = "patientstreatments_filtert14Label";
             this.patientstreatments_filtert14Label.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert14Label.TabIndex = 52;
@@ -3003,7 +2898,7 @@
             // 
             this.patientstreatments_filtert13Label.AutoSize = true;
             this.patientstreatments_filtert13Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patientstreatments_filtert13Label.Location = new System.Drawing.Point(136, 26);
+            this.patientstreatments_filtert13Label.Location = new System.Drawing.Point(114, 26);
             this.patientstreatments_filtert13Label.Name = "patientstreatments_filtert13Label";
             this.patientstreatments_filtert13Label.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert13Label.TabIndex = 51;
@@ -3014,7 +2909,7 @@
             // 
             this.patientstreatments_filtert12Label.AutoSize = true;
             this.patientstreatments_filtert12Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patientstreatments_filtert12Label.Location = new System.Drawing.Point(157, 26);
+            this.patientstreatments_filtert12Label.Location = new System.Drawing.Point(135, 26);
             this.patientstreatments_filtert12Label.Name = "patientstreatments_filtert12Label";
             this.patientstreatments_filtert12Label.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert12Label.TabIndex = 50;
@@ -3025,7 +2920,7 @@
             // 
             this.patientstreatments_filtert11Label.AutoSize = true;
             this.patientstreatments_filtert11Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patientstreatments_filtert11Label.Location = new System.Drawing.Point(178, 26);
+            this.patientstreatments_filtert11Label.Location = new System.Drawing.Point(156, 26);
             this.patientstreatments_filtert11Label.Name = "patientstreatments_filtert11Label";
             this.patientstreatments_filtert11Label.Size = new System.Drawing.Size(15, 12);
             this.patientstreatments_filtert11Label.TabIndex = 49;
@@ -3035,7 +2930,7 @@
             // patientstreatments_filtertnoCheckBox
             // 
             this.patientstreatments_filtertnoCheckBox.AutoSize = true;
-            this.patientstreatments_filtertnoCheckBox.Location = new System.Drawing.Point(394, 69);
+            this.patientstreatments_filtertnoCheckBox.Location = new System.Drawing.Point(368, 69);
             this.patientstreatments_filtertnoCheckBox.Name = "patientstreatments_filtertnoCheckBox";
             this.patientstreatments_filtertnoCheckBox.Size = new System.Drawing.Size(15, 14);
             this.patientstreatments_filtertnoCheckBox.TabIndex = 48;
@@ -3045,7 +2940,7 @@
             // patientstreatments_filtertalCheckBox
             // 
             this.patientstreatments_filtertalCheckBox.AutoSize = true;
-            this.patientstreatments_filtertalCheckBox.Location = new System.Drawing.Point(394, 21);
+            this.patientstreatments_filtertalCheckBox.Location = new System.Drawing.Point(368, 21);
             this.patientstreatments_filtertalCheckBox.Name = "patientstreatments_filtertalCheckBox";
             this.patientstreatments_filtertalCheckBox.Size = new System.Drawing.Size(15, 14);
             this.patientstreatments_filtertalCheckBox.TabIndex = 47;
@@ -3055,7 +2950,7 @@
             // patientstreatments_filtertdwCheckBox
             // 
             this.patientstreatments_filtertdwCheckBox.AutoSize = true;
-            this.patientstreatments_filtertdwCheckBox.Location = new System.Drawing.Point(394, 53);
+            this.patientstreatments_filtertdwCheckBox.Location = new System.Drawing.Point(368, 53);
             this.patientstreatments_filtertdwCheckBox.Name = "patientstreatments_filtertdwCheckBox";
             this.patientstreatments_filtertdwCheckBox.Size = new System.Drawing.Size(15, 14);
             this.patientstreatments_filtertdwCheckBox.TabIndex = 46;
@@ -3065,7 +2960,7 @@
             // patientstreatments_filtertupCheckBox
             // 
             this.patientstreatments_filtertupCheckBox.AutoSize = true;
-            this.patientstreatments_filtertupCheckBox.Location = new System.Drawing.Point(394, 37);
+            this.patientstreatments_filtertupCheckBox.Location = new System.Drawing.Point(368, 37);
             this.patientstreatments_filtertupCheckBox.Name = "patientstreatments_filtertupCheckBox";
             this.patientstreatments_filtertupCheckBox.Size = new System.Drawing.Size(15, 14);
             this.patientstreatments_filtertupCheckBox.TabIndex = 45;
@@ -3075,7 +2970,7 @@
             // patientstreatments_filtert18CheckBox
             // 
             this.patientstreatments_filtert18CheckBox.AutoSize = true;
-            this.patientstreatments_filtert18CheckBox.Location = new System.Drawing.Point(31, 41);
+            this.patientstreatments_filtert18CheckBox.Location = new System.Drawing.Point(9, 41);
             this.patientstreatments_filtert18CheckBox.Name = "patientstreatments_filtert18CheckBox";
             this.patientstreatments_filtert18CheckBox.Size = new System.Drawing.Size(15, 14);
             this.patientstreatments_filtert18CheckBox.TabIndex = 20;
@@ -3085,7 +2980,7 @@
             // patientstreatments_filtert11CheckBox
             // 
             this.patientstreatments_filtert11CheckBox.AutoSize = true;
-            this.patientstreatments_filtert11CheckBox.Location = new System.Drawing.Point(178, 41);
+            this.patientstreatments_filtert11CheckBox.Location = new System.Drawing.Point(156, 41);
             this.patientstreatments_filtert11CheckBox.Name = "patientstreatments_filtert11CheckBox";
             this.patientstreatments_filtert11CheckBox.Size = new System.Drawing.Size(15, 14);
             this.patientstreatments_filtert11CheckBox.TabIndex = 13;
@@ -3095,7 +2990,7 @@
             // patientstreatments_filtert12CheckBox
             // 
             this.patientstreatments_filtert12CheckBox.AutoSize = true;
-            this.patientstreatments_filtert12CheckBox.Location = new System.Drawing.Point(157, 41);
+            this.patientstreatments_filtert12CheckBox.Location = new System.Drawing.Point(135, 41);
             this.patientstreatments_filtert12CheckBox.Name = "patientstreatments_filtert12CheckBox";
             this.patientstreatments_filtert12CheckBox.Size = new System.Drawing.Size(15, 14);
             this.patientstreatments_filtert12CheckBox.TabIndex = 14;
@@ -3105,7 +3000,7 @@
             // patientstreatments_filtert48CheckBox
             // 
             this.patientstreatments_filtert48CheckBox.AutoSize = true;
-            this.patientstreatments_filtert48CheckBox.Location = new System.Drawing.Point(31, 61);
+            this.patientstreatments_filtert48CheckBox.Location = new System.Drawing.Point(9, 61);
             this.patientstreatments_filtert48CheckBox.Name = "patientstreatments_filtert48CheckBox";
             this.patientstreatments_filtert48CheckBox.Size = new System.Drawing.Size(15, 14);
             this.patientstreatments_filtert48CheckBox.TabIndex = 44;
@@ -3115,7 +3010,7 @@
             // patientstreatments_filtert13CheckBox
             // 
             this.patientstreatments_filtert13CheckBox.AutoSize = true;
-            this.patientstreatments_filtert13CheckBox.Location = new System.Drawing.Point(136, 41);
+            this.patientstreatments_filtert13CheckBox.Location = new System.Drawing.Point(114, 41);
             this.patientstreatments_filtert13CheckBox.Name = "patientstreatments_filtert13CheckBox";
             this.patientstreatments_filtert13CheckBox.Size = new System.Drawing.Size(15, 14);
             this.patientstreatments_filtert13CheckBox.TabIndex = 15;
@@ -3125,7 +3020,7 @@
             // patientstreatments_filtert47CheckBox
             // 
             this.patientstreatments_filtert47CheckBox.AutoSize = true;
-            this.patientstreatments_filtert47CheckBox.Location = new System.Drawing.Point(52, 61);
+            this.patientstreatments_filtert47CheckBox.Location = new System.Drawing.Point(30, 61);
             this.patientstreatments_filtert47CheckBox.Name = "patientstreatments_filtert47CheckBox";
             this.patientstreatments_filtert47CheckBox.Size = new System.Drawing.Size(15, 14);
             this.patientstreatments_filtert47CheckBox.TabIndex = 43;
@@ -3135,7 +3030,7 @@
             // patientstreatments_filtert14CheckBox
             // 
             this.patientstreatments_filtert14CheckBox.AutoSize = true;
-            this.patientstreatments_filtert14CheckBox.Location = new System.Drawing.Point(115, 41);
+            this.patientstreatments_filtert14CheckBox.Location = new System.Drawing.Point(93, 41);
             this.patientstreatments_filtert14CheckBox.Name = "patientstreatments_filtert14CheckBox";
             this.patientstreatments_filtert14CheckBox.Size = new System.Drawing.Size(15, 14);
             this.patientstreatments_filtert14CheckBox.TabIndex = 16;
@@ -3145,7 +3040,7 @@
             // patientstreatments_filtert46CheckBox
             // 
             this.patientstreatments_filtert46CheckBox.AutoSize = true;
-            this.patientstreatments_filtert46CheckBox.Location = new System.Drawing.Point(73, 61);
+            this.patientstreatments_filtert46CheckBox.Location = new System.Drawing.Point(51, 61);
             this.patientstreatments_filtert46CheckBox.Name = "patientstreatments_filtert46CheckBox";
             this.patientstreatments_filtert46CheckBox.Size = new System.Drawing.Size(15, 14);
             this.patientstreatments_filtert46CheckBox.TabIndex = 42;
@@ -3155,7 +3050,7 @@
             // patientstreatments_filtert15CheckBox
             // 
             this.patientstreatments_filtert15CheckBox.AutoSize = true;
-            this.patientstreatments_filtert15CheckBox.Location = new System.Drawing.Point(94, 41);
+            this.patientstreatments_filtert15CheckBox.Location = new System.Drawing.Point(72, 41);
             this.patientstreatments_filtert15CheckBox.Name = "patientstreatments_filtert15CheckBox";
             this.patientstreatments_filtert15CheckBox.Size = new System.Drawing.Size(15, 14);
             this.patientstreatments_filtert15CheckBox.TabIndex = 17;
@@ -3165,7 +3060,7 @@
             // patientstreatments_filtert45CheckBox
             // 
             this.patientstreatments_filtert45CheckBox.AutoSize = true;
-            this.patientstreatments_filtert45CheckBox.Location = new System.Drawing.Point(94, 61);
+            this.patientstreatments_filtert45CheckBox.Location = new System.Drawing.Point(72, 61);
             this.patientstreatments_filtert45CheckBox.Name = "patientstreatments_filtert45CheckBox";
             this.patientstreatments_filtert45CheckBox.Size = new System.Drawing.Size(15, 14);
             this.patientstreatments_filtert45CheckBox.TabIndex = 41;
@@ -3175,7 +3070,7 @@
             // patientstreatments_filtert16CheckBox
             // 
             this.patientstreatments_filtert16CheckBox.AutoSize = true;
-            this.patientstreatments_filtert16CheckBox.Location = new System.Drawing.Point(73, 41);
+            this.patientstreatments_filtert16CheckBox.Location = new System.Drawing.Point(51, 41);
             this.patientstreatments_filtert16CheckBox.Name = "patientstreatments_filtert16CheckBox";
             this.patientstreatments_filtert16CheckBox.Size = new System.Drawing.Size(15, 14);
             this.patientstreatments_filtert16CheckBox.TabIndex = 18;
@@ -3185,7 +3080,7 @@
             // patientstreatments_filtert44CheckBox
             // 
             this.patientstreatments_filtert44CheckBox.AutoSize = true;
-            this.patientstreatments_filtert44CheckBox.Location = new System.Drawing.Point(115, 61);
+            this.patientstreatments_filtert44CheckBox.Location = new System.Drawing.Point(93, 61);
             this.patientstreatments_filtert44CheckBox.Name = "patientstreatments_filtert44CheckBox";
             this.patientstreatments_filtert44CheckBox.Size = new System.Drawing.Size(15, 14);
             this.patientstreatments_filtert44CheckBox.TabIndex = 40;
@@ -3195,7 +3090,7 @@
             // patientstreatments_filtert17CheckBox
             // 
             this.patientstreatments_filtert17CheckBox.AutoSize = true;
-            this.patientstreatments_filtert17CheckBox.Location = new System.Drawing.Point(52, 41);
+            this.patientstreatments_filtert17CheckBox.Location = new System.Drawing.Point(30, 41);
             this.patientstreatments_filtert17CheckBox.Name = "patientstreatments_filtert17CheckBox";
             this.patientstreatments_filtert17CheckBox.Size = new System.Drawing.Size(15, 14);
             this.patientstreatments_filtert17CheckBox.TabIndex = 19;
@@ -3205,7 +3100,7 @@
             // patientstreatments_filtert43CheckBox
             // 
             this.patientstreatments_filtert43CheckBox.AutoSize = true;
-            this.patientstreatments_filtert43CheckBox.Location = new System.Drawing.Point(136, 61);
+            this.patientstreatments_filtert43CheckBox.Location = new System.Drawing.Point(114, 61);
             this.patientstreatments_filtert43CheckBox.Name = "patientstreatments_filtert43CheckBox";
             this.patientstreatments_filtert43CheckBox.Size = new System.Drawing.Size(15, 14);
             this.patientstreatments_filtert43CheckBox.TabIndex = 39;
@@ -3215,7 +3110,7 @@
             // patientstreatments_filtert21CheckBox
             // 
             this.patientstreatments_filtert21CheckBox.AutoSize = true;
-            this.patientstreatments_filtert21CheckBox.Location = new System.Drawing.Point(209, 41);
+            this.patientstreatments_filtert21CheckBox.Location = new System.Drawing.Point(187, 41);
             this.patientstreatments_filtert21CheckBox.Name = "patientstreatments_filtert21CheckBox";
             this.patientstreatments_filtert21CheckBox.Size = new System.Drawing.Size(15, 14);
             this.patientstreatments_filtert21CheckBox.TabIndex = 21;
@@ -3225,7 +3120,7 @@
             // patientstreatments_filtert42CheckBox
             // 
             this.patientstreatments_filtert42CheckBox.AutoSize = true;
-            this.patientstreatments_filtert42CheckBox.Location = new System.Drawing.Point(157, 61);
+            this.patientstreatments_filtert42CheckBox.Location = new System.Drawing.Point(135, 61);
             this.patientstreatments_filtert42CheckBox.Name = "patientstreatments_filtert42CheckBox";
             this.patientstreatments_filtert42CheckBox.Size = new System.Drawing.Size(15, 14);
             this.patientstreatments_filtert42CheckBox.TabIndex = 38;
@@ -3235,7 +3130,7 @@
             // patientstreatments_filtert22CheckBox
             // 
             this.patientstreatments_filtert22CheckBox.AutoSize = true;
-            this.patientstreatments_filtert22CheckBox.Location = new System.Drawing.Point(230, 41);
+            this.patientstreatments_filtert22CheckBox.Location = new System.Drawing.Point(208, 41);
             this.patientstreatments_filtert22CheckBox.Name = "patientstreatments_filtert22CheckBox";
             this.patientstreatments_filtert22CheckBox.Size = new System.Drawing.Size(15, 14);
             this.patientstreatments_filtert22CheckBox.TabIndex = 22;
@@ -3245,7 +3140,7 @@
             // patientstreatments_filtert41CheckBox
             // 
             this.patientstreatments_filtert41CheckBox.AutoSize = true;
-            this.patientstreatments_filtert41CheckBox.Location = new System.Drawing.Point(178, 61);
+            this.patientstreatments_filtert41CheckBox.Location = new System.Drawing.Point(156, 61);
             this.patientstreatments_filtert41CheckBox.Name = "patientstreatments_filtert41CheckBox";
             this.patientstreatments_filtert41CheckBox.Size = new System.Drawing.Size(15, 14);
             this.patientstreatments_filtert41CheckBox.TabIndex = 37;
@@ -3255,7 +3150,7 @@
             // patientstreatments_filtert23CheckBox
             // 
             this.patientstreatments_filtert23CheckBox.AutoSize = true;
-            this.patientstreatments_filtert23CheckBox.Location = new System.Drawing.Point(251, 41);
+            this.patientstreatments_filtert23CheckBox.Location = new System.Drawing.Point(229, 41);
             this.patientstreatments_filtert23CheckBox.Name = "patientstreatments_filtert23CheckBox";
             this.patientstreatments_filtert23CheckBox.Size = new System.Drawing.Size(15, 14);
             this.patientstreatments_filtert23CheckBox.TabIndex = 23;
@@ -3265,7 +3160,7 @@
             // patientstreatments_filtert38CheckBox
             // 
             this.patientstreatments_filtert38CheckBox.AutoSize = true;
-            this.patientstreatments_filtert38CheckBox.Location = new System.Drawing.Point(356, 61);
+            this.patientstreatments_filtert38CheckBox.Location = new System.Drawing.Point(334, 61);
             this.patientstreatments_filtert38CheckBox.Name = "patientstreatments_filtert38CheckBox";
             this.patientstreatments_filtert38CheckBox.Size = new System.Drawing.Size(15, 14);
             this.patientstreatments_filtert38CheckBox.TabIndex = 36;
@@ -3275,7 +3170,7 @@
             // patientstreatments_filtert24CheckBox
             // 
             this.patientstreatments_filtert24CheckBox.AutoSize = true;
-            this.patientstreatments_filtert24CheckBox.Location = new System.Drawing.Point(272, 41);
+            this.patientstreatments_filtert24CheckBox.Location = new System.Drawing.Point(250, 41);
             this.patientstreatments_filtert24CheckBox.Name = "patientstreatments_filtert24CheckBox";
             this.patientstreatments_filtert24CheckBox.Size = new System.Drawing.Size(15, 14);
             this.patientstreatments_filtert24CheckBox.TabIndex = 24;
@@ -3285,7 +3180,7 @@
             // patientstreatments_filtert37CheckBox
             // 
             this.patientstreatments_filtert37CheckBox.AutoSize = true;
-            this.patientstreatments_filtert37CheckBox.Location = new System.Drawing.Point(335, 61);
+            this.patientstreatments_filtert37CheckBox.Location = new System.Drawing.Point(313, 61);
             this.patientstreatments_filtert37CheckBox.Name = "patientstreatments_filtert37CheckBox";
             this.patientstreatments_filtert37CheckBox.Size = new System.Drawing.Size(15, 14);
             this.patientstreatments_filtert37CheckBox.TabIndex = 35;
@@ -3295,7 +3190,7 @@
             // patientstreatments_filtert25CheckBox
             // 
             this.patientstreatments_filtert25CheckBox.AutoSize = true;
-            this.patientstreatments_filtert25CheckBox.Location = new System.Drawing.Point(293, 41);
+            this.patientstreatments_filtert25CheckBox.Location = new System.Drawing.Point(271, 41);
             this.patientstreatments_filtert25CheckBox.Name = "patientstreatments_filtert25CheckBox";
             this.patientstreatments_filtert25CheckBox.Size = new System.Drawing.Size(15, 14);
             this.patientstreatments_filtert25CheckBox.TabIndex = 25;
@@ -3305,7 +3200,7 @@
             // patientstreatments_filtert36CheckBox
             // 
             this.patientstreatments_filtert36CheckBox.AutoSize = true;
-            this.patientstreatments_filtert36CheckBox.Location = new System.Drawing.Point(314, 61);
+            this.patientstreatments_filtert36CheckBox.Location = new System.Drawing.Point(292, 61);
             this.patientstreatments_filtert36CheckBox.Name = "patientstreatments_filtert36CheckBox";
             this.patientstreatments_filtert36CheckBox.Size = new System.Drawing.Size(15, 14);
             this.patientstreatments_filtert36CheckBox.TabIndex = 34;
@@ -3315,7 +3210,7 @@
             // patientstreatments_filtert26CheckBox
             // 
             this.patientstreatments_filtert26CheckBox.AutoSize = true;
-            this.patientstreatments_filtert26CheckBox.Location = new System.Drawing.Point(314, 41);
+            this.patientstreatments_filtert26CheckBox.Location = new System.Drawing.Point(292, 41);
             this.patientstreatments_filtert26CheckBox.Name = "patientstreatments_filtert26CheckBox";
             this.patientstreatments_filtert26CheckBox.Size = new System.Drawing.Size(15, 14);
             this.patientstreatments_filtert26CheckBox.TabIndex = 26;
@@ -3325,7 +3220,7 @@
             // patientstreatments_filtert35CheckBox
             // 
             this.patientstreatments_filtert35CheckBox.AutoSize = true;
-            this.patientstreatments_filtert35CheckBox.Location = new System.Drawing.Point(293, 61);
+            this.patientstreatments_filtert35CheckBox.Location = new System.Drawing.Point(271, 61);
             this.patientstreatments_filtert35CheckBox.Name = "patientstreatments_filtert35CheckBox";
             this.patientstreatments_filtert35CheckBox.Size = new System.Drawing.Size(15, 14);
             this.patientstreatments_filtert35CheckBox.TabIndex = 33;
@@ -3335,7 +3230,7 @@
             // patientstreatments_filtert27CheckBox
             // 
             this.patientstreatments_filtert27CheckBox.AutoSize = true;
-            this.patientstreatments_filtert27CheckBox.Location = new System.Drawing.Point(335, 41);
+            this.patientstreatments_filtert27CheckBox.Location = new System.Drawing.Point(313, 41);
             this.patientstreatments_filtert27CheckBox.Name = "patientstreatments_filtert27CheckBox";
             this.patientstreatments_filtert27CheckBox.Size = new System.Drawing.Size(15, 14);
             this.patientstreatments_filtert27CheckBox.TabIndex = 27;
@@ -3345,7 +3240,7 @@
             // patientstreatments_filtert34CheckBox
             // 
             this.patientstreatments_filtert34CheckBox.AutoSize = true;
-            this.patientstreatments_filtert34CheckBox.Location = new System.Drawing.Point(272, 61);
+            this.patientstreatments_filtert34CheckBox.Location = new System.Drawing.Point(250, 61);
             this.patientstreatments_filtert34CheckBox.Name = "patientstreatments_filtert34CheckBox";
             this.patientstreatments_filtert34CheckBox.Size = new System.Drawing.Size(15, 14);
             this.patientstreatments_filtert34CheckBox.TabIndex = 32;
@@ -3355,7 +3250,7 @@
             // patientstreatments_filtert28CheckBox
             // 
             this.patientstreatments_filtert28CheckBox.AutoSize = true;
-            this.patientstreatments_filtert28CheckBox.Location = new System.Drawing.Point(356, 41);
+            this.patientstreatments_filtert28CheckBox.Location = new System.Drawing.Point(334, 41);
             this.patientstreatments_filtert28CheckBox.Name = "patientstreatments_filtert28CheckBox";
             this.patientstreatments_filtert28CheckBox.Size = new System.Drawing.Size(15, 14);
             this.patientstreatments_filtert28CheckBox.TabIndex = 28;
@@ -3365,7 +3260,7 @@
             // patientstreatments_filtert33CheckBox
             // 
             this.patientstreatments_filtert33CheckBox.AutoSize = true;
-            this.patientstreatments_filtert33CheckBox.Location = new System.Drawing.Point(251, 61);
+            this.patientstreatments_filtert33CheckBox.Location = new System.Drawing.Point(229, 61);
             this.patientstreatments_filtert33CheckBox.Name = "patientstreatments_filtert33CheckBox";
             this.patientstreatments_filtert33CheckBox.Size = new System.Drawing.Size(15, 14);
             this.patientstreatments_filtert33CheckBox.TabIndex = 31;
@@ -3375,7 +3270,7 @@
             // patientstreatments_filtert31CheckBox
             // 
             this.patientstreatments_filtert31CheckBox.AutoSize = true;
-            this.patientstreatments_filtert31CheckBox.Location = new System.Drawing.Point(209, 61);
+            this.patientstreatments_filtert31CheckBox.Location = new System.Drawing.Point(187, 61);
             this.patientstreatments_filtert31CheckBox.Name = "patientstreatments_filtert31CheckBox";
             this.patientstreatments_filtert31CheckBox.Size = new System.Drawing.Size(15, 14);
             this.patientstreatments_filtert31CheckBox.TabIndex = 29;
@@ -3385,12 +3280,63 @@
             // patientstreatments_filtert32CheckBox
             // 
             this.patientstreatments_filtert32CheckBox.AutoSize = true;
-            this.patientstreatments_filtert32CheckBox.Location = new System.Drawing.Point(230, 61);
+            this.patientstreatments_filtert32CheckBox.Location = new System.Drawing.Point(208, 61);
             this.patientstreatments_filtert32CheckBox.Name = "patientstreatments_filtert32CheckBox";
             this.patientstreatments_filtert32CheckBox.Size = new System.Drawing.Size(15, 14);
             this.patientstreatments_filtert32CheckBox.TabIndex = 30;
             this.patientstreatments_filtert32CheckBox.UseVisualStyleBackColor = true;
             this.patientstreatments_filtert32CheckBox.CheckedChanged += new System.EventHandler(this.patientstreatments_filtert32CheckBox_CheckedChanged);
+            // 
+            // panel_tabPatientsTreatments_filters
+            // 
+            this.panel_tabPatientsTreatments_filters.Controls.Add(this.comboBox_tabPatientsTreatments_filterpaid);
+            this.panel_tabPatientsTreatments_filters.Controls.Add(this.label_tabPatientsTreatments_filterpaid);
+            this.panel_tabPatientsTreatments_filters.Controls.Add(this.comboBox_tabPatientsTreatments_filterfulfilled);
+            this.panel_tabPatientsTreatments_filters.Controls.Add(this.label_tabPatientsTreatments_filterfulfilled);
+            this.panel_tabPatientsTreatments_filters.Location = new System.Drawing.Point(3, 3);
+            this.panel_tabPatientsTreatments_filters.Name = "panel_tabPatientsTreatments_filters";
+            this.panel_tabPatientsTreatments_filters.Size = new System.Drawing.Size(540, 114);
+            this.panel_tabPatientsTreatments_filters.TabIndex = 14;
+            // 
+            // comboBox_tabPatientsTreatments_filterpaid
+            // 
+            this.comboBox_tabPatientsTreatments_filterpaid.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_tabPatientsTreatments_filterpaid.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox_tabPatientsTreatments_filterpaid.FormattingEnabled = true;
+            this.comboBox_tabPatientsTreatments_filterpaid.Location = new System.Drawing.Point(4, 65);
+            this.comboBox_tabPatientsTreatments_filterpaid.Name = "comboBox_tabPatientsTreatments_filterpaid";
+            this.comboBox_tabPatientsTreatments_filterpaid.Size = new System.Drawing.Size(80, 20);
+            this.comboBox_tabPatientsTreatments_filterpaid.TabIndex = 3;
+            this.comboBox_tabPatientsTreatments_filterpaid.SelectedIndexChanged += new System.EventHandler(this.comboBox_tabPatientsTreatments_filterpaid_SelectedIndexChanged);
+            // 
+            // label_tabPatientsTreatments_filterpaid
+            // 
+            this.label_tabPatientsTreatments_filterpaid.AutoSize = true;
+            this.label_tabPatientsTreatments_filterpaid.Location = new System.Drawing.Point(1, 49);
+            this.label_tabPatientsTreatments_filterpaid.Name = "label_tabPatientsTreatments_filterpaid";
+            this.label_tabPatientsTreatments_filterpaid.Size = new System.Drawing.Size(31, 13);
+            this.label_tabPatientsTreatments_filterpaid.TabIndex = 2;
+            this.label_tabPatientsTreatments_filterpaid.Text = "Paid:";
+            // 
+            // comboBox_tabPatientsTreatments_filterfulfilled
+            // 
+            this.comboBox_tabPatientsTreatments_filterfulfilled.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_tabPatientsTreatments_filterfulfilled.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox_tabPatientsTreatments_filterfulfilled.FormattingEnabled = true;
+            this.comboBox_tabPatientsTreatments_filterfulfilled.Location = new System.Drawing.Point(4, 25);
+            this.comboBox_tabPatientsTreatments_filterfulfilled.Name = "comboBox_tabPatientsTreatments_filterfulfilled";
+            this.comboBox_tabPatientsTreatments_filterfulfilled.Size = new System.Drawing.Size(80, 20);
+            this.comboBox_tabPatientsTreatments_filterfulfilled.TabIndex = 1;
+            this.comboBox_tabPatientsTreatments_filterfulfilled.SelectedIndexChanged += new System.EventHandler(this.comboBox_tabPatientsTreatments_filterfulfilled_SelectedIndexChanged);
+            // 
+            // label_tabPatientsTreatments_filterfulfilled
+            // 
+            this.label_tabPatientsTreatments_filterfulfilled.AutoSize = true;
+            this.label_tabPatientsTreatments_filterfulfilled.Location = new System.Drawing.Point(1, 9);
+            this.label_tabPatientsTreatments_filterfulfilled.Name = "label_tabPatientsTreatments_filterfulfilled";
+            this.label_tabPatientsTreatments_filterfulfilled.Size = new System.Drawing.Size(50, 13);
+            this.label_tabPatientsTreatments_filterfulfilled.TabIndex = 0;
+            this.label_tabPatientsTreatments_filterfulfilled.Text = "FullFilled:";
             // 
             // panel_tabPatientsTreatments_data
             // 
@@ -3421,9 +3367,9 @@
             this.panel_tabPatientsTreatments_data.Controls.Add(this.treatments_idComboBox);
             this.panel_tabPatientsTreatments_data.Controls.Add(this.patientstreatments_idLabel);
             this.panel_tabPatientsTreatments_data.Controls.Add(this.patientstreatments_idTextBox);
-            this.panel_tabPatientsTreatments_data.Location = new System.Drawing.Point(6, 294);
+            this.panel_tabPatientsTreatments_data.Location = new System.Drawing.Point(3, 275);
             this.panel_tabPatientsTreatments_data.Name = "panel_tabPatientsTreatments_data";
-            this.panel_tabPatientsTreatments_data.Size = new System.Drawing.Size(540, 330);
+            this.panel_tabPatientsTreatments_data.Size = new System.Drawing.Size(540, 320);
             this.panel_tabPatientsTreatments_data.TabIndex = 13;
             // 
             // patientstreatments_isunitpriceCheckBox
@@ -4347,7 +4293,7 @@
             this.patientstreatments_notesTextBox.Multiline = true;
             this.patientstreatments_notesTextBox.Name = "patientstreatments_notesTextBox";
             this.patientstreatments_notesTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.patientstreatments_notesTextBox.Size = new System.Drawing.Size(520, 50);
+            this.patientstreatments_notesTextBox.Size = new System.Drawing.Size(520, 40);
             this.patientstreatments_notesTextBox.TabIndex = 11;
             // 
             // patientstreatments_descriptionTextBox
@@ -4401,14 +4347,14 @@
             // 
             this.panel_tabPatientsTreatments_updates.Controls.Add(this.button_tabPatientsTreatments_cancel);
             this.panel_tabPatientsTreatments_updates.Controls.Add(this.button_tabPatientsTreatments_save);
-            this.panel_tabPatientsTreatments_updates.Location = new System.Drawing.Point(6, 628);
+            this.panel_tabPatientsTreatments_updates.Location = new System.Drawing.Point(3, 598);
             this.panel_tabPatientsTreatments_updates.Name = "panel_tabPatientsTreatments_updates";
-            this.panel_tabPatientsTreatments_updates.Size = new System.Drawing.Size(540, 30);
+            this.panel_tabPatientsTreatments_updates.Size = new System.Drawing.Size(540, 29);
             this.panel_tabPatientsTreatments_updates.TabIndex = 12;
             // 
             // button_tabPatientsTreatments_cancel
             // 
-            this.button_tabPatientsTreatments_cancel.Location = new System.Drawing.Point(462, 4);
+            this.button_tabPatientsTreatments_cancel.Location = new System.Drawing.Point(462, 3);
             this.button_tabPatientsTreatments_cancel.Name = "button_tabPatientsTreatments_cancel";
             this.button_tabPatientsTreatments_cancel.Size = new System.Drawing.Size(75, 23);
             this.button_tabPatientsTreatments_cancel.TabIndex = 2;
@@ -4417,7 +4363,7 @@
             // 
             // button_tabPatientsTreatments_save
             // 
-            this.button_tabPatientsTreatments_save.Location = new System.Drawing.Point(381, 4);
+            this.button_tabPatientsTreatments_save.Location = new System.Drawing.Point(381, 3);
             this.button_tabPatientsTreatments_save.Name = "button_tabPatientsTreatments_save";
             this.button_tabPatientsTreatments_save.Size = new System.Drawing.Size(75, 23);
             this.button_tabPatientsTreatments_save.TabIndex = 1;
@@ -4431,9 +4377,9 @@
             this.panel_tabPatientsTreatments_actions.Controls.Add(this.button_tabPatientsTreatments_delete);
             this.panel_tabPatientsTreatments_actions.Controls.Add(this.button_tabPatientsTreatments_edit);
             this.panel_tabPatientsTreatments_actions.Controls.Add(this.button_tabPatientsTreatments_new);
-            this.panel_tabPatientsTreatments_actions.Location = new System.Drawing.Point(6, 260);
+            this.panel_tabPatientsTreatments_actions.Location = new System.Drawing.Point(3, 243);
             this.panel_tabPatientsTreatments_actions.Name = "panel_tabPatientsTreatments_actions";
-            this.panel_tabPatientsTreatments_actions.Size = new System.Drawing.Size(540, 30);
+            this.panel_tabPatientsTreatments_actions.Size = new System.Drawing.Size(540, 29);
             this.panel_tabPatientsTreatments_actions.TabIndex = 11;
             // 
             // button_tabPatientsTreatments_setpaid
@@ -4488,9 +4434,9 @@
             // panel_tabPatientsTreatments_list
             // 
             this.panel_tabPatientsTreatments_list.Controls.Add(this.advancedDataGridView_tabPatientsTreatments_list);
-            this.panel_tabPatientsTreatments_list.Location = new System.Drawing.Point(6, 126);
+            this.panel_tabPatientsTreatments_list.Location = new System.Drawing.Point(3, 120);
             this.panel_tabPatientsTreatments_list.Name = "panel_tabPatientsTreatments_list";
-            this.panel_tabPatientsTreatments_list.Size = new System.Drawing.Size(540, 130);
+            this.panel_tabPatientsTreatments_list.Size = new System.Drawing.Size(540, 120);
             this.panel_tabPatientsTreatments_list.TabIndex = 10;
             // 
             // advancedDataGridView_tabPatientsTreatments_list
@@ -4517,66 +4463,10 @@
             this.advancedDataGridView_tabPatientsTreatments_list.ReadOnly = true;
             this.advancedDataGridView_tabPatientsTreatments_list.RowHeadersVisible = false;
             this.advancedDataGridView_tabPatientsTreatments_list.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.advancedDataGridView_tabPatientsTreatments_list.Size = new System.Drawing.Size(540, 130);
+            this.advancedDataGridView_tabPatientsTreatments_list.Size = new System.Drawing.Size(540, 120);
             this.advancedDataGridView_tabPatientsTreatments_list.TabIndex = 1;
             this.advancedDataGridView_tabPatientsTreatments_list.SortStringChanged += new System.EventHandler(this.advancedDataGridView_tabPatientsTreatments_list_SortStringChanged);
             this.advancedDataGridView_tabPatientsTreatments_list.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_tabPatientsTreatments_list_FilterStringChanged);
-            // 
-            // dateDataGridViewTextBoxColumn1
-            // 
-            this.dateDataGridViewTextBoxColumn1.DataPropertyName = "date";
-            dataGridViewCellStyle5.Format = "d";
-            this.dateDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle5;
-            this.dateDataGridViewTextBoxColumn1.HeaderText = "Date";
-            this.dateDataGridViewTextBoxColumn1.MinimumWidth = 22;
-            this.dateDataGridViewTextBoxColumn1.Name = "dateDataGridViewTextBoxColumn1";
-            this.dateDataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dateDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.dateDataGridViewTextBoxColumn1.Width = 80;
-            // 
-            // treatmentDataGridViewTextBoxColumn
-            // 
-            this.treatmentDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.treatmentDataGridViewTextBoxColumn.DataPropertyName = "treatment";
-            this.treatmentDataGridViewTextBoxColumn.HeaderText = "Treatment";
-            this.treatmentDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.treatmentDataGridViewTextBoxColumn.Name = "treatmentDataGridViewTextBoxColumn";
-            this.treatmentDataGridViewTextBoxColumn.ReadOnly = true;
-            this.treatmentDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // toothsDataGridViewTextBoxColumn
-            // 
-            this.toothsDataGridViewTextBoxColumn.DataPropertyName = "tooths";
-            this.toothsDataGridViewTextBoxColumn.HeaderText = "Tooths";
-            this.toothsDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.toothsDataGridViewTextBoxColumn.Name = "toothsDataGridViewTextBoxColumn";
-            this.toothsDataGridViewTextBoxColumn.ReadOnly = true;
-            this.toothsDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // isfulfilledDataGridViewCheckBoxColumn
-            // 
-            this.isfulfilledDataGridViewCheckBoxColumn.DataPropertyName = "isfulfilled";
-            this.isfulfilledDataGridViewCheckBoxColumn.HeaderText = "F";
-            this.isfulfilledDataGridViewCheckBoxColumn.MinimumWidth = 22;
-            this.isfulfilledDataGridViewCheckBoxColumn.Name = "isfulfilledDataGridViewCheckBoxColumn";
-            this.isfulfilledDataGridViewCheckBoxColumn.ReadOnly = true;
-            this.isfulfilledDataGridViewCheckBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.isfulfilledDataGridViewCheckBoxColumn.Width = 40;
-            // 
-            // ispaidDataGridViewCheckBoxColumn
-            // 
-            this.ispaidDataGridViewCheckBoxColumn.DataPropertyName = "ispaid";
-            this.ispaidDataGridViewCheckBoxColumn.HeaderText = "P";
-            this.ispaidDataGridViewCheckBoxColumn.MinimumWidth = 22;
-            this.ispaidDataGridViewCheckBoxColumn.Name = "ispaidDataGridViewCheckBoxColumn";
-            this.ispaidDataGridViewCheckBoxColumn.ReadOnly = true;
-            this.ispaidDataGridViewCheckBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.ispaidDataGridViewCheckBoxColumn.Width = 40;
-            // 
-            // vPatientsTreatmentsBindingSource
-            // 
-            this.vPatientsTreatmentsBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatientsTreatments);
-            this.vPatientsTreatmentsBindingSource.CurrentChanged += new System.EventHandler(this.vPatientsTreatmentsBindingSource_CurrentChanged);
             // 
             // tabPage_tabPayments
             // 
@@ -4821,53 +4711,6 @@
             this.advancedDataGridView_tabPayments_list.SortStringChanged += new System.EventHandler(this.advancedDataGridView_tabPayments_list_SortStringChanged);
             this.advancedDataGridView_tabPayments_list.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_tabPayments_list_FilterStringChanged);
             // 
-            // paymentsidDataGridViewTextBoxColumn
-            // 
-            this.paymentsidDataGridViewTextBoxColumn.DataPropertyName = "payments_id";
-            this.paymentsidDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.paymentsidDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.paymentsidDataGridViewTextBoxColumn.Name = "paymentsidDataGridViewTextBoxColumn";
-            this.paymentsidDataGridViewTextBoxColumn.ReadOnly = true;
-            this.paymentsidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.paymentsidDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // dateDataGridViewTextBoxColumn2
-            // 
-            this.dateDataGridViewTextBoxColumn2.DataPropertyName = "date";
-            dataGridViewCellStyle7.Format = "d";
-            this.dateDataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle7;
-            this.dateDataGridViewTextBoxColumn2.HeaderText = "Date";
-            this.dateDataGridViewTextBoxColumn2.MinimumWidth = 22;
-            this.dateDataGridViewTextBoxColumn2.Name = "dateDataGridViewTextBoxColumn2";
-            this.dateDataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dateDataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.dateDataGridViewTextBoxColumn2.Width = 80;
-            // 
-            // noteDataGridViewTextBoxColumn1
-            // 
-            this.noteDataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.noteDataGridViewTextBoxColumn1.DataPropertyName = "note";
-            this.noteDataGridViewTextBoxColumn1.HeaderText = "Note";
-            this.noteDataGridViewTextBoxColumn1.MinimumWidth = 22;
-            this.noteDataGridViewTextBoxColumn1.Name = "noteDataGridViewTextBoxColumn1";
-            this.noteDataGridViewTextBoxColumn1.ReadOnly = true;
-            this.noteDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // amountDataGridViewTextBoxColumn
-            // 
-            this.amountDataGridViewTextBoxColumn.DataPropertyName = "amount";
-            dataGridViewCellStyle8.Format = "0.00";
-            this.amountDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle8;
-            this.amountDataGridViewTextBoxColumn.HeaderText = "Total";
-            this.amountDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.amountDataGridViewTextBoxColumn.Name = "amountDataGridViewTextBoxColumn";
-            this.amountDataGridViewTextBoxColumn.ReadOnly = true;
-            this.amountDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // vPatientsPaymentsBindingSource
-            // 
-            this.vPatientsPaymentsBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatientsPayments);
-            // 
             // tabPage_tabAppointments
             // 
             this.tabPage_tabAppointments.Controls.Add(this.panel_tabAppointments_data);
@@ -4983,50 +4826,6 @@
             this.advancedDataGridView_tabAppointments_list.TabIndex = 1;
             this.advancedDataGridView_tabAppointments_list.SortStringChanged += new System.EventHandler(this.advancedDataGridView_tabAppointments_list_SortStringChanged);
             this.advancedDataGridView_tabAppointments_list.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_tabAppointments_list_FilterStringChanged);
-            // 
-            // appointmentsidDataGridViewTextBoxColumn
-            // 
-            this.appointmentsidDataGridViewTextBoxColumn.DataPropertyName = "appointments_id";
-            this.appointmentsidDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.appointmentsidDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.appointmentsidDataGridViewTextBoxColumn.Name = "appointmentsidDataGridViewTextBoxColumn";
-            this.appointmentsidDataGridViewTextBoxColumn.ReadOnly = true;
-            this.appointmentsidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.appointmentsidDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // fromDataGridViewTextBoxColumn
-            // 
-            this.fromDataGridViewTextBoxColumn.DataPropertyName = "from";
-            this.fromDataGridViewTextBoxColumn.HeaderText = "From";
-            this.fromDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.fromDataGridViewTextBoxColumn.Name = "fromDataGridViewTextBoxColumn";
-            this.fromDataGridViewTextBoxColumn.ReadOnly = true;
-            this.fromDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.fromDataGridViewTextBoxColumn.Width = 120;
-            // 
-            // toDataGridViewTextBoxColumn
-            // 
-            this.toDataGridViewTextBoxColumn.DataPropertyName = "to";
-            this.toDataGridViewTextBoxColumn.HeaderText = "To";
-            this.toDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.toDataGridViewTextBoxColumn.Name = "toDataGridViewTextBoxColumn";
-            this.toDataGridViewTextBoxColumn.ReadOnly = true;
-            this.toDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.toDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // titleDataGridViewTextBoxColumn
-            // 
-            this.titleDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.titleDataGridViewTextBoxColumn.DataPropertyName = "title";
-            this.titleDataGridViewTextBoxColumn.HeaderText = "Title";
-            this.titleDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
-            this.titleDataGridViewTextBoxColumn.ReadOnly = true;
-            this.titleDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // vPatientsAppointmentsBindingSource
-            // 
-            this.vPatientsAppointmentsBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatientsAppointments);
             // 
             // tabPage_tabPatientsAttachments
             // 
@@ -5258,40 +5057,6 @@
             this.advancedDataGridView_tabPatientsAttachments_list.SortStringChanged += new System.EventHandler(this.advancedDataGridView_tabPatientsAttachments_list_SortStringChanged);
             this.advancedDataGridView_tabPatientsAttachments_list.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_tabPatientsAttachments_list_FilterStringChanged);
             // 
-            // patientsattachmentsidDataGridViewTextBoxColumn
-            // 
-            this.patientsattachmentsidDataGridViewTextBoxColumn.DataPropertyName = "patientsattachments_id";
-            this.patientsattachmentsidDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.patientsattachmentsidDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.patientsattachmentsidDataGridViewTextBoxColumn.Name = "patientsattachmentsidDataGridViewTextBoxColumn";
-            this.patientsattachmentsidDataGridViewTextBoxColumn.ReadOnly = true;
-            this.patientsattachmentsidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.patientsattachmentsidDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // attachmetnstypeDataGridViewTextBoxColumn
-            // 
-            this.attachmetnstypeDataGridViewTextBoxColumn.DataPropertyName = "attachmetnstype";
-            this.attachmetnstypeDataGridViewTextBoxColumn.HeaderText = "Type";
-            this.attachmetnstypeDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.attachmetnstypeDataGridViewTextBoxColumn.Name = "attachmetnstypeDataGridViewTextBoxColumn";
-            this.attachmetnstypeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.attachmetnstypeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.attachmetnstypeDataGridViewTextBoxColumn.Width = 120;
-            // 
-            // attachmentDataGridViewTextBoxColumn
-            // 
-            this.attachmentDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.attachmentDataGridViewTextBoxColumn.DataPropertyName = "attachment";
-            this.attachmentDataGridViewTextBoxColumn.HeaderText = "Attachment";
-            this.attachmentDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.attachmentDataGridViewTextBoxColumn.Name = "attachmentDataGridViewTextBoxColumn";
-            this.attachmentDataGridViewTextBoxColumn.ReadOnly = true;
-            this.attachmentDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // vPatientsAttachmentsBindingSource
-            // 
-            this.vPatientsAttachmentsBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatientsAttachments);
-            // 
             // tabPage_tabInvoices
             // 
             this.tabPage_tabInvoices.AutoScroll = true;
@@ -5423,61 +5188,6 @@
             this.advancedDataGridView_tabInvoices_list.SortStringChanged += new System.EventHandler(this.advancedDataGridView_tabInvoices_list_SortStringChanged);
             this.advancedDataGridView_tabInvoices_list.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_tabInvoices_list_FilterStringChanged);
             // 
-            // numberDataGridViewTextBoxColumn
-            // 
-            this.numberDataGridViewTextBoxColumn.DataPropertyName = "number";
-            this.numberDataGridViewTextBoxColumn.HeaderText = "Number";
-            this.numberDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.numberDataGridViewTextBoxColumn.Name = "numberDataGridViewTextBoxColumn";
-            this.numberDataGridViewTextBoxColumn.ReadOnly = true;
-            this.numberDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.numberDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // dateDataGridViewTextBoxColumn3
-            // 
-            this.dateDataGridViewTextBoxColumn3.DataPropertyName = "date";
-            dataGridViewCellStyle12.Format = "d";
-            this.dateDataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle12;
-            this.dateDataGridViewTextBoxColumn3.HeaderText = "Date";
-            this.dateDataGridViewTextBoxColumn3.MinimumWidth = 22;
-            this.dateDataGridViewTextBoxColumn3.Name = "dateDataGridViewTextBoxColumn3";
-            this.dateDataGridViewTextBoxColumn3.ReadOnly = true;
-            this.dateDataGridViewTextBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.dateDataGridViewTextBoxColumn3.Width = 80;
-            // 
-            // doctorDataGridViewTextBoxColumn
-            // 
-            this.doctorDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.doctorDataGridViewTextBoxColumn.DataPropertyName = "doctor";
-            this.doctorDataGridViewTextBoxColumn.HeaderText = "Doctor";
-            this.doctorDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.doctorDataGridViewTextBoxColumn.Name = "doctorDataGridViewTextBoxColumn";
-            this.doctorDataGridViewTextBoxColumn.ReadOnly = true;
-            this.doctorDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // ispaidDataGridViewCheckBoxColumn1
-            // 
-            this.ispaidDataGridViewCheckBoxColumn1.DataPropertyName = "ispaid";
-            this.ispaidDataGridViewCheckBoxColumn1.HeaderText = "P";
-            this.ispaidDataGridViewCheckBoxColumn1.MinimumWidth = 22;
-            this.ispaidDataGridViewCheckBoxColumn1.Name = "ispaidDataGridViewCheckBoxColumn1";
-            this.ispaidDataGridViewCheckBoxColumn1.ReadOnly = true;
-            this.ispaidDataGridViewCheckBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.ispaidDataGridViewCheckBoxColumn1.Width = 50;
-            // 
-            // totalDataGridViewTextBoxColumn
-            // 
-            this.totalDataGridViewTextBoxColumn.DataPropertyName = "total";
-            this.totalDataGridViewTextBoxColumn.HeaderText = "Total Due";
-            this.totalDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.totalDataGridViewTextBoxColumn.Name = "totalDataGridViewTextBoxColumn";
-            this.totalDataGridViewTextBoxColumn.ReadOnly = true;
-            this.totalDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // vPatientsInvoicesBindingSource
-            // 
-            this.vPatientsInvoicesBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatientsInvoices);
-            // 
             // tabPage_tabEstimates
             // 
             this.tabPage_tabEstimates.Controls.Add(this.panel_tabEstimates_actions);
@@ -5607,63 +5317,6 @@
             this.advancedDataGridView_tabEstimates_list.TabIndex = 1;
             this.advancedDataGridView_tabEstimates_list.SortStringChanged += new System.EventHandler(this.advancedDataGridView_tabEstimates_list_SortStringChanged);
             this.advancedDataGridView_tabEstimates_list.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_tabEstimates_list_FilterStringChanged);
-            // 
-            // numberDataGridViewTextBoxColumn1
-            // 
-            this.numberDataGridViewTextBoxColumn1.DataPropertyName = "number";
-            this.numberDataGridViewTextBoxColumn1.HeaderText = "Number";
-            this.numberDataGridViewTextBoxColumn1.MinimumWidth = 22;
-            this.numberDataGridViewTextBoxColumn1.Name = "numberDataGridViewTextBoxColumn1";
-            this.numberDataGridViewTextBoxColumn1.ReadOnly = true;
-            this.numberDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.numberDataGridViewTextBoxColumn1.Width = 80;
-            // 
-            // dateDataGridViewTextBoxColumn4
-            // 
-            this.dateDataGridViewTextBoxColumn4.DataPropertyName = "date";
-            dataGridViewCellStyle14.Format = "d";
-            this.dateDataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle14;
-            this.dateDataGridViewTextBoxColumn4.HeaderText = "Date";
-            this.dateDataGridViewTextBoxColumn4.MinimumWidth = 22;
-            this.dateDataGridViewTextBoxColumn4.Name = "dateDataGridViewTextBoxColumn4";
-            this.dateDataGridViewTextBoxColumn4.ReadOnly = true;
-            this.dateDataGridViewTextBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.dateDataGridViewTextBoxColumn4.Width = 80;
-            // 
-            // doctorDataGridViewTextBoxColumn1
-            // 
-            this.doctorDataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.doctorDataGridViewTextBoxColumn1.DataPropertyName = "doctor";
-            this.doctorDataGridViewTextBoxColumn1.HeaderText = "Doctor";
-            this.doctorDataGridViewTextBoxColumn1.MinimumWidth = 22;
-            this.doctorDataGridViewTextBoxColumn1.Name = "doctorDataGridViewTextBoxColumn1";
-            this.doctorDataGridViewTextBoxColumn1.ReadOnly = true;
-            this.doctorDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // isinvoicedDataGridViewCheckBoxColumn
-            // 
-            this.isinvoicedDataGridViewCheckBoxColumn.DataPropertyName = "isinvoiced";
-            this.isinvoicedDataGridViewCheckBoxColumn.HeaderText = "I";
-            this.isinvoicedDataGridViewCheckBoxColumn.MinimumWidth = 22;
-            this.isinvoicedDataGridViewCheckBoxColumn.Name = "isinvoicedDataGridViewCheckBoxColumn";
-            this.isinvoicedDataGridViewCheckBoxColumn.ReadOnly = true;
-            this.isinvoicedDataGridViewCheckBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.isinvoicedDataGridViewCheckBoxColumn.Width = 50;
-            // 
-            // totalDataGridViewTextBoxColumn1
-            // 
-            this.totalDataGridViewTextBoxColumn1.DataPropertyName = "total";
-            dataGridViewCellStyle15.Format = "0.00";
-            this.totalDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle15;
-            this.totalDataGridViewTextBoxColumn1.HeaderText = "Total Due";
-            this.totalDataGridViewTextBoxColumn1.MinimumWidth = 22;
-            this.totalDataGridViewTextBoxColumn1.Name = "totalDataGridViewTextBoxColumn1";
-            this.totalDataGridViewTextBoxColumn1.ReadOnly = true;
-            this.totalDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // vPatientsEstimatesBindingSource
-            // 
-            this.vPatientsEstimatesBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatientsEstimates);
             // 
             // tabPage_tabPatientsNotes
             // 
@@ -5824,42 +5477,6 @@
             this.advancedDataGridView_tabPatientsNotes_list.SortStringChanged += new System.EventHandler(this.advancedDataGridView_tabPatientsNotes_list_SortStringChanged);
             this.advancedDataGridView_tabPatientsNotes_list.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_tabPatientsNotes_list_FilterStringChanged);
             // 
-            // patientsnotesidDataGridViewTextBoxColumn
-            // 
-            this.patientsnotesidDataGridViewTextBoxColumn.DataPropertyName = "patientsnotes_id";
-            this.patientsnotesidDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.patientsnotesidDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.patientsnotesidDataGridViewTextBoxColumn.Name = "patientsnotesidDataGridViewTextBoxColumn";
-            this.patientsnotesidDataGridViewTextBoxColumn.ReadOnly = true;
-            this.patientsnotesidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.patientsnotesidDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // dateDataGridViewTextBoxColumn
-            // 
-            this.dateDataGridViewTextBoxColumn.DataPropertyName = "date";
-            dataGridViewCellStyle17.Format = "d";
-            this.dateDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle17;
-            this.dateDataGridViewTextBoxColumn.HeaderText = "Date";
-            this.dateDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
-            this.dateDataGridViewTextBoxColumn.ReadOnly = true;
-            this.dateDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.dateDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // noteDataGridViewTextBoxColumn
-            // 
-            this.noteDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.noteDataGridViewTextBoxColumn.DataPropertyName = "note";
-            this.noteDataGridViewTextBoxColumn.HeaderText = "Note";
-            this.noteDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.noteDataGridViewTextBoxColumn.Name = "noteDataGridViewTextBoxColumn";
-            this.noteDataGridViewTextBoxColumn.ReadOnly = true;
-            this.noteDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // vPatientsNotesBindingSource
-            // 
-            this.vPatientsNotesBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatientsNotes);
-            // 
             // panel_list
             // 
             this.panel_list.Controls.Add(this.advancedDataGridView_main);
@@ -5896,42 +5513,6 @@
             this.advancedDataGridView_main.TabIndex = 0;
             this.advancedDataGridView_main.SortStringChanged += new System.EventHandler(this.advancedDataGridView_main_SortStringChanged);
             this.advancedDataGridView_main.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_main_FilterStringChanged);
-            // 
-            // patientsidDataGridViewTextBoxColumn
-            // 
-            this.patientsidDataGridViewTextBoxColumn.DataPropertyName = "patients_id";
-            this.patientsidDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.patientsidDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.patientsidDataGridViewTextBoxColumn.Name = "patientsidDataGridViewTextBoxColumn";
-            this.patientsidDataGridViewTextBoxColumn.ReadOnly = true;
-            this.patientsidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.patientsidDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // nameDataGridViewTextBoxColumn
-            // 
-            this.nameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "name";
-            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
-            this.nameDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
-            this.nameDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // isarchivedDataGridViewCheckBoxColumn
-            // 
-            this.isarchivedDataGridViewCheckBoxColumn.DataPropertyName = "isarchived";
-            this.isarchivedDataGridViewCheckBoxColumn.HeaderText = "A";
-            this.isarchivedDataGridViewCheckBoxColumn.MinimumWidth = 22;
-            this.isarchivedDataGridViewCheckBoxColumn.Name = "isarchivedDataGridViewCheckBoxColumn";
-            this.isarchivedDataGridViewCheckBoxColumn.ReadOnly = true;
-            this.isarchivedDataGridViewCheckBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.isarchivedDataGridViewCheckBoxColumn.Width = 50;
-            // 
-            // vPatientsBindingSource
-            // 
-            this.vPatientsBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatients);
-            this.vPatientsBindingSource.CurrentChanged += new System.EventHandler(this.vPatientsBindingSource_CurrentChanged);
-            this.vPatientsBindingSource.ListChanged += new System.ComponentModel.ListChangedEventHandler(this.vPatientsBindingSource_ListChanged);
             // 
             // panel_listtotal
             // 
@@ -6009,6 +5590,473 @@
             // 
             this.estimatesBindingSource.DataSource = typeof(DG.DentneD.Model.Entity.estimates);
             // 
+            // patientsidDataGridViewTextBoxColumn
+            // 
+            this.patientsidDataGridViewTextBoxColumn.DataPropertyName = "patients_id";
+            this.patientsidDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.patientsidDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.patientsidDataGridViewTextBoxColumn.Name = "patientsidDataGridViewTextBoxColumn";
+            this.patientsidDataGridViewTextBoxColumn.ReadOnly = true;
+            this.patientsidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.patientsidDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            this.nameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            this.nameDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.nameDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // isarchivedDataGridViewCheckBoxColumn
+            // 
+            this.isarchivedDataGridViewCheckBoxColumn.DataPropertyName = "isarchived";
+            this.isarchivedDataGridViewCheckBoxColumn.HeaderText = "A";
+            this.isarchivedDataGridViewCheckBoxColumn.MinimumWidth = 22;
+            this.isarchivedDataGridViewCheckBoxColumn.Name = "isarchivedDataGridViewCheckBoxColumn";
+            this.isarchivedDataGridViewCheckBoxColumn.ReadOnly = true;
+            this.isarchivedDataGridViewCheckBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.isarchivedDataGridViewCheckBoxColumn.Width = 50;
+            // 
+            // vPatientsBindingSource
+            // 
+            this.vPatientsBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatients);
+            this.vPatientsBindingSource.CurrentChanged += new System.EventHandler(this.vPatientsBindingSource_CurrentChanged);
+            this.vPatientsBindingSource.ListChanged += new System.ComponentModel.ListChangedEventHandler(this.vPatientsBindingSource_ListChanged);
+            // 
+            // patientscontactsidDataGridViewTextBoxColumn
+            // 
+            this.patientscontactsidDataGridViewTextBoxColumn.DataPropertyName = "patientscontacts_id";
+            this.patientscontactsidDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.patientscontactsidDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.patientscontactsidDataGridViewTextBoxColumn.Name = "patientscontactsidDataGridViewTextBoxColumn";
+            this.patientscontactsidDataGridViewTextBoxColumn.ReadOnly = true;
+            this.patientscontactsidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.patientscontactsidDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // contactstypeDataGridViewTextBoxColumn
+            // 
+            this.contactstypeDataGridViewTextBoxColumn.DataPropertyName = "contactstype";
+            this.contactstypeDataGridViewTextBoxColumn.HeaderText = "Type";
+            this.contactstypeDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.contactstypeDataGridViewTextBoxColumn.Name = "contactstypeDataGridViewTextBoxColumn";
+            this.contactstypeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.contactstypeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.contactstypeDataGridViewTextBoxColumn.Width = 120;
+            // 
+            // contactDataGridViewTextBoxColumn
+            // 
+            this.contactDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.contactDataGridViewTextBoxColumn.DataPropertyName = "contact";
+            this.contactDataGridViewTextBoxColumn.HeaderText = "Contact";
+            this.contactDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.contactDataGridViewTextBoxColumn.Name = "contactDataGridViewTextBoxColumn";
+            this.contactDataGridViewTextBoxColumn.ReadOnly = true;
+            this.contactDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // vPatientsContactsBindingSource
+            // 
+            this.vPatientsContactsBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatientsContacts);
+            // 
+            // patientsaddressesidDataGridViewTextBoxColumn
+            // 
+            this.patientsaddressesidDataGridViewTextBoxColumn.DataPropertyName = "patientsaddresses_id";
+            this.patientsaddressesidDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.patientsaddressesidDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.patientsaddressesidDataGridViewTextBoxColumn.Name = "patientsaddressesidDataGridViewTextBoxColumn";
+            this.patientsaddressesidDataGridViewTextBoxColumn.ReadOnly = true;
+            this.patientsaddressesidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.patientsaddressesidDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // addresstypeDataGridViewTextBoxColumn
+            // 
+            this.addresstypeDataGridViewTextBoxColumn.DataPropertyName = "addresstype";
+            this.addresstypeDataGridViewTextBoxColumn.HeaderText = "Type";
+            this.addresstypeDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.addresstypeDataGridViewTextBoxColumn.Name = "addresstypeDataGridViewTextBoxColumn";
+            this.addresstypeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.addresstypeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.addresstypeDataGridViewTextBoxColumn.Width = 120;
+            // 
+            // addressDataGridViewTextBoxColumn
+            // 
+            this.addressDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.addressDataGridViewTextBoxColumn.DataPropertyName = "address";
+            this.addressDataGridViewTextBoxColumn.HeaderText = "Address";
+            this.addressDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.addressDataGridViewTextBoxColumn.Name = "addressDataGridViewTextBoxColumn";
+            this.addressDataGridViewTextBoxColumn.ReadOnly = true;
+            this.addressDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // vPatientsAddressesBindingSource
+            // 
+            this.vPatientsAddressesBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatientsAddresses);
+            // 
+            // patientsmedicalrecordsidDataGridViewTextBoxColumn
+            // 
+            this.patientsmedicalrecordsidDataGridViewTextBoxColumn.DataPropertyName = "patientsmedicalrecords_id";
+            this.patientsmedicalrecordsidDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.patientsmedicalrecordsidDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.patientsmedicalrecordsidDataGridViewTextBoxColumn.Name = "patientsmedicalrecordsidDataGridViewTextBoxColumn";
+            this.patientsmedicalrecordsidDataGridViewTextBoxColumn.ReadOnly = true;
+            this.patientsmedicalrecordsidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.patientsmedicalrecordsidDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // medicalrecordstypeDataGridViewTextBoxColumn
+            // 
+            this.medicalrecordstypeDataGridViewTextBoxColumn.DataPropertyName = "medicalrecordstype";
+            this.medicalrecordstypeDataGridViewTextBoxColumn.HeaderText = "Type";
+            this.medicalrecordstypeDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.medicalrecordstypeDataGridViewTextBoxColumn.Name = "medicalrecordstypeDataGridViewTextBoxColumn";
+            this.medicalrecordstypeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.medicalrecordstypeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.medicalrecordstypeDataGridViewTextBoxColumn.Width = 120;
+            // 
+            // valueDataGridViewTextBoxColumn
+            // 
+            this.valueDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.valueDataGridViewTextBoxColumn.DataPropertyName = "value";
+            this.valueDataGridViewTextBoxColumn.HeaderText = "Info";
+            this.valueDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.valueDataGridViewTextBoxColumn.Name = "valueDataGridViewTextBoxColumn";
+            this.valueDataGridViewTextBoxColumn.ReadOnly = true;
+            this.valueDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // vPatientsMedicalrecordsBindingSource
+            // 
+            this.vPatientsMedicalrecordsBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatientsMedicalrecords);
+            // 
+            // dateDataGridViewTextBoxColumn1
+            // 
+            this.dateDataGridViewTextBoxColumn1.DataPropertyName = "date";
+            dataGridViewCellStyle5.Format = "d";
+            this.dateDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle5;
+            this.dateDataGridViewTextBoxColumn1.HeaderText = "Date";
+            this.dateDataGridViewTextBoxColumn1.MinimumWidth = 22;
+            this.dateDataGridViewTextBoxColumn1.Name = "dateDataGridViewTextBoxColumn1";
+            this.dateDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dateDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.dateDataGridViewTextBoxColumn1.Width = 80;
+            // 
+            // treatmentDataGridViewTextBoxColumn
+            // 
+            this.treatmentDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.treatmentDataGridViewTextBoxColumn.DataPropertyName = "treatment";
+            this.treatmentDataGridViewTextBoxColumn.HeaderText = "Treatment";
+            this.treatmentDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.treatmentDataGridViewTextBoxColumn.Name = "treatmentDataGridViewTextBoxColumn";
+            this.treatmentDataGridViewTextBoxColumn.ReadOnly = true;
+            this.treatmentDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // toothsDataGridViewTextBoxColumn
+            // 
+            this.toothsDataGridViewTextBoxColumn.DataPropertyName = "tooths";
+            this.toothsDataGridViewTextBoxColumn.HeaderText = "Tooths";
+            this.toothsDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.toothsDataGridViewTextBoxColumn.Name = "toothsDataGridViewTextBoxColumn";
+            this.toothsDataGridViewTextBoxColumn.ReadOnly = true;
+            this.toothsDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // isfulfilledDataGridViewCheckBoxColumn
+            // 
+            this.isfulfilledDataGridViewCheckBoxColumn.DataPropertyName = "isfulfilled";
+            this.isfulfilledDataGridViewCheckBoxColumn.HeaderText = "F";
+            this.isfulfilledDataGridViewCheckBoxColumn.MinimumWidth = 22;
+            this.isfulfilledDataGridViewCheckBoxColumn.Name = "isfulfilledDataGridViewCheckBoxColumn";
+            this.isfulfilledDataGridViewCheckBoxColumn.ReadOnly = true;
+            this.isfulfilledDataGridViewCheckBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.isfulfilledDataGridViewCheckBoxColumn.Width = 40;
+            // 
+            // ispaidDataGridViewCheckBoxColumn
+            // 
+            this.ispaidDataGridViewCheckBoxColumn.DataPropertyName = "ispaid";
+            this.ispaidDataGridViewCheckBoxColumn.HeaderText = "P";
+            this.ispaidDataGridViewCheckBoxColumn.MinimumWidth = 22;
+            this.ispaidDataGridViewCheckBoxColumn.Name = "ispaidDataGridViewCheckBoxColumn";
+            this.ispaidDataGridViewCheckBoxColumn.ReadOnly = true;
+            this.ispaidDataGridViewCheckBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.ispaidDataGridViewCheckBoxColumn.Width = 40;
+            // 
+            // vPatientsTreatmentsBindingSource
+            // 
+            this.vPatientsTreatmentsBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatientsTreatments);
+            this.vPatientsTreatmentsBindingSource.CurrentChanged += new System.EventHandler(this.vPatientsTreatmentsBindingSource_CurrentChanged);
+            // 
+            // paymentsidDataGridViewTextBoxColumn
+            // 
+            this.paymentsidDataGridViewTextBoxColumn.DataPropertyName = "payments_id";
+            this.paymentsidDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.paymentsidDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.paymentsidDataGridViewTextBoxColumn.Name = "paymentsidDataGridViewTextBoxColumn";
+            this.paymentsidDataGridViewTextBoxColumn.ReadOnly = true;
+            this.paymentsidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.paymentsidDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // dateDataGridViewTextBoxColumn2
+            // 
+            this.dateDataGridViewTextBoxColumn2.DataPropertyName = "date";
+            dataGridViewCellStyle7.Format = "d";
+            this.dateDataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle7;
+            this.dateDataGridViewTextBoxColumn2.HeaderText = "Date";
+            this.dateDataGridViewTextBoxColumn2.MinimumWidth = 22;
+            this.dateDataGridViewTextBoxColumn2.Name = "dateDataGridViewTextBoxColumn2";
+            this.dateDataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dateDataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.dateDataGridViewTextBoxColumn2.Width = 80;
+            // 
+            // noteDataGridViewTextBoxColumn1
+            // 
+            this.noteDataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.noteDataGridViewTextBoxColumn1.DataPropertyName = "note";
+            this.noteDataGridViewTextBoxColumn1.HeaderText = "Note";
+            this.noteDataGridViewTextBoxColumn1.MinimumWidth = 22;
+            this.noteDataGridViewTextBoxColumn1.Name = "noteDataGridViewTextBoxColumn1";
+            this.noteDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.noteDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // amountDataGridViewTextBoxColumn
+            // 
+            this.amountDataGridViewTextBoxColumn.DataPropertyName = "amount";
+            dataGridViewCellStyle8.Format = "0.00";
+            this.amountDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle8;
+            this.amountDataGridViewTextBoxColumn.HeaderText = "Total";
+            this.amountDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.amountDataGridViewTextBoxColumn.Name = "amountDataGridViewTextBoxColumn";
+            this.amountDataGridViewTextBoxColumn.ReadOnly = true;
+            this.amountDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // vPatientsPaymentsBindingSource
+            // 
+            this.vPatientsPaymentsBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatientsPayments);
+            // 
+            // appointmentsidDataGridViewTextBoxColumn
+            // 
+            this.appointmentsidDataGridViewTextBoxColumn.DataPropertyName = "appointments_id";
+            this.appointmentsidDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.appointmentsidDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.appointmentsidDataGridViewTextBoxColumn.Name = "appointmentsidDataGridViewTextBoxColumn";
+            this.appointmentsidDataGridViewTextBoxColumn.ReadOnly = true;
+            this.appointmentsidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.appointmentsidDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // fromDataGridViewTextBoxColumn
+            // 
+            this.fromDataGridViewTextBoxColumn.DataPropertyName = "from";
+            this.fromDataGridViewTextBoxColumn.HeaderText = "From";
+            this.fromDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.fromDataGridViewTextBoxColumn.Name = "fromDataGridViewTextBoxColumn";
+            this.fromDataGridViewTextBoxColumn.ReadOnly = true;
+            this.fromDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.fromDataGridViewTextBoxColumn.Width = 120;
+            // 
+            // toDataGridViewTextBoxColumn
+            // 
+            this.toDataGridViewTextBoxColumn.DataPropertyName = "to";
+            this.toDataGridViewTextBoxColumn.HeaderText = "To";
+            this.toDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.toDataGridViewTextBoxColumn.Name = "toDataGridViewTextBoxColumn";
+            this.toDataGridViewTextBoxColumn.ReadOnly = true;
+            this.toDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.toDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // titleDataGridViewTextBoxColumn
+            // 
+            this.titleDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.titleDataGridViewTextBoxColumn.DataPropertyName = "title";
+            this.titleDataGridViewTextBoxColumn.HeaderText = "Title";
+            this.titleDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
+            this.titleDataGridViewTextBoxColumn.ReadOnly = true;
+            this.titleDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // vPatientsAppointmentsBindingSource
+            // 
+            this.vPatientsAppointmentsBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatientsAppointments);
+            // 
+            // patientsattachmentsidDataGridViewTextBoxColumn
+            // 
+            this.patientsattachmentsidDataGridViewTextBoxColumn.DataPropertyName = "patientsattachments_id";
+            this.patientsattachmentsidDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.patientsattachmentsidDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.patientsattachmentsidDataGridViewTextBoxColumn.Name = "patientsattachmentsidDataGridViewTextBoxColumn";
+            this.patientsattachmentsidDataGridViewTextBoxColumn.ReadOnly = true;
+            this.patientsattachmentsidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.patientsattachmentsidDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // attachmetnstypeDataGridViewTextBoxColumn
+            // 
+            this.attachmetnstypeDataGridViewTextBoxColumn.DataPropertyName = "attachmetnstype";
+            this.attachmetnstypeDataGridViewTextBoxColumn.HeaderText = "Type";
+            this.attachmetnstypeDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.attachmetnstypeDataGridViewTextBoxColumn.Name = "attachmetnstypeDataGridViewTextBoxColumn";
+            this.attachmetnstypeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.attachmetnstypeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.attachmetnstypeDataGridViewTextBoxColumn.Width = 120;
+            // 
+            // attachmentDataGridViewTextBoxColumn
+            // 
+            this.attachmentDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.attachmentDataGridViewTextBoxColumn.DataPropertyName = "attachment";
+            this.attachmentDataGridViewTextBoxColumn.HeaderText = "Attachment";
+            this.attachmentDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.attachmentDataGridViewTextBoxColumn.Name = "attachmentDataGridViewTextBoxColumn";
+            this.attachmentDataGridViewTextBoxColumn.ReadOnly = true;
+            this.attachmentDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // vPatientsAttachmentsBindingSource
+            // 
+            this.vPatientsAttachmentsBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatientsAttachments);
+            // 
+            // numberDataGridViewTextBoxColumn
+            // 
+            this.numberDataGridViewTextBoxColumn.DataPropertyName = "number";
+            this.numberDataGridViewTextBoxColumn.HeaderText = "Number";
+            this.numberDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.numberDataGridViewTextBoxColumn.Name = "numberDataGridViewTextBoxColumn";
+            this.numberDataGridViewTextBoxColumn.ReadOnly = true;
+            this.numberDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.numberDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // dateDataGridViewTextBoxColumn3
+            // 
+            this.dateDataGridViewTextBoxColumn3.DataPropertyName = "date";
+            dataGridViewCellStyle12.Format = "d";
+            this.dateDataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle12;
+            this.dateDataGridViewTextBoxColumn3.HeaderText = "Date";
+            this.dateDataGridViewTextBoxColumn3.MinimumWidth = 22;
+            this.dateDataGridViewTextBoxColumn3.Name = "dateDataGridViewTextBoxColumn3";
+            this.dateDataGridViewTextBoxColumn3.ReadOnly = true;
+            this.dateDataGridViewTextBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.dateDataGridViewTextBoxColumn3.Width = 80;
+            // 
+            // doctorDataGridViewTextBoxColumn
+            // 
+            this.doctorDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.doctorDataGridViewTextBoxColumn.DataPropertyName = "doctor";
+            this.doctorDataGridViewTextBoxColumn.HeaderText = "Doctor";
+            this.doctorDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.doctorDataGridViewTextBoxColumn.Name = "doctorDataGridViewTextBoxColumn";
+            this.doctorDataGridViewTextBoxColumn.ReadOnly = true;
+            this.doctorDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // ispaidDataGridViewCheckBoxColumn1
+            // 
+            this.ispaidDataGridViewCheckBoxColumn1.DataPropertyName = "ispaid";
+            this.ispaidDataGridViewCheckBoxColumn1.HeaderText = "P";
+            this.ispaidDataGridViewCheckBoxColumn1.MinimumWidth = 22;
+            this.ispaidDataGridViewCheckBoxColumn1.Name = "ispaidDataGridViewCheckBoxColumn1";
+            this.ispaidDataGridViewCheckBoxColumn1.ReadOnly = true;
+            this.ispaidDataGridViewCheckBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.ispaidDataGridViewCheckBoxColumn1.Width = 50;
+            // 
+            // totalDataGridViewTextBoxColumn
+            // 
+            this.totalDataGridViewTextBoxColumn.DataPropertyName = "total";
+            this.totalDataGridViewTextBoxColumn.HeaderText = "Total Due";
+            this.totalDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.totalDataGridViewTextBoxColumn.Name = "totalDataGridViewTextBoxColumn";
+            this.totalDataGridViewTextBoxColumn.ReadOnly = true;
+            this.totalDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // vPatientsInvoicesBindingSource
+            // 
+            this.vPatientsInvoicesBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatientsInvoices);
+            // 
+            // numberDataGridViewTextBoxColumn1
+            // 
+            this.numberDataGridViewTextBoxColumn1.DataPropertyName = "number";
+            this.numberDataGridViewTextBoxColumn1.HeaderText = "Number";
+            this.numberDataGridViewTextBoxColumn1.MinimumWidth = 22;
+            this.numberDataGridViewTextBoxColumn1.Name = "numberDataGridViewTextBoxColumn1";
+            this.numberDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.numberDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.numberDataGridViewTextBoxColumn1.Width = 80;
+            // 
+            // dateDataGridViewTextBoxColumn4
+            // 
+            this.dateDataGridViewTextBoxColumn4.DataPropertyName = "date";
+            dataGridViewCellStyle14.Format = "d";
+            this.dateDataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle14;
+            this.dateDataGridViewTextBoxColumn4.HeaderText = "Date";
+            this.dateDataGridViewTextBoxColumn4.MinimumWidth = 22;
+            this.dateDataGridViewTextBoxColumn4.Name = "dateDataGridViewTextBoxColumn4";
+            this.dateDataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dateDataGridViewTextBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.dateDataGridViewTextBoxColumn4.Width = 80;
+            // 
+            // doctorDataGridViewTextBoxColumn1
+            // 
+            this.doctorDataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.doctorDataGridViewTextBoxColumn1.DataPropertyName = "doctor";
+            this.doctorDataGridViewTextBoxColumn1.HeaderText = "Doctor";
+            this.doctorDataGridViewTextBoxColumn1.MinimumWidth = 22;
+            this.doctorDataGridViewTextBoxColumn1.Name = "doctorDataGridViewTextBoxColumn1";
+            this.doctorDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.doctorDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // isinvoicedDataGridViewCheckBoxColumn
+            // 
+            this.isinvoicedDataGridViewCheckBoxColumn.DataPropertyName = "isinvoiced";
+            this.isinvoicedDataGridViewCheckBoxColumn.HeaderText = "I";
+            this.isinvoicedDataGridViewCheckBoxColumn.MinimumWidth = 22;
+            this.isinvoicedDataGridViewCheckBoxColumn.Name = "isinvoicedDataGridViewCheckBoxColumn";
+            this.isinvoicedDataGridViewCheckBoxColumn.ReadOnly = true;
+            this.isinvoicedDataGridViewCheckBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.isinvoicedDataGridViewCheckBoxColumn.Width = 50;
+            // 
+            // totalDataGridViewTextBoxColumn1
+            // 
+            this.totalDataGridViewTextBoxColumn1.DataPropertyName = "total";
+            dataGridViewCellStyle15.Format = "0.00";
+            this.totalDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle15;
+            this.totalDataGridViewTextBoxColumn1.HeaderText = "Total Due";
+            this.totalDataGridViewTextBoxColumn1.MinimumWidth = 22;
+            this.totalDataGridViewTextBoxColumn1.Name = "totalDataGridViewTextBoxColumn1";
+            this.totalDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.totalDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // vPatientsEstimatesBindingSource
+            // 
+            this.vPatientsEstimatesBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatientsEstimates);
+            // 
+            // patientsnotesidDataGridViewTextBoxColumn
+            // 
+            this.patientsnotesidDataGridViewTextBoxColumn.DataPropertyName = "patientsnotes_id";
+            this.patientsnotesidDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.patientsnotesidDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.patientsnotesidDataGridViewTextBoxColumn.Name = "patientsnotesidDataGridViewTextBoxColumn";
+            this.patientsnotesidDataGridViewTextBoxColumn.ReadOnly = true;
+            this.patientsnotesidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.patientsnotesidDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // dateDataGridViewTextBoxColumn
+            // 
+            this.dateDataGridViewTextBoxColumn.DataPropertyName = "date";
+            dataGridViewCellStyle17.Format = "d";
+            this.dateDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle17;
+            this.dateDataGridViewTextBoxColumn.HeaderText = "Date";
+            this.dateDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
+            this.dateDataGridViewTextBoxColumn.ReadOnly = true;
+            this.dateDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.dateDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // noteDataGridViewTextBoxColumn
+            // 
+            this.noteDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.noteDataGridViewTextBoxColumn.DataPropertyName = "note";
+            this.noteDataGridViewTextBoxColumn.HeaderText = "Note";
+            this.noteDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.noteDataGridViewTextBoxColumn.Name = "noteDataGridViewTextBoxColumn";
+            this.noteDataGridViewTextBoxColumn.ReadOnly = true;
+            this.noteDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // vPatientsNotesBindingSource
+            // 
+            this.vPatientsNotesBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatientsNotes);
+            // 
             // FormPatients
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -6044,7 +6092,6 @@
             this.panel_tabPatients_tabPatientsContacts_actions.ResumeLayout(false);
             this.panel_tabPatients_tabPatientsContacts_list.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabPatients_tabPatientsContacts_list)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsContactsBindingSource)).EndInit();
             this.tabPage_tabPatients_tabPatientsAddresses.ResumeLayout(false);
             this.panel_tabPatients_tabPatientsAddresses_data.ResumeLayout(false);
             this.panel_tabPatients_tabPatientsAddresses_data.PerformLayout();
@@ -6053,7 +6100,6 @@
             this.panel_tabPatients_tabPatientsAddresses_actions.ResumeLayout(false);
             this.panel_tabPatients_tabPatientsAddresses_list.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabPatients_tabPatientsAddresses_list)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsAddressesBindingSource)).EndInit();
             this.tabPage_tabPatientsMedicalrecords.ResumeLayout(false);
             this.panel_tabPatientsMedicalrecords_data.ResumeLayout(false);
             this.panel_tabPatientsMedicalrecords_data.PerformLayout();
@@ -6062,11 +6108,11 @@
             this.panel_tabPatientsMedicalrecords_actions.ResumeLayout(false);
             this.panel_tabPatientsMedicalrecords_list.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabPatientsMedicalrecords_list)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsMedicalrecordsBindingSource)).EndInit();
             this.tabPage_tabPatientsTreatments.ResumeLayout(false);
+            this.groupBox_t.ResumeLayout(false);
+            this.groupBox_t.PerformLayout();
             this.panel_tabPatientsTreatments_filters.ResumeLayout(false);
-            this.groupBox_tabPatientsTreatments_filtert.ResumeLayout(false);
-            this.groupBox_tabPatientsTreatments_filtert.PerformLayout();
+            this.panel_tabPatientsTreatments_filters.PerformLayout();
             this.panel_tabPatientsTreatments_data.ResumeLayout(false);
             this.panel_tabPatientsTreatments_data.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.patientstreatmentsBindingSource)).EndInit();
@@ -6076,7 +6122,6 @@
             this.panel_tabPatientsTreatments_actions.ResumeLayout(false);
             this.panel_tabPatientsTreatments_list.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabPatientsTreatments_list)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsTreatmentsBindingSource)).EndInit();
             this.tabPage_tabPayments.ResumeLayout(false);
             this.panel_tabPayments_data.ResumeLayout(false);
             this.panel_tabPayments_data.PerformLayout();
@@ -6085,14 +6130,12 @@
             this.panel_tabPayments_actions.ResumeLayout(false);
             this.panel_tabPayments_list.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabPayments_list)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsPaymentsBindingSource)).EndInit();
             this.tabPage_tabAppointments.ResumeLayout(false);
             this.panel_tabAppointments_data.ResumeLayout(false);
             this.panel_tabAppointments_data.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.appointmentsBindingSource)).EndInit();
             this.panel_tabAppointments_list.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabAppointments_list)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsAppointmentsBindingSource)).EndInit();
             this.tabPage_tabPatientsAttachments.ResumeLayout(false);
             this.panel_tabPatientsAttachments_data.ResumeLayout(false);
             this.panel_tabPatientsAttachments_data.PerformLayout();
@@ -6101,17 +6144,14 @@
             this.panel_tabPatientsAttachments_actions.ResumeLayout(false);
             this.panel_tabPatientsAttachments_list.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabPatientsAttachments_list)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsAttachmentsBindingSource)).EndInit();
             this.tabPage_tabInvoices.ResumeLayout(false);
             this.panel_tabInvoices_actions.ResumeLayout(false);
             this.panel_tabInvoices_list.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabInvoices_list)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsInvoicesBindingSource)).EndInit();
             this.tabPage_tabEstimates.ResumeLayout(false);
             this.panel_tabEstimates_actions.ResumeLayout(false);
             this.panel_tabEstimates_list.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabEstimates_list)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsEstimatesBindingSource)).EndInit();
             this.tabPage_tabPatientsNotes.ResumeLayout(false);
             this.panel_tabPatientsNotes_data.ResumeLayout(false);
             this.panel_tabPatientsNotes_data.PerformLayout();
@@ -6120,16 +6160,25 @@
             this.panel_tabPatientsNotes_actions.ResumeLayout(false);
             this.panel_tabPatientsNotes_list.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabPatientsNotes_list)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsNotesBindingSource)).EndInit();
             this.panel_list.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_main)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vPatientsBindingSource)).EndInit();
             this.panel_listtotal.ResumeLayout(false);
             this.panel_listtotal.PerformLayout();
             this.panel_filters.ResumeLayout(false);
             this.panel_filters.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.invoicesBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.estimatesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsContactsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsAddressesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsMedicalrecordsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsTreatmentsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsPaymentsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsAppointmentsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsAttachmentsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsInvoicesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsEstimatesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vPatientsNotesBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -6388,7 +6437,7 @@
         private System.Windows.Forms.CheckBox patientstreatments_fulfilldateenabledCheckBox;
         private System.Windows.Forms.DateTimePicker patientstreatments_fulfilldateDateTimePicker;
         private System.Windows.Forms.CheckBox patientstreatments_ispaidCheckBox;
-        private System.Windows.Forms.GroupBox groupBox_tabPatientsTreatments_filtert;
+        private System.Windows.Forms.GroupBox groupBox_t;
         private System.Windows.Forms.Label patientstreatments_filtert31numLabel;
         private System.Windows.Forms.Label patientstreatments_filtert32numLabel;
         private System.Windows.Forms.Label patientstreatments_filtert33numLabel;
@@ -6638,5 +6687,9 @@
         private System.Windows.Forms.Label label_tabPayments_inforeference;
         private System.Windows.Forms.TextBox textBox_filterPatient;
         private System.Windows.Forms.CheckBox patientstreatments_isunitpriceCheckBox;
+        private System.Windows.Forms.ComboBox comboBox_tabPatientsTreatments_filterpaid;
+        private System.Windows.Forms.Label label_tabPatientsTreatments_filterpaid;
+        private System.Windows.Forms.ComboBox comboBox_tabPatientsTreatments_filterfulfilled;
+        private System.Windows.Forms.Label label_tabPatientsTreatments_filterfulfilled;
     }
 }

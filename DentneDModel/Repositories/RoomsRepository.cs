@@ -8,6 +8,7 @@ using System.Linq;
 using DG.Data.Model;
 using DG.DentneD.Model.Entity;
 using System;
+using System.Text.RegularExpressions;
 
 namespace DG.DentneD.Model.Repositories
 {
@@ -23,6 +24,7 @@ namespace DG.DentneD.Model.Repositories
             public string text001 = "Room already inserted.";
             public string text002 = "Name can not be empty.";
             public string text003 = "Remove appointments before deleting this item.";
+            public string text004 = "Invalid color.";
         }
 
         /// <summary>
@@ -85,6 +87,15 @@ namespace DG.DentneD.Model.Repositories
                 {
                     ret = false;
                     errors = errors.Concat(new string[] { language.text002 }).ToArray();
+                }
+
+                if (!ret)
+                    break;
+
+                if (!String.IsNullOrEmpty(item.rooms_color) && !Regex.Match(item.rooms_color, @"^#(?:[0-9a-fA-F]{3}){2}$").Success)
+                {
+                    ret = false;
+                    errors = errors.Concat(new string[] { language.text004 }).ToArray();
                 }
 
                 if (!ret)

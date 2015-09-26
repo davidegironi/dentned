@@ -25,13 +25,36 @@ namespace DG.DentneD.Model.Test
             
             t_rooms = new rooms()
             {
-                //rooms_name = "XX1"
+                //rooms_name = "XX1",
+                rooms_color = "#dddddd"
             };
             Assert.IsFalse(_dentnedModel.Rooms.CanAdd(t_rooms));
-            
+
             t_rooms = new rooms()
             {
-                rooms_name = "XX1"
+                rooms_name = "XX1",
+                //rooms_color = "#dddddd"
+            };
+            Assert.IsTrue(_dentnedModel.Rooms.CanAdd(t_rooms));
+
+            t_rooms = new rooms()
+            {
+                rooms_name = "XX1",
+                rooms_color = "#ddd"
+            };
+            Assert.IsFalse(_dentnedModel.Rooms.CanAdd(t_rooms));
+
+            t_rooms = new rooms()
+            {
+                rooms_name = "XX1",
+                rooms_color = "blue"
+            };
+            Assert.IsFalse(_dentnedModel.Rooms.CanAdd(t_rooms));
+
+            t_rooms = new rooms()
+            {
+                rooms_name = "XX1",
+                rooms_color = "#dddddd"
             };
             Assert.IsTrue(_dentnedModel.Rooms.CanAdd(t_rooms));
             _dentnedModel.Rooms.Add(t_rooms);

@@ -22,6 +22,7 @@ namespace DG.DentneD.Model.Entity
         public System.DateTime appointments_to { get; set; }
         public string appointments_title { get; set; }
         public string appointments_notes { get; set; }
+        public string appointments_color { get; set; }
     
         public virtual doctors doctors { get; set; }
         public virtual patients patients { get; set; }

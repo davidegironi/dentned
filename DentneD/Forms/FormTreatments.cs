@@ -205,7 +205,9 @@ namespace DG.DentneD.Forms
         private void FormTreatments_Load(object sender, EventArgs e)
         {
             IsBindingSourceLoading = true;
+            advancedDataGridView_main.SortASC(advancedDataGridView_main.Columns[2]);
             advancedDataGridView_main.SortASC(advancedDataGridView_main.Columns[1]);
+            advancedDataGridView_main.SortASC(advancedDataGridView_main.Columns[3]);
             IsBindingSourceLoading = false;
 
             PreloadView();

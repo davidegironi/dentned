@@ -15,6 +15,7 @@ using DG.DentneD.Model.Entity;
 using DG.DentneD.Forms.Objects;
 using Zuby.ADGV;
 using SMcMaster;
+using System.Drawing;
 
 namespace DG.DentneD.Forms
 {
@@ -56,6 +57,8 @@ namespace DG.DentneD.Forms
             LanguageHelper.AddComponent(button_tabRooms_cancel);
             LanguageHelper.AddComponent(rooms_idLabel);
             LanguageHelper.AddComponent(rooms_nameLabel);
+            LanguageHelper.AddComponent(rooms_colorLabel);
+            LanguageHelper.AddComponent(button_tabRooms_colorselect);
         }
 
         /// <summary>
@@ -190,6 +193,9 @@ namespace DG.DentneD.Forms
         /// <param name="item"></param>
         private void Add_tabRooms(object item)
         {
+            if (String.IsNullOrEmpty(((rooms)item).rooms_color))
+                ((rooms)item).rooms_color = null;
+
             DGUIGHFData.Add<rooms, DentneDModel>(_dentnedModel.Rooms, item);
         }
 
@@ -199,6 +205,9 @@ namespace DG.DentneD.Forms
         /// <param name="item"></param>
         private void Update_tabRooms(object item)
         {
+            if (String.IsNullOrEmpty(((rooms)item).rooms_color))
+                ((rooms)item).rooms_color = null;
+
             DGUIGHFData.Update<rooms, DentneDModel>(_dentnedModel.Rooms, item);
         }
 
@@ -210,8 +219,55 @@ namespace DG.DentneD.Forms
         {
             DGUIGHFData.Remove<rooms, DentneDModel>(_dentnedModel.Rooms, item);
         }
+        
+        /// <summary>
+        /// Color text changed handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void rooms_colorTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(rooms_colorTextBox.Text))
+            {
+                try
+                {
+                    rooms_colorTextBox.BackColor = ColorTranslator.FromHtml(rooms_colorTextBox.Text);
+                }
+                catch
+                {
+                    rooms_colorTextBox.BackColor = Color.Empty;
+                }
+            }
+            else
+            {
+                rooms_colorTextBox.BackColor = Color.Empty;
+            }
+        }
+
+        /// <summary>
+        /// Select color handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button_tabRooms_colorselect_Click(object sender, EventArgs e)
+        {
+            if (tabElement_tabRooms.CurrentEditingMode == EditingMode.C || tabElement_tabRooms.CurrentEditingMode == EditingMode.U)
+            {
+                ColorDialog colorDialog = new ColorDialog();
+                if (colorDialog.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        ((rooms)roomsBindingSource.Current).rooms_color = "#" + colorDialog.Color.R.ToString("X2") + colorDialog.Color.G.ToString("X2") + colorDialog.Color.B.ToString("X2");
+                        roomsBindingSource.ResetBindings(true);
+                    }
+                    catch { }
+                }
+            }
+        }
 
         #endregion
+
 
     }
 }

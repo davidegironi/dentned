@@ -24,6 +24,7 @@
           <Property Name="appointments_to" Type="datetime" Nullable="false" />
           <Property Name="appointments_title" Type="varchar" MaxLength="128" Nullable="false" />
           <Property Name="appointments_notes" Type="text" />
+          <Property Name="appointments_color" Type="char" MaxLength="7" />
         </EntityType>
         <EntityType Name="computedlines">
           <Key>
@@ -308,6 +309,7 @@
           </Key>
           <Property Name="rooms_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="rooms_name" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="rooms_color" Type="char" MaxLength="7" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -965,6 +967,7 @@
           <Property Name="appointments_to" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="appointments_title" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
           <Property Name="appointments_notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="appointments_color" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="doctors" Relationship="dentnedModel.FK_appointments_doctors" FromRole="appointments" ToRole="doctors" />
           <NavigationProperty Name="patients" Relationship="dentnedModel.FK_appointments_patients" FromRole="appointments" ToRole="patients" />
           <NavigationProperty Name="rooms" Relationship="dentnedModel.FK_appointments_rooms" FromRole="appointments" ToRole="rooms" />
@@ -1290,6 +1293,7 @@
           </Key>
           <Property Name="rooms_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="rooms_name" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="rooms_color" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="appointments" Relationship="dentnedModel.FK_appointments_rooms" FromRole="rooms" ToRole="appointments" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -1682,6 +1686,7 @@
           <EntitySetMapping Name="appointments">
             <EntityTypeMapping TypeName="dentnedModel.appointments">
               <MappingFragment StoreEntitySet="appointments">
+                <ScalarProperty Name="appointments_color" ColumnName="appointments_color" />
                 <ScalarProperty Name="appointments_notes" ColumnName="appointments_notes" />
                 <ScalarProperty Name="appointments_title" ColumnName="appointments_title" />
                 <ScalarProperty Name="appointments_to" ColumnName="appointments_to" />
@@ -1994,6 +1999,7 @@
           <EntitySetMapping Name="rooms">
             <EntityTypeMapping TypeName="dentnedModel.rooms">
               <MappingFragment StoreEntitySet="rooms">
+                <ScalarProperty Name="rooms_color" ColumnName="rooms_color" />
                 <ScalarProperty Name="rooms_name" ColumnName="rooms_name" />
                 <ScalarProperty Name="rooms_id" ColumnName="rooms_id" />
               </MappingFragment>

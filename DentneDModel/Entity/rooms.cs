@@ -21,6 +21,7 @@ namespace DG.DentneD.Model.Entity
     
         public int rooms_id { get; set; }
         public string rooms_name { get; set; }
+        public string rooms_color { get; set; }
     
         public virtual ICollection<appointments> appointments { get; set; }
     }

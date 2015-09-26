@@ -57,11 +57,14 @@
             this.tabControl_main = new System.Windows.Forms.TabControl();
             this.tabPage_tabAppointments = new System.Windows.Forms.TabPage();
             this.panel_tabAppointments_data = new System.Windows.Forms.Panel();
+            this.button_tabAppointments_colorselect = new System.Windows.Forms.Button();
+            this.appointments_colorLabel = new System.Windows.Forms.Label();
+            this.appointments_colorTextBox = new System.Windows.Forms.TextBox();
+            this.appointmentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.appointments_dateDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.appointments_toDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.appointments_fromDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.appointments_notesTextBox = new System.Windows.Forms.TextBox();
-            this.appointmentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.appointments_titleTextBox = new System.Windows.Forms.TextBox();
             this.patients_idComboBox = new System.Windows.Forms.ComboBox();
             this.doctors_idComboBox = new System.Windows.Forms.ComboBox();
@@ -71,6 +74,7 @@
             this.button_tabAppointments_cancel = new System.Windows.Forms.Button();
             this.button_tabAppointments_save = new System.Windows.Forms.Button();
             this.panel_tabAppointments_actions = new System.Windows.Forms.Panel();
+            this.button_tabAppointments_new = new System.Windows.Forms.Button();
             this.button_tabAppointments_delete = new System.Windows.Forms.Button();
             this.button_tabAppointments_edit = new System.Windows.Forms.Button();
             this.panel_list = new System.Windows.Forms.Panel();
@@ -151,7 +155,7 @@
             // appointments_notesLabel
             // 
             this.appointments_notesLabel.AutoSize = true;
-            this.appointments_notesLabel.Location = new System.Drawing.Point(9, 285);
+            this.appointments_notesLabel.Location = new System.Drawing.Point(9, 324);
             this.appointments_notesLabel.Name = "appointments_notesLabel";
             this.appointments_notesLabel.Size = new System.Drawing.Size(33, 13);
             this.appointments_notesLabel.TabIndex = 14;
@@ -210,6 +214,9 @@
             // 
             // panel_tabAppointments_data
             // 
+            this.panel_tabAppointments_data.Controls.Add(this.button_tabAppointments_colorselect);
+            this.panel_tabAppointments_data.Controls.Add(this.appointments_colorLabel);
+            this.panel_tabAppointments_data.Controls.Add(this.appointments_colorTextBox);
             this.panel_tabAppointments_data.Controls.Add(this.appointments_dateDateTimePicker);
             this.panel_tabAppointments_data.Controls.Add(this.appointments_toLabel);
             this.panel_tabAppointments_data.Controls.Add(this.appointments_toDateTimePicker);
@@ -229,8 +236,42 @@
             this.panel_tabAppointments_data.Controls.Add(this.appointments_idTextBox);
             this.panel_tabAppointments_data.Location = new System.Drawing.Point(6, 42);
             this.panel_tabAppointments_data.Name = "panel_tabAppointments_data";
-            this.panel_tabAppointments_data.Size = new System.Drawing.Size(280, 359);
+            this.panel_tabAppointments_data.Size = new System.Drawing.Size(282, 398);
             this.panel_tabAppointments_data.TabIndex = 2;
+            // 
+            // button_tabAppointments_colorselect
+            // 
+            this.button_tabAppointments_colorselect.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_tabAppointments_colorselect.Location = new System.Drawing.Point(78, 298);
+            this.button_tabAppointments_colorselect.Name = "button_tabAppointments_colorselect";
+            this.button_tabAppointments_colorselect.Size = new System.Drawing.Size(75, 23);
+            this.button_tabAppointments_colorselect.TabIndex = 21;
+            this.button_tabAppointments_colorselect.Text = "Select";
+            this.button_tabAppointments_colorselect.UseVisualStyleBackColor = true;
+            this.button_tabAppointments_colorselect.Click += new System.EventHandler(this.button_tabAppointments_colorselect_Click);
+            // 
+            // appointments_colorLabel
+            // 
+            this.appointments_colorLabel.AutoSize = true;
+            this.appointments_colorLabel.Location = new System.Drawing.Point(9, 285);
+            this.appointments_colorLabel.Name = "appointments_colorLabel";
+            this.appointments_colorLabel.Size = new System.Drawing.Size(34, 13);
+            this.appointments_colorLabel.TabIndex = 19;
+            this.appointments_colorLabel.Text = "Color:";
+            // 
+            // appointments_colorTextBox
+            // 
+            this.appointments_colorTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.appointmentsBindingSource, "appointments_color", true));
+            this.appointments_colorTextBox.Location = new System.Drawing.Point(12, 301);
+            this.appointments_colorTextBox.Name = "appointments_colorTextBox";
+            this.appointments_colorTextBox.Size = new System.Drawing.Size(60, 20);
+            this.appointments_colorTextBox.TabIndex = 20;
+            this.appointments_colorTextBox.TextChanged += new System.EventHandler(this.appointments_colorTextBox_TextChanged);
+            // 
+            // appointmentsBindingSource
+            // 
+            this.appointmentsBindingSource.DataSource = typeof(DG.DentneD.Model.Entity.appointments);
+            this.appointmentsBindingSource.CurrentChanged += new System.EventHandler(this.appointmentsBindingSource_CurrentChanged);
             // 
             // appointments_dateDateTimePicker
             // 
@@ -263,17 +304,12 @@
             // appointments_notesTextBox
             // 
             this.appointments_notesTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.appointmentsBindingSource, "appointments_notes", true));
-            this.appointments_notesTextBox.Location = new System.Drawing.Point(12, 301);
+            this.appointments_notesTextBox.Location = new System.Drawing.Point(12, 340);
             this.appointments_notesTextBox.Multiline = true;
             this.appointments_notesTextBox.Name = "appointments_notesTextBox";
             this.appointments_notesTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.appointments_notesTextBox.Size = new System.Drawing.Size(250, 50);
             this.appointments_notesTextBox.TabIndex = 15;
-            // 
-            // appointmentsBindingSource
-            // 
-            this.appointmentsBindingSource.DataSource = typeof(DG.DentneD.Model.Entity.appointments);
-            this.appointmentsBindingSource.CurrentChanged += new System.EventHandler(this.appointmentsBindingSource_CurrentChanged);
             // 
             // appointments_titleTextBox
             // 
@@ -330,7 +366,7 @@
             // 
             this.panel_tabAppointments_updates.Controls.Add(this.button_tabAppointments_cancel);
             this.panel_tabAppointments_updates.Controls.Add(this.button_tabAppointments_save);
-            this.panel_tabAppointments_updates.Location = new System.Drawing.Point(6, 407);
+            this.panel_tabAppointments_updates.Location = new System.Drawing.Point(6, 446);
             this.panel_tabAppointments_updates.Name = "panel_tabAppointments_updates";
             this.panel_tabAppointments_updates.Size = new System.Drawing.Size(280, 30);
             this.panel_tabAppointments_updates.TabIndex = 1;
@@ -357,6 +393,7 @@
             // 
             // panel_tabAppointments_actions
             // 
+            this.panel_tabAppointments_actions.Controls.Add(this.button_tabAppointments_new);
             this.panel_tabAppointments_actions.Controls.Add(this.button_tabAppointments_delete);
             this.panel_tabAppointments_actions.Controls.Add(this.button_tabAppointments_edit);
             this.panel_tabAppointments_actions.Location = new System.Drawing.Point(6, 6);
@@ -364,9 +401,19 @@
             this.panel_tabAppointments_actions.Size = new System.Drawing.Size(280, 30);
             this.panel_tabAppointments_actions.TabIndex = 0;
             // 
+            // button_tabAppointments_new
+            // 
+            this.button_tabAppointments_new.Location = new System.Drawing.Point(3, 4);
+            this.button_tabAppointments_new.Name = "button_tabAppointments_new";
+            this.button_tabAppointments_new.Size = new System.Drawing.Size(75, 23);
+            this.button_tabAppointments_new.TabIndex = 3;
+            this.button_tabAppointments_new.Text = "New";
+            this.button_tabAppointments_new.UseVisualStyleBackColor = true;
+            this.button_tabAppointments_new.Click += new System.EventHandler(this.button_tabAppointments_new_Click);
+            // 
             // button_tabAppointments_delete
             // 
-            this.button_tabAppointments_delete.Location = new System.Drawing.Point(84, 4);
+            this.button_tabAppointments_delete.Location = new System.Drawing.Point(165, 3);
             this.button_tabAppointments_delete.Name = "button_tabAppointments_delete";
             this.button_tabAppointments_delete.Size = new System.Drawing.Size(75, 23);
             this.button_tabAppointments_delete.TabIndex = 2;
@@ -376,7 +423,7 @@
             // 
             // button_tabAppointments_edit
             // 
-            this.button_tabAppointments_edit.Location = new System.Drawing.Point(3, 4);
+            this.button_tabAppointments_edit.Location = new System.Drawing.Point(84, 3);
             this.button_tabAppointments_edit.Name = "button_tabAppointments_edit";
             this.button_tabAppointments_edit.Size = new System.Drawing.Size(75, 23);
             this.button_tabAppointments_edit.TabIndex = 1;
@@ -700,5 +747,9 @@
         private System.Windows.Forms.Label appointments_notesLabel;
         private System.Windows.Forms.Label appointments_fromLabel;
         private System.Windows.Forms.Label appointments_toLabel;
+        private System.Windows.Forms.Button button_tabAppointments_new;
+        private System.Windows.Forms.Label appointments_colorLabel;
+        private System.Windows.Forms.TextBox appointments_colorTextBox;
+        private System.Windows.Forms.Button button_tabAppointments_colorselect;
     }
 }

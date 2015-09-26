@@ -25,8 +25,10 @@ namespace DG.DentneD.Forms
 
         private TabElement tabElement_tabAppointments = new TabElement();
 
-        private readonly int calendarDayHourBegin = 9;
-        private readonly int calendarDayHourEnd = 19;
+        private readonly int _calendarDayHourBegin = 9;
+        private readonly int _calendarDayHourEnd = 19;
+
+        private readonly Color _calendarTreatmentAdvicesColor = Color.SandyBrown;
 
         private DateTime _currentDate = DateTime.Now;
         private List<CustomAppointmentItem> _appointmentItems = new List<CustomAppointmentItem>();
@@ -131,8 +133,8 @@ namespace DG.DentneD.Forms
             _dentnedModel = new DentneDModel();
             _dentnedModel.LanguageHelper.LoadFromFile(Program.uighfApplication.LanguageFilename);
 
-            calendarDayHourBegin = Convert.ToInt16(ConfigurationManager.AppSettings["calendarDayHourBegin"]);
-            calendarDayHourEnd = Convert.ToInt16(ConfigurationManager.AppSettings["calendarDayHourEnd"]);
+            _calendarDayHourBegin = Convert.ToInt16(ConfigurationManager.AppSettings["calendarDayHourBegin"]);
+            _calendarDayHourEnd = Convert.ToInt16(ConfigurationManager.AppSettings["calendarDayHourEnd"]);
             foreach (DayOfWeek dayOfWeek in Enum.GetValues(typeof(DayOfWeek)))
             {
                 if(dayOfWeek.ToString().CompareTo(ConfigurationManager.AppSettings["calendarFirstDayOfTheWeek"]) == 0)
@@ -144,34 +146,41 @@ namespace DG.DentneD.Forms
             bool calendarWeekIncludeSaturday = Convert.ToBoolean(ConfigurationManager.AppSettings["calendarWeekIncludeSaturday"]);
             bool calendarWeekIncludeSunday = Convert.ToBoolean(ConfigurationManager.AppSettings["calendarWeekIncludeSunday"]);
 
+            string calendarTreatmentAdvicesColor = ConfigurationManager.AppSettings["calendarTreatmentAdvicesColor"];
+            try
+            {
+                _calendarTreatmentAdvicesColor = ColorTranslator.FromHtml(calendarTreatmentAdvicesColor);
+            }
+            catch { }
+
             CalendarHighlightRange highlightrangeMonday = new CalendarHighlightRange();
             highlightrangeMonday.DayOfWeek = DayOfWeek.Monday;
-            highlightrangeMonday.StartTime = TimeSpan.Parse(calendarDayHourBegin + ":00:00");
-            highlightrangeMonday.EndTime = TimeSpan.Parse((calendarDayHourEnd + 1) + ":00:00");
+            highlightrangeMonday.StartTime = TimeSpan.Parse(_calendarDayHourBegin + ":00:00");
+            highlightrangeMonday.EndTime = TimeSpan.Parse((_calendarDayHourEnd + 1) + ":00:00");
             CalendarHighlightRange highlightrangeTuesday = new CalendarHighlightRange();
             highlightrangeTuesday.DayOfWeek = DayOfWeek.Tuesday;
-            highlightrangeTuesday.StartTime = TimeSpan.Parse(calendarDayHourBegin + ":00:00");
-            highlightrangeTuesday.EndTime = TimeSpan.Parse((calendarDayHourEnd + 1) + ":00:00");
+            highlightrangeTuesday.StartTime = TimeSpan.Parse(_calendarDayHourBegin + ":00:00");
+            highlightrangeTuesday.EndTime = TimeSpan.Parse((_calendarDayHourEnd + 1) + ":00:00");
             CalendarHighlightRange highlightrangeWednesday = new CalendarHighlightRange();
             highlightrangeWednesday.DayOfWeek = DayOfWeek.Wednesday;
-            highlightrangeWednesday.StartTime = TimeSpan.Parse(calendarDayHourBegin + ":00:00");
-            highlightrangeWednesday.EndTime = TimeSpan.Parse((calendarDayHourEnd + 1) + ":00:00");
+            highlightrangeWednesday.StartTime = TimeSpan.Parse(_calendarDayHourBegin + ":00:00");
+            highlightrangeWednesday.EndTime = TimeSpan.Parse((_calendarDayHourEnd + 1) + ":00:00");
             CalendarHighlightRange highlightrangeThursday = new CalendarHighlightRange();
             highlightrangeThursday.DayOfWeek = DayOfWeek.Thursday;
-            highlightrangeThursday.StartTime = TimeSpan.Parse(calendarDayHourBegin + ":00:00");
-            highlightrangeThursday.EndTime = TimeSpan.Parse((calendarDayHourEnd + 1) + ":00:00");
+            highlightrangeThursday.StartTime = TimeSpan.Parse(_calendarDayHourBegin + ":00:00");
+            highlightrangeThursday.EndTime = TimeSpan.Parse((_calendarDayHourEnd + 1) + ":00:00");
             CalendarHighlightRange highlightrangeFriday = new CalendarHighlightRange();
             highlightrangeFriday.DayOfWeek = DayOfWeek.Friday;
-            highlightrangeFriday.StartTime = TimeSpan.Parse(calendarDayHourBegin + ":00:00");
-            highlightrangeFriday.EndTime = TimeSpan.Parse((calendarDayHourEnd + 1) + ":00:00");
+            highlightrangeFriday.StartTime = TimeSpan.Parse(_calendarDayHourBegin + ":00:00");
+            highlightrangeFriday.EndTime = TimeSpan.Parse((_calendarDayHourEnd + 1) + ":00:00");
             CalendarHighlightRange highlightrangeSaturday = new CalendarHighlightRange();
             highlightrangeSaturday.DayOfWeek = DayOfWeek.Saturday;
-            highlightrangeSaturday.StartTime = TimeSpan.Parse(calendarDayHourBegin + ":00:00");
-            highlightrangeSaturday.EndTime = TimeSpan.Parse((calendarDayHourEnd + 1) + ":00:00");
+            highlightrangeSaturday.StartTime = TimeSpan.Parse(_calendarDayHourBegin + ":00:00");
+            highlightrangeSaturday.EndTime = TimeSpan.Parse((_calendarDayHourEnd + 1) + ":00:00");
             CalendarHighlightRange highlightrangeSunday = new CalendarHighlightRange();
             highlightrangeSunday.DayOfWeek = DayOfWeek.Sunday;
-            highlightrangeSunday.StartTime = TimeSpan.Parse(calendarDayHourBegin + ":00:00");
-            highlightrangeSunday.EndTime = TimeSpan.Parse((calendarDayHourEnd + 1) + ":00:00");
+            highlightrangeSunday.StartTime = TimeSpan.Parse(_calendarDayHourBegin + ":00:00");
+            highlightrangeSunday.EndTime = TimeSpan.Parse((_calendarDayHourEnd + 1) + ":00:00");
 
             CalendarHighlightRange[] highlightrange = { highlightrangeMonday, highlightrangeTuesday, highlightrangeWednesday, highlightrangeThursday, highlightrangeFriday };
             if (calendarWeekIncludeSaturday)
@@ -181,7 +190,7 @@ namespace DG.DentneD.Forms
 
             calendar_listdays.HighlightRanges = highlightrange;
             calendar_listdays.TimeScale = CalendarTimeScale.ThirtyMinutes;
-            calendar_listdays.TimeUnitsOffset = -calendarDayHourBegin * (60 / (int)calendar_listdays.TimeScale); // *23 + 58;
+            calendar_listdays.TimeUnitsOffset = -_calendarDayHourBegin * (60 / (int)calendar_listdays.TimeScale); // *23 + 58;
             calendar_listdays.AllowDrop = false;
             calendar_listdays.AllowItemEdit = false;
             calendar_listdays.AllowItemResize = false;
@@ -189,7 +198,7 @@ namespace DG.DentneD.Forms
 
             calendar_listweeks.HighlightRanges = highlightrange;
             calendar_listweeks.TimeScale = CalendarTimeScale.ThirtyMinutes;
-            calendar_listweeks.TimeUnitsOffset = -calendarDayHourBegin * (60 / (int)calendar_listweeks.TimeScale);
+            calendar_listweeks.TimeUnitsOffset = -_calendarDayHourBegin * (60 / (int)calendar_listweeks.TimeScale);
             calendar_listweeks.AllowDrop = false;
             calendar_listweeks.AllowItemEdit = false;
             calendar_listweeks.AllowItemResize = false;
@@ -197,13 +206,13 @@ namespace DG.DentneD.Forms
 
             calendar_listmonths.HighlightRanges = highlightrange;
             calendar_listmonths.TimeScale = CalendarTimeScale.ThirtyMinutes;
-            calendar_listmonths.TimeUnitsOffset = -calendarDayHourBegin * (30 / (int)calendar_listmonths.TimeScale);
+            calendar_listmonths.TimeUnitsOffset = -_calendarDayHourBegin * (30 / (int)calendar_listmonths.TimeScale);
             calendar_listmonths.AllowDrop = false;
             calendar_listmonths.AllowItemEdit = false;
             calendar_listmonths.AllowItemResize = false;
             calendar_listmonths.AllowNew = false;
             calendar_listmonths.MaximumViewDays = 42;
-
+            
             ResetAppointmentBindingSource();
         }
 
@@ -222,6 +231,7 @@ namespace DG.DentneD.Forms
             LanguageHelper.AddComponent(tabPage_tabListMonths);
             //tabAppointments
             LanguageHelper.AddComponent(tabPage_tabAppointments);
+            LanguageHelper.AddComponent(button_tabAppointments_new);
             LanguageHelper.AddComponent(button_tabAppointments_edit);
             LanguageHelper.AddComponent(button_tabAppointments_delete);
             LanguageHelper.AddComponent(button_tabAppointments_save);
@@ -232,8 +242,10 @@ namespace DG.DentneD.Forms
             LanguageHelper.AddComponent(appointments_toLabel);
             LanguageHelper.AddComponent(doctors_idLabel);
             LanguageHelper.AddComponent(rooms_idLabel);
+            LanguageHelper.AddComponent(appointments_colorLabel);
             LanguageHelper.AddComponent(appointments_titleLabel);
             LanguageHelper.AddComponent(appointments_notesLabel);
+            LanguageHelper.AddComponent(button_tabAppointments_colorselect);
         }
         
         /// <summary>
@@ -409,6 +421,32 @@ namespace DG.DentneD.Forms
                 string titlemonth = (patient.patients_surname.Length > 3 ? patient.patients_surname.Substring(0, 3) + "." : patient.patients_surname) + " " + patient.patients_surname.Substring(0, 1) + "."; 
                 titlemonth = (titlemonth.Length > CalendarTitleMonthMaxLengh ? titlemonth.Substring(0, CalendarTitleMonthMaxLengh) + "..." : titlemonth);
 
+                //set color
+                Color color = getCalendarItemColor(appointment.rooms_id);
+                if(!String.IsNullOrEmpty(appointment.appointments_color))
+                {
+                    try
+                    {
+                        color = ColorTranslator.FromHtml(appointment.appointments_color);
+                    }
+                    catch { }
+                }
+                else
+                {
+                    rooms room = _dentnedModel.Rooms.Find(appointment.rooms_id);
+                    if(room != null)
+                    {
+                        if(!String.IsNullOrEmpty(room.rooms_color))
+                        {
+                            try
+                            {
+                                color = ColorTranslator.FromHtml(room.rooms_color);
+                            }
+                            catch { }
+                        }
+                    }
+                }
+
                 _appointmentItems.Add(new CustomAppointmentItem()
                 {
                     DateFrom = appointment.appointments_from,
@@ -416,7 +454,7 @@ namespace DG.DentneD.Forms
                     TitleDay = titleday,
                     TitleWeek = titleweek,
                     TitleMonth = titlemonth,
-                    Color = getCalendarItemColor(appointment.rooms_id),
+                    Color = color,
                     AppointmentId = appointment.appointments_id,
                     PatientTreatmentId = -1
                 });
@@ -438,6 +476,9 @@ namespace DG.DentneD.Forms
                     string titlemonth = "ADV " + treatment.treatments_code + " - " + (patient.patients_surname.Length > 3 ? patient.patients_surname.Substring(0, 3) + "." : patient.patients_surname) + " " + patient.patients_surname.Substring(0, 1) + ".";
                     titlemonth = (titlemonth.Length > CalendarTitleMonthMaxLengh ? titlemonth.Substring(0, CalendarTitleMonthMaxLengh) + "..." : titlemonth);
 
+                    //set color
+                    Color color = _calendarTreatmentAdvicesColor;
+
                     _appointmentItems.Add(new CustomAppointmentItem()
                     {
                         DateFrom = patientstreatment.patientstreatments_expirationdate.Value.AddHours(12),
@@ -445,7 +486,7 @@ namespace DG.DentneD.Forms
                         TitleDay = titleday,
                         TitleWeek = titleweek,
                         TitleMonth = titlemonth,
-                        Color = getCalendarItemColor(-1),
+                        Color = _calendarTreatmentAdvicesColor,
                         AppointmentId = -1,
                         PatientTreatmentId = patientstreatment.patientstreatments_id
                     });
@@ -476,6 +517,7 @@ namespace DG.DentneD.Forms
                     cal.AppointmentId = item.AppointmentId;
                     cal.PatientTreatmentId = -1;
                     cal.ApplyColor(item.Color);
+                    cal.ForeColor = Color.Black;
 
                     if (calendar_listdays.ViewIntersects(cal))
                         calendar_listdays.Items.Add(cal);
@@ -502,6 +544,7 @@ namespace DG.DentneD.Forms
                     cal.AppointmentId = item.AppointmentId;
                     cal.PatientTreatmentId = -1;
                     cal.ApplyColor(item.Color);
+                    cal.ForeColor = Color.Black;
 
                     if (calendar_listweeks.ViewIntersects(cal))
                         calendar_listweeks.Items.Add(cal);
@@ -528,6 +571,7 @@ namespace DG.DentneD.Forms
                     cal.AppointmentId = item.AppointmentId;
                     cal.PatientTreatmentId = -1;
                     cal.ApplyColor(item.Color);
+                    cal.ForeColor = Color.Black;
 
                     if (calendar_listmonths.ViewIntersects(cal))
                         calendar_listmonths.Items.Add(cal);
@@ -562,6 +606,8 @@ namespace DG.DentneD.Forms
                 appointments_dateDateTimePicker.Enabled = true;
                 appointments_toDateTimePicker.Enabled = true;
                 appointments_notesTextBox.ReadOnly = false;
+                appointments_colorTextBox.ReadOnly = false;
+                button_tabAppointments_colorselect.Enabled = true;
 
                 tabControl_list.Enabled = false;
 
@@ -586,6 +632,8 @@ namespace DG.DentneD.Forms
                 appointments_dateDateTimePicker.Enabled = false;
                 appointments_toDateTimePicker.Enabled = false;
                 appointments_notesTextBox.ReadOnly = true;
+                appointments_colorTextBox.ReadOnly = true;
+                button_tabAppointments_colorselect.Enabled = false;
 
                 tabControl_list.Enabled = true;
 
@@ -609,6 +657,16 @@ namespace DG.DentneD.Forms
 
         
         #region tabAppointments
+
+        /// <summary>
+        /// New button click handlers
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button_tabAppointments_new_Click(object sender, EventArgs e)
+        {
+            AddAppointment(new DateTime(monthView_filterDay.SelectionStart.Year,monthView_filterDay.SelectionStart.Month, monthView_filterDay.SelectionStart.Day, DateTime.Now.Hour, DateTime.Now.Minute, 0));
+        }
 
         /// <summary>
         /// Edit button click handlers
@@ -635,8 +693,11 @@ namespace DG.DentneD.Forms
         {
             if (_selectedAppointmentId != -1)
             {
-                _currentEditingMode = EditingMode.D;
-                button_tabAppointments_save_Click(sender, e);
+                if (MessageBox.Show(languageBase.formDeleteMessageBoxText, languageBase.formDeleteMessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                {
+                    _currentEditingMode = EditingMode.D;
+                    button_tabAppointments_save_Click(sender, e);
+                }
             }
         }
 
@@ -662,6 +723,9 @@ namespace DG.DentneD.Forms
 
             ((appointments)appointmentsBindingSource.Current).appointments_from = from;
             ((appointments)appointmentsBindingSource.Current).appointments_to = to;
+            
+            if (String.IsNullOrEmpty(((appointments)appointmentsBindingSource.Current).appointments_color))
+                ((appointments)appointmentsBindingSource.Current).appointments_color = null;
 
             appointmentsBindingSource.EndEdit();
 
@@ -734,6 +798,43 @@ namespace DG.DentneD.Forms
         }
 
         /// <summary>
+        /// Add a new appointment
+        /// </summary>
+        /// <param name="date"></param>
+        private void AddAppointment(DateTime date)
+        {
+            _currentEditingMode = EditingMode.C;
+            SetCustomEditingMode(true);
+
+            ResetAppointmentBindingSource();
+
+            IsBindingSourceLoading = true;
+            appointmentsBindingSource.AddNew();
+            IsBindingSourceLoading = false;
+
+            appointments_dateDateTimePicker.Value = date;
+            appointments_fromDateTimePicker.Value = date;
+            appointments_toDateTimePicker.Value = date;
+            if (date.Minute < 30)
+            {
+                appointments_fromDateTimePicker.Value = new DateTime(date.Year, date.Month, date.Day, date.Hour, 0, 0);
+                appointments_toDateTimePicker.Value = new DateTime(date.Year, date.Month, date.Day, date.Hour, 0, 0).AddMinutes(30);
+            }
+            else
+            {
+                appointments_fromDateTimePicker.Value = new DateTime(date.Year, date.Month, date.Day, date.Hour, 30, 0);
+                appointments_toDateTimePicker.Value = new DateTime(date.Year, date.Month, date.Day, date.Hour, 30, 0).AddMinutes(30);
+            }
+
+            ((appointments)appointmentsBindingSource.Current).doctors_id = Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_filterDoctors.SelectedItem).Id);
+
+            if (comboBox_filterRooms.SelectedIndex != -1 && comboBox_filterRooms.SelectedIndex != 0)
+                ((appointments)appointmentsBindingSource.Current).rooms_id = Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_filterRooms.SelectedItem).Id);
+
+            appointmentsBindingSource.ResetBindings(true);
+        }
+
+        /// <summary>
         /// Reset appointment binding source
         /// </summary>
         private void ResetAppointmentBindingSource()
@@ -748,6 +849,52 @@ namespace DG.DentneD.Forms
             IsBindingSourceLoading = false;
         }
 
+        /// <summary>
+        /// Color text changed handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void appointments_colorTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(appointments_colorTextBox.Text))
+            {
+                try
+                {
+                    appointments_colorTextBox.BackColor = ColorTranslator.FromHtml(appointments_colorTextBox.Text);
+                }
+                catch
+                {
+                    appointments_colorTextBox.BackColor = Color.Empty;
+                }
+            }
+            else
+            {
+                appointments_colorTextBox.BackColor = Color.Empty;
+            }
+        }
+
+        /// <summary>
+        /// Select color handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button_tabAppointments_colorselect_Click(object sender, EventArgs e)
+        {
+            if (_currentEditingMode == EditingMode.C || _currentEditingMode == EditingMode.U)
+            {
+                ColorDialog colorDialog = new ColorDialog();
+                if (colorDialog.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        ((appointments)appointmentsBindingSource.Current).appointments_color = "#" + colorDialog.Color.R.ToString("X2") + colorDialog.Color.G.ToString("X2") + colorDialog.Color.B.ToString("X2");
+                        appointmentsBindingSource.ResetBindings(true);
+                    }
+                    catch { }
+                }
+            }
+        }
+        
         /// <summary>
         /// Combobox autocomplete
         /// </summary>
@@ -815,35 +962,7 @@ namespace DG.DentneD.Forms
         {
             if (comboBox_filterDoctors.SelectedIndex != -1 && comboBox_filterDoctors.SelectedIndex != 0)
             {
-                _currentEditingMode = EditingMode.C;
-                SetCustomEditingMode(true);
-
-                ResetAppointmentBindingSource();
-
-                IsBindingSourceLoading = true;
-                appointmentsBindingSource.AddNew();
-                IsBindingSourceLoading = false;
-
-                appointments_dateDateTimePicker.Value = e.Item.StartDate;
-                appointments_fromDateTimePicker.Value = e.Item.StartDate;
-                appointments_toDateTimePicker.Value = e.Item.StartDate;
-                if (e.Item.StartDate.Minute < 30)
-                {
-                    appointments_fromDateTimePicker.Value = new DateTime(e.Item.StartDate.Year, e.Item.StartDate.Month, e.Item.StartDate.Day, e.Item.StartDate.Hour, 0, 0);
-                    appointments_toDateTimePicker.Value = new DateTime(e.Item.StartDate.Year, e.Item.StartDate.Month, e.Item.StartDate.Day, e.Item.StartDate.Hour, 0, 0).AddMinutes(30);
-                }
-                else
-                {
-                    appointments_fromDateTimePicker.Value = new DateTime(e.Item.StartDate.Year, e.Item.StartDate.Month, e.Item.StartDate.Day, e.Item.StartDate.Hour, 30, 0);
-                    appointments_toDateTimePicker.Value = new DateTime(e.Item.StartDate.Year, e.Item.StartDate.Month, e.Item.StartDate.Day, e.Item.StartDate.Hour, 30, 0).AddMinutes(30);
-                }
-
-                ((appointments)appointmentsBindingSource.Current).doctors_id = Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_filterDoctors.SelectedItem).Id);
-                               
-                if (comboBox_filterRooms.SelectedIndex != -1 && comboBox_filterRooms.SelectedIndex != 0)
-                    ((appointments)appointmentsBindingSource.Current).rooms_id = Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_filterRooms.SelectedItem).Id);
-
-                appointmentsBindingSource.ResetBindings(true);
+                AddAppointment(e.Item.StartDate);
             }
 
             e.Cancel = true;
@@ -1042,8 +1161,7 @@ namespace DG.DentneD.Forms
         }
 
         #endregion                                                                
-
+                
     }
-
 
 }

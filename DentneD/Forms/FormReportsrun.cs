@@ -116,14 +116,14 @@ namespace DG.DentneD.Forms
         /// </summary>
         private void PreloadView()
         {
+            IsBindingSourceLoading = true;
+
             //load filter doctors
-            comboBox_reports.Items.Clear();
-            comboBox_reports.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem("-1", ""));
-            foreach (reports a in _dentnedModel.Reports.List().OrderBy(r => r.reports_name))
-            {
-                comboBox_reports.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(a.reports_id.ToString(), a.reports_name));
-            }
-            comboBox_reports.SelectedIndex = -1;
+            comboBox_reports.DataSource = (new[] { new { name = "", reports_id = -1 } }).Concat(_dentnedModel.Reports.List().Select(r => new { name = r.reports_name, r.reports_id }).OrderBy(r => r.name)).ToArray();
+            comboBox_reports.DisplayMember = "name";
+            comboBox_reports.ValueMember = "reports_id";
+
+            IsBindingSourceLoading = false;
         }
 
         /// <summary>
@@ -139,7 +139,7 @@ namespace DG.DentneD.Forms
 
             if (comboBox_reports.SelectedIndex != -1 && comboBox_reports.SelectedIndex != 0)
             {
-                int reports_id = Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_reports.SelectedItem).Id);
+                int reports_id = Convert.ToInt32(comboBox_reports.SelectedValue);
                 reports report = _dentnedModel.Reports.Find(reports_id);
 
                 if (!String.IsNullOrEmpty(report.reports_infotext))
@@ -172,7 +172,7 @@ namespace DG.DentneD.Forms
             {
                 DataTable dt = new DataTable();
 
-                int reports_id = Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_reports.SelectedItem).Id);
+                int reports_id = Convert.ToInt32(comboBox_reports.SelectedValue);
                 reports report = _dentnedModel.Reports.Find(reports_id);
 
                 if (report.reports_ispasswordprotected && !_isPasswordLogged)

@@ -269,11 +269,11 @@ namespace DG.DentneD.Forms
                     if (invoice != null)
                     {
                         if (invoice.doctors_id != null)
-                            DGUIGHFUtilsUI.DGComboBoxItem.SelectItemById(comboBox_filterDoctors, invoice.doctors_id);
+                           comboBox_filterDoctors.SelectedValue = invoice.doctors_id;
                         else
                             comboBox_filterDoctors.SelectedIndex = -1;
                     }
-                    DGUIGHFUtilsUI.DGComboBoxItem.SelectItemById(comboBox_filterYears, invoice.invoices_date.Year);
+                    comboBox_filterYears.SelectedValue = invoice.invoices_date.Year;
                     IsBindingSourceLoading = false;
                     break;
                 }
@@ -297,74 +297,60 @@ namespace DG.DentneD.Forms
             IsBindingSourceLoading = true;
 
             //load doctors
-            doctors_idComboBox.DataSource = _dentnedModel.Doctors.List().Select(r => new { name = r.doctors_surname + " " + r.doctors_name, r.doctors_id }).OrderBy(r => r.name).ToList();
+            doctors_idComboBox.DataSource = _dentnedModel.Doctors.List().Select(r => new { name = r.doctors_surname + " " + r.doctors_name, r.doctors_id }).OrderBy(r => r.name).ToArray();
             doctors_idComboBox.DisplayMember = "name";
             doctors_idComboBox.ValueMember = "doctors_id";
+            doctors_idComboBox.SelectedIndex = -1;
 
             //load patients
-            patients_idComboBox.DataSource = _dentnedModel.Patients.List().Select(r => new { name = r.patients_surname + " " + r.patients_name, r.patients_id }).OrderBy(r => r.name).ToList();
+            patients_idComboBox.DataSource = _dentnedModel.Patients.List().Select(r => new { name = r.patients_surname + " " + r.patients_name, r.patients_id }).OrderBy(r => r.name).ToArray();
             patients_idComboBox.DisplayMember = "name";
             patients_idComboBox.ValueMember = "patients_id";
+            patients_idComboBox.SelectedIndex = -1;
 
             //load payments
-            invoices_paymentComboBox.Items.Clear();
-            foreach (paymentstypes a in _dentnedModel.PaymentsTypes.List().OrderBy(r => r.paymentstypes_name))
-            {
-                invoices_paymentComboBox.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(a.paymentstypes_id.ToString(), a.paymentstypes_name));
-            }
+            invoices_paymentComboBox.DataSource = _dentnedModel.PaymentsTypes.List().Select(r => new { name = r.paymentstypes_name, r.paymentstypes_id }).OrderBy(r => r.name).ToArray();
+            invoices_paymentComboBox.DisplayMember = "name";
+            invoices_paymentComboBox.ValueMember = "paymentstypes_id";
             invoices_paymentComboBox.SelectedIndex = -1;
 
             //load footers
-            invoices_footerComboBox.Items.Clear();
-            foreach (invoicesfooters a in _dentnedModel.InvoicesFooters.List().OrderBy(r => r.invoicesfooters_name))
-            {
-                invoices_footerComboBox.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(a.invoicesfooters_id.ToString(), a.invoicesfooters_name));
-            }
+            invoices_footerComboBox.DataSource = _dentnedModel.InvoicesFooters.List().Select(r => new { name = r.invoicesfooters_name, r.invoicesfooters_id }).OrderBy(r => r.name).ToArray();
+            invoices_footerComboBox.DisplayMember = "name";
+            invoices_footerComboBox.ValueMember = "invoicesfooters_id";
             invoices_footerComboBox.SelectedIndex = -1;
 
             //load deduction taxes
-            invoices_deductiontaxrateComboBox.Items.Clear();
-            foreach (taxesdeductions a in _dentnedModel.TaxesDeductions.List().OrderBy(r => r.taxesdeductions_name))
-            {
-                invoices_deductiontaxrateComboBox.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(a.taxesdeductions_id.ToString(), a.taxesdeductions_name));
-            }
+            invoices_deductiontaxrateComboBox.DataSource = _dentnedModel.TaxesDeductions.List().Select(r => new { name = r.taxesdeductions_name, r.taxesdeductions_id }).OrderBy(r => r.name).ToArray();
+            invoices_deductiontaxrateComboBox.DisplayMember = "name";
+            invoices_deductiontaxrateComboBox.ValueMember = "taxesdeductions_id";
             invoices_deductiontaxrateComboBox.SelectedIndex = -1;
 
             //load tax rates
-            invoiceslines_taxrateComboBox.Items.Clear();
-            foreach (taxes a in _dentnedModel.Taxes.List().OrderBy(r => r.taxes_name))
-            {
-                invoiceslines_taxrateComboBox.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(a.taxes_id.ToString(), a.taxes_name));
-            }
+            invoiceslines_taxrateComboBox.DataSource = _dentnedModel.Taxes.List().Select(r => new { name = r.taxes_name, r.taxes_id }).OrderBy(r => r.name).ToArray();
+            invoiceslines_taxrateComboBox.DisplayMember = "name";
+            invoiceslines_taxrateComboBox.ValueMember = "taxes_id";
             invoiceslines_taxrateComboBox.SelectedIndex = -1;
-            
+
             //load treatments
-            treatments_idComboBox.Items.Clear();
-            foreach (treatments a in _dentnedModel.Treatments.List())
-            {
-                treatments_idComboBox.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(a.treatments_id.ToString(), a.treatments_code + " - " + a.treatments_name));
-            }
+            treatments_idComboBox.DataSource = _dentnedModel.Treatments.List().Select(r => new { name = r.treatments_code + " - " + r.treatments_name, r.treatments_id }).OrderBy(r => r.name).ToArray();
+            treatments_idComboBox.DisplayMember = "name";
+            treatments_idComboBox.ValueMember = "treatments_id";
             treatments_idComboBox.SelectedIndex = -1;
 
             //load computed lines
-            computedlines_idComboBox.Items.Clear();
-            foreach (computedlines a in _dentnedModel.ComputedLines.List())
-            {
-                computedlines_idComboBox.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(a.computedlines_id.ToString(), a.computedlines_name));
-            }
+            computedlines_idComboBox.DataSource = _dentnedModel.ComputedLines.List().Select(r => new { name = r.computedlines_name, r.computedlines_id }).OrderBy(r => r.name).ToArray();
+            computedlines_idComboBox.DisplayMember = "name";
+            computedlines_idComboBox.ValueMember = "computedlines_id";
             computedlines_idComboBox.SelectedIndex = -1;
 
             //load filter doctors
-            comboBox_filterDoctors.Items.Clear();
-            comboBox_filterDoctors.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem("-1", ""));
-            foreach (doctors a in _dentnedModel.Doctors.List().OrderBy(r => r.doctors_surname))
-            {
-                comboBox_filterDoctors.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(a.doctors_id.ToString(), a.doctors_surname + " " + a.doctors_name));
-            }
+            comboBox_filterDoctors.DataSource = (new[] { new { name = "", doctors_id = -1 } }).Concat(_dentnedModel.Doctors.List().Select(r => new { name = r.doctors_surname + " " + r.doctors_name, r.doctors_id })).ToArray();
+            comboBox_filterDoctors.DisplayMember = "name";
+            comboBox_filterDoctors.ValueMember = "doctors_id";
+            comboBox_filterDoctors.SelectedIndex = -1;
             if (comboBox_filterDoctors.Items.Count == 2)
                 comboBox_filterDoctors.SelectedIndex = 1;
-            else
-                comboBox_filterDoctors.SelectedIndex = -1;
             
             IsBindingSourceLoading = false;
 
@@ -391,15 +377,15 @@ namespace DG.DentneD.Forms
             IsBindingSourceLoading = true;
             int currentSelectedIndex = comboBox_filterYears.SelectedIndex;
             List<int> years = new List<int>();
-            comboBox_filterYears.Items.Clear();
             foreach (invoices a in _dentnedModel.Invoices.List().OrderBy(r => r.invoices_date))
             {
-                if(!years.Contains(a.invoices_date.Year))
-                {
-                    comboBox_filterYears.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(a.invoices_date.Year.ToString(), a.invoices_date.Year.ToString()));
+                if (!years.Contains(a.invoices_date.Year))
                     years.Add(a.invoices_date.Year);
-                }                    
             }
+            comboBox_filterYears.DataSource = years.Select(r => new { name = r.ToString(), year = r }).ToArray();
+            comboBox_filterYears.DisplayMember = "name";
+            comboBox_filterYears.ValueMember = "year";
+            
             if (currentSelectedIndex == -1)
                 comboBox_filterYears.SelectedIndex = comboBox_filterYears.Items.Count - 1;
             else
@@ -423,12 +409,12 @@ namespace DG.DentneD.Forms
             int doctors_id = -1;
             if (comboBox_filterDoctors.SelectedIndex != -1)
             {
-                doctors_id = Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_filterDoctors.SelectedItem).Id);
+                doctors_id = Convert.ToInt32(comboBox_filterDoctors.SelectedValue);
             }
             int year = -1;
             if (comboBox_filterYears.SelectedIndex != -1)
             {
-                year = Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_filterYears.SelectedItem).Id);
+                year = Convert.ToInt32(comboBox_filterYears.SelectedValue);
             }
 
             totalnetTextBox.Text = "0";
@@ -512,7 +498,7 @@ namespace DG.DentneD.Forms
             int doctors_id = -1;
             if (comboBox_filterDoctors.SelectedIndex != -1)
             {
-                doctors_id = Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_filterDoctors.SelectedItem).Id);
+                doctors_id = Convert.ToInt32(comboBox_filterDoctors.SelectedValue);
             }
 
             totalnetTextBox.Text = Math.Round(_dentnedModel.Invoices.List(r => r.doctors_id == doctors_id && r.invoices_date.Year == year).Sum(r => r.invoices_totalnet), 2).ToString();
@@ -594,12 +580,12 @@ namespace DG.DentneD.Forms
             if (AddClick(tabElement_tabInvoices))
             {
                 //set default values
-                int doctors_id = Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_filterDoctors.SelectedItem).Id);
+                int doctors_id = Convert.ToInt32(comboBox_filterDoctors.SelectedValue);
                 int maxnumber = 0;
                 int year = DateTime.Now.Year;
                 if (comboBox_filterYears.SelectedIndex != -1)
                 {
-                    year = Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_filterYears.SelectedItem).Id);
+                    year = Convert.ToInt32(comboBox_filterYears.SelectedValue);
                 }
                 string[] numbers = _dentnedModel.Invoices.List(r => r.doctors_id == doctors_id && r.invoices_date.Year == year).Select(r => r.invoices_number).ToArray();
                 try
@@ -839,7 +825,7 @@ namespace DG.DentneD.Forms
                 int paymentstypes_id = -1;
                 try
                 {
-                    paymentstypes_id = Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)invoices_paymentComboBox.SelectedItem).Id);
+                    paymentstypes_id = Convert.ToInt32(invoices_paymentComboBox.SelectedValue);
                 }
                 catch { }
                 if (paymentstypes_id != -1)
@@ -866,7 +852,7 @@ namespace DG.DentneD.Forms
                 int invoicesfooters_id = -1;
                 try
                 {
-                    invoicesfooters_id = Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)invoices_footerComboBox.SelectedItem).Id);
+                    invoicesfooters_id = Convert.ToInt32(invoices_footerComboBox.SelectedValue);
                 }
                 catch { }
                 if (invoicesfooters_id != -1)
@@ -893,7 +879,7 @@ namespace DG.DentneD.Forms
                 int taxesdeductions_id = -1;
                 try
                 {
-                    taxesdeductions_id = Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)invoices_deductiontaxrateComboBox.SelectedItem).Id);
+                    taxesdeductions_id = Convert.ToInt32(invoices_deductiontaxrateComboBox.SelectedValue);
                 }
                 catch { }
                 if (taxesdeductions_id != -1)
@@ -948,7 +934,7 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void doctors_idComboBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            DGUIGHFUtilsUI.DGComboBoxAutoComplete.OnKeyPress((ComboBox)sender, e);
+            ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
         }
 
         /// <summary>
@@ -958,7 +944,7 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void patients_idComboBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            DGUIGHFUtilsUI.DGComboBoxAutoComplete.OnKeyPress((ComboBox)sender, e);
+            ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
         }
 
         /// <summary>
@@ -968,7 +954,7 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void invoices_paymentComboBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            DGUIGHFUtilsUI.DGComboBoxAutoComplete.OnKeyPress((ComboBox)sender, e);
+            ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
         }
 
         /// <summary>
@@ -978,7 +964,7 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void invoices_footerComboBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            DGUIGHFUtilsUI.DGComboBoxAutoComplete.OnKeyPress((ComboBox)sender, e);
+            ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
         }
 
         /// <summary>
@@ -988,7 +974,7 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void invoices_deductiontaxrateComboBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            DGUIGHFUtilsUI.DGComboBoxAutoComplete.OnKeyPress((ComboBox)sender, e);
+            ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
         }
 
         #endregion
@@ -1206,7 +1192,7 @@ namespace DG.DentneD.Forms
 
             //local patients treatments
             IsBindingSourceLoading = true;
-            patientstreatments_idComboBox.DataSource = patientstreatmentsl.Select(r => new { name = _dentnedModel.Treatments.Find(r.treatments_id).treatments_code + " [" + _dentnedModel.PatientsTreatments.GetTreatmentsToothsString(r) + "] " + r.patientstreatments_creationdate.ToShortDateString(), r.patientstreatments_id }).OrderBy(r => r.name).ToList();
+            patientstreatments_idComboBox.DataSource = patientstreatmentsl.Select(r => new { name = _dentnedModel.Treatments.Find(r.treatments_id).treatments_code + " [" + _dentnedModel.PatientsTreatments.GetTreatmentsToothsString(r) + "] " + r.patientstreatments_creationdate.ToShortDateString(), r.patientstreatments_id }).OrderBy(r => r.name).ToArray();
             patientstreatments_idComboBox.DisplayMember = "name";
             patientstreatments_idComboBox.ValueMember = "patientstreatments_id";
             IsBindingSourceLoading = false;
@@ -1227,7 +1213,7 @@ namespace DG.DentneD.Forms
                 int taxes_id = -1;
                 try
                 {
-                    taxes_id = Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)invoiceslines_taxrateComboBox.SelectedItem).Id);
+                    taxes_id = Convert.ToInt32(invoiceslines_taxrateComboBox.SelectedValue);
                 }
                 catch { }
                 if (taxes_id != -1)
@@ -1266,7 +1252,7 @@ namespace DG.DentneD.Forms
 
                     if (patients_id != -1)
                     {
-                        treatments treatment = _dentnedModel.Treatments.Find(Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)treatments_idComboBox.SelectedItem).Id));
+                        treatments treatment = _dentnedModel.Treatments.Find(Convert.ToInt32(treatments_idComboBox.SelectedValue));
                         if (treatment != null)
                         {
                             string code = treatment.treatments_code;
@@ -1325,7 +1311,7 @@ namespace DG.DentneD.Forms
 
                     if (patients_id != -1)
                     {
-                        computedlines computedline = _dentnedModel.ComputedLines.Find(Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)computedlines_idComboBox.SelectedItem).Id));
+                        computedlines computedline = _dentnedModel.ComputedLines.Find(Convert.ToInt32(computedlines_idComboBox.SelectedValue));
                         if (computedline != null)
                         {
                             decimal totallines = _dentnedModel.InvoicesLines.List(r => r.invoices_id == invoices_id).Sum(r => r.invoiceslines_quantity * r.invoiceslines_unitprice);
@@ -1453,7 +1439,7 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void treatments_idComboBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            DGUIGHFUtilsUI.DGComboBoxAutoComplete.OnKeyPress((ComboBox)sender, e);
+            ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
         }
         
         /// <summary>
@@ -1463,7 +1449,7 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void computedlines_idComboBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            DGUIGHFUtilsUI.DGComboBoxAutoComplete.OnKeyPress((ComboBox)sender, e);
+            ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
         }
 
         /// <summary>
@@ -1473,7 +1459,7 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void patientstreatments_idComboBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            DGUIGHFUtilsUI.DGComboBoxAutoComplete.OnKeyPress((ComboBox)sender, e);
+            ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
         }
 
         /// <summary>
@@ -1483,7 +1469,7 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void invoiceslines_taxrateComboBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            DGUIGHFUtilsUI.DGComboBoxAutoComplete.OnKeyPress((ComboBox)sender, e);
+            ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
         }
 
         #endregion

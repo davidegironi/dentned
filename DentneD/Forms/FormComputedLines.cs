@@ -15,6 +15,7 @@ using DG.DentneD.Model.Entity;
 using DG.DentneD.Forms.Objects;
 using Zuby.ADGV;
 using SMcMaster;
+using DG.DentneD.Helpers;
 
 namespace DG.DentneD.Forms
 {
@@ -141,9 +142,11 @@ namespace DG.DentneD.Forms
             IsBindingSourceLoading = true;
 
             //load tax rates
-            taxes_idComboBox.DataSource = _dentnedModel.Taxes.List().OrderBy(r => r.taxes_name).ToList();
-            taxes_idComboBox.DisplayMember = "taxes_name";
+            taxes_idComboBox.DataSource = _dentnedModel.Taxes.List().Select(r => new { name = r.taxes_name, r.taxes_id }).OrderBy(r => r.name).ToArray();
+            taxes_idComboBox.DisplayMember = "name";
             taxes_idComboBox.ValueMember = "taxes_id";
+
+            IsBindingSourceLoading = false;
         }
 
         /// <summary>
@@ -249,7 +252,7 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void taxes_idComboBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            DGUIGHFUtilsUI.DGComboBoxAutoComplete.OnKeyPress((ComboBox)sender, e);
+            ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
         }
 
         #endregion

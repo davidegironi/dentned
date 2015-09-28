@@ -262,6 +262,7 @@
     <Compile Include="Forms\Objects\VTaxesDeductions.cs" />
     <Compile Include="Forms\Objects\VTaxes.cs" />
     <Compile Include="Forms\Objects\VDoctors.cs" />
+    <Compile Include="Helpers\ComboBoxHelper.cs" />
     <Compile Include="Helpers\DentneDPrintModelHelper.cs" />
     <Compile Include="Helpers\ExcelExporter.cs" />
     <Compile Include="Helpers\FileHelper.cs" />

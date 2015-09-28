@@ -345,6 +345,8 @@
             // 
             // rooms_idComboBox
             // 
+            this.rooms_idComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.rooms_idComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.rooms_idComboBox.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.appointmentsBindingSource, "rooms_id", true));
             this.rooms_idComboBox.FormattingEnabled = true;
             this.rooms_idComboBox.Location = new System.Drawing.Point(12, 222);

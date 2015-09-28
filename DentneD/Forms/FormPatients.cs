@@ -815,10 +815,13 @@ namespace DG.DentneD.Forms
             IsBindingSourceLoading = true;
 
             //load filter doctors
-            comboBox_filterArchived.Items.Clear();
-            comboBox_filterArchived.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(FilterShow.All.ToString(), language.filtershowAll));
-            comboBox_filterArchived.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(FilterShow.NotArchived.ToString(), language.filtershowNotarchived));
-            comboBox_filterArchived.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(FilterShow.Archived.ToString(), language.filtershowArchived));
+            comboBox_filterArchived.DataSource = (new[] {
+                    new { name = language.filtershowAll, value = FilterShow.All.ToString() },
+                    new { name = language.filtershowNotarchived, value = FilterShow.NotArchived.ToString() },
+                    new { name = language.filtershowArchived, value = FilterShow.Archived.ToString() }
+                }).ToArray();
+            comboBox_filterArchived.DisplayMember = "name";
+            comboBox_filterArchived.ValueMember = "value";
             comboBox_filterArchived.SelectedIndex = 0;
             if (_patientsFilter == PatientsFilter.All)
                 comboBox_filterArchived.SelectedIndex = 0;
@@ -828,58 +831,66 @@ namespace DG.DentneD.Forms
                 comboBox_filterArchived.SelectedIndex = 2;
 
             //load prices lists
-            treatmentspriceslists_idComboBox.DataSource = _dentnedModel.TreatmentsPricesLists.List().OrderBy(r => r.treatmentspriceslists_name).ToList();
-            treatmentspriceslists_idComboBox.DisplayMember = "treatmentspriceslists_name";
+            treatmentspriceslists_idComboBox.DataSource = _dentnedModel.TreatmentsPricesLists.List().Select(r => new { name = r.treatmentspriceslists_name, r.treatmentspriceslists_id }).OrderBy(r => r.name).ToArray();
+            treatmentspriceslists_idComboBox.DisplayMember = "name";
             treatmentspriceslists_idComboBox.ValueMember = "treatmentspriceslists_id";
-
-            //load prices lists
-            treatmentspriceslists_idComboBox.DataSource = _dentnedModel.TreatmentsPricesLists.List().OrderBy(r => r.treatmentspriceslists_name).ToList();
-            treatmentspriceslists_idComboBox.DisplayMember = "treatmentspriceslists_name";
-            treatmentspriceslists_idComboBox.ValueMember = "treatmentspriceslists_id";
+            treatmentspriceslists_idComboBox.SelectedIndex = -1;
 
             //load contacts types
-            contactstypes_idComboBox.DataSource = _dentnedModel.ContactsTypes.List().OrderBy(r => r.contactstypes_name).ToList();
-            contactstypes_idComboBox.DisplayMember = "contactstypes_name";
+            contactstypes_idComboBox.DataSource = _dentnedModel.ContactsTypes.List().Select(r => new { name = r.contactstypes_name, r.contactstypes_id }).OrderBy(r => r.name).ToArray();
+            contactstypes_idComboBox.DisplayMember = "name";
             contactstypes_idComboBox.ValueMember = "contactstypes_id";
+            contactstypes_idComboBox.SelectedIndex = -1;
 
             //load addresses types
-            addressestypes_idComboBox.DataSource = _dentnedModel.AddressesTypes.List().OrderBy(r => r.addressestypes_name).ToList();
-            addressestypes_idComboBox.DisplayMember = "addressestypes_name";
+            addressestypes_idComboBox.DataSource = _dentnedModel.AddressesTypes.List().Select(r => new { name = r.addressestypes_name, r.addressestypes_id }).OrderBy(r => r.name).ToArray();
+            addressestypes_idComboBox.DisplayMember = "name";
             addressestypes_idComboBox.ValueMember = "addressestypes_id";
+            addressestypes_idComboBox.SelectedIndex = -1;
 
             //load medicalrecords types
-            medicalrecordstypes_idComboBox.DataSource = _dentnedModel.MedicalrecordsTypes.List().OrderBy(r => r.medicalrecordstypes_name).ToList();
-            medicalrecordstypes_idComboBox.DisplayMember = "medicalrecordstypes_name";
+            medicalrecordstypes_idComboBox.DataSource = _dentnedModel.MedicalrecordsTypes.List().Select(r => new { name = r.medicalrecordstypes_name, r.medicalrecordstypes_id }).OrderBy(r => r.name).ToArray();
+            medicalrecordstypes_idComboBox.DisplayMember = "name";
             medicalrecordstypes_idComboBox.ValueMember = "medicalrecordstypes_id";
+            medicalrecordstypes_idComboBox.SelectedIndex = -1;
 
             //load patientsattachments types
-            patientsattachmentstypes_idComboBox.DataSource = _dentnedModel.PatientsAttachmentsTypes.List().OrderBy(r => r.patientsattachmentstypes_name).ToList();
-            patientsattachmentstypes_idComboBox.DisplayMember = "patientsattachmentstypes_name";
+            patientsattachmentstypes_idComboBox.DataSource = _dentnedModel.PatientsAttachmentsTypes.List().Select(r => new { name = r.patientsattachmentstypes_name, r.patientsattachmentstypes_id }).OrderBy(r => r.name).ToArray();
+            patientsattachmentstypes_idComboBox.DisplayMember = "name";
             patientsattachmentstypes_idComboBox.ValueMember = "patientsattachmentstypes_id";
+            patientsattachmentstypes_idComboBox.SelectedIndex = -1;
 
             //load rooms
-            rooms_idComboBox.DataSource = _dentnedModel.Rooms.List().OrderBy(r => r.rooms_name).ToList();
-            rooms_idComboBox.DisplayMember = "rooms_name";
+            rooms_idComboBox.DataSource = _dentnedModel.Rooms.List().Select(r => new { name = r.rooms_name, r.rooms_id }).OrderBy(r => r.name).ToArray();
+            rooms_idComboBox.DisplayMember = "name";
             rooms_idComboBox.ValueMember = "rooms_id";
-            
+            rooms_idComboBox.SelectedIndex = -1;
+
             //load doctors
-            doctors_idComboBox.DataSource = _dentnedModel.Doctors.List().Select(r => new { name = r.doctors_surname + " " + r.doctors_name, r.doctors_id}).OrderBy(r => r.name).ToList();
+            doctors_idComboBox.DataSource = _dentnedModel.Doctors.List().Select(r => new { name = r.doctors_surname + " " + r.doctors_name, r.doctors_id }).OrderBy(r => r.name).ToArray();
             doctors_idComboBox.DisplayMember = "name";
             doctors_idComboBox.ValueMember = "doctors_id";
-            doctors_idComboBox1.DataSource = _dentnedModel.Doctors.List().Select(r => new { name = r.doctors_surname + " " + r.doctors_name, r.doctors_id }).OrderBy(r => r.name).ToList();
+            doctors_idComboBox1.SelectedIndex = -1;
+
+            doctors_idComboBox1.DataSource = _dentnedModel.Doctors.List().Select(r => new { name = r.doctors_surname + " " + r.doctors_name, r.doctors_id }).OrderBy(r => r.name).ToArray();
             doctors_idComboBox1.DisplayMember = "name";
             doctors_idComboBox1.ValueMember = "doctors_id";
+            doctors_idComboBox1.SelectedIndex = -1;
 
             //load treatments
-            treatments_idComboBox.DataSource = _dentnedModel.Treatments.List().Select(r => new { name = r.treatments_code + " - " + r.treatments_name, r.treatments_id }).OrderBy(r => r.name).ToList();
+            treatments_idComboBox.DataSource = _dentnedModel.Treatments.List().Select(r => new { name = r.treatments_code + " - " + r.treatments_name, r.treatments_id }).OrderBy(r => r.name).ToArray();
             treatments_idComboBox.DisplayMember = "name";
             treatments_idComboBox.ValueMember = "treatments_id";
+            treatments_idComboBox.SelectedIndex = -1;
 
             //load patientstreatments filter fullfilled
-            comboBox_tabPatientsTreatments_filterfulfilled.Items.Clear();
-            comboBox_tabPatientsTreatments_filterfulfilled.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(PatientsTreatmentsFulfilledFilter.All.ToString(), language.patientstreatmentsfilterfulfilledAll));
-            comboBox_tabPatientsTreatments_filterfulfilled.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(PatientsTreatmentsFulfilledFilter.NotFulfilled.ToString(), language.patientstreatmentsfilterfulfilledN));
-            comboBox_tabPatientsTreatments_filterfulfilled.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(PatientsTreatmentsFulfilledFilter.Fulfilled.ToString(), language.patientstreatmentsfilterfulfilledY));
+            comboBox_tabPatientsTreatments_filterfulfilled.DataSource = (new[] {
+                    new { name = language.patientstreatmentsfilterfulfilledAll, value = PatientsTreatmentsFulfilledFilter.All.ToString() },
+                    new { name = language.patientstreatmentsfilterfulfilledN, value = PatientsTreatmentsFulfilledFilter.NotFulfilled.ToString() },
+                    new { name = language.patientstreatmentsfilterfulfilledY, value = PatientsTreatmentsFulfilledFilter.Fulfilled.ToString() }
+                }).ToArray();
+            comboBox_tabPatientsTreatments_filterfulfilled.DisplayMember = "name";
+            comboBox_tabPatientsTreatments_filterfulfilled.ValueMember = "value";
             comboBox_tabPatientsTreatments_filterfulfilled.SelectedIndex = 0;
             if (_patientsTreatmentsFulfilledFilter == PatientsTreatmentsFulfilledFilter.All)
                 comboBox_tabPatientsTreatments_filterfulfilled.SelectedIndex = 0;
@@ -889,10 +900,13 @@ namespace DG.DentneD.Forms
                 comboBox_tabPatientsTreatments_filterfulfilled.SelectedIndex = 2;
 
             //load patientstreatments filter paid
-            comboBox_tabPatientsTreatments_filterpaid.Items.Clear();
-            comboBox_tabPatientsTreatments_filterpaid.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(PatientsTreatmentsPaidFilter.All.ToString(), language.patientstreatmentsfilterpaidAll));
-            comboBox_tabPatientsTreatments_filterpaid.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(PatientsTreatmentsPaidFilter.NotPaid.ToString(), language.patientstreatmentsfilterpaidN));
-            comboBox_tabPatientsTreatments_filterpaid.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(PatientsTreatmentsPaidFilter.Paid.ToString(), language.patientstreatmentsfilterpaidY));
+            comboBox_tabPatientsTreatments_filterpaid.DataSource = (new[] {
+                    new { name = language.patientstreatmentsfilterpaidAll, value = PatientsTreatmentsPaidFilter.All.ToString() },
+                    new { name = language.patientstreatmentsfilterpaidN, value = PatientsTreatmentsPaidFilter.NotPaid.ToString() },
+                    new { name = language.patientstreatmentsfilterpaidY, value = PatientsTreatmentsPaidFilter.Paid.ToString() }
+                }).ToArray();
+            comboBox_tabPatientsTreatments_filterpaid.DisplayMember = "name";
+            comboBox_tabPatientsTreatments_filterpaid.ValueMember = "value";
             comboBox_tabPatientsTreatments_filterpaid.SelectedIndex = 0;
             if (_patientsTreatmentsPaidFilter == PatientsTreatmentsPaidFilter.All)
                 comboBox_tabPatientsTreatments_filterpaid.SelectedIndex = 0;
@@ -946,7 +960,7 @@ namespace DG.DentneD.Forms
             List<patients> patients = new List<patients>();
             if(comboBox_filterArchived.SelectedIndex != -1)
             {
-                string filterShow = ((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_filterArchived.SelectedItem).Id;
+                string filterShow = comboBox_filterArchived.SelectedValue.ToString();
                 if(filterShow == FilterShow.NotArchived.ToString())
                     patients = _dentnedModel.Patients.List(r => !r.patients_isarchived).ToList();
                 else if(filterShow == FilterShow.Archived.ToString())
@@ -1256,7 +1270,7 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void treatmentspriceslists_idComboBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            DGUIGHFUtilsUI.DGComboBoxAutoComplete.OnKeyPress((ComboBox)sender, e);
+            ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
         }
 
         /// <summary>
@@ -1532,7 +1546,7 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void contactstypes_idComboBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            DGUIGHFUtilsUI.DGComboBoxAutoComplete.OnKeyPress((ComboBox)sender, e);
+            ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
         }
 
         #endregion
@@ -1657,7 +1671,7 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void addressestypes_idComboBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            DGUIGHFUtilsUI.DGComboBoxAutoComplete.OnKeyPress((ComboBox)sender, e);
+            ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
         }
 
         #endregion
@@ -1782,7 +1796,7 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void medicalrecordstypes_idComboBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            DGUIGHFUtilsUI.DGComboBoxAutoComplete.OnKeyPress((ComboBox)sender, e);
+            ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
         }
 
         #endregion
@@ -1810,7 +1824,7 @@ namespace DG.DentneD.Forms
             predicate = predicate.And(r => r.patients_id == patients_id);
             if (comboBox_tabPatientsTreatments_filterfulfilled.SelectedIndex != -1)
             {
-                string filterfulfilled = ((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_tabPatientsTreatments_filterfulfilled.SelectedItem).Id;
+                string filterfulfilled = comboBox_tabPatientsTreatments_filterfulfilled.SelectedValue.ToString();
                 if (filterfulfilled == PatientsTreatmentsFulfilledFilter.NotFulfilled.ToString())
                     predicate = predicate.And(r => r.patientstreatments_fulfilldate == null);
                 else if (filterfulfilled == PatientsTreatmentsFulfilledFilter.Fulfilled.ToString())
@@ -1818,7 +1832,7 @@ namespace DG.DentneD.Forms
             }
             if (comboBox_tabPatientsTreatments_filterpaid.SelectedIndex != -1)
             {
-                string filterpaid = ((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_tabPatientsTreatments_filterpaid.SelectedItem).Id;
+                string filterpaid = comboBox_tabPatientsTreatments_filterpaid.SelectedValue.ToString();
                 if (filterpaid == PatientsTreatmentsPaidFilter.NotPaid.ToString())
                     predicate = predicate.And(r => r.patientstreatments_ispaid == false);
                 else if (filterpaid == PatientsTreatmentsPaidFilter.Paid.ToString())
@@ -2999,7 +3013,7 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void doctors_idComboBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            DGUIGHFUtilsUI.DGComboBoxAutoComplete.OnKeyPress((ComboBox)sender, e);
+            ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
         }
 
         /// <summary>
@@ -3009,7 +3023,7 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void treatments_idComboBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            DGUIGHFUtilsUI.DGComboBoxAutoComplete.OnKeyPress((ComboBox)sender, e);
+            ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
         }
 
 
@@ -3031,7 +3045,7 @@ namespace DG.DentneD.Forms
             predicate = predicate.And(r => r.patients_id == patients_id);
             if (comboBox_tabPatientsTreatments_filterfulfilled.SelectedIndex != -1)
             {
-                string filterfulfilled = ((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_tabPatientsTreatments_filterfulfilled.SelectedItem).Id;
+                string filterfulfilled = comboBox_tabPatientsTreatments_filterfulfilled.SelectedValue.ToString();
                 if (filterfulfilled == PatientsTreatmentsFulfilledFilter.NotFulfilled.ToString())
                     predicate = predicate.And(r => r.patientstreatments_fulfilldate == null);
                 else if (filterfulfilled == PatientsTreatmentsFulfilledFilter.Fulfilled.ToString())
@@ -3039,7 +3053,7 @@ namespace DG.DentneD.Forms
             }
             if (comboBox_tabPatientsTreatments_filterpaid.SelectedIndex != -1)
             {
-                string filterpaid = ((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_tabPatientsTreatments_filterpaid.SelectedItem).Id;
+                string filterpaid = comboBox_tabPatientsTreatments_filterpaid.SelectedValue.ToString();
                 if (filterpaid == PatientsTreatmentsPaidFilter.NotPaid.ToString())
                     predicate = predicate.And(r => r.patientstreatments_ispaid == false);
                 else if (filterpaid == PatientsTreatmentsPaidFilter.Paid.ToString())
@@ -4667,7 +4681,7 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void patientsattachmentstypes_idComboBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            DGUIGHFUtilsUI.DGComboBoxAutoComplete.OnKeyPress((ComboBox)sender, e);
+            ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
         }
 
         #endregion

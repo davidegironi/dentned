@@ -220,29 +220,29 @@ namespace DG.DentneD.Forms
         /// </summary>
         private void PreloadView()
         {
+            IsBindingSourceLoading = true;
+
             //load categories
-            treatmentstypes_idComboBox.DataSource = _dentnedModel.TreatmentsTypes.List().OrderBy(r => r.treatmentstypes_name).ToList();
-            treatmentstypes_idComboBox.DisplayMember = "treatmentstypes_name";
+            treatmentstypes_idComboBox.DataSource = _dentnedModel.TreatmentsTypes.List().Select(r => new { name = r.treatmentstypes_name, r.treatmentstypes_id }).OrderBy(r => r.name).ToArray();
+            treatmentstypes_idComboBox.DisplayMember = "name";
             treatmentstypes_idComboBox.ValueMember = "treatmentstypes_id";
 
             //load prices lists
-            treatmentspriceslists_idComboBox.DataSource = _dentnedModel.TreatmentsPricesLists.List().OrderBy(r => r.treatmentspriceslists_name).ToList();
-            treatmentspriceslists_idComboBox.DisplayMember = "treatmentspriceslists_name";
+            treatmentspriceslists_idComboBox.DataSource = _dentnedModel.TreatmentsPricesLists.List().Select(r => new { name = r.treatmentspriceslists_name, r.treatmentspriceslists_id }).OrderBy(r => r.name).ToArray();
+            treatmentspriceslists_idComboBox.DisplayMember = "name";
             treatmentspriceslists_idComboBox.ValueMember = "treatmentspriceslists_id";
 
             //load prices lists
-            comboBox_tabTreatmentsPrices_filterPriceslists.Items.Clear();
-            comboBox_tabTreatmentsPrices_filterPriceslists.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem("-1", ""));
-            foreach (treatmentspriceslists a in _dentnedModel.TreatmentsPricesLists.List().OrderBy(r => r.treatmentspriceslists_name))
-            {
-                comboBox_tabTreatmentsPrices_filterPriceslists.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(a.treatmentspriceslists_id.ToString(), a.treatmentspriceslists_name));
-            }
-            comboBox_tabTreatmentsPrices_filterPriceslists.SelectedIndex = -1;
+            comboBox_tabTreatmentsPrices_filterPriceslists.DataSource = (new[] { new { name = "", treatmentspriceslists_id = -1 } }).Concat(_dentnedModel.TreatmentsPricesLists.List().Select(r => new { name = r.treatmentspriceslists_name, r.treatmentspriceslists_id }).OrderBy(r => r.name)).ToArray();
+            comboBox_tabTreatmentsPrices_filterPriceslists.DisplayMember = "name";
+            comboBox_tabTreatmentsPrices_filterPriceslists.ValueMember = "treatmentspriceslists_id";
 
             //load tax rates
-            taxes_idComboBox.DataSource = _dentnedModel.Taxes.List().OrderBy(r => r.taxes_name).ToList();
-            taxes_idComboBox.DisplayMember = "taxes_name";
+            taxes_idComboBox.DataSource = _dentnedModel.Taxes.List().Select(r => new { name = r.taxes_name, r.taxes_id }).OrderBy(r => r.name).ToArray();
+            taxes_idComboBox.DisplayMember = "name";
             taxes_idComboBox.ValueMember = "taxes_id";
+
+            IsBindingSourceLoading = false;
         }
 
         /// <summary>
@@ -481,7 +481,7 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void treatmentstypes_idComboBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            DGUIGHFUtilsUI.DGComboBoxAutoComplete.OnKeyPress((ComboBox)sender, e);
+            ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
         }
 
         /// <summary>
@@ -491,7 +491,7 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void taxes_idComboBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            DGUIGHFUtilsUI.DGComboBoxAutoComplete.OnKeyPress((ComboBox)sender, e);
+            ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
         }
 
         #endregion
@@ -517,7 +517,7 @@ namespace DG.DentneD.Forms
             //get treatments
             List<treatmentsprices> treatmentspricesl = new List<treatmentsprices>();
             if (comboBox_tabTreatmentsPrices_filterPriceslists.SelectedIndex != -1 && comboBox_tabTreatmentsPrices_filterPriceslists.SelectedIndex != 0)
-                treatmentspricesl = _dentnedModel.TreatmentsPrices.List(r => r.treatments_id == treatments_id && r.treatmentspriceslists_id == Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_tabTreatmentsPrices_filterPriceslists.SelectedItem).Id)).ToList();
+                treatmentspricesl = _dentnedModel.TreatmentsPrices.List(r => r.treatments_id == treatments_id && r.treatmentspriceslists_id == Convert.ToInt32(comboBox_tabTreatmentsPrices_filterPriceslists.SelectedValue)).ToList();
             else
                 treatmentspricesl = _dentnedModel.TreatmentsPrices.List(r => r.treatments_id == treatments_id).ToList();
             IEnumerable<VTreatmentsPrices> vTreatmentsPrices =
@@ -613,7 +613,7 @@ namespace DG.DentneD.Forms
                     ((treatmentsprices)treatmentspricesBindingSource.Current).treatments_id = (((DataRowView)vTreatmentsBindingSource.Current).Row).Field<int>("treatments_id");
                     if (comboBox_tabTreatmentsPrices_filterPriceslists.SelectedIndex != -1 && comboBox_tabTreatmentsPrices_filterPriceslists.SelectedIndex != 0)
                     {
-                        ((treatmentsprices)treatmentspricesBindingSource.Current).treatmentspriceslists_id = Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_tabTreatmentsPrices_filterPriceslists.SelectedItem).Id);
+                        ((treatmentsprices)treatmentspricesBindingSource.Current).treatmentspriceslists_id = Convert.ToInt32(comboBox_tabTreatmentsPrices_filterPriceslists.SelectedValue);
                         treatmentspriceslists_idComboBox.Enabled = false;
                     }
                     treatmentspricesBindingSource.ResetBindings(true);
@@ -672,7 +672,7 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void treatmentspriceslists_idComboBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            DGUIGHFUtilsUI.DGComboBoxAutoComplete.OnKeyPress((ComboBox)sender, e);
+            ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
         }
 
         #endregion

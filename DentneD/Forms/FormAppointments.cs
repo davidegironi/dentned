@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Data;
 using SMcMaster;
+using DG.DentneD.Helpers;
 
 namespace DG.DentneD.Forms
 {
@@ -255,13 +256,7 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void FormAppointments_Load(object sender, EventArgs e)
         {
-            IsBindingSourceLoading = true;
             PreloadView();
-            if (comboBox_filterRooms.Items.Count == 2)
-                comboBox_filterRooms.SelectedIndex = 1;
-            if (comboBox_filterDoctors.Items.Count == 2)
-                comboBox_filterDoctors.SelectedIndex = 1;
-            IsBindingSourceLoading = false;
 
             _currentEditingMode = EditingMode.R;
             SetCustomEditingMode(false);
@@ -274,38 +269,43 @@ namespace DG.DentneD.Forms
         /// </summary>
         private void PreloadView()
         {
+            IsBindingSourceLoading = true;
+
             //load doctors
-            doctors_idComboBox.DataSource = _dentnedModel.Doctors.List().Select(r => new { name = r.doctors_surname + " " + r.doctors_name, r.doctors_id }).OrderBy(r => r.name).ToList();
+            doctors_idComboBox.DataSource = _dentnedModel.Doctors.List().Select(r => new { name = r.doctors_surname + " " + r.doctors_name, r.doctors_id }).OrderBy(r => r.name).ToArray();
             doctors_idComboBox.DisplayMember = "name";
             doctors_idComboBox.ValueMember = "doctors_id";
+            doctors_idComboBox.SelectedIndex = -1;
 
             //load rooms
-            rooms_idComboBox.DataSource = _dentnedModel.Rooms.List().OrderBy(r => r.rooms_name).ToList();
-            rooms_idComboBox.DisplayMember = "rooms_name";
+            rooms_idComboBox.DataSource = _dentnedModel.Rooms.List().Select(r => new { name = r.rooms_name, r.rooms_id }).OrderBy(r => r.name).ToArray();
+            rooms_idComboBox.DisplayMember = "name";
             rooms_idComboBox.ValueMember = "rooms_id";
+            rooms_idComboBox.SelectedIndex = -1;
 
             //load patients
-            patients_idComboBox.DataSource = _dentnedModel.Patients.List().Select(r => new { name = r.patients_surname + " " + r.patients_name, r.patients_id }).OrderBy(r => r.name).ToList();
+            patients_idComboBox.DataSource = _dentnedModel.Patients.List().Select(r => new { name = r.patients_surname + " " + r.patients_name, r.patients_id }).OrderBy(r => r.name).ToArray();
             patients_idComboBox.DisplayMember = "name";
             patients_idComboBox.ValueMember = "patients_id";
+            patients_idComboBox.SelectedIndex = -1;
 
             //load filter doctors
-            comboBox_filterDoctors.Items.Clear();
-            comboBox_filterDoctors.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem("-1", ""));
-            foreach (doctors a in _dentnedModel.Doctors.List().OrderBy(r => r.doctors_surname))
-            {
-                comboBox_filterDoctors.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(a.doctors_id.ToString(), a.doctors_surname + " " + a.doctors_name));
-            }
+            comboBox_filterDoctors.DataSource = (new[] { new { name = "", doctors_id = -1 } }).Concat(_dentnedModel.Doctors.List().Select(r => new { name = r.doctors_surname + " " + r.doctors_name, r.doctors_id })).ToArray();
+            comboBox_filterDoctors.DisplayMember = "name";
+            comboBox_filterDoctors.ValueMember = "doctors_id";
             comboBox_filterDoctors.SelectedIndex = -1;
+            if (comboBox_filterDoctors.Items.Count == 2)
+                comboBox_filterDoctors.SelectedIndex = 1;
 
             //load filter rooms
-            comboBox_filterRooms.Items.Clear();
-            comboBox_filterRooms.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem("-1", ""));
-            foreach (rooms a in _dentnedModel.Rooms.List().OrderBy(r => r.rooms_name))
-            {
-                comboBox_filterRooms.Items.Add(new DGUIGHFUtilsUI.DGComboBoxItem(a.rooms_id.ToString(), a.rooms_name));
-            }
+            comboBox_filterRooms.DataSource = (new[] { new { name = "", rooms_id = -1 } }).Concat(_dentnedModel.Rooms.List().Select(r => new { name = r.rooms_name, r.rooms_id }).OrderBy(r => r.name)).ToArray();
+            comboBox_filterRooms.DisplayMember = "name";
+            comboBox_filterRooms.ValueMember = "rooms_id";
             comboBox_filterRooms.SelectedIndex = -1;
+            if (comboBox_filterRooms.Items.Count == 2)
+                comboBox_filterRooms.SelectedIndex = 1;
+
+            IsBindingSourceLoading = false;
         }
 
         
@@ -392,10 +392,10 @@ namespace DG.DentneD.Forms
             //load appointements
             if (comboBox_filterDoctors.SelectedIndex != -1 && comboBox_filterDoctors.SelectedIndex != 0)
             {
-                int doctors_id = Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_filterDoctors.SelectedItem).Id);
+                int doctors_id = Convert.ToInt32(comboBox_filterDoctors.SelectedValue);
                 if (comboBox_filterRooms.SelectedIndex != -1 && comboBox_filterRooms.SelectedIndex != 0)
                 {
-                    int rooms_id = Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_filterRooms.SelectedItem).Id);
+                    int rooms_id = Convert.ToInt32(comboBox_filterRooms.SelectedValue);
                     appointments = _dentnedModel.Appointments.List(r =>
                             r.appointments_from >= fromdate &&
                             r.appointments_from <= todate &&
@@ -826,10 +826,10 @@ namespace DG.DentneD.Forms
                 appointments_toDateTimePicker.Value = new DateTime(date.Year, date.Month, date.Day, date.Hour, 30, 0).AddMinutes(30);
             }
 
-            ((appointments)appointmentsBindingSource.Current).doctors_id = Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_filterDoctors.SelectedItem).Id);
+            ((appointments)appointmentsBindingSource.Current).doctors_id = Convert.ToInt32(comboBox_filterDoctors.SelectedValue);
 
             if (comboBox_filterRooms.SelectedIndex != -1 && comboBox_filterRooms.SelectedIndex != 0)
-                ((appointments)appointmentsBindingSource.Current).rooms_id = Convert.ToInt32(((DGUIGHFUtilsUI.DGComboBoxItem)comboBox_filterRooms.SelectedItem).Id);
+                ((appointments)appointmentsBindingSource.Current).rooms_id = Convert.ToInt32(comboBox_filterRooms.SelectedValue);
 
             appointmentsBindingSource.ResetBindings(true);
         }
@@ -902,7 +902,7 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void patients_idComboBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            DGUIGHFUtilsUI.DGComboBoxAutoComplete.OnKeyPress((ComboBox)sender, e);
+            ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
         }
 
         /// <summary>
@@ -912,7 +912,7 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void doctors_idComboBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            DGUIGHFUtilsUI.DGComboBoxAutoComplete.OnKeyPress((ComboBox)sender, e);
+            ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
         }
 
         /// <summary>
@@ -922,7 +922,7 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void rooms_idComboBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            DGUIGHFUtilsUI.DGComboBoxAutoComplete.OnKeyPress((ComboBox)sender, e);
+            ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
         }
 
         #endregion

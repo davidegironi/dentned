@@ -288,25 +288,30 @@ namespace DG.DentneD
                 {
                     aCell = new PdfPCell(new Paragraph(_language.estimatesItemsCodeTH, b10Font));
                     aCell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
+                    aCell.HorizontalAlignment = Element.ALIGN_LEFT;
                     aCell.PaddingBottom = 5;
                     itemsTable.AddCell(aCell);
                 }
                 aCell = new PdfPCell(new Paragraph(_language.estimatesItemsDescriptionTH, b10Font));
                 aCell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
+                aCell.HorizontalAlignment = Element.ALIGN_LEFT;
                 aCell.PaddingBottom = 5;
                 itemsTable.AddCell(aCell);
                 aCell = new PdfPCell(new Paragraph(_language.estimatesItemsQuantityTH, b10Font));
                 aCell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
+                aCell.HorizontalAlignment = Element.ALIGN_RIGHT;
                 aCell.PaddingBottom = 5;
                 itemsTable.AddCell(aCell);
                 aCell = new PdfPCell(new Paragraph(_language.estimatesItemsPriceTH, b10Font));
                 aCell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
+                aCell.HorizontalAlignment = Element.ALIGN_RIGHT;
                 aCell.PaddingBottom = 5;
                 itemsTable.AddCell(aCell);
                 if (hastax)
                 {
                     aCell = new PdfPCell(new Paragraph(_language.estimatesItemsTaxrateTH, b10Font));
                     aCell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
+                    aCell.HorizontalAlignment = Element.ALIGN_RIGHT;
                     aCell.PaddingBottom = 5;
                     itemsTable.AddCell(aCell);
                 }
@@ -315,22 +320,58 @@ namespace DG.DentneD
                     if (_settings.printCode)
                     {
                         if (!String.IsNullOrEmpty(estimateline.estimateslines_code))
+                        {
                             if (estimateline.estimateslines_code.Trim() != "")
-                                itemsTable.AddCell(new Paragraph(estimateline.estimateslines_code, n10Font));
+                            {
+                                aCell = new PdfPCell(new Paragraph(estimateline.estimateslines_code, n10Font));
+                                aCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                                aCell.HorizontalAlignment = Element.ALIGN_LEFT;
+                                itemsTable.AddCell(aCell);
+                            }
                             else
-                                itemsTable.AddCell(new Paragraph("/"));
+                            {
+                                aCell = new PdfPCell(new Paragraph("/", n10Font));
+                                aCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                                aCell.HorizontalAlignment = Element.ALIGN_LEFT;
+                                itemsTable.AddCell(aCell);
+                            }
+                        }
                         else
-                            itemsTable.AddCell(new Paragraph("/"));
+                        {
+                            aCell = new PdfPCell(new Paragraph("/", n10Font));
+                            aCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                            aCell.HorizontalAlignment = Element.ALIGN_LEFT;
+                            itemsTable.AddCell(aCell);
+                        }
                     }
-                    itemsTable.AddCell(new Paragraph(estimateline.estimateslines_description, n10Font));
-                    itemsTable.AddCell(new Paragraph(estimateline.estimateslines_quantity.ToString(), n10Font));
-                    itemsTable.AddCell(new Paragraph(Math.Round(estimateline.estimateslines_unitprice, 2).ToString(), n10Font));
+                    aCell = new PdfPCell(new Paragraph(estimateline.estimateslines_description, n10Font));
+                    aCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                    aCell.HorizontalAlignment = Element.ALIGN_LEFT;
+                    itemsTable.AddCell(aCell);
+                    aCell = new PdfPCell(new Paragraph(estimateline.estimateslines_quantity.ToString(), n10Font));
+                    aCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                    aCell.HorizontalAlignment = Element.ALIGN_RIGHT;
+                    itemsTable.AddCell(aCell);
+                    aCell = new PdfPCell(new Paragraph(Math.Round(estimateline.estimateslines_unitprice, 2).ToString(), n10Font));
+                    aCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                    aCell.HorizontalAlignment = Element.ALIGN_RIGHT;
+                    itemsTable.AddCell(aCell);
                     if (hastax)
                     {
                         if (estimateline.estimateslines_taxrate != 0)
-                            itemsTable.AddCell(new Paragraph(Math.Round(estimateline.estimateslines_taxrate, 2) + "%", n10Font));
+                        {
+                            aCell = new PdfPCell(new Paragraph(Math.Round(estimateline.estimateslines_taxrate, 2) + "%", n10Font));
+                            aCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                            aCell.HorizontalAlignment = Element.ALIGN_RIGHT;
+                            itemsTable.AddCell(aCell);
+                        }
                         else
-                            itemsTable.AddCell(new Paragraph("/"));
+                        {
+                            aCell = new PdfPCell(new Paragraph("/", n10Font));
+                            aCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                            aCell.HorizontalAlignment = Element.ALIGN_RIGHT;
+                            itemsTable.AddCell(aCell);
+                        }
                     }
                 }
 
@@ -669,25 +710,30 @@ namespace DG.DentneD
                 {
                     aCell = new PdfPCell(new Paragraph(_language.invoicesItemsCodeTH, b10Font));
                     aCell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
+                    aCell.HorizontalAlignment = Element.ALIGN_LEFT;
                     aCell.PaddingBottom = 5;
                     itemsTable.AddCell(aCell);
                 }                
                 aCell = new PdfPCell(new Paragraph(_language.invoicesItemsDescriptionTH, b10Font));
                 aCell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
+                aCell.HorizontalAlignment = Element.ALIGN_LEFT;
                 aCell.PaddingBottom = 5;
                 itemsTable.AddCell(aCell);
                 aCell = new PdfPCell(new Paragraph(_language.invoicesItemsQuantityTH, b10Font));
                 aCell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
+                aCell.HorizontalAlignment = Element.ALIGN_RIGHT;
                 aCell.PaddingBottom = 5;
                 itemsTable.AddCell(aCell);
                 aCell = new PdfPCell(new Paragraph(_language.invoicesItemsPriceTH, b10Font));
                 aCell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
+                aCell.HorizontalAlignment = Element.ALIGN_RIGHT;
                 aCell.PaddingBottom = 5;
                 itemsTable.AddCell(aCell);
                 if (hastax)
                 {
                     aCell = new PdfPCell(new Paragraph(_language.invoicesItemsTaxrateTH, b10Font));
                     aCell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
+                    aCell.HorizontalAlignment = Element.ALIGN_RIGHT;
                     aCell.PaddingBottom = 5;
                     itemsTable.AddCell(aCell);
                 }
@@ -696,22 +742,58 @@ namespace DG.DentneD
                     if (_settings.printCode)
                     {
                         if (!String.IsNullOrEmpty(invoiceline.invoiceslines_code))
+                        {
                             if (invoiceline.invoiceslines_code.Trim() != "")
-                                itemsTable.AddCell(new Paragraph(invoiceline.invoiceslines_code, n10Font));
+                            {
+                                aCell = new PdfPCell(new Paragraph(invoiceline.invoiceslines_code, n10Font));
+                                aCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                                aCell.HorizontalAlignment = Element.ALIGN_LEFT;
+                                itemsTable.AddCell(aCell);
+                            }
                             else
-                                itemsTable.AddCell(new Paragraph("/"));
+                            {
+                                aCell = new PdfPCell(new Paragraph("/", n10Font));
+                                aCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                                aCell.HorizontalAlignment = Element.ALIGN_LEFT;
+                                itemsTable.AddCell(aCell);
+                            }
+                        }
                         else
-                            itemsTable.AddCell(new Paragraph("/"));
+                        {
+                            aCell = new PdfPCell(new Paragraph("/", n10Font));
+                            aCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                            aCell.HorizontalAlignment = Element.ALIGN_LEFT;
+                            itemsTable.AddCell(aCell);
+                        }
                     }
-                    itemsTable.AddCell(new Paragraph(invoiceline.invoiceslines_description, n10Font));
-                    itemsTable.AddCell(new Paragraph(invoiceline.invoiceslines_quantity.ToString(), n10Font));
-                    itemsTable.AddCell(new Paragraph(Math.Round(invoiceline.invoiceslines_unitprice, 2).ToString(), n10Font));
+                    aCell = new PdfPCell(new Paragraph(invoiceline.invoiceslines_description, n10Font));
+                    aCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                    aCell.HorizontalAlignment = Element.ALIGN_LEFT;
+                    itemsTable.AddCell(aCell);
+                    aCell = new PdfPCell(new Paragraph(invoiceline.invoiceslines_quantity.ToString(), n10Font));
+                    aCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                    aCell.HorizontalAlignment = Element.ALIGN_RIGHT;
+                    itemsTable.AddCell(aCell);
+                    aCell = new PdfPCell(new Paragraph(Math.Round(invoiceline.invoiceslines_unitprice, 2).ToString(), n10Font));
+                    aCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                    aCell.HorizontalAlignment = Element.ALIGN_RIGHT;
+                    itemsTable.AddCell(aCell);
                     if (hastax)
                     {
                         if (invoiceline.invoiceslines_taxrate != 0)
-                            itemsTable.AddCell(new Paragraph(Math.Round(invoiceline.invoiceslines_taxrate, 2) + "%", n10Font));
+                        {
+                            aCell = new PdfPCell(new Paragraph(Math.Round(invoiceline.invoiceslines_taxrate, 2) + "%", n10Font));
+                            aCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                            aCell.HorizontalAlignment = Element.ALIGN_RIGHT;
+                            itemsTable.AddCell(aCell);
+                        }
                         else
-                            itemsTable.AddCell(new Paragraph("/"));
+                        {
+                            aCell = new PdfPCell(new Paragraph("/", n10Font));
+                            aCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                            aCell.HorizontalAlignment = Element.ALIGN_RIGHT;
+                            itemsTable.AddCell(aCell);
+                        }
                     }
                 }
                 

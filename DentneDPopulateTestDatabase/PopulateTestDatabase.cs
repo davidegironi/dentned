@@ -27,6 +27,9 @@ namespace DG.DentneD.Test
         private readonly string _patientsDatadir = null;
         private readonly string _patientsAttachmentsdir = null;
 
+        //number of patients to load
+        private const int PatientsNum = 500;
+
         public PopulateTestDatabase()
         {
             _dentnedModel = new DentneDModel();
@@ -90,7 +93,6 @@ EXEC sp_msforeachtable 'DBCC CHECKIDENT(''?'', RESEED, 0)'; DECLARE @max int; SE
             int treatmentstypesNum = 3;
             int treatmentspriceslistsNum = 2;
             int treatmentsNum = 100;
-            int patientsNum = 500;
             bool generatedatafiles = true;
 
             Console.WriteLine("Add AddressesTypes...");
@@ -279,7 +281,7 @@ EXEC sp_msforeachtable 'DBCC CHECKIDENT(''?'', RESEED, 0)'; DECLARE @max int; SE
             
             Console.WriteLine("Add Patients...");
             patients[] patients = new patients[] { };
-            for (int i = 0; i < patientsNum; i++)
+            for (int i = 0; i < PatientsNum; i++)
             {
                 patients patientstmp = new patients()
                 {

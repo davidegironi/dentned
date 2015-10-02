@@ -53,6 +53,7 @@ namespace DG.DentneD.Forms
         private readonly bool _doSecureDelete = false;
         private readonly bool _resetPatientstreatmentsFilterOnChange = false;
         private readonly bool _patientsAttachmentsFindMaxValue = false;
+        private readonly bool _patientsAttachmentsSaveandedit = true;
 
         private enum PatientsFilter { All, NotArchived, Archived };
         private readonly PatientsFilter _patientsFilter = PatientsFilter.NotArchived;
@@ -105,7 +106,8 @@ namespace DG.DentneD.Forms
             if (ConfigurationManager.AppSettings["patientsAttachmentsOpenMode"] == "A")
                 _attachmentsOpenMode = AttachmentsOpenMode.Application;
             else if (ConfigurationManager.AppSettings["patientsAttachmentsOpenMode"] == "F")
-                _attachmentsOpenMode = AttachmentsOpenMode.Folder;           
+                _attachmentsOpenMode = AttachmentsOpenMode.Folder;
+            _patientsAttachmentsSaveandedit = Convert.ToBoolean(ConfigurationManager.AppSettings["patientsAttachmentsSaveandedit"]);
 
             IsBindingSourceLoading = true;
             patientstreatments_filtertanyCheckBox.Checked = true;
@@ -4440,7 +4442,7 @@ namespace DG.DentneD.Forms
         private void AfterSaveAction_tabPatientsAttachments(object item)
         {
             DGUIGHFData.SetBindingSourcePosition<patientsattachments, DentneDModel>(_dentnedModel.PatientsAttachments, item, vPatientsAttachmentsBindingSource);
-            if (_tabPatientsAttachments_isnewsave)
+            if (_tabPatientsAttachments_isnewsave && _patientsAttachmentsSaveandedit)
             {
                 button_tabPatientsAttachments_edit_Click(null, null);
             }
@@ -4652,7 +4654,7 @@ namespace DG.DentneD.Forms
                         if (patientsattachmentstype != null)
                         {
                             int maxvalue = 0;
-                            foreach(patientsattachments patientsattachment in _dentnedModel.PatientsAttachments.List(r => r.patients_id == patients_id && r.patientsattachmentstypes_id == patientsattachmentstype.patientsattachmentstypes_id))
+                            foreach(patientsattachments patientsattachment in _dentnedModel.PatientsAttachments.List(r => r.patientsattachmentstypes_id == patientsattachmentstype.patientsattachmentstypes_id))
                             {
                                 try
                                 {

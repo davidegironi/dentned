@@ -28,6 +28,7 @@ namespace DG.DentneD.Forms
         private SqlConnection _sqlConnection = new SqlConnection();
 
         private bool _isPasswordLogged = false;
+        private BindingSource _mainBindingSource = new BindingSource();
 
         /// <summary>
         /// Constructor
@@ -93,7 +94,7 @@ namespace DG.DentneD.Forms
             dataGridView_reportsparameters.Columns[1].AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             dataGridView_reportsparameters.Columns[1].ReadOnly = false;
 
-            advancedDataGridView_main.DataSource = null;
+            advancedDataGridView_main.DataSource = _mainBindingSource;
 
             textBox_info.Text = "";
 
@@ -133,7 +134,8 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void comboBox_reports_SelectedIndexChanged(object sender, EventArgs e)
         {
-            advancedDataGridView_main.DataSource = null;
+            advancedDataGridView_main.CleanFilterAndSort();
+            _mainBindingSource.DataSource = null;
             _datatableReportsParameters.Clear();
             textBox_info.Text = "";
 
@@ -250,12 +252,33 @@ namespace DG.DentneD.Forms
                     _sqlConnection.Close();
                 }
 
-                advancedDataGridView_main.DataSource = dt;
+                advancedDataGridView_main.CleanFilterAndSort();
+                _mainBindingSource.DataSource = dt;
                 for (int i = 0; i < advancedDataGridView_main.Columns.Count; i++)
                 {
                     advancedDataGridView_main.Columns[i].AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
                 }
             }
+        }
+
+        /// <summary>
+        /// Main Datagrid filter handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void advancedDataGridView_main_FilterStringChanged(object sender, EventArgs e)
+        {
+            _mainBindingSource.Filter = advancedDataGridView_main.FilterString;
+        }
+
+        /// <summary>
+        /// Main Datagrid sort handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void advancedDataGridView_main_SortStringChanged(object sender, EventArgs e)
+        {
+            _mainBindingSource.Sort = advancedDataGridView_main.SortString;
         }
 
         /// <summary>

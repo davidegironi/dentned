@@ -28,7 +28,7 @@ namespace DG.DentneD.Test
         private readonly string _patientsAttachmentsdir = null;
 
         //number of patients to load
-        private const int PatientsNum = 500;
+        private const int PatientsNum = 10;
 
         public PopulateTestDatabase()
         {

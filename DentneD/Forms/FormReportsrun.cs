@@ -221,17 +221,38 @@ namespace DG.DentneD.Forms
                         sql_cm1.Parameters.Add(param);
                     }
                     sql_rd1 = sql_cm1.ExecuteReader();
-                    
-                    for (int i = 0; i < sql_rd1.FieldCount; i++)
-                    {
-                        dt.Columns.Add(sql_rd1.GetName(i), Type.GetType("System.String"));
+                    sql_rd1.Read();  
+                    if (sql_rd1.HasRows)
+                    {                  
+                        for (int i = 0; i < sql_rd1.FieldCount; i++)
+                        {
+                            Type dtType = Type.GetType("System.String");
+                            try
+                            {
+                                dtType = sql_rd1[sql_rd1.GetName(i)].GetType();
+                                if(dtType == Type.GetType("System.DBNull"))
+                                    dtType = Type.GetType("System.String");
+                            }
+                            catch { }
+                            dt.Columns.Add(sql_rd1.GetName(i), dtType);
+                        }
                     }
+                    else
+                    {
+                        for (int i = 0; i < sql_rd1.FieldCount; i++)
+                        {
+                            Type dtType = Type.GetType("System.String");
+                            dt.Columns.Add(sql_rd1.GetName(i), dtType);
+                        }
+                    }
+                    sql_rd1.Close();
+                    sql_rd1 = sql_cm1.ExecuteReader();
                     while (sql_rd1.Read())
                     {
                         DataRow dr = dt.NewRow();
                         for (int i = 0; i < sql_rd1.FieldCount; i++)
                         {
-                            dr[sql_rd1.GetName(i)] = sql_rd1[sql_rd1.GetName(i)].ToString();
+                            dr[sql_rd1.GetName(i)] = sql_rd1[sql_rd1.GetName(i)];
                         }
                         dt.Rows.Add(dr);
                     }
@@ -242,6 +263,7 @@ namespace DG.DentneD.Forms
                 }
                 catch (Exception ex)
                 {
+                    dt.Columns.Clear();
                     dt.Columns.Add("Errors", Type.GetType("System.String"));
                     DataRow dr = dt.NewRow();
                     dr["Errors"] = ex.Message;

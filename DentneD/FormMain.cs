@@ -20,6 +20,8 @@ namespace DG.DentneD
 {
     public partial class FormMain : DGUIGHFFormMain
     {
+        private bool _isClosing = false;
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -184,6 +186,16 @@ namespace DG.DentneD
         private void aboutToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             DisplayAbout();
+        }
+
+        /// <summary>
+        /// Form closing handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            FormClosingHandler(sender, e);
         }
 
         /// <summary>
@@ -459,7 +471,5 @@ namespace DG.DentneD
             }
         }
 
-            
-        
     }
 }

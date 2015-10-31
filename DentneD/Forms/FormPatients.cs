@@ -4814,6 +4814,26 @@ namespace DG.DentneD.Forms
                             ((patientsattachments)patientsattachmentsBindingSource.Current).patientsattachments_value = maxvalue.ToString();
                             patientsattachmentsBindingSource.ResetBindings(true);
                         }
+                        else if (patientsattachmentstype.patientsattachmentstypes_valueautofunc == PatientsAttachmentsTypesRepository.ValueAutoFuncCode.AMD.ToString())
+                        {
+                            int maxvalue = 0;
+                            foreach (patientsattachments patientsattachment in _dentnedModel.PatientsAttachments.List(r => r.patientsattachmentstypes_id == patientsattachmentstype.patientsattachmentstypes_id && r.patients_id == patients_id && r.patientsattachments_date.Date == ((patientsattachments)patientsattachmentsBindingSource.Current).patientsattachments_date.Date))
+                            {
+                                try
+                                {
+                                    int n = Convert.ToInt32(patientsattachment.patientsattachments_value);
+                                    if (n > maxvalue)
+                                        maxvalue = n;
+                                }
+                                catch { }
+                            }
+                            maxvalue++;
+                            if (maxvalue == 0)
+                                maxvalue++;
+                            patientsattachmentsBindingSource.EndEdit();
+                            ((patientsattachments)patientsattachmentsBindingSource.Current).patientsattachments_value = maxvalue.ToString();
+                            patientsattachmentsBindingSource.ResetBindings(true);
+                        }
                     }
                 }
             }

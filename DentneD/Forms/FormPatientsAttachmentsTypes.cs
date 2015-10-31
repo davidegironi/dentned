@@ -145,6 +145,7 @@ namespace DG.DentneD.Forms
                     new { name = _dentnedModel.PatientsAttachmentsTypes.language.valueAutoFuncNUL, value = PatientsAttachmentsTypesRepository.ValueAutoFuncCode.NUL.ToString() },
                     new { name = _dentnedModel.PatientsAttachmentsTypes.language.valueAutoFuncAMG, value = PatientsAttachmentsTypesRepository.ValueAutoFuncCode.AMG.ToString() },
                     new { name = _dentnedModel.PatientsAttachmentsTypes.language.valueAutoFuncAML, value = PatientsAttachmentsTypesRepository.ValueAutoFuncCode.AML.ToString() },
+                    new { name = _dentnedModel.PatientsAttachmentsTypes.language.valueAutoFuncAMD, value = PatientsAttachmentsTypesRepository.ValueAutoFuncCode.AMD.ToString() }
                 }).ToArray();
             patientsattachmentstypes_valueautofuncComboBox.DisplayMember = "name";
             patientsattachmentstypes_valueautofuncComboBox.ValueMember = "value";
@@ -247,7 +248,7 @@ namespace DG.DentneD.Forms
         {
             if (AddClick(tabElement_tabPatientsAttachmentsTypes))
             {
-                ((patientsattachmentstypes)patientsattachmentstypesBindingSource.Current).patientsattachmentstypes_valueautofunc = PatientsAttachmentsTypesRepository.ValueAutoFuncCode.AMG.ToString();
+                ((patientsattachmentstypes)patientsattachmentstypesBindingSource.Current).patientsattachmentstypes_valueautofunc = PatientsAttachmentsTypesRepository.ValueAutoFuncCode.NUL.ToString();
                 patientsattachmentstypesBindingSource.ResetBindings(true);
             }
         }

@@ -15,7 +15,7 @@ namespace DG.DentneD.Model.Repositories
     {
         public PatientsAttachmentsTypesRepository() : base() { }
         
-        public enum ValueAutoFuncCode { NUL, AMG, AML };
+        public enum ValueAutoFuncCode { NUL, AMG, AML, AMD };
 
         /// <summary>
         /// Repository language dictionary
@@ -27,8 +27,9 @@ namespace DG.DentneD.Model.Repositories
             public string text003 = "This item can not be removed. An attachment depends it.";
             public string text004 = "Invalid value autocomplete function.";
             public string valueAutoFuncNUL = "None";
-            public string valueAutoFuncAMG = "Treat as numeric, set to max numeric value found by same attachments type";
-            public string valueAutoFuncAML = "Treat as numeric, set to max numeric value found by same attachments type of selected patient";
+            public string valueAutoFuncAMG = "Treat Value field as numeric, set to max between same attachments type";
+            public string valueAutoFuncAML = "Treat Value field as numeric, set to max between same attachments type/patient";
+            public string valueAutoFuncAMD = "Treat Value field as numeric, set to max between same attachments type/patient/day";
         }
 
         /// <summary>

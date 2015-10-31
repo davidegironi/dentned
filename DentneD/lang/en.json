@@ -156,7 +156,7 @@
     "DataModel-PatientsTreatments-text101":"Arches",
     "DataModel-PatientsTreatments-text102":"Upper Arch",
     "DataModel-PatientsTreatments-text103":"Lower Arch",
-    "DataModel-PatientsTreatments-text104":"None",
+    "DataModel-PatientsTreatments-text104":"/",
     "DataModel-Payments-text001":"Invalid amount. Can not be less than zero.",
     "DataModel-Payments-text002":"Patient is mandatory.",
     "DataModel-Invoices-text001":"Number can not be empty.",

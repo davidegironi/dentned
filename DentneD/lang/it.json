@@ -156,7 +156,7 @@
     "DataModel-PatientsTreatments-text101":"Tutti",
     "DataModel-PatientsTreatments-text102":"Arcata Sup.",
     "DataModel-PatientsTreatments-text103":"Arcata Inf.",
-    "DataModel-PatientsTreatments-text104":"Nessuno",
+    "DataModel-PatientsTreatments-text104":"/",
     "DataModel-Payments-text001":"Importo non valido. Non può essere minore di zero.",
     "DataModel-Payments-text002":"E\u0027 obbligatorio selezionare un paziente.",
     "DataModel-Invoices-text001":"Il numero di fattura non può essere lasciato vuoto.",

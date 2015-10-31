@@ -15,6 +15,8 @@ using DG.DentneD.Model.Entity;
 using DG.DentneD.Forms.Objects;
 using Zuby.ADGV;
 using SMcMaster;
+using DG.DentneD.Helpers;
+using DG.DentneD.Model.Repositories;
 
 namespace DG.DentneD.Forms
 {
@@ -56,6 +58,7 @@ namespace DG.DentneD.Forms
             LanguageHelper.AddComponent(button_tabPatientsAttachmentsTypes_cancel);
             LanguageHelper.AddComponent(patientsattachmentstypes_idLabel);
             LanguageHelper.AddComponent(patientsattachmentstypes_nameLabel);
+            LanguageHelper.AddComponent(patientsattachmentstypes_valueautofuncLabel);
         }
 
         /// <summary>
@@ -97,6 +100,7 @@ namespace DG.DentneD.Forms
                     AfterSaveAction = AfterSaveAction_tabPatientsAttachmentsTypes,
 
                     AddButton = button_tabPatientsAttachmentsTypes_new,
+                    IsAddButtonDefaultClickEventAttached = false,
                     UpdateButton = button_tabPatientsAttachmentsTypes_edit,
                     RemoveButton = button_tabPatientsAttachmentsTypes_delete,
                     SaveButton = button_tabPatientsAttachmentsTypes_save,
@@ -123,7 +127,30 @@ namespace DG.DentneD.Forms
             advancedDataGridView_main.SortASC(advancedDataGridView_main.Columns[1]);
             IsBindingSourceLoading = false;
 
+            PreloadView();
+
             ReloadView();
+        }
+
+
+        /// <summary>
+        /// Preload View
+        /// </summary>
+        private void PreloadView()
+        {
+            IsBindingSourceLoading = true;
+
+            //load valueautofunc
+            patientsattachmentstypes_valueautofuncComboBox.DataSource = (new[] {
+                    new { name = _dentnedModel.PatientsAttachmentsTypes.language.valueAutoFuncNUL, value = PatientsAttachmentsTypesRepository.ValueAutoFuncCode.NUL.ToString() },
+                    new { name = _dentnedModel.PatientsAttachmentsTypes.language.valueAutoFuncAMG, value = PatientsAttachmentsTypesRepository.ValueAutoFuncCode.AMG.ToString() },
+                    new { name = _dentnedModel.PatientsAttachmentsTypes.language.valueAutoFuncAML, value = PatientsAttachmentsTypesRepository.ValueAutoFuncCode.AML.ToString() },
+                }).ToArray();
+            patientsattachmentstypes_valueautofuncComboBox.DisplayMember = "name";
+            patientsattachmentstypes_valueautofuncComboBox.ValueMember = "value";
+            patientsattachmentstypes_valueautofuncComboBox.SelectedIndex = -1;
+
+            IsBindingSourceLoading = false;
         }
 
         /// <summary>
@@ -211,7 +238,31 @@ namespace DG.DentneD.Forms
             DGUIGHFData.Remove<patientsattachmentstypes, DentneDModel>(_dentnedModel.PatientsAttachmentsTypes, item);
         }
 
-        #endregion
+        /// <summary>
+        /// New tab button handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button_tabPatientsAttachmentsTypes_new_Click(object sender, EventArgs e)
+        {
+            if (AddClick(tabElement_tabPatientsAttachmentsTypes))
+            {
+                ((patientsattachmentstypes)patientsattachmentstypesBindingSource.Current).patientsattachmentstypes_valueautofunc = PatientsAttachmentsTypesRepository.ValueAutoFuncCode.AMG.ToString();
+                patientsattachmentstypesBindingSource.ResetBindings(true);
+            }
+        }
 
+        /// <summary>
+        /// Combobox autocomplete
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void patientsattachmentstypes_valueautofuncComboBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
+        }
+
+        #endregion
+        
     }
 }

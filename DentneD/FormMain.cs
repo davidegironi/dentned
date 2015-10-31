@@ -20,8 +20,6 @@ namespace DG.DentneD
 {
     public partial class FormMain : DGUIGHFFormMain
     {
-        private bool _isClosing = false;
-
         /// <summary>
         /// Constructor
         /// </summary>

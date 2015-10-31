@@ -8,6 +8,7 @@ using System.Linq;
 using DG.DentneD.Model.Entity;
 using NUnit.Framework;
 using System;
+using DG.DentneD.Model.Repositories;
 
 namespace DG.DentneD.Model.Test
 {
@@ -40,7 +41,8 @@ namespace DG.DentneD.Model.Test
 
             t_patientsattachmentstypes = new patientsattachmentstypes()
             {
-                patientsattachmentstypes_name = "XX1"
+                patientsattachmentstypes_name = "XX1",
+                patientsattachmentstypes_valueautofunc = PatientsAttachmentsTypesRepository.ValueAutoFuncCode.NUL.ToString()
             };
             _dentnedModel.PatientsAttachmentsTypes.Add(t_patientsattachmentstypes);
 

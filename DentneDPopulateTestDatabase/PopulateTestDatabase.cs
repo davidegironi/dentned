@@ -15,6 +15,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Configuration;
+using DG.DentneD.Model.Repositories;
 
 namespace DG.DentneD.Test
 {
@@ -213,6 +214,7 @@ EXEC sp_msforeachtable 'DBCC CHECKIDENT(''?'', RESEED, 0)'; DECLARE @max int; SE
                 patientsattachmentstypes patientsattachmentstypestmp = new patientsattachmentstypes()
                 {
                     patientsattachmentstypes_name = "AttachmentsT " + (i + 1),
+                    patientsattachmentstypes_valueautofunc = PatientsAttachmentsTypesRepository.ValueAutoFuncCode.NUL.ToString()
                 };
                 _dentnedModel.PatientsAttachmentsTypes.Add(patientsattachmentstypestmp);
                 patientsattachmentstypes = patientsattachmentstypes.Concat(new patientsattachmentstypes[] { patientsattachmentstypestmp }).ToArray();

@@ -37,8 +37,10 @@
             this.tabControl_main = new System.Windows.Forms.TabControl();
             this.tabPage_tabPatientsAttachmentsTypes = new System.Windows.Forms.TabPage();
             this.panel_tabPatientsAttachmentsTypes_data = new System.Windows.Forms.Panel();
-            this.patientsattachmentstypes_nameTextBox = new System.Windows.Forms.TextBox();
+            this.patientsattachmentstypes_valueautofuncLabel = new System.Windows.Forms.Label();
+            this.patientsattachmentstypes_valueautofuncComboBox = new System.Windows.Forms.ComboBox();
             this.patientsattachmentstypesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.patientsattachmentstypes_nameTextBox = new System.Windows.Forms.TextBox();
             this.patientsattachmentstypes_idTextBox = new System.Windows.Forms.TextBox();
             this.panel_tabPatientsAttachmentsTypes_updates = new System.Windows.Forms.Panel();
             this.button_tabPatientsAttachmentsTypes_cancel = new System.Windows.Forms.Button();
@@ -117,14 +119,42 @@
             // 
             // panel_tabPatientsAttachmentsTypes_data
             // 
+            this.panel_tabPatientsAttachmentsTypes_data.Controls.Add(this.patientsattachmentstypes_valueautofuncLabel);
+            this.panel_tabPatientsAttachmentsTypes_data.Controls.Add(this.patientsattachmentstypes_valueautofuncComboBox);
             this.panel_tabPatientsAttachmentsTypes_data.Controls.Add(this.patientsattachmentstypes_nameLabel);
             this.panel_tabPatientsAttachmentsTypes_data.Controls.Add(this.patientsattachmentstypes_nameTextBox);
             this.panel_tabPatientsAttachmentsTypes_data.Controls.Add(this.patientsattachmentstypes_idLabel);
             this.panel_tabPatientsAttachmentsTypes_data.Controls.Add(this.patientsattachmentstypes_idTextBox);
             this.panel_tabPatientsAttachmentsTypes_data.Location = new System.Drawing.Point(6, 42);
             this.panel_tabPatientsAttachmentsTypes_data.Name = "panel_tabPatientsAttachmentsTypes_data";
-            this.panel_tabPatientsAttachmentsTypes_data.Size = new System.Drawing.Size(480, 91);
+            this.panel_tabPatientsAttachmentsTypes_data.Size = new System.Drawing.Size(480, 133);
             this.panel_tabPatientsAttachmentsTypes_data.TabIndex = 2;
+            // 
+            // patientsattachmentstypes_valueautofuncLabel
+            // 
+            this.patientsattachmentstypes_valueautofuncLabel.AutoSize = true;
+            this.patientsattachmentstypes_valueautofuncLabel.Location = new System.Drawing.Point(9, 87);
+            this.patientsattachmentstypes_valueautofuncLabel.Name = "patientsattachmentstypes_valueautofuncLabel";
+            this.patientsattachmentstypes_valueautofuncLabel.Size = new System.Drawing.Size(177, 13);
+            this.patientsattachmentstypes_valueautofuncLabel.TabIndex = 5;
+            this.patientsattachmentstypes_valueautofuncLabel.Text = "Autocomplete function for Text field:";
+            // 
+            // patientsattachmentstypes_valueautofuncComboBox
+            // 
+            this.patientsattachmentstypes_valueautofuncComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.patientsattachmentstypes_valueautofuncComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.patientsattachmentstypes_valueautofuncComboBox.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.patientsattachmentstypesBindingSource, "patientsattachmentstypes_valueautofunc", true));
+            this.patientsattachmentstypes_valueautofuncComboBox.DataSource = this.patientsattachmentstypesBindingSource;
+            this.patientsattachmentstypes_valueautofuncComboBox.FormattingEnabled = true;
+            this.patientsattachmentstypes_valueautofuncComboBox.Location = new System.Drawing.Point(12, 103);
+            this.patientsattachmentstypes_valueautofuncComboBox.Name = "patientsattachmentstypes_valueautofuncComboBox";
+            this.patientsattachmentstypes_valueautofuncComboBox.Size = new System.Drawing.Size(430, 21);
+            this.patientsattachmentstypes_valueautofuncComboBox.TabIndex = 4;
+            this.patientsattachmentstypes_valueautofuncComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.patientsattachmentstypes_valueautofuncComboBox_KeyPress);
+            // 
+            // patientsattachmentstypesBindingSource
+            // 
+            this.patientsattachmentstypesBindingSource.DataSource = typeof(DG.DentneD.Model.Entity.patientsattachmentstypes);
             // 
             // patientsattachmentstypes_nameTextBox
             // 
@@ -133,10 +163,6 @@
             this.patientsattachmentstypes_nameTextBox.Name = "patientsattachmentstypes_nameTextBox";
             this.patientsattachmentstypes_nameTextBox.Size = new System.Drawing.Size(100, 20);
             this.patientsattachmentstypes_nameTextBox.TabIndex = 3;
-            // 
-            // patientsattachmentstypesBindingSource
-            // 
-            this.patientsattachmentstypesBindingSource.DataSource = typeof(DG.DentneD.Model.Entity.patientsattachmentstypes);
             // 
             // patientsattachmentstypes_idTextBox
             // 
@@ -151,7 +177,7 @@
             // 
             this.panel_tabPatientsAttachmentsTypes_updates.Controls.Add(this.button_tabPatientsAttachmentsTypes_cancel);
             this.panel_tabPatientsAttachmentsTypes_updates.Controls.Add(this.button_tabPatientsAttachmentsTypes_save);
-            this.panel_tabPatientsAttachmentsTypes_updates.Location = new System.Drawing.Point(6, 139);
+            this.panel_tabPatientsAttachmentsTypes_updates.Location = new System.Drawing.Point(6, 181);
             this.panel_tabPatientsAttachmentsTypes_updates.Name = "panel_tabPatientsAttachmentsTypes_updates";
             this.panel_tabPatientsAttachmentsTypes_updates.Size = new System.Drawing.Size(480, 30);
             this.panel_tabPatientsAttachmentsTypes_updates.TabIndex = 1;
@@ -210,6 +236,7 @@
             this.button_tabPatientsAttachmentsTypes_new.TabIndex = 0;
             this.button_tabPatientsAttachmentsTypes_new.Text = "New";
             this.button_tabPatientsAttachmentsTypes_new.UseVisualStyleBackColor = true;
+            this.button_tabPatientsAttachmentsTypes_new.Click += new System.EventHandler(this.button_tabPatientsAttachmentsTypes_new_Click);
             // 
             // panel_list
             // 
@@ -330,5 +357,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.Label patientsattachmentstypes_idLabel;
         private System.Windows.Forms.Label patientsattachmentstypes_nameLabel;
+        private System.Windows.Forms.Label patientsattachmentstypes_valueautofuncLabel;
+        private System.Windows.Forms.ComboBox patientsattachmentstypes_valueautofuncComboBox;
     }
 }

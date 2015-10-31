@@ -30,5 +30,12 @@
     "invoicesTotalsTotaltax":"Imposta",
     "invoicesTotalsTotaldocument":"Fattura",
     "invoicesTotalsTotaldeductiontax":"Trattenuta",
-    "invoicesTotalsTotalamountdue":"Totale"
+    "invoicesTotalsTotalamountdue":"Totale",
+    "patientstreatmentsTitle":"Trattamenti",
+    "patientstreatmentsDate":"Data",
+    "patientstreatmentsPatienttext":"Paziente",
+    "patientstreatmentsItemsCodeTH":"Codice",
+    "patientstreatmentsItemsDescriptionTH":"Descrizione",
+    "patientstreatmentsItemsToothsTH":"Denti",
+    "patientstreatmentsFootertext":""
 }

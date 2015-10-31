@@ -342,6 +342,7 @@ BEGIN
 CREATE TABLE [dbo].[patientsattachmentstypes](
 	[patientsattachmentstypes_id] [int] IDENTITY(1,1) NOT NULL,
 	[patientsattachmentstypes_name] [varchar](16) COLLATE Latin1_General_CI_AS NOT NULL,
+	[patientsattachmentstypes_valueautofunc] [char](3) COLLATE Latin1_General_CI_AS NOT NULL,
  CONSTRAINT [PK_patientsattachmentstypes] PRIMARY KEY CLUSTERED 
 (
 	[patientsattachmentstypes_id] ASC
@@ -740,6 +741,10 @@ ALTER TABLE [dbo].[patientsattachments]  WITH CHECK ADD  CONSTRAINT [FK_patients
 REFERENCES [patientsattachmentstypes] ([patientsattachmentstypes_id]);
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_patientsattachments_patientsattachmentstypes]') AND parent_object_id = OBJECT_ID(N'[dbo].[patientsattachments]'))
 ALTER TABLE [dbo].[patientsattachments] CHECK CONSTRAINT [FK_patientsattachments_patientsattachmentstypes];
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_patientsattachmentstypes_patientsattachmentstypes_valuefunc]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[patientsattachmentstypes] ADD  CONSTRAINT [DF_patientsattachmentstypes_patientsattachmentstypes_valuefunc]  DEFAULT ('NUL') FOR [patientsattachmentstypes_valueautofunc]
+END;
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_patientscontacts_contactstypes]') AND parent_object_id = OBJECT_ID(N'[dbo].[patientscontacts]'))
 ALTER TABLE [dbo].[patientscontacts]  WITH CHECK ADD  CONSTRAINT [FK_patientscontacts_contactstypes] FOREIGN KEY([contactstypes_id])
 REFERENCES [contactstypes] ([contactstypes_id]);

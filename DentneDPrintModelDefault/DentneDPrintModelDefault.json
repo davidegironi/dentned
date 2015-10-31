@@ -1,3 +1,6 @@
 ﻿{
-    "printCode":true
+    "estimatesPrintCode":true,
+    "invoicesPrintCode":true,
+    "patientstreatmentsPrintCode":true,
+    "patientstreatmentsPrintDoctor":true
 }

@@ -30,5 +30,12 @@
     "invoicesTotalsTotaltax":"Tax",
     "invoicesTotalsTotaldocument":"Invoice total",
     "invoicesTotalsTotaldeductiontax":"Deduction tax total",
-    "invoicesTotalsTotalamountdue":"Total"
+    "invoicesTotalsTotalamountdue":"Total",
+    "patientstreatmentsTitle":"Treatments",
+    "patientstreatmentsDate":"Date",
+    "patientstreatmentsPatienttext":"Patient",
+    "patientstreatmentsItemsCodeTH":"Code",
+    "patientstreatmentsItemsDescriptionTH":"Description",
+    "patientstreatmentsItemsToothsTH":"Tooths",
+    "patientstreatmentsFootertext":""
 }

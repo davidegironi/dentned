@@ -5,6 +5,7 @@
 #endregion
 
 using DG.DentneD.Model;
+using DG.DentneD.Model.Entity;
 
 namespace DG.DentneD
 {
@@ -34,5 +35,16 @@ namespace DG.DentneD
         /// <param name="language"></param>
         /// <returns></returns>
         bool BuildInvoicePDF(DentneDModel dentnedModel, int invoices_id, string filename, string language);
+
+        /// <summary>
+        /// Build a PDF for patients treatments
+        /// </summary>
+        /// <param name="dentnedModel"></param>
+        /// <param name="patients_id"></param>
+        /// <param name="patientstreatmentsl"></param>
+        /// <param name="filename"></param>
+        /// <param name="language"></param>
+        /// <returns></returns>
+        bool BuildPatientsTreatmentsPDF(DentneDModel dentnedModel, int patients_id, patientstreatments[] patientstreatmentsl, string filename, string language);
     }
 }

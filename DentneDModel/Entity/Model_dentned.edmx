@@ -196,6 +196,7 @@
           </Key>
           <Property Name="patientsattachmentstypes_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="patientsattachmentstypes_name" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="patientsattachmentstypes_valueautofunc" Type="char" MaxLength="3" Nullable="false" />
         </EntityType>
         <EntityType Name="patientscontacts">
           <Key>
@@ -1173,6 +1174,7 @@
           <Property Name="patientsattachmentstypes_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="patientsattachmentstypes_name" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="patientsattachments" Relationship="dentnedModel.FK_patientsattachments_patientsattachmentstypes" FromRole="patientsattachmentstypes" ToRole="patientsattachments" />
+          <Property Name="patientsattachmentstypes_valueautofunc" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
         </EntityType>
         <EntityType Name="patientscontacts">
           <Key>
@@ -1878,6 +1880,7 @@
           <EntitySetMapping Name="patientsattachmentstypes">
             <EntityTypeMapping TypeName="dentnedModel.patientsattachmentstypes">
               <MappingFragment StoreEntitySet="patientsattachmentstypes">
+                <ScalarProperty Name="patientsattachmentstypes_valueautofunc" ColumnName="patientsattachmentstypes_valueautofunc" />
                 <ScalarProperty Name="patientsattachmentstypes_name" ColumnName="patientsattachmentstypes_name" />
                 <ScalarProperty Name="patientsattachmentstypes_id" ColumnName="patientsattachmentstypes_id" />
               </MappingFragment>

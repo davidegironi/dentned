@@ -57,6 +57,13 @@ namespace DG.DentneD
             public string invoicesTotalsTotaldocument = "Document total";
             public string invoicesTotalsTotaldeductiontax = "Deduction tax total";
             public string invoicesTotalsTotalamountdue = "Total";
+            public string patientstreatmentsTitle = "Treatments";
+            public string patientstreatmentsDate = "Date";
+            public string patientstreatmentsPatienttext = "Patient";
+            public string patientstreatmentsItemsCodeTH = "Code";
+            public string patientstreatmentsItemsDescriptionTH = "Description";
+            public string patientstreatmentsItemsToothsTH = "Tooths";
+            public string patientstreatmentsFootertext = "";
         }
 
         /// <summary>
@@ -65,9 +72,24 @@ namespace DG.DentneD
         private class DentneDPrintModelDefaultSettings
         {
             /// <summary>
-            /// Print code on items lines
+            /// Print code on estimates items lines
             /// </summary>
-            public bool printCode = true;
+            public bool estimatesPrintCode = true;
+
+            /// <summary>
+            /// Print code on invoices items lines
+            /// </summary>
+            public bool invoicesPrintCode = true;
+
+            /// <summary>
+            /// Print code on patient treatments items lines
+            /// </summary>
+            public bool patientstreatmentsPrintCode = true;
+
+            /// <summary>
+            /// Print doctor text on patient treatments
+            /// </summary>
+            public bool patientstreatmentsPrintDoctor = true;
         }
 
         /// <summary>
@@ -254,14 +276,14 @@ namespace DG.DentneD
                 //itemsTable
                 if (hastax)
                 {
-                    if(_settings.printCode)
+                    if(_settings.estimatesPrintCode)
                         itemsTable = new PdfPTable(new float[] { 1, 1, 1, 1, 1 });
                     else
                         itemsTable = new PdfPTable(new float[] { 1, 1, 1, 1 });
                 }
                 else
                 {
-                    if (_settings.printCode)
+                    if (_settings.estimatesPrintCode)
                         itemsTable = new PdfPTable(new float[] { 1, 1, 1, 1 });
                     else
                         itemsTable = new PdfPTable(new float[] { 1, 1, 1 });
@@ -271,20 +293,20 @@ namespace DG.DentneD
                 itemsTable.DefaultCell.HorizontalAlignment = Element.ALIGN_LEFT;
                 if (hastax)
                 {
-                    if (_settings.printCode)
+                    if (_settings.estimatesPrintCode)
                         itemsTable.SetTotalWidth(new float[] { 70, itemsTable.TotalWidth - 170, 40, 70, 70 });
                     else
                         itemsTable.SetTotalWidth(new float[] { itemsTable.TotalWidth - 100, 40, 70, 70 });
                 }
                 else
                 {
-                    if (_settings.printCode)
+                    if (_settings.estimatesPrintCode)
                         itemsTable.SetTotalWidth(new float[] { 70, itemsTable.TotalWidth - 100, 40, 70 });
                     else
                         itemsTable.SetTotalWidth(new float[] { itemsTable.TotalWidth - 30, 40, 70 });
                 }
 
-                if (_settings.printCode)
+                if (_settings.estimatesPrintCode)
                 {
                     aCell = new PdfPCell(new Paragraph(_language.estimatesItemsCodeTH, b10Font));
                     aCell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
@@ -317,7 +339,7 @@ namespace DG.DentneD
                 }
                 foreach (estimateslines estimateline in estimatelines)
                 {
-                    if (_settings.printCode)
+                    if (_settings.estimatesPrintCode)
                     {
                         if (!String.IsNullOrEmpty(estimateline.estimateslines_code))
                         {
@@ -676,14 +698,14 @@ namespace DG.DentneD
                 //itemsTable
                 if (hastax)
                 {
-                    if (_settings.printCode)
+                    if (_settings.invoicesPrintCode)
                         itemsTable = new PdfPTable(new float[] { 1, 1, 1, 1, 1 });
                     else
                         itemsTable = new PdfPTable(new float[] { 1, 1, 1, 1 });
                 }
                 else
                 {
-                    if (_settings.printCode)
+                    if (_settings.invoicesPrintCode)
                         itemsTable = new PdfPTable(new float[] { 1, 1, 1, 1 });
                     else
                         itemsTable = new PdfPTable(new float[] { 1, 1, 1 });
@@ -693,20 +715,20 @@ namespace DG.DentneD
                 itemsTable.DefaultCell.HorizontalAlignment = Element.ALIGN_LEFT;
                 if (hastax)
                 {
-                    if (_settings.printCode)
+                    if (_settings.invoicesPrintCode)
                         itemsTable.SetTotalWidth(new float[] { 70, itemsTable.TotalWidth - 170, 40, 70, 70 });
                     else
                         itemsTable.SetTotalWidth(new float[] { itemsTable.TotalWidth - 100, 40, 70, 70 });
                 }
                 else
                 {
-                    if (_settings.printCode)
+                    if (_settings.invoicesPrintCode)
                         itemsTable.SetTotalWidth(new float[] { 70, itemsTable.TotalWidth - 100, 40, 70 });
                     else
                         itemsTable.SetTotalWidth(new float[] { itemsTable.TotalWidth - 30, 40, 70 });
                 }
 
-                if (_settings.printCode)
+                if (_settings.invoicesPrintCode)
                 {
                     aCell = new PdfPCell(new Paragraph(_language.invoicesItemsCodeTH, b10Font));
                     aCell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
@@ -739,7 +761,7 @@ namespace DG.DentneD
                 }
                 foreach (invoiceslines invoiceline in invoicelines)
                 {
-                    if (_settings.printCode)
+                    if (_settings.invoicesPrintCode)
                     {
                         if (!String.IsNullOrEmpty(invoiceline.invoiceslines_code))
                         {
@@ -966,7 +988,264 @@ namespace DG.DentneD
 
             return ret;
         }
-        
+
+        /// <summary>
+        /// Build a PDF for patients treatments
+        /// </summary>
+        /// <param name="dentnedModel"></param>
+        /// <param name="patients_id"></param>
+        /// <param name="patientstreatmentsl"></param>
+        /// <param name="filename"></param>
+        /// <param name="language"></param>
+        /// <returns></returns>
+        public bool BuildPatientsTreatmentsPDF(DentneDModel dentnedModel, int patients_id, patientstreatments[] patientstreatmentsl, string filename, string language)
+        {
+            bool ret = false;
+
+            //load language
+            LoadLanguageFromFile(languageFolder + "\\" + languageFilenamePrefix + language + ".json");
+
+            try
+            {
+                //get data
+                string doctors_doctext = null;
+                int[] doctors_ids = patientstreatmentsl.Select(r => r.doctors_id).Distinct().ToArray();
+                if(doctors_ids.Count() == 1)
+                {
+                    int doctors_id = doctors_ids[0];
+                    doctors doctor = dentnedModel.Doctors.Find(doctors_id);
+                    if (doctor != null)
+                        doctors_doctext = doctor.doctors_doctext;
+                }
+                patients patient = dentnedModel.Patients.Find(patients_id);
+                if (patient == null)
+                    return false;
+                if (patientstreatmentsl == null || patientstreatmentsl.Count() == 0)
+                    return false;
+
+                //fill infos
+                Document document = new Document(PageSize.A4);
+                PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(filename, FileMode.Create));
+                writer.ViewerPreferences = PdfWriter.PageModeUseOutlines;
+                PrintPageN printPageN = new PrintPageN();
+                writer.PageEvent = printPageN;
+                document.Open();
+
+                iTextSharp.text.Font b10Font = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 10, iTextSharp.text.Font.BOLD);
+                iTextSharp.text.Font b12Font = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 12, iTextSharp.text.Font.BOLD);
+                iTextSharp.text.Font n10Font = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 10, iTextSharp.text.Font.NORMAL);
+                iTextSharp.text.Font n8Font = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 8, iTextSharp.text.Font.NORMAL);
+
+                PdfPTable titleTable = null;
+                PdfPTable preheaderTable = null;
+                PdfPTable headerTable = null;
+                PdfPTable itemsTable = null;
+                PdfPTable footerTable = null;
+
+                PdfPTable bTable = null;
+                PdfPCell aCell = null;
+                Phrase phrase = null;
+
+                //titleTable
+                titleTable = new PdfPTable(new float[] { 1 });
+                titleTable.TotalWidth = PageSize.A4.Width - document.RightMargin - document.LeftMargin;
+                titleTable.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                titleTable.DefaultCell.HorizontalAlignment = Element.ALIGN_CENTER;
+                phrase = new Phrase();
+                phrase.Add(new Chunk(_language.patientstreatmentsTitle, b12Font));
+                aCell = new PdfPCell(phrase);
+                aCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                aCell.PaddingBottom = 10;
+                aCell.HorizontalAlignment = Element.ALIGN_CENTER;
+                titleTable.AddCell(aCell);
+
+                //preheaderTable
+                preheaderTable = new PdfPTable(new float[] { 1 });
+                preheaderTable.TotalWidth = PageSize.A4.Width - document.RightMargin - document.LeftMargin;
+                preheaderTable.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                preheaderTable.DefaultCell.HorizontalAlignment = Element.ALIGN_RIGHT;
+                phrase = new Phrase();
+                phrase.Add(new Chunk(_language.patientstreatmentsDate + ": ", b10Font));
+                phrase.Add(new Chunk(DateTime.Now.ToShortDateString(), n10Font));
+                preheaderTable.AddCell(phrase);
+
+                //headerTable
+                headerTable = new PdfPTable(new float[] { 1, 1 });
+                headerTable.TotalWidth = PageSize.A4.Width - document.RightMargin - document.LeftMargin;
+                headerTable.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                headerTable.DefaultCell.HorizontalAlignment = Element.ALIGN_LEFT;
+                headerTable.SetTotalWidth(new float[] { headerTable.TotalWidth / 2, headerTable.TotalWidth / 2 });
+                bTable = new PdfPTable(new float[] { 1 });
+                bTable.TotalWidth = PageSize.A4.Width - document.RightMargin - document.LeftMargin;
+                bTable.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                bTable.DefaultCell.HorizontalAlignment = Element.ALIGN_LEFT;
+                phrase = new Phrase();
+                phrase.Add(new Chunk(" ", b10Font));
+                aCell = new PdfPCell(phrase);
+                aCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                aCell.PaddingBottom = 5;
+                bTable.AddCell(aCell);
+                bTable.AddCell(new Paragraph(""));
+                if (_settings.patientstreatmentsPrintDoctor)
+                {
+                    if (!String.IsNullOrEmpty(doctors_doctext))
+                    {
+                        if (doctors_doctext.Trim() != "")
+                        {
+                            phrase = new Phrase();
+                            phrase.Add(new Chunk(doctors_doctext, n10Font));
+                            aCell = new PdfPCell(phrase);
+                            aCell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER + iTextSharp.text.Rectangle.TOP_BORDER + iTextSharp.text.Rectangle.LEFT_BORDER + iTextSharp.text.Rectangle.RIGHT_BORDER;
+                            aCell.PaddingBottom = 5;
+                            bTable.AddCell(aCell);
+                        }
+                        else
+                        {
+                            bTable.AddCell(new Paragraph(""));
+                        }
+                    }
+                    else
+                    {
+                        bTable.AddCell(new Paragraph(""));
+                    }
+                }
+                else
+                {
+                    bTable.AddCell(new Paragraph(""));
+                }
+                headerTable.AddCell(bTable);
+                bTable = new PdfPTable(new float[] { 1 });
+                bTable.TotalWidth = PageSize.A4.Width - document.RightMargin - document.LeftMargin;
+                bTable.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                bTable.DefaultCell.HorizontalAlignment = Element.ALIGN_LEFT;
+                phrase = new Phrase();
+                phrase.Add(new Chunk(_language.patientstreatmentsPatienttext + ":", b10Font));
+                aCell = new PdfPCell(phrase);
+                aCell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
+                aCell.PaddingBottom = 5;
+                bTable.AddCell(aCell);
+                bTable.AddCell(new Paragraph(""));
+                phrase = new Phrase();
+                phrase.Add(new Chunk(patient.patients_doctext, n10Font));
+                bTable.AddCell(phrase);
+                headerTable.AddCell(bTable);
+                
+                //itemsTable
+                if (_settings.patientstreatmentsPrintCode)
+                    itemsTable = new PdfPTable(new float[] { 1, 1, 1 });
+                else
+                    itemsTable = new PdfPTable(new float[] { 1, 1 });
+                itemsTable.TotalWidth = PageSize.A4.Width - document.RightMargin - document.LeftMargin;
+                itemsTable.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                itemsTable.DefaultCell.HorizontalAlignment = Element.ALIGN_LEFT;
+                if (_settings.patientstreatmentsPrintCode)
+                    itemsTable.SetTotalWidth(new float[] { 70, itemsTable.TotalWidth - 190, 120 });
+                else
+                    itemsTable.SetTotalWidth(new float[] { itemsTable.TotalWidth - 120, 120 });
+                if (_settings.patientstreatmentsPrintCode)
+                {
+                    aCell = new PdfPCell(new Paragraph(_language.patientstreatmentsItemsCodeTH, b10Font));
+                    aCell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
+                    aCell.HorizontalAlignment = Element.ALIGN_LEFT;
+                    aCell.PaddingBottom = 5;
+                    itemsTable.AddCell(aCell);
+                }
+                aCell = new PdfPCell(new Paragraph(_language.patientstreatmentsItemsDescriptionTH, b10Font));
+                aCell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
+                aCell.HorizontalAlignment = Element.ALIGN_LEFT;
+                aCell.PaddingBottom = 5;
+                itemsTable.AddCell(aCell);
+                aCell = new PdfPCell(new Paragraph(_language.patientstreatmentsItemsToothsTH, b10Font));
+                aCell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
+                aCell.HorizontalAlignment = Element.ALIGN_LEFT;
+                aCell.PaddingBottom = 5;
+                itemsTable.AddCell(aCell);
+                foreach (patientstreatments patientstreatment in patientstreatmentsl.OrderBy(r => r.patientstreatments_creationdate))
+                {
+                    string tooths = dentnedModel.PatientsTreatments.GetTreatmentsToothsString(patientstreatment);
+                    if (_settings.patientstreatmentsPrintCode)
+                    {
+                        treatments treatment = dentnedModel.Treatments.Find(patientstreatment.treatments_id);
+                        if (treatment != null)
+                        {
+                            if (treatment.treatments_code.Trim() != "")
+                            {
+                                aCell = new PdfPCell(new Paragraph(treatment.treatments_code, n10Font));
+                                aCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                                aCell.HorizontalAlignment = Element.ALIGN_LEFT;
+                                itemsTable.AddCell(aCell);
+                            }
+                            else
+                            {
+                                aCell = new PdfPCell(new Paragraph("/", n10Font));
+                                aCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                                aCell.HorizontalAlignment = Element.ALIGN_LEFT;
+                                itemsTable.AddCell(aCell);
+                            }
+                        }
+                        else
+                        {
+                            aCell = new PdfPCell(new Paragraph("/", n10Font));
+                            aCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                            aCell.HorizontalAlignment = Element.ALIGN_LEFT;
+                            itemsTable.AddCell(aCell);
+                        }
+                    }
+                    aCell = new PdfPCell(new Paragraph(patientstreatment.patientstreatments_description, n10Font));
+                    aCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                    aCell.HorizontalAlignment = Element.ALIGN_LEFT;
+                    itemsTable.AddCell(aCell);
+                    aCell = new PdfPCell(new Paragraph(tooths, n10Font));
+                    aCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                    aCell.HorizontalAlignment = Element.ALIGN_LEFT;
+                    itemsTable.AddCell(aCell);
+                }
+                
+                //footerTable
+                footerTable = new PdfPTable(new float[] { 1 });
+                footerTable.TotalWidth = PageSize.A4.Width - document.RightMargin - document.LeftMargin;
+                footerTable.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                footerTable.DefaultCell.HorizontalAlignment = Element.ALIGN_LEFT;
+                if (!String.IsNullOrEmpty(_language.patientstreatmentsFootertext))
+                {
+                    if (_language.patientstreatmentsFootertext.Trim() != "")
+                    {
+                        phrase = new Phrase();
+                        phrase.Add(new Chunk(_language.patientstreatmentsFootertext, n8Font));
+                        aCell = new PdfPCell(phrase);
+                        aCell.Border = iTextSharp.text.Rectangle.TOP_BORDER;
+                        aCell.PaddingTop = 5;
+                        footerTable.AddCell(aCell);
+                    }
+                }
+
+                //add tables
+                document.Add(titleTable);
+                document.Add(preheaderTable);
+                document.Add(headerTable);
+                document.Add(new Paragraph(" "));
+                document.Add(itemsTable);
+                if (writer.GetVerticalPosition(false) < footerTable.TotalHeight + (float)80)
+                {
+                    float currentvert = writer.GetVerticalPosition(false);
+                    document.Add(new Paragraph(" "));
+                    while (writer.GetVerticalPosition(false) < currentvert)
+                        document.Add(new Paragraph(" "));
+                }
+                while (writer.GetVerticalPosition(false) > footerTable.TotalHeight + (float)80)
+                    document.Add(new Paragraph(" "));
+                if (footerTable != null)
+                    document.Add(footerTable);
+
+                document.Close();
+
+                ret = true;
+            }
+            catch { }
+
+            return ret;
+        }
+
         /// <summary>
         /// PDF pager class
         /// </summary>

@@ -14,6 +14,8 @@ namespace DG.DentneD.Model.Repositories
     public class PatientsAttachmentsTypesRepository : GenericDataRepository<patientsattachmentstypes, DentneDModel>
     {
         public PatientsAttachmentsTypesRepository() : base() { }
+        
+        public enum ValueAutoFuncCode { NUL, AMG, AML };
 
         /// <summary>
         /// Repository language dictionary
@@ -23,6 +25,10 @@ namespace DG.DentneD.Model.Repositories
             public string text001 = "Name can not be empty.";
             public string text002 = "Attachment type already inserted.";
             public string text003 = "This item can not be removed. An attachment depends it.";
+            public string text004 = "Invalid value autocomplete function.";
+            public string valueAutoFuncNUL = "None";
+            public string valueAutoFuncAMG = "Treat as numeric, set to max numeric value found by same attachments type";
+            public string valueAutoFuncAML = "Treat as numeric, set to max numeric value found by same attachments type of selected patient";
         }
 
         /// <summary>
@@ -86,7 +92,21 @@ namespace DG.DentneD.Model.Repositories
                     ret = false;
                     errors = errors.Concat(new string[] { language.text001 }).ToArray();
                 }
+                if (String.IsNullOrEmpty(item.patientsattachmentstypes_valueautofunc))
+                {
+                    ret = false;
+                    errors = errors.Concat(new string[] { language.text004 }).ToArray();
+                }
 
+                if (!ret)
+                    break;
+
+                if(!Enum.GetNames(typeof(ValueAutoFuncCode)).Contains(item.patientsattachmentstypes_valueautofunc))
+                {
+                    ret = false;
+                    errors = errors.Concat(new string[] { language.text004 }).ToArray();
+                }
+                
                 if (!ret)
                     break;
 

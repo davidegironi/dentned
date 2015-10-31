@@ -21,6 +21,7 @@ namespace DG.DentneD.Model.Entity
     
         public int patientsattachmentstypes_id { get; set; }
         public string patientsattachmentstypes_name { get; set; }
+        public string patientsattachmentstypes_valueautofunc { get; set; }
     
         public virtual ICollection<patientsattachments> patientsattachments { get; set; }
     }

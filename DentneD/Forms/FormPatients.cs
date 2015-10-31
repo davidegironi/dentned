@@ -22,6 +22,7 @@ using System.Linq.Expressions;
 using System.Drawing;
 using DG.DentneD.Helpers;
 using SMcMaster;
+using DG.DentneD.Model.Repositories;
 
 namespace DG.DentneD.Forms
 {
@@ -52,7 +53,7 @@ namespace DG.DentneD.Forms
         private readonly string _patientsAttachmentsdir = "";
         private readonly bool _doSecureDelete = false;
         private readonly bool _resetPatientstreatmentsFilterOnChange = false;
-        private readonly bool _patientsAttachmentsFindMaxValue = false;
+        private readonly bool _resetPatientstreatmentsFilterOnSave = false;
         private readonly bool _patientsAttachmentsSaveandedit = true;
 
         private enum PatientsFilter { All, NotArchived, Archived };
@@ -72,7 +73,9 @@ namespace DG.DentneD.Forms
 
         public int invoices_id_toload = -1;
         public int estimates_id_toload = -1;
-        
+
+        private bool _loadPatientsTreatmentsFilter = true;
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -96,13 +99,13 @@ namespace DG.DentneD.Forms
             else if (ConfigurationManager.AppSettings["paymentReference"] == "I")
                 _paymentsReference = PaymentsReference.Invoices;
             _resetPatientstreatmentsFilterOnChange = Convert.ToBoolean(ConfigurationManager.AppSettings["resetPatientstreatmentsFilterOnChange"]);
+            _resetPatientstreatmentsFilterOnSave = Convert.ToBoolean(ConfigurationManager.AppSettings["resetPatientstreatmentsFilterOnSave"]);
             if (ConfigurationManager.AppSettings["patientsDefaultFilter"] == "A")
                 _patientsFilter = PatientsFilter.All;
             else if (ConfigurationManager.AppSettings["patientsDefaultFilter"] == "N")
                 _patientsFilter = PatientsFilter.NotArchived;
             else if (ConfigurationManager.AppSettings["patientsDefaultFilter"] == "C")
                 _patientsFilter = PatientsFilter.Archived;
-            _patientsAttachmentsFindMaxValue = Convert.ToBoolean(ConfigurationManager.AppSettings["patientsAttachmentsFindMaxValue"]);
             if (ConfigurationManager.AppSettings["patientsAttachmentsOpenMode"] == "A")
                 _attachmentsOpenMode = AttachmentsOpenMode.Application;
             else if (ConfigurationManager.AppSettings["patientsAttachmentsOpenMode"] == "F")
@@ -228,6 +231,7 @@ namespace DG.DentneD.Forms
             LanguageHelper.AddComponent(patientstreatments_filtertanyLabel);
             LanguageHelper.AddComponent(label_tabPatientsTreatments_filterfulfilled);
             LanguageHelper.AddComponent(label_tabPatientsTreatments_filterpaid);
+            LanguageHelper.AddComponent(button_tabPatientsTreatments_filterprint);
             LanguageHelper.AddComponent(dateDataGridViewTextBoxColumn1, this.GetType().Name, "HeaderText");
             LanguageHelper.AddComponent(treatmentDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
             LanguageHelper.AddComponent(toothsDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
@@ -291,6 +295,7 @@ namespace DG.DentneD.Forms
             LanguageHelper.AddComponent(tabPage_tabPatientsAttachments);
             LanguageHelper.AddComponent(patientsattachmentsidDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
             LanguageHelper.AddComponent(attachmetnstypeDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(dateDataGridViewTextBoxColumn5, this.GetType().Name, "HeaderText");
             LanguageHelper.AddComponent(attachmentDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
             LanguageHelper.AddComponent(button_tabPatientsAttachments_new);
             LanguageHelper.AddComponent(button_tabPatientsAttachments_edit);
@@ -372,6 +377,16 @@ namespace DG.DentneD.Forms
             public string patientstreatmentsfilterpaidAll = "All";
             public string patientstreatmentsfilterpaidN = "Not paid";
             public string patientstreatmentsfilterpaidY = "Paid";
+            public string printmodelerrorMessage = "Can not instantiate the print model.";
+            public string printmodelerrorTitle = "Error";
+            public string printcreatefoldererrorMessage = "Can not create destination folder '{0}'.";
+            public string printcreatefoldererrorTitle = "Error";
+            public string printvalidfilenameerrorMessage = "Can not found a valid filename.";
+            public string printvalidfilenameerrorTitle = "Error";
+            public string printbuildpdferrorMessage = "Can not build the PDF file '{0}'.";
+            public string printbuildpdferrorTitle = "Error";
+            public string printopenfilenameMessage = "File '{0}' built successful.";
+            public string printopenfilenameTitle = "Info";
         }
 
         /// <summary>
@@ -942,6 +957,8 @@ namespace DG.DentneD.Forms
             advancedDataGridView_tabAppointments_list.SortDESC(advancedDataGridView_tabAppointments_list.Columns[1]);
             advancedDataGridView_tabPatientsAttachments_list.CleanFilterAndSort();
             advancedDataGridView_tabPatientsAttachments_list.SortASC(advancedDataGridView_tabPatientsAttachments_list.Columns[1]);
+            advancedDataGridView_tabPatientsAttachments_list.SortDESC(advancedDataGridView_tabPatientsAttachments_list.Columns[2]);
+            advancedDataGridView_tabPatientsAttachments_list.SortASC(advancedDataGridView_tabPatientsAttachments_list.Columns[3]);
             advancedDataGridView_tabInvoices_list.CleanFilterAndSort();
             advancedDataGridView_tabInvoices_list.SortDESC(advancedDataGridView_tabInvoices_list.Columns[1]);
             advancedDataGridView_tabEstimates_list.CleanFilterAndSort();
@@ -1820,6 +1837,38 @@ namespace DG.DentneD.Forms
                 patients_id = (((DataRowView)vPatientsBindingSource.Current).Row).Field<int>("patients_id");
             }
 
+            //get predicate
+            Expression<Func<patientstreatments, bool>> predicate = GetDataSourceList_tabPatientsTreatmentsPredicate(patients_id);
+
+            //set the filter numbers
+            IsBindingSourceLoading = true;
+            SetPatientstreatmentsFiltert();
+            IsBindingSourceLoading = false;
+
+            IEnumerable<VPatientsTreatments> vPatientsTreatments =
+            _dentnedModel.PatientsTreatments.List(predicate.Compile()).Select(
+            r => new VPatientsTreatments
+            {
+                patientstreatments_id = r.patientstreatments_id,
+                treatment = _dentnedModel.Treatments.Find(r.treatments_id).treatments_code,
+                isfulfilled = (r.patientstreatments_fulfilldate != null ? true : false),
+                ispaid = r.patientstreatments_ispaid,
+                date = r.patientstreatments_creationdate,
+                tooths = _dentnedModel.PatientsTreatments.GetTreatmentsToothsString(r)
+            }).ToList();
+
+            ret = DGDataTableUtils.ToDataTable<VPatientsTreatments>(vPatientsTreatments);
+
+            return ret;
+        }
+
+        /// <summary>
+        /// Get predicate for patientstreatments to show
+        /// </summary>
+        /// <param name="patients_id"></param>
+        /// <returns></returns>
+        private Expression<Func<patientstreatments, bool>> GetDataSourceList_tabPatientsTreatmentsPredicate(int patients_id)
+        {
             //set predicate
             Expression<Func<patientstreatments, bool>> predicate = DGPredicateBuilder.True<patientstreatments>();
             Expression<Func<patientstreatments, bool>> predicateor = DGPredicateBuilder.False<patientstreatments>();
@@ -1840,7 +1889,7 @@ namespace DG.DentneD.Forms
                 else if (filterpaid == PatientsTreatmentsPaidFilter.Paid.ToString())
                     predicate = predicate.And(r => r.patientstreatments_ispaid == true);
             }
-            if(!patientstreatments_filtertanyCheckBox.Checked)
+            if (!patientstreatments_filtertanyCheckBox.Checked)
             {
                 if (
                     patientstreatments_filtert11CheckBox.Checked &&
@@ -2308,30 +2357,10 @@ namespace DG.DentneD.Forms
                         !r.patientstreatments_t47 &&
                         !r.patientstreatments_t48)
                         ));
-
                 }
             }
 
-            //set the filter numbers
-            IsBindingSourceLoading = true;
-            SetPatientstreatmentsFiltert();
-            IsBindingSourceLoading = false;
-
-            IEnumerable<VPatientsTreatments> vPatientsTreatments =
-            _dentnedModel.PatientsTreatments.List(predicate.Compile()).Select(
-            r => new VPatientsTreatments
-            {
-                patientstreatments_id = r.patientstreatments_id,
-                treatment = _dentnedModel.Treatments.Find(r.treatments_id).treatments_code,
-                isfulfilled = (r.patientstreatments_fulfilldate != null ? true : false),
-                ispaid = r.patientstreatments_ispaid,
-                date = r.patientstreatments_creationdate,
-                tooths = _dentnedModel.PatientsTreatments.GetTreatmentsToothsString(r)
-            }).ToList();
-
-            ret = DGDataTableUtils.ToDataTable<VPatientsTreatments>(vPatientsTreatments);
-
-            return ret;
+            return predicate;
         }
 
         /// <summary>
@@ -2379,7 +2408,7 @@ namespace DG.DentneD.Forms
         private void Add_tabPatientsTreatments(object item)
         {
             SetCurrentPatientstreatmentsBindingSource();
-            
+
             //scroll up
             tabPage_tabPatientsTreatments.AutoScrollPosition = new Point(0, 0);
 
@@ -2388,6 +2417,9 @@ namespace DG.DentneD.Forms
                 //unset lazy load for payments tab, to reload totals
                 tabElement_tabPayments.IsLazyLoaded = false;
             }
+
+            if (_resetPatientstreatmentsFilterOnSave)
+                ResetPatientstreatmentsFilter();
 
             DGUIGHFData.Add<patientstreatments, DentneDModel>(_dentnedModel.PatientsTreatments, item);
         }
@@ -2409,6 +2441,9 @@ namespace DG.DentneD.Forms
                 tabElement_tabPayments.IsLazyLoaded = false;
             }
 
+            if (_resetPatientstreatmentsFilterOnSave)
+                ResetPatientstreatmentsFilter();
+
             DGUIGHFData.Update<patientstreatments, DentneDModel>(_dentnedModel.PatientsTreatments, item);
         }
 
@@ -2423,6 +2458,9 @@ namespace DG.DentneD.Forms
                 //unset lazy load for payments tab, to reload totals
                 tabElement_tabPayments.IsLazyLoaded = false;
             }
+
+            if (_resetPatientstreatmentsFilterOnSave)
+                ResetPatientstreatmentsFilter();
 
             DGUIGHFData.Remove<patientstreatments, DentneDModel>(false, _dentnedModel.PatientsTreatments, item);
         }
@@ -2527,7 +2565,84 @@ namespace DG.DentneD.Forms
                 ReloadTab(tabElement_tabPatientsTreatments);
             }
         }
-        
+
+        /// <summary>
+        /// Print treatments for this patient
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button_tabPatientsTreatments_filterprint_Click(object sender, EventArgs e)
+        {
+            int patients_id = -1;
+            if (vPatientsBindingSource.Current != null)
+            {
+                patients_id = (((DataRowView)vPatientsBindingSource.Current).Row).Field<int>("patients_id");
+            }
+
+            if(patients_id != -1)
+            {
+                //get predicate
+                Expression<Func<patientstreatments, bool>> predicate = GetDataSourceList_tabPatientsTreatmentsPredicate(patients_id);
+                patientstreatments[] patientstreatmentsl = _dentnedModel.PatientsTreatments.List(predicate.Compile()).ToArray();
+
+                //do print
+                PrintPatientsTreatments(patients_id, patientstreatmentsl);
+            }
+        }
+
+        /// <summary>
+        /// Print patient treatments
+        /// </summary>
+        /// <param name="patients_id"></param>
+        /// <param name="patientstreatmentsl"></param>
+        private void PrintPatientsTreatments(int patients_id, patientstreatments[] patientstreatmentsl)
+        {
+            if (patientstreatmentsl == null || patientstreatmentsl.Count() == 0)
+                return;
+
+            //instantiate the printmodel
+            string assemblyPath = ConfigurationManager.AppSettings["printModel"];
+            IDentneDPrintModel printModel = DentneDPrintModelHelper.DentneDPrintModelInstance(assemblyPath);
+            if (printModel == null)
+            {
+                MessageBox.Show(language.printmodelerrorMessage, language.printmodelerrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            //prepare folders
+            string destfolder = ConfigurationManager.AppSettings["tmpdir"];
+            if (!FileHelper.CreateFolder(destfolder))
+            {
+                MessageBox.Show(String.Format(language.printcreatefoldererrorMessage, destfolder), language.printcreatefoldererrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            //make new filename
+            string filename = FileHelper.FindRandomFileName(destfolder, "T", "pdf");
+            if (String.IsNullOrEmpty(filename))
+            {
+                MessageBox.Show(language.printvalidfilenameerrorMessage, language.printvalidfilenameerrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            //build PDF
+            if (!printModel.BuildPatientsTreatmentsPDF(_dentnedModel, patients_id, patientstreatmentsl, filename, ConfigurationManager.AppSettings["language"]))
+            {
+                MessageBox.Show(String.Format(language.printbuildpdferrorMessage, filename), language.printbuildpdferrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            //try to start the process
+            try
+            {
+                Process.Start(filename);
+            }
+            catch
+            {
+                MessageBox.Show(String.Format(language.printopenfilenameMessage, filename), language.printopenfilenameTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
         /// <summary>
         ///  Patients treatments view BindingSourceList event raised
         /// </summary>
@@ -3484,10 +3599,14 @@ namespace DG.DentneD.Forms
         /// </summary>
         private void ResetPatientstreatmentsFilter()
         {
+            _loadPatientsTreatmentsFilter = false;
             IsBindingSourceLoading = true;
             patientstreatments_filtertanyCheckBox.Checked = true;
-            patientstreatments_filtertanyCheckBox_CheckedChanged(null, null);
+            comboBox_tabPatientsTreatments_filterfulfilled.SelectedIndex = 0;
+            comboBox_tabPatientsTreatments_filterpaid.SelectedIndex = 0;
             IsBindingSourceLoading = false;
+            patientstreatments_filtertanyCheckBox_CheckedChanged(null, null);
+            _loadPatientsTreatmentsFilter = true;
         }
 
         /// <summary>
@@ -3496,6 +3615,9 @@ namespace DG.DentneD.Forms
         private void PatientsTreatmentsFilter()
         {
             if (IsBindingSourceLoading)
+                return;
+
+            if (!_loadPatientsTreatmentsFilter)
                 return;
 
             IsBindingSourceLoading = true;
@@ -4398,6 +4520,7 @@ namespace DG.DentneD.Forms
             {
                 patientsattachments_id = r.patientsattachments_id,
                 attachmetnstype = _dentnedModel.PatientsAttachmentsTypes.Find(r.patientsattachmentstypes_id).patientsattachmentstypes_name,
+                date = r.patientsattachments_date.Date,
                 attachment = (r.patientsattachments_value.Length > MaxRowValueLength ? r.patientsattachments_value.Substring(0, MaxRowValueLength) + "..." : r.patientsattachments_value)
             }).ToList();
 
@@ -4638,23 +4761,43 @@ namespace DG.DentneD.Forms
             if (IsBindingSourceLoading)
                 return;
 
-            if(_patientsAttachmentsFindMaxValue)
+            if (patientsattachmentstypes_idComboBox.SelectedIndex != -1 && tabElement_tabPatientsAttachments.CurrentEditingMode == EditingMode.C || tabElement_tabPatientsAttachments.CurrentEditingMode == EditingMode.U)
             {
-                if (patientsattachmentstypes_idComboBox.SelectedIndex != -1 && tabElement_tabPatientsAttachments.CurrentEditingMode == EditingMode.C || tabElement_tabPatientsAttachments.CurrentEditingMode == EditingMode.U)
+                int patients_id = -1;
+                if (vPatientsBindingSource.Current != null)
                 {
-                    int patients_id = -1;
-                    if (vPatientsBindingSource.Current != null)
-                    {
-                        patients_id = (((DataRowView)vPatientsBindingSource.Current).Row).Field<int>("patients_id");
-                    }
+                    patients_id = (((DataRowView)vPatientsBindingSource.Current).Row).Field<int>("patients_id");
+                }
 
-                    if(patients_id != -1)
+                if(patients_id != -1)
+                {
+                    patientsattachmentstypes patientsattachmentstype = _dentnedModel.PatientsAttachmentsTypes.Find(patientsattachmentstypes_idComboBox.SelectedValue);
+                    if (patientsattachmentstype != null)
                     {
-                        patientsattachmentstypes patientsattachmentstype = _dentnedModel.PatientsAttachmentsTypes.Find(patientsattachmentstypes_idComboBox.SelectedValue);
-                        if (patientsattachmentstype != null)
+                        if(patientsattachmentstype.patientsattachmentstypes_valueautofunc == PatientsAttachmentsTypesRepository.ValueAutoFuncCode.AMG.ToString())
                         {
                             int maxvalue = 0;
-                            foreach(patientsattachments patientsattachment in _dentnedModel.PatientsAttachments.List(r => r.patientsattachmentstypes_id == patientsattachmentstype.patientsattachmentstypes_id))
+                            foreach (patientsattachments patientsattachment in _dentnedModel.PatientsAttachments.List(r => r.patientsattachmentstypes_id == patientsattachmentstype.patientsattachmentstypes_id))
+                            {
+                                try
+                                {
+                                    int n = Convert.ToInt32(patientsattachment.patientsattachments_value);
+                                    if (n > maxvalue)
+                                        maxvalue = n;
+                                }
+                                catch { }
+                            }
+                            maxvalue++;
+                            if (maxvalue == 0)
+                                maxvalue++;
+                            patientsattachmentsBindingSource.EndEdit();
+                            ((patientsattachments)patientsattachmentsBindingSource.Current).patientsattachments_value = maxvalue.ToString();
+                            patientsattachmentsBindingSource.ResetBindings(true);
+                        }
+                        else if(patientsattachmentstype.patientsattachmentstypes_valueautofunc == PatientsAttachmentsTypesRepository.ValueAutoFuncCode.AML.ToString())
+                        {
+                            int maxvalue = 0;
+                            foreach (patientsattachments patientsattachment in _dentnedModel.PatientsAttachments.List(r => r.patientsattachmentstypes_id == patientsattachmentstype.patientsattachmentstypes_id && r.patients_id == patients_id))
                             {
                                 try
                                 {
@@ -4997,6 +5140,6 @@ namespace DG.DentneD.Forms
         }
 
         #endregion
-                        
+                                
     }
 }

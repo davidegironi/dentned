@@ -16,6 +16,7 @@ namespace DG.DentneD.Model.Entity
     {
         public treatments()
         {
+            this.patientstreatments = new HashSet<patientstreatments>();
             this.treatmentsprices = new HashSet<treatmentsprices>();
         }
     
@@ -29,6 +30,8 @@ namespace DG.DentneD.Model.Entity
         public Nullable<byte> treatments_mexpiration { get; set; }
         public string treatments_notes { get; set; }
     
+        public virtual ICollection<patientstreatments> patientstreatments { get; set; }
+        public virtual taxes taxes { get; set; }
         public virtual treatmentstypes treatmentstypes { get; set; }
         public virtual ICollection<treatmentsprices> treatmentsprices { get; set; }
     }

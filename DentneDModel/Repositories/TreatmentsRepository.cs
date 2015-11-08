@@ -4,11 +4,11 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System.Linq;
 using DG.Data.Model;
 using DG.DentneD.Model.Entity;
-using System.Text.RegularExpressions;
 using System;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace DG.DentneD.Model.Repositories
 {
@@ -29,6 +29,7 @@ namespace DG.DentneD.Model.Repositories
             public string text006 = "Treatment already inserted.";
             public string text007 = "Invalid tax.";
             public string text008 = "A computed line already has this code.";
+            public string text009 = "This item can not be removed. A patient treatment depends on it.";
         }
 
         /// <summary>
@@ -120,7 +121,7 @@ namespace DG.DentneD.Model.Repositories
                     ret = false;
                     errors = errors.Concat(new string[] { language.text005 }).ToArray();
                 }
-                
+
                 if (item.taxes_id != null && BaseModel.Taxes.Find(item.taxes_id) == null)
                 {
                     ret = false;
@@ -130,7 +131,7 @@ namespace DG.DentneD.Model.Repositories
                 if (!ret)
                     break;
 
-                if (BaseModel.ComputedLines.List(r => r.computedlines_code == item.treatments_code).Count() > 0)
+                if (BaseModel.ComputedLines.Any(r => r.computedlines_code == item.treatments_code))
                 {
                     ret = false;
                     errors = errors.Concat(new string[] { language.text008 }).ToArray();
@@ -138,8 +139,8 @@ namespace DG.DentneD.Model.Repositories
 
                 if (!isUpdate)
                 {
-                    if (List(r => r.treatments_code == item.treatments_code).Count() > 0 ||
-                        List(r => r.treatments_name == item.treatments_name).Count() > 0)
+                    if (Any(r => r.treatments_code == item.treatments_code) ||
+                        Any(r => r.treatments_name == item.treatments_name))
                     {
                         ret = false;
                         errors = errors.Concat(new string[] { language.text006 }).ToArray();
@@ -147,8 +148,8 @@ namespace DG.DentneD.Model.Repositories
                 }
                 else
                 {
-                    if (List(r => r.treatments_id != item.treatments_id && r.treatments_code == item.treatments_code).Count() > 0 ||
-                        List(r => r.treatments_id != item.treatments_id && r.treatments_name == item.treatments_name).Count() > 0)
+                    if (Any(r => r.treatments_id != item.treatments_id && r.treatments_code == item.treatments_code) ||
+                        Any(r => r.treatments_id != item.treatments_id && r.treatments_name == item.treatments_name))
                     {
                         ret = false;
                         errors = errors.Concat(new string[] { language.text006 }).ToArray();
@@ -158,6 +159,45 @@ namespace DG.DentneD.Model.Repositories
                 if (!ret)
                     break;
             }
+
+            return ret;
+        }
+
+        /// <summary>
+        /// Check if an item can be removed
+        /// </summary>
+        /// <param name="checkForeingKeys"></param>
+        /// <param name="excludedForeingKeys"></param>
+        /// <param name="errors"></param>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public override bool CanRemove(bool checkForeingKeys, string[] excludedForeingKeys, ref string[] errors, params treatments[] items)
+        {
+            bool ret = true;
+
+            errors = new string[] { };
+
+            foreach (treatments item in items)
+            {
+                if (BaseModel.PatientsTreatments.Any(r => r.treatments_id == item.treatments_id))
+                {
+                    ret = false;
+                    errors = errors.Concat(new string[] { language.text009 }).ToArray();
+                }
+
+                if (!ret)
+                    break;
+            }
+
+            if (!ret)
+                return ret;
+
+            if (excludedForeingKeys == null)
+                excludedForeingKeys = new string[] { };
+            if (!excludedForeingKeys.Contains("FK_treatmentsprices_treatments"))
+                excludedForeingKeys = excludedForeingKeys.Concat(new string[] { "FK_treatmentsprices_treatments" }).ToArray();
+
+            ret = base.CanRemove(checkForeingKeys, excludedForeingKeys, ref errors, items);
 
             return ret;
         }

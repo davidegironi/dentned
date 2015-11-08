@@ -4,10 +4,10 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System.Linq;
 using DG.DentneD.Model.Entity;
 using NUnit.Framework;
 using System;
+using System.Linq;
 
 namespace DG.DentneD.Model.Test
 {
@@ -23,8 +23,8 @@ namespace DG.DentneD.Model.Test
             rooms t_rooms = null;
             appointments t_appointments = null;
 
-            t_patients = _dentnedModel.Patients.List(r => r.patients_name == "XX1" && r.patients_surname == "XX1").FirstOrDefault();
-            if(t_patients != null)
+            t_patients = _dentnedModel.Patients.FirstOrDefault(r => r.patients_name == "XX1" && r.patients_surname == "XX1");
+            if (t_patients != null)
                 _dentnedModel.Appointments.Remove(_dentnedModel.Appointments.List(r => r.patients_id == t_patients.patients_id).ToArray());
             _dentnedModel.Patients.Remove(_dentnedModel.Patients.List(r => r.patients_name == "XX1" && r.patients_surname == "XX1").ToArray());
             _dentnedModel.Doctors.Remove(_dentnedModel.Doctors.List(r => r.doctors_name == "XX1" && r.doctors_surname == "XX1").ToArray());
@@ -155,7 +155,7 @@ namespace DG.DentneD.Model.Test
             Assert.IsTrue(_dentnedModel.Appointments.CanAdd(t_appointments));
             _dentnedModel.Appointments.Add(t_appointments);
 
-            t_patients = _dentnedModel.Patients.List(r => r.patients_name == "XX1" && r.patients_surname == "XX1").FirstOrDefault();
+            t_patients = _dentnedModel.Patients.FirstOrDefault(r => r.patients_name == "XX1" && r.patients_surname == "XX1");
             if (t_patients != null)
                 _dentnedModel.Appointments.Remove(_dentnedModel.Appointments.List(r => r.patients_id == t_patients.patients_id).ToArray());
             _dentnedModel.Patients.Remove(_dentnedModel.Patients.List(r => r.patients_name == "XX1" && r.patients_surname == "XX1").ToArray());

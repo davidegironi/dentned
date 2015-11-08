@@ -4,19 +4,19 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System;
-using System.Linq;
-using DG.UI.GHF;
+using DG.DentneD.Helpers;
 using DG.DentneD.Model;
 using DG.DentneD.Model.Entity;
-using System.Configuration;
-using System.Windows.Forms.Calendar;
-using System.Drawing;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using System.Data;
+using DG.UI.GHF;
 using SMcMaster;
-using DG.DentneD.Helpers;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
+using System.Windows.Forms.Calendar;
 
 namespace DG.DentneD.Forms
 {
@@ -138,7 +138,7 @@ namespace DG.DentneD.Forms
             _calendarDayHourEnd = Convert.ToInt16(ConfigurationManager.AppSettings["calendarDayHourEnd"]);
             foreach (DayOfWeek dayOfWeek in Enum.GetValues(typeof(DayOfWeek)))
             {
-                if(dayOfWeek.ToString().CompareTo(ConfigurationManager.AppSettings["calendarFirstDayOfTheWeek"]) == 0)
+                if (dayOfWeek.ToString().CompareTo(ConfigurationManager.AppSettings["calendarFirstDayOfTheWeek"]) == 0)
                 {
                     _calendarFirstDayOfTheWeek = dayOfWeek;
                     break;
@@ -213,7 +213,7 @@ namespace DG.DentneD.Forms
             calendar_listmonths.AllowItemResize = false;
             calendar_listmonths.AllowNew = false;
             calendar_listmonths.MaximumViewDays = 42;
-            
+
             ResetAppointmentBindingSource();
         }
 
@@ -248,7 +248,7 @@ namespace DG.DentneD.Forms
             LanguageHelper.AddComponent(appointments_notesLabel);
             LanguageHelper.AddComponent(button_tabAppointments_colorselect);
         }
-        
+
         /// <summary>
         /// Loader
         /// </summary>
@@ -260,7 +260,7 @@ namespace DG.DentneD.Forms
 
             _currentEditingMode = EditingMode.R;
             SetCustomEditingMode(false);
-            
+
             LoadAppointments();
         }
 
@@ -272,25 +272,25 @@ namespace DG.DentneD.Forms
             IsBindingSourceLoading = true;
 
             //load doctors
-            doctors_idComboBox.DataSource = _dentnedModel.Doctors.List().Select(r => new { name = r.doctors_surname + " " + r.doctors_name, r.doctors_id }).OrderBy(r => r.name).ToArray();
+            doctors_idComboBox.DataSource = _dentnedModel.Doctors.List().OrderBy(r => r.doctors_surname).ThenBy(r => r.doctors_name).Select(r => new { name = r.doctors_surname + " " + r.doctors_name, r.doctors_id }).ToArray();
             doctors_idComboBox.DisplayMember = "name";
             doctors_idComboBox.ValueMember = "doctors_id";
             doctors_idComboBox.SelectedIndex = -1;
 
             //load rooms
-            rooms_idComboBox.DataSource = _dentnedModel.Rooms.List().Select(r => new { name = r.rooms_name, r.rooms_id }).OrderBy(r => r.name).ToArray();
+            rooms_idComboBox.DataSource = _dentnedModel.Rooms.List().OrderBy(r => r.rooms_name).Select(r => new { name = r.rooms_name, r.rooms_id }).ToArray();
             rooms_idComboBox.DisplayMember = "name";
             rooms_idComboBox.ValueMember = "rooms_id";
             rooms_idComboBox.SelectedIndex = -1;
 
             //load patients
-            patients_idComboBox.DataSource = _dentnedModel.Patients.List().Select(r => new { name = r.patients_surname + " " + r.patients_name, r.patients_id }).OrderBy(r => r.name).ToArray();
+            patients_idComboBox.DataSource = _dentnedModel.Patients.List().OrderBy(r => r.patients_surname).ThenBy(r => r.patients_name).Select(r => new { name = r.patients_surname + " " + r.patients_name, r.patients_id }).ToArray();
             patients_idComboBox.DisplayMember = "name";
             patients_idComboBox.ValueMember = "patients_id";
             patients_idComboBox.SelectedIndex = -1;
 
             //load filter doctors
-            comboBox_filterDoctors.DataSource = (new[] { new { name = "", doctors_id = -1 } }).Concat(_dentnedModel.Doctors.List().Select(r => new { name = r.doctors_surname + " " + r.doctors_name, r.doctors_id })).ToArray();
+            comboBox_filterDoctors.DataSource = (new[] { new { name = "", doctors_id = -1 } }).Concat(_dentnedModel.Doctors.List().OrderBy(r => r.doctors_surname).ThenBy(r => r.doctors_name).Select(r => new { name = r.doctors_surname + " " + r.doctors_name, r.doctors_id })).ToArray();
             comboBox_filterDoctors.DisplayMember = "name";
             comboBox_filterDoctors.ValueMember = "doctors_id";
             comboBox_filterDoctors.SelectedIndex = -1;
@@ -298,7 +298,7 @@ namespace DG.DentneD.Forms
                 comboBox_filterDoctors.SelectedIndex = 1;
 
             //load filter rooms
-            comboBox_filterRooms.DataSource = (new[] { new { name = "", rooms_id = -1 } }).Concat(_dentnedModel.Rooms.List().Select(r => new { name = r.rooms_name, r.rooms_id }).OrderBy(r => r.name)).ToArray();
+            comboBox_filterRooms.DataSource = (new[] { new { name = "", rooms_id = -1 } }).Concat(_dentnedModel.Rooms.List().OrderBy(r => r.rooms_name).Select(r => new { name = r.rooms_name, r.rooms_id })).ToArray();
             comboBox_filterRooms.DisplayMember = "name";
             comboBox_filterRooms.ValueMember = "rooms_id";
             comboBox_filterRooms.SelectedIndex = -1;
@@ -308,7 +308,7 @@ namespace DG.DentneD.Forms
             IsBindingSourceLoading = false;
         }
 
-        
+
         #region filters
 
         /// <summary>
@@ -383,7 +383,7 @@ namespace DG.DentneD.Forms
             _currentDate = new DateTime(monthView_filterDay.SelectionStart.Year, monthView_filterDay.SelectionStart.Month, 1);
 
             _appointmentItems.Clear();
-            
+
             List<appointments> appointments = new List<appointments>();
 
             DateTime fromdate = new DateTime(monthView_filterDay.SelectionStart.Year, monthView_filterDay.SelectionStart.Month, 1).AddDays(-7);
@@ -408,7 +408,7 @@ namespace DG.DentneD.Forms
                             r.appointments_from >= fromdate &&
                             r.appointments_from <= todate &&
                             r.doctors_id == doctors_id).OrderBy(r => r.rooms_id).ThenBy(r => r.doctors_id).ToList();
-                }                
+                }
             }
 
             foreach (appointments appointment in appointments)
@@ -418,12 +418,12 @@ namespace DG.DentneD.Forms
                 titleday = (titleday.Length > CalendarTitleDayMaxLengh ? titleday.Substring(0, CalendarTitleDayMaxLengh) + "..." : titleday);
                 string titleweek = patient.patients_surname + " " + patient.patients_name;
                 titleweek = (titleweek.Length > CalendarTitleWeekMaxLengh ? titleday.Substring(0, CalendarTitleWeekMaxLengh) + "..." : titleweek);
-                string titlemonth = (patient.patients_surname.Length > 3 ? patient.patients_surname.Substring(0, 3) + "." : patient.patients_surname) + " " + patient.patients_surname.Substring(0, 1) + "."; 
+                string titlemonth = (patient.patients_surname.Length > 3 ? patient.patients_surname.Substring(0, 3) + "." : patient.patients_surname) + " " + patient.patients_surname.Substring(0, 1) + ".";
                 titlemonth = (titlemonth.Length > CalendarTitleMonthMaxLengh ? titlemonth.Substring(0, CalendarTitleMonthMaxLengh) + "..." : titlemonth);
 
                 //set color
                 Color color = getCalendarItemColor(appointment.rooms_id);
-                if(!String.IsNullOrEmpty(appointment.appointments_color))
+                if (!String.IsNullOrEmpty(appointment.appointments_color))
                 {
                     try
                     {
@@ -434,9 +434,9 @@ namespace DG.DentneD.Forms
                 else
                 {
                     rooms room = _dentnedModel.Rooms.Find(appointment.rooms_id);
-                    if(room != null)
+                    if (room != null)
                     {
-                        if(!String.IsNullOrEmpty(room.rooms_color))
+                        if (!String.IsNullOrEmpty(room.rooms_color))
                         {
                             try
                             {
@@ -509,7 +509,8 @@ namespace DG.DentneD.Forms
 
                 calendar_listdays.Items.Clear();
 
-                foreach (CustomAppointmentItem item in _appointmentItems) { 
+                foreach (CustomAppointmentItem item in _appointmentItems)
+                {
                     CustomCalendarItem cal = new CustomCalendarItem(calendar_listdays,
                         item.DateFrom,
                         item.DateTo,
@@ -580,7 +581,7 @@ namespace DG.DentneD.Forms
                 calendar_listmonths.Invalidate();
             }
         }
-        
+
         /// <summary>
         /// Set components status
         /// </summary>
@@ -655,7 +656,7 @@ namespace DG.DentneD.Forms
 
         #endregion
 
-        
+
         #region tabAppointments
 
         /// <summary>
@@ -665,7 +666,7 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void button_tabAppointments_new_Click(object sender, EventArgs e)
         {
-            AddAppointment(new DateTime(monthView_filterDay.SelectionStart.Year,monthView_filterDay.SelectionStart.Month, monthView_filterDay.SelectionStart.Day, DateTime.Now.Hour, DateTime.Now.Minute, 0));
+            AddAppointment(new DateTime(monthView_filterDay.SelectionStart.Year, monthView_filterDay.SelectionStart.Month, monthView_filterDay.SelectionStart.Day, DateTime.Now.Hour, DateTime.Now.Minute, 0));
         }
 
         /// <summary>
@@ -712,7 +713,7 @@ namespace DG.DentneD.Forms
                 appointments_fromDateTimePicker.Value = new DateTime(appointments_fromDateTimePicker.Value.Year, appointments_fromDateTimePicker.Value.Month, appointments_fromDateTimePicker.Value.Day, appointments_fromDateTimePicker.Value.Hour, 30, 0);
             else
                 appointments_fromDateTimePicker.Value = new DateTime(appointments_fromDateTimePicker.Value.Year, appointments_fromDateTimePicker.Value.Month, appointments_fromDateTimePicker.Value.Day, appointments_fromDateTimePicker.Value.Hour, 0, 0);
-            
+
             if (appointments_toDateTimePicker.Value.Minute >= 30)
                 appointments_toDateTimePicker.Value = new DateTime(appointments_toDateTimePicker.Value.Year, appointments_toDateTimePicker.Value.Month, appointments_toDateTimePicker.Value.Day, appointments_toDateTimePicker.Value.Hour, 30, 0);
             else
@@ -723,7 +724,7 @@ namespace DG.DentneD.Forms
 
             ((appointments)appointmentsBindingSource.Current).appointments_from = from;
             ((appointments)appointmentsBindingSource.Current).appointments_to = to;
-            
+
             if (String.IsNullOrEmpty(((appointments)appointmentsBindingSource.Current).appointments_color))
                 ((appointments)appointmentsBindingSource.Current).appointments_color = null;
 
@@ -894,7 +895,7 @@ namespace DG.DentneD.Forms
                 }
             }
         }
-        
+
         /// <summary>
         /// Combobox autocomplete
         /// </summary>
@@ -929,7 +930,7 @@ namespace DG.DentneD.Forms
 
 
         #region calendar handlers
-        
+
         /// <summary>
         /// Day item click
         /// </summary>
@@ -937,7 +938,7 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void calendar_listdays_ItemClick(object sender, CalendarItemEventArgs e)
         {
-            if(_calendarDoubleClick)
+            if (_calendarDoubleClick)
             {
                 _calendarDoubleClick = false;
             }
@@ -996,7 +997,7 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void calendar_listdays_ItemSelected(object sender, CalendarItemEventArgs e)
         { }
-        
+
         /// <summary>
         /// Day painting
         /// </summary>
@@ -1012,7 +1013,7 @@ namespace DG.DentneD.Forms
                 ResetAppointmentBindingSource();
             }
         }
-        
+
         /// <summary>
         /// Weeks item click
         /// </summary>
@@ -1083,7 +1084,7 @@ namespace DG.DentneD.Forms
         {
             calendar_listdays_ItemClick(sender, e);
         }
-        
+
         /// <summary>
         /// Month item creating
         /// </summary>
@@ -1160,8 +1161,8 @@ namespace DG.DentneD.Forms
             return Color.FromArgb(randomGen.Next(0, 255), randomGen.Next(0, 255), randomGen.Next(0, 255));
         }
 
-        #endregion                                                                
-                
+        #endregion
+
     }
 
 }

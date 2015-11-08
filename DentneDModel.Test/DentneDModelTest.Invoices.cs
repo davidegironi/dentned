@@ -4,11 +4,10 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System.Linq;
 using DG.DentneD.Model.Entity;
 using NUnit.Framework;
 using System;
-using DG.DentneD.Model.Repositories;
+using System.Linq;
 
 namespace DG.DentneD.Model.Test
 {
@@ -222,7 +221,7 @@ namespace DG.DentneD.Model.Test
                 invoices_deductiontaxrate = 0
             };
             Assert.IsFalse(_dentnedModel.Invoices.CanAdd(t_invoices));
-            
+
             t_invoices = new invoices()
             {
                 invoices_date = today,
@@ -276,13 +275,13 @@ namespace DG.DentneD.Model.Test
             Assert.IsTrue(_dentnedModel.Invoices.CanAdd(t_invoices));
             _dentnedModel.Invoices.Add(t_invoices);
 
-            t_invoices = _dentnedModel.Invoices.List(r => r.invoices_number == "XX1" && r.invoices_date == today.Date).FirstOrDefault();
+            t_invoices = _dentnedModel.Invoices.FirstOrDefault(r => r.invoices_number == "XX1" && r.invoices_date == today.Date);
             t_invoices.invoices_number = "XX2";
             Assert.IsFalse(_dentnedModel.Invoices.CanUpdate(t_invoices));
             t_invoices.invoices_number = "XX3";
             Assert.IsTrue(_dentnedModel.Invoices.CanUpdate(t_invoices));
 
-            t_invoices = _dentnedModel.Invoices.List(r => r.invoices_number == "XX1" && r.invoices_date == today.Date).FirstOrDefault();
+            t_invoices = _dentnedModel.Invoices.FirstOrDefault(r => r.invoices_number == "XX1" && r.invoices_date == today.Date);
             t_invoices.doctors_id = -999;
             Assert.IsTrue(_dentnedModel.Invoices.CanUpdate(t_invoices));
 
@@ -350,7 +349,7 @@ namespace DG.DentneD.Model.Test
                 treatments_price = 10
             };
             _dentnedModel.Treatments.Add(t_treatments);
-            
+
             t_patientstreatments = new patientstreatments()
             {
                 doctors_id = t_doctors.doctors_id,
@@ -404,7 +403,7 @@ namespace DG.DentneD.Model.Test
             };
             _dentnedModel.InvoicesLines.Add(t_invoiceslines);
 
-            t_invoices = _dentnedModel.Invoices.List(r => r.invoices_number == "XX1" && r.invoices_date == today.Date).FirstOrDefault();
+            t_invoices = _dentnedModel.Invoices.FirstOrDefault(r => r.invoices_number == "XX1" && r.invoices_date == today.Date);
             Assert.That(t_invoices.invoices_totalnet, Is.EqualTo(34));
             Assert.That(t_invoices.invoices_totalgross, Is.EqualTo(41.48));
             Assert.That(t_invoices.invoices_totaldue, Is.EqualTo(34.68));
@@ -422,7 +421,7 @@ namespace DG.DentneD.Model.Test
             };
             _dentnedModel.InvoicesLines.Add(t_invoiceslines);
 
-            t_invoices = _dentnedModel.Invoices.List(r => r.invoices_number == "XX1" && r.invoices_date == today.Date).FirstOrDefault();
+            t_invoices = _dentnedModel.Invoices.FirstOrDefault(r => r.invoices_number == "XX1" && r.invoices_date == today.Date);
             Assert.That(t_invoices.invoices_totalnet, Is.EqualTo(24));
 
             _dentnedModel.Invoices.Remove(_dentnedModel.Invoices.List(r => r.invoices_number == "XX1" && r.invoices_date == today.Date).ToArray());

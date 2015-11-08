@@ -4,10 +4,10 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System.Linq;
 using DG.DentneD.Model.Entity;
 using NUnit.Framework;
 using System;
+using System.Linq;
 
 namespace DG.DentneD.Model.Test
 {
@@ -22,13 +22,13 @@ namespace DG.DentneD.Model.Test
 
             _dentnedModel.AddressesTypes.Remove(_dentnedModel.AddressesTypes.List(r => r.addressestypes_name == "XX1").ToArray());
             _dentnedModel.AddressesTypes.Remove(_dentnedModel.AddressesTypes.List(r => r.addressestypes_name == "XX2").ToArray());
-            
+
             t_addressestypes = new addressestypes()
             {
                 //addressestypes_name = "XX1"
             };
             Assert.IsFalse(_dentnedModel.AddressesTypes.CanAdd(t_addressestypes));
-            
+
             t_addressestypes = new addressestypes()
             {
                 addressestypes_name = "XX1"
@@ -48,7 +48,7 @@ namespace DG.DentneD.Model.Test
             };
             _dentnedModel.AddressesTypes.Add(t_addressestypes);
 
-            t_addressestypes = _dentnedModel.AddressesTypes.List(r => r.addressestypes_name == "XX1").FirstOrDefault();
+            t_addressestypes = _dentnedModel.AddressesTypes.FirstOrDefault(r => r.addressestypes_name == "XX1");
             t_addressestypes.addressestypes_name = "XX2";
             Assert.IsFalse(_dentnedModel.AddressesTypes.CanUpdate(t_addressestypes));
             t_addressestypes.addressestypes_name = "XX3";

@@ -4,10 +4,10 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System.Linq;
 using DG.Data.Model;
 using DG.DentneD.Model.Entity;
 using System;
+using System.Linq;
 
 namespace DG.DentneD.Model.Repositories
 {
@@ -22,14 +22,14 @@ namespace DG.DentneD.Model.Repositories
         {
             public string text001 = "Name can not be empty.";
             public string text002 = "Address type already inserted.";
-            public string text003 = "This item can not be removed. An address depends it.";
+            public string text003 = "This item can not be removed. An address depends on it.";
         }
 
         /// <summary>
         /// Repository language
         /// </summary>
         public RepositoryLanguage language = new RepositoryLanguage();
-        
+
         /// <summary>
         /// Check if an item can be added
         /// </summary>
@@ -92,7 +92,7 @@ namespace DG.DentneD.Model.Repositories
 
                 if (!isUpdate)
                 {
-                    if (List(r => r.addressestypes_name == item.addressestypes_name).Count() > 0)
+                    if (Any(r => r.addressestypes_name == item.addressestypes_name))
                     {
                         ret = false;
                         errors = errors.Concat(new string[] { language.text002 }).ToArray();
@@ -100,7 +100,7 @@ namespace DG.DentneD.Model.Repositories
                 }
                 else
                 {
-                    if (List(r => r.addressestypes_id != item.addressestypes_id && r.addressestypes_name == item.addressestypes_name).Count() > 0)
+                    if (Any(r => r.addressestypes_id != item.addressestypes_id && r.addressestypes_name == item.addressestypes_name))
                     {
                         ret = false;
                         errors = errors.Concat(new string[] { language.text002 }).ToArray();
@@ -130,7 +130,7 @@ namespace DG.DentneD.Model.Repositories
 
             foreach (addressestypes item in items)
             {
-                if (BaseModel.PatientsAddresses.List(r => r.addressestypes_id == item.addressestypes_id).Count > 0)
+                if (BaseModel.PatientsAddresses.Any(r => r.addressestypes_id == item.addressestypes_id))
                 {
                     ret = false;
                     errors = errors.Concat(new string[] { language.text003 }).ToArray();

@@ -4,9 +4,9 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System.Linq;
 using DG.DentneD.Model.Entity;
 using NUnit.Framework;
+using System.Linq;
 
 namespace DG.DentneD.Model.Test
 {
@@ -49,7 +49,7 @@ namespace DG.DentneD.Model.Test
                 treatments_price = 10
             };
             Assert.IsFalse(_dentnedModel.Treatments.CanAdd(t_treatments));
-            
+
             t_treatments = new treatments()
             {
                 //treatmentstypes_id = t_treatmentstypes.treatmentstypes_id,
@@ -82,7 +82,7 @@ namespace DG.DentneD.Model.Test
                 treatments_price = 10
             };
             Assert.IsTrue(_dentnedModel.Treatments.CanAdd(t_treatments));
-            
+
             t_treatments = new treatments()
             {
                 treatmentstypes_id = t_treatmentstypes.treatmentstypes_id,
@@ -153,7 +153,7 @@ namespace DG.DentneD.Model.Test
             };
             Assert.IsTrue(_dentnedModel.Treatments.CanAdd(t_treatments));
 
-            t_treatments = _dentnedModel.Treatments.List(r => r.treatments_code == "XX1").FirstOrDefault();
+            t_treatments = _dentnedModel.Treatments.FirstOrDefault(r => r.treatments_code == "XX1");
             t_treatments.treatments_code = "XX2";
             Assert.IsFalse(_dentnedModel.Treatments.CanUpdate(t_treatments));
             t_treatments.treatments_code = "XX3";

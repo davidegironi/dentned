@@ -29,7 +29,7 @@ namespace DG.DentneD
 
             Initialize(Program.uighfApplication);
         }
-        
+
         /// <summary>
         /// Load handler
         /// </summary>
@@ -345,7 +345,7 @@ namespace DG.DentneD
         {
             ShowForm(this, typeof(FormPatientsAttachmentsTypes));
         }
-        
+
         /// <summary>
         /// Patients form
         /// </summary>
@@ -416,12 +416,12 @@ namespace DG.DentneD
             if (UIGHFApplication.IsEditing)
                 return;
 
-            if(MessageBox.Show(language.backupToolMessage, language.backupToolTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show(language.backupToolMessage, language.backupToolTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 try
                 {
                     string filename = ConfigurationManager.AppSettings["backupscript"];
-                    if(File.Exists(filename))
+                    if (File.Exists(filename))
                     {
                         ProcessStartInfo startInfo = new ProcessStartInfo();
                         startInfo.UseShellExecute = true;

@@ -4,10 +4,10 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System.Linq;
 using DG.Data.Model;
 using DG.DentneD.Model.Entity;
 using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace DG.DentneD.Model.Repositories
@@ -31,7 +31,7 @@ namespace DG.DentneD.Model.Repositories
         /// Repository language
         /// </summary>
         public RepositoryLanguage language = new RepositoryLanguage();
-        
+
         /// <summary>
         /// Check if an item can be added
         /// </summary>
@@ -69,7 +69,7 @@ namespace DG.DentneD.Model.Repositories
 
             return ret;
         }
-        
+
         /// <summary>
         /// Validate an item
         /// </summary>
@@ -103,7 +103,7 @@ namespace DG.DentneD.Model.Repositories
 
                 if (!isUpdate)
                 {
-                    if (List(r => r.rooms_name == item.rooms_name).Count() > 0)
+                    if (Any(r => r.rooms_name == item.rooms_name))
                     {
                         ret = false;
                         errors = errors.Concat(new string[] { language.text001 }).ToArray();
@@ -111,7 +111,7 @@ namespace DG.DentneD.Model.Repositories
                 }
                 else
                 {
-                    if (List(r => r.rooms_id != item.rooms_id && r.rooms_name == item.rooms_name).Count() > 0)
+                    if (Any(r => r.rooms_id != item.rooms_id && r.rooms_name == item.rooms_name))
                     {
                         ret = false;
                         errors = errors.Concat(new string[] { language.text001 }).ToArray();
@@ -141,7 +141,7 @@ namespace DG.DentneD.Model.Repositories
 
             foreach (rooms item in items)
             {
-                if (BaseModel.Appointments.List(r => r.rooms_id == item.rooms_id).Count() > 0)
+                if (BaseModel.Appointments.Any(r => r.rooms_id == item.rooms_id))
                 {
                     ret = false;
                     errors = errors.Concat(new string[] { language.text003 }).ToArray();

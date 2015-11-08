@@ -4,10 +4,10 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System.Linq;
 using DG.DentneD.Model.Entity;
 using NUnit.Framework;
 using System;
+using System.Linq;
 
 namespace DG.DentneD.Model.Test
 {
@@ -22,13 +22,13 @@ namespace DG.DentneD.Model.Test
 
             _dentnedModel.ContactsTypes.Remove(_dentnedModel.ContactsTypes.List(r => r.contactstypes_name == "XX1").ToArray());
             _dentnedModel.ContactsTypes.Remove(_dentnedModel.ContactsTypes.List(r => r.contactstypes_name == "XX2").ToArray());
-            
+
             t_contactstypes = new contactstypes()
             {
                 //contactstypes_name = "XX1"
             };
             Assert.IsFalse(_dentnedModel.ContactsTypes.CanAdd(t_contactstypes));
-            
+
             t_contactstypes = new contactstypes()
             {
                 contactstypes_name = "XX1"
@@ -48,7 +48,7 @@ namespace DG.DentneD.Model.Test
             };
             _dentnedModel.ContactsTypes.Add(t_contactstypes);
 
-            t_contactstypes = _dentnedModel.ContactsTypes.List(r => r.contactstypes_name == "XX1").FirstOrDefault();
+            t_contactstypes = _dentnedModel.ContactsTypes.FirstOrDefault(r => r.contactstypes_name == "XX1");
             t_contactstypes.contactstypes_name = "XX2";
             Assert.IsFalse(_dentnedModel.ContactsTypes.CanUpdate(t_contactstypes));
             t_contactstypes.contactstypes_name = "XX3";
@@ -95,7 +95,7 @@ namespace DG.DentneD.Model.Test
                 patientscontacts_value = "XX"
             };
             _dentnedModel.PatientsContacts.Add(t_patientscontacts);
-            
+
             Assert.IsFalse(_dentnedModel.ContactsTypes.CanRemove(_dentnedModel.ContactsTypes.List(r => r.contactstypes_name == "XX1").ToArray()));
 
             _dentnedModel.Patients.Remove(_dentnedModel.Patients.List(r => r.patients_name == "XX1" && r.patients_surname == "XX1").ToArray());

@@ -4,10 +4,10 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System.Linq;
 using DG.Data.Model;
 using DG.DentneD.Model.Entity;
 using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace DG.DentneD.Model.Repositories
@@ -15,7 +15,7 @@ namespace DG.DentneD.Model.Repositories
     public class InvoicesLinesRepository : GenericDataRepository<invoiceslines, DentneDModel>
     {
         public InvoicesLinesRepository() : base() { }
-        
+
         /// <summary>
         /// Repository language dictionary
         /// </summary>
@@ -132,7 +132,7 @@ namespace DG.DentneD.Model.Repositories
                 if (!ret)
                     break;
 
-                if(BaseModel.Invoices.Find(item.invoices_id).invoices_totalnet + Math.Round(item.invoiceslines_quantity * item.invoiceslines_unitprice, 2) < 0)
+                if (BaseModel.Invoices.Find(item.invoices_id).invoices_totalnet + Math.Round(item.invoiceslines_quantity * item.invoiceslines_unitprice, 2) < 0)
                 {
                     ret = false;
                     errors = errors.Concat(new string[] { language.text006 }).ToArray();

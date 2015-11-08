@@ -4,9 +4,9 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System.Linq;
 using DG.DentneD.Model.Entity;
 using NUnit.Framework;
+using System.Linq;
 
 namespace DG.DentneD.Model.Test
 {
@@ -21,7 +21,7 @@ namespace DG.DentneD.Model.Test
 
             _dentnedModel.Reports.Remove(_dentnedModel.Reports.List(r => r.reports_name == "XX1").ToArray());
             _dentnedModel.Reports.Remove(_dentnedModel.Reports.List(r => r.reports_name == "XX2").ToArray());
-            
+
             t_reports = new reports()
             {
                 //reports_name = "XX1",
@@ -57,7 +57,7 @@ namespace DG.DentneD.Model.Test
             };
             _dentnedModel.Reports.Add(t_reports);
 
-            t_reports = _dentnedModel.Reports.List(r => r.reports_name == "XX1").FirstOrDefault();
+            t_reports = _dentnedModel.Reports.FirstOrDefault(r => r.reports_name == "XX1");
             t_reports.reports_name = "XX2";
             Assert.IsFalse(_dentnedModel.Reports.CanUpdate(t_reports));
             t_reports.reports_name = "XX3";

@@ -4,9 +4,9 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System.Linq;
 using DG.DentneD.Model.Entity;
 using NUnit.Framework;
+using System.Linq;
 
 namespace DG.DentneD.Model.Test
 {
@@ -33,7 +33,7 @@ namespace DG.DentneD.Model.Test
                 treatmentspriceslists_name = "XX1"
             };
             _dentnedModel.TreatmentsPricesLists.Add(t_treatmentspriceslists);
-            
+
             t_treatmentstypes = new treatmentstypes()
             {
                 treatmentstypes_name = "XX1"

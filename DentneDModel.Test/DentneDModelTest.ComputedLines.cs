@@ -4,9 +4,9 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System.Linq;
 using DG.DentneD.Model.Entity;
 using NUnit.Framework;
+using System.Linq;
 
 namespace DG.DentneD.Model.Test
 {
@@ -93,7 +93,7 @@ namespace DG.DentneD.Model.Test
             };
             _dentnedModel.ComputedLines.Add(t_computedlines);
 
-            t_computedlines = _dentnedModel.ComputedLines.List(r => r.computedlines_code == "XX1").FirstOrDefault();
+            t_computedlines = _dentnedModel.ComputedLines.FirstOrDefault(r => r.computedlines_code == "XX1");
             t_computedlines.computedlines_code = "XX2";
             Assert.IsFalse(_dentnedModel.ComputedLines.CanUpdate(t_computedlines));
             t_computedlines.computedlines_code = "XX3";

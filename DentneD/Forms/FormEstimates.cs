@@ -4,23 +4,22 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
 using DG.Data.Model.Helpers;
-using DG.UI.GHF;
+using DG.DentneD.Forms.Objects;
+using DG.DentneD.Helpers;
 using DG.DentneD.Model;
 using DG.DentneD.Model.Entity;
-using DG.DentneD.Forms.Objects;
-using Zuby.ADGV;
+using DG.UI.GHF;
+using SMcMaster;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Diagnostics;
-using System.Configuration;
-using DG.DentneD.Helpers;
-using SMcMaster;
-using DG.DentneD.Model.Repositories;
-using System.Collections;
+using System.Linq;
+using System.Windows.Forms;
+using Zuby.ADGV;
 
 namespace DG.DentneD.Forms
 {
@@ -280,7 +279,7 @@ namespace DG.DentneD.Forms
             }
 
             ReloadView();
-            
+
             //select an estiamte on load invoice
             if (estimate != null)
             {
@@ -297,55 +296,55 @@ namespace DG.DentneD.Forms
             IsBindingSourceLoading = true;
 
             //load doctors
-            doctors_idComboBox.DataSource = _dentnedModel.Doctors.List().Select(r => new { name = r.doctors_surname + " " + r.doctors_name, r.doctors_id }).OrderBy(r => r.name).ToArray();
+            doctors_idComboBox.DataSource = _dentnedModel.Doctors.List().OrderBy(r => r.doctors_surname).ThenBy(r => r.doctors_name).Select(r => new { name = r.doctors_surname + " " + r.doctors_name, r.doctors_id }).ToArray();
             doctors_idComboBox.DisplayMember = "name";
             doctors_idComboBox.ValueMember = "doctors_id";
             doctors_idComboBox.SelectedIndex = -1;
 
             //load patients
-            patients_idComboBox.DataSource = _dentnedModel.Patients.List().Select(r => new { name = r.patients_surname + " " + r.patients_name, r.patients_id }).OrderBy(r => r.name).ToArray();
+            patients_idComboBox.DataSource = _dentnedModel.Patients.List().OrderBy(r => r.patients_surname).ThenBy(r => r.patients_name).Select(r => new { name = r.patients_surname + " " + r.patients_name, r.patients_id }).ToArray();
             patients_idComboBox.DisplayMember = "name";
             patients_idComboBox.ValueMember = "patients_id";
             patients_idComboBox.SelectedIndex = -1;
 
             //load payments
-            estimates_paymentComboBox.DataSource = _dentnedModel.PaymentsTypes.List().Select(r => new { name = r.paymentstypes_name, r.paymentstypes_id }).OrderBy(r => r.name).ToArray();
+            estimates_paymentComboBox.DataSource = _dentnedModel.PaymentsTypes.List().OrderBy(r => r.paymentstypes_name).Select(r => new { name = r.paymentstypes_name, r.paymentstypes_id }).ToArray();
             estimates_paymentComboBox.DisplayMember = "name";
             estimates_paymentComboBox.ValueMember = "paymentstypes_id";
             estimates_paymentComboBox.SelectedIndex = -1;
 
             //load footers
-            estimates_footerComboBox.DataSource = _dentnedModel.EstimatesFooters.List().Select(r => new { name = r.estimatesfooters_name, r.estimatesfooters_id }).OrderBy(r => r.name).ToArray();
+            estimates_footerComboBox.DataSource = _dentnedModel.EstimatesFooters.List().OrderBy(r => r.estimatesfooters_name).Select(r => new { name = r.estimatesfooters_name, r.estimatesfooters_id }).ToArray();
             estimates_footerComboBox.DisplayMember = "name";
             estimates_footerComboBox.ValueMember = "estimatesfooters_id";
             estimates_footerComboBox.SelectedIndex = -1;
 
             //load deduction taxes
-            estimates_deductiontaxrateComboBox.DataSource = _dentnedModel.TaxesDeductions.List().Select(r => new { name = r.taxesdeductions_name, r.taxesdeductions_id }).OrderBy(r => r.name).ToArray();
+            estimates_deductiontaxrateComboBox.DataSource = _dentnedModel.TaxesDeductions.List().OrderBy(r => r.taxesdeductions_name).Select(r => new { name = r.taxesdeductions_name, r.taxesdeductions_id }).ToArray();
             estimates_deductiontaxrateComboBox.DisplayMember = "name";
             estimates_deductiontaxrateComboBox.ValueMember = "taxesdeductions_id";
             estimates_deductiontaxrateComboBox.SelectedIndex = -1;
 
             //load tax rates
-            estimateslines_taxrateComboBox.DataSource = _dentnedModel.Taxes.List().Select(r => new { name = r.taxes_name, r.taxes_id }).OrderBy(r => r.name).ToArray();
+            estimateslines_taxrateComboBox.DataSource = _dentnedModel.Taxes.List().OrderBy(r => r.taxes_name).Select(r => new { name = r.taxes_name, r.taxes_id }).ToArray();
             estimateslines_taxrateComboBox.DisplayMember = "name";
             estimateslines_taxrateComboBox.ValueMember = "taxes_id";
             estimateslines_taxrateComboBox.SelectedIndex = -1;
 
             //load treatments
-            treatments_idComboBox.DataSource = _dentnedModel.Treatments.List().Select(r => new { name = r.treatments_code + " - " + r.treatments_name, r.treatments_id }).OrderBy(r => r.name).ToArray();
+            treatments_idComboBox.DataSource = _dentnedModel.Treatments.List().OrderBy(r => r.treatments_code).ThenBy(r => r.treatments_name).Select(r => new { name = r.treatments_code + " - " + r.treatments_name, r.treatments_id }).ToArray();
             treatments_idComboBox.DisplayMember = "name";
             treatments_idComboBox.ValueMember = "treatments_id";
             treatments_idComboBox.SelectedIndex = -1;
 
             //load computed lines
-            computedlines_idComboBox.DataSource = _dentnedModel.ComputedLines.List().Select(r => new { name = r.computedlines_name, r.computedlines_id }).OrderBy(r => r.name).ToArray();
+            computedlines_idComboBox.DataSource = _dentnedModel.ComputedLines.List().OrderBy(r => r.computedlines_name).Select(r => new { name = r.computedlines_name, r.computedlines_id }).ToArray();
             computedlines_idComboBox.DisplayMember = "name";
             computedlines_idComboBox.ValueMember = "computedlines_id";
             computedlines_idComboBox.SelectedIndex = -1;
 
             //load filter doctors
-            comboBox_filterDoctors.DataSource = (new[] { new { name = "", doctors_id = -1 } }).Concat(_dentnedModel.Doctors.List().Select(r => new { name = r.doctors_surname + " " + r.doctors_name, r.doctors_id })).ToArray();
+            comboBox_filterDoctors.DataSource = (new[] { new { name = "", doctors_id = -1 } }).Concat(_dentnedModel.Doctors.List().OrderBy(r => r.doctors_surname).ThenBy(r => r.doctors_name).Select(r => new { name = r.doctors_surname + " " + r.doctors_name, r.doctors_id })).ToArray();
             comboBox_filterDoctors.DisplayMember = "name";
             comboBox_filterDoctors.ValueMember = "doctors_id";
             comboBox_filterDoctors.SelectedIndex = -1;
@@ -385,7 +384,7 @@ namespace DG.DentneD.Forms
             comboBox_filterYears.DataSource = years.Select(r => new { name = r.ToString(), year = r }).ToArray();
             comboBox_filterYears.DisplayMember = "name";
             comboBox_filterYears.ValueMember = "year";
-            
+
             if (currentSelectedIndex == -1)
                 comboBox_filterYears.SelectedIndex = comboBox_filterYears.Items.Count - 1;
             else
@@ -475,7 +474,7 @@ namespace DG.DentneD.Forms
 
             ReloadView();
         }
-        
+
         /// <summary>
         /// Years filter handler
         /// </summary>
@@ -506,7 +505,7 @@ namespace DG.DentneD.Forms
             totaldueTextBox.Text = Math.Round(_dentnedModel.Estimates.List(r => r.doctors_id == doctors_id && r.estimates_date.Year == year).Sum(r => r.estimates_totaldue), 2).ToString();
             totaldueinvoicedTextBox.Text = Math.Round(_dentnedModel.Estimates.List(r => r.doctors_id == doctors_id && r.estimates_date.Year == year && r.invoices_id != null).Sum(r => r.estimates_totaldue), 2).ToString();
         }
-        
+
         /// <summary>
         /// Main BindingSource changed handler
         /// </summary>
@@ -521,18 +520,18 @@ namespace DG.DentneD.Forms
             }
 
             estimates_invoiceTextBox.Text = "";
-            if(estimates_id != -1)
+            if (estimates_id != -1)
             {
                 estimates estimate = _dentnedModel.Estimates.Find(estimates_id);
-                if(estimate.invoices_id != null)
+                if (estimate.invoices_id != null)
                 {
                     invoices invoice = _dentnedModel.Invoices.Find(estimate.invoices_id);
                     doctors doctor = null;
-                    if(invoice.doctors_id != null)
+                    if (invoice.doctors_id != null)
                     {
                         doctor = _dentnedModel.Doctors.Find(invoice.doctors_id);
                     }
-                    
+
                     estimates_invoiceTextBox.Text = invoice.invoices_number + " / " + invoice.invoices_date.ToShortDateString() + " " + (doctor != null ? "- " + doctor.doctors_surname + " " + doctor.doctors_name + " " : "") + "(" + invoice.invoices_id + ")";
                 }
             }
@@ -590,7 +589,7 @@ namespace DG.DentneD.Forms
         /// <param name="item"></param>
         private void Remove_tabEstimates(object item)
         {
-            DGUIGHFData.Remove<estimates, DentneDModel>(false, _dentnedModel.Estimates, item);
+            DGUIGHFData.Remove<estimates, DentneDModel>(_dentnedModel.Estimates, item);
 
             //load filter years
             ReloadFilterYears();
@@ -635,12 +634,12 @@ namespace DG.DentneD.Forms
                     maxnumber++;
                 ((estimates)estimatesBindingSource.Current).doctors_id = doctors_id;
                 ((estimates)estimatesBindingSource.Current).patients_id = null;
-                if (_dentnedModel.PaymentsTypes.List(r => r.paymentstypes_isdefault).Count > 0)
-                    ((estimates)estimatesBindingSource.Current).estimates_payment = _dentnedModel.PaymentsTypes.List(r => r.paymentstypes_isdefault).FirstOrDefault().paymentstypes_doctext;
-                if (_dentnedModel.EstimatesFooters.List(r => r.estimatesfooters_isdefault).Count > 0)
-                    ((estimates)estimatesBindingSource.Current).estimates_footer = _dentnedModel.EstimatesFooters.List(r => r.estimatesfooters_isdefault).FirstOrDefault().estimatesfooters_doctext;
-                if (_dentnedModel.TaxesDeductions.List(r => r.taxesdeductions_isdefault).Count > 0)
-                    ((estimates)estimatesBindingSource.Current).estimates_deductiontaxrate = _dentnedModel.TaxesDeductions.List(r => r.taxesdeductions_isdefault).FirstOrDefault().taxesdeductions_rate;
+                if (_dentnedModel.PaymentsTypes.Any(r => r.paymentstypes_isdefault))
+                    ((estimates)estimatesBindingSource.Current).estimates_payment = _dentnedModel.PaymentsTypes.FirstOrDefault(r => r.paymentstypes_isdefault).paymentstypes_doctext;
+                if (_dentnedModel.EstimatesFooters.Any(r => r.estimatesfooters_isdefault))
+                    ((estimates)estimatesBindingSource.Current).estimates_footer = _dentnedModel.EstimatesFooters.FirstOrDefault(r => r.estimatesfooters_isdefault).estimatesfooters_doctext;
+                if (_dentnedModel.TaxesDeductions.Any(r => r.taxesdeductions_isdefault))
+                    ((estimates)estimatesBindingSource.Current).estimates_deductiontaxrate = _dentnedModel.TaxesDeductions.FirstOrDefault(r => r.taxesdeductions_isdefault).taxesdeductions_rate;
                 ((estimates)estimatesBindingSource.Current).estimates_date = DateTime.Now;
                 ((estimates)estimatesBindingSource.Current).estimates_number = maxnumber.ToString();
                 //reset BindingSource
@@ -687,7 +686,7 @@ namespace DG.DentneD.Forms
                 if (estimates_id != -1)
                 {
                     estimates estimate = _dentnedModel.Estimates.Find(estimates_id);
-                    if(estimate.invoices_id == null)
+                    if (estimate.invoices_id == null)
                     {
                         if (MessageBox.Show(language.invoicerequestMessage, language.invoicerequestTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                         {
@@ -760,10 +759,10 @@ namespace DG.DentneD.Forms
 
                         MessageBox.Show(String.Format(language.invoicerequestalreadyexistsMessage, invoice.invoices_number, invoice.invoices_date.ToString()), language.invoicerequestalreadyexistsTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                    
+
                 }
             }
-                
+
         }
 
         /// <summary>
@@ -1075,13 +1074,13 @@ namespace DG.DentneD.Forms
                 //reload patientstreatments tab
                 estimates estimate = _dentnedModel.Estimates.Find(estimates_id);
                 ReloadPatientsTreatments(estimate.patients_id, true);
-                
+
                 //reset list total
                 SetListTotal(estimate.estimates_date.Year);
             }
             else
                 ReloadPatientsTreatments(null, true);
-            
+
             IEnumerable<VEstimatesLines> vEstimatesLines =
             _dentnedModel.EstimatesLines.List(r => r.estimates_id == estimates_id).Select(
             r => new VEstimatesLines
@@ -1194,8 +1193,8 @@ namespace DG.DentneD.Forms
                     ((estimateslines)estimateslinesBindingSource.Current).estimateslines_description = "";
                     ((estimateslines)estimateslinesBindingSource.Current).estimateslines_quantity = 1;
                     ((estimateslines)estimateslinesBindingSource.Current).estimateslines_unitprice = 0;
-                    if (_dentnedModel.Taxes.List(r => r.taxes_isdefault).Count > 0)
-                        ((estimateslines)estimateslinesBindingSource.Current).estimateslines_taxrate = _dentnedModel.Taxes.List(r => r.taxes_isdefault).FirstOrDefault().taxes_rate;
+                    if (_dentnedModel.Taxes.Any(r => r.taxes_isdefault))
+                        ((estimateslines)estimateslinesBindingSource.Current).estimateslines_taxrate = _dentnedModel.Taxes.FirstOrDefault(r => r.taxes_isdefault).taxes_rate;
                     ((estimateslines)estimateslinesBindingSource.Current).estimateslines_istaxesdeductionsable = true;
                     estimateslinesBindingSource.ResetBindings(true);
                 }
@@ -1254,7 +1253,7 @@ namespace DG.DentneD.Forms
                     foreach (estimateslines estimatesline in _dentnedModel.EstimatesLines.List().Join(
                             _dentnedModel.Estimates.List(), a => a.estimates_id, b => b.estimates_id, (a, b) => a).ToList())
                     {
-                        patientstreatments patientstreatment = patientstreatmentsl.Where(r => r.patientstreatments_id == estimatesline.patientstreatments_id).FirstOrDefault();
+                        patientstreatments patientstreatment = patientstreatmentsl.FirstOrDefault(r => r.patientstreatments_id == estimatesline.patientstreatments_id);
                         if (patientstreatment != null)
                             patientstreatmentsl.Remove(patientstreatment);
                     }
@@ -1262,7 +1261,7 @@ namespace DG.DentneD.Forms
                         r => r.patientstreatments_id != null && patientstreatmentsids.Contains((int)r.patientstreatments_id)).Join(
                             _dentnedModel.Invoices.List(), a => a.invoices_id, b => b.invoices_id, (a, b) => a).ToList())
                     {
-                        patientstreatments patientstreatment = patientstreatmentsl.Where(r => r.patientstreatments_id == invoicesline.patientstreatments_id).FirstOrDefault();
+                        patientstreatments patientstreatment = patientstreatmentsl.FirstOrDefault(r => r.patientstreatments_id == invoicesline.patientstreatments_id);
                         if (patientstreatment != null)
                             patientstreatmentsl.Remove(patientstreatment);
                     }
@@ -1347,7 +1346,7 @@ namespace DG.DentneD.Forms
                                 patients patient = _dentnedModel.Patients.Find(patients_id);
                                 if (patient != null)
                                 {
-                                    treatmentsprices treatmentsprice = _dentnedModel.TreatmentsPrices.List(r => r.treatments_id == treatment.treatments_id && r.treatmentspriceslists_id == patient.treatmentspriceslists_id).FirstOrDefault();
+                                    treatmentsprices treatmentsprice = _dentnedModel.TreatmentsPrices.FirstOrDefault(r => r.treatments_id == treatment.treatments_id && r.treatmentspriceslists_id == patient.treatmentspriceslists_id);
                                     if (treatmentsprice != null)
                                     {
                                         price = treatmentsprice.treatmentsprices_price;
@@ -1366,7 +1365,7 @@ namespace DG.DentneD.Forms
                 estimateslinesBindingSource.ResetBindings(true);
             }
         }
-        
+
         /// <summary>
         /// Computed lines changed
         /// </summary>
@@ -1414,7 +1413,7 @@ namespace DG.DentneD.Forms
                 estimateslinesBindingSource.ResetBindings(true);
             }
         }
-        
+
         /// <summary>
         /// Patient treatments changed
         /// </summary>
@@ -1534,7 +1533,7 @@ namespace DG.DentneD.Forms
         {
             ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
         }
-        
+
         /// <summary>
         /// Combobox autocomplete
         /// </summary>
@@ -1556,6 +1555,6 @@ namespace DG.DentneD.Forms
         }
 
         #endregion
-      
+
     }
 }

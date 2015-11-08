@@ -14,9 +14,18 @@ namespace DG.DentneD.Model.Entity
     
     public partial class taxes
     {
+        public taxes()
+        {
+            this.computedlines = new HashSet<computedlines>();
+            this.treatments = new HashSet<treatments>();
+        }
+    
         public int taxes_id { get; set; }
         public string taxes_name { get; set; }
         public decimal taxes_rate { get; set; }
         public bool taxes_isdefault { get; set; }
+    
+        public virtual ICollection<computedlines> computedlines { get; set; }
+        public virtual ICollection<treatments> treatments { get; set; }
     }
 }

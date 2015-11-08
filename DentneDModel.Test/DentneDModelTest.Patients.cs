@@ -4,10 +4,10 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System.Linq;
 using DG.DentneD.Model.Entity;
 using NUnit.Framework;
 using System;
+using System.Linq;
 
 namespace DG.DentneD.Model.Test
 {
@@ -49,7 +49,7 @@ namespace DG.DentneD.Model.Test
                 patients_password = "123456"
             };
             Assert.IsFalse(_dentnedModel.Patients.CanAdd(t_patients));
-            
+
             t_patients = new patients()
             {
                 patients_name = "XX1",
@@ -141,7 +141,7 @@ namespace DG.DentneD.Model.Test
                 patients_password = "123456"
             };
             Assert.IsFalse(_dentnedModel.Patients.CanAdd(t_patients));
-            
+
             t_patients = new patients()
             {
                 patients_name = "XX1",

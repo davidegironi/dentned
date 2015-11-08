@@ -66,7 +66,10 @@ namespace DG.DentneD.Model.Entity
         public bool patientstreatments_t47 { get; set; }
         public bool patientstreatments_t48 { get; set; }
     
+        public virtual doctors doctors { get; set; }
         public virtual ICollection<estimateslines> estimateslines { get; set; }
         public virtual ICollection<invoiceslines> invoiceslines { get; set; }
+        public virtual patients patients { get; set; }
+        public virtual treatments treatments { get; set; }
     }
 }

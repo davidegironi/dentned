@@ -4,10 +4,10 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System.Linq;
 using DG.Data.Model;
 using DG.DentneD.Model.Entity;
 using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace DG.DentneD.Model.Repositories
@@ -77,7 +77,7 @@ namespace DG.DentneD.Model.Repositories
 
             return ret;
         }
-        
+
         /// <summary>
         /// Validate an item
         /// </summary>
@@ -151,13 +151,13 @@ namespace DG.DentneD.Model.Repositories
                     ret = false;
                     errors = errors.Concat(new string[] { language.text006 }).ToArray();
                 }
-                
+
                 if (!ret)
                     break;
 
                 if (!isUpdate)
                 {
-                    if (List(r => r.patients_username == item.patients_username).Count() > 0)
+                    if (Any(r => r.patients_username == item.patients_username))
                     {
                         ret = false;
                         errors = errors.Concat(new string[] { language.text007 }).ToArray();
@@ -165,14 +165,14 @@ namespace DG.DentneD.Model.Repositories
                 }
                 else
                 {
-                    if (List(r => r.patients_id != item.patients_id && r.patients_username == item.patients_username).Count() > 0)
+                    if (Any(r => r.patients_id != item.patients_id && r.patients_username == item.patients_username))
                     {
                         ret = false;
                         errors = errors.Concat(new string[] { language.text007 }).ToArray();
                     }
                 }
 
-                if (BaseModel.Doctors.List(r => r.doctors_username == item.patients_username).Count() > 0)
+                if (BaseModel.Doctors.Any(r => r.doctors_username == item.patients_username))
                 {
                     ret = false;
                     errors = errors.Concat(new string[] { language.text012 }).ToArray();
@@ -181,6 +181,48 @@ namespace DG.DentneD.Model.Repositories
                 if (!ret)
                     break;
             }
+
+            return ret;
+        }
+
+        /// <summary>
+        /// Check if an item can be removed
+        /// </summary>
+        /// <param name="checkForeingKeys"></param>
+        /// <param name="excludedForeingKeys"></param>
+        /// <param name="errors"></param>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public override bool CanRemove(bool checkForeingKeys, string[] excludedForeingKeys, ref string[] errors, params patients[] items)
+        {
+            bool ret = true;
+
+            errors = new string[] { };
+
+            if (excludedForeingKeys == null)
+                excludedForeingKeys = new string[] { };
+            if (!excludedForeingKeys.Contains("FK_appointments_patients"))
+                excludedForeingKeys = excludedForeingKeys.Concat(new string[] { "FK_appointments_patients" }).ToArray();
+            if (!excludedForeingKeys.Contains("FK_estimates_patients"))
+                excludedForeingKeys = excludedForeingKeys.Concat(new string[] { "FK_estimates_patients" }).ToArray();
+            if (!excludedForeingKeys.Contains("FK_invoices_patients"))
+                excludedForeingKeys = excludedForeingKeys.Concat(new string[] { "FK_invoices_patients" }).ToArray();
+            if (!excludedForeingKeys.Contains("FK_patientsaddresses_patients"))
+                excludedForeingKeys = excludedForeingKeys.Concat(new string[] { "FK_patientsaddresses_patients" }).ToArray();
+            if (!excludedForeingKeys.Contains("FK_patientsattachments_patients"))
+                excludedForeingKeys = excludedForeingKeys.Concat(new string[] { "FK_patientsattachments_patients" }).ToArray();
+            if (!excludedForeingKeys.Contains("FK_patientscontacts_patients"))
+                excludedForeingKeys = excludedForeingKeys.Concat(new string[] { "FK_patientscontacts_patients" }).ToArray();
+            if (!excludedForeingKeys.Contains("FK_patientsmedicalrecords_patients"))
+                excludedForeingKeys = excludedForeingKeys.Concat(new string[] { "FK_patientsmedicalrecords_patients" }).ToArray();
+            if (!excludedForeingKeys.Contains("FK_patientsnotes_patients"))
+                excludedForeingKeys = excludedForeingKeys.Concat(new string[] { "FK_patientsnotes_patients" }).ToArray();
+            if (!excludedForeingKeys.Contains("FK_patientstreatments_patients"))
+                excludedForeingKeys = excludedForeingKeys.Concat(new string[] { "FK_patientstreatments_patients" }).ToArray();
+            if (!excludedForeingKeys.Contains("FK_payments_patients"))
+                excludedForeingKeys = excludedForeingKeys.Concat(new string[] { "FK_payments_patients" }).ToArray();
+
+            ret = base.CanRemove(checkForeingKeys, excludedForeingKeys, ref errors, items);
 
             return ret;
         }
@@ -195,9 +237,9 @@ namespace DG.DentneD.Model.Repositories
             foreach (patients item in items)
             {
                 BaseModel.PatientsAddresses.Remove(BaseModel.PatientsAddresses.List(r => r.patients_id == item.patients_id).ToArray());
+                BaseModel.PatientsAttachments.Remove(BaseModel.PatientsAttachments.List(r => r.patients_id == item.patients_id).ToArray());
                 BaseModel.PatientsContacts.Remove(BaseModel.PatientsContacts.List(r => r.patients_id == item.patients_id).ToArray());
                 BaseModel.PatientsMedicalrecords.Remove(BaseModel.PatientsMedicalrecords.List(r => r.patients_id == item.patients_id).ToArray());
-                BaseModel.PatientsAttachments.Remove(BaseModel.PatientsAttachments.List(r => r.patients_id == item.patients_id).ToArray());
                 BaseModel.PatientsNotes.Remove(BaseModel.PatientsNotes.List(r => r.patients_id == item.patients_id).ToArray());
                 BaseModel.PatientsTreatments.Remove(BaseModel.PatientsTreatments.List(r => r.patients_id == item.patients_id).ToArray());
                 BaseModel.Payments.Remove(BaseModel.Payments.List(r => r.patients_id == item.patients_id).ToArray());

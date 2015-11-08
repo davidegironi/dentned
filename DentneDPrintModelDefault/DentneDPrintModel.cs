@@ -9,11 +9,10 @@ using DG.DentneD.Model.Entity;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Web.Script.Serialization;
-using System.Xml.Serialization;
 
 namespace DG.DentneD
 {
@@ -111,7 +110,7 @@ namespace DG.DentneD
         /// Default settings file
         /// </summary>
         private const string languageSettingsFilename = "DentneDPrintModelDefault.json";
-        
+
         /// <summary>
         /// Settings
         /// </summary>
@@ -181,7 +180,7 @@ namespace DG.DentneD
                 iTextSharp.text.Font b12Font = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 12, iTextSharp.text.Font.BOLD);
                 iTextSharp.text.Font n10Font = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 10, iTextSharp.text.Font.NORMAL);
                 iTextSharp.text.Font n8Font = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 8, iTextSharp.text.Font.NORMAL);
-                
+
                 PdfPTable titleTable = null;
                 PdfPTable preheaderTable = null;
                 PdfPTable headerTable = null;
@@ -276,7 +275,7 @@ namespace DG.DentneD
                 //itemsTable
                 if (hastax)
                 {
-                    if(_settings.estimatesPrintCode)
+                    if (_settings.estimatesPrintCode)
                         itemsTable = new PdfPTable(new float[] { 1, 1, 1, 1, 1 });
                     else
                         itemsTable = new PdfPTable(new float[] { 1, 1, 1, 1 });
@@ -557,17 +556,17 @@ namespace DG.DentneD
                 document.Add(paymentTable);
                 if (footerTable != null)
                     document.Add(footerTable);
-                
+
                 document.Close();
 
                 ret = true;
             }
             catch { }
-            
+
             return ret;
         }
 
-        
+
         /// <summary>
         /// Build a PDF for an invoice
         /// </summary>
@@ -684,7 +683,7 @@ namespace DG.DentneD
                 phrase.Add(new Chunk(invoice.invoices_patient, n10Font));
                 bTable.AddCell(phrase);
                 headerTable.AddCell(bTable);
-                
+
                 bool hastax = false;
                 foreach (invoiceslines invoiceline in invoicelines)
                 {
@@ -735,7 +734,7 @@ namespace DG.DentneD
                     aCell.HorizontalAlignment = Element.ALIGN_LEFT;
                     aCell.PaddingBottom = 5;
                     itemsTable.AddCell(aCell);
-                }                
+                }
                 aCell = new PdfPCell(new Paragraph(_language.invoicesItemsDescriptionTH, b10Font));
                 aCell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
                 aCell.HorizontalAlignment = Element.ALIGN_LEFT;
@@ -818,7 +817,7 @@ namespace DG.DentneD
                         }
                     }
                 }
-                
+
                 decimal totalnotax = 0;
                 decimal totaltax = 0;
                 decimal totaldeductiontax = 0;
@@ -1010,7 +1009,7 @@ namespace DG.DentneD
                 //get data
                 string doctors_doctext = null;
                 int[] doctors_ids = patientstreatmentsl.Select(r => r.doctors_id).Distinct().ToArray();
-                if(doctors_ids.Count() == 1)
+                if (doctors_ids.Count() == 1)
                 {
                     int doctors_id = doctors_ids[0];
                     doctors doctor = dentnedModel.Doctors.Find(doctors_id);
@@ -1129,7 +1128,7 @@ namespace DG.DentneD
                 phrase.Add(new Chunk(patient.patients_doctext, n10Font));
                 bTable.AddCell(phrase);
                 headerTable.AddCell(bTable);
-                
+
                 //itemsTable
                 if (_settings.patientstreatmentsPrintCode)
                     itemsTable = new PdfPTable(new float[] { 1, 1, 1 });
@@ -1200,7 +1199,7 @@ namespace DG.DentneD
                     aCell.HorizontalAlignment = Element.ALIGN_LEFT;
                     itemsTable.AddCell(aCell);
                 }
-                
+
                 //footerTable
                 footerTable = new PdfPTable(new float[] { 1 });
                 footerTable.TotalWidth = PageSize.A4.Width - document.RightMargin - document.LeftMargin;

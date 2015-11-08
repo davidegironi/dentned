@@ -4,9 +4,9 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System.Linq;
 using DG.Data.Model;
 using DG.DentneD.Model.Entity;
+using System.Linq;
 
 namespace DG.DentneD.Model.Repositories
 {
@@ -96,7 +96,7 @@ namespace DG.DentneD.Model.Repositories
 
                 if (!isUpdate)
                 {
-                    if (List(r => r.treatments_id == item.treatments_id && r.treatmentspriceslists_id == item.treatmentspriceslists_id).Count() > 0)
+                    if (Any(r => r.treatments_id == item.treatments_id && r.treatmentspriceslists_id == item.treatmentspriceslists_id))
                     {
                         ret = false;
                         errors = errors.Concat(new string[] { language.text003 }).ToArray();
@@ -104,7 +104,7 @@ namespace DG.DentneD.Model.Repositories
                 }
                 else
                 {
-                    if (List(r => r.treatmentsprices_id != item.treatmentsprices_id && r.treatments_id == item.treatments_id && r.treatmentspriceslists_id == item.treatmentspriceslists_id).Count() > 0)
+                    if (Any(r => r.treatmentsprices_id != item.treatmentsprices_id && r.treatments_id == item.treatments_id && r.treatmentspriceslists_id == item.treatmentspriceslists_id))
                     {
                         ret = false;
                         errors = errors.Concat(new string[] { language.text003 }).ToArray();

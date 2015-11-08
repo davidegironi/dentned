@@ -4,10 +4,10 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System.Linq;
 using DG.Data.Model;
 using DG.DentneD.Model.Entity;
 using System;
+using System.Linq;
 
 namespace DG.DentneD.Model.Repositories
 {
@@ -122,7 +122,7 @@ namespace DG.DentneD.Model.Repositories
 
                 if (!ret)
                     break;
-                
+
                 if (item.estimates_totalnet < 0)
                 {
                     ret = false;
@@ -146,10 +146,10 @@ namespace DG.DentneD.Model.Repositories
                         errors = errors.Concat(new string[] { language.text011 }).ToArray();
                     }
                 }
-                
+
                 if (!ret)
                     break;
-                                
+
                 if (!isUpdate)
                 {
                     //needed at the add stage, but can be omitted in the update stage, cause those link can be deleted
@@ -172,7 +172,7 @@ namespace DG.DentneD.Model.Repositories
 
                 if (!isUpdate)
                 {
-                    if (List(r => r.doctors_id == item.doctors_id && r.estimates_date.Year == item.estimates_date.Year && r.estimates_number == item.estimates_number).Count() > 0)
+                    if (Any(r => r.doctors_id == item.doctors_id && r.estimates_date.Year == item.estimates_date.Year && r.estimates_number == item.estimates_number))
                     {
                         ret = false;
                         errors = errors.Concat(new string[] { language.text008 }).ToArray();
@@ -180,7 +180,7 @@ namespace DG.DentneD.Model.Repositories
                 }
                 else
                 {
-                    if (List(r => r.estimates_id != item.estimates_id && r.doctors_id == item.doctors_id && r.estimates_date.Year == item.estimates_date.Year && r.estimates_number == item.estimates_number).Count() > 0)
+                    if (Any(r => r.estimates_id != item.estimates_id && r.doctors_id == item.doctors_id && r.estimates_date.Year == item.estimates_date.Year && r.estimates_number == item.estimates_number))
                     {
                         ret = false;
                         errors = errors.Concat(new string[] { language.text008 }).ToArray();
@@ -192,6 +192,24 @@ namespace DG.DentneD.Model.Repositories
             }
 
             return ret;
+        }
+
+        /// <summary>
+        /// Check if an item can be removed
+        /// </summary>
+        /// <param name="checkForeingKeys"></param>
+        /// <param name="excludedForeingKeys"></param>
+        /// <param name="errors"></param>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public override bool CanRemove(bool checkForeingKeys, string[] excludedForeingKeys, ref string[] errors, params estimates[] items)
+        {
+            if (excludedForeingKeys == null)
+                excludedForeingKeys = new string[] { };
+            if (!excludedForeingKeys.Contains("FK_estimateslines_estimates"))
+                excludedForeingKeys = excludedForeingKeys.Concat(new string[] { "FK_estimateslines_estimates" }).ToArray();
+
+            return base.CanRemove(checkForeingKeys, excludedForeingKeys, ref errors, items);
         }
 
         /// <summary>

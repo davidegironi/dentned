@@ -4,20 +4,20 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
 using DG.Data.Model.Helpers;
-using DG.UI.GHF;
+using DG.DentneD.Forms.Objects;
+using DG.DentneD.Helpers;
 using DG.DentneD.Model;
 using DG.DentneD.Model.Entity;
-using DG.DentneD.Forms.Objects;
-using System.Data;
-using Zuby.ADGV;
+using DG.UI.GHF;
 using SMcMaster;
-using DG.DentneD.Helpers;
+using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
+using System.Linq;
+using System.Windows.Forms;
+using Zuby.ADGV;
 
 namespace DG.DentneD.Forms
 {
@@ -178,7 +178,7 @@ namespace DG.DentneD.Forms
                     BindingSourceEdit = treatmentspricesBindingSource,
                     GetDataSourceEdit = GetDataSourceEdit_tabTreatmentsPrices,
                     AfterSaveAction = AfterSaveAction_tabTreatmentsPrices,
-                    
+
                     AddButton = button_tabTreatmentsPrices_new,
                     IsAddButtonDefaultClickEventAttached = false,
                     UpdateButton = button_tabTreatmentsPrices_edit,
@@ -223,22 +223,22 @@ namespace DG.DentneD.Forms
             IsBindingSourceLoading = true;
 
             //load categories
-            treatmentstypes_idComboBox.DataSource = _dentnedModel.TreatmentsTypes.List().Select(r => new { name = r.treatmentstypes_name, r.treatmentstypes_id }).OrderBy(r => r.name).ToArray();
+            treatmentstypes_idComboBox.DataSource = _dentnedModel.TreatmentsTypes.List().OrderBy(r => r.treatmentstypes_name).Select(r => new { name = r.treatmentstypes_name, r.treatmentstypes_id }).ToArray();
             treatmentstypes_idComboBox.DisplayMember = "name";
             treatmentstypes_idComboBox.ValueMember = "treatmentstypes_id";
 
             //load prices lists
-            treatmentspriceslists_idComboBox.DataSource = _dentnedModel.TreatmentsPricesLists.List().Select(r => new { name = r.treatmentspriceslists_name, r.treatmentspriceslists_id }).OrderBy(r => r.name).ToArray();
+            treatmentspriceslists_idComboBox.DataSource = _dentnedModel.TreatmentsPricesLists.List().OrderBy(r => r.treatmentspriceslists_name).Select(r => new { name = r.treatmentspriceslists_name, r.treatmentspriceslists_id }).ToArray();
             treatmentspriceslists_idComboBox.DisplayMember = "name";
             treatmentspriceslists_idComboBox.ValueMember = "treatmentspriceslists_id";
 
             //load prices lists
-            comboBox_tabTreatmentsPrices_filterPriceslists.DataSource = (new[] { new { name = "", treatmentspriceslists_id = -1 } }).Concat(_dentnedModel.TreatmentsPricesLists.List().Select(r => new { name = r.treatmentspriceslists_name, r.treatmentspriceslists_id }).OrderBy(r => r.name)).ToArray();
+            comboBox_tabTreatmentsPrices_filterPriceslists.DataSource = (new[] { new { name = "", treatmentspriceslists_id = -1 } }).Concat(_dentnedModel.TreatmentsPricesLists.List().OrderBy(r => r.treatmentspriceslists_multiplier).Select(r => new { name = r.treatmentspriceslists_name, r.treatmentspriceslists_id })).ToArray();
             comboBox_tabTreatmentsPrices_filterPriceslists.DisplayMember = "name";
             comboBox_tabTreatmentsPrices_filterPriceslists.ValueMember = "treatmentspriceslists_id";
 
             //load tax rates
-            taxes_idComboBox.DataSource = _dentnedModel.Taxes.List().Select(r => new { name = r.taxes_name, r.taxes_id }).OrderBy(r => r.name).ToArray();
+            taxes_idComboBox.DataSource = _dentnedModel.Taxes.List().OrderBy(r => r.taxes_name).Select(r => new { name = r.taxes_name, r.taxes_id }).ToArray();
             taxes_idComboBox.DisplayMember = "name";
             taxes_idComboBox.ValueMember = "taxes_id";
 
@@ -336,7 +336,7 @@ namespace DG.DentneD.Forms
             string filename = null;
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Excel|*.xls";
-            saveFileDialog.Title = language.exportSaveFileDialogTitle;;
+            saveFileDialog.Title = language.exportSaveFileDialogTitle; ;
             saveFileDialog.ShowDialog();
             filename = saveFileDialog.FileName;
             if (!String.IsNullOrEmpty(filename))
@@ -365,7 +365,7 @@ namespace DG.DentneD.Forms
                     foreach (treatmentspriceslists treatmentspriceslist in _dentnedModel.TreatmentsPricesLists.List().OrderBy(r => r.treatmentspriceslists_name))
                     {
                         Nullable<decimal> price = null;
-                        treatmentsprices treatmentsprice = _dentnedModel.TreatmentsPrices.List(r => r.treatments_id == treatment.treatments_id && r.treatmentspriceslists_id == treatmentspriceslist.treatmentspriceslists_id).FirstOrDefault();
+                        treatmentsprices treatmentsprice = _dentnedModel.TreatmentsPrices.FirstOrDefault(r => r.treatments_id == treatment.treatments_id && r.treatmentspriceslists_id == treatmentspriceslist.treatmentspriceslists_id);
                         if (treatmentsprice != null)
                         {
                             price = treatmentsprice.treatmentsprices_price;
@@ -461,7 +461,7 @@ namespace DG.DentneD.Forms
         /// <param name="item"></param>
         private void Remove_tabTreatments(object item)
         {
-            DGUIGHFData.Remove<treatments, DentneDModel>(false, _dentnedModel.Treatments, item);
+            DGUIGHFData.Remove<treatments, DentneDModel>(_dentnedModel.Treatments, item);
         }
 
         /// <summary>
@@ -571,7 +571,7 @@ namespace DG.DentneD.Forms
         {
             DGUIGHFData.SetBindingSourcePosition<treatmentsprices, DentneDModel>(_dentnedModel.TreatmentsPrices, item, vTreatmentsPricesBindingSource);
         }
-        
+
         /// <summary>
         /// Add an item
         /// </summary>
@@ -644,7 +644,7 @@ namespace DG.DentneD.Forms
             if (IsBindingSourceLoading)
                 return;
 
-            if(treatmentspriceslists_idComboBox.SelectedIndex != -1 && (tabElement_tabTreatmentsPrices.CurrentEditingMode == EditingMode.C || tabElement_tabTreatmentsPrices.CurrentEditingMode == EditingMode.U))
+            if (treatmentspriceslists_idComboBox.SelectedIndex != -1 && (tabElement_tabTreatmentsPrices.CurrentEditingMode == EditingMode.C || tabElement_tabTreatmentsPrices.CurrentEditingMode == EditingMode.U))
             {
                 int treatments_id = -1;
                 if (vTreatmentsBindingSource.Current != null)

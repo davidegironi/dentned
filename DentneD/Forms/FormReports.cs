@@ -4,19 +4,19 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
 using DG.Data.Model.Helpers;
-using DG.UI.GHF;
+using DG.DentneD.Forms.Objects;
+using DG.DentneD.Helpers;
 using DG.DentneD.Model;
 using DG.DentneD.Model.Entity;
-using DG.DentneD.Forms.Objects;
-using Zuby.ADGV;
+using DG.UI.GHF;
 using SMcMaster;
-using DG.DentneD.Helpers;
+using System;
+using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
+using System.Windows.Forms;
+using Zuby.ADGV;
 
 namespace DG.DentneD.Forms
 {
@@ -144,7 +144,7 @@ namespace DG.DentneD.Forms
 
             ReloadView();
         }
-        
+
         /// <summary>
         /// Form is shown
         /// </summary>
@@ -256,6 +256,6 @@ namespace DG.DentneD.Forms
         }
 
         #endregion
-        
+
     }
 }

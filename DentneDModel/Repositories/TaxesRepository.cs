@@ -4,10 +4,10 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System.Linq;
 using DG.Data.Model;
 using DG.DentneD.Model.Entity;
 using System;
+using System.Linq;
 
 namespace DG.DentneD.Model.Repositories
 {
@@ -102,7 +102,7 @@ namespace DG.DentneD.Model.Repositories
 
                 if (!isUpdate)
                 {
-                    if (List(r => r.taxes_name == item.taxes_name).Count() > 0)
+                    if (Any(r => r.taxes_name == item.taxes_name))
                     {
                         ret = false;
                         errors = errors.Concat(new string[] { language.text002 }).ToArray();
@@ -110,7 +110,7 @@ namespace DG.DentneD.Model.Repositories
                 }
                 else
                 {
-                    if (List(r => r.taxes_id != item.taxes_id && r.taxes_name == item.taxes_name).Count() > 0)
+                    if (Any(r => r.taxes_id != item.taxes_id && r.taxes_name == item.taxes_name))
                     {
                         ret = false;
                         errors = errors.Concat(new string[] { language.text002 }).ToArray();
@@ -122,6 +122,56 @@ namespace DG.DentneD.Model.Repositories
             }
 
             return ret;
+        }
+
+        /// <summary>
+        /// Check if an item can be removed
+        /// </summary>
+        /// <param name="checkForeingKeys"></param>
+        /// <param name="excludedForeingKeys"></param>
+        /// <param name="errors"></param>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public override bool CanRemove(bool checkForeingKeys, string[] excludedForeingKeys, ref string[] errors, params taxes[] items)
+        {
+            bool ret = true;
+
+            errors = new string[] { };
+
+            if (excludedForeingKeys == null)
+                excludedForeingKeys = new string[] { };
+            if (!excludedForeingKeys.Contains("FK_computedlines_taxes"))
+                excludedForeingKeys = excludedForeingKeys.Concat(new string[] { "FK_computedlines_taxes" }).ToArray();
+            if (!excludedForeingKeys.Contains("FK_treatments_taxes"))
+                excludedForeingKeys = excludedForeingKeys.Concat(new string[] { "FK_treatments_taxes" }).ToArray();
+
+            ret = base.CanRemove(checkForeingKeys, excludedForeingKeys, ref errors, items);
+
+            return ret;
+        }
+
+        /// <summary>
+        /// Remove an item
+        /// </summary>
+        /// <param name="items"></param>
+        public override void Remove(params taxes[] items)
+        {
+            //remove or unset all related items
+            foreach (taxes item in items)
+            {
+                foreach (computedlines computedline in BaseModel.ComputedLines.List(r => r.taxes_id == item.taxes_id))
+                {
+                    computedline.taxes_id = null;
+                    BaseModel.ComputedLines.Update(computedline);
+                }
+                foreach (treatments treatment in BaseModel.Treatments.List(r => r.taxes_id == item.taxes_id))
+                {
+                    treatment.taxes_id = null;
+                    BaseModel.Treatments.Update(treatment);
+                }
+            }
+
+            base.Remove(items);
         }
 
         /// <summary>

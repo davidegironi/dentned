@@ -37,12 +37,12 @@ namespace DG.DentneD
                 aboutLogo = new Bitmap(System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("DG.DentneD.about_logoimg.png")),
                 splashScreenLogo = new Bitmap(System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("DG.DentneD.splashscreen_logo.png"))
             });
-        
+
         // Defines native methods for command out
         [DllImport("kernel32.dll")]
         static extern bool AttachConsole(int dwProcessId);
         private const int ATTACH_PARENT_PROCESS = -1;
-                
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>

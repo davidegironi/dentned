@@ -4,10 +4,10 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System.Linq;
 using DG.DentneD.Model.Entity;
 using NUnit.Framework;
 using System;
+using System.Linq;
 
 namespace DG.DentneD.Model.Test
 {
@@ -21,7 +21,7 @@ namespace DG.DentneD.Model.Test
             patients t_patients = null;
             contactstypes t_contactstypes = null;
             patientscontacts t_patientscontacts = null;
-            
+
             _dentnedModel.Patients.Remove(_dentnedModel.Patients.List(r => r.patients_name == "XX1" && r.patients_surname == "XX1").ToArray());
             _dentnedModel.ContactsTypes.Remove(_dentnedModel.ContactsTypes.List(r => r.contactstypes_name == "XX1").ToArray());
 

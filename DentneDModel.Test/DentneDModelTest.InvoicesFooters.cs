@@ -4,9 +4,9 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System.Linq;
 using DG.DentneD.Model.Entity;
 using NUnit.Framework;
+using System.Linq;
 
 namespace DG.DentneD.Model.Test
 {
@@ -21,7 +21,7 @@ namespace DG.DentneD.Model.Test
 
             _dentnedModel.InvoicesFooters.Remove(_dentnedModel.InvoicesFooters.List(r => r.invoicesfooters_name == "XX1").ToArray());
             _dentnedModel.InvoicesFooters.Remove(_dentnedModel.InvoicesFooters.List(r => r.invoicesfooters_name == "XX2").ToArray());
-            
+
             t_invoicesfooters = new invoicesfooters()
             {
                 //invoicesfooters_name = "XX1",
@@ -58,7 +58,7 @@ namespace DG.DentneD.Model.Test
             };
             _dentnedModel.InvoicesFooters.Add(t_invoicesfooters);
 
-            t_invoicesfooters = _dentnedModel.InvoicesFooters.List(r => r.invoicesfooters_name == "XX1").FirstOrDefault();
+            t_invoicesfooters = _dentnedModel.InvoicesFooters.FirstOrDefault(r => r.invoicesfooters_name == "XX1");
             t_invoicesfooters.invoicesfooters_name = "XX2";
             Assert.IsFalse(_dentnedModel.InvoicesFooters.CanUpdate(t_invoicesfooters));
             t_invoicesfooters.invoicesfooters_name = "XX3";

@@ -4,17 +4,17 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System.Linq;
 using DG.Data.Model;
 using DG.DentneD.Model.Entity;
 using System;
+using System.Linq;
 
 namespace DG.DentneD.Model.Repositories
 {
     public class PatientsAttachmentsTypesRepository : GenericDataRepository<patientsattachmentstypes, DentneDModel>
     {
         public PatientsAttachmentsTypesRepository() : base() { }
-        
+
         public enum ValueAutoFuncCode { NUL, AMG, AML, AMD };
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace DG.DentneD.Model.Repositories
         {
             public string text001 = "Name can not be empty.";
             public string text002 = "Attachment type already inserted.";
-            public string text003 = "This item can not be removed. An attachment depends it.";
+            public string text003 = "This item can not be removed. An attachment depends on it.";
             public string text004 = "Invalid value autocomplete function.";
             public string valueAutoFuncNUL = "None";
             public string valueAutoFuncAMG = "Treat Value field as numeric, set to max between same attachments type";
@@ -102,18 +102,18 @@ namespace DG.DentneD.Model.Repositories
                 if (!ret)
                     break;
 
-                if(!Enum.GetNames(typeof(ValueAutoFuncCode)).Contains(item.patientsattachmentstypes_valueautofunc))
+                if (!Enum.GetNames(typeof(ValueAutoFuncCode)).Contains(item.patientsattachmentstypes_valueautofunc))
                 {
                     ret = false;
                     errors = errors.Concat(new string[] { language.text004 }).ToArray();
                 }
-                
+
                 if (!ret)
                     break;
 
                 if (!isUpdate)
                 {
-                    if (List(r => r.patientsattachmentstypes_name == item.patientsattachmentstypes_name).Count() > 0)
+                    if (Any(r => r.patientsattachmentstypes_name == item.patientsattachmentstypes_name))
                     {
                         ret = false;
                         errors = errors.Concat(new string[] { language.text002 }).ToArray();
@@ -121,7 +121,7 @@ namespace DG.DentneD.Model.Repositories
                 }
                 else
                 {
-                    if (List(r => r.patientsattachmentstypes_id != item.patientsattachmentstypes_id && r.patientsattachmentstypes_name == item.patientsattachmentstypes_name).Count() > 0)
+                    if (Any(r => r.patientsattachmentstypes_id != item.patientsattachmentstypes_id && r.patientsattachmentstypes_name == item.patientsattachmentstypes_name))
                     {
                         ret = false;
                         errors = errors.Concat(new string[] { language.text002 }).ToArray();
@@ -151,7 +151,7 @@ namespace DG.DentneD.Model.Repositories
 
             foreach (patientsattachmentstypes item in items)
             {
-                if (BaseModel.PatientsAttachments.List(r => r.patientsattachmentstypes_id == item.patientsattachmentstypes_id).Count > 0)
+                if (BaseModel.PatientsAttachments.Any(r => r.patientsattachmentstypes_id == item.patientsattachmentstypes_id))
                 {
                     ret = false;
                     errors = errors.Concat(new string[] { language.text003 }).ToArray();

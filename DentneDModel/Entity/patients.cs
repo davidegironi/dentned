@@ -24,6 +24,8 @@ namespace DG.DentneD.Model.Entity
             this.patientscontacts = new HashSet<patientscontacts>();
             this.patientsmedicalrecords = new HashSet<patientsmedicalrecords>();
             this.patientsnotes = new HashSet<patientsnotes>();
+            this.patientstreatments = new HashSet<patientstreatments>();
+            this.payments = new HashSet<payments>();
         }
     
         public int patients_id { get; set; }
@@ -50,5 +52,7 @@ namespace DG.DentneD.Model.Entity
         public virtual ICollection<patientscontacts> patientscontacts { get; set; }
         public virtual ICollection<patientsmedicalrecords> patientsmedicalrecords { get; set; }
         public virtual ICollection<patientsnotes> patientsnotes { get; set; }
+        public virtual ICollection<patientstreatments> patientstreatments { get; set; }
+        public virtual ICollection<payments> payments { get; set; }
     }
 }

@@ -4,10 +4,10 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System.Linq;
 using DG.DentneD.Model.Entity;
 using NUnit.Framework;
 using System;
+using System.Linq;
 
 namespace DG.DentneD.Model.Test
 {
@@ -43,7 +43,7 @@ namespace DG.DentneD.Model.Test
                 patients_id = t_patients.patients_id
             };
             Assert.IsFalse(_dentnedModel.Payments.CanAdd(t_payments));
-            
+
             t_payments = new payments()
             {
                 payments_amount = (decimal)10.10,

@@ -4,10 +4,10 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System.Linq;
 using DG.DentneD.Model.Entity;
 using NUnit.Framework;
 using System;
+using System.Linq;
 
 namespace DG.DentneD.Model.Test
 {
@@ -22,14 +22,14 @@ namespace DG.DentneD.Model.Test
 
             _dentnedModel.TreatmentsPricesLists.Remove(_dentnedModel.TreatmentsPricesLists.List(r => r.treatmentspriceslists_name == "XX1").ToArray());
             _dentnedModel.TreatmentsPricesLists.Remove(_dentnedModel.TreatmentsPricesLists.List(r => r.treatmentspriceslists_name == "XX2").ToArray());
-            
+
             t_treatmentspriceslists = new treatmentspriceslists()
             {
                 //treatmentspriceslists_name = "XX1",
                 treatmentspriceslists_multiplier = 1
             };
             Assert.IsFalse(_dentnedModel.TreatmentsPricesLists.CanAdd(t_treatmentspriceslists));
-            
+
             t_treatmentspriceslists = new treatmentspriceslists()
             {
                 treatmentspriceslists_name = "XX1",
@@ -52,7 +52,7 @@ namespace DG.DentneD.Model.Test
             };
             _dentnedModel.TreatmentsPricesLists.Add(t_treatmentspriceslists);
 
-            t_treatmentspriceslists = _dentnedModel.TreatmentsPricesLists.List(r => r.treatmentspriceslists_name == "XX1").FirstOrDefault();
+            t_treatmentspriceslists = _dentnedModel.TreatmentsPricesLists.FirstOrDefault(r => r.treatmentspriceslists_name == "XX1");
             t_treatmentspriceslists.treatmentspriceslists_name = "XX2";
             Assert.IsFalse(_dentnedModel.TreatmentsPricesLists.CanUpdate(t_treatmentspriceslists));
             t_treatmentspriceslists.treatmentspriceslists_name = "XX3";
@@ -75,7 +75,7 @@ namespace DG.DentneD.Model.Test
             _dentnedModel.TreatmentsTypes.Remove(_dentnedModel.TreatmentsTypes.List(r => r.treatmentstypes_name == "XX1").ToArray());
             _dentnedModel.TreatmentsPricesLists.Remove(_dentnedModel.TreatmentsPricesLists.List(r => r.treatmentspriceslists_name == "XX1").ToArray());
             _dentnedModel.Patients.Remove(_dentnedModel.Patients.List(r => r.patients_name == "XX1" && r.patients_surname == "XX1").ToArray());
-            
+
             t_treatmentspriceslists = new treatmentspriceslists()
             {
                 treatmentspriceslists_name = "XX1"
@@ -121,7 +121,7 @@ namespace DG.DentneD.Model.Test
 
             _dentnedModel.TreatmentsPricesLists.Remove(_dentnedModel.TreatmentsPricesLists.List(r => r.treatmentspriceslists_name == "XX1").ToArray());
 
-            t_patients = _dentnedModel.Patients.List(r => r.patients_name == "XX1" && r.patients_surname == "XX1").FirstOrDefault();
+            t_patients = _dentnedModel.Patients.FirstOrDefault(r => r.patients_name == "XX1" && r.patients_surname == "XX1");
             Assert.That(t_patients.treatmentspriceslists_id, Is.EqualTo(null));
 
             _dentnedModel.Treatments.Remove(_dentnedModel.Treatments.List(r => r.treatments_code == "XX1").ToArray());

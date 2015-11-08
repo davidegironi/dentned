@@ -19,5 +19,7 @@ namespace DG.DentneD.Model.Entity
         public System.DateTime payments_date { get; set; }
         public decimal payments_amount { get; set; }
         public string payments_notes { get; set; }
+    
+        public virtual patients patients { get; set; }
     }
 }

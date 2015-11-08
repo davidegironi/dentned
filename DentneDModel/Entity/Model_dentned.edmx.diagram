@@ -5,44 +5,46 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="78dc419be0c8474fa514e35383135c72" Name="Diagram1">
-        <EntityTypeShape EntityType="dentnedModel.addressestypes" Width="1.5" PointX="6" PointY="28.75" />
-        <EntityTypeShape EntityType="dentnedModel.appointments" Width="1.5" PointX="8.25" PointY="23.875" />
-        <EntityTypeShape EntityType="dentnedModel.computedlines" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="dentnedModel.contactstypes" Width="1.5" PointX="3" PointY="25.75" />
-        <EntityTypeShape EntityType="dentnedModel.doctors" Width="1.5" PointX="8.25" PointY="11.875" />
-        <EntityTypeShape EntityType="dentnedModel.estimates" Width="1.5" PointX="10.5" PointY="19.25" />
-        <EntityTypeShape EntityType="dentnedModel.estimatesfooters" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="dentnedModel.estimateslines" Width="1.5" PointX="12.75" PointY="19.875" />
-        <EntityTypeShape EntityType="dentnedModel.invoices" Width="1.5" PointX="5.25" PointY="19.25" />
-        <EntityTypeShape EntityType="dentnedModel.invoicesfooters" Width="1.5" PointX="0.75" PointY="3.75" />
-        <EntityTypeShape EntityType="dentnedModel.invoiceslines" Width="1.5" PointX="10.5" PointY="14.875" />
-        <EntityTypeShape EntityType="dentnedModel.medicalrecordstypes" Width="1.5" PointX="3" PointY="12.75" />
-        <EntityTypeShape EntityType="dentnedModel.patients" Width="1.5" PointX="3" PointY="18.75" />
-        <EntityTypeShape EntityType="dentnedModel.patientsaddresses" Width="1.5" PointX="8.25" PointY="20.125" />
-        <EntityTypeShape EntityType="dentnedModel.patientsattachments" Width="1.5" PointX="8.25" PointY="16.125" />
-        <EntityTypeShape EntityType="dentnedModel.patientsattachmentstypes" Width="1.5" PointX="6" PointY="12.75" />
-        <EntityTypeShape EntityType="dentnedModel.patientscontacts" Width="1.5" PointX="5.25" PointY="25.375" />
-        <EntityTypeShape EntityType="dentnedModel.patientsmedicalrecords" Width="1.5" PointX="5.25" PointY="15.375" />
-        <EntityTypeShape EntityType="dentnedModel.patientsnotes" Width="1.5" PointX="5.25" PointY="47.875" />
-        <EntityTypeShape EntityType="dentnedModel.patientstreatments" Width="1.5" PointX="10.5" PointY="25.5" />
-        <EntityTypeShape EntityType="dentnedModel.payments" Width="1.5" PointX="2.75" PointY="3.75" />
-        <EntityTypeShape EntityType="dentnedModel.paymentstypes" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="dentnedModel.reports" Width="1.5" PointX="4.75" PointY="3.75" />
-        <EntityTypeShape EntityType="dentnedModel.rooms" Width="1.5" PointX="6" PointY="31.625" />
-        <EntityTypeShape EntityType="dentnedModel.sysdiagrams" Width="1.5" PointX="6.75" PointY="0.75" />
-        <EntityTypeShape EntityType="dentnedModel.taxes" Width="1.5" PointX="0.75" PointY="6.75" />
-        <EntityTypeShape EntityType="dentnedModel.taxesdeductions" Width="1.5" PointX="2.75" PointY="6.75" />
-        <EntityTypeShape EntityType="dentnedModel.treatments" Width="1.5" PointX="0.75" PointY="13" />
-        <EntityTypeShape EntityType="dentnedModel.treatmentsprices" Width="1.5" PointX="3" PointY="15.5" />
-        <EntityTypeShape EntityType="dentnedModel.treatmentspriceslists" Width="1.5" PointX="0.75" PointY="17.625" />
-        <EntityTypeShape EntityType="dentnedModel.treatmentstypes" Width="1.5" PointX="1.5" PointY="9.75" />
+        <EntityTypeShape EntityType="dentnedModel.addressestypes" Width="1.5" PointX="6" PointY="37.625" />
+        <EntityTypeShape EntityType="dentnedModel.appointments" Width="1.5" PointX="5.25" PointY="32.75" />
+        <EntityTypeShape EntityType="dentnedModel.computedlines" Width="1.5" PointX="3.75" PointY="17.25" />
+        <EntityTypeShape EntityType="dentnedModel.contactstypes" Width="1.5" PointX="3" PointY="20.625" />
+        <EntityTypeShape EntityType="dentnedModel.doctors" Width="1.5" PointX="3" PointY="33.75" />
+        <EntityTypeShape EntityType="dentnedModel.estimates" Width="1.5" PointX="5.25" PointY="27.125" />
+        <EntityTypeShape EntityType="dentnedModel.estimatesfooters" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="dentnedModel.estimateslines" Width="1.5" PointX="13.5" PointY="27.75" />
+        <EntityTypeShape EntityType="dentnedModel.invoices" Width="1.5" PointX="8.25" PointY="27.125" />
+        <EntityTypeShape EntityType="dentnedModel.invoicesfooters" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="dentnedModel.invoiceslines" Width="1.5" PointX="16.5" PointY="27.75" />
+        <EntityTypeShape EntityType="dentnedModel.medicalrecordstypes" Width="1.5" PointX="6" PointY="20.625" />
+        <EntityTypeShape EntityType="dentnedModel.patients" Width="1.5" PointX="3" PointY="26.5" />
+        <EntityTypeShape EntityType="dentnedModel.patientsaddresses" Width="1.5" PointX="8.25" PointY="33" />
+        <EntityTypeShape EntityType="dentnedModel.patientsattachments" Width="1.5" PointX="11.25" PointY="20" />
+        <EntityTypeShape EntityType="dentnedModel.patientsattachmentstypes" Width="1.5" PointX="9" PointY="20.5" />
+        <EntityTypeShape EntityType="dentnedModel.patientscontacts" Width="1.5" PointX="5.25" PointY="23.25" />
+        <EntityTypeShape EntityType="dentnedModel.patientsmedicalrecords" Width="1.5" PointX="8.25" PointY="23.25" />
+        <EntityTypeShape EntityType="dentnedModel.patientsnotes" Width="1.5" PointX="5.25" PointY="68.625" />
+        <EntityTypeShape EntityType="dentnedModel.patientstreatments" Width="1.5" PointX="11.25" PointY="24" />
+        <EntityTypeShape EntityType="dentnedModel.payments" Width="1.5" PointX="5.25" PointY="65.625" />
+        <EntityTypeShape EntityType="dentnedModel.paymentstypes" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="dentnedModel.reports" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="dentnedModel.rooms" Width="1.5" PointX="3" PointY="38.5" />
+        <EntityTypeShape EntityType="dentnedModel.sysdiagrams" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="dentnedModel.taxes" Width="1.5" PointX="1.5" PointY="17.25" />
+        <EntityTypeShape EntityType="dentnedModel.taxesdeductions" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="dentnedModel.treatments" Width="1.5" PointX="0.75" PointY="20.75" />
+        <EntityTypeShape EntityType="dentnedModel.treatmentsprices" Width="1.5" PointX="3" PointY="23.375" />
+        <EntityTypeShape EntityType="dentnedModel.treatmentspriceslists" Width="1.5" PointX="0.75" PointY="25.5" />
+        <EntityTypeShape EntityType="dentnedModel.treatmentstypes" Width="1.5" PointX="1.5" PointY="14.125" />
         <AssociationConnector Association="dentnedModel.FK_patientsaddresses_addressestypes" />
         <AssociationConnector Association="dentnedModel.FK_appointments_doctors" />
         <AssociationConnector Association="dentnedModel.FK_appointments_patients" />
         <AssociationConnector Association="dentnedModel.FK_appointments_rooms" />
+        <AssociationConnector Association="dentnedModel.FK_computedlines_taxes" />
         <AssociationConnector Association="dentnedModel.FK_patientscontacts_contactstypes" />
         <AssociationConnector Association="dentnedModel.FK_estimates_doctors" />
         <AssociationConnector Association="dentnedModel.FK_invoices_doctors" />
+        <AssociationConnector Association="dentnedModel.FK_patientstreatments_doctors" />
         <AssociationConnector Association="dentnedModel.FK_estimates_invoices" />
         <AssociationConnector Association="dentnedModel.FK_estimates_patients" />
         <AssociationConnector Association="dentnedModel.FK_estimateslines_estimates" />
@@ -57,7 +59,11 @@
         <AssociationConnector Association="dentnedModel.FK_patientscontacts_patients" />
         <AssociationConnector Association="dentnedModel.FK_patientsmedicalrecords_patients" />
         <AssociationConnector Association="dentnedModel.FK_patientsnotes_patients" />
+        <AssociationConnector Association="dentnedModel.FK_patientstreatments_patients" />
+        <AssociationConnector Association="dentnedModel.FK_payments_patients" />
         <AssociationConnector Association="dentnedModel.FK_patientsattachments_patientsattachmentstypes" />
+        <AssociationConnector Association="dentnedModel.FK_patientstreatments_treatments" />
+        <AssociationConnector Association="dentnedModel.FK_treatments_taxes" />
         <AssociationConnector Association="dentnedModel.FK_treatments_treatmentstypes" />
         <AssociationConnector Association="dentnedModel.FK_treatmentsprices_treatments" />
         <AssociationConnector Association="dentnedModel.FK_treatmentsprices_treatmentspriceslists" />

@@ -4,10 +4,10 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System.Linq;
 using DG.Data.Model;
 using DG.DentneD.Model.Entity;
 using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace DG.DentneD.Model.Repositories
@@ -22,7 +22,7 @@ namespace DG.DentneD.Model.Repositories
         public class RepositoryLanguage : IGenericDataRepositoryLanguage
         {
             public string text001 = "Invoice text can not be empty.";
-            public string text002 = "This item can not be removed. Appointments depends it.";
+            public string text002 = "This item can not be removed. Appointments depends on it.";
             public string text003 = "Name can not be empty.";
             public string text004 = "Surname can not be empty.";
             public string text005 = "Doctor already inserted.";
@@ -31,6 +31,7 @@ namespace DG.DentneD.Model.Repositories
             public string text008 = "Invalid username format. 8 character, lower letters [a-z] or numbers [0-9].";
             public string text009 = "Invalid password format. 6 numbers [0-9].";
             public string text010 = "A patient already exists with this username.";
+            public string text011 = "This item can not be removed. Patient treatments depends on it.";
         }
 
         /// <summary>
@@ -74,42 +75,6 @@ namespace DG.DentneD.Model.Repositories
             ret = base.CanUpdate(ref errors, items);
 
             return ret;
-        }
-
-        /// <summary>
-        /// Check if an item can be removed
-        /// </summary>
-        /// <param name="checkForeingKeys"></param>
-        /// <param name="excludedForeingKeys"></param>
-        /// <param name="errors"></param>
-        /// <param name="items"></param>
-        /// <returns></returns>
-        public override bool CanRemove(bool checkForeingKeys, string[] excludedForeingKeys, ref string[] errors, params doctors[] items)
-        {
-            bool ret = true;
-
-            foreach (doctors item in items)
-            {
-                if (String.IsNullOrEmpty(item.doctors_doctext))
-                {
-                    ret = false;
-                    errors = errors.Concat(new string[] { language.text001 }).ToArray();
-                }
-
-                if (!ret)
-                    break;
-
-                if (BaseModel.Appointments.List(r => r.doctors_id == item.doctors_id).Count() > 0)
-                {
-                    ret = false;
-                    errors = errors.Concat(new string[] { language.text002 }).ToArray();
-                }
-
-                if (!ret)
-                    break;
-            }
-
-            return base.CanRemove(checkForeingKeys, excludedForeingKeys, ref errors, items);
         }
 
         /// <summary>
@@ -171,8 +136,8 @@ namespace DG.DentneD.Model.Repositories
 
                 if (!isUpdate)
                 {
-                    if (List(r => r.doctors_name == item.doctors_name && r.doctors_surname == item.doctors_surname).Count() > 0 ||
-                        List(r => r.doctors_username == item.doctors_username).Count() > 0)
+                    if (Any(r => r.doctors_name == item.doctors_name && r.doctors_surname == item.doctors_surname) ||
+                        Any(r => r.doctors_username == item.doctors_username))
                     {
                         ret = false;
                         errors = errors.Concat(new string[] { language.text005 }).ToArray();
@@ -180,15 +145,15 @@ namespace DG.DentneD.Model.Repositories
                 }
                 else
                 {
-                    if (List(r => r.doctors_id != item.doctors_id && r.doctors_name == item.doctors_name && r.doctors_surname == item.doctors_surname).Count() > 0 ||
-                        List(r => r.doctors_id != item.doctors_id && r.doctors_username == item.doctors_username).Count() > 0)
+                    if (Any(r => r.doctors_id != item.doctors_id && r.doctors_name == item.doctors_name && r.doctors_surname == item.doctors_surname) ||
+                        Any(r => r.doctors_id != item.doctors_id && r.doctors_username == item.doctors_username))
                     {
                         ret = false;
                         errors = errors.Concat(new string[] { language.text005 }).ToArray();
                     }
                 }
 
-                if (BaseModel.Patients.List(r => r.patients_username == item.doctors_username).Count() > 0)
+                if (BaseModel.Patients.Any(r => r.patients_username == item.doctors_username))
                 {
                     ret = false;
                     errors = errors.Concat(new string[] { language.text010 }).ToArray();
@@ -201,10 +166,54 @@ namespace DG.DentneD.Model.Repositories
             return ret;
         }
 
+        /// <summary>
+        /// Check if an item can be removed
+        /// </summary>
+        /// <param name="checkForeingKeys"></param>
+        /// <param name="excludedForeingKeys"></param>
+        /// <param name="errors"></param>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public override bool CanRemove(bool checkForeingKeys, string[] excludedForeingKeys, ref string[] errors, params doctors[] items)
+        {
+            bool ret = true;
+
+            foreach (doctors item in items)
+            {
+                if (BaseModel.Appointments.Any(r => r.doctors_id == item.doctors_id))
+                {
+                    ret = false;
+                    errors = errors.Concat(new string[] { language.text002 }).ToArray();
+                }
+                if (BaseModel.PatientsTreatments.Any(r => r.doctors_id == item.doctors_id))
+                {
+                    ret = false;
+                    errors = errors.Concat(new string[] { language.text011 }).ToArray();
+                }
+
+                if (!ret)
+                    break;
+            }
+
+            if (!ret)
+                return ret;
+
+            if (excludedForeingKeys == null)
+                excludedForeingKeys = new string[] { };
+            if (!excludedForeingKeys.Contains("FK_estimates_doctors"))
+                excludedForeingKeys = excludedForeingKeys.Concat(new string[] { "FK_estimates_doctors" }).ToArray();
+            if (!excludedForeingKeys.Contains("FK_invoices_doctors"))
+                excludedForeingKeys = excludedForeingKeys.Concat(new string[] { "FK_invoices_doctors" }).ToArray();
+
+            return base.CanRemove(checkForeingKeys, excludedForeingKeys, ref errors, items);
+        }
+
+        /// <summary>
+        /// Remove an item
+        /// </summary>
+        /// <param name="items"></param>
         public override void Remove(params doctors[] items)
         {
-            base.Remove(items);
-
             //remove all related items
             foreach (doctors item in items)
             {
@@ -219,6 +228,8 @@ namespace DG.DentneD.Model.Repositories
                     BaseModel.Estimates.Update(estimate);
                 }
             }
+
+            base.Remove(items);
         }
     }
 

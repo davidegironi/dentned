@@ -4,25 +4,25 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Windows.Forms;
 using DG.Data.Model.Helpers;
-using DG.UI.GHF;
+using DG.DentneD.Forms.Objects;
+using DG.DentneD.Helpers;
 using DG.DentneD.Model;
 using DG.DentneD.Model.Entity;
-using DG.DentneD.Forms.Objects;
-using Zuby.ADGV;
-using System.Data;
-using System.Configuration;
-using System.Diagnostics;
-using System.Linq.Expressions;
-using System.Drawing;
-using DG.DentneD.Helpers;
-using SMcMaster;
 using DG.DentneD.Model.Repositories;
+using DG.UI.GHF;
+using SMcMaster;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Diagnostics;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Windows.Forms;
+using Zuby.ADGV;
 
 namespace DG.DentneD.Forms
 {
@@ -67,7 +67,7 @@ namespace DG.DentneD.Forms
 
         private enum PatientsTreatmentsFulfilledFilter { All, NotFulfilled, Fulfilled };
         private readonly PatientsTreatmentsFulfilledFilter _patientsTreatmentsFulfilledFilter = PatientsTreatmentsFulfilledFilter.All;
-        
+
         private enum PatientsTreatmentsPaidFilter { All, NotPaid, Paid };
         private readonly PatientsTreatmentsPaidFilter _patientsTreatmentsPaidFilter = PatientsTreatmentsPaidFilter.All;
 
@@ -793,7 +793,7 @@ namespace DG.DentneD.Forms
                     }
                 }
             };
-            
+
             //set Elements
             TabElements.Add(tabElement_tabPatients);
             TabElements.Add(tabElement_tabPatientsMedicalrecords);
@@ -805,7 +805,7 @@ namespace DG.DentneD.Forms
             TabElements.Add(tabElement_tabEstimates);
             TabElements.Add(tabElement_tabPatientsNotes);
         }
-                
+
         /// <summary>
         /// Loader
         /// </summary>
@@ -820,7 +820,7 @@ namespace DG.DentneD.Forms
             PreloadView();
 
             ReloadView();
-            
+
             vPatientsBindingSource_CurrentChanged(sender, e);
         }
 
@@ -848,54 +848,54 @@ namespace DG.DentneD.Forms
                 comboBox_filterArchived.SelectedIndex = 2;
 
             //load prices lists
-            treatmentspriceslists_idComboBox.DataSource = _dentnedModel.TreatmentsPricesLists.List().Select(r => new { name = r.treatmentspriceslists_name, r.treatmentspriceslists_id }).OrderBy(r => r.name).ToArray();
+            treatmentspriceslists_idComboBox.DataSource = _dentnedModel.TreatmentsPricesLists.List().OrderBy(r => r.treatmentspriceslists_name).Select(r => new { name = r.treatmentspriceslists_name, r.treatmentspriceslists_id }).ToArray();
             treatmentspriceslists_idComboBox.DisplayMember = "name";
             treatmentspriceslists_idComboBox.ValueMember = "treatmentspriceslists_id";
             treatmentspriceslists_idComboBox.SelectedIndex = -1;
 
             //load contacts types
-            contactstypes_idComboBox.DataSource = _dentnedModel.ContactsTypes.List().Select(r => new { name = r.contactstypes_name, r.contactstypes_id }).OrderBy(r => r.name).ToArray();
+            contactstypes_idComboBox.DataSource = _dentnedModel.ContactsTypes.List().OrderBy(r => r.contactstypes_name).Select(r => new { name = r.contactstypes_name, r.contactstypes_id }).ToArray();
             contactstypes_idComboBox.DisplayMember = "name";
             contactstypes_idComboBox.ValueMember = "contactstypes_id";
             contactstypes_idComboBox.SelectedIndex = -1;
 
             //load addresses types
-            addressestypes_idComboBox.DataSource = _dentnedModel.AddressesTypes.List().Select(r => new { name = r.addressestypes_name, r.addressestypes_id }).OrderBy(r => r.name).ToArray();
+            addressestypes_idComboBox.DataSource = _dentnedModel.AddressesTypes.List().OrderBy(r => r.addressestypes_name).Select(r => new { name = r.addressestypes_name, r.addressestypes_id }).ToArray();
             addressestypes_idComboBox.DisplayMember = "name";
             addressestypes_idComboBox.ValueMember = "addressestypes_id";
             addressestypes_idComboBox.SelectedIndex = -1;
 
             //load medicalrecords types
-            medicalrecordstypes_idComboBox.DataSource = _dentnedModel.MedicalrecordsTypes.List().Select(r => new { name = r.medicalrecordstypes_name, r.medicalrecordstypes_id }).OrderBy(r => r.name).ToArray();
+            medicalrecordstypes_idComboBox.DataSource = _dentnedModel.MedicalrecordsTypes.List().OrderBy(r => r.medicalrecordstypes_name).Select(r => new { name = r.medicalrecordstypes_name, r.medicalrecordstypes_id }).ToArray();
             medicalrecordstypes_idComboBox.DisplayMember = "name";
             medicalrecordstypes_idComboBox.ValueMember = "medicalrecordstypes_id";
             medicalrecordstypes_idComboBox.SelectedIndex = -1;
 
             //load patientsattachments types
-            patientsattachmentstypes_idComboBox.DataSource = _dentnedModel.PatientsAttachmentsTypes.List().Select(r => new { name = r.patientsattachmentstypes_name, r.patientsattachmentstypes_id }).OrderBy(r => r.name).ToArray();
+            patientsattachmentstypes_idComboBox.DataSource = _dentnedModel.PatientsAttachmentsTypes.List().OrderBy(r => r.patientsattachmentstypes_name).Select(r => new { name = r.patientsattachmentstypes_name, r.patientsattachmentstypes_id }).ToArray();
             patientsattachmentstypes_idComboBox.DisplayMember = "name";
             patientsattachmentstypes_idComboBox.ValueMember = "patientsattachmentstypes_id";
             patientsattachmentstypes_idComboBox.SelectedIndex = -1;
 
             //load rooms
-            rooms_idComboBox.DataSource = _dentnedModel.Rooms.List().Select(r => new { name = r.rooms_name, r.rooms_id }).OrderBy(r => r.name).ToArray();
+            rooms_idComboBox.DataSource = _dentnedModel.Rooms.List().OrderBy(r => r.rooms_name).Select(r => new { name = r.rooms_name, r.rooms_id }).ToArray();
             rooms_idComboBox.DisplayMember = "name";
             rooms_idComboBox.ValueMember = "rooms_id";
             rooms_idComboBox.SelectedIndex = -1;
 
             //load doctors
-            doctors_idComboBox.DataSource = _dentnedModel.Doctors.List().Select(r => new { name = r.doctors_surname + " " + r.doctors_name, r.doctors_id }).OrderBy(r => r.name).ToArray();
+            doctors_idComboBox.DataSource = _dentnedModel.Doctors.List().OrderBy(r => r.doctors_surname.ThenBy(r => r.doctors_name).Select(r => new { name = r.doctors_surname + " " + r.doctors_name, r.doctors_id }).ToArray();
             doctors_idComboBox.DisplayMember = "name";
             doctors_idComboBox.ValueMember = "doctors_id";
             doctors_idComboBox1.SelectedIndex = -1;
 
-            doctors_idComboBox1.DataSource = _dentnedModel.Doctors.List().Select(r => new { name = r.doctors_surname + " " + r.doctors_name, r.doctors_id }).OrderBy(r => r.name).ToArray();
+            doctors_idComboBox1.DataSource = _dentnedModel.Doctors.List().OrderBy(r => r.doctors_surname).ThenBy(r => r.doctors_name).Select(r => new { name = r.doctors_surname + " " + r.doctors_name, r.doctors_id }).ToArray();
             doctors_idComboBox1.DisplayMember = "name";
             doctors_idComboBox1.ValueMember = "doctors_id";
             doctors_idComboBox1.SelectedIndex = -1;
 
             //load treatments
-            treatments_idComboBox.DataSource = _dentnedModel.Treatments.List().Select(r => new { name = r.treatments_code + " - " + r.treatments_name, r.treatments_id }).OrderBy(r => r.name).ToArray();
+            treatments_idComboBox.DataSource = _dentnedModel.Treatments.List().OrderBy(r => r.treatments_code).ThenBy(r => r.treatments_name).Select(r => new { name = r.treatments_code + " - " + r.treatments_name, r.treatments_id }).ToArray();
             treatments_idComboBox.DisplayMember = "name";
             treatments_idComboBox.ValueMember = "treatments_id";
             treatments_idComboBox.SelectedIndex = -1;
@@ -977,12 +977,12 @@ namespace DG.DentneD.Forms
             ResetTabsDataGrid();
 
             List<patients> patients = new List<patients>();
-            if(comboBox_filterArchived.SelectedIndex != -1)
+            if (comboBox_filterArchived.SelectedIndex != -1)
             {
                 string filterShow = comboBox_filterArchived.SelectedValue.ToString();
-                if(filterShow == FilterShow.NotArchived.ToString())
+                if (filterShow == FilterShow.NotArchived.ToString())
                     patients = _dentnedModel.Patients.List(r => !r.patients_isarchived).ToList();
-                else if(filterShow == FilterShow.Archived.ToString())
+                else if (filterShow == FilterShow.Archived.ToString())
                     patients = _dentnedModel.Patients.List(r => r.patients_isarchived).ToList();
                 else
                     patients = _dentnedModel.Patients.List().ToList();
@@ -1010,7 +1010,7 @@ namespace DG.DentneD.Forms
         private void advancedDataGridView_main_FilterStringChanged(object sender, EventArgs e)
         {
             string filter = advancedDataGridView_main.FilterString;
-            if(!String.IsNullOrEmpty(textBox_filterPatient.Text))
+            if (!String.IsNullOrEmpty(textBox_filterPatient.Text))
             {
                 filter += (!String.IsNullOrEmpty(filter) ? " AND " : "") + String.Format("name LIKE '%{0}%'", textBox_filterPatient.Text);
             }
@@ -1039,7 +1039,7 @@ namespace DG.DentneD.Forms
                 return;
 
             ReloadView();
-            
+
             vPatientsBindingSource_CurrentChanged(sender, e);
         }
 
@@ -1104,7 +1104,7 @@ namespace DG.DentneD.Forms
 
             advancedDataGridView_main_FilterStringChanged(sender, e);
         }
-                
+
 
         #region tabPatients_tabPatients
 
@@ -1164,19 +1164,25 @@ namespace DG.DentneD.Forms
         {
             patients patient = (patients)item;
 
-            if (!FileHelper.DeleteFolder(_patientsAttachmentsdir + "\\" + patient.patients_id, _doSecureDelete))
+            if (Directory.Exists(_patientsAttachmentsdir + "\\" + patient.patients_id))
             {
-                MessageBox.Show(String.Format(language.folderdeleteerrorMessage, _patientsAttachmentsdir + "\\" + patient.patients_id), language.filedeleteerrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                if (!FileHelper.DeleteFolder(_patientsAttachmentsdir + "\\" + patient.patients_id, _doSecureDelete))
+                {
+                    MessageBox.Show(String.Format(language.folderdeleteerrorMessage, _patientsAttachmentsdir + "\\" + patient.patients_id), language.filedeleteerrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
             }
-            
-            if (!FileHelper.DeleteFolder(_patientsDatadir + "\\" + patient.patients_id, _doSecureDelete))
+
+            if (Directory.Exists(_patientsDatadir + "\\" + patient.patients_id))
             {
-                MessageBox.Show(String.Format(language.folderdeleteerrorMessage, _patientsDatadir + "\\" + patient.patients_id), language.filedeleteerrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                if (!FileHelper.DeleteFolder(_patientsDatadir + "\\" + patient.patients_id, _doSecureDelete))
+                {
+                    MessageBox.Show(String.Format(language.folderdeleteerrorMessage, _patientsDatadir + "\\" + patient.patients_id), language.filedeleteerrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
             }
-            
-            DGUIGHFData.Remove<patients, DentneDModel>(false, _dentnedModel.Patients, item);
+
+            DGUIGHFData.Remove<patients, DentneDModel>(_dentnedModel.Patients, item);
         }
 
         /// <summary>
@@ -1281,7 +1287,7 @@ namespace DG.DentneD.Forms
                 catch { }
             }
         }
-        
+
         /// <summary>
         /// Combobox autocomplete
         /// </summary>
@@ -1325,7 +1331,7 @@ namespace DG.DentneD.Forms
                 }
                 catch { }
                 bool deleteFolder = false;
-                if(patients_id != -1)
+                if (patients_id != -1)
                 {
                     //check if folder patient exists
                     if (dentnedModel.Patients.Find(patients_id) == null)
@@ -1336,8 +1342,8 @@ namespace DG.DentneD.Forms
                 else
                 {
                     deleteFolder = true;
-                }                    
-                if(deleteFolder)
+                }
+                if (deleteFolder)
                 {
                     FileHelper.DeleteFolder(subDirectoryInfo.FullName, doSecureDelete);
 
@@ -1401,7 +1407,7 @@ namespace DG.DentneD.Forms
                 if (deleteFolder)
                 {
                     FileHelper.DeleteFolder(subDirectoryInfo.FullName, doSecureDelete);
-                    
+
                     if (!Directory.Exists(subDirectoryInfo.FullName))
                     {
                         messages = messages.Concat(new string[] { String.Format("Folder \"{0}\" does not have any patient attached, it was deleted successfully.", subDirectoryInfo.FullName) }).ToArray();
@@ -1412,7 +1418,7 @@ namespace DG.DentneD.Forms
                     }
                 }
                 else
-                {   
+                {
                     //check attachments
                     DirectoryInfo sdirectoryInfo = new DirectoryInfo(subDirectoryInfo.FullName);
                     DirectoryInfo[] subsDirectoriesInfo = sdirectoryInfo.GetDirectories();
@@ -1421,11 +1427,11 @@ namespace DG.DentneD.Forms
                     {
                         FileHelper.DeleteFolder(subsDirectoryInfo.FullName, doSecureDelete);
                     }
-                    
+
                     //clean attachments if needed
                     foreach (FileInfo file in sdirectoryInfo.GetFiles())
                     {
-                        if(dentnedModel.PatientsAttachments.List(r => r.patients_id == patients_id && r.patientsattachments_filename == file.Name).Count == 0)
+                        if (!dentnedModel.PatientsAttachments.Any(r => r.patients_id == patients_id && r.patientsattachments_filename == file.Name))
                         {
                             FileHelper.DeleteFile(file.FullName, doSecureDelete);
 
@@ -1846,7 +1852,7 @@ namespace DG.DentneD.Forms
             IsBindingSourceLoading = false;
 
             IEnumerable<VPatientsTreatments> vPatientsTreatments =
-            _dentnedModel.PatientsTreatments.List(predicate.Compile()).Select(
+            _dentnedModel.PatientsTreatments.List(predicate).Select(
             r => new VPatientsTreatments
             {
                 patientstreatments_id = r.patientstreatments_id,
@@ -2382,7 +2388,7 @@ namespace DG.DentneD.Forms
         {
             vPatientsTreatmentsBindingSource.Sort = advancedDataGridView_tabPatientsTreatments_list.SortString;
         }
-        
+
         /// <summary>
         /// Load the tab DataSource
         /// </summary>
@@ -2431,7 +2437,7 @@ namespace DG.DentneD.Forms
         private void Update_tabPatientsTreatments(object item)
         {
             SetCurrentPatientstreatmentsBindingSource();
-            
+
             //scroll up
             tabPage_tabPatientsTreatments.AutoScrollPosition = new Point(0, 0);
 
@@ -2462,7 +2468,7 @@ namespace DG.DentneD.Forms
             if (_resetPatientstreatmentsFilterOnSave)
                 ResetPatientstreatmentsFilter();
 
-            DGUIGHFData.Remove<patientstreatments, DentneDModel>(false, _dentnedModel.PatientsTreatments, item);
+            DGUIGHFData.Remove<patientstreatments, DentneDModel>(_dentnedModel.PatientsTreatments, item);
         }
 
         /// <summary>
@@ -2478,9 +2484,12 @@ namespace DG.DentneD.Forms
                 {
                     ((patientstreatments)patientstreatmentsBindingSource.Current).patients_id = (((DataRowView)vPatientsBindingSource.Current).Row).Field<int>("patients_id");
                     ((patientstreatments)patientstreatmentsBindingSource.Current).patientstreatments_creationdate = DateTime.Now;
-                    doctors doctor = _dentnedModel.Doctors.List().FirstOrDefault();
-                    if (doctor != null)
-                        ((patientstreatments)patientstreatmentsBindingSource.Current).doctors_id = doctor.doctors_id;
+                    if (_dentnedModel.Doctors.Count() == 1)
+                    {
+                        doctors doctor = _dentnedModel.Doctors.FirstOrDefault();
+                        if (doctor != null)
+                            ((patientstreatments)patientstreatmentsBindingSource.Current).doctors_id = doctor.doctors_id;
+                    }
                     ((patientstreatments)patientstreatmentsBindingSource.Current).patientstreatments_ispaid = false;
                     ((patientstreatments)patientstreatmentsBindingSource.Current).patientstreatments_isunitprice = true;
                     patientstreatmentsBindingSource.ResetBindings(true);
@@ -2579,11 +2588,11 @@ namespace DG.DentneD.Forms
                 patients_id = (((DataRowView)vPatientsBindingSource.Current).Row).Field<int>("patients_id");
             }
 
-            if(patients_id != -1)
+            if (patients_id != -1)
             {
                 //get predicate
                 Expression<Func<patientstreatments, bool>> predicate = GetDataSourceList_tabPatientsTreatmentsPredicate(patients_id);
-                patientstreatments[] patientstreatmentsl = _dentnedModel.PatientsTreatments.List(predicate.Compile()).ToArray();
+                patientstreatments[] patientstreatmentsl = _dentnedModel.PatientsTreatments.List(predicate).ToArray();
 
                 //do print
                 PrintPatientsTreatments(patients_id, patientstreatmentsl);
@@ -2681,7 +2690,7 @@ namespace DG.DentneD.Forms
 
             if (patientstreatments_id != -1)
             {
-                invoiceslines invoiceline = _dentnedModel.InvoicesLines.List(r => r.patientstreatments_id == patientstreatments_id).FirstOrDefault();
+                invoiceslines invoiceline = _dentnedModel.InvoicesLines.FirstOrDefault(r => r.patientstreatments_id == patientstreatments_id);
                 if (invoiceline != null)
                 {
                     invoices invoice = _dentnedModel.Invoices.Find(invoiceline.invoices_id);
@@ -2770,7 +2779,7 @@ namespace DG.DentneD.Forms
             patientstreatments_expirationdateenabledCheckBox_CheckedChanged(null, null);
             patientstreatments_fulfilldateenabledCheckBox_CheckedChanged(null, null);
         }
-        
+
         /// <summary>
         /// Treatment combobox changed handler
         /// </summary>
@@ -2804,7 +2813,7 @@ namespace DG.DentneD.Forms
                             patients patient = _dentnedModel.Patients.Find(patients_id);
                             if (patient != null)
                             {
-                                treatmentsprices treatmentsprice = _dentnedModel.TreatmentsPrices.List(r => r.treatments_id == treatment.treatments_id && r.treatmentspriceslists_id == patient.treatmentspriceslists_id).FirstOrDefault();
+                                treatmentsprices treatmentsprice = _dentnedModel.TreatmentsPrices.FirstOrDefault(r => r.treatments_id == treatment.treatments_id && r.treatmentspriceslists_id == patient.treatmentspriceslists_id);
                                 if (treatmentsprice != null)
                                 {
                                     price = treatmentsprice.treatmentsprices_price;
@@ -2862,13 +2871,13 @@ namespace DG.DentneD.Forms
             else
                 patientstreatments_fulfilldateDateTimePicker.Visible = false;
         }
-        
+
         /// <summary>
         /// Set the current patient treatments before update the record
         /// </summary>
         private void SetCurrentPatientstreatmentsBindingSource()
         {
-            if(patientstreatmentsBindingSource.Current != null)
+            if (patientstreatmentsBindingSource.Current != null)
             {
                 ((patientstreatments)patientstreatmentsBindingSource.Current).patientstreatments_t11 = patientstreatments_t11CheckBox.Checked;
                 ((patientstreatments)patientstreatmentsBindingSource.Current).patientstreatments_t12 = patientstreatments_t12CheckBox.Checked;
@@ -2914,7 +2923,7 @@ namespace DG.DentneD.Forms
                     ((patientstreatments)patientstreatmentsBindingSource.Current).patientstreatments_fulfilldate = patientstreatments_fulfilldateDateTimePicker.Value;
             }
         }
-        
+
         /// <summary>
         /// Treatments all checked handler
         /// </summary>
@@ -3453,10 +3462,10 @@ namespace DG.DentneD.Forms
                 !r.patientstreatments_t48)
                 ));
 
-            int patientstreatments_talnum = _dentnedModel.PatientsTreatments.List(predicatetalnum.Compile()).Count;
-            int patientstreatments_tnonum = _dentnedModel.PatientsTreatments.List(predicatetnonum.Compile()).Count;
-            int patientstreatments_tupnum = _dentnedModel.PatientsTreatments.List(predicatetupnum.Compile()).Count;
-            int patientstreatments_tdwnum = _dentnedModel.PatientsTreatments.List(predicatetdwnum.Compile()).Count;
+            int patientstreatments_talnum = _dentnedModel.PatientsTreatments.List(predicatetalnum).Count;
+            int patientstreatments_tnonum = _dentnedModel.PatientsTreatments.List(predicatetnonum).Count;
+            int patientstreatments_tupnum = _dentnedModel.PatientsTreatments.List(predicatetupnum).Count;
+            int patientstreatments_tdwnum = _dentnedModel.PatientsTreatments.List(predicatetdwnum).Count;
             int patientstreatments_t11num = 0;
             int patientstreatments_t12num = 0;
             int patientstreatments_t13num = 0;
@@ -3489,7 +3498,7 @@ namespace DG.DentneD.Forms
             int patientstreatments_t46num = 0;
             int patientstreatments_t47num = 0;
             int patientstreatments_t48num = 0;
-            foreach (patientstreatments patientstreatment in _dentnedModel.PatientsTreatments.List(predicatetoothnum.Compile()))
+            foreach (patientstreatments patientstreatment in _dentnedModel.PatientsTreatments.List(predicatetoothnum))
             {
                 if (patientstreatment.patientstreatments_t11)
                     patientstreatments_t11num++;
@@ -3682,7 +3691,7 @@ namespace DG.DentneD.Forms
         {
             PatientsTreatmentsFilter();
         }
-        
+
         /// <summary>
         /// Treatments filter all checked handler
         /// </summary>
@@ -4306,15 +4315,15 @@ namespace DG.DentneD.Forms
             decimal paidtotalnum = Math.Round(_dentnedModel.Payments.List(r => r.patients_id == patients_id).Sum(r => r.payments_amount), 2);
             decimal totalvalue = 0;
             decimal lefttotalvalue = 0;
-            if(_paymentsReference == PaymentsReference.Treatments)
+            if (_paymentsReference == PaymentsReference.Treatments)
             {
-                foreach(patientstreatments patientstreatment in _dentnedModel.PatientsTreatments.List(r => r.patients_id == patients_id && r.patientstreatments_fulfilldate != null))
+                foreach (patientstreatments patientstreatment in _dentnedModel.PatientsTreatments.List(r => r.patients_id == patients_id && r.patientstreatments_fulfilldate != null))
                 {
-                    if(!patientstreatment.patientstreatments_isunitprice)
+                    if (!patientstreatment.patientstreatments_isunitprice)
                         totalvalue += patientstreatment.patientstreatments_price + (patientstreatment.patientstreatments_price * patientstreatment.patientstreatments_taxrate / 100);
                     else
                     {
-                        int tooths =_dentnedModel.PatientsTreatments.GetNumberOfTooths(patientstreatment);
+                        int tooths = _dentnedModel.PatientsTreatments.GetNumberOfTooths(patientstreatment);
                         if (tooths == 0)
                             tooths = 1;
                         totalvalue += tooths * (patientstreatment.patientstreatments_price + (patientstreatment.patientstreatments_price * patientstreatment.patientstreatments_taxrate / 100));
@@ -4339,7 +4348,7 @@ namespace DG.DentneD.Forms
                 payments_id = r.payments_id,
                 amount = (double)r.payments_amount,
                 date = r.payments_date,
-                note = (!String.IsNullOrEmpty(r.payments_notes) ? (r.payments_notes.Length > MaxRowValueLength ? r.payments_notes.Substring(0, MaxRowValueLength) + "..." : r.payments_notes) : "") 
+                note = (!String.IsNullOrEmpty(r.payments_notes) ? (r.payments_notes.Length > MaxRowValueLength ? r.payments_notes.Substring(0, MaxRowValueLength) + "..." : r.payments_notes) : "")
             }).ToList();
 
             ret = DGDataTableUtils.ToDataTable<VPatientsPayments>(vPayments);
@@ -4492,7 +4501,7 @@ namespace DG.DentneD.Forms
         {
             return DGUIGHFData.LoadEntityFromCurrentBindingSource<appointments, DentneDModel>(_dentnedModel.Appointments, vPatientsAppointmentsBindingSource, new string[] { "appointments_id" });
         }
-        
+
         #endregion
 
 
@@ -4647,7 +4656,7 @@ namespace DG.DentneD.Forms
                 }
             }
         }
-        
+
         /// <summary>
         /// File attachment delete
         /// </summary>
@@ -4691,7 +4700,7 @@ namespace DG.DentneD.Forms
                             Directory.CreateDirectory(_patientsAttachmentsdir + "\\" + patients_id);
 
                         //delete old file
-                        if(!String.IsNullOrEmpty(patientsattachments_filenameTextBox.Text))
+                        if (!String.IsNullOrEmpty(patientsattachments_filenameTextBox.Text))
                         {
                             FileHelper.DeleteFile(_patientsAttachmentsdir + "\\" + patients_id + "\\" + patientsattachments_filenameTextBox.Text, _doSecureDelete);
                             patientsattachments_filenameTextBox.Text = "";
@@ -4769,12 +4778,12 @@ namespace DG.DentneD.Forms
                     patients_id = (((DataRowView)vPatientsBindingSource.Current).Row).Field<int>("patients_id");
                 }
 
-                if(patients_id != -1)
+                if (patients_id != -1)
                 {
                     patientsattachmentstypes patientsattachmentstype = _dentnedModel.PatientsAttachmentsTypes.Find(patientsattachmentstypes_idComboBox.SelectedValue);
                     if (patientsattachmentstype != null)
                     {
-                        if(patientsattachmentstype.patientsattachmentstypes_valueautofunc == PatientsAttachmentsTypesRepository.ValueAutoFuncCode.AMG.ToString())
+                        if (patientsattachmentstype.patientsattachmentstypes_valueautofunc == PatientsAttachmentsTypesRepository.ValueAutoFuncCode.AMG.ToString())
                         {
                             int maxvalue = 0;
                             foreach (patientsattachments patientsattachment in _dentnedModel.PatientsAttachments.List(r => r.patientsattachmentstypes_id == patientsattachmentstype.patientsattachmentstypes_id))
@@ -4794,7 +4803,7 @@ namespace DG.DentneD.Forms
                             ((patientsattachments)patientsattachmentsBindingSource.Current).patientsattachments_value = maxvalue.ToString();
                             patientsattachmentsBindingSource.ResetBindings(true);
                         }
-                        else if(patientsattachmentstype.patientsattachmentstypes_valueautofunc == PatientsAttachmentsTypesRepository.ValueAutoFuncCode.AML.ToString())
+                        else if (patientsattachmentstype.patientsattachmentstypes_valueautofunc == PatientsAttachmentsTypesRepository.ValueAutoFuncCode.AML.ToString())
                         {
                             int maxvalue = 0;
                             foreach (patientsattachments patientsattachment in _dentnedModel.PatientsAttachments.List(r => r.patientsattachmentstypes_id == patientsattachmentstype.patientsattachmentstypes_id && r.patients_id == patients_id))
@@ -4837,7 +4846,7 @@ namespace DG.DentneD.Forms
                     }
                 }
             }
-        }         
+        }
 
         /// <summary>
         /// Combobox autocomplete
@@ -4945,7 +4954,7 @@ namespace DG.DentneD.Forms
                 }
             }
         }
-        
+
         #endregion
 
 
@@ -5160,6 +5169,6 @@ namespace DG.DentneD.Forms
         }
 
         #endregion
-                                
+        
     }
 }

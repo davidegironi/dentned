@@ -4,10 +4,10 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System.Linq;
 using DG.Data.Model;
 using DG.DentneD.Model.Entity;
 using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace DG.DentneD.Model.Repositories
@@ -15,7 +15,7 @@ namespace DG.DentneD.Model.Repositories
     public class ComputedLinesRepository : GenericDataRepository<computedlines, DentneDModel>
     {
         public ComputedLinesRepository() : base() { }
-        
+
         /// <summary>
         /// Repository language dictionary
         /// </summary>
@@ -117,7 +117,7 @@ namespace DG.DentneD.Model.Repositories
                 if (!ret)
                     break;
 
-                if (BaseModel.Treatments.List(r => r.treatments_code == item.computedlines_code).Count() > 0)
+                if (BaseModel.Treatments.Any(r => r.treatments_code == item.computedlines_code))
                 {
                     ret = false;
                     errors = errors.Concat(new string[] { language.text006 }).ToArray();
@@ -125,8 +125,8 @@ namespace DG.DentneD.Model.Repositories
 
                 if (!isUpdate)
                 {
-                    if (List(r => r.computedlines_code == item.computedlines_code).Count() > 0 || 
-                        List(r => r.computedlines_name == item.computedlines_name).Count() > 0)
+                    if (Any(r => r.computedlines_code == item.computedlines_code) ||
+                        Any(r => r.computedlines_name == item.computedlines_name))
                     {
                         ret = false;
                         errors = errors.Concat(new string[] { language.text002 }).ToArray();
@@ -134,8 +134,8 @@ namespace DG.DentneD.Model.Repositories
                 }
                 else
                 {
-                    if (List(r => r.computedlines_id != item.computedlines_id && r.computedlines_code == item.computedlines_code).Count() > 0 ||
-                        List(r => r.computedlines_id != item.computedlines_id && r.computedlines_name == item.computedlines_name).Count() > 0)
+                    if (Any(r => r.computedlines_id != item.computedlines_id && r.computedlines_code == item.computedlines_code) ||
+                        Any(r => r.computedlines_id != item.computedlines_id && r.computedlines_name == item.computedlines_name))
                     {
                         ret = false;
                         errors = errors.Concat(new string[] { language.text002 }).ToArray();

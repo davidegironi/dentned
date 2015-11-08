@@ -4,11 +4,11 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System.Linq;
 using DG.DentneD.Model.Entity;
+using DG.DentneD.Model.Repositories;
 using NUnit.Framework;
 using System;
-using DG.DentneD.Model.Repositories;
+using System.Linq;
 
 namespace DG.DentneD.Model.Test
 {
@@ -23,7 +23,7 @@ namespace DG.DentneD.Model.Test
 
             _dentnedModel.PatientsAttachmentsTypes.Remove(_dentnedModel.PatientsAttachmentsTypes.List(r => r.patientsattachmentstypes_name == "XX1").ToArray());
             _dentnedModel.PatientsAttachmentsTypes.Remove(_dentnedModel.PatientsAttachmentsTypes.List(r => r.patientsattachmentstypes_name == "XX2").ToArray());
-            
+
             t_patientsattachmentstypes = new patientsattachmentstypes()
             {
                 //patientsattachmentstypes_name = "XX1",
@@ -60,7 +60,7 @@ namespace DG.DentneD.Model.Test
             };
             _dentnedModel.PatientsAttachmentsTypes.Add(t_patientsattachmentstypes);
 
-            t_patientsattachmentstypes = _dentnedModel.PatientsAttachmentsTypes.List(r => r.patientsattachmentstypes_name == "XX1").FirstOrDefault();
+            t_patientsattachmentstypes = _dentnedModel.PatientsAttachmentsTypes.FirstOrDefault(r => r.patientsattachmentstypes_name == "XX1");
             t_patientsattachmentstypes.patientsattachmentstypes_name = "XX2";
             Assert.IsFalse(_dentnedModel.PatientsAttachmentsTypes.CanUpdate(t_patientsattachmentstypes));
             t_patientsattachmentstypes.patientsattachmentstypes_name = "XX3";

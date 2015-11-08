@@ -4,18 +4,18 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
+using DG.Data.Model.Helpers;
+using DG.DentneD.Forms.Objects;
+using DG.DentneD.Helpers;
+using DG.DentneD.Model;
+using DG.DentneD.Model.Entity;
+using DG.UI.GHF;
+using SMcMaster;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using DG.Data.Model.Helpers;
-using DG.UI.GHF;
-using DG.DentneD.Model;
-using DG.DentneD.Model.Entity;
-using DG.DentneD.Forms.Objects;
 using Zuby.ADGV;
-using SMcMaster;
-using DG.DentneD.Helpers;
 
 namespace DG.DentneD.Forms
 {
@@ -142,7 +142,7 @@ namespace DG.DentneD.Forms
             IsBindingSourceLoading = true;
 
             //load tax rates
-            taxes_idComboBox.DataSource = _dentnedModel.Taxes.List().Select(r => new { name = r.taxes_name, r.taxes_id }).OrderBy(r => r.name).ToArray();
+            taxes_idComboBox.DataSource = _dentnedModel.Taxes.List().OrderBy(r => r.taxes_name).Select(r => new { name = r.taxes_name, r.taxes_id }).ToArray();
             taxes_idComboBox.DisplayMember = "name";
             taxes_idComboBox.ValueMember = "taxes_id";
 
@@ -257,7 +257,7 @@ namespace DG.DentneD.Forms
 
         #endregion
 
-        
+
 
     }
 }

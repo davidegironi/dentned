@@ -306,6 +306,7 @@
             this.patientstreatments_filtert31CheckBox = new System.Windows.Forms.CheckBox();
             this.patientstreatments_filtert32CheckBox = new System.Windows.Forms.CheckBox();
             this.panel_tabPatientsTreatments_filters = new System.Windows.Forms.Panel();
+            this.button_tabPatientsTreatments_filterprint = new System.Windows.Forms.Button();
             this.comboBox_tabPatientsTreatments_filterpaid = new System.Windows.Forms.ComboBox();
             this.label_tabPatientsTreatments_filterpaid = new System.Windows.Forms.Label();
             this.comboBox_tabPatientsTreatments_filterfulfilled = new System.Windows.Forms.ComboBox();
@@ -556,7 +557,6 @@
             this.comboBox_filterArchived = new System.Windows.Forms.ComboBox();
             this.invoicesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.estimatesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.button_tabPatientsTreatments_filterprint = new System.Windows.Forms.Button();
             this.panel_data.SuspendLayout();
             this.tabControl_main.SuspendLayout();
             this.tabPage_tabPatients.SuspendLayout();
@@ -3404,6 +3404,16 @@
             this.panel_tabPatientsTreatments_filters.Size = new System.Drawing.Size(540, 114);
             this.panel_tabPatientsTreatments_filters.TabIndex = 14;
             // 
+            // button_tabPatientsTreatments_filterprint
+            // 
+            this.button_tabPatientsTreatments_filterprint.Location = new System.Drawing.Point(7, 87);
+            this.button_tabPatientsTreatments_filterprint.Name = "button_tabPatientsTreatments_filterprint";
+            this.button_tabPatientsTreatments_filterprint.Size = new System.Drawing.Size(75, 23);
+            this.button_tabPatientsTreatments_filterprint.TabIndex = 5;
+            this.button_tabPatientsTreatments_filterprint.Text = "Print";
+            this.button_tabPatientsTreatments_filterprint.UseVisualStyleBackColor = true;
+            this.button_tabPatientsTreatments_filterprint.Click += new System.EventHandler(this.button_tabPatientsTreatments_filterprint_Click);
+            // 
             // comboBox_tabPatientsTreatments_filterpaid
             // 
             this.comboBox_tabPatientsTreatments_filterpaid.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -6072,16 +6082,6 @@
             // estimatesBindingSource
             // 
             this.estimatesBindingSource.DataSource = typeof(DG.DentneD.Model.Entity.estimates);
-            // 
-            // button_tabPatientsTreatments_filterprint
-            // 
-            this.button_tabPatientsTreatments_filterprint.Location = new System.Drawing.Point(7, 87);
-            this.button_tabPatientsTreatments_filterprint.Name = "button_tabPatientsTreatments_filterprint";
-            this.button_tabPatientsTreatments_filterprint.Size = new System.Drawing.Size(75, 23);
-            this.button_tabPatientsTreatments_filterprint.TabIndex = 5;
-            this.button_tabPatientsTreatments_filterprint.Text = "Print";
-            this.button_tabPatientsTreatments_filterprint.UseVisualStyleBackColor = true;
-            this.button_tabPatientsTreatments_filterprint.Click += new System.EventHandler(this.button_tabPatientsTreatments_filterprint_Click);
             // 
             // FormPatients
             // 

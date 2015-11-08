@@ -4,10 +4,10 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System.Linq;
 using DG.DentneD.Model.Entity;
 using NUnit.Framework;
 using System;
+using System.Linq;
 
 namespace DG.DentneD.Model.Test
 {
@@ -146,7 +146,7 @@ namespace DG.DentneD.Model.Test
             };
             _dentnedModel.Doctors.Add(t_doctors);
 
-            t_doctors = _dentnedModel.Doctors.List(r => r.doctors_name == "XX1" && r.doctors_surname == "XX1").FirstOrDefault();
+            t_doctors = _dentnedModel.Doctors.FirstOrDefault(r => r.doctors_name == "XX1" && r.doctors_surname == "XX1");
             t_doctors.doctors_name = "XX2";
             t_doctors.doctors_surname = "XX2";
             Assert.IsFalse(_dentnedModel.Doctors.CanUpdate(t_doctors));

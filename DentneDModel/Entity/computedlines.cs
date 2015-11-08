@@ -19,5 +19,7 @@ namespace DG.DentneD.Model.Entity
         public string computedlines_code { get; set; }
         public string computedlines_name { get; set; }
         public decimal computedlines_rate { get; set; }
+    
+        public virtual taxes taxes { get; set; }
     }
 }

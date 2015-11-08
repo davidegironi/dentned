@@ -4,9 +4,9 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System.Windows.Forms;
-using System.Drawing;
 using System;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace DG.DentneD.Helpers
 {
@@ -92,6 +92,6 @@ namespace DG.DentneD.Helpers
             return dialogResult;
         }
     }
-    
+
 }
 

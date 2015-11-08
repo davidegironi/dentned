@@ -4,10 +4,10 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System.Linq;
 using DG.Data.Model;
 using DG.DentneD.Model.Entity;
 using System;
+using System.Linq;
 
 namespace DG.DentneD.Model.Repositories
 {
@@ -22,7 +22,7 @@ namespace DG.DentneD.Model.Repositories
         {
             public string text001 = "Name can not be empty.";
             public string text002 = "Treatment type already inserted.";
-            public string text003 = "This item can not be removed. A treatment depends it.";
+            public string text003 = "This item can not be removed. A treatment depends on it.";
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace DG.DentneD.Model.Repositories
 
                 if (!isUpdate)
                 {
-                    if (List(r => r.treatmentstypes_name == item.treatmentstypes_name).Count() > 0)
+                    if (Any(r => r.treatmentstypes_name == item.treatmentstypes_name))
                     {
                         ret = false;
                         errors = errors.Concat(new string[] { language.text002 }).ToArray();
@@ -100,7 +100,7 @@ namespace DG.DentneD.Model.Repositories
                 }
                 else
                 {
-                    if (List(r => r.treatmentstypes_id != item.treatmentstypes_id && r.treatmentstypes_name == item.treatmentstypes_name).Count() > 0)
+                    if (Any(r => r.treatmentstypes_id != item.treatmentstypes_id && r.treatmentstypes_name == item.treatmentstypes_name))
                     {
                         ret = false;
                         errors = errors.Concat(new string[] { language.text002 }).ToArray();
@@ -130,7 +130,7 @@ namespace DG.DentneD.Model.Repositories
 
             foreach (treatmentstypes item in items)
             {
-                if(BaseModel.Treatments.List(r => r.treatmentstypes_id == item.treatmentstypes_id).Count > 0)
+                if (BaseModel.Treatments.Any(r => r.treatmentstypes_id == item.treatmentstypes_id))
                 {
                     ret = false;
                     errors = errors.Concat(new string[] { language.text003 }).ToArray();
@@ -138,7 +138,7 @@ namespace DG.DentneD.Model.Repositories
 
                 if (!ret)
                     break;
-            }            
+            }
 
             if (!ret)
                 return ret;

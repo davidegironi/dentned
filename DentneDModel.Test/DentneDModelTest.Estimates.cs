@@ -4,11 +4,10 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System.Linq;
 using DG.DentneD.Model.Entity;
 using NUnit.Framework;
 using System;
-using DG.DentneD.Model.Repositories;
+using System.Linq;
 
 namespace DG.DentneD.Model.Test
 {
@@ -222,7 +221,7 @@ namespace DG.DentneD.Model.Test
                 estimates_deductiontaxrate = 0
             };
             Assert.IsFalse(_dentnedModel.Estimates.CanAdd(t_estimates));
-            
+
             t_estimates = new estimates()
             {
                 estimates_date = today,
@@ -276,13 +275,13 @@ namespace DG.DentneD.Model.Test
             Assert.IsTrue(_dentnedModel.Estimates.CanAdd(t_estimates));
             _dentnedModel.Estimates.Add(t_estimates);
 
-            t_estimates = _dentnedModel.Estimates.List(r => r.estimates_number == "XX1" && r.estimates_date == today.Date).FirstOrDefault();
+            t_estimates = _dentnedModel.Estimates.FirstOrDefault(r => r.estimates_number == "XX1" && r.estimates_date == today.Date);
             t_estimates.estimates_number = "XX2";
             Assert.IsFalse(_dentnedModel.Estimates.CanUpdate(t_estimates));
             t_estimates.estimates_number = "XX3";
             Assert.IsTrue(_dentnedModel.Estimates.CanUpdate(t_estimates));
 
-            t_estimates = _dentnedModel.Estimates.List(r => r.estimates_number == "XX1" && r.estimates_date == today.Date).FirstOrDefault();
+            t_estimates = _dentnedModel.Estimates.FirstOrDefault(r => r.estimates_number == "XX1" && r.estimates_date == today.Date);
             t_estimates.doctors_id = -999;
             Assert.IsTrue(_dentnedModel.Estimates.CanUpdate(t_estimates));
 
@@ -350,7 +349,7 @@ namespace DG.DentneD.Model.Test
                 treatments_price = 10
             };
             _dentnedModel.Treatments.Add(t_treatments);
-            
+
             t_patientstreatments = new patientstreatments()
             {
                 doctors_id = t_doctors.doctors_id,
@@ -404,7 +403,7 @@ namespace DG.DentneD.Model.Test
             };
             _dentnedModel.EstimatesLines.Add(t_estimateslines);
 
-            t_estimates = _dentnedModel.Estimates.List(r => r.estimates_number == "XX1" && r.estimates_date == today.Date).FirstOrDefault();
+            t_estimates = _dentnedModel.Estimates.FirstOrDefault(r => r.estimates_number == "XX1" && r.estimates_date == today.Date);
             Assert.That(t_estimates.estimates_totalnet, Is.EqualTo(34));
 
             t_estimateslines = new estimateslines()
@@ -420,7 +419,7 @@ namespace DG.DentneD.Model.Test
             };
             _dentnedModel.EstimatesLines.Add(t_estimateslines);
 
-            t_estimates = _dentnedModel.Estimates.List(r => r.estimates_number == "XX1" && r.estimates_date == today.Date).FirstOrDefault();
+            t_estimates = _dentnedModel.Estimates.FirstOrDefault(r => r.estimates_number == "XX1" && r.estimates_date == today.Date);
             Assert.That(t_estimates.estimates_totalnet, Is.EqualTo(24));
             Assert.That(t_estimates.estimates_totalgross, Is.EqualTo(29.28));
             Assert.That(t_estimates.estimates_totaldue, Is.EqualTo(24.48));

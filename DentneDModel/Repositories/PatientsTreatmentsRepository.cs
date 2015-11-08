@@ -4,9 +4,9 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System.Linq;
 using DG.Data.Model;
 using DG.DentneD.Model.Entity;
+using System.Linq;
 
 namespace DG.DentneD.Model.Repositories
 {
@@ -86,7 +86,7 @@ namespace DG.DentneD.Model.Repositories
 
             foreach (patientstreatments item in items)
             {
-                if(item.patientstreatments_taxrate < 0)
+                if (item.patientstreatments_taxrate < 0)
                 {
                     ret = false;
                     errors = errors.Concat(new string[] { language.text005 }).ToArray();
@@ -114,6 +114,32 @@ namespace DG.DentneD.Model.Repositories
                 if (!ret)
                     break;
             }
+
+            return ret;
+        }
+
+        /// <summary>
+        /// Check if an item can be removed
+        /// </summary>
+        /// <param name="checkForeingKeys"></param>
+        /// <param name="excludedForeingKeys"></param>
+        /// <param name="errors"></param>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public override bool CanRemove(bool checkForeingKeys, string[] excludedForeingKeys, ref string[] errors, params patientstreatments[] items)
+        {
+            bool ret = true;
+
+            errors = new string[] { };
+
+            if (excludedForeingKeys == null)
+                excludedForeingKeys = new string[] { };
+            if (!excludedForeingKeys.Contains("FK_estimateslines_patientstreatments"))
+                excludedForeingKeys = excludedForeingKeys.Concat(new string[] { "FK_estimateslines_patientstreatments" }).ToArray();
+            if (!excludedForeingKeys.Contains("FK_invoiceslines_patientstreatments"))
+                excludedForeingKeys = excludedForeingKeys.Concat(new string[] { "FK_invoiceslines_patientstreatments" }).ToArray();
+
+            ret = base.CanRemove(checkForeingKeys, excludedForeingKeys, ref errors, items);
 
             return ret;
         }
@@ -152,11 +178,11 @@ namespace DG.DentneD.Model.Repositories
             string ret = (item.patientstreatments_t11 && item.patientstreatments_t12 && item.patientstreatments_t13 && item.patientstreatments_t14 && item.patientstreatments_t15 && item.patientstreatments_t16 && item.patientstreatments_t17 && item.patientstreatments_t18 &&
                     item.patientstreatments_t21 && item.patientstreatments_t22 && item.patientstreatments_t23 && item.patientstreatments_t24 && item.patientstreatments_t25 && item.patientstreatments_t26 && item.patientstreatments_t27 && item.patientstreatments_t28 &&
                     item.patientstreatments_t31 && item.patientstreatments_t32 && item.patientstreatments_t33 && item.patientstreatments_t34 && item.patientstreatments_t35 && item.patientstreatments_t36 && item.patientstreatments_t37 && item.patientstreatments_t38 &&
-                    item.patientstreatments_t41 && item.patientstreatments_t42 && item.patientstreatments_t43 && item.patientstreatments_t44 && item.patientstreatments_t45 && item.patientstreatments_t46 && item.patientstreatments_t47 && item.patientstreatments_t48 ? language.text101 : 
+                    item.patientstreatments_t41 && item.patientstreatments_t42 && item.patientstreatments_t43 && item.patientstreatments_t44 && item.patientstreatments_t45 && item.patientstreatments_t46 && item.patientstreatments_t47 && item.patientstreatments_t48 ? language.text101 :
                         (item.patientstreatments_t11 && item.patientstreatments_t12 && item.patientstreatments_t13 && item.patientstreatments_t14 && item.patientstreatments_t15 && item.patientstreatments_t16 && item.patientstreatments_t17 && item.patientstreatments_t18 &&
                         item.patientstreatments_t21 && item.patientstreatments_t22 && item.patientstreatments_t23 && item.patientstreatments_t24 && item.patientstreatments_t25 && item.patientstreatments_t26 && item.patientstreatments_t27 && item.patientstreatments_t28 &&
                         !item.patientstreatments_t31 && !item.patientstreatments_t32 && !item.patientstreatments_t33 && !item.patientstreatments_t34 && !item.patientstreatments_t35 && !item.patientstreatments_t36 && !item.patientstreatments_t37 && !item.patientstreatments_t38 &&
-                        !item.patientstreatments_t41 && !item.patientstreatments_t42 && !item.patientstreatments_t43 && !item.patientstreatments_t44 && !item.patientstreatments_t45 && !item.patientstreatments_t46 && !item.patientstreatments_t47 && !item.patientstreatments_t48 ? language.text102 : 
+                        !item.patientstreatments_t41 && !item.patientstreatments_t42 && !item.patientstreatments_t43 && !item.patientstreatments_t44 && !item.patientstreatments_t45 && !item.patientstreatments_t46 && !item.patientstreatments_t47 && !item.patientstreatments_t48 ? language.text102 :
                             (!item.patientstreatments_t11 && !item.patientstreatments_t12 && !item.patientstreatments_t13 && !item.patientstreatments_t14 && !item.patientstreatments_t15 && !item.patientstreatments_t16 && !item.patientstreatments_t17 && !item.patientstreatments_t18 &&
                             !item.patientstreatments_t21 && !item.patientstreatments_t22 && !item.patientstreatments_t23 && !item.patientstreatments_t24 && !item.patientstreatments_t25 && !item.patientstreatments_t26 && !item.patientstreatments_t27 && !item.patientstreatments_t28 &&
                             item.patientstreatments_t31 && item.patientstreatments_t32 && item.patientstreatments_t33 && item.patientstreatments_t34 && item.patientstreatments_t35 && item.patientstreatments_t36 && item.patientstreatments_t37 && item.patientstreatments_t38 &&
@@ -201,7 +227,7 @@ namespace DG.DentneD.Model.Repositories
                             )
                         )
                     );
-            ret = (ret.EndsWith(",") ? ret.Substring(0, ret.Length-1) : ret);
+            ret = (ret.EndsWith(",") ? ret.Substring(0, ret.Length - 1) : ret);
             return ret;
         }
 

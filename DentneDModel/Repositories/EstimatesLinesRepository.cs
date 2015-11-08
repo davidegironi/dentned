@@ -4,10 +4,10 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System.Linq;
 using DG.Data.Model;
 using DG.DentneD.Model.Entity;
 using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace DG.DentneD.Model.Repositories
@@ -132,7 +132,7 @@ namespace DG.DentneD.Model.Repositories
                 if (!ret)
                     break;
 
-                if(BaseModel.Estimates.Find(item.estimates_id).estimates_totalnet + Math.Round(item.estimateslines_quantity * item.estimateslines_unitprice, 2) < 0)
+                if (BaseModel.Estimates.Find(item.estimates_id).estimates_totalnet + Math.Round(item.estimateslines_quantity * item.estimateslines_unitprice, 2) < 0)
                 {
                     ret = false;
                     errors = errors.Concat(new string[] { language.text006 }).ToArray();

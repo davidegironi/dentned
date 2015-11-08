@@ -4,10 +4,10 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System.Linq;
 using DG.DentneD.Model.Entity;
 using NUnit.Framework;
 using System;
+using System.Linq;
 
 namespace DG.DentneD.Model.Test
 {
@@ -22,13 +22,13 @@ namespace DG.DentneD.Model.Test
 
             _dentnedModel.MedicalrecordsTypes.Remove(_dentnedModel.MedicalrecordsTypes.List(r => r.medicalrecordstypes_name == "XX1").ToArray());
             _dentnedModel.MedicalrecordsTypes.Remove(_dentnedModel.MedicalrecordsTypes.List(r => r.medicalrecordstypes_name == "XX2").ToArray());
-            
+
             t_medicalrecordstypes = new medicalrecordstypes()
             {
                 //medicalrecordstypes_name = "XX1"
             };
             Assert.IsFalse(_dentnedModel.MedicalrecordsTypes.CanAdd(t_medicalrecordstypes));
-            
+
             t_medicalrecordstypes = new medicalrecordstypes()
             {
                 medicalrecordstypes_name = "XX1"
@@ -48,7 +48,7 @@ namespace DG.DentneD.Model.Test
             };
             _dentnedModel.MedicalrecordsTypes.Add(t_medicalrecordstypes);
 
-            t_medicalrecordstypes = _dentnedModel.MedicalrecordsTypes.List(r => r.medicalrecordstypes_name == "XX1").FirstOrDefault();
+            t_medicalrecordstypes = _dentnedModel.MedicalrecordsTypes.FirstOrDefault(r => r.medicalrecordstypes_name == "XX1");
             t_medicalrecordstypes.medicalrecordstypes_name = "XX2";
             Assert.IsFalse(_dentnedModel.MedicalrecordsTypes.CanUpdate(t_medicalrecordstypes));
             t_medicalrecordstypes.medicalrecordstypes_name = "XX3";
@@ -97,7 +97,7 @@ namespace DG.DentneD.Model.Test
             _dentnedModel.PatientsMedicalrecords.Add(t_patientsmedicalrecords);
 
             Assert.IsFalse(_dentnedModel.MedicalrecordsTypes.CanRemove(_dentnedModel.MedicalrecordsTypes.List(r => r.medicalrecordstypes_name == "XX1").ToArray()));
-            
+
             _dentnedModel.Patients.Remove(_dentnedModel.Patients.List(r => r.patients_name == "XX1" && r.patients_surname == "XX1").ToArray());
 
             Assert.IsTrue(_dentnedModel.MedicalrecordsTypes.CanRemove(_dentnedModel.MedicalrecordsTypes.List(r => r.medicalrecordstypes_name == "XX1").ToArray()));

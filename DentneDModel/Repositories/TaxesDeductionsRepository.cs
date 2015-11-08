@@ -4,10 +4,10 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System.Linq;
 using DG.Data.Model;
 using DG.DentneD.Model.Entity;
 using System;
+using System.Linq;
 
 namespace DG.DentneD.Model.Repositories
 {
@@ -90,18 +90,18 @@ namespace DG.DentneD.Model.Repositories
                 if (!ret)
                     break;
 
-                if(item.taxesdeductions_rate < 0)
+                if (item.taxesdeductions_rate < 0)
                 {
                     ret = false;
                     errors = errors.Concat(new string[] { language.text003 }).ToArray();
                 }
-                
+
                 if (!ret)
                     break;
 
                 if (!isUpdate)
                 {
-                    if (List(r => r.taxesdeductions_name == item.taxesdeductions_name).Count() > 0)
+                    if (Any(r => r.taxesdeductions_name == item.taxesdeductions_name))
                     {
                         ret = false;
                         errors = errors.Concat(new string[] { language.text002 }).ToArray();
@@ -109,7 +109,7 @@ namespace DG.DentneD.Model.Repositories
                 }
                 else
                 {
-                    if (List(r => r.taxesdeductions_id != item.taxesdeductions_id && r.taxesdeductions_name == item.taxesdeductions_name).Count() > 0)
+                    if (Any(r => r.taxesdeductions_id != item.taxesdeductions_id && r.taxesdeductions_name == item.taxesdeductions_name))
                     {
                         ret = false;
                         errors = errors.Concat(new string[] { language.text002 }).ToArray();

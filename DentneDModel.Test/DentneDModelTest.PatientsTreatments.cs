@@ -4,11 +4,10 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System.Linq;
 using DG.DentneD.Model.Entity;
 using NUnit.Framework;
 using System;
-using DG.DentneD.Model.Repositories;
+using System.Linq;
 
 namespace DG.DentneD.Model.Test
 {
@@ -24,7 +23,7 @@ namespace DG.DentneD.Model.Test
             treatments t_treatments = null;
             treatmentstypes t_treatmentstypes = null;
             patientstreatments t_patientstreatments = null;
-            
+
             _dentnedModel.Patients.Remove(_dentnedModel.Patients.List(r => r.patients_name == "XX1" && r.patients_surname == "XX1").ToArray());
             _dentnedModel.Doctors.Remove(_dentnedModel.Doctors.List(r => r.doctors_name == "XX1" && r.doctors_surname == "XX1").ToArray());
             _dentnedModel.Treatments.Remove(_dentnedModel.Treatments.List(r => r.treatments_code == "XX1").ToArray());
@@ -42,7 +41,7 @@ namespace DG.DentneD.Model.Test
                 patients_password = "123456"
             };
             _dentnedModel.Patients.Add(t_patients);
-            
+
             t_doctors = new doctors()
             {
                 doctors_name = "XX1",
@@ -100,7 +99,7 @@ namespace DG.DentneD.Model.Test
                 patientstreatments_taxrate = 0,
             };
             Assert.IsFalse(_dentnedModel.PatientsTreatments.CanAdd(t_patientstreatments));
-            
+
             t_patientstreatments = new patientstreatments()
             {
                 doctors_id = t_doctors.doctors_id,
@@ -152,7 +151,7 @@ namespace DG.DentneD.Model.Test
             _dentnedModel.Doctors.Remove(_dentnedModel.Doctors.List(r => r.doctors_name == "XX1" && r.doctors_surname == "XX1").ToArray());
             _dentnedModel.Treatments.Remove(_dentnedModel.Treatments.List(r => r.treatments_code == "XX1").ToArray());
             _dentnedModel.TreatmentsTypes.Remove(_dentnedModel.TreatmentsTypes.List(r => r.treatmentstypes_name == "XX1").ToArray());
-            
+
             t_doctors = new doctors()
             {
                 doctors_name = "XX1",
@@ -190,7 +189,7 @@ namespace DG.DentneD.Model.Test
                 treatments_price = 10
             };
             _dentnedModel.Treatments.Add(t_treatments);
-            
+
             t_patientstreatments = new patientstreatments()
             {
                 doctors_id = t_doctors.doctors_id,
@@ -263,10 +262,10 @@ namespace DG.DentneD.Model.Test
 
             _dentnedModel.PatientsTreatments.Remove(t_patientstreatments);
 
-            t_invoiceslines = _dentnedModel.InvoicesLines.List(r => r.invoices_id == t_invoices.invoices_id).FirstOrDefault();
+            t_invoiceslines = _dentnedModel.InvoicesLines.FirstOrDefault(r => r.invoices_id == t_invoices.invoices_id);
             Assert.That(t_invoiceslines.patientstreatments_id, Is.EqualTo(null));
-            
-            t_estimateslines = _dentnedModel.EstimatesLines.List(r => r.estimates_id == t_estimates.estimates_id).FirstOrDefault();
+
+            t_estimateslines = _dentnedModel.EstimatesLines.FirstOrDefault(r => r.estimates_id == t_estimates.estimates_id);
             Assert.That(t_estimateslines.patientstreatments_id, Is.EqualTo(null));
 
             _dentnedModel.Estimates.Remove(_dentnedModel.Estimates.List(r => r.estimates_number == "XX1" && r.estimates_date == today.Date).ToArray());

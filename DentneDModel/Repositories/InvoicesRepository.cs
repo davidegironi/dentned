@@ -4,17 +4,17 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System.Linq;
 using DG.Data.Model;
 using DG.DentneD.Model.Entity;
 using System;
+using System.Linq;
 
 namespace DG.DentneD.Model.Repositories
 {
     public class InvoicesRepository : GenericDataRepository<invoices, DentneDModel>
     {
         public InvoicesRepository() : base() { }
-        
+
         /// <summary>
         /// Repository language dictionary
         /// </summary>
@@ -110,7 +110,7 @@ namespace DG.DentneD.Model.Repositories
                     ret = false;
                     errors = errors.Concat(new string[] { language.text004 }).ToArray();
                 }
-                
+
                 if (!ret)
                     break;
 
@@ -146,10 +146,10 @@ namespace DG.DentneD.Model.Repositories
                         errors = errors.Concat(new string[] { language.text011 }).ToArray();
                     }
                 }
-                
+
                 if (!ret)
                     break;
-                
+
                 if (!isUpdate)
                 {
                     //needed at the add stage, but can be omitted in the update stage, cause those link can be deleted
@@ -172,7 +172,7 @@ namespace DG.DentneD.Model.Repositories
 
                 if (!isUpdate)
                 {
-                    if (List(r => r.doctors_id == item.doctors_id && r.invoices_date.Year == item.invoices_date.Year && r.invoices_number == item.invoices_number).Count() > 0)
+                    if (Any(r => r.doctors_id == item.doctors_id && r.invoices_date.Year == item.invoices_date.Year && r.invoices_number == item.invoices_number))
                     {
                         ret = false;
                         errors = errors.Concat(new string[] { language.text008 }).ToArray();
@@ -180,7 +180,7 @@ namespace DG.DentneD.Model.Repositories
                 }
                 else
                 {
-                    if (List(r => r.invoices_id != item.invoices_id && r.doctors_id == item.doctors_id && r.invoices_date.Year == item.invoices_date.Year && r.invoices_number == item.invoices_number).Count() > 0)
+                    if (Any(r => r.invoices_id != item.invoices_id && r.doctors_id == item.doctors_id && r.invoices_date.Year == item.invoices_date.Year && r.invoices_number == item.invoices_number))
                     {
                         ret = false;
                         errors = errors.Concat(new string[] { language.text008 }).ToArray();
@@ -192,6 +192,26 @@ namespace DG.DentneD.Model.Repositories
             }
 
             return ret;
+        }
+
+        /// <summary>
+        /// Check if an item can be removed
+        /// </summary>
+        /// <param name="checkForeingKeys"></param>
+        /// <param name="excludedForeingKeys"></param>
+        /// <param name="errors"></param>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public override bool CanRemove(bool checkForeingKeys, string[] excludedForeingKeys, ref string[] errors, params invoices[] items)
+        {
+            if (excludedForeingKeys == null)
+                excludedForeingKeys = new string[] { };
+            if (!excludedForeingKeys.Contains("FK_invoiceslines_invoices"))
+                excludedForeingKeys = excludedForeingKeys.Concat(new string[] { "FK_invoiceslines_invoices" }).ToArray();
+            if (!excludedForeingKeys.Contains("FK_estimates_invoices"))
+                excludedForeingKeys = excludedForeingKeys.Concat(new string[] { "FK_estimates_invoices" }).ToArray();
+
+            return base.CanRemove(checkForeingKeys, excludedForeingKeys, ref errors, items);
         }
 
         /// <summary>

@@ -6,16 +6,16 @@
 
 using DG.DentneD.Model;
 using DG.DentneD.Model.Entity;
+using DG.DentneD.Model.Repositories;
 using System;
-using System.Linq;
+using System.Configuration;
 using System.Data.Entity;
 using System.Data.SqlClient;
-using System.Text;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Configuration;
-using DG.DentneD.Model.Repositories;
+using System.Linq;
+using System.Text;
 
 namespace DG.DentneD.Test
 {
@@ -265,7 +265,7 @@ EXEC sp_msforeachtable 'DBCC CHECKIDENT(''?'', RESEED, 0)'; DECLARE @max int; SE
 
             Console.WriteLine("Add TreatmentsPrices...");
             treatmentsprices[] treatmentsprices = new treatmentsprices[] { };
-            foreach(treatments treatment in treatments)
+            foreach (treatments treatment in treatments)
             {
                 if (_r.Next(0, 100) >= 30)
                 {
@@ -274,13 +274,13 @@ EXEC sp_msforeachtable 'DBCC CHECKIDENT(''?'', RESEED, 0)'; DECLARE @max int; SE
                     {
                         treatments_id = treatment.treatments_id,
                         treatmentspriceslists_id = treatmentspriceslist.treatmentspriceslists_id,
-                        treatmentsprices_price = treatment.treatments_price + treatment.treatments_price*treatmentspriceslist.treatmentspriceslists_multiplier
+                        treatmentsprices_price = treatment.treatments_price + treatment.treatments_price * treatmentspriceslist.treatmentspriceslists_multiplier
                     };
                     _dentnedModel.TreatmentsPrices.Add(treatmentspricestmp);
                     treatmentsprices = treatmentsprices.Concat(new treatmentsprices[] { treatmentspricestmp }).ToArray();
                 }
             }
-            
+
             Console.WriteLine("Add Patients...");
             patients[] patients = new patients[] { };
             for (int i = 0; i < PatientsNum; i++)
@@ -303,9 +303,9 @@ EXEC sp_msforeachtable 'DBCC CHECKIDENT(''?'', RESEED, 0)'; DECLARE @max int; SE
 
                 if (generatedatafiles)
                 {
-                    if(_r.Next(0, 100) > 50)
+                    if (_r.Next(0, 100) > 50)
                     {
-                        if(!Directory.Exists(_patientsDatadir + "\\" + patientstmp.patients_id))
+                        if (!Directory.Exists(_patientsDatadir + "\\" + patientstmp.patients_id))
                             Directory.CreateDirectory(_patientsDatadir + "\\" + patientstmp.patients_id);
                         GenerateImage(_patientsDatadir + "\\" + patientstmp.patients_id + "\\" + BuildRandomString(12) + ".png");
                     }
@@ -313,7 +313,7 @@ EXEC sp_msforeachtable 'DBCC CHECKIDENT(''?'', RESEED, 0)'; DECLARE @max int; SE
             }
 
             Console.WriteLine("Add PatientsAddresses...");
-            foreach(patients patient in patients)
+            foreach (patients patient in patients)
             {
                 do
                 {
@@ -382,7 +382,7 @@ EXEC sp_msforeachtable 'DBCC CHECKIDENT(''?'', RESEED, 0)'; DECLARE @max int; SE
                     do
                     {
                         string filename = null;
-                        
+
                         if (generatedatafiles)
                         {
                             if (_r.Next(0, 100) > 50)
@@ -403,7 +403,7 @@ EXEC sp_msforeachtable 'DBCC CHECKIDENT(''?'', RESEED, 0)'; DECLARE @max int; SE
                             patientsattachments_filename = filename
                         });
 
-                        
+
 
                     } while (_r.Next(0, 100) > 50);
                 }
@@ -428,7 +428,7 @@ EXEC sp_msforeachtable 'DBCC CHECKIDENT(''?'', RESEED, 0)'; DECLARE @max int; SE
                     });
                 } while (_r.Next(0, 100) > 3);
             }
-            
+
             Console.WriteLine("Add PatientsTreatments...");
             foreach (patients patient in patients)
             {
@@ -488,7 +488,7 @@ EXEC sp_msforeachtable 'DBCC CHECKIDENT(''?'', RESEED, 0)'; DECLARE @max int; SE
             }
 
             Console.WriteLine("Add Payments...");
-            foreach(patientstreatments patientstreatment in _dentnedModel.PatientsTreatments.List())
+            foreach (patientstreatments patientstreatment in _dentnedModel.PatientsTreatments.List())
             {
                 if (patientstreatment.patientstreatments_fulfilldate != null)
                 {
@@ -542,8 +542,8 @@ EXEC sp_msforeachtable 'DBCC CHECKIDENT(''?'', RESEED, 0)'; DECLARE @max int; SE
                         int quantity = _r.Next(1, 3);
                         if (_r.Next(0, 100) > 80)
                         {
-                            patientstreatment = _dentnedModel.PatientsTreatments.List(r => r.patients_id == patient.patients_id).FirstOrDefault();
-                            if(patientstreatment != null)
+                            patientstreatment = _dentnedModel.PatientsTreatments.FirstOrDefault(r => r.patients_id == patient.patients_id);
+                            if (patientstreatment != null)
                             {
                                 treatment = _dentnedModel.Treatments.Find(patientstreatment.treatments_id);
                                 if (patientstreatment.patientstreatments_isunitprice)
@@ -605,7 +605,7 @@ EXEC sp_msforeachtable 'DBCC CHECKIDENT(''?'', RESEED, 0)'; DECLARE @max int; SE
                         int quantity = _r.Next(1, 3);
                         if (_r.Next(0, 100) > 80)
                         {
-                            patientstreatment = _dentnedModel.PatientsTreatments.List(r => r.patients_id == patient.patients_id).FirstOrDefault();
+                            patientstreatment = _dentnedModel.PatientsTreatments.FirstOrDefault(r => r.patients_id == patient.patients_id);
                             if (patientstreatment != null)
                             {
                                 if (patientstreatment.patientstreatments_isunitprice)
@@ -619,7 +619,7 @@ EXEC sp_msforeachtable 'DBCC CHECKIDENT(''?'', RESEED, 0)'; DECLARE @max int; SE
                         }
                         if (treatment == null)
                             treatment = treatments[_r.Next(treatments.Count())];
-                        
+
                         _dentnedModel.InvoicesLines.Add(new invoiceslines()
                         {
                             invoices_id = invoice.invoices_id,

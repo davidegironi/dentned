@@ -4,10 +4,10 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System.Linq;
 using DG.DentneD.Model.Entity;
 using NUnit.Framework;
 using System;
+using System.Linq;
 
 namespace DG.DentneD.Model.Test
 {
@@ -20,7 +20,7 @@ namespace DG.DentneD.Model.Test
             string[] errors = new string[] { };
             patients t_patients = null;
             patientsnotes t_patientsnotes = null;
-            
+
             _dentnedModel.Patients.Remove(_dentnedModel.Patients.List(r => r.patients_name == "XX1" && r.patients_surname == "XX1").ToArray());
 
             t_patients = new patients()
@@ -35,7 +35,7 @@ namespace DG.DentneD.Model.Test
                 patients_password = "123456"
             };
             _dentnedModel.Patients.Add(t_patients);
-            
+
             t_patientsnotes = new patientsnotes()
             {
                 //patients_id = t_patients.patients_id
@@ -51,7 +51,7 @@ namespace DG.DentneD.Model.Test
                 patientsnotes_date = DateTime.Now
             };
             Assert.IsFalse(_dentnedModel.PatientsNotes.CanAdd(t_patientsnotes));
-            
+
             t_patientsnotes = new patientsnotes()
             {
                 patients_id = t_patients.patients_id,

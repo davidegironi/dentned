@@ -4,10 +4,10 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System.Linq;
 using DG.Data.Model;
 using DG.DentneD.Model.Entity;
 using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace DG.DentneD.Model.Repositories
@@ -114,7 +114,7 @@ namespace DG.DentneD.Model.Repositories
                     ret = false;
                     errors = errors.Concat(new string[] { language.text007 }).ToArray();
                 }
-                
+
                 if (!ret)
                     break;
 
@@ -140,21 +140,21 @@ namespace DG.DentneD.Model.Repositories
                 {
                     if (!isUpdate)
                     {
-                        if (List(r => r.rooms_id == item.rooms_id &&
+                        if (Any(r => r.rooms_id == item.rooms_id &&
                                 ((r.appointments_from <= item.appointments_to && r.appointments_from >= item.appointments_from) ||
                                 (r.appointments_from <= item.appointments_from && r.appointments_to >= item.appointments_to) ||
                                 (r.appointments_to >= item.appointments_from && r.appointments_to <= item.appointments_to) ||
-                                (r.appointments_from >= item.appointments_from && r.appointments_to <= item.appointments_to))).Count() > 0 ||
-                            List(r => r.doctors_id == item.doctors_id &&
+                                (r.appointments_from >= item.appointments_from && r.appointments_to <= item.appointments_to))) ||
+                            Any(r => r.doctors_id == item.doctors_id &&
                                 ((r.appointments_from <= item.appointments_to && r.appointments_from >= item.appointments_from) ||
                                 (r.appointments_from <= item.appointments_from && r.appointments_to >= item.appointments_to) ||
                                 (r.appointments_to >= item.appointments_from && r.appointments_to <= item.appointments_to) ||
-                                (r.appointments_from >= item.appointments_from && r.appointments_to <= item.appointments_to))).Count() > 0 ||
-                            List(r => r.patients_id == item.patients_id &&
+                                (r.appointments_from >= item.appointments_from && r.appointments_to <= item.appointments_to))) ||
+                            Any(r => r.patients_id == item.patients_id &&
                                 ((r.appointments_from <= item.appointments_to && r.appointments_from >= item.appointments_from) ||
                                 (r.appointments_from <= item.appointments_from && r.appointments_to >= item.appointments_to) ||
                                 (r.appointments_to >= item.appointments_from && r.appointments_to <= item.appointments_to) ||
-                                (r.appointments_from >= item.appointments_from && r.appointments_to <= item.appointments_to))).Count() > 0)
+                                (r.appointments_from >= item.appointments_from && r.appointments_to <= item.appointments_to))))
                         {
                             ret = false;
                             errors = errors.Concat(new string[] { language.text006 }).ToArray();
@@ -162,21 +162,21 @@ namespace DG.DentneD.Model.Repositories
                     }
                     else
                     {
-                        if (List(r => r.appointments_id != item.appointments_id && r.rooms_id == item.rooms_id &&
+                        if (Any(r => r.appointments_id != item.appointments_id && r.rooms_id == item.rooms_id &&
                                 ((r.appointments_from <= item.appointments_to && r.appointments_from >= item.appointments_from) ||
                                 (r.appointments_from <= item.appointments_from && r.appointments_to >= item.appointments_to) ||
                                 (r.appointments_to >= item.appointments_from && r.appointments_to <= item.appointments_to) ||
-                                (r.appointments_from >= item.appointments_from && r.appointments_to <= item.appointments_to))).Count() > 0 ||
-                            List(r => r.appointments_id != item.appointments_id && r.doctors_id == item.doctors_id &&
+                                (r.appointments_from >= item.appointments_from && r.appointments_to <= item.appointments_to))) ||
+                            Any(r => r.appointments_id != item.appointments_id && r.doctors_id == item.doctors_id &&
                                 ((r.appointments_from <= item.appointments_to && r.appointments_from >= item.appointments_from) ||
                                 (r.appointments_from <= item.appointments_from && r.appointments_to >= item.appointments_to) ||
                                 (r.appointments_to >= item.appointments_from && r.appointments_to <= item.appointments_to) ||
-                                (r.appointments_from >= item.appointments_from && r.appointments_to <= item.appointments_to))).Count() > 0 ||
-                            List(r => r.appointments_id != item.appointments_id && r.patients_id == item.patients_id &&
+                                (r.appointments_from >= item.appointments_from && r.appointments_to <= item.appointments_to))) ||
+                            Any(r => r.appointments_id != item.appointments_id && r.patients_id == item.patients_id &&
                                 ((r.appointments_from <= item.appointments_to && r.appointments_from >= item.appointments_from) ||
                                 (r.appointments_from <= item.appointments_from && r.appointments_to >= item.appointments_to) ||
                                 (r.appointments_to >= item.appointments_from && r.appointments_to <= item.appointments_to) ||
-                                (r.appointments_from >= item.appointments_from && r.appointments_to <= item.appointments_to))).Count() > 0)
+                                (r.appointments_from >= item.appointments_from && r.appointments_to <= item.appointments_to))))
                         {
                             ret = false;
                             errors = errors.Concat(new string[] { language.text006 }).ToArray();

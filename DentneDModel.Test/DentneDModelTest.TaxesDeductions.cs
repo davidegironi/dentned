@@ -4,9 +4,9 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System.Linq;
 using DG.DentneD.Model.Entity;
 using NUnit.Framework;
+using System.Linq;
 
 namespace DG.DentneD.Model.Test
 {
@@ -21,7 +21,7 @@ namespace DG.DentneD.Model.Test
 
             _dentnedModel.TaxesDeductions.Remove(_dentnedModel.TaxesDeductions.List(r => r.taxesdeductions_name == "XX1").ToArray());
             _dentnedModel.TaxesDeductions.Remove(_dentnedModel.TaxesDeductions.List(r => r.taxesdeductions_name == "XX2").ToArray());
-            
+
             t_taxesdeductions = new taxesdeductions()
             {
                 //taxesdeductions_name = "XX1",
@@ -58,7 +58,7 @@ namespace DG.DentneD.Model.Test
             };
             _dentnedModel.TaxesDeductions.Add(t_taxesdeductions);
 
-            t_taxesdeductions = _dentnedModel.TaxesDeductions.List(r => r.taxesdeductions_name == "XX1").FirstOrDefault();
+            t_taxesdeductions = _dentnedModel.TaxesDeductions.FirstOrDefault(r => r.taxesdeductions_name == "XX1");
             t_taxesdeductions.taxesdeductions_name = "XX2";
             Assert.IsFalse(_dentnedModel.TaxesDeductions.CanUpdate(t_taxesdeductions));
             t_taxesdeductions.taxesdeductions_name = "XX3";

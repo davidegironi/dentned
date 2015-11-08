@@ -82,7 +82,7 @@ namespace DG.DentneD.Helpers
                     dodelete = true;
                 }
 
-                if(dodelete)
+                if (dodelete)
                 {
                     try
                     {
@@ -107,7 +107,7 @@ namespace DG.DentneD.Helpers
                         }
                     }
                     catch { }
-                }                
+                }
             }
 
             return ret;

@@ -4,9 +4,9 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using System.Linq;
 using DG.DentneD.Model.Entity;
 using NUnit.Framework;
+using System.Linq;
 
 namespace DG.DentneD.Model.Test
 {
@@ -21,7 +21,7 @@ namespace DG.DentneD.Model.Test
 
             _dentnedModel.PaymentsTypes.Remove(_dentnedModel.PaymentsTypes.List(r => r.paymentstypes_name == "XX1").ToArray());
             _dentnedModel.PaymentsTypes.Remove(_dentnedModel.PaymentsTypes.List(r => r.paymentstypes_name == "XX2").ToArray());
-            
+
             t_paymentstypes = new paymentstypes()
             {
                 //paymentstypes_name = "XX1",
@@ -58,7 +58,7 @@ namespace DG.DentneD.Model.Test
             };
             _dentnedModel.PaymentsTypes.Add(t_paymentstypes);
 
-            t_paymentstypes = _dentnedModel.PaymentsTypes.List(r => r.paymentstypes_name == "XX1").FirstOrDefault();
+            t_paymentstypes = _dentnedModel.PaymentsTypes.FirstOrDefault(r => r.paymentstypes_name == "XX1");
             t_paymentstypes.paymentstypes_name = "XX2";
             Assert.IsFalse(_dentnedModel.PaymentsTypes.CanUpdate(t_paymentstypes));
             t_paymentstypes.paymentstypes_name = "XX3";

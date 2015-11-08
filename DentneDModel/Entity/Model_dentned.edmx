@@ -414,6 +414,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_computedlines_taxes">
+          <End Role="taxes" Type="Self.taxes" Multiplicity="0..1" />
+          <End Role="computedlines" Type="Self.computedlines" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="taxes">
+              <PropertyRef Name="taxes_id" />
+            </Principal>
+            <Dependent Role="computedlines">
+              <PropertyRef Name="taxes_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_estimates_doctors">
           <End Role="doctors" Type="Self.doctors" Multiplicity="0..1" />
           <End Role="estimates" Type="Self.estimates" Multiplicity="*" />
@@ -642,6 +654,66 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_patientstreatments_doctors">
+          <End Role="doctors" Type="Self.doctors" Multiplicity="1" />
+          <End Role="patientstreatments" Type="Self.patientstreatments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="doctors">
+              <PropertyRef Name="doctors_id" />
+            </Principal>
+            <Dependent Role="patientstreatments">
+              <PropertyRef Name="doctors_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_patientstreatments_patients">
+          <End Role="patients" Type="Self.patients" Multiplicity="1" />
+          <End Role="patientstreatments" Type="Self.patientstreatments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patients">
+              <PropertyRef Name="patients_id" />
+            </Principal>
+            <Dependent Role="patientstreatments">
+              <PropertyRef Name="patients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_patientstreatments_treatments">
+          <End Role="treatments" Type="Self.treatments" Multiplicity="1" />
+          <End Role="patientstreatments" Type="Self.patientstreatments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="treatments">
+              <PropertyRef Name="treatments_id" />
+            </Principal>
+            <Dependent Role="patientstreatments">
+              <PropertyRef Name="treatments_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_payments_patients">
+          <End Role="patients" Type="Self.patients" Multiplicity="1" />
+          <End Role="payments" Type="Self.payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patients">
+              <PropertyRef Name="patients_id" />
+            </Principal>
+            <Dependent Role="payments">
+              <PropertyRef Name="patients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_treatments_taxes">
+          <End Role="taxes" Type="Self.taxes" Multiplicity="0..1" />
+          <End Role="treatments" Type="Self.treatments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="taxes">
+              <PropertyRef Name="taxes_id" />
+            </Principal>
+            <Dependent Role="treatments">
+              <PropertyRef Name="taxes_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_treatments_treatmentstypes">
           <End Role="treatmentstypes" Type="Self.treatmentstypes" Multiplicity="1" />
           <End Role="treatments" Type="Self.treatments" Multiplicity="*" />
@@ -722,6 +794,10 @@
             <End Role="rooms" EntitySet="rooms" />
             <End Role="appointments" EntitySet="appointments" />
           </AssociationSet>
+          <AssociationSet Name="FK_computedlines_taxes" Association="Self.FK_computedlines_taxes">
+            <End Role="taxes" EntitySet="taxes" />
+            <End Role="computedlines" EntitySet="computedlines" />
+          </AssociationSet>
           <AssociationSet Name="FK_estimates_doctors" Association="Self.FK_estimates_doctors">
             <End Role="doctors" EntitySet="doctors" />
             <End Role="estimates" EntitySet="estimates" />
@@ -798,6 +874,26 @@
             <End Role="patients" EntitySet="patients" />
             <End Role="patientsnotes" EntitySet="patientsnotes" />
           </AssociationSet>
+          <AssociationSet Name="FK_patientstreatments_doctors" Association="Self.FK_patientstreatments_doctors">
+            <End Role="doctors" EntitySet="doctors" />
+            <End Role="patientstreatments" EntitySet="patientstreatments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_patientstreatments_patients" Association="Self.FK_patientstreatments_patients">
+            <End Role="patients" EntitySet="patients" />
+            <End Role="patientstreatments" EntitySet="patientstreatments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_patientstreatments_treatments" Association="Self.FK_patientstreatments_treatments">
+            <End Role="treatments" EntitySet="treatments" />
+            <End Role="patientstreatments" EntitySet="patientstreatments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_payments_patients" Association="Self.FK_payments_patients">
+            <End Role="patients" EntitySet="patients" />
+            <End Role="payments" EntitySet="payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_treatments_taxes" Association="Self.FK_treatments_taxes">
+            <End Role="taxes" EntitySet="taxes" />
+            <End Role="treatments" EntitySet="treatments" />
+          </AssociationSet>
           <AssociationSet Name="FK_treatments_treatmentstypes" Association="Self.FK_treatments_treatmentstypes">
             <End Role="treatmentstypes" EntitySet="treatmentstypes" />
             <End Role="treatments" EntitySet="treatments" />
@@ -863,6 +959,10 @@
             <End Role="rooms" EntitySet="rooms" />
             <End Role="appointments" EntitySet="appointments" />
           </AssociationSet>
+          <AssociationSet Name="FK_computedlines_taxes" Association="dentnedModel.FK_computedlines_taxes">
+            <End Role="taxes" EntitySet="taxes" />
+            <End Role="computedlines" EntitySet="computedlines" />
+          </AssociationSet>
           <AssociationSet Name="FK_patientscontacts_contactstypes" Association="dentnedModel.FK_patientscontacts_contactstypes">
             <End Role="contactstypes" EntitySet="contactstypes" />
             <End Role="patientscontacts" EntitySet="patientscontacts" />
@@ -874,6 +974,10 @@
           <AssociationSet Name="FK_invoices_doctors" Association="dentnedModel.FK_invoices_doctors">
             <End Role="doctors" EntitySet="doctors" />
             <End Role="invoices" EntitySet="invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_patientstreatments_doctors" Association="dentnedModel.FK_patientstreatments_doctors">
+            <End Role="doctors" EntitySet="doctors" />
+            <End Role="patientstreatments" EntitySet="patientstreatments" />
           </AssociationSet>
           <AssociationSet Name="FK_estimates_invoices" Association="dentnedModel.FK_estimates_invoices">
             <End Role="invoices" EntitySet="invoices" />
@@ -931,9 +1035,25 @@
             <End Role="patients" EntitySet="patients" />
             <End Role="patientsnotes" EntitySet="patientsnotes" />
           </AssociationSet>
+          <AssociationSet Name="FK_patientstreatments_patients" Association="dentnedModel.FK_patientstreatments_patients">
+            <End Role="patients" EntitySet="patients" />
+            <End Role="patientstreatments" EntitySet="patientstreatments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_payments_patients" Association="dentnedModel.FK_payments_patients">
+            <End Role="patients" EntitySet="patients" />
+            <End Role="payments" EntitySet="payments" />
+          </AssociationSet>
           <AssociationSet Name="FK_patientsattachments_patientsattachmentstypes" Association="dentnedModel.FK_patientsattachments_patientsattachmentstypes">
             <End Role="patientsattachmentstypes" EntitySet="patientsattachmentstypes" />
             <End Role="patientsattachments" EntitySet="patientsattachments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_patientstreatments_treatments" Association="dentnedModel.FK_patientstreatments_treatments">
+            <End Role="treatments" EntitySet="treatments" />
+            <End Role="patientstreatments" EntitySet="patientstreatments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_treatments_taxes" Association="dentnedModel.FK_treatments_taxes">
+            <End Role="taxes" EntitySet="taxes" />
+            <End Role="treatments" EntitySet="treatments" />
           </AssociationSet>
           <AssociationSet Name="FK_treatments_treatmentstypes" Association="dentnedModel.FK_treatments_treatmentstypes">
             <End Role="treatmentstypes" EntitySet="treatmentstypes" />
@@ -982,6 +1102,7 @@
           <Property Name="computedlines_code" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
           <Property Name="computedlines_name" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
           <Property Name="computedlines_rate" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <NavigationProperty Name="taxes" Relationship="dentnedModel.FK_computedlines_taxes" FromRole="computedlines" ToRole="taxes" />
         </EntityType>
         <EntityType Name="contactstypes">
           <Key>
@@ -1006,6 +1127,7 @@
           <NavigationProperty Name="appointments" Relationship="dentnedModel.FK_appointments_doctors" FromRole="doctors" ToRole="appointments" />
           <NavigationProperty Name="estimates" Relationship="dentnedModel.FK_estimates_doctors" FromRole="doctors" ToRole="estimates" />
           <NavigationProperty Name="invoices" Relationship="dentnedModel.FK_invoices_doctors" FromRole="doctors" ToRole="invoices" />
+          <NavigationProperty Name="patientstreatments" Relationship="dentnedModel.FK_patientstreatments_doctors" FromRole="doctors" ToRole="patientstreatments" />
         </EntityType>
         <EntityType Name="estimates">
           <Key>
@@ -1138,6 +1260,8 @@
           <NavigationProperty Name="patientscontacts" Relationship="dentnedModel.FK_patientscontacts_patients" FromRole="patients" ToRole="patientscontacts" />
           <NavigationProperty Name="patientsmedicalrecords" Relationship="dentnedModel.FK_patientsmedicalrecords_patients" FromRole="patients" ToRole="patientsmedicalrecords" />
           <NavigationProperty Name="patientsnotes" Relationship="dentnedModel.FK_patientsnotes_patients" FromRole="patients" ToRole="patientsnotes" />
+          <NavigationProperty Name="patientstreatments" Relationship="dentnedModel.FK_patientstreatments_patients" FromRole="patients" ToRole="patientstreatments" />
+          <NavigationProperty Name="payments" Relationship="dentnedModel.FK_payments_patients" FromRole="patients" ToRole="payments" />
         </EntityType>
         <EntityType Name="patientsaddresses">
           <Key>
@@ -1173,8 +1297,8 @@
           </Key>
           <Property Name="patientsattachmentstypes_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="patientsattachmentstypes_name" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="patientsattachments" Relationship="dentnedModel.FK_patientsattachments_patientsattachmentstypes" FromRole="patientsattachmentstypes" ToRole="patientsattachments" />
           <Property Name="patientsattachmentstypes_valueautofunc" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="patientsattachments" Relationship="dentnedModel.FK_patientsattachments_patientsattachmentstypes" FromRole="patientsattachmentstypes" ToRole="patientsattachments" />
         </EntityType>
         <EntityType Name="patientscontacts">
           <Key>
@@ -1257,8 +1381,11 @@
           <Property Name="patientstreatments_t46" Type="Boolean" Nullable="false" />
           <Property Name="patientstreatments_t47" Type="Boolean" Nullable="false" />
           <Property Name="patientstreatments_t48" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="doctors" Relationship="dentnedModel.FK_patientstreatments_doctors" FromRole="patientstreatments" ToRole="doctors" />
           <NavigationProperty Name="estimateslines" Relationship="dentnedModel.FK_estimateslines_patientstreatments" FromRole="patientstreatments" ToRole="estimateslines" />
           <NavigationProperty Name="invoiceslines" Relationship="dentnedModel.FK_invoiceslines_patientstreatments" FromRole="patientstreatments" ToRole="invoiceslines" />
+          <NavigationProperty Name="patients" Relationship="dentnedModel.FK_patientstreatments_patients" FromRole="patientstreatments" ToRole="patients" />
+          <NavigationProperty Name="treatments" Relationship="dentnedModel.FK_patientstreatments_treatments" FromRole="patientstreatments" ToRole="treatments" />
         </EntityType>
         <EntityType Name="payments">
           <Key>
@@ -1269,6 +1396,7 @@
           <Property Name="payments_date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="payments_amount" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
           <Property Name="payments_notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="patients" Relationship="dentnedModel.FK_payments_patients" FromRole="payments" ToRole="patients" />
         </EntityType>
         <EntityType Name="paymentstypes">
           <Key>
@@ -1316,6 +1444,8 @@
           <Property Name="taxes_name" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
           <Property Name="taxes_rate" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
           <Property Name="taxes_isdefault" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="computedlines" Relationship="dentnedModel.FK_computedlines_taxes" FromRole="taxes" ToRole="computedlines" />
+          <NavigationProperty Name="treatments" Relationship="dentnedModel.FK_treatments_taxes" FromRole="taxes" ToRole="treatments" />
         </EntityType>
         <EntityType Name="taxesdeductions">
           <Key>
@@ -1339,6 +1469,8 @@
           <Property Name="treatments_isunitprice" Type="Boolean" Nullable="false" />
           <Property Name="treatments_mexpiration" Type="Byte" />
           <Property Name="treatments_notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="patientstreatments" Relationship="dentnedModel.FK_patientstreatments_treatments" FromRole="treatments" ToRole="patientstreatments" />
+          <NavigationProperty Name="taxes" Relationship="dentnedModel.FK_treatments_taxes" FromRole="treatments" ToRole="taxes" />
           <NavigationProperty Name="treatmentstypes" Relationship="dentnedModel.FK_treatments_treatmentstypes" FromRole="treatments" ToRole="treatmentstypes" />
           <NavigationProperty Name="treatmentsprices" Relationship="dentnedModel.FK_treatmentsprices_treatments" FromRole="treatments" ToRole="treatmentsprices" />
         </EntityType>
@@ -1419,6 +1551,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_computedlines_taxes">
+          <End Type="dentnedModel.taxes" Role="taxes" Multiplicity="0..1" />
+          <End Type="dentnedModel.computedlines" Role="computedlines" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="taxes">
+              <PropertyRef Name="taxes_id" />
+            </Principal>
+            <Dependent Role="computedlines">
+              <PropertyRef Name="taxes_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_patientscontacts_contactstypes">
           <End Type="dentnedModel.contactstypes" Role="contactstypes" Multiplicity="1" />
           <End Type="dentnedModel.patientscontacts" Role="patientscontacts" Multiplicity="*" />
@@ -1451,6 +1595,18 @@
               <PropertyRef Name="doctors_id" />
             </Principal>
             <Dependent Role="invoices">
+              <PropertyRef Name="doctors_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_patientstreatments_doctors">
+          <End Type="dentnedModel.doctors" Role="doctors" Multiplicity="1" />
+          <End Type="dentnedModel.patientstreatments" Role="patientstreatments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="doctors">
+              <PropertyRef Name="doctors_id" />
+            </Principal>
+            <Dependent Role="patientstreatments">
               <PropertyRef Name="doctors_id" />
             </Dependent>
           </ReferentialConstraint>
@@ -1623,6 +1779,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_patientstreatments_patients">
+          <End Type="dentnedModel.patients" Role="patients" Multiplicity="1" />
+          <End Type="dentnedModel.patientstreatments" Role="patientstreatments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patients">
+              <PropertyRef Name="patients_id" />
+            </Principal>
+            <Dependent Role="patientstreatments">
+              <PropertyRef Name="patients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_payments_patients">
+          <End Type="dentnedModel.patients" Role="patients" Multiplicity="1" />
+          <End Type="dentnedModel.payments" Role="payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patients">
+              <PropertyRef Name="patients_id" />
+            </Principal>
+            <Dependent Role="payments">
+              <PropertyRef Name="patients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_patientsattachments_patientsattachmentstypes">
           <End Type="dentnedModel.patientsattachmentstypes" Role="patientsattachmentstypes" Multiplicity="1" />
           <End Type="dentnedModel.patientsattachments" Role="patientsattachments" Multiplicity="*" />
@@ -1632,6 +1812,30 @@
             </Principal>
             <Dependent Role="patientsattachments">
               <PropertyRef Name="patientsattachmentstypes_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_patientstreatments_treatments">
+          <End Type="dentnedModel.treatments" Role="treatments" Multiplicity="1" />
+          <End Type="dentnedModel.patientstreatments" Role="patientstreatments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="treatments">
+              <PropertyRef Name="treatments_id" />
+            </Principal>
+            <Dependent Role="patientstreatments">
+              <PropertyRef Name="treatments_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_treatments_taxes">
+          <End Type="dentnedModel.taxes" Role="taxes" Multiplicity="0..1" />
+          <End Type="dentnedModel.treatments" Role="treatments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="taxes">
+              <PropertyRef Name="taxes_id" />
+            </Principal>
+            <Dependent Role="treatments">
+              <PropertyRef Name="taxes_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

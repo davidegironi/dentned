@@ -49,7 +49,7 @@ namespace DG.DentneD.Forms
                 _sqlConnection.ConnectionString = context.Database.Connection.ConnectionString;
             }
         }
-        
+
         /// <summary>
         /// Add components language
         /// </summary>
@@ -71,7 +71,7 @@ namespace DG.DentneD.Forms
             public string reportsPasswordErrorMessage = "Wrong password.";
             public string reportsPasswordErrorTitle = "Error";
         }
-        
+
         /// <summary>
         /// Form language
         /// </summary>
@@ -120,7 +120,7 @@ namespace DG.DentneD.Forms
             IsBindingSourceLoading = true;
 
             //load filter doctors
-            comboBox_reports.DataSource = (new[] { new { name = "", reports_id = -1 } }).Concat(_dentnedModel.Reports.List().Select(r => new { name = r.reports_name, r.reports_id }).OrderBy(r => r.name)).ToArray();
+            comboBox_reports.DataSource = (new[] { new { name = "", reports_id = -1 } }).Concat(_dentnedModel.Reports.List().OrderBy(r => r.reports_name).Select(r => new { name = r.reports_name, r.reports_id })).ToArray();
             comboBox_reports.DisplayMember = "name";
             comboBox_reports.ValueMember = "reports_id";
 
@@ -221,16 +221,16 @@ namespace DG.DentneD.Forms
                         sql_cm1.Parameters.Add(param);
                     }
                     sql_rd1 = sql_cm1.ExecuteReader();
-                    sql_rd1.Read();  
+                    sql_rd1.Read();
                     if (sql_rd1.HasRows)
-                    {                  
+                    {
                         for (int i = 0; i < sql_rd1.FieldCount; i++)
                         {
                             Type dtType = Type.GetType("System.String");
                             try
                             {
                                 dtType = sql_rd1[sql_rd1.GetName(i)].GetType();
-                                if(dtType == Type.GetType("System.DBNull"))
+                                if (dtType == Type.GetType("System.DBNull"))
                                     dtType = Type.GetType("System.String");
                             }
                             catch { }
@@ -329,6 +329,6 @@ namespace DG.DentneD.Forms
 
             return ret;
         }
-        
+
     }
 }

@@ -884,7 +884,7 @@ namespace DG.DentneD.Forms
             rooms_idComboBox.SelectedIndex = -1;
 
             //load doctors
-            doctors_idComboBox.DataSource = _dentnedModel.Doctors.List().OrderBy(r => r.doctors_surname.ThenBy(r => r.doctors_name).Select(r => new { name = r.doctors_surname + " " + r.doctors_name, r.doctors_id }).ToArray();
+            doctors_idComboBox.DataSource = _dentnedModel.Doctors.List().OrderBy(r => r.doctors_surname).ThenBy(r => r.doctors_name).Select(r => new { name = r.doctors_surname + " " + r.doctors_name, r.doctors_id }).ToArray();
             doctors_idComboBox.DisplayMember = "name";
             doctors_idComboBox.ValueMember = "doctors_id";
             doctors_idComboBox1.SelectedIndex = -1;

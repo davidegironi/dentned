@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Data.Entity;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -4826,7 +4827,7 @@ namespace DG.DentneD.Forms
                         else if (patientsattachmentstype.patientsattachmentstypes_valueautofunc == PatientsAttachmentsTypesRepository.ValueAutoFuncCode.AMD.ToString())
                         {
                             int maxvalue = 0;
-                            foreach (patientsattachments patientsattachment in _dentnedModel.PatientsAttachments.List(r => r.patientsattachmentstypes_id == patientsattachmentstype.patientsattachmentstypes_id && r.patients_id == patients_id && r.patientsattachments_date.Date == ((patientsattachments)patientsattachmentsBindingSource.Current).patientsattachments_date.Date))
+                            foreach (patientsattachments patientsattachment in _dentnedModel.PatientsAttachments.List(r => r.patientsattachmentstypes_id == patientsattachmentstype.patientsattachmentstypes_id && r.patients_id == patients_id && DbFunctions.TruncateTime(r.patientsattachments_date) == ((patientsattachments)patientsattachmentsBindingSource.Current).patientsattachments_date.Date))
                             {
                                 try
                                 {
@@ -5169,6 +5170,6 @@ namespace DG.DentneD.Forms
         }
 
         #endregion
-        
+
     }
 }

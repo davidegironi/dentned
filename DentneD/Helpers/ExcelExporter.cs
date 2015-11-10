@@ -31,7 +31,13 @@ namespace DG.DentneD.Helpers
                     for (int j = 0; j < dt.Rows.Count; j++)
                     {
                         if (dt.Rows[j][i].GetType() == typeof(DateTime))
-                            worksheet.Cells[j + 1, i] = new Cell(dt.Rows[j][i], @"YYYY\-MM\-DD hh:mm:ss");
+                        {
+                            DateTime val = (DateTime)dt.Rows[j][i];
+                            if (val.Hour == 0 && val.Minute == 0 && val.Second == 0)
+                                worksheet.Cells[j + 1, i] = new Cell(val, @"YYYY\-MM\-DD");
+                            else
+                                worksheet.Cells[j + 1, i] = new Cell(val, @"YYYY\-MM\-DD hh:mm:ss");
+                        }
                         else
                             worksheet.Cells[j + 1, i] = new Cell(dt.Rows[j][i] == DBNull.Value ? "" : dt.Rows[j][i]);
                     }

@@ -1250,16 +1250,28 @@ namespace DG.DentneD.Forms
                     //do not load already inserted treatments and yet paid or invoices
                     patientstreatmentsl = _dentnedModel.PatientsTreatments.List(r => r.patients_id == patients_id && !r.patientstreatments_ispaid).ToList();
                     int[] patientstreatmentsids = patientstreatmentsl.Select(r => r.patientstreatments_id).ToArray();
-                    foreach (estimateslines estimatesline in _dentnedModel.EstimatesLines.List().Join(
-                            _dentnedModel.Estimates.List(), a => a.estimates_id, b => b.estimates_id, (a, b) => a).ToList())
+                    estimateslines[] estimateslinel = new estimateslines[] { };
+                    using (var context = (dentnedEntities)Activator.CreateInstance(_dentnedModel.ContextType, _dentnedModel.ContextParameters))
+                    {
+                        estimateslinel = (from estimatesline in context.estimateslines
+                                          join estimate in context.estimates on estimatesline.estimates_id equals estimate.estimates_id
+                                          select estimatesline).ToArray();
+                    }
+                    foreach (estimateslines estimatesline in estimateslinel)
                     {
                         patientstreatments patientstreatment = patientstreatmentsl.FirstOrDefault(r => r.patientstreatments_id == estimatesline.patientstreatments_id);
                         if (patientstreatment != null)
                             patientstreatmentsl.Remove(patientstreatment);
                     }
-                    foreach (invoiceslines invoicesline in _dentnedModel.InvoicesLines.List(
-                        r => r.patientstreatments_id != null && patientstreatmentsids.Contains((int)r.patientstreatments_id)).Join(
-                            _dentnedModel.Invoices.List(), a => a.invoices_id, b => b.invoices_id, (a, b) => a).ToList())
+                    invoiceslines[] invoiceslinel = new invoiceslines[] { };
+                    using (var context = (dentnedEntities)Activator.CreateInstance(_dentnedModel.ContextType, _dentnedModel.ContextParameters))
+                    {
+                        invoiceslinel = (from invoicesline in context.invoiceslines
+                                         join invoice in context.invoices on invoicesline.invoices_id equals invoice.invoices_id
+                                         where invoicesline.patientstreatments_id != null && patientstreatmentsids.Contains((int)invoicesline.patientstreatments_id)
+                                         select invoicesline).ToArray();
+                    }
+                    foreach (invoiceslines invoicesline in invoiceslinel)
                     {
                         patientstreatments patientstreatment = patientstreatmentsl.FirstOrDefault(r => r.patientstreatments_id == invoicesline.patientstreatments_id);
                         if (patientstreatment != null)

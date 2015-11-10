@@ -1175,8 +1175,14 @@ namespace DG.DentneD.Forms
                 {
                     //do not load already inserted treatments
                     patientstreatmentsl = _dentnedModel.PatientsTreatments.List(r => r.patients_id == patients_id).ToList();
-                    foreach (invoiceslines invoicesline in _dentnedModel.InvoicesLines.List().Join(
-                            _dentnedModel.Invoices.List(), a => a.invoices_id, b => b.invoices_id, (a, b) => a).ToList())
+                    invoiceslines[] invoiceslinel = new invoiceslines[] { };
+                    using (var context = (dentnedEntities)Activator.CreateInstance(_dentnedModel.ContextType, _dentnedModel.ContextParameters))
+                    {
+                        invoiceslinel = (from invoicesline in context.invoiceslines
+                                         join invoice in context.invoices on invoicesline.invoices_id equals invoice.invoices_id
+                                         select invoicesline).ToArray();
+                    }
+                    foreach (invoiceslines invoicesline in invoiceslinel)
                     {
                         patientstreatments patientstreatment = patientstreatmentsl.FirstOrDefault(r => r.patientstreatments_id == invoicesline.patientstreatments_id);
                         if (patientstreatment != null)

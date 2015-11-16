@@ -74,6 +74,7 @@
             this.button_tabAppointments_cancel = new System.Windows.Forms.Button();
             this.button_tabAppointments_save = new System.Windows.Forms.Button();
             this.panel_tabAppointments_actions = new System.Windows.Forms.Panel();
+            this.button_tabAppointments_openpatient = new System.Windows.Forms.Button();
             this.button_tabAppointments_new = new System.Windows.Forms.Button();
             this.button_tabAppointments_delete = new System.Windows.Forms.Button();
             this.button_tabAppointments_edit = new System.Windows.Forms.Button();
@@ -92,7 +93,6 @@
             this.comboBox_filterDoctors = new System.Windows.Forms.ComboBox();
             this.label_filterDoctors = new System.Windows.Forms.Label();
             this.checkBox_filterTreatmentsadvices = new System.Windows.Forms.CheckBox();
-            this.button_tabAppointments_openpatient = new System.Windows.Forms.Button();
             this.panel_data.SuspendLayout();
             this.tabControl_main.SuspendLayout();
             this.tabPage_tabAppointments.SuspendLayout();
@@ -369,14 +369,14 @@
             // 
             this.panel_tabAppointments_updates.Controls.Add(this.button_tabAppointments_cancel);
             this.panel_tabAppointments_updates.Controls.Add(this.button_tabAppointments_save);
-            this.panel_tabAppointments_updates.Location = new System.Drawing.Point(8, 478);
+            this.panel_tabAppointments_updates.Location = new System.Drawing.Point(6, 478);
             this.panel_tabAppointments_updates.Name = "panel_tabAppointments_updates";
-            this.panel_tabAppointments_updates.Size = new System.Drawing.Size(280, 30);
+            this.panel_tabAppointments_updates.Size = new System.Drawing.Size(282, 30);
             this.panel_tabAppointments_updates.TabIndex = 1;
             // 
             // button_tabAppointments_cancel
             // 
-            this.button_tabAppointments_cancel.Location = new System.Drawing.Point(202, 3);
+            this.button_tabAppointments_cancel.Location = new System.Drawing.Point(204, 3);
             this.button_tabAppointments_cancel.Name = "button_tabAppointments_cancel";
             this.button_tabAppointments_cancel.Size = new System.Drawing.Size(75, 23);
             this.button_tabAppointments_cancel.TabIndex = 2;
@@ -386,7 +386,7 @@
             // 
             // button_tabAppointments_save
             // 
-            this.button_tabAppointments_save.Location = new System.Drawing.Point(121, 3);
+            this.button_tabAppointments_save.Location = new System.Drawing.Point(123, 3);
             this.button_tabAppointments_save.Name = "button_tabAppointments_save";
             this.button_tabAppointments_save.Size = new System.Drawing.Size(75, 23);
             this.button_tabAppointments_save.TabIndex = 1;
@@ -405,9 +405,19 @@
             this.panel_tabAppointments_actions.Size = new System.Drawing.Size(280, 62);
             this.panel_tabAppointments_actions.TabIndex = 0;
             // 
+            // button_tabAppointments_openpatient
+            // 
+            this.button_tabAppointments_openpatient.Location = new System.Drawing.Point(3, 32);
+            this.button_tabAppointments_openpatient.Name = "button_tabAppointments_openpatient";
+            this.button_tabAppointments_openpatient.Size = new System.Drawing.Size(100, 23);
+            this.button_tabAppointments_openpatient.TabIndex = 4;
+            this.button_tabAppointments_openpatient.Text = "View Patient";
+            this.button_tabAppointments_openpatient.UseVisualStyleBackColor = true;
+            this.button_tabAppointments_openpatient.Click += new System.EventHandler(this.button_tabAppointments_openpatient_Click);
+            // 
             // button_tabAppointments_new
             // 
-            this.button_tabAppointments_new.Location = new System.Drawing.Point(3, 4);
+            this.button_tabAppointments_new.Location = new System.Drawing.Point(3, 3);
             this.button_tabAppointments_new.Name = "button_tabAppointments_new";
             this.button_tabAppointments_new.Size = new System.Drawing.Size(75, 23);
             this.button_tabAppointments_new.TabIndex = 3;
@@ -673,16 +683,6 @@
             this.checkBox_filterTreatmentsadvices.Text = "Show treatments advices";
             this.checkBox_filterTreatmentsadvices.UseVisualStyleBackColor = true;
             this.checkBox_filterTreatmentsadvices.CheckedChanged += new System.EventHandler(this.checkBox_filterTreatmentsadvices_CheckedChanged);
-            // 
-            // button_tabAppointments_openpatient
-            // 
-            this.button_tabAppointments_openpatient.Location = new System.Drawing.Point(3, 33);
-            this.button_tabAppointments_openpatient.Name = "button_tabAppointments_openpatient";
-            this.button_tabAppointments_openpatient.Size = new System.Drawing.Size(100, 23);
-            this.button_tabAppointments_openpatient.TabIndex = 4;
-            this.button_tabAppointments_openpatient.Text = "View Patient";
-            this.button_tabAppointments_openpatient.UseVisualStyleBackColor = true;
-            this.button_tabAppointments_openpatient.Click += new System.EventHandler(this.button_tabAppointments_openpatient_Click);
             // 
             // FormAppointments
             // 

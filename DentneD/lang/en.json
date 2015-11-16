@@ -231,6 +231,7 @@
     "Form-FormAppointments-button_tabAppointments_delete":"Delete",
     "Form-FormAppointments-button_tabAppointments_save":"Save",
     "Form-FormAppointments-button_tabAppointments_cancel":"Cancel",
+    "Form-FormAppointments-button_tabAppointments_openpatient":"View Patient",
     "Form-FormAppointments-appointments_idLabel":"Id:",
     "Form-FormAppointments-patients_idLabel":"Patient:",
     "Form-FormAppointments-appointments_fromLabel":"From:",

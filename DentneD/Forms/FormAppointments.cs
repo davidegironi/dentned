@@ -821,12 +821,9 @@ namespace DG.DentneD.Forms
                 appointments appointment = _dentnedModel.Appointments.Find(_selectedAppointmentId);
                 if (appointment != null)
                 {
-                    if (appointment.patients_id != null)
-                    {
-                        patients_id_toload = appointment.patients_id;
-                        DGUIGHFFormMain mainForm = (DGUIGHFFormMain)this.MdiParent;
-                        mainForm.ShowForm(mainForm, typeof(FormPatients));
-                    }
+                    patients_id_toload = appointment.patients_id;
+                    DGUIGHFFormMain mainForm = (DGUIGHFFormMain)this.MdiParent;
+                    mainForm.ShowForm(mainForm, typeof(FormPatients));
                 }
             }
         }

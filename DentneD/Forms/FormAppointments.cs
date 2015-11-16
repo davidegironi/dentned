@@ -669,7 +669,40 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void button_tabAppointments_new_Click(object sender, EventArgs e)
         {
-            AddAppointment(new DateTime(monthView_filterDay.SelectionStart.Year, monthView_filterDay.SelectionStart.Month, monthView_filterDay.SelectionStart.Day, DateTime.Now.Hour, DateTime.Now.Minute, 0));
+            DateTime date = new DateTime(monthView_filterDay.SelectionStart.Year, monthView_filterDay.SelectionStart.Month, monthView_filterDay.SelectionStart.Day, DateTime.Now.Hour, DateTime.Now.Minute, 0);
+            if (tabControl_list.SelectedTab == tabPage_tabListDays)
+            {
+                var calendarSelectableElement = calendar_listdays.SelectedElementStart;
+                if (calendarSelectableElement != null)
+                {
+                    date = new DateTime(calendarSelectableElement.Date.Year, calendarSelectableElement.Date.Month, calendarSelectableElement.Date.Day, calendarSelectableElement.Date.Hour, calendarSelectableElement.Date.Minute, 0);
+                }
+                else
+                {
+                    List<CalendarItem> selectedItems = calendar_listdays.GetSelectedItems().ToList();
+                    if (selectedItems != null && selectedItems.Count > 0)
+                    {
+                        date = new DateTime(selectedItems.FirstOrDefault().Date.Year, selectedItems.FirstOrDefault().Date.Month, selectedItems.FirstOrDefault().Date.Day, selectedItems.FirstOrDefault().Date.Hour, selectedItems.FirstOrDefault().Date.Minute, 0);
+                    }
+                }
+            }
+            else if (tabControl_list.SelectedTab == tabPage_tabListWeeks)
+            {
+                var calendarSelectableElement = calendar_listweeks.SelectedElementStart;
+                if (calendarSelectableElement != null)
+                {
+                    date = new DateTime(calendarSelectableElement.Date.Year, calendarSelectableElement.Date.Month, calendarSelectableElement.Date.Day, calendarSelectableElement.Date.Hour, calendarSelectableElement.Date.Minute, 0);
+                }
+                else
+                {
+                    List<CalendarItem> selectedItems = calendar_listweeks.GetSelectedItems().ToList();
+                    if (selectedItems != null && selectedItems.Count > 0)
+                    {
+                        date = new DateTime(selectedItems.FirstOrDefault().Date.Year, selectedItems.FirstOrDefault().Date.Month, selectedItems.FirstOrDefault().Date.Day, selectedItems.FirstOrDefault().Date.Hour, selectedItems.FirstOrDefault().Date.Minute, 0);
+                    }
+                }
+            }
+            AddAppointment(date);
         }
 
         /// <summary>
@@ -786,9 +819,9 @@ namespace DG.DentneD.Forms
             if (_selectedAppointmentId != -1)
             {
                 appointments appointment = _dentnedModel.Appointments.Find(_selectedAppointmentId);
-                if(appointment != null)
+                if (appointment != null)
                 {
-                    if(appointment.patients_id != null)
+                    if (appointment.patients_id != null)
                     {
                         patients_id_toload = appointment.patients_id;
                         DGUIGHFFormMain mainForm = (DGUIGHFFormMain)this.MdiParent;
@@ -1187,7 +1220,7 @@ namespace DG.DentneD.Forms
         }
 
         #endregion
-        
+
     }
 
 }

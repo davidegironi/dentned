@@ -44,6 +44,8 @@ namespace DG.DentneD.Forms
         private const int CalendarTitleWeekMaxLengh = 50;
         private const int CalendarTitleMonthMaxLengh = 20;
 
+        public int patients_id_toload = -1;
+
         #region Calendar custom objects
 
         /// <summary>
@@ -237,6 +239,7 @@ namespace DG.DentneD.Forms
             LanguageHelper.AddComponent(button_tabAppointments_delete);
             LanguageHelper.AddComponent(button_tabAppointments_save);
             LanguageHelper.AddComponent(button_tabAppointments_cancel);
+            LanguageHelper.AddComponent(button_tabAppointments_openpatient);
             LanguageHelper.AddComponent(appointments_idLabel);
             LanguageHelper.AddComponent(patients_idLabel);
             LanguageHelper.AddComponent(appointments_fromLabel);
@@ -774,6 +777,28 @@ namespace DG.DentneD.Forms
         }
 
         /// <summary>
+        /// View a patient
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button_tabAppointments_openpatient_Click(object sender, EventArgs e)
+        {
+            if (_selectedAppointmentId != -1)
+            {
+                appointments appointment = _dentnedModel.Appointments.Find(_selectedAppointmentId);
+                if(appointment != null)
+                {
+                    if(appointment.patients_id != null)
+                    {
+                        patients_id_toload = appointment.patients_id;
+                        DGUIGHFFormMain mainForm = (DGUIGHFFormMain)this.MdiParent;
+                        mainForm.ShowForm(mainForm, typeof(FormPatients));
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// Main BindingSource changed handler
         /// </summary>
         /// <param name="sender"></param>
@@ -1162,7 +1187,7 @@ namespace DG.DentneD.Forms
         }
 
         #endregion
-
+        
     }
 
 }

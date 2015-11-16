@@ -820,9 +820,41 @@ namespace DG.DentneD.Forms
 
             PreloadView();
 
-            ReloadView();
+            //select a patient on load patient
+            int patients_id = -1;
+            patients patient = null;
+            foreach (Form form in this.MdiParent.MdiChildren)
+            {
+                if (form.GetType() == typeof(FormAppointments))
+                {
+                    patients_id = ((FormAppointments)form).patients_id_toload;
+                    ((FormAppointments)form).patients_id_toload = -1;
+                }
 
+                if (patients_id != -1)
+                {
+                    IsBindingSourceLoading = true;
+                    patient = _dentnedModel.Patients.Find(patients_id);
+                    if (patient != null)
+                    {
+                        comboBox_filterArchived.SelectedIndex = 0;
+                    }
+                    IsBindingSourceLoading = false;
+                    break;
+                }
+            }
+
+            ReloadView();
+            
             vPatientsBindingSource_CurrentChanged(sender, e);
+
+            //select a patient on load patient
+            if (patient != null)
+            {
+                DGUIGHFData.SetBindingSourcePosition<patients, DentneDModel>(_dentnedModel.Patients, patient, vPatientsBindingSource);
+                tabControl_main.SelectedTab = tabPage_tabPatients;
+                tabControl_tabPatients.SelectedTab = tabPage_tabPatients_tabPatients;
+            }
         }
 
         /// <summary>

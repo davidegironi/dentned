@@ -280,7 +280,7 @@ namespace DG.DentneD.Forms
 
             ReloadView();
 
-            //select an estiamte on load invoice
+            //select an estimate on load estimate
             if (estimate != null)
             {
                 DGUIGHFData.SetBindingSourcePosition<estimates, DentneDModel>(_dentnedModel.Estimates, estimate, vEstimatesBindingSource);

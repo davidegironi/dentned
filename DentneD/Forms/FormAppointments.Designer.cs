@@ -92,6 +92,7 @@
             this.comboBox_filterDoctors = new System.Windows.Forms.ComboBox();
             this.label_filterDoctors = new System.Windows.Forms.Label();
             this.checkBox_filterTreatmentsadvices = new System.Windows.Forms.CheckBox();
+            this.button_tabAppointments_openpatient = new System.Windows.Forms.Button();
             this.panel_data.SuspendLayout();
             this.tabControl_main.SuspendLayout();
             this.tabPage_tabAppointments.SuspendLayout();
@@ -234,7 +235,7 @@
             this.panel_tabAppointments_data.Controls.Add(this.rooms_idComboBox);
             this.panel_tabAppointments_data.Controls.Add(this.appointments_idLabel);
             this.panel_tabAppointments_data.Controls.Add(this.appointments_idTextBox);
-            this.panel_tabAppointments_data.Location = new System.Drawing.Point(6, 42);
+            this.panel_tabAppointments_data.Location = new System.Drawing.Point(6, 74);
             this.panel_tabAppointments_data.Name = "panel_tabAppointments_data";
             this.panel_tabAppointments_data.Size = new System.Drawing.Size(282, 398);
             this.panel_tabAppointments_data.TabIndex = 2;
@@ -368,7 +369,7 @@
             // 
             this.panel_tabAppointments_updates.Controls.Add(this.button_tabAppointments_cancel);
             this.panel_tabAppointments_updates.Controls.Add(this.button_tabAppointments_save);
-            this.panel_tabAppointments_updates.Location = new System.Drawing.Point(6, 446);
+            this.panel_tabAppointments_updates.Location = new System.Drawing.Point(8, 478);
             this.panel_tabAppointments_updates.Name = "panel_tabAppointments_updates";
             this.panel_tabAppointments_updates.Size = new System.Drawing.Size(280, 30);
             this.panel_tabAppointments_updates.TabIndex = 1;
@@ -395,12 +396,13 @@
             // 
             // panel_tabAppointments_actions
             // 
+            this.panel_tabAppointments_actions.Controls.Add(this.button_tabAppointments_openpatient);
             this.panel_tabAppointments_actions.Controls.Add(this.button_tabAppointments_new);
             this.panel_tabAppointments_actions.Controls.Add(this.button_tabAppointments_delete);
             this.panel_tabAppointments_actions.Controls.Add(this.button_tabAppointments_edit);
             this.panel_tabAppointments_actions.Location = new System.Drawing.Point(6, 6);
             this.panel_tabAppointments_actions.Name = "panel_tabAppointments_actions";
-            this.panel_tabAppointments_actions.Size = new System.Drawing.Size(280, 30);
+            this.panel_tabAppointments_actions.Size = new System.Drawing.Size(280, 62);
             this.panel_tabAppointments_actions.TabIndex = 0;
             // 
             // button_tabAppointments_new
@@ -672,6 +674,16 @@
             this.checkBox_filterTreatmentsadvices.UseVisualStyleBackColor = true;
             this.checkBox_filterTreatmentsadvices.CheckedChanged += new System.EventHandler(this.checkBox_filterTreatmentsadvices_CheckedChanged);
             // 
+            // button_tabAppointments_openpatient
+            // 
+            this.button_tabAppointments_openpatient.Location = new System.Drawing.Point(3, 33);
+            this.button_tabAppointments_openpatient.Name = "button_tabAppointments_openpatient";
+            this.button_tabAppointments_openpatient.Size = new System.Drawing.Size(100, 23);
+            this.button_tabAppointments_openpatient.TabIndex = 4;
+            this.button_tabAppointments_openpatient.Text = "View Patient";
+            this.button_tabAppointments_openpatient.UseVisualStyleBackColor = true;
+            this.button_tabAppointments_openpatient.Click += new System.EventHandler(this.button_tabAppointments_openpatient_Click);
+            // 
             // FormAppointments
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -753,5 +765,6 @@
         private System.Windows.Forms.Label appointments_colorLabel;
         private System.Windows.Forms.TextBox appointments_colorTextBox;
         private System.Windows.Forms.Button button_tabAppointments_colorselect;
+        private System.Windows.Forms.Button button_tabAppointments_openpatient;
     }
 }

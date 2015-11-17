@@ -426,8 +426,8 @@ namespace DG.DentneD.Forms
                     PanelActions = panel_tabPatients_tabPatients_actions,
                     PanelUpdates = panel_tabPatients_tabPatients_updates,
 
-                    BindingSourceList = vPatientsBindingSource,
-                    GetDataSourceList = GetDataSource_main,
+                    ParentBindingSourceList = vPatientsBindingSource,
+                    GetParentDataSourceList = GetDataSource_main,
 
                     BindingSourceEdit = patientsBindingSource,
                     GetDataSourceEdit = GetDataSourceEdit_tabPatients,
@@ -845,7 +845,7 @@ namespace DG.DentneD.Forms
             }
 
             ReloadView();
-            
+
             vPatientsBindingSource_CurrentChanged(sender, e);
 
             //select a patient on load patient

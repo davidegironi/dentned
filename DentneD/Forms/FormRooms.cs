@@ -92,8 +92,8 @@ namespace DG.DentneD.Forms
                     PanelActions = panel_tabRooms_actions,
                     PanelUpdates = panel_tabRooms_updates,
 
-                    BindingSourceList = vRoomsBindingSource,
-                    GetDataSourceList = GetDataSource_main,
+                    ParentBindingSourceList = vRoomsBindingSource,
+                    GetParentDataSourceList = GetDataSource_main,
 
                     BindingSourceEdit = roomsBindingSource,
                     GetDataSourceEdit = GetDataSourceEdit_tabRooms,

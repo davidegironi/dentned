@@ -595,8 +595,10 @@ namespace DG.DentneD.Forms
             {
                 Program.uighfApplication.IsEditing = true;
 
+                button_tabAppointments_new.Enabled = false;
                 button_tabAppointments_edit.Enabled = false;
                 button_tabAppointments_delete.Enabled = false;
+                button_tabAppointments_openpatient.Enabled = false;
 
                 button_tabAppointments_save.Enabled = true;
                 button_tabAppointments_cancel.Enabled = true;
@@ -621,8 +623,10 @@ namespace DG.DentneD.Forms
             {
                 Program.uighfApplication.IsEditing = false;
 
+                button_tabAppointments_new.Enabled = true;
                 button_tabAppointments_edit.Enabled = true;
                 button_tabAppointments_delete.Enabled = true;
+                button_tabAppointments_openpatient.Enabled = true;
 
                 button_tabAppointments_save.Enabled = false;
                 button_tabAppointments_cancel.Enabled = false;

@@ -108,8 +108,8 @@ namespace DG.DentneD.Forms
                     PanelActions = panel_tabReports_actions,
                     PanelUpdates = panel_tabReports_updates,
 
-                    BindingSourceList = vReportsBindingSource,
-                    GetDataSourceList = GetDataSource_main,
+                    ParentBindingSourceList = vReportsBindingSource,
+                    GetParentDataSourceList = GetDataSource_main,
 
                     BindingSourceEdit = reportsBindingSource,
                     GetDataSourceEdit = GetDataSourceEdit_tabReports,

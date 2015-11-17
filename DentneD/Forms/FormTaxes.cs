@@ -92,8 +92,8 @@ namespace DG.DentneD.Forms
                     PanelActions = panel_tabTaxes_actions,
                     PanelUpdates = panel_tabTaxes_updates,
 
-                    BindingSourceList = vTaxesBindingSource,
-                    GetDataSourceList = GetDataSource_main,
+                    ParentBindingSourceList = vTaxesBindingSource,
+                    GetParentDataSourceList = GetDataSource_main,
 
                     BindingSourceEdit = taxesBindingSource,
                     GetDataSourceEdit = GetDataSourceEdit_tabTaxes,

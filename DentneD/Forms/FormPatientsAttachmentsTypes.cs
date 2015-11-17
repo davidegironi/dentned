@@ -92,8 +92,8 @@ namespace DG.DentneD.Forms
                     PanelActions = panel_tabPatientsAttachmentsTypes_actions,
                     PanelUpdates = panel_tabPatientsAttachmentsTypes_updates,
 
-                    BindingSourceList = vPatientsAttachmentsTypesBindingSource,
-                    GetDataSourceList = GetDataSource_main,
+                    ParentBindingSourceList = vPatientsAttachmentsTypesBindingSource,
+                    GetParentDataSourceList = GetDataSource_main,
 
                     BindingSourceEdit = patientsattachmentstypesBindingSource,
                     GetDataSourceEdit = GetDataSourceEdit_tabPatientsAttachmentsTypes,

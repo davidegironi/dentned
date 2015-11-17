@@ -89,8 +89,8 @@ namespace DG.DentneD.Forms
                     PanelActions = panel_tabAddressesTypes_actions,
                     PanelUpdates = panel_tabAddressesTypes_updates,
 
-                    BindingSourceList = vAddressesTypesBindingSource,
-                    GetDataSourceList = GetDataSource_main,
+                    ParentBindingSourceList = vAddressesTypesBindingSource,
+                    GetParentDataSourceList = GetDataSource_main,
 
                     BindingSourceEdit = addressestypesBindingSource,
                     GetDataSourceEdit = GetDataSourceEdit_tabAddressesTypes,

@@ -97,8 +97,8 @@ namespace DG.DentneD.Forms
                     PanelActions = panel_tabDoctors_actions,
                     PanelUpdates = panel_tabDoctors_updates,
 
-                    BindingSourceList = vDoctorsBindingSource,
-                    GetDataSourceList = GetDataSource_main,
+                    ParentBindingSourceList = vDoctorsBindingSource,
+                    GetParentDataSourceList = GetDataSource_main,
 
                     BindingSourceEdit = doctorsBindingSource,
                     GetDataSourceEdit = GetDataSourceEdit_tabDoctors,

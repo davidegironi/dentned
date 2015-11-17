@@ -1,5 +1,6 @@
 ﻿{
     "Form-formDeleteMessageBoxText":"Vuoi cancellare questo elemento?",
+    "Form-formDeleteManyMessageBoxText":"Vuoi cancellare gli elementi selezionati?",
     "Form-formDeleteMessageBoxTitle":"Cancellazione",
     "Form-mainExitMessageBoxText":"Sei sicuro di volere uscire?",
     "Form-mainExitMessageBoxTitle":"Uscita",
@@ -231,6 +232,7 @@
     "Form-FormAppointments-button_tabAppointments_delete":"Cancella",
     "Form-FormAppointments-button_tabAppointments_save":"Salva",
     "Form-FormAppointments-button_tabAppointments_cancel":"Annulla",
+    "Form-FormAppointments-button_tabAppointments_openpatient":"Scheda Paziente",
     "Form-FormAppointments-appointments_idLabel":"Id:",
     "Form-FormAppointments-patients_idLabel":"Paziente:",
     "Form-FormAppointments-appointments_fromLabel":"Da:",

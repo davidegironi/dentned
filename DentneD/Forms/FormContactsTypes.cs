@@ -89,8 +89,8 @@ namespace DG.DentneD.Forms
                     PanelActions = panel_tabContactsTypes_actions,
                     PanelUpdates = panel_tabContactsTypes_updates,
 
-                    BindingSourceList = vContactsTypesBindingSource,
-                    GetDataSourceList = GetDataSource_main,
+                    ParentBindingSourceList = vContactsTypesBindingSource,
+                    GetParentDataSourceList = GetDataSource_main,
 
                     BindingSourceEdit = contactstypesBindingSource,
                     GetDataSourceEdit = GetDataSourceEdit_tabContactsTypes,

@@ -94,8 +94,8 @@ namespace DG.DentneD.Forms
                     PanelActions = panel_tabComputedLines_actions,
                     PanelUpdates = panel_tabComputedLines_updates,
 
-                    BindingSourceList = vComputedLinesBindingSource,
-                    GetDataSourceList = GetDataSource_main,
+                    ParentBindingSourceList = vComputedLinesBindingSource,
+                    GetParentDataSourceList = GetDataSource_main,
 
                     BindingSourceEdit = computedlinesBindingSource,
                     GetDataSourceEdit = GetDataSourceEdit_tabComputedLines,

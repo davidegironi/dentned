@@ -92,8 +92,8 @@ namespace DG.DentneD.Forms
                     PanelActions = panel_tabPaymentsTypes_actions,
                     PanelUpdates = panel_tabPaymentsTypes_updates,
 
-                    BindingSourceList = vPaymentsTypesBindingSource,
-                    GetDataSourceList = GetDataSource_main,
+                    ParentBindingSourceList = vPaymentsTypesBindingSource,
+                    GetParentDataSourceList = GetDataSource_main,
 
                     BindingSourceEdit = paymentstypesBindingSource,
                     GetDataSourceEdit = GetDataSourceEdit_tabPaymentsTypes,

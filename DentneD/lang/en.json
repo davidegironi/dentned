@@ -1,5 +1,6 @@
 ﻿{
     "Form-formDeleteMessageBoxText":"Do you really want to delete this item?",
+    "Form-formDeleteManyMessageBoxText":"Do you really want to delete the selected items?",
     "Form-formDeleteMessageBoxTitle":"Deleting",
     "Form-mainExitMessageBoxText":"Exit this application?",
     "Form-mainExitMessageBoxTitle":"Exit",

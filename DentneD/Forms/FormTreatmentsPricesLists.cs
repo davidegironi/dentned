@@ -90,8 +90,8 @@ namespace DG.DentneD.Forms
                     PanelActions = panel_tabTreatmentsPricesLists_actions,
                     PanelUpdates = panel_tabTreatmentsPricesLists_updates,
 
-                    BindingSourceList = vTreatmentsPricesListsBindingSource,
-                    GetDataSourceList = GetDataSource_main,
+                    ParentBindingSourceList = vTreatmentsPricesListsBindingSource,
+                    GetParentDataSourceList = GetDataSource_main,
 
                     BindingSourceEdit = treatmentspriceslistsBindingSource,
                     GetDataSourceEdit = GetDataSourceEdit_tabTreatmentsPricesLists,

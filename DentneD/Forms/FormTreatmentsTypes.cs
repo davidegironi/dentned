@@ -89,8 +89,8 @@ namespace DG.DentneD.Forms
                     PanelActions = panel_tabTreatmentsTypes_actions,
                     PanelUpdates = panel_tabTreatmentsTypes_updates,
 
-                    BindingSourceList = vTreatmentsTypesBindingSource,
-                    GetDataSourceList = GetDataSource_main,
+                    ParentBindingSourceList = vTreatmentsTypesBindingSource,
+                    GetParentDataSourceList = GetDataSource_main,
 
                     BindingSourceEdit = treatmentstypesBindingSource,
                     GetDataSourceEdit = GetDataSourceEdit_tabTreatmentsTypes,

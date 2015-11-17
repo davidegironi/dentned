@@ -89,8 +89,8 @@ namespace DG.DentneD.Forms
                     PanelActions = panel_tabMedicalrecordsTypes_actions,
                     PanelUpdates = panel_tabMedicalrecordsTypes_updates,
 
-                    BindingSourceList = vMedicalrecordsTypesBindingSource,
-                    GetDataSourceList = GetDataSource_main,
+                    ParentBindingSourceList = vMedicalrecordsTypesBindingSource,
+                    GetParentDataSourceList = GetDataSource_main,
 
                     BindingSourceEdit = medicalrecordstypesBindingSource,
                     GetDataSourceEdit = GetDataSourceEdit_tabMedicalrecordsTypes,

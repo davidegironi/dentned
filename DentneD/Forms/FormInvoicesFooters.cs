@@ -92,8 +92,8 @@ namespace DG.DentneD.Forms
                     PanelActions = panel_tabInvoicesFooters_actions,
                     PanelUpdates = panel_tabInvoicesFooters_updates,
 
-                    BindingSourceList = vInvoicesFootersBindingSource,
-                    GetDataSourceList = GetDataSource_main,
+                    ParentBindingSourceList = vInvoicesFootersBindingSource,
+                    GetParentDataSourceList = GetDataSource_main,
 
                     BindingSourceEdit = invoicesfootersBindingSource,
                     GetDataSourceEdit = GetDataSourceEdit_tabInvoicesFooters,

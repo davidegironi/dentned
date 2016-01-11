@@ -569,6 +569,15 @@ namespace DG.DentneD.Forms
 
             //load filter years
             ReloadFilterYears();
+
+            if (comboBox_filterYears.SelectedIndex != -1)
+            {
+                if (((estimates)item).estimates_date.Year != Convert.ToInt32(comboBox_filterYears.SelectedValue))
+                {
+                    ReloadView();
+                    comboBox_filterYears.SelectedIndex = comboBox_filterYears.Items.Count - 1;
+                }
+            }
         }
 
         /// <summary>
@@ -581,6 +590,15 @@ namespace DG.DentneD.Forms
 
             //load filter years
             ReloadFilterYears();
+
+            if (comboBox_filterYears.SelectedIndex != -1)
+            {
+                if (((estimates)item).estimates_date.Year != Convert.ToInt32(comboBox_filterYears.SelectedValue))
+                {
+                    ReloadView();
+                    comboBox_filterYears.SelectedIndex = comboBox_filterYears.Items.Count - 1;
+                }
+            }
         }
 
         /// <summary>
@@ -616,7 +634,13 @@ namespace DG.DentneD.Forms
                 int year = DateTime.Now.Year;
                 if (comboBox_filterYears.SelectedIndex != -1)
                 {
-                    year = Convert.ToInt32(comboBox_filterYears.SelectedValue);
+                    if (Convert.ToInt32(comboBox_filterYears.SelectedValue) == year - 1)
+                    {
+                        if (_dentnedModel.Estimates.Any(r => r.doctors_id == doctors_id && r.estimates_date.Year == year))
+                            year = Convert.ToInt32(comboBox_filterYears.SelectedValue);
+                    }
+                    else
+                        year = Convert.ToInt32(comboBox_filterYears.SelectedValue);
                 }
                 string[] numbers = _dentnedModel.Estimates.List(r => r.doctors_id == doctors_id && r.estimates_date.Year == year).Select(r => r.estimates_number).ToArray();
                 try

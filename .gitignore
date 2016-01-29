@@ -194,12 +194,11 @@ _DevTools/
 # packages Ext
 !packages/Ext/
 
-# packages Ext
-!_DBDump/
+# _DBDump
+_DBDump/
 
-# packages Ext
-!DentneD/backup/
+# DentneD/backup
+DentneD/backup/
 
 # DataTemp folder
-!DataTemp/
-/DataTemp
+DataTemp/

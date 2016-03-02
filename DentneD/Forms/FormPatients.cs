@@ -833,6 +833,7 @@ namespace DG.DentneD.Forms
 
                 if (patients_id != -1)
                 {
+                    textBox_filterPatient.Text = "";
                     IsBindingSourceLoading = true;
                     patient = _dentnedModel.Patients.Find(patients_id);
                     if (patient != null)

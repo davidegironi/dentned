@@ -466,6 +466,7 @@
             this.tabControl_list.Size = new System.Drawing.Size(484, 380);
             this.tabControl_list.TabIndex = 0;
             this.tabControl_list.SelectedIndexChanged += new System.EventHandler(this.tabControl_list_SelectedIndexChanged);
+            this.tabControl_list.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tabControl_list_KeyDown);
             // 
             // tabPage_tabListDays
             // 

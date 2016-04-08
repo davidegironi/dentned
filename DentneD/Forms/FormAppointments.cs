@@ -36,6 +36,7 @@ namespace DG.DentneD.Forms
         private EditingMode _currentEditingMode = EditingMode.R;
         private bool _calendarDoubleClick = false;
         private int _selectedAppointmentId = -1;
+        private int _selectedPatientId = -1;
         private DayOfWeek _calendarFirstDayOfTheWeek = DayOfWeek.Monday;
 
         private bool _calendar_listmonthsReloadAfterMouseWheel = true;
@@ -89,6 +90,11 @@ namespace DG.DentneD.Forms
             public int AppointmentId { get; set; }
 
             /// <summary>
+            /// Item patient id
+            /// </summary>
+            public int PatientId { get; set; }
+
+            /// <summary>
             /// Item patient treatment id
             /// </summary>
             public int PatientTreatmentId { get; set; }
@@ -114,6 +120,11 @@ namespace DG.DentneD.Forms
             /// Item appointment id
             /// </summary>
             public int AppointmentId { get; set; }
+
+            /// <summary>
+            /// Item patient id
+            /// </summary>
+            public int PatientId { get; set; }
 
             /// <summary>
             /// Item patient treatment id
@@ -459,6 +470,7 @@ namespace DG.DentneD.Forms
                     TitleMonth = titlemonth,
                     Color = color,
                     AppointmentId = appointment.appointments_id,
+                    PatientId = appointment.patients_id,
                     PatientTreatmentId = -1
                 });
             }
@@ -467,6 +479,7 @@ namespace DG.DentneD.Forms
             {
                 foreach (patientstreatments patientstreatment in _dentnedModel.PatientsTreatments.List(r =>
                     r.patientstreatments_expirationdate != null &&
+                    r.patientstreatments_fulfilldate == null &&
                     r.patientstreatments_expirationdate >= fromdate &&
                     r.patientstreatments_expirationdate <= todate))
                 {
@@ -491,6 +504,7 @@ namespace DG.DentneD.Forms
                         TitleMonth = titlemonth,
                         Color = _calendarTreatmentAdvicesColor,
                         AppointmentId = -1,
+                        PatientId = patientstreatment.patients_id,
                         PatientTreatmentId = patientstreatment.patientstreatments_id
                     });
                 }
@@ -519,6 +533,7 @@ namespace DG.DentneD.Forms
                         item.DateTo,
                         item.TitleDay);
                     cal.AppointmentId = item.AppointmentId;
+                    cal.PatientId = item.PatientId;
                     cal.PatientTreatmentId = -1;
                     cal.ApplyColor(item.Color);
                     cal.ForeColor = Color.Black;
@@ -546,6 +561,7 @@ namespace DG.DentneD.Forms
                         item.DateTo,
                         item.TitleWeek);
                     cal.AppointmentId = item.AppointmentId;
+                    cal.PatientId = item.PatientId;
                     cal.PatientTreatmentId = -1;
                     cal.ApplyColor(item.Color);
                     cal.ForeColor = Color.Black;
@@ -573,6 +589,7 @@ namespace DG.DentneD.Forms
                         item.DateTo,
                         item.TitleMonth);
                     cal.AppointmentId = item.AppointmentId;
+                    cal.PatientId = item.PatientId;
                     cal.PatientTreatmentId = -1;
                     cal.ApplyColor(item.Color);
                     cal.ForeColor = Color.Black;
@@ -820,12 +837,12 @@ namespace DG.DentneD.Forms
         /// <param name="e"></param>
         private void button_tabAppointments_openpatient_Click(object sender, EventArgs e)
         {
-            if (_selectedAppointmentId != -1)
+            if (_selectedPatientId != -1)
             {
-                appointments appointment = _dentnedModel.Appointments.Find(_selectedAppointmentId);
-                if (appointment != null)
+                patients patient = _dentnedModel.Patients.Find(_selectedPatientId);
+                if (patient != null)
                 {
-                    patients_id_toload = appointment.patients_id;
+                    patients_id_toload = patient.patients_id;
                     DGUIGHFFormMain mainForm = (DGUIGHFFormMain)this.MdiParent;
                     mainForm.ShowForm(mainForm, typeof(FormPatients));
                 }
@@ -844,10 +861,6 @@ namespace DG.DentneD.Forms
 
             if (appointmentsBindingSource.Current != null)
             {
-                _selectedAppointmentId = ((appointments)appointmentsBindingSource.Current).appointments_id;
-                if (_selectedAppointmentId == 0)
-                    _selectedAppointmentId = -1;
-
                 if (_selectedAppointmentId != -1)
                 {
                     appointments_dateDateTimePicker.Value = ((appointments)appointmentsBindingSource.Current).appointments_from;
@@ -901,6 +914,7 @@ namespace DG.DentneD.Forms
         {
             IsBindingSourceLoading = true;
             _selectedAppointmentId = -1;
+            _selectedPatientId = -1;
             DateTime now = DateTime.Now;
             appointments_dateDateTimePicker.Value = DateTime.Now;
             appointments_fromDateTimePicker.Value = new DateTime(now.Year, now.Month, now.Day, 0, 0, 0);
@@ -991,6 +1005,18 @@ namespace DG.DentneD.Forms
         #region calendar handlers
 
         /// <summary>
+        /// Main tab control key handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tabControl_list_KeyDown(object sender, KeyEventArgs e)
+        {
+            //stop keypress if one appointment selected to prevent exception on the calendar control 
+            if (_selectedAppointmentId != -1 || _selectedPatientId != -1)
+                e.Handled = true;
+        }
+
+        /// <summary>
         /// Day item click
         /// </summary>
         /// <param name="sender"></param>
@@ -1003,13 +1029,24 @@ namespace DG.DentneD.Forms
             }
             else
             {
+                _selectedAppointmentId = -1;
+                _selectedPatientId = -1;
                 int appointments_id = ((CustomCalendarItem)e.Item).AppointmentId;
+                int patients_id = ((CustomCalendarItem)e.Item).PatientId;
                 if (appointments_id != -1)
                 {
                     appointmentsBindingSource.DataSource = _dentnedModel.Appointments.Find(appointments_id);
-
-                    SetCustomEditingMode(false);
+                    _selectedAppointmentId = appointments_id;
+                    appointments appointment = _dentnedModel.Appointments.Find(appointments_id);
+                    _selectedPatientId = appointment.patients_id;
                 }
+                else
+                {
+                    appointmentsBindingSource.DataSource = new appointments();
+                    if (patients_id != -1)
+                        _selectedPatientId = patients_id;
+                }
+                SetCustomEditingMode(false);
             }
         }
 

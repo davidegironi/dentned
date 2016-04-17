@@ -15,6 +15,7 @@ using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Windows.Forms;
 using System.Windows.Forms.Calendar;
 
@@ -30,7 +31,7 @@ namespace DG.DentneD.Forms
         private readonly int _calendarDayHourEnd = 19;
 
         private readonly Color _calendarTreatmentAdvicesColor = Color.SandyBrown;
-
+        
         private DateTime _currentDate = DateTime.Now;
         private List<CustomAppointmentItem> _appointmentItems = new List<CustomAppointmentItem>();
         private EditingMode _currentEditingMode = EditingMode.R;
@@ -146,6 +147,8 @@ namespace DG.DentneD.Forms
 
             _dentnedModel = new DentneDModel();
             _dentnedModel.LanguageHelper.LoadFromFile(Program.uighfApplication.LanguageFilename);
+
+            checkBox_filterTreatmentsadvices.Checked = Convert.ToBoolean(ConfigurationManager.AppSettings["appointmentsShowTreatmentsAdvicesChecked"]);
 
             _calendarDayHourBegin = Convert.ToInt16(ConfigurationManager.AppSettings["calendarDayHourBegin"]);
             _calendarDayHourEnd = Convert.ToInt16(ConfigurationManager.AppSettings["calendarDayHourEnd"]);
@@ -859,6 +862,13 @@ namespace DG.DentneD.Forms
             if (IsBindingSourceLoading)
                 return;
 
+            if(_currentEditingMode != EditingMode.C && _currentEditingMode != EditingMode.U)
+            {
+                appointments_dateDateTimePicker.Value = DateTime.Now.Date;
+                appointments_fromDateTimePicker.Value = DateTime.Now.Date;
+                appointments_toDateTimePicker.Value = DateTime.Now.Date;
+            }
+
             if (appointmentsBindingSource.Current != null)
             {
                 if (_selectedAppointmentId != -1)
@@ -1035,8 +1045,8 @@ namespace DG.DentneD.Forms
                 int patients_id = ((CustomCalendarItem)e.Item).PatientId;
                 if (appointments_id != -1)
                 {
-                    appointmentsBindingSource.DataSource = _dentnedModel.Appointments.Find(appointments_id);
                     _selectedAppointmentId = appointments_id;
+                    appointmentsBindingSource.DataSource = _dentnedModel.Appointments.Find(appointments_id);                    
                     appointments appointment = _dentnedModel.Appointments.Find(appointments_id);
                     _selectedPatientId = appointment.patients_id;
                 }

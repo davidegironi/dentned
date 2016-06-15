@@ -4,7 +4,7 @@ rem DentneD Database backup script
 rem Copyright (c) Davide Gironi, 2015
 
 rem set mssql database hostname
-set SQLHOSTNAME=192.168.1.57
+set SQLHOSTNAME=dgsql02d
 rem set mssql database name
 set SQLDATABASE=dentned
 rem set mssql database username
@@ -17,7 +17,7 @@ rem optionally set a copy timeout time for the backup file
 set SQLCOPYTIMEOUT=30
 
 rem set the destination full path of backup files
-set DESTPATH=d:\Projects VS\DentneD\DentneD\DentneD\backup\data
+set DESTPATH=data
 
 rem purge backup files in older than days
 set OLDFILEDAYSPURGE=30

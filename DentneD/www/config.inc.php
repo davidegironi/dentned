@@ -9,7 +9,7 @@ defined( '_VALID_' ) or die( 'Restricted access' );
 date_default_timezone_set('Europe/Rome');
 
 //set database credentials
-$mssql_hostname = '192.168.1.57';
+$mssql_hostname = 'dgsql02d';
 $mssql_database = 'dentned';
 $mssql_username = 'sa';
 $mssql_password = '123456';

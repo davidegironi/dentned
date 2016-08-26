@@ -4,15 +4,15 @@ rem DentneD Database backup script
 rem Copyright (c) Davide Gironi, 2015
 
 rem set mssql database hostname
-set SQLHOSTNAME=dgsql02d
+set SQLHOSTNAME=YOUR_DATABASE_HOSTNAME (es. localhost)
 rem set mssql database name
-set SQLDATABASE=dentned
+set SQLDATABASE=YOUR_DATABASE_NAME (es. dentned)
 rem set mssql database username
-set SQLUSERNAME=sa
+set SQLUSERNAME=YOUR_DATABASE_USERNAME (es. userdb)
 rem set mssql database password
-set SQLPASSWORD=123456
+set SQLPASSWORD=YOUR_DATABASE_PASSWORD (es. userdbsecpas)
 rem set database backup folder
-set SQLFOLDER=\\%SQLHOSTNAME%\Backup
+set SQLFOLDER=YOUR_DATABASE_BACKUPFOLDER (es. c:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\Backup)
 rem optionally set a copy timeout time for the backup file
 set SQLCOPYTIMEOUT=30
 

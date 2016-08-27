@@ -27,9 +27,7 @@ namespace DG.DentneD.Test
 
         private readonly string _patientsDatadir = null;
         private readonly string _patientsAttachmentsdir = null;
-
-        //number of patients to load
-        private const int PatientsNum = 500;
+        private readonly int _patientsNum = 0;
 
         public PopulateTestDatabase()
         {
@@ -41,6 +39,7 @@ namespace DG.DentneD.Test
 
             _patientsDatadir = ConfigurationManager.AppSettings["patientsDatadir"];
             _patientsAttachmentsdir = ConfigurationManager.AppSettings["patientsAttachmentsdir"];
+            _patientsNum = Convert.ToInt16(ConfigurationManager.AppSettings["patientsNum"]);
         }
 
         public void Empty()
@@ -283,7 +282,7 @@ EXEC sp_msforeachtable 'DBCC CHECKIDENT(''?'', RESEED, 0)'; DECLARE @max int; SE
 
             Console.WriteLine("Add Patients...");
             patients[] patients = new patients[] { };
-            for (int i = 0; i < PatientsNum; i++)
+            for (int i = 0; i < _patientsNum; i++)
             {
                 patients patientstmp = new patients()
                 {

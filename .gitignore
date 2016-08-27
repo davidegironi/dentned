@@ -189,17 +189,18 @@ GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
 
-# _DevTools
-_DevTools/
+# DataTemp folder
+DataTemp/
 
 # packages Ext
 !packages/Ext/
 
+# _DevTools
+_DevTools/out.txt
+_DevTools/TestResult.xml
+
+# App.config
+App.*.config
+
 # _DBDump
 _DBDump/
-
-# DentneD/backup
-DentneD/backup/
-
-# DataTemp folder
-DataTemp/

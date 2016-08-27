@@ -8,6 +8,10 @@ It's a complete **open source** solution to manage you clinic.
 You can trace your patient, treatments, scheduling appointments, doing reports, and billing managment.
 It features also a client-server architecture.
 
+## Download
+
+**[Latest Release](../../releases/latest)**
+
 
 ## Features:
 

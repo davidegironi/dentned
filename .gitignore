@@ -203,4 +203,4 @@ _DevTools/TestResult.xml
 App.*.config
 
 # _DBDump
-_DBDump/
+!_DBDump/

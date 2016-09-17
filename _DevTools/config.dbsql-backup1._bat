@@ -1,0 +1,19 @@
+@echo off
+
+rem Backup an MSSQL database to a tsql file, run empty commands
+rem Copyright (c) Davide Gironi, 2014
+
+rem Customize this file and copy it to ../../_DevTools folder
+
+rem database name
+set SQLDATABASE=
+rem sql hostname
+set SQLHOSTNAME=
+rem sql username
+set SQLUSERNAME=
+rem sql password
+set SQLPASSWORD=
+rem sql backup folder
+set SQLBAKFOLDR=
+rem time to wait before copying from the sql backup folder to local
+set SQLBAKCPTIM=

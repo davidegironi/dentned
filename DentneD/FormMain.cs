@@ -13,6 +13,7 @@ using System.Configuration;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -21,6 +22,26 @@ namespace DG.DentneD
     public partial class FormMain : DGUIGHFFormMain
     {
         /// <summary>
+        /// Password protected form list
+        /// </summary>
+        private readonly string[] _passwordProtectedForms = new string[] { };
+
+        /// <summary>
+        /// Password protected form list salt check
+        /// </summary>
+        private readonly string _passwordProtectedFormsCheck = null;
+
+        /// <summary>
+        /// Protection password
+        /// </summary>
+        private readonly string _passwordProtectedFormsPassword = null;
+
+        /// <summary>
+        /// Check if is logged
+        /// </summary>
+        private bool _isPasswordLogged = false;
+
+        /// <summary>
         /// Constructor
         /// </summary>
         public FormMain()
@@ -28,6 +49,11 @@ namespace DG.DentneD
             InitializeComponent();
 
             Initialize(Program.uighfApplication);
+
+            //get password proteded forms
+            _passwordProtectedForms = ConfigurationManager.AppSettings["passwordProtectedForms"].Split(',');
+            _passwordProtectedFormsCheck = ConfigurationManager.AppSettings["passwordProtectedFormsCheck"];
+            _passwordProtectedFormsPassword = ConfigurationManager.AppSettings["passwordProtectedFormsPassword"];
         }
 
         /// <summary>
@@ -84,6 +110,8 @@ namespace DG.DentneD
         /// </summary>
         public override void AddLanguageComponents()
         {
+            //main StatusStrip
+            LanguageHelper.AddComponent(toolStripStatusLabel_logout);
             //main ToolStripMenuItem
             LanguageHelper.AddComponent(patientsToolStripMenuItem);
             LanguageHelper.AddComponent(appointmentsToolStripMenuItem);
@@ -130,6 +158,10 @@ namespace DG.DentneD
             public string backupToolTitle = "Backup";
             public string cleandatadirToolMessage = "Do you want to run the clean data directories tool?";
             public string cleandatadirToolTitle = "Clean Datadir";
+            public string passwordInputMessage = "Insert password:";
+            public string passwordInputTitle = "Password";
+            public string passwordErrorMessage = "Wrong password.";
+            public string passwordErrorTitle = "Error";
         }
 
         /// <summary>
@@ -197,13 +229,89 @@ namespace DG.DentneD
         }
 
         /// <summary>
+        /// Check if a form can be showed
+        /// </summary>
+        /// <param name="o"></param>
+        /// <param name="formName"></param>
+        /// <returns></returns>
+        private bool CanShowForm(object o, string formName)
+        {
+            bool ret = false;
+            if (_isPasswordLogged)
+            {
+                //already logged in, show the form
+                ret = true;
+            }
+            else
+            {
+                if (!PasswordHelper.CheckPassword(String.Join(",", _passwordProtectedForms), _passwordProtectedFormsCheck) || _passwordProtectedForms.Contains(formName) || _passwordProtectedForms.FirstOrDefault() == "*")
+                {
+                    //check for inserted password
+                    string input = null;
+                    if (InputBox.ShowPassword(language.passwordInputMessage, language.passwordInputTitle, ref input) == DialogResult.OK)
+                    {
+                        if (PasswordHelper.CheckPassword(input, _passwordProtectedFormsPassword))
+                        {
+                            _isPasswordLogged = true;
+                            toolStripStatusLabel_logout.Visible = true;
+                            ret = true;
+                        }
+                        else
+                        {
+                            MessageBox.Show(language.passwordErrorMessage, language.passwordErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+                else
+                {
+                    ret = true;
+                }
+            }
+
+            return ret;
+        }
+
+        /// <summary>
+        /// Password protected show form
+        /// </summary>
+        /// <param name="o"></param>
+        /// <param name="t"></param>
+        public void ShowFormProtected(object o, Type t)
+        {
+            //Show the form
+            if (CanShowForm(o, t.Name))
+            {
+                ShowForm(o, t);
+            }
+        }
+
+        /// <summary>
+        /// Logout click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolStripStatusLabel_logout_Click(object sender, EventArgs e)
+        {
+            if (UIGHFApplication.IsEditing)
+                return;
+
+            if (_isPasswordLogged)
+            {
+                _isPasswordLogged = false;
+                toolStripStatusLabel_logout.Visible = false;
+                CloseAllForms(this);
+            }
+        }
+
+
+        /// <summary>
         /// Doctors form
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void doctorsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowForm(this, typeof(FormDoctors));
+            ShowFormProtected(this, typeof(FormDoctors));
         }
 
         /// <summary>
@@ -213,7 +321,7 @@ namespace DG.DentneD
         /// <param name="e"></param>
         private void roomsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowForm(this, typeof(FormRooms));
+            ShowFormProtected(this, typeof(FormRooms));
         }
 
         /// <summary>
@@ -223,7 +331,7 @@ namespace DG.DentneD
         /// <param name="e"></param>
         private void taxesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowForm(this, typeof(FormTaxes));
+            ShowFormProtected(this, typeof(FormTaxes));
         }
 
         /// <summary>
@@ -233,7 +341,7 @@ namespace DG.DentneD
         /// <param name="e"></param>
         private void taxesDeductionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowForm(this, typeof(FormTaxesDeductions));
+            ShowFormProtected(this, typeof(FormTaxesDeductions));
         }
 
         /// <summary>
@@ -243,7 +351,7 @@ namespace DG.DentneD
         /// <param name="e"></param>
         private void documentComputedLinesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowForm(this, typeof(FormComputedLines));
+            ShowFormProtected(this, typeof(FormComputedLines));
         }
 
         /// <summary>
@@ -253,7 +361,7 @@ namespace DG.DentneD
         /// <param name="e"></param>
         private void invoicesFootersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowForm(this, typeof(FormInvoicesFooters));
+            ShowFormProtected(this, typeof(FormInvoicesFooters));
         }
 
         /// <summary>
@@ -263,7 +371,7 @@ namespace DG.DentneD
         /// <param name="e"></param>
         private void estimatesFootersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowForm(this, typeof(FormEstimatesFooters));
+            ShowFormProtected(this, typeof(FormEstimatesFooters));
         }
 
         /// <summary>
@@ -273,7 +381,7 @@ namespace DG.DentneD
         /// <param name="e"></param>
         private void paymentTypesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowForm(this, typeof(FormPaymentsTypes));
+            ShowFormProtected(this, typeof(FormPaymentsTypes));
         }
 
         /// <summary>
@@ -283,7 +391,7 @@ namespace DG.DentneD
         /// <param name="e"></param>
         private void treatments1ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowForm(this, typeof(FormTreatments));
+            ShowFormProtected(this, typeof(FormTreatments));
         }
 
         /// <summary>
@@ -293,7 +401,7 @@ namespace DG.DentneD
         /// <param name="e"></param>
         private void treatmentsTypesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowForm(this, typeof(FormTreatmentsTypes));
+            ShowFormProtected(this, typeof(FormTreatmentsTypes));
         }
 
         /// <summary>
@@ -303,7 +411,7 @@ namespace DG.DentneD
         /// <param name="e"></param>
         private void treatmentsPricesListToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowForm(this, typeof(FormTreatmentsPricesLists));
+            ShowFormProtected(this, typeof(FormTreatmentsPricesLists));
         }
 
         /// <summary>
@@ -313,7 +421,7 @@ namespace DG.DentneD
         /// <param name="e"></param>
         private void addressesTypesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowForm(this, typeof(FormAddressesTypes));
+            ShowFormProtected(this, typeof(FormAddressesTypes));
         }
 
         /// <summary>
@@ -323,7 +431,7 @@ namespace DG.DentneD
         /// <param name="e"></param>
         private void contactTypesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowForm(this, typeof(FormContactsTypes));
+            ShowFormProtected(this, typeof(FormContactsTypes));
         }
 
         /// <summary>
@@ -333,7 +441,7 @@ namespace DG.DentneD
         /// <param name="e"></param>
         private void medicalRecordTypesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowForm(this, typeof(FormMedicalrecordsTypes));
+            ShowFormProtected(this, typeof(FormMedicalrecordsTypes));
         }
 
         /// <summary>
@@ -343,7 +451,7 @@ namespace DG.DentneD
         /// <param name="e"></param>
         private void patientAttachmentsTypesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowForm(this, typeof(FormPatientsAttachmentsTypes));
+            ShowFormProtected(this, typeof(FormPatientsAttachmentsTypes));
         }
 
         /// <summary>
@@ -353,7 +461,7 @@ namespace DG.DentneD
         /// <param name="e"></param>
         private void patientsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowForm(this, typeof(FormPatients));
+            ShowFormProtected(this, typeof(FormPatients));
         }
 
         /// <summary>
@@ -363,7 +471,7 @@ namespace DG.DentneD
         /// <param name="e"></param>
         private void appointmentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowForm(this, typeof(FormAppointments));
+            ShowFormProtected(this, typeof(FormAppointments));
         }
 
         /// <summary>
@@ -373,7 +481,7 @@ namespace DG.DentneD
         /// <param name="e"></param>
         private void invoicesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowForm(this, typeof(FormInvoices));
+            ShowFormProtected(this, typeof(FormInvoices));
         }
 
         /// <summary>
@@ -383,7 +491,7 @@ namespace DG.DentneD
         /// <param name="e"></param>
         private void estimatesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowForm(this, typeof(FormEstimates));
+            ShowFormProtected(this, typeof(FormEstimates));
         }
 
         /// <summary>
@@ -393,7 +501,7 @@ namespace DG.DentneD
         /// <param name="e"></param>
         private void runReportsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowForm(this, typeof(FormReportsrun));
+            ShowFormProtected(this, typeof(FormReportsrun));
         }
 
         /// <summary>
@@ -403,7 +511,7 @@ namespace DG.DentneD
         /// <param name="e"></param>
         private void setReportsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowForm(this, typeof(FormReports));
+            ShowFormProtected(this, typeof(FormReports));
         }
 
         /// <summary>
@@ -416,24 +524,28 @@ namespace DG.DentneD
             if (UIGHFApplication.IsEditing)
                 return;
 
-            if (MessageBox.Show(language.backupToolMessage, language.backupToolTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            //Show the form
+            if (CanShowForm(this, "Backup"))
             {
-                try
+                if (MessageBox.Show(language.backupToolMessage, language.backupToolTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    string filename = ConfigurationManager.AppSettings["backupscript"];
-                    if (File.Exists(filename))
+                    try
                     {
-                        ProcessStartInfo startInfo = new ProcessStartInfo();
-                        startInfo.UseShellExecute = true;
-                        startInfo.FileName = Path.GetFileName(filename);
-                        startInfo.WindowStyle = ProcessWindowStyle.Normal;
-                        startInfo.WorkingDirectory = Path.GetDirectoryName(Path.GetFullPath(filename));
-                        Process exeProcess = Process.Start(startInfo);
-                        exeProcess.WaitForExit();
+                        string filename = ConfigurationManager.AppSettings["backupscript"];
+                        if (File.Exists(filename))
+                        {
+                            ProcessStartInfo startInfo = new ProcessStartInfo();
+                            startInfo.UseShellExecute = true;
+                            startInfo.FileName = Path.GetFileName(filename);
+                            startInfo.WindowStyle = ProcessWindowStyle.Normal;
+                            startInfo.WorkingDirectory = Path.GetDirectoryName(Path.GetFullPath(filename));
+                            Process exeProcess = Process.Start(startInfo);
+                            exeProcess.WaitForExit();
+                        }
                     }
+                    catch
+                    { }
                 }
-                catch
-                { }
             }
         }
 
@@ -447,27 +559,30 @@ namespace DG.DentneD
             if (UIGHFApplication.IsEditing)
                 return;
 
-            if (MessageBox.Show(language.cleandatadirToolMessage, language.cleandatadirToolTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            //Show the form
+            if (CanShowForm(this, "CleanDatadir"))
             {
-                try
+                if (MessageBox.Show(language.cleandatadirToolMessage, language.cleandatadirToolTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    string filename = Assembly.GetExecutingAssembly().Location;
-                    if (File.Exists(filename))
+                    try
                     {
-                        ProcessStartInfo startInfo = new ProcessStartInfo();
-                        startInfo.UseShellExecute = true;
-                        startInfo.FileName = Path.GetFileName(filename);
-                        startInfo.Arguments = "-d";
-                        startInfo.WindowStyle = ProcessWindowStyle.Normal;
-                        startInfo.WorkingDirectory = Path.GetDirectoryName(Path.GetFullPath(filename));
-                        Process exeProcess = Process.Start(startInfo);
-                        exeProcess.WaitForExit();
+                        string filename = Assembly.GetExecutingAssembly().Location;
+                        if (File.Exists(filename))
+                        {
+                            ProcessStartInfo startInfo = new ProcessStartInfo();
+                            startInfo.UseShellExecute = true;
+                            startInfo.FileName = Path.GetFileName(filename);
+                            startInfo.Arguments = "-d";
+                            startInfo.WindowStyle = ProcessWindowStyle.Normal;
+                            startInfo.WorkingDirectory = Path.GetDirectoryName(Path.GetFullPath(filename));
+                            Process exeProcess = Process.Start(startInfo);
+                            exeProcess.WaitForExit();
+                        }
                     }
+                    catch
+                    { }
                 }
-                catch
-                { }
             }
         }
-
     }
 }

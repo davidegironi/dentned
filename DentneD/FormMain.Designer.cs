@@ -65,7 +65,10 @@
             this.closeAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip_main = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel_logout = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip_main.SuspendLayout();
+            this.statusStrip_main.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip_main
@@ -169,7 +172,7 @@
             this.taxesDeductionsToolStripMenuItem,
             this.treatmentsToolStripMenuItem});
             this.tablesToolStripMenuItem.Name = "tablesToolStripMenuItem";
-            this.tablesToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
+            this.tablesToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
             this.tablesToolStripMenuItem.Text = "Tables";
             // 
             // addressesTypesToolStripMenuItem
@@ -270,26 +273,26 @@
             // treatments1ToolStripMenuItem
             // 
             this.treatments1ToolStripMenuItem.Name = "treatments1ToolStripMenuItem";
-            this.treatments1ToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.treatments1ToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.treatments1ToolStripMenuItem.Text = "Treatments";
             this.treatments1ToolStripMenuItem.Click += new System.EventHandler(this.treatments1ToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(186, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(185, 6);
             // 
             // treatmentsTypesToolStripMenuItem
             // 
             this.treatmentsTypesToolStripMenuItem.Name = "treatmentsTypesToolStripMenuItem";
-            this.treatmentsTypesToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.treatmentsTypesToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.treatmentsTypesToolStripMenuItem.Text = "Treatments Types";
             this.treatmentsTypesToolStripMenuItem.Click += new System.EventHandler(this.treatmentsTypesToolStripMenuItem_Click);
             // 
             // treatmentsPricesListToolStripMenuItem
             // 
             this.treatmentsPricesListToolStripMenuItem.Name = "treatmentsPricesListToolStripMenuItem";
-            this.treatmentsPricesListToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.treatmentsPricesListToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.treatmentsPricesListToolStripMenuItem.Text = "Treatments Prices List";
             this.treatmentsPricesListToolStripMenuItem.Click += new System.EventHandler(this.treatmentsPricesListToolStripMenuItem_Click);
             // 
@@ -299,7 +302,7 @@
             this.backupToolStripMenuItem,
             this.cleanDatadirToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
             // 
             // backupToolStripMenuItem
@@ -353,11 +356,33 @@
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
+            // statusStrip_main
+            // 
+            this.statusStrip_main.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel_logout});
+            this.statusStrip_main.Location = new System.Drawing.Point(0, 590);
+            this.statusStrip_main.Name = "statusStrip_main";
+            this.statusStrip_main.Size = new System.Drawing.Size(814, 22);
+            this.statusStrip_main.TabIndex = 3;
+            this.statusStrip_main.Text = "statusStrip_main";
+            // 
+            // toolStripStatusLabel_logout
+            // 
+            this.toolStripStatusLabel_logout.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripStatusLabel_logout.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripStatusLabel_logout.ForeColor = System.Drawing.Color.White;
+            this.toolStripStatusLabel_logout.Name = "toolStripStatusLabel_logout";
+            this.toolStripStatusLabel_logout.Size = new System.Drawing.Size(63, 17);
+            this.toolStripStatusLabel_logout.Text = "   Logout   ";
+            this.toolStripStatusLabel_logout.Visible = false;
+            this.toolStripStatusLabel_logout.Click += new System.EventHandler(this.toolStripStatusLabel_logout_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(814, 612);
+            this.Controls.Add(this.statusStrip_main);
             this.Controls.Add(this.menuStrip_main);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
@@ -370,6 +395,8 @@
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.menuStrip_main.ResumeLayout(false);
             this.menuStrip_main.PerformLayout();
+            this.statusStrip_main.ResumeLayout(false);
+            this.statusStrip_main.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -413,6 +440,8 @@
         private System.Windows.Forms.ToolStripMenuItem setReportsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cleanDatadirToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem documentComputedLinesToolStripMenuItem;
+        private System.Windows.Forms.StatusStrip statusStrip_main;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_logout;
     }
 }
 

@@ -83,6 +83,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms.Calendar, Version=1.0.5665.40596, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -265,6 +266,7 @@
     <Compile Include="Helpers\ComboBoxHelper.cs" />
     <Compile Include="Helpers\DentneDPrintModelHelper.cs" />
     <Compile Include="Helpers\ExcelExporter.cs" />
+    <Compile Include="Helpers\PasswordHelper.cs" />
     <Compile Include="Helpers\FileHelper.cs" />
     <Compile Include="Helpers\Randomizer.cs" />
     <Compile Include="Helpers\InputBox.cs" />
@@ -365,6 +367,9 @@
     </None>
     <None Include="App.Release.config">
       <DependentUpon>App.config</DependentUpon>
+    </None>
+    <None Include="GetEncryptedPasswords.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="CleanDatadir.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

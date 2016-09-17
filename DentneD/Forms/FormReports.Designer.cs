@@ -366,7 +366,6 @@
             this.Name = "FormReports";
             this.Text = "Reports";
             this.Load += new System.EventHandler(this.FormReports_Load);
-            this.Shown += new System.EventHandler(this.FormReports_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_main)).EndInit();
             this.panel_list.ResumeLayout(false);
             this.panel_tabReports_actions.ResumeLayout(false);

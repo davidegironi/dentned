@@ -53,6 +53,8 @@ namespace DG.DentneD
             bool defaultlanguagerebuild = false;
             bool languagerebuild = false;
             bool cleandatadir = false;
+            string formprotectedpassword = null;
+            string reportprotectedpassword = null;
 
             var p = new OptionSet() {
                 { "l|languagerebuilt", "rebuild the loaded language file against default values",
@@ -61,7 +63,11 @@ namespace DG.DentneD
                     v => defaultlanguagerebuild = v != null },
                 { "d|cleandatadir", "clean data directories",
                     v => cleandatadir = v != null },
-                { "h|help",  "show help", 
+                { "f|formprotectedpassword=", "get entrypted password for protected forms",
+                    v => formprotectedpassword = v },
+                { "t|reportprotectedpassword=", "get entrypted password for protected reports",
+                    v => reportprotectedpassword = v },
+                { "h|help",  "show help",
                     v => showhelp = v != null }
             };
 
@@ -83,10 +89,10 @@ namespace DG.DentneD
                     return;
                 }
 
-                if (defaultlanguagerebuild && languagerebuild ||
-                    defaultlanguagerebuild && cleandatadir ||
-                    languagerebuild && cleandatadir ||
-                    !defaultlanguagerebuild && !languagerebuild && !cleandatadir)
+                if (
+                    (languagerebuild ? 1 : 0) + (defaultlanguagerebuild ? 1 : 0) + (cleandatadir ? 1 : 0) +
+                        (!String.IsNullOrEmpty(formprotectedpassword) || !String.IsNullOrEmpty(reportprotectedpassword) ? 1 : 0) > 1 ||
+                    !defaultlanguagerebuild && !languagerebuild && !cleandatadir && String.IsNullOrEmpty(formprotectedpassword) && String.IsNullOrEmpty(reportprotectedpassword))
                 {
                     showhelp = true;
                 }
@@ -162,6 +168,27 @@ namespace DG.DentneD
                     foreach (string error in errors)
                         Console.WriteLine("  " + error);
                     Console.WriteLine("Folder processed.");
+                }
+                else if (!String.IsNullOrEmpty(formprotectedpassword) && !String.IsNullOrEmpty(reportprotectedpassword))
+                {
+                    //Build encrypted passwords
+                    Console.WriteLine("Building the encrypted passwords for protected forms and reports...");
+                    Console.WriteLine(String.Format("Your form entrypted password is: {0} ", PasswordHelper.EncryptPassword(formprotectedpassword)));
+                    Console.WriteLine(String.Format("Your check for proteted form list is: {0} ", PasswordHelper.EncryptPassword(String.Join(",", ConfigurationManager.AppSettings["passwordProtectedForms"].Split(',')))));
+                    Console.WriteLine(String.Format("Your report entrypted password is: {0} ", PasswordHelper.EncryptPassword(reportprotectedpassword)));
+                }
+                else if (!String.IsNullOrEmpty(formprotectedpassword))
+                {
+                    //Build encrypted password
+                    Console.WriteLine("Building the encrypted password for protected forms...");
+                    Console.WriteLine(String.Format("Your form entrypted password is: {0} ", PasswordHelper.EncryptPassword(formprotectedpassword)));
+                    Console.WriteLine(String.Format("Your check for proteted form list is: {0} ", PasswordHelper.EncryptPassword(String.Join(",", ConfigurationManager.AppSettings["passwordProtectedForms"].Split(',')))));
+                }
+                else if (!String.IsNullOrEmpty(reportprotectedpassword))
+                {
+                    //Build encrypted password
+                    Console.WriteLine("Building the encrypted password for protected reports...");
+                    Console.WriteLine(String.Format("Your report entrypted password is: {0} ", PasswordHelper.EncryptPassword(reportprotectedpassword)));
                 }
 
                 Console.WriteLine();

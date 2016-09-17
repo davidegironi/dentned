@@ -4983,8 +4983,8 @@ namespace DG.DentneD.Forms
                 if (invoices_id != -1)
                 {
                     invoices_id_toload = invoices_id;
-                    DGUIGHFFormMain mainForm = (DGUIGHFFormMain)this.MdiParent;
-                    mainForm.ShowForm(mainForm, typeof(FormInvoices));
+                    FormMain mainForm = (FormMain)this.MdiParent;
+                    mainForm.ShowFormProtected(mainForm, typeof(FormInvoices));
                 }
             }
         }
@@ -5080,8 +5080,8 @@ namespace DG.DentneD.Forms
                 if (estimates_id != -1)
                 {
                     estimates_id_toload = estimates_id;
-                    DGUIGHFFormMain mainForm = (DGUIGHFFormMain)this.MdiParent;
-                    mainForm.ShowForm(mainForm, typeof(FormEstimates));
+                    FormMain mainForm = (FormMain)this.MdiParent;
+                    mainForm.ShowFormProtected(mainForm, typeof(FormEstimates));
                 }
             }
         }

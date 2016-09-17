@@ -15,7 +15,6 @@ using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Windows.Forms;
 using System.Windows.Forms.Calendar;
 
@@ -31,7 +30,7 @@ namespace DG.DentneD.Forms
         private readonly int _calendarDayHourEnd = 19;
 
         private readonly Color _calendarTreatmentAdvicesColor = Color.SandyBrown;
-        
+
         private DateTime _currentDate = DateTime.Now;
         private List<CustomAppointmentItem> _appointmentItems = new List<CustomAppointmentItem>();
         private EditingMode _currentEditingMode = EditingMode.R;
@@ -846,8 +845,8 @@ namespace DG.DentneD.Forms
                 if (patient != null)
                 {
                     patients_id_toload = patient.patients_id;
-                    DGUIGHFFormMain mainForm = (DGUIGHFFormMain)this.MdiParent;
-                    mainForm.ShowForm(mainForm, typeof(FormPatients));
+                    FormMain formMain = (FormMain)this.MdiParent;
+                    formMain.ShowFormProtected(formMain, typeof(FormPatients));
                 }
             }
         }
@@ -862,7 +861,7 @@ namespace DG.DentneD.Forms
             if (IsBindingSourceLoading)
                 return;
 
-            if(_currentEditingMode != EditingMode.C && _currentEditingMode != EditingMode.U)
+            if (_currentEditingMode != EditingMode.C && _currentEditingMode != EditingMode.U)
             {
                 appointments_dateDateTimePicker.Value = DateTime.Now.Date;
                 appointments_fromDateTimePicker.Value = DateTime.Now.Date;
@@ -1046,7 +1045,7 @@ namespace DG.DentneD.Forms
                 if (appointments_id != -1)
                 {
                     _selectedAppointmentId = appointments_id;
-                    appointmentsBindingSource.DataSource = _dentnedModel.Appointments.Find(appointments_id);                    
+                    appointmentsBindingSource.DataSource = _dentnedModel.Appointments.Find(appointments_id);
                     appointments appointment = _dentnedModel.Appointments.Find(appointments_id);
                     _selectedPatientId = appointment.patients_id;
                 }

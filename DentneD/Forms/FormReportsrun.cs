@@ -182,7 +182,7 @@ namespace DG.DentneD.Forms
                     string input = null;
                     if (InputBox.ShowPassword(language.reportsPasswordInputMessage, language.reportsPasswordInputTitle, ref input) == DialogResult.OK)
                     {
-                        if (input == ConfigurationManager.AppSettings["formspassword"])
+                        if (PasswordHelper.CheckPassword(input, ConfigurationManager.AppSettings["passwordProtectedReports"]))
                         {
                             _isPasswordLogged = true;
                         }

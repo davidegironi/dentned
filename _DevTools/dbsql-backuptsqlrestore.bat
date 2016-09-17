@@ -17,8 +17,7 @@ rem load configs
 for %%f in (..\..\_DevTools\config.dbsql-backup*.bat) do (
 	rem load config file
 	call "%%f"
-	
-	
+		
 	echo Press R to restore the !SQLDATABASE! on !SQLHOSTNAME! server, your actual database will be dropped.
 	echo Press B to backup your actual database then restore the !SQLDATABASE! on !SQLHOSTNAME! server.
 	echo Prese any other key to skip to the next backup
@@ -84,4 +83,4 @@ endlocal
 
 pause
 
-rem exit
+exit

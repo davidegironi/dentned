@@ -48,7 +48,7 @@ It features also a client-server architecture.
 * Create a new folder, and copy all the DentneD files in that folder
 * Sets the *DentneD.exe.config* file according to your preferences, (see inline comments for further informations)
 * To add a new translation, or for language settings, change files under the *lang* folder
-* Change the backup.bat parameters to fit your needs, optionally add the backup script
+* Change the *config.db-backup.bat* parameters to fit your needs, optionally add the backup script
   as a cron job to activate it automatically
 
 

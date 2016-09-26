@@ -95,6 +95,9 @@ $builds = @(
 			},
 			@{
 				Cmd = ".\copylicense.bat"
+			},
+			@{
+				Cmd = ".\makeinstallfolders.bat Bin"
 			}
 		);
 	};

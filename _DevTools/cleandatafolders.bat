@@ -3,11 +3,11 @@
 rem Clean data folders
 rem Copyright (c) Davide Gironi, 2014
 
-rd ..\DataTemp\Attachmentsdir /s /q
-md ..\DataTemp\Attachmentsdir
+rd ..\DataTemp\Attachments /s /q
+md ..\DataTemp\Attachments
 
-rd ..\DataTemp\Datadir /s /q
-md ..\DataTemp\Datadir
+rd ..\DataTemp\Datas /s /q
+md ..\DataTemp\Datas
 
 rd ..\DataTemp\Invoices /s /q
 md ..\DataTemp\Invoices

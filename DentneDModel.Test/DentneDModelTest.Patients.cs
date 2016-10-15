@@ -19,10 +19,8 @@ namespace DG.DentneD.Model.Test
         {
             string[] errors = new string[] { };
             patients t_patients = null;
-            doctors t_doctors = null;
 
             _dentnedModel.Patients.Remove(_dentnedModel.Patients.List(r => r.patients_name == "XX1" && r.patients_surname == "XX1").ToArray());
-            _dentnedModel.Doctors.Remove(_dentnedModel.Doctors.List(r => r.doctors_name == "XX1" && r.doctors_surname == "XX1").ToArray());
 
             t_patients = new patients()
             {
@@ -195,28 +193,7 @@ namespace DG.DentneD.Model.Test
             };
             Assert.IsTrue(_dentnedModel.Patients.CanAdd(t_patients));
 
-            t_doctors = new doctors()
-            {
-                doctors_name = "XX1",
-                doctors_surname = "XX1",
-                doctors_doctext = "XXXXX",
-                doctors_username = "xxxx1234",
-                doctors_password = "123456"
-            };
-            Assert.IsFalse(_dentnedModel.Doctors.CanAdd(t_doctors));
-
-            t_doctors = new doctors()
-            {
-                doctors_name = "XX1",
-                doctors_surname = "XX1",
-                doctors_doctext = "XXXXX",
-                doctors_username = "xxxx1236",
-                doctors_password = "123456"
-            };
-            Assert.IsTrue(_dentnedModel.Doctors.CanAdd(t_doctors));
-
             _dentnedModel.Patients.Remove(_dentnedModel.Patients.List(r => r.patients_name == "XX1" && r.patients_surname == "XX1").ToArray());
-            _dentnedModel.Doctors.Remove(_dentnedModel.Doctors.List(r => r.doctors_name == "XX1" && r.doctors_surname == "XX1").ToArray());
         }
     }
 }

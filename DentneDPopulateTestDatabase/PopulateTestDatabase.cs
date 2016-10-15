@@ -103,6 +103,11 @@ EXEC sp_msforeachtable 'DBCC CHECKIDENT(''?'', RESEED, 0)'; DECLARE @max int; SE
             _dentnedModel.AddressesTypes.Add(addressestypesHome);
 
             Console.WriteLine("Add ContactsTypes...");
+            contactstypes contactstypesEMail = new contactstypes()
+            {
+                contactstypes_name = ContactsTypesRepository.SystemAttributes.EMail.ToString(),
+            };
+            _dentnedModel.ContactsTypes.Add(contactstypesEMail);
             contactstypes contactstypesMobile = new contactstypes()
             {
                 contactstypes_name = "Telephone"

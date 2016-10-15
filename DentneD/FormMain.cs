@@ -75,12 +75,15 @@ namespace DG.DentneD
                 this.Close();
             }
 
-            //purge temporary folder
-            try
+            //clean temporary folder
+            if (Convert.ToBoolean(ConfigurationManager.AppSettings["cleanTmpdirAtStartup"]))
             {
-                FileHelper.PurgeFolder(ConfigurationManager.AppSettings["tmpdir"], false, 1);
+                try
+                {
+                    FileHelper.PurgeFolder(ConfigurationManager.AppSettings["tmpdir"], false, 2);
+                }
+                catch { }
             }
-            catch { }
 
             //eventually maximize
             try

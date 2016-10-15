@@ -4,9 +4,9 @@ $solutionName = "DentneD"
 
 #set version
 $versionMajor = "1"
-$versionMinor = "0"
+$versionMinor = "1"
 $versionBuild = GetVersionBuild
-$versionRevision = "25"
+$versionRevision = "0"
 #build version number
 $assemblyVersion = GetVersion $versionMajor $versionMinor $versionBuild $versionRevision
 $fileVersion = $assemblyVersion
@@ -53,6 +53,15 @@ $builds = @(
 			},
 			@{
 				Name = "DentneDPrintModelDefault";
+			},
+			@{
+				Name = "DentneDHelpers";
+			},
+			@{
+				Name = "DentneDHelpers.Test";
+			},
+			@{
+				Name = "DentneDHelpers.TestConsole";
 			}
 		);
 		#files to include in the release binary package
@@ -62,6 +71,10 @@ $builds = @(
 			@{
 				Name = "DentneDModel.Test";
 				TestDll = "DentneDModel.Test.dll"
+			},
+			@{
+				Name = "DentneDHelpers.Test";
+				TestDll = "DentneDHelpers.Test.dll"
 			}
 		);
 		#commands to run before packaging of the release source

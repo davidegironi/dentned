@@ -267,8 +267,6 @@
     <Compile Include="Helpers\DentneDPrintModelHelper.cs" />
     <Compile Include="Helpers\ExcelExporter.cs" />
     <Compile Include="Helpers\PasswordHelper.cs" />
-    <Compile Include="Helpers\FileHelper.cs" />
-    <Compile Include="Helpers\Randomizer.cs" />
     <Compile Include="Helpers\InputBox.cs" />
     <Compile Include="Libs\NDesk.Options\Options.cs" />
     <Compile Include="Libs\TabOrderManager\TabOrderManager.cs" />
@@ -466,19 +464,23 @@
     <EmbeddedResource Include="about_logoimg.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DentneDHelpers\DentneDHelpers.csproj">
+      <Project>{a56de3fd-7e06-4389-a56a-5022d3d68777}</Project>
+      <Name>DentneDHelpers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DentneDModel\DentneDModel.csproj">
       <Project>{b00e28db-3dbe-41d6-ae16-fd8352ce3d2b}</Project>
       <Name>DentneDModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DentneDSer\DentneDSer.csproj">
+      <Project>{5e684a5a-6f8a-4a26-b81c-0803b2b24834}</Project>
+      <Name>DentneDSer</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="splashscreen_logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\packages\Ext\srm\srm.exe">
-      <Link>srm.exe</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="..\packages\Int\DentneDPrintModelDefault\DentneDPrintModelDefault.dll">
       <Link>DentneDPrintModelDefault.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

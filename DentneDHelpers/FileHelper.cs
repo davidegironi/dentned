@@ -44,37 +44,40 @@ namespace DG.DentneD.Helpers
         public static bool CreateFolder(string folder)
         {
             bool ret = false;
+
             try
             {
                 if (!Directory.Exists(folder))
                 {
                     Directory.CreateDirectory(folder);
                 }
+
                 ret = true;
             }
             catch { }
+
             return ret;
         }
 
         /// <summary>
-        /// Purge files older than days, set to -1 to delete all folder
+        /// Purge files older than days, set to null to delete all files in folder
         /// </summary>
         /// <param name="foldername"></param>
         /// <param name="doSecureDelete"></param>
         /// <param name="days"></param>
         /// <returns></returns>
-        public static bool PurgeFolder(string foldername, bool doSecureDelete, int days)
+        public static bool PurgeFolder(string foldername, bool doSecureDelete, Nullable<int> days)
         {
-            bool ret = false;
+            bool ret = true;
 
             DirectoryInfo directoryInfo = new DirectoryInfo(foldername);
             FileInfo[] fileInfos = directoryInfo.GetFiles("*.*");
             foreach (FileInfo fileInfo in fileInfos)
             {
                 bool dodelete = false;
-                if (days != -1)
+                if (days != null)
                 {
-                    if (fileInfo.LastWriteTime < DateTime.Now.AddDays(-days))
+                    if (fileInfo.LastWriteTime < DateTime.Now.AddDays(-Math.Abs((int)days)))
                         dodelete = true;
                 }
                 else
@@ -84,6 +87,8 @@ namespace DG.DentneD.Helpers
 
                 if (dodelete)
                 {
+                    ret = false;
+
                     try
                     {
                         if (doSecureDelete)

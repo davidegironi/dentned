@@ -7,6 +7,7 @@
 using DG.Data.Model;
 using DG.DentneD.Model.Entity;
 using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -189,6 +190,27 @@ namespace DG.DentneD.Model.Repositories
             }
 
             return ret;
+        }
+
+
+        /// <summary>
+        /// Purge appointments older than days
+        /// </summary>
+        /// <param name="days"></param>
+        /// <param name="purgedAppintments"></param>
+        public void Purge(int days, ref int purgedAppintments)
+        {
+            purgedAppintments = 0;
+
+            if (days >= 0)
+                return;
+
+            DateTime dayback = DateTime.Now.AddDays(days);
+            appointments[] appointmentsToDeletes = List(r => DbFunctions.TruncateTime(r.appointments_from) <= DbFunctions.TruncateTime(dayback)).ToArray();
+
+            purgedAppintments = appointmentsToDeletes.Count();
+
+            Remove(appointmentsToDeletes);
         }
     }
 

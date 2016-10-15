@@ -23,12 +23,22 @@ namespace DG.DentneD.Model.Repositories
             public string text001 = "Name can not be empty.";
             public string text002 = "Contact type already inserted.";
             public string text003 = "This item can not be removed. A contact depends on it.";
+            public string text004 = "This is a system type, therefore code can not be changed.";
+            public string text005 = "This is a system type, therefore it can not be removed.";
         }
 
         /// <summary>
         /// Repository language
         /// </summary>
         public RepositoryLanguage language = new RepositoryLanguage();
+
+        /// <summary>
+        /// System attributes
+        /// </summary>
+        public enum SystemAttributes
+        {
+            EMail
+        }
 
         /// <summary>
         /// Check if an item can be added
@@ -105,6 +115,17 @@ namespace DG.DentneD.Model.Repositories
                         ret = false;
                         errors = errors.Concat(new string[] { language.text002 }).ToArray();
                     }
+
+                    contactstypes contactstype = Find(item.contactstypes_id);
+                    if (contactstype != null)
+                    {
+                        if (Enum.GetNames(typeof(SystemAttributes)).ToArray().Contains(contactstype.contactstypes_name) &&
+                            contactstype.contactstypes_name != item.contactstypes_name)
+                        {
+                            ret = false;
+                            errors = errors.Concat(new string[] { language.text004 }).ToArray();
+                        }
+                    }
                 }
 
                 if (!ret)
@@ -130,6 +151,15 @@ namespace DG.DentneD.Model.Repositories
 
             foreach (contactstypes item in items)
             {
+                if (Enum.GetNames(typeof(SystemAttributes)).ToArray().Contains(item.contactstypes_name))
+                {
+                    ret = false;
+                    errors = errors.Concat(new string[] { language.text005 }).ToArray();
+                }
+
+                if (!ret)
+                    break;
+
                 if (BaseModel.PatientsContacts.Any(r => r.contactstypes_id == item.contactstypes_id))
                 {
                     ret = false;

@@ -5,6 +5,7 @@
 #endregion
 
 using DG.DentneD.Model.Entity;
+using DG.DentneD.Model.Repositories;
 using NUnit.Framework;
 using System;
 using System.Linq;
@@ -103,6 +104,30 @@ namespace DG.DentneD.Model.Test
             Assert.IsTrue(_dentnedModel.ContactsTypes.CanRemove(_dentnedModel.ContactsTypes.List(r => r.contactstypes_name == "XX1").ToArray()));
 
             _dentnedModel.ContactsTypes.Remove(_dentnedModel.ContactsTypes.List(r => r.contactstypes_name == "XX1").ToArray());
+        }
+
+        [Category("RunSolo")]
+        [Test]
+        public void ContactsTypes_Test3()
+        {
+            string[] errors = new string[] { };
+            contactstypes contactstypesEMail = null;
+
+            contactstypesEMail = _dentnedModel.ContactsTypes.FirstOrDefault(r => r.contactstypes_name == ContactsTypesRepository.SystemAttributes.EMail.ToString());
+            if (contactstypesEMail == null)
+            {
+                contactstypesEMail = new contactstypes()
+                {
+                    contactstypes_name = ContactsTypesRepository.SystemAttributes.EMail.ToString(),
+                };
+                _dentnedModel.ContactsTypes.Add(contactstypesEMail);
+            }
+
+            contactstypesEMail.contactstypes_name = "test";
+            Assert.IsFalse(_dentnedModel.ContactsTypes.CanUpdate(contactstypesEMail));
+
+            contactstypesEMail = _dentnedModel.ContactsTypes.FirstOrDefault(r => r.contactstypes_name == ContactsTypesRepository.SystemAttributes.EMail.ToString());
+            Assert.IsFalse(_dentnedModel.ContactsTypes.CanRemove(contactstypesEMail));
         }
     }
 }

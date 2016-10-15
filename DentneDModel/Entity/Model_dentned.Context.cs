@@ -41,6 +41,8 @@ namespace DG.DentneD.Model.Entity
         public virtual DbSet<patientsaddresses> patientsaddresses { get; set; }
         public virtual DbSet<patientsattachments> patientsattachments { get; set; }
         public virtual DbSet<patientsattachmentstypes> patientsattachmentstypes { get; set; }
+        public virtual DbSet<patientsattributes> patientsattributes { get; set; }
+        public virtual DbSet<patientsattributestypes> patientsattributestypes { get; set; }
         public virtual DbSet<patientscontacts> patientscontacts { get; set; }
         public virtual DbSet<patientsmedicalrecords> patientsmedicalrecords { get; set; }
         public virtual DbSet<patientsnotes> patientsnotes { get; set; }

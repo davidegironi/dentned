@@ -116,6 +116,12 @@
     <Compile Include="Entity\patientsattachmentstypes.cs">
       <DependentUpon>Model_dentned.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\patientsattributes.cs">
+      <DependentUpon>Model_dentned.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\patientsattributestypes.cs">
+      <DependentUpon>Model_dentned.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\patientscontacts.cs">
       <DependentUpon>Model_dentned.tt</DependentUpon>
     </Compile>

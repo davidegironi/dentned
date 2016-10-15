@@ -198,6 +198,23 @@
           <Property Name="patientsattachmentstypes_name" Type="varchar" MaxLength="16" Nullable="false" />
           <Property Name="patientsattachmentstypes_valueautofunc" Type="char" MaxLength="3" Nullable="false" />
         </EntityType>
+        <EntityType Name="patientsattributes">
+          <Key>
+            <PropertyRef Name="patientsattributes_id" />
+          </Key>
+          <Property Name="patientsattributes_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="patients_id" Type="int" Nullable="false" />
+          <Property Name="patientsattributestypes_id" Type="int" Nullable="false" />
+          <Property Name="patientsattributestypes_value" Type="varchar" MaxLength="512" Nullable="false" />
+          <Property Name="patientsattributestypes_note" Type="text" />
+        </EntityType>
+        <EntityType Name="patientsattributestypes">
+          <Key>
+            <PropertyRef Name="patientsattributestypes_id" />
+          </Key>
+          <Property Name="patientsattributestypes_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="patientsattributestypes_name" Type="varchar" MaxLength="16" Nullable="false" />
+        </EntityType>
         <EntityType Name="patientscontacts">
           <Key>
             <PropertyRef Name="patientscontacts_id" />
@@ -594,6 +611,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_patientsattributes_patients">
+          <End Role="patients" Type="Self.patients" Multiplicity="1" />
+          <End Role="patientsattributes" Type="Self.patientsattributes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patients">
+              <PropertyRef Name="patients_id" />
+            </Principal>
+            <Dependent Role="patientsattributes">
+              <PropertyRef Name="patients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_patientsattributes_patientsattributestypes">
+          <End Role="patientsattributestypes" Type="Self.patientsattributestypes" Multiplicity="1" />
+          <End Role="patientsattributes" Type="Self.patientsattributes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patientsattributestypes">
+              <PropertyRef Name="patientsattributestypes_id" />
+            </Principal>
+            <Dependent Role="patientsattributes">
+              <PropertyRef Name="patientsattributestypes_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_patientscontacts_contactstypes">
           <End Role="contactstypes" Type="Self.contactstypes" Multiplicity="1" />
           <End Role="patientscontacts" Type="Self.patientscontacts" Multiplicity="*" />
@@ -767,6 +808,8 @@
           <EntitySet Name="patientsaddresses" EntityType="Self.patientsaddresses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="patientsattachments" EntityType="Self.patientsattachments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="patientsattachmentstypes" EntityType="Self.patientsattachmentstypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="patientsattributes" EntityType="Self.patientsattributes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="patientsattributestypes" EntityType="Self.patientsattributestypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="patientscontacts" EntityType="Self.patientscontacts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="patientsmedicalrecords" EntityType="Self.patientsmedicalrecords" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="patientsnotes" EntityType="Self.patientsnotes" Schema="dbo" store:Type="Tables" />
@@ -854,6 +897,14 @@
             <End Role="patientsattachmentstypes" EntitySet="patientsattachmentstypes" />
             <End Role="patientsattachments" EntitySet="patientsattachments" />
           </AssociationSet>
+          <AssociationSet Name="FK_patientsattributes_patients" Association="Self.FK_patientsattributes_patients">
+            <End Role="patients" EntitySet="patients" />
+            <End Role="patientsattributes" EntitySet="patientsattributes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_patientsattributes_patientsattributestypes" Association="Self.FK_patientsattributes_patientsattributestypes">
+            <End Role="patientsattributestypes" EntitySet="patientsattributestypes" />
+            <End Role="patientsattributes" EntitySet="patientsattributes" />
+          </AssociationSet>
           <AssociationSet Name="FK_patientscontacts_contactstypes" Association="Self.FK_patientscontacts_contactstypes">
             <End Role="contactstypes" EntitySet="contactstypes" />
             <End Role="patientscontacts" EntitySet="patientscontacts" />
@@ -928,6 +979,8 @@
           <EntitySet Name="patientsaddresses" EntityType="dentnedModel.patientsaddresses" />
           <EntitySet Name="patientsattachments" EntityType="dentnedModel.patientsattachments" />
           <EntitySet Name="patientsattachmentstypes" EntityType="dentnedModel.patientsattachmentstypes" />
+          <EntitySet Name="patientsattributes" EntityType="dentnedModel.patientsattributes" />
+          <EntitySet Name="patientsattributestypes" EntityType="dentnedModel.patientsattributestypes" />
           <EntitySet Name="patientscontacts" EntityType="dentnedModel.patientscontacts" />
           <EntitySet Name="patientsmedicalrecords" EntityType="dentnedModel.patientsmedicalrecords" />
           <EntitySet Name="patientsnotes" EntityType="dentnedModel.patientsnotes" />
@@ -1023,6 +1076,10 @@
             <End Role="patients" EntitySet="patients" />
             <End Role="patientsattachments" EntitySet="patientsattachments" />
           </AssociationSet>
+          <AssociationSet Name="FK_patientsattributes_patients" Association="dentnedModel.FK_patientsattributes_patients">
+            <End Role="patients" EntitySet="patients" />
+            <End Role="patientsattributes" EntitySet="patientsattributes" />
+          </AssociationSet>
           <AssociationSet Name="FK_patientscontacts_patients" Association="dentnedModel.FK_patientscontacts_patients">
             <End Role="patients" EntitySet="patients" />
             <End Role="patientscontacts" EntitySet="patientscontacts" />
@@ -1046,6 +1103,10 @@
           <AssociationSet Name="FK_patientsattachments_patientsattachmentstypes" Association="dentnedModel.FK_patientsattachments_patientsattachmentstypes">
             <End Role="patientsattachmentstypes" EntitySet="patientsattachmentstypes" />
             <End Role="patientsattachments" EntitySet="patientsattachments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_patientsattributes_patientsattributestypes" Association="dentnedModel.FK_patientsattributes_patientsattributestypes">
+            <End Role="patientsattributestypes" EntitySet="patientsattributestypes" />
+            <End Role="patientsattributes" EntitySet="patientsattributes" />
           </AssociationSet>
           <AssociationSet Name="FK_patientstreatments_treatments" Association="dentnedModel.FK_patientstreatments_treatments">
             <End Role="treatments" EntitySet="treatments" />
@@ -1257,6 +1318,7 @@
           <NavigationProperty Name="treatmentspriceslists" Relationship="dentnedModel.FK_patients_treatmentspriceslists" FromRole="patients" ToRole="treatmentspriceslists" />
           <NavigationProperty Name="patientsaddresses" Relationship="dentnedModel.FK_patientsaddresses_patients" FromRole="patients" ToRole="patientsaddresses" />
           <NavigationProperty Name="patientsattachments" Relationship="dentnedModel.FK_patientsattachments_patients" FromRole="patients" ToRole="patientsattachments" />
+          <NavigationProperty Name="patientsattributes" Relationship="dentnedModel.FK_patientsattributes_patients" FromRole="patients" ToRole="patientsattributes" />
           <NavigationProperty Name="patientscontacts" Relationship="dentnedModel.FK_patientscontacts_patients" FromRole="patients" ToRole="patientscontacts" />
           <NavigationProperty Name="patientsmedicalrecords" Relationship="dentnedModel.FK_patientsmedicalrecords_patients" FromRole="patients" ToRole="patientsmedicalrecords" />
           <NavigationProperty Name="patientsnotes" Relationship="dentnedModel.FK_patientsnotes_patients" FromRole="patients" ToRole="patientsnotes" />
@@ -1299,6 +1361,26 @@
           <Property Name="patientsattachmentstypes_name" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
           <Property Name="patientsattachmentstypes_valueautofunc" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="patientsattachments" Relationship="dentnedModel.FK_patientsattachments_patientsattachmentstypes" FromRole="patientsattachmentstypes" ToRole="patientsattachments" />
+        </EntityType>
+        <EntityType Name="patientsattributes">
+          <Key>
+            <PropertyRef Name="patientsattributes_id" />
+          </Key>
+          <Property Name="patientsattributes_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="patients_id" Type="Int32" Nullable="false" />
+          <Property Name="patientsattributestypes_id" Type="Int32" Nullable="false" />
+          <Property Name="patientsattributestypes_value" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="patientsattributestypes_note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="patients" Relationship="dentnedModel.FK_patientsattributes_patients" FromRole="patientsattributes" ToRole="patients" />
+          <NavigationProperty Name="patientsattributestypes" Relationship="dentnedModel.FK_patientsattributes_patientsattributestypes" FromRole="patientsattributes" ToRole="patientsattributestypes" />
+        </EntityType>
+        <EntityType Name="patientsattributestypes">
+          <Key>
+            <PropertyRef Name="patientsattributestypes_id" />
+          </Key>
+          <Property Name="patientsattributestypes_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="patientsattributestypes_name" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="patientsattributes" Relationship="dentnedModel.FK_patientsattributes_patientsattributestypes" FromRole="patientsattributestypes" ToRole="patientsattributes" />
         </EntityType>
         <EntityType Name="patientscontacts">
           <Key>
@@ -1743,6 +1825,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_patientsattributes_patients">
+          <End Type="dentnedModel.patients" Role="patients" Multiplicity="1" />
+          <End Type="dentnedModel.patientsattributes" Role="patientsattributes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patients">
+              <PropertyRef Name="patients_id" />
+            </Principal>
+            <Dependent Role="patientsattributes">
+              <PropertyRef Name="patients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_patientscontacts_patients">
           <End Type="dentnedModel.patients" Role="patients" Multiplicity="1" />
           <End Type="dentnedModel.patientscontacts" Role="patientscontacts" Multiplicity="*" />
@@ -1812,6 +1906,18 @@
             </Principal>
             <Dependent Role="patientsattachments">
               <PropertyRef Name="patientsattachmentstypes_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_patientsattributes_patientsattributestypes">
+          <End Type="dentnedModel.patientsattributestypes" Role="patientsattributestypes" Multiplicity="1" />
+          <End Type="dentnedModel.patientsattributes" Role="patientsattributes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patientsattributestypes">
+              <PropertyRef Name="patientsattributestypes_id" />
+            </Principal>
+            <Dependent Role="patientsattributes">
+              <PropertyRef Name="patientsattributestypes_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2087,6 +2193,25 @@
                 <ScalarProperty Name="patientsattachmentstypes_valueautofunc" ColumnName="patientsattachmentstypes_valueautofunc" />
                 <ScalarProperty Name="patientsattachmentstypes_name" ColumnName="patientsattachmentstypes_name" />
                 <ScalarProperty Name="patientsattachmentstypes_id" ColumnName="patientsattachmentstypes_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="patientsattributes">
+            <EntityTypeMapping TypeName="dentnedModel.patientsattributes">
+              <MappingFragment StoreEntitySet="patientsattributes">
+                <ScalarProperty Name="patientsattributestypes_note" ColumnName="patientsattributestypes_note" />
+                <ScalarProperty Name="patientsattributestypes_value" ColumnName="patientsattributestypes_value" />
+                <ScalarProperty Name="patientsattributestypes_id" ColumnName="patientsattributestypes_id" />
+                <ScalarProperty Name="patients_id" ColumnName="patients_id" />
+                <ScalarProperty Name="patientsattributes_id" ColumnName="patientsattributes_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="patientsattributestypes">
+            <EntityTypeMapping TypeName="dentnedModel.patientsattributestypes">
+              <MappingFragment StoreEntitySet="patientsattributestypes">
+                <ScalarProperty Name="patientsattributestypes_name" ColumnName="patientsattributestypes_name" />
+                <ScalarProperty Name="patientsattributestypes_id" ColumnName="patientsattributestypes_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

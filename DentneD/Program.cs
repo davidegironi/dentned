@@ -4,7 +4,6 @@
 // Please refer to LICENSE file for licensing information.
 #endregion
 
-using DG.DentneD.Forms;
 using DG.DentneD.Helpers;
 using DG.UI.GHF;
 using NDesk.Options;
@@ -61,7 +60,7 @@ namespace DG.DentneD
                     v => languagerebuild = v != null },
                 { "r|defaultlanguagerebuild", "rebuild the default language file",
                     v => defaultlanguagerebuild = v != null },
-                { "d|cleandatadir", "clean data directories",
+                { "d|cleandatadir", "clean patients data and temporary directories",
                     v => cleandatadir = v != null },
                 { "f|formprotectedpassword=", "get entrypted password for protected forms",
                     v => formprotectedpassword = v },
@@ -70,6 +69,8 @@ namespace DG.DentneD
                 { "h|help",  "show help",
                     v => showhelp = v != null }
             };
+            string[] messages2 = new string[] { };
+            string[] errors2 = new string[] { };
 
             //attach the console
             if (args.Length > 0)
@@ -143,15 +144,19 @@ namespace DG.DentneD
                     bool doSecureDelete = Convert.ToBoolean(ConfigurationManager.AppSettings["doSecureDelete"]);
 
                     //clean the tmpdir
-                    Console.WriteLine("Cleaning Temp folder \"" + tmpdir + "\"...");
-                    FileHelper.PurgeFolder(tmpdir, true, -1);
+                    Console.WriteLine("Cleaning Temporary folder \"" + tmpdir + "\"...");
+                    CleanDir.CleanTmpdir(tmpdir, doSecureDelete, null, ref messages, ref errors);
+                    foreach (string message in messages)
+                        Console.WriteLine("  " + message);
+                    foreach (string error in errors)
+                        Console.WriteLine("  " + error);
                     Console.WriteLine("Folder processed.");
 
                     Console.WriteLine();
 
                     //clean the patient datadir
                     Console.WriteLine("Cleaning Patient Data folder \"" + patientsDatadir + "\"...");
-                    FormPatients.CleanPatientDir(patientsDatadir, doSecureDelete, ref messages, ref errors);
+                    CleanDir.CleanPatientDir(patientsDatadir, doSecureDelete, ref messages, ref errors);
                     foreach (string message in messages)
                         Console.WriteLine("  " + message);
                     foreach (string error in errors)
@@ -162,7 +167,7 @@ namespace DG.DentneD
 
                     //clean the patient attachment dir
                     Console.WriteLine("Cleaning Patient Attachments folder \"" + patientsAttachmentsdir + "\"...");
-                    FormPatients.CleanPatientAttachmentsDir(patientsAttachmentsdir, doSecureDelete, ref messages, ref errors);
+                    CleanDir.CleanPatientAttachmentsDir(patientsAttachmentsdir, doSecureDelete, ref messages, ref errors);
                     foreach (string message in messages)
                         Console.WriteLine("  " + message);
                     foreach (string error in errors)

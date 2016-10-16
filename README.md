@@ -6,7 +6,7 @@ DentneD is a **Dental Practice Management Software**.
 It's a complete **open source** solution to manage you clinic.
 
 You can trace your patient, treatments, scheduling appointments, doing reports, and billing managment.
-It features also a client-server architecture.
+It features a client-server architecture.
 
 ## Download
 
@@ -26,19 +26,21 @@ It features also a client-server architecture.
 * PDF output
 * Cloud backup scripts
 * Calendar web interface
-* Client-server architecture, ccess by multiple computer at the same time
+* Client-server architecture, access by multiple computer at the same time
 * Multilanguage
+* Send appointments reminder
+* Windows service to perform optional folder cleaning
 
 
 ## Requirements
 
-* Microsoft Windows with .NET framework 4.5 or more
-* Microsoft SQL Server 2012 or more
+* Microsoft Windows with .NET framework 4.5 or later
+* Microsoft SQL Server 2012 or later
 
 
 ## Requirements: web app
 
-* PHP 5.3 or more
+* PHP 5.3 or later
 
 
 ## Installation

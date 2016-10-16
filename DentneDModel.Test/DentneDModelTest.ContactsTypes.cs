@@ -106,7 +106,6 @@ namespace DG.DentneD.Model.Test
             _dentnedModel.ContactsTypes.Remove(_dentnedModel.ContactsTypes.List(r => r.contactstypes_name == "XX1").ToArray());
         }
 
-        [Category("RunSolo")]
         [Test]
         public void ContactsTypes_Test3()
         {

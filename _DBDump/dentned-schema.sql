@@ -168,7 +168,7 @@ CREATE TABLE [dbo].[estimatesfooters](
 	[estimatesfooters_id] [int] IDENTITY(1,1) NOT NULL,
 	[estimatesfooters_name] [varchar](16) COLLATE Latin1_General_CI_AS NOT NULL,
 	[estimatesfooters_doctext] [varchar](512) COLLATE Latin1_General_CI_AS NOT NULL,
-	[estimatesfooters_isdefault] [bit] NOT NULL CONSTRAINT [DF_estimatesfooters_estimatesfooters_isdefault]  DEFAULT ((0)),
+	[estimatesfooters_isdefault] [bit] NOT NULL,
  CONSTRAINT [PK_estimatesfooters] PRIMARY KEY CLUSTERED 
 (
 	[estimatesfooters_id] ASC
@@ -189,7 +189,7 @@ CREATE TABLE [dbo].[estimateslines](
 	[estimateslines_quantity] [int] NOT NULL,
 	[estimateslines_unitprice] [decimal](10, 2) NOT NULL,
 	[estimateslines_taxrate] [decimal](10, 2) NOT NULL,
-	[estimateslines_istaxesdeductionsable] [bit] NOT NULL CONSTRAINT [DF_estimateslines_estimateslines_istaxesdeductionsable]  DEFAULT ((1)),
+	[estimateslines_istaxesdeductionsable] [bit] NOT NULL,
  CONSTRAINT [PK_estimateslines] PRIMARY KEY CLUSTERED 
 (
 	[estimateslines_id] ASC
@@ -231,7 +231,7 @@ CREATE TABLE [dbo].[invoicesfooters](
 	[invoicesfooters_id] [int] IDENTITY(1,1) NOT NULL,
 	[invoicesfooters_name] [varchar](16) COLLATE Latin1_General_CI_AS NOT NULL,
 	[invoicesfooters_doctext] [varchar](512) COLLATE Latin1_General_CI_AS NOT NULL,
-	[invoicesfooters_isdefault] [bit] NOT NULL CONSTRAINT [DF_invoicesfooters_invoicesfooters_isdefault]  DEFAULT ((0)),
+	[invoicesfooters_isdefault] [bit] NOT NULL,
  CONSTRAINT [PK_invoicesfooters] PRIMARY KEY CLUSTERED 
 (
 	[invoicesfooters_id] ASC
@@ -252,7 +252,7 @@ CREATE TABLE [dbo].[invoiceslines](
 	[invoiceslines_quantity] [int] NOT NULL,
 	[invoiceslines_unitprice] [decimal](10, 2) NOT NULL,
 	[invoiceslines_taxrate] [decimal](10, 2) NOT NULL,
-	[invoiceslines_istaxesdeductionsable] [bit] NOT NULL CONSTRAINT [DF_invoiceslines_invoiceslines_istaxesdeductionsable]  DEFAULT ((1)),
+	[invoiceslines_istaxesdeductionsable] [bit] NOT NULL,
  CONSTRAINT [PK_invoiceslines] PRIMARY KEY CLUSTERED 
 (
 	[invoiceslines_id] ASC
@@ -345,7 +345,7 @@ BEGIN
 CREATE TABLE [dbo].[patientsattachmentstypes](
 	[patientsattachmentstypes_id] [int] IDENTITY(1,1) NOT NULL,
 	[patientsattachmentstypes_name] [varchar](16) COLLATE Latin1_General_CI_AS NOT NULL,
-	[patientsattachmentstypes_valueautofunc] [char](3) COLLATE Latin1_General_CI_AS NOT NULL CONSTRAINT [DF_patientsattachmentstypes_patientsattachmentstypes_valuefunc]  DEFAULT ('NUL'),
+	[patientsattachmentstypes_valueautofunc] [char](3) COLLATE Latin1_General_CI_AS NOT NULL,
  CONSTRAINT [PK_patientsattachmentstypes] PRIMARY KEY CLUSTERED 
 (
 	[patientsattachmentstypes_id] ASC
@@ -355,6 +355,37 @@ END;
 ALTER AUTHORIZATION ON [dbo].[patientsattachmentstypes] TO  SCHEMA OWNER;
 SET ANSI_NULLS ON;
 SET QUOTED_IDENTIFIER ON;
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[patientsattributes]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[patientsattributes](
+	[patientsattributes_id] [int] IDENTITY(1,1) NOT NULL,
+	[patients_id] [int] NOT NULL,
+	[patientsattributestypes_id] [int] NOT NULL,
+	[patientsattributes_value] [varchar](512) COLLATE Latin1_General_CI_AS NULL,
+	[patientsattributes_note] [text] COLLATE Latin1_General_CI_AS NULL,
+ CONSTRAINT [PK_patientsattributes] PRIMARY KEY CLUSTERED 
+(
+	[patientsattributes_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+END;
+ALTER AUTHORIZATION ON [dbo].[patientsattributes] TO  SCHEMA OWNER;
+SET ANSI_NULLS ON;
+SET QUOTED_IDENTIFIER ON;
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[patientsattributestypes]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[patientsattributestypes](
+	[patientsattributestypes_id] [int] IDENTITY(1,1) NOT NULL,
+	[patientsattributestypes_name] [varchar](32) COLLATE Latin1_General_CI_AS NOT NULL,
+ CONSTRAINT [PK_patientsattributestypes] PRIMARY KEY CLUSTERED 
+(
+	[patientsattributestypes_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END;
+ALTER AUTHORIZATION ON [dbo].[patientsattributestypes] TO  SCHEMA OWNER;
+SET ANSI_NULLS ON;
+SET QUOTED_IDENTIFIER ON;
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[patientscontacts]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [dbo].[patientscontacts](
@@ -362,11 +393,12 @@ CREATE TABLE [dbo].[patientscontacts](
 	[patients_id] [int] NOT NULL,
 	[contactstypes_id] [int] NOT NULL,
 	[patientscontacts_value] [varchar](256) COLLATE Latin1_General_CI_AS NOT NULL,
+	[patientscontacts_note] [text] COLLATE Latin1_General_CI_AS NULL,
  CONSTRAINT [PK_patientscontacts] PRIMARY KEY CLUSTERED 
 (
 	[patientscontacts_id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 END;
 ALTER AUTHORIZATION ON [dbo].[patientscontacts] TO  SCHEMA OWNER;
 SET ANSI_NULLS ON;
@@ -378,11 +410,12 @@ CREATE TABLE [dbo].[patientsmedicalrecords](
 	[patients_id] [int] NOT NULL,
 	[medicalrecordstypes_id] [int] NOT NULL,
 	[patientsmedicalrecords_value] [varchar](128) COLLATE Latin1_General_CI_AS NULL,
+	[patientsmedicalrecords_note] [text] COLLATE Latin1_General_CI_AS NULL,
  CONSTRAINT [PK_patientsmedicalrecords] PRIMARY KEY CLUSTERED 
 (
 	[patientsmedicalrecords_id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 END;
 ALTER AUTHORIZATION ON [dbo].[patientsmedicalrecords] TO  SCHEMA OWNER;
 SET ANSI_NULLS ON;
@@ -412,45 +445,45 @@ CREATE TABLE [dbo].[patientstreatments](
 	[treatments_id] [int] NOT NULL,
 	[patientstreatments_creationdate] [date] NOT NULL,
 	[patientstreatments_fulfilldate] [date] NULL,
-	[patientstreatments_ispaid] [bit] NOT NULL CONSTRAINT [DF_patientstreatments_patientstreatments_ispayed]  DEFAULT ((0)),
+	[patientstreatments_ispaid] [bit] NOT NULL,
 	[patientstreatments_price] [decimal](10, 2) NOT NULL,
-	[patientstreatments_isunitprice] [bit] NOT NULL CONSTRAINT [DF_patientstreatments_patientstreatments_isunitprice]  DEFAULT ((1)),
+	[patientstreatments_isunitprice] [bit] NOT NULL,
 	[patientstreatments_taxrate] [decimal](10, 2) NOT NULL,
 	[patientstreatments_description] [varchar](128) COLLATE Latin1_General_CI_AS NULL,
 	[patientstreatments_notes] [text] COLLATE Latin1_General_CI_AS NULL,
 	[patientstreatments_expirationdate] [date] NULL,
-	[patientstreatments_t11] [bit] NOT NULL CONSTRAINT [DF_patientstreatments_patientstreatments_t11]  DEFAULT ((0)),
-	[patientstreatments_t12] [bit] NOT NULL CONSTRAINT [DF_patientstreatments_patientstreatments_t12]  DEFAULT ((0)),
-	[patientstreatments_t13] [bit] NOT NULL CONSTRAINT [DF_patientstreatments_patientstreatments_t13]  DEFAULT ((0)),
-	[patientstreatments_t14] [bit] NOT NULL CONSTRAINT [DF_patientstreatments_patientstreatments_t14]  DEFAULT ((0)),
-	[patientstreatments_t15] [bit] NOT NULL CONSTRAINT [DF_patientstreatments_patientstreatments_t15]  DEFAULT ((0)),
-	[patientstreatments_t16] [bit] NOT NULL CONSTRAINT [DF_patientstreatments_patientstreatments_t16]  DEFAULT ((0)),
-	[patientstreatments_t17] [bit] NOT NULL CONSTRAINT [DF_patientstreatments_patientstreatments_t17]  DEFAULT ((0)),
-	[patientstreatments_t18] [bit] NOT NULL CONSTRAINT [DF_patientstreatments_patientstreatments_t18]  DEFAULT ((0)),
-	[patientstreatments_t21] [bit] NOT NULL CONSTRAINT [DF_patientstreatments_patientstreatments_t21]  DEFAULT ((0)),
-	[patientstreatments_t22] [bit] NOT NULL CONSTRAINT [DF_patientstreatments_patientstreatments_t22]  DEFAULT ((0)),
-	[patientstreatments_t23] [bit] NOT NULL CONSTRAINT [DF_patientstreatments_patientstreatments_t23]  DEFAULT ((0)),
-	[patientstreatments_t24] [bit] NOT NULL CONSTRAINT [DF_patientstreatments_patientstreatments_t24]  DEFAULT ((0)),
-	[patientstreatments_t25] [bit] NOT NULL CONSTRAINT [DF_patientstreatments_patientstreatments_t25]  DEFAULT ((0)),
-	[patientstreatments_t26] [bit] NOT NULL CONSTRAINT [DF_patientstreatments_patientstreatments_t26]  DEFAULT ((0)),
-	[patientstreatments_t27] [bit] NOT NULL CONSTRAINT [DF_patientstreatments_patientstreatments_t27]  DEFAULT ((0)),
-	[patientstreatments_t28] [bit] NOT NULL CONSTRAINT [DF_patientstreatments_patientstreatments_t28]  DEFAULT ((0)),
-	[patientstreatments_t31] [bit] NOT NULL CONSTRAINT [DF_patientstreatments_patientstreatments_t31]  DEFAULT ((0)),
-	[patientstreatments_t32] [bit] NOT NULL CONSTRAINT [DF_patientstreatments_patientstreatments_t32]  DEFAULT ((0)),
-	[patientstreatments_t33] [bit] NOT NULL CONSTRAINT [DF_patientstreatments_patientstreatments_t33]  DEFAULT ((0)),
-	[patientstreatments_t34] [bit] NOT NULL CONSTRAINT [DF_patientstreatments_patientstreatments_t34]  DEFAULT ((0)),
-	[patientstreatments_t35] [bit] NOT NULL CONSTRAINT [DF_patientstreatments_patientstreatments_t35]  DEFAULT ((0)),
-	[patientstreatments_t36] [bit] NOT NULL CONSTRAINT [DF_patientstreatments_patientstreatments_t36]  DEFAULT ((0)),
-	[patientstreatments_t37] [bit] NOT NULL CONSTRAINT [DF_patientstreatments_patientstreatments_t37]  DEFAULT ((0)),
-	[patientstreatments_t38] [bit] NOT NULL CONSTRAINT [DF_patientstreatments_patientstreatments_t38]  DEFAULT ((0)),
-	[patientstreatments_t41] [bit] NOT NULL CONSTRAINT [DF_patientstreatments_patientstreatments_t41]  DEFAULT ((0)),
-	[patientstreatments_t42] [bit] NOT NULL CONSTRAINT [DF_patientstreatments_patientstreatments_t42]  DEFAULT ((0)),
-	[patientstreatments_t43] [bit] NOT NULL CONSTRAINT [DF_patientstreatments_patientstreatments_t43]  DEFAULT ((0)),
-	[patientstreatments_t44] [bit] NOT NULL CONSTRAINT [DF_patientstreatments_patientstreatments_t44]  DEFAULT ((0)),
-	[patientstreatments_t45] [bit] NOT NULL CONSTRAINT [DF_patientstreatments_patientstreatments_t45]  DEFAULT ((0)),
-	[patientstreatments_t46] [bit] NOT NULL CONSTRAINT [DF_patientstreatments_patientstreatments_t46]  DEFAULT ((0)),
-	[patientstreatments_t47] [bit] NOT NULL CONSTRAINT [DF_patientstreatments_patientstreatments_t47]  DEFAULT ((0)),
-	[patientstreatments_t48] [bit] NOT NULL CONSTRAINT [DF_patientstreatments_patientstreatments_t48]  DEFAULT ((0)),
+	[patientstreatments_t11] [bit] NOT NULL,
+	[patientstreatments_t12] [bit] NOT NULL,
+	[patientstreatments_t13] [bit] NOT NULL,
+	[patientstreatments_t14] [bit] NOT NULL,
+	[patientstreatments_t15] [bit] NOT NULL,
+	[patientstreatments_t16] [bit] NOT NULL,
+	[patientstreatments_t17] [bit] NOT NULL,
+	[patientstreatments_t18] [bit] NOT NULL,
+	[patientstreatments_t21] [bit] NOT NULL,
+	[patientstreatments_t22] [bit] NOT NULL,
+	[patientstreatments_t23] [bit] NOT NULL,
+	[patientstreatments_t24] [bit] NOT NULL,
+	[patientstreatments_t25] [bit] NOT NULL,
+	[patientstreatments_t26] [bit] NOT NULL,
+	[patientstreatments_t27] [bit] NOT NULL,
+	[patientstreatments_t28] [bit] NOT NULL,
+	[patientstreatments_t31] [bit] NOT NULL,
+	[patientstreatments_t32] [bit] NOT NULL,
+	[patientstreatments_t33] [bit] NOT NULL,
+	[patientstreatments_t34] [bit] NOT NULL,
+	[patientstreatments_t35] [bit] NOT NULL,
+	[patientstreatments_t36] [bit] NOT NULL,
+	[patientstreatments_t37] [bit] NOT NULL,
+	[patientstreatments_t38] [bit] NOT NULL,
+	[patientstreatments_t41] [bit] NOT NULL,
+	[patientstreatments_t42] [bit] NOT NULL,
+	[patientstreatments_t43] [bit] NOT NULL,
+	[patientstreatments_t44] [bit] NOT NULL,
+	[patientstreatments_t45] [bit] NOT NULL,
+	[patientstreatments_t46] [bit] NOT NULL,
+	[patientstreatments_t47] [bit] NOT NULL,
+	[patientstreatments_t48] [bit] NOT NULL,
  CONSTRAINT [PK_patientstreatments] PRIMARY KEY CLUSTERED 
 (
 	[patientstreatments_id] ASC
@@ -483,7 +516,7 @@ CREATE TABLE [dbo].[paymentstypes](
 	[paymentstypes_id] [int] IDENTITY(1,1) NOT NULL,
 	[paymentstypes_name] [varchar](16) COLLATE Latin1_General_CI_AS NOT NULL,
 	[paymentstypes_doctext] [varchar](512) COLLATE Latin1_General_CI_AS NOT NULL,
-	[paymentstypes_isdefault] [bit] NOT NULL CONSTRAINT [DF_paymentstypes_paymentstypes_isdefault]  DEFAULT ((0)),
+	[paymentstypes_isdefault] [bit] NOT NULL,
  CONSTRAINT [PK_paymentstypes] PRIMARY KEY CLUSTERED 
 (
 	[paymentstypes_id] ASC
@@ -553,7 +586,7 @@ CREATE TABLE [dbo].[taxes](
 	[taxes_id] [int] IDENTITY(1,1) NOT NULL,
 	[taxes_name] [varchar](16) COLLATE Latin1_General_CI_AS NOT NULL,
 	[taxes_rate] [decimal](10, 2) NOT NULL,
-	[taxes_isdefault] [bit] NOT NULL CONSTRAINT [DF_taxes_taxes_isdefault]  DEFAULT ((0)),
+	[taxes_isdefault] [bit] NOT NULL,
  CONSTRAINT [PK_taxes] PRIMARY KEY CLUSTERED 
 (
 	[taxes_id] ASC
@@ -569,7 +602,7 @@ CREATE TABLE [dbo].[taxesdeductions](
 	[taxesdeductions_id] [int] IDENTITY(1,1) NOT NULL,
 	[taxesdeductions_name] [varchar](16) COLLATE Latin1_General_CI_AS NOT NULL,
 	[taxesdeductions_rate] [decimal](10, 2) NOT NULL,
-	[taxesdeductions_isdefault] [bit] NOT NULL CONSTRAINT [DF_taxesdeductions_taxesdeductions_isdefault]  DEFAULT ((0)),
+	[taxesdeductions_isdefault] [bit] NOT NULL,
  CONSTRAINT [PK_taxesdeductions] PRIMARY KEY CLUSTERED 
 (
 	[taxesdeductions_id] ASC
@@ -588,7 +621,7 @@ CREATE TABLE [dbo].[treatments](
 	[treatments_code] [char](3) COLLATE Latin1_General_CI_AS NOT NULL,
 	[treatments_name] [varchar](32) COLLATE Latin1_General_CI_AS NOT NULL,
 	[treatments_price] [decimal](10, 2) NOT NULL,
-	[treatments_isunitprice] [bit] NOT NULL CONSTRAINT [DF_treatments_treatments_isunitprice]  DEFAULT ((1)),
+	[treatments_isunitprice] [bit] NOT NULL,
 	[treatments_mexpiration] [tinyint] NULL,
 	[treatments_notes] [text] COLLATE Latin1_General_CI_AS NULL,
  CONSTRAINT [PK_treatments] PRIMARY KEY CLUSTERED 
@@ -621,7 +654,7 @@ BEGIN
 CREATE TABLE [dbo].[treatmentspriceslists](
 	[treatmentspriceslists_id] [int] IDENTITY(1,1) NOT NULL,
 	[treatmentspriceslists_name] [varchar](16) COLLATE Latin1_General_CI_AS NOT NULL,
-	[treatmentspriceslists_multiplier] [decimal](10, 2) NOT NULL CONSTRAINT [DF_treatmentspriceslists_treatmentspriceslists_multiplier]  DEFAULT ((1)),
+	[treatmentspriceslists_multiplier] [decimal](10, 2) NOT NULL,
  CONSTRAINT [PK_treatmentspriceslists] PRIMARY KEY CLUSTERED 
 (
 	[treatmentspriceslists_id] ASC
@@ -678,6 +711,14 @@ ALTER TABLE [dbo].[estimates]  WITH CHECK ADD  CONSTRAINT [FK_estimates_patients
 REFERENCES [dbo].[patients] ([patients_id]);
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_estimates_patients]') AND parent_object_id = OBJECT_ID(N'[dbo].[estimates]'))
 ALTER TABLE [dbo].[estimates] CHECK CONSTRAINT [FK_estimates_patients];
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_estimatesfooters_estimatesfooters_isdefault]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[estimatesfooters] ADD  CONSTRAINT [DF_estimatesfooters_estimatesfooters_isdefault]  DEFAULT ((0)) FOR [estimatesfooters_isdefault]
+END;
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_estimateslines_estimateslines_istaxesdeductionsable]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[estimateslines] ADD  CONSTRAINT [DF_estimateslines_estimateslines_istaxesdeductionsable]  DEFAULT ((1)) FOR [estimateslines_istaxesdeductionsable]
+END;
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_estimateslines_estimates]') AND parent_object_id = OBJECT_ID(N'[dbo].[estimateslines]'))
 ALTER TABLE [dbo].[estimateslines]  WITH CHECK ADD  CONSTRAINT [FK_estimateslines_estimates] FOREIGN KEY([estimates_id])
 REFERENCES [dbo].[estimates] ([estimates_id]);
@@ -698,6 +739,14 @@ ALTER TABLE [dbo].[invoices]  WITH CHECK ADD  CONSTRAINT [FK_invoices_patients] 
 REFERENCES [dbo].[patients] ([patients_id]);
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_invoices_patients]') AND parent_object_id = OBJECT_ID(N'[dbo].[invoices]'))
 ALTER TABLE [dbo].[invoices] CHECK CONSTRAINT [FK_invoices_patients];
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_invoicesfooters_invoicesfooters_isdefault]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[invoicesfooters] ADD  CONSTRAINT [DF_invoicesfooters_invoicesfooters_isdefault]  DEFAULT ((0)) FOR [invoicesfooters_isdefault]
+END;
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_invoiceslines_invoiceslines_istaxesdeductionsable]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[invoiceslines] ADD  CONSTRAINT [DF_invoiceslines_invoiceslines_istaxesdeductionsable]  DEFAULT ((1)) FOR [invoiceslines_istaxesdeductionsable]
+END;
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_invoiceslines_invoices]') AND parent_object_id = OBJECT_ID(N'[dbo].[invoiceslines]'))
 ALTER TABLE [dbo].[invoiceslines]  WITH CHECK ADD  CONSTRAINT [FK_invoiceslines_invoices] FOREIGN KEY([invoices_id])
 REFERENCES [dbo].[invoices] ([invoices_id]);
@@ -733,6 +782,20 @@ ALTER TABLE [dbo].[patientsattachments]  WITH CHECK ADD  CONSTRAINT [FK_patients
 REFERENCES [dbo].[patientsattachmentstypes] ([patientsattachmentstypes_id]);
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_patientsattachments_patientsattachmentstypes]') AND parent_object_id = OBJECT_ID(N'[dbo].[patientsattachments]'))
 ALTER TABLE [dbo].[patientsattachments] CHECK CONSTRAINT [FK_patientsattachments_patientsattachmentstypes];
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_patientsattachmentstypes_patientsattachmentstypes_valuefunc]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[patientsattachmentstypes] ADD  CONSTRAINT [DF_patientsattachmentstypes_patientsattachmentstypes_valuefunc]  DEFAULT ('NUL') FOR [patientsattachmentstypes_valueautofunc]
+END;
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_patientsattributes_patients]') AND parent_object_id = OBJECT_ID(N'[dbo].[patientsattributes]'))
+ALTER TABLE [dbo].[patientsattributes]  WITH CHECK ADD  CONSTRAINT [FK_patientsattributes_patients] FOREIGN KEY([patients_id])
+REFERENCES [dbo].[patients] ([patients_id]);
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_patientsattributes_patients]') AND parent_object_id = OBJECT_ID(N'[dbo].[patientsattributes]'))
+ALTER TABLE [dbo].[patientsattributes] CHECK CONSTRAINT [FK_patientsattributes_patients];
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_patientsattributes_patientsattributestypes]') AND parent_object_id = OBJECT_ID(N'[dbo].[patientsattributes]'))
+ALTER TABLE [dbo].[patientsattributes]  WITH CHECK ADD  CONSTRAINT [FK_patientsattributes_patientsattributestypes] FOREIGN KEY([patientsattributestypes_id])
+REFERENCES [dbo].[patientsattributestypes] ([patientsattributestypes_id]);
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_patientsattributes_patientsattributestypes]') AND parent_object_id = OBJECT_ID(N'[dbo].[patientsattributes]'))
+ALTER TABLE [dbo].[patientsattributes] CHECK CONSTRAINT [FK_patientsattributes_patientsattributestypes];
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_patientscontacts_contactstypes]') AND parent_object_id = OBJECT_ID(N'[dbo].[patientscontacts]'))
 ALTER TABLE [dbo].[patientscontacts]  WITH CHECK ADD  CONSTRAINT [FK_patientscontacts_contactstypes] FOREIGN KEY([contactstypes_id])
 REFERENCES [dbo].[contactstypes] ([contactstypes_id]);
@@ -758,6 +821,142 @@ ALTER TABLE [dbo].[patientsnotes]  WITH CHECK ADD  CONSTRAINT [FK_patientsnotes_
 REFERENCES [dbo].[patients] ([patients_id]);
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_patientsnotes_patients]') AND parent_object_id = OBJECT_ID(N'[dbo].[patientsnotes]'))
 ALTER TABLE [dbo].[patientsnotes] CHECK CONSTRAINT [FK_patientsnotes_patients];
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_patientstreatments_patientstreatments_ispayed]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[patientstreatments] ADD  CONSTRAINT [DF_patientstreatments_patientstreatments_ispayed]  DEFAULT ((0)) FOR [patientstreatments_ispaid]
+END;
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_patientstreatments_patientstreatments_isunitprice]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[patientstreatments] ADD  CONSTRAINT [DF_patientstreatments_patientstreatments_isunitprice]  DEFAULT ((1)) FOR [patientstreatments_isunitprice]
+END;
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_patientstreatments_patientstreatments_t11]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[patientstreatments] ADD  CONSTRAINT [DF_patientstreatments_patientstreatments_t11]  DEFAULT ((0)) FOR [patientstreatments_t11]
+END;
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_patientstreatments_patientstreatments_t12]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[patientstreatments] ADD  CONSTRAINT [DF_patientstreatments_patientstreatments_t12]  DEFAULT ((0)) FOR [patientstreatments_t12]
+END;
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_patientstreatments_patientstreatments_t13]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[patientstreatments] ADD  CONSTRAINT [DF_patientstreatments_patientstreatments_t13]  DEFAULT ((0)) FOR [patientstreatments_t13]
+END;
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_patientstreatments_patientstreatments_t14]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[patientstreatments] ADD  CONSTRAINT [DF_patientstreatments_patientstreatments_t14]  DEFAULT ((0)) FOR [patientstreatments_t14]
+END;
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_patientstreatments_patientstreatments_t15]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[patientstreatments] ADD  CONSTRAINT [DF_patientstreatments_patientstreatments_t15]  DEFAULT ((0)) FOR [patientstreatments_t15]
+END;
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_patientstreatments_patientstreatments_t16]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[patientstreatments] ADD  CONSTRAINT [DF_patientstreatments_patientstreatments_t16]  DEFAULT ((0)) FOR [patientstreatments_t16]
+END;
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_patientstreatments_patientstreatments_t17]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[patientstreatments] ADD  CONSTRAINT [DF_patientstreatments_patientstreatments_t17]  DEFAULT ((0)) FOR [patientstreatments_t17]
+END;
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_patientstreatments_patientstreatments_t18]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[patientstreatments] ADD  CONSTRAINT [DF_patientstreatments_patientstreatments_t18]  DEFAULT ((0)) FOR [patientstreatments_t18]
+END;
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_patientstreatments_patientstreatments_t21]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[patientstreatments] ADD  CONSTRAINT [DF_patientstreatments_patientstreatments_t21]  DEFAULT ((0)) FOR [patientstreatments_t21]
+END;
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_patientstreatments_patientstreatments_t22]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[patientstreatments] ADD  CONSTRAINT [DF_patientstreatments_patientstreatments_t22]  DEFAULT ((0)) FOR [patientstreatments_t22]
+END;
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_patientstreatments_patientstreatments_t23]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[patientstreatments] ADD  CONSTRAINT [DF_patientstreatments_patientstreatments_t23]  DEFAULT ((0)) FOR [patientstreatments_t23]
+END;
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_patientstreatments_patientstreatments_t24]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[patientstreatments] ADD  CONSTRAINT [DF_patientstreatments_patientstreatments_t24]  DEFAULT ((0)) FOR [patientstreatments_t24]
+END;
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_patientstreatments_patientstreatments_t25]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[patientstreatments] ADD  CONSTRAINT [DF_patientstreatments_patientstreatments_t25]  DEFAULT ((0)) FOR [patientstreatments_t25]
+END;
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_patientstreatments_patientstreatments_t26]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[patientstreatments] ADD  CONSTRAINT [DF_patientstreatments_patientstreatments_t26]  DEFAULT ((0)) FOR [patientstreatments_t26]
+END;
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_patientstreatments_patientstreatments_t27]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[patientstreatments] ADD  CONSTRAINT [DF_patientstreatments_patientstreatments_t27]  DEFAULT ((0)) FOR [patientstreatments_t27]
+END;
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_patientstreatments_patientstreatments_t28]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[patientstreatments] ADD  CONSTRAINT [DF_patientstreatments_patientstreatments_t28]  DEFAULT ((0)) FOR [patientstreatments_t28]
+END;
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_patientstreatments_patientstreatments_t31]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[patientstreatments] ADD  CONSTRAINT [DF_patientstreatments_patientstreatments_t31]  DEFAULT ((0)) FOR [patientstreatments_t31]
+END;
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_patientstreatments_patientstreatments_t32]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[patientstreatments] ADD  CONSTRAINT [DF_patientstreatments_patientstreatments_t32]  DEFAULT ((0)) FOR [patientstreatments_t32]
+END;
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_patientstreatments_patientstreatments_t33]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[patientstreatments] ADD  CONSTRAINT [DF_patientstreatments_patientstreatments_t33]  DEFAULT ((0)) FOR [patientstreatments_t33]
+END;
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_patientstreatments_patientstreatments_t34]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[patientstreatments] ADD  CONSTRAINT [DF_patientstreatments_patientstreatments_t34]  DEFAULT ((0)) FOR [patientstreatments_t34]
+END;
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_patientstreatments_patientstreatments_t35]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[patientstreatments] ADD  CONSTRAINT [DF_patientstreatments_patientstreatments_t35]  DEFAULT ((0)) FOR [patientstreatments_t35]
+END;
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_patientstreatments_patientstreatments_t36]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[patientstreatments] ADD  CONSTRAINT [DF_patientstreatments_patientstreatments_t36]  DEFAULT ((0)) FOR [patientstreatments_t36]
+END;
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_patientstreatments_patientstreatments_t37]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[patientstreatments] ADD  CONSTRAINT [DF_patientstreatments_patientstreatments_t37]  DEFAULT ((0)) FOR [patientstreatments_t37]
+END;
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_patientstreatments_patientstreatments_t38]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[patientstreatments] ADD  CONSTRAINT [DF_patientstreatments_patientstreatments_t38]  DEFAULT ((0)) FOR [patientstreatments_t38]
+END;
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_patientstreatments_patientstreatments_t41]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[patientstreatments] ADD  CONSTRAINT [DF_patientstreatments_patientstreatments_t41]  DEFAULT ((0)) FOR [patientstreatments_t41]
+END;
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_patientstreatments_patientstreatments_t42]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[patientstreatments] ADD  CONSTRAINT [DF_patientstreatments_patientstreatments_t42]  DEFAULT ((0)) FOR [patientstreatments_t42]
+END;
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_patientstreatments_patientstreatments_t43]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[patientstreatments] ADD  CONSTRAINT [DF_patientstreatments_patientstreatments_t43]  DEFAULT ((0)) FOR [patientstreatments_t43]
+END;
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_patientstreatments_patientstreatments_t44]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[patientstreatments] ADD  CONSTRAINT [DF_patientstreatments_patientstreatments_t44]  DEFAULT ((0)) FOR [patientstreatments_t44]
+END;
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_patientstreatments_patientstreatments_t45]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[patientstreatments] ADD  CONSTRAINT [DF_patientstreatments_patientstreatments_t45]  DEFAULT ((0)) FOR [patientstreatments_t45]
+END;
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_patientstreatments_patientstreatments_t46]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[patientstreatments] ADD  CONSTRAINT [DF_patientstreatments_patientstreatments_t46]  DEFAULT ((0)) FOR [patientstreatments_t46]
+END;
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_patientstreatments_patientstreatments_t47]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[patientstreatments] ADD  CONSTRAINT [DF_patientstreatments_patientstreatments_t47]  DEFAULT ((0)) FOR [patientstreatments_t47]
+END;
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_patientstreatments_patientstreatments_t48]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[patientstreatments] ADD  CONSTRAINT [DF_patientstreatments_patientstreatments_t48]  DEFAULT ((0)) FOR [patientstreatments_t48]
+END;
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_patientstreatments_doctors]') AND parent_object_id = OBJECT_ID(N'[dbo].[patientstreatments]'))
 ALTER TABLE [dbo].[patientstreatments]  WITH CHECK ADD  CONSTRAINT [FK_patientstreatments_doctors] FOREIGN KEY([doctors_id])
 REFERENCES [dbo].[doctors] ([doctors_id]);
@@ -778,6 +977,22 @@ ALTER TABLE [dbo].[payments]  WITH CHECK ADD  CONSTRAINT [FK_payments_patients] 
 REFERENCES [dbo].[patients] ([patients_id]);
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_payments_patients]') AND parent_object_id = OBJECT_ID(N'[dbo].[payments]'))
 ALTER TABLE [dbo].[payments] CHECK CONSTRAINT [FK_payments_patients];
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_paymentstypes_paymentstypes_isdefault]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[paymentstypes] ADD  CONSTRAINT [DF_paymentstypes_paymentstypes_isdefault]  DEFAULT ((0)) FOR [paymentstypes_isdefault]
+END;
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_taxes_taxes_isdefault]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[taxes] ADD  CONSTRAINT [DF_taxes_taxes_isdefault]  DEFAULT ((0)) FOR [taxes_isdefault]
+END;
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_taxesdeductions_taxesdeductions_isdefault]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[taxesdeductions] ADD  CONSTRAINT [DF_taxesdeductions_taxesdeductions_isdefault]  DEFAULT ((0)) FOR [taxesdeductions_isdefault]
+END;
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_treatments_treatments_isunitprice]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[treatments] ADD  CONSTRAINT [DF_treatments_treatments_isunitprice]  DEFAULT ((1)) FOR [treatments_isunitprice]
+END;
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_treatments_taxes]') AND parent_object_id = OBJECT_ID(N'[dbo].[treatments]'))
 ALTER TABLE [dbo].[treatments]  WITH CHECK ADD  CONSTRAINT [FK_treatments_taxes] FOREIGN KEY([taxes_id])
 REFERENCES [dbo].[taxes] ([taxes_id]);
@@ -798,3 +1013,7 @@ ALTER TABLE [dbo].[treatmentsprices]  WITH CHECK ADD  CONSTRAINT [FK_treatmentsp
 REFERENCES [dbo].[treatmentspriceslists] ([treatmentspriceslists_id]);
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_treatmentsprices_treatmentspriceslists]') AND parent_object_id = OBJECT_ID(N'[dbo].[treatmentsprices]'))
 ALTER TABLE [dbo].[treatmentsprices] CHECK CONSTRAINT [FK_treatmentsprices_treatmentspriceslists];
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DF_treatmentspriceslists_treatmentspriceslists_multiplier]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[treatmentspriceslists] ADD  CONSTRAINT [DF_treatmentspriceslists_treatmentspriceslists_multiplier]  DEFAULT ((1)) FOR [treatmentspriceslists_multiplier]
+END;

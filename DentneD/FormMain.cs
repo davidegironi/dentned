@@ -138,6 +138,7 @@ namespace DG.DentneD
             LanguageHelper.AddComponent(medicalRecordTypesToolStripMenuItem);
             LanguageHelper.AddComponent(invoicesFootersToolStripMenuItem);
             LanguageHelper.AddComponent(patientAttachmentsTypesToolStripMenuItem);
+            LanguageHelper.AddComponent(patientAttributesTypesToolStripMenuItem);
             LanguageHelper.AddComponent(paymentTypesToolStripMenuItem);
             LanguageHelper.AddComponent(roomsToolStripMenuItem);
             LanguageHelper.AddComponent(taxesToolStripMenuItem);
@@ -455,6 +456,16 @@ namespace DG.DentneD
         private void patientAttachmentsTypesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowFormProtected(this, typeof(FormPatientsAttachmentsTypes));
+        }
+
+        /// <summary>
+        /// FormPatientsAttributesTypes form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void patientAttributesTypesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowFormProtected(this, typeof(FormPatientsAttributesTypes));
         }
 
         /// <summary>

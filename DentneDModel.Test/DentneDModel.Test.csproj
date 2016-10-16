@@ -63,6 +63,8 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="DentneDModelTest.PatientsAttributes.cs" />
+    <Compile Include="DentneDModelTest.PatientsAttributesTypes.cs" />
     <Compile Include="DentneDModelTest.Estimates.cs" />
     <Compile Include="DentneDModelTest.EstimatesLines.cs" />
     <Compile Include="DentneDModelTest.Reports.cs" />

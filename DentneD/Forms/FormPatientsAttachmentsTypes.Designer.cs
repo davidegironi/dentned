@@ -91,7 +91,7 @@
             this.panel_data.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel_data.Location = new System.Drawing.Point(284, 0);
             this.panel_data.Name = "panel_data";
-            this.panel_data.Size = new System.Drawing.Size(500, 562);
+            this.panel_data.Size = new System.Drawing.Size(500, 561);
             this.panel_data.TabIndex = 9;
             // 
             // tabControl_main
@@ -101,7 +101,7 @@
             this.tabControl_main.Location = new System.Drawing.Point(0, 0);
             this.tabControl_main.Name = "tabControl_main";
             this.tabControl_main.SelectedIndex = 0;
-            this.tabControl_main.Size = new System.Drawing.Size(500, 562);
+            this.tabControl_main.Size = new System.Drawing.Size(500, 561);
             this.tabControl_main.TabIndex = 0;
             // 
             // tabPage_tabPatientsAttachmentsTypes
@@ -112,7 +112,7 @@
             this.tabPage_tabPatientsAttachmentsTypes.Location = new System.Drawing.Point(4, 22);
             this.tabPage_tabPatientsAttachmentsTypes.Name = "tabPage_tabPatientsAttachmentsTypes";
             this.tabPage_tabPatientsAttachmentsTypes.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_tabPatientsAttachmentsTypes.Size = new System.Drawing.Size(492, 536);
+            this.tabPage_tabPatientsAttachmentsTypes.Size = new System.Drawing.Size(492, 535);
             this.tabPage_tabPatientsAttachmentsTypes.TabIndex = 0;
             this.tabPage_tabPatientsAttachmentsTypes.Text = "Attachment Type";
             this.tabPage_tabPatientsAttachmentsTypes.UseVisualStyleBackColor = true;
@@ -244,7 +244,7 @@
             this.panel_list.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel_list.Location = new System.Drawing.Point(0, 60);
             this.panel_list.Name = "panel_list";
-            this.panel_list.Size = new System.Drawing.Size(284, 502);
+            this.panel_list.Size = new System.Drawing.Size(284, 501);
             this.panel_list.TabIndex = 11;
             // 
             // advancedDataGridView_main
@@ -268,7 +268,7 @@
             this.advancedDataGridView_main.ReadOnly = true;
             this.advancedDataGridView_main.RowHeadersVisible = false;
             this.advancedDataGridView_main.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.advancedDataGridView_main.Size = new System.Drawing.Size(284, 502);
+            this.advancedDataGridView_main.Size = new System.Drawing.Size(284, 501);
             this.advancedDataGridView_main.TabIndex = 0;
             this.advancedDataGridView_main.SortStringChanged += new System.EventHandler(this.advancedDataGridView_main_SortStringChanged);
             this.advancedDataGridView_main.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_main_FilterStringChanged);
@@ -309,7 +309,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 562);
+            this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.panel_list);
             this.Controls.Add(this.panel_filters);
             this.Controls.Add(this.panel_data);

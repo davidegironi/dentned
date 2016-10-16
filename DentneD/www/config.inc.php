@@ -9,10 +9,10 @@ defined( '_VALID_' ) or die( 'Restricted access' );
 date_default_timezone_set('Europe/Rome');
 
 //set database credentials
-$mssql_hostname = 'dgsql02d';
-$mssql_database = 'dentned';
-$mssql_username = 'sa';
-$mssql_password = '123456';
+$mssql_hostname = 'HOSTNAME';
+$mssql_database = 'DATABASE';
+$mssql_username = 'USERNAME';
+$mssql_password = 'PASSWORD';
 
 //set the type of database driver: sqlsrv OR mssql
 $mssql_driver = 'sqlsrv';

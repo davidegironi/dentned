@@ -177,6 +177,12 @@
     <Compile Include="Forms\FormPatientsAttachmentsTypes.Designer.cs">
       <DependentUpon>FormPatientsAttachmentsTypes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormPatientsAttributesTypes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormPatientsAttributesTypes.Designer.cs">
+      <DependentUpon>FormPatientsAttributesTypes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormPaymentsTypes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -232,6 +238,8 @@
       <DependentUpon>FormTreatmentsPricesLists.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Objects\VComputedLines.cs" />
+    <Compile Include="Forms\Objects\VPatientsAttributesTypes.cs" />
+    <Compile Include="Forms\Objects\VPatientsAttributes.cs" />
     <Compile Include="Forms\Objects\VReports.cs" />
     <Compile Include="Forms\Objects\VEstimatesFooters.cs" />
     <Compile Include="Forms\Objects\VEstimates.cs" />
@@ -311,6 +319,9 @@
     <EmbeddedResource Include="Forms\FormPatientsAttachmentsTypes.resx">
       <DependentUpon>FormPatientsAttachmentsTypes.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormPatientsAttributesTypes.resx">
+      <DependentUpon>FormPatientsAttributesTypes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormPaymentsTypes.resx">
       <DependentUpon>FormPaymentsTypes.cs</DependentUpon>
     </EmbeddedResource>
@@ -358,6 +369,14 @@
     </None>
     <None Include="..\packages\Int\DentneDPrintModelDefault\DentneDPrintModelDefault.json">
       <Link>DentneDPrintModelDefault.json</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\packages\Int\DentneDSer\DentneDSer-en.json">
+      <Link>lang\DentneDSer-en.json</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\packages\Int\DentneDSer\DentneDSer-it.json">
+      <Link>lang\DentneDSer-it.json</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="App.Debug.config">
@@ -517,6 +536,9 @@
 xcopy "$(ProjectDir)www" "$(TargetDir)www\" /v /y /e
 rmdir "$(TargetDir)backup\" /s
 xcopy "$(ProjectDir)backup" "$(TargetDir)backup\" /v /y  /e
+del "$(TargetDir)DentneDPrintModelDefault-*.json" -f
+xcopy "$(SolutionDir)DentneDSer\$(OutDir)DentneDSer.exe.config" "$(TargetDir)" /v /y
+del "$(TargetDir)DentneDSer-*.json" -f
 </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

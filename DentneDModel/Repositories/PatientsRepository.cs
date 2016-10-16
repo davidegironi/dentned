@@ -203,6 +203,8 @@ namespace DG.DentneD.Model.Repositories
                 excludedForeingKeys = new string[] { };
             if (!excludedForeingKeys.Contains("FK_appointments_patients"))
                 excludedForeingKeys = excludedForeingKeys.Concat(new string[] { "FK_appointments_patients" }).ToArray();
+            if (!excludedForeingKeys.Contains("FK_patientsattributes_patients"))
+                excludedForeingKeys = excludedForeingKeys.Concat(new string[] { "FK_patientsattributes_patients" }).ToArray();
             if (!excludedForeingKeys.Contains("FK_estimates_patients"))
                 excludedForeingKeys = excludedForeingKeys.Concat(new string[] { "FK_estimates_patients" }).ToArray();
             if (!excludedForeingKeys.Contains("FK_invoices_patients"))
@@ -238,6 +240,7 @@ namespace DG.DentneD.Model.Repositories
             {
                 BaseModel.PatientsAddresses.Remove(BaseModel.PatientsAddresses.List(r => r.patients_id == item.patients_id).ToArray());
                 BaseModel.PatientsAttachments.Remove(BaseModel.PatientsAttachments.List(r => r.patients_id == item.patients_id).ToArray());
+                BaseModel.PatientsAttributes.Remove(BaseModel.PatientsAttributes.List(r => r.patients_id == item.patients_id).ToArray());
                 BaseModel.PatientsContacts.Remove(BaseModel.PatientsContacts.List(r => r.patients_id == item.patients_id).ToArray());
                 BaseModel.PatientsMedicalrecords.Remove(BaseModel.PatientsMedicalrecords.List(r => r.patients_id == item.patients_id).ToArray());
                 BaseModel.PatientsNotes.Remove(BaseModel.PatientsNotes.List(r => r.patients_id == item.patients_id).ToArray());

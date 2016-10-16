@@ -10,6 +10,7 @@ using NCrontab;
 using System;
 using System.Configuration;
 using System.IO;
+using System.Web.Script.Serialization;
 
 namespace DG.DentneD.Service
 {
@@ -20,11 +21,11 @@ namespace DG.DentneD.Service
         private bool runactions = false;
 
         private Mailer _mailer = null;
-        private const string MailerSubjectPrefix = "[DentnetDSer] ";
 
         private DentneDModel _dentnedModel = null;
 
-        private string language = "en";
+        private DentneDSerLanguage language = new DentneDSerLanguage();
+        private const string LanguageFilenamePrefix = "DentneDSer-";
         private string languageFolder = "lang";
 
         private readonly string tmpdir = "";
@@ -39,29 +40,54 @@ namespace DG.DentneD.Service
         private readonly string mailerSMTPpassword = "";
         private readonly bool mailerSMTPenablessl = false;
 
+        /// <summary>
+        /// Language definitions
+        /// </summary>
+        private class DentneDSerLanguage
+        {
+            public string dateFormat = "yyyy/MM/dd";
+            public string timeFormat = "HH:mm";
+            public string sendAppointmentsReminderSubject = "Appointment reminder from Dental Clinic";
+            public string sendAppointmentsReminderBody = "Dear <b>%NAME%</b><br/><br/>This is a reminder that you have an appoinment with us on <b>%DATE%</b> at <b>%TIME%</b>.<br/><br/>Thank you,<br/><b>Dental Clinic</b><br/><br/><br/><small>This message is a PRIVATE communication. This message and all attachments are a private communication and may be confidential or protected by privilege. If you are not the intended recipient, you are hereby notified that any disclosure, copying, distribution or use of the information contained in or attached to this message is strictly prohibited. Please notify the sender of the delivery error by replying to this message, and then delete it from your system. Thank you.</small>";
+        }
+
+        /// <summary>
+        /// main service worker
+        /// </summary>
         public ServiceWorker()
         {
             //load main configuration file
             ExeConfigurationFileMap configMap = new ExeConfigurationFileMap();
 #if DEBUG
-            configMap.ExeConfigFilename = @"..\..\..\DentneD\bin\Debug\DentneD.exe.config";
+            if (File.Exists("DentneD.exe.config"))
+                configMap.ExeConfigFilename = "DentneD.exe.config";
+            else
+            {
+                if (File.Exists("..\\..\\..\\DentneD\\bin\\Debug\\DentneD.exe.config"))
+                    configMap.ExeConfigFilename = "..\\..\\..\\DentneD\\bin\\Debug\\DentneD.exe.config";
+                else
+                    throw new Exception("Can not load configuration file.");
+            }
 #else
-            configMap.ExeConfigFilename = @"DentneD.exe.config";
+            if (File.Exists("DentneD.exe.config"))
+                configMap.ExeConfigFilename = "DentneD.exe.config";
+            else
+                throw new Exception("Can not load configuration file.");
 #endif
             Configuration config = ConfigurationManager.OpenMappedExeConfiguration(configMap, ConfigurationUserLevel.None);
 
             //set current working directory and load logger files
             Directory.SetCurrentDirectory(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location));
-            log4net.Config.XmlConfigurator.Configure(new FileInfo("Config.log4net"));
+            if (File.Exists("Config.log4net"))
+                log4net.Config.XmlConfigurator.Configure(new FileInfo("Config.log4net"));
+            else
+                throw new Exception("Can not load log4net configuration file.");
             log = log4net.LogManager.GetLogger("MainLogger");
 
             //set if run at startup enabled
 #if DEBUG
             runactions = true;
 #endif
-
-            //load language
-            language = config.AppSettings.Settings["language"].Value;
 
             //load folder preferences
             tmpdir = config.AppSettings.Settings["tmpdir"].Value;
@@ -78,7 +104,30 @@ namespace DG.DentneD.Service
             mailerSMTPenablessl = Convert.ToBoolean(config.AppSettings.Settings["mailerSMTPenablessl"].Value);
 
             //set mailer
-            _mailer = new Mailer(mailerSMTPhost, mailerSMTPport, mailerSMTPfrom, mailerSMTPusername, mailerSMTPpassword, mailerSMTPenablessl, MailerSubjectPrefix);
+            _mailer = new Mailer(mailerSMTPhost, mailerSMTPport, mailerSMTPfrom, mailerSMTPusername, mailerSMTPpassword, mailerSMTPenablessl);
+
+            //load language
+            if (!String.IsNullOrEmpty(languageFolder + "\\" + LanguageFilenamePrefix + config.AppSettings.Settings["language"].Value + ".json"))
+            {
+                try
+                {
+                    string jsontext = null;
+#if DEBUG
+                    if (File.Exists(languageFolder + "\\" + LanguageFilenamePrefix + config.AppSettings.Settings["language"].Value + ".json"))
+                        jsontext = File.ReadAllText(languageFolder + "\\" + LanguageFilenamePrefix + config.AppSettings.Settings["language"].Value + ".json");
+                    else
+                    {
+                        if (File.Exists("..\\..\\..\\DentneD\\bin\\Debug\\" + languageFolder + "\\" + LanguageFilenamePrefix + config.AppSettings.Settings["language"].Value + ".json"))
+                            jsontext = File.ReadAllText("..\\..\\..\\DentneD\\bin\\Debug\\" + languageFolder + "\\" + LanguageFilenamePrefix + config.AppSettings.Settings["language"].Value + ".json");
+                    }
+#else
+                    if (File.Exists(languageFolder + "\\" + LanguageFilenamePrefix + config.AppSettings.Settings["language"].Value + ".json"))
+                        jsontext = File.ReadAllText(languageFolder + "\\" + LanguageFilenamePrefix + config.AppSettings.Settings["language"].Value + ".json");
+#endif
+                    language = new JavaScriptSerializer().Deserialize<DentneDSerLanguage>(jsontext);
+                }
+                catch { }
+            }
 
             //load connection string
             Configuration actualConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);

@@ -131,8 +131,7 @@ namespace DG.DentneD.Forms
 
             ReloadView();
         }
-
-
+        
         /// <summary>
         /// Preload View
         /// </summary>

@@ -18,6 +18,7 @@ namespace DG.DentneD.Model.Entity
         public int patients_id { get; set; }
         public int contactstypes_id { get; set; }
         public string patientscontacts_value { get; set; }
+        public string patientscontacts_note { get; set; }
     
         public virtual contactstypes contactstypes { get; set; }
         public virtual patients patients { get; set; }

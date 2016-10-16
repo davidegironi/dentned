@@ -18,7 +18,7 @@ namespace DG.DentneD.Model.Test
         static void Main(string[] args)
         {
             // Select tests to run
-            Category category = Category.RunSolo;
+            Category category = Category.All;
 
             // Run tests
             if (category != Category.None)

@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentneD", "DentneD\DentneD.csproj", "{29E70CEE-F381-4C42-97FA-1BB49BF8F710}"
+	ProjectSection(ProjectDependencies) = postProject
+		{11E53A7F-D538-4FD1-BEBF-43A3A9248A6A} = {11E53A7F-D538-4FD1-BEBF-43A3A9248A6A}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentneDModel", "DentneDModel\DentneDModel.csproj", "{B00E28DB-3DBE-41D6-AE16-FD8352CE3D2B}"
 EndProject

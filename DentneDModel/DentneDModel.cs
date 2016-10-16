@@ -30,6 +30,8 @@ namespace DG.DentneD.Model
         public ContactsTypesRepository ContactsTypes { get; private set; }
         public MedicalrecordsTypesRepository MedicalrecordsTypes { get; private set; }
         public PatientsAttachmentsTypesRepository PatientsAttachmentsTypes { get; private set; }
+        public PatientsAttributesTypesRepository PatientsAttributesTypes { get; private set; }
+        public PatientsAttributesRepository PatientsAttributes { get; private set; }
         public PatientsRepository Patients { get; private set; }
         public PatientsAddressesRepository PatientsAddresses { get; private set; }
         public PatientsContactsRepository PatientsContacts { get; private set; }

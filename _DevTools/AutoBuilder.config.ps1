@@ -6,7 +6,7 @@ $solutionName = "DentneD"
 $versionMajor = "1"
 $versionMinor = "1"
 $versionBuild = GetVersionBuild
-$versionRevision = "0"
+$versionRevision = "1"
 #build version number
 $assemblyVersion = GetVersion $versionMajor $versionMinor $versionBuild $versionRevision
 $fileVersion = $assemblyVersion
@@ -62,6 +62,9 @@ $builds = @(
 			},
 			@{
 				Name = "DentneDHelpers.TestConsole";
+			},
+			@{
+				Name = "DentneDSer";
 			}
 		);
 		#files to include in the release binary package

@@ -205,15 +205,15 @@
           <Property Name="patientsattributes_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="patients_id" Type="int" Nullable="false" />
           <Property Name="patientsattributestypes_id" Type="int" Nullable="false" />
-          <Property Name="patientsattributestypes_value" Type="varchar" MaxLength="512" Nullable="false" />
-          <Property Name="patientsattributestypes_note" Type="text" />
+          <Property Name="patientsattributes_value" Type="varchar" MaxLength="512" />
+          <Property Name="patientsattributes_note" Type="text" />
         </EntityType>
         <EntityType Name="patientsattributestypes">
           <Key>
             <PropertyRef Name="patientsattributestypes_id" />
           </Key>
           <Property Name="patientsattributestypes_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="patientsattributestypes_name" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="patientsattributestypes_name" Type="varchar" MaxLength="32" Nullable="false" />
         </EntityType>
         <EntityType Name="patientscontacts">
           <Key>
@@ -223,6 +223,7 @@
           <Property Name="patients_id" Type="int" Nullable="false" />
           <Property Name="contactstypes_id" Type="int" Nullable="false" />
           <Property Name="patientscontacts_value" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="patientscontacts_note" Type="text" />
         </EntityType>
         <EntityType Name="patientsmedicalrecords">
           <Key>
@@ -232,6 +233,7 @@
           <Property Name="patients_id" Type="int" Nullable="false" />
           <Property Name="medicalrecordstypes_id" Type="int" Nullable="false" />
           <Property Name="patientsmedicalrecords_value" Type="varchar" MaxLength="128" />
+          <Property Name="patientsmedicalrecords_note" Type="text" />
         </EntityType>
         <EntityType Name="patientsnotes">
           <Key>
@@ -1369,8 +1371,8 @@
           <Property Name="patientsattributes_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="patients_id" Type="Int32" Nullable="false" />
           <Property Name="patientsattributestypes_id" Type="Int32" Nullable="false" />
-          <Property Name="patientsattributestypes_value" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="false" />
-          <Property Name="patientsattributestypes_note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="patientsattributes_value" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="patientsattributes_note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="patients" Relationship="dentnedModel.FK_patientsattributes_patients" FromRole="patientsattributes" ToRole="patients" />
           <NavigationProperty Name="patientsattributestypes" Relationship="dentnedModel.FK_patientsattributes_patientsattributestypes" FromRole="patientsattributes" ToRole="patientsattributestypes" />
         </EntityType>
@@ -1379,7 +1381,7 @@
             <PropertyRef Name="patientsattributestypes_id" />
           </Key>
           <Property Name="patientsattributestypes_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="patientsattributestypes_name" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="patientsattributestypes_name" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="patientsattributes" Relationship="dentnedModel.FK_patientsattributes_patientsattributestypes" FromRole="patientsattributestypes" ToRole="patientsattributes" />
         </EntityType>
         <EntityType Name="patientscontacts">
@@ -1390,6 +1392,7 @@
           <Property Name="patients_id" Type="Int32" Nullable="false" />
           <Property Name="contactstypes_id" Type="Int32" Nullable="false" />
           <Property Name="patientscontacts_value" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="patientscontacts_note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="contactstypes" Relationship="dentnedModel.FK_patientscontacts_contactstypes" FromRole="patientscontacts" ToRole="contactstypes" />
           <NavigationProperty Name="patients" Relationship="dentnedModel.FK_patientscontacts_patients" FromRole="patientscontacts" ToRole="patients" />
         </EntityType>
@@ -1401,6 +1404,7 @@
           <Property Name="patients_id" Type="Int32" Nullable="false" />
           <Property Name="medicalrecordstypes_id" Type="Int32" Nullable="false" />
           <Property Name="patientsmedicalrecords_value" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="patientsmedicalrecords_note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="medicalrecordstypes" Relationship="dentnedModel.FK_patientsmedicalrecords_medicalrecordstypes" FromRole="patientsmedicalrecords" ToRole="medicalrecordstypes" />
           <NavigationProperty Name="patients" Relationship="dentnedModel.FK_patientsmedicalrecords_patients" FromRole="patientsmedicalrecords" ToRole="patients" />
         </EntityType>
@@ -2199,8 +2203,8 @@
           <EntitySetMapping Name="patientsattributes">
             <EntityTypeMapping TypeName="dentnedModel.patientsattributes">
               <MappingFragment StoreEntitySet="patientsattributes">
-                <ScalarProperty Name="patientsattributestypes_note" ColumnName="patientsattributestypes_note" />
-                <ScalarProperty Name="patientsattributestypes_value" ColumnName="patientsattributestypes_value" />
+                <ScalarProperty Name="patientsattributes_note" ColumnName="patientsattributes_note" />
+                <ScalarProperty Name="patientsattributes_value" ColumnName="patientsattributes_value" />
                 <ScalarProperty Name="patientsattributestypes_id" ColumnName="patientsattributestypes_id" />
                 <ScalarProperty Name="patients_id" ColumnName="patients_id" />
                 <ScalarProperty Name="patientsattributes_id" ColumnName="patientsattributes_id" />
@@ -2218,6 +2222,7 @@
           <EntitySetMapping Name="patientscontacts">
             <EntityTypeMapping TypeName="dentnedModel.patientscontacts">
               <MappingFragment StoreEntitySet="patientscontacts">
+                <ScalarProperty Name="patientscontacts_note" ColumnName="patientscontacts_note" />
                 <ScalarProperty Name="patientscontacts_value" ColumnName="patientscontacts_value" />
                 <ScalarProperty Name="contactstypes_id" ColumnName="contactstypes_id" />
                 <ScalarProperty Name="patients_id" ColumnName="patients_id" />
@@ -2228,6 +2233,7 @@
           <EntitySetMapping Name="patientsmedicalrecords">
             <EntityTypeMapping TypeName="dentnedModel.patientsmedicalrecords">
               <MappingFragment StoreEntitySet="patientsmedicalrecords">
+                <ScalarProperty Name="patientsmedicalrecords_note" ColumnName="patientsmedicalrecords_note" />
                 <ScalarProperty Name="patientsmedicalrecords_value" ColumnName="patientsmedicalrecords_value" />
                 <ScalarProperty Name="medicalrecordstypes_id" ColumnName="medicalrecordstypes_id" />
                 <ScalarProperty Name="patients_id" ColumnName="patients_id" />

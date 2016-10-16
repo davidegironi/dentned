@@ -11,7 +11,7 @@ namespace DG.DentneD.Forms.Objects
     public class VPatientsAttachments
     {
         public int patientsattachments_id { get; set; }
-        public string attachmetnstype { get; set; }
+        public string attachmentstype { get; set; }
         public DateTime date { get; set; }
         public string attachment { get; set; }
     }

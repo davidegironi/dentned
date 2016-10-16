@@ -43,6 +43,7 @@ namespace DG.DentneD.Forms
         private TabElement tabElement_tabInvoices = new TabElement();
         private TabElement tabElement_tabEstimates = new TabElement();
         private TabElement tabElement_tabPatientsNotes = new TabElement();
+        private TabElement tabElement_tabPatientsAttributes = new TabElement();
 
         private const int MaxRowValueLength = 60;
 
@@ -194,6 +195,7 @@ namespace DG.DentneD.Forms
             LanguageHelper.AddComponent(patientscontacts_idLabel);
             LanguageHelper.AddComponent(contactstypes_idLabel);
             LanguageHelper.AddComponent(patientscontacts_valueLabel);
+            LanguageHelper.AddComponent(patientscontacts_noteLabel);
             //tabPatients_tabPatientsAddresses
             LanguageHelper.AddComponent(tabPage_tabPatients_tabPatientsAddresses);
             LanguageHelper.AddComponent(patientsaddressesidDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
@@ -223,6 +225,7 @@ namespace DG.DentneD.Forms
             LanguageHelper.AddComponent(patientsmedicalrecords_idLabel);
             LanguageHelper.AddComponent(medicalrecordstypes_idLabel);
             LanguageHelper.AddComponent(patientsmedicalrecords_valueLabel);
+            LanguageHelper.AddComponent(patientsmedicalrecords_noteLabel);
             //tabPatientsTreatments
             LanguageHelper.AddComponent(tabPage_tabPatientsTreatments);
             LanguageHelper.AddComponent(patientstreatments_filtertalLabel);
@@ -295,7 +298,7 @@ namespace DG.DentneD.Forms
             //tabPatientsAttachments
             LanguageHelper.AddComponent(tabPage_tabPatientsAttachments);
             LanguageHelper.AddComponent(patientsattachmentsidDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
-            LanguageHelper.AddComponent(attachmetnstypeDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(attachmentstypeDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
             LanguageHelper.AddComponent(dateDataGridViewTextBoxColumn5, this.GetType().Name, "HeaderText");
             LanguageHelper.AddComponent(attachmentDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
             LanguageHelper.AddComponent(button_tabPatientsAttachments_new);
@@ -347,6 +350,20 @@ namespace DG.DentneD.Forms
             LanguageHelper.AddComponent(patientsnotes_idLabel);
             LanguageHelper.AddComponent(patientsnotes_dateLabel);
             LanguageHelper.AddComponent(patientsnotes_textLabel);
+            //tabPatientsAttributes
+            LanguageHelper.AddComponent(tabPage_tabPatientsAttributes);
+            LanguageHelper.AddComponent(patientsattributesidDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(attributestypeDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(valueDataGridViewTextBoxColumn1, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(button_tabPatientsAttributes_new);
+            LanguageHelper.AddComponent(button_tabPatientsAttributes_edit);
+            LanguageHelper.AddComponent(button_tabPatientsAttributes_delete);
+            LanguageHelper.AddComponent(button_tabPatientsAttributes_save);
+            LanguageHelper.AddComponent(button_tabPatientsAttributes_cancel);
+            LanguageHelper.AddComponent(patientsattributes_idLabel);
+            LanguageHelper.AddComponent(patientsattributestypes_idLabel);
+            LanguageHelper.AddComponent(patientsattributes_valueLabel);
+            LanguageHelper.AddComponent(patientsattributes_noteLabel);
         }
 
         /// <summary>
@@ -777,6 +794,39 @@ namespace DG.DentneD.Forms
                 }
             };
 
+            //set tabPatientsAttributes
+            tabElement_tabPatientsAttributes = new TabElement()
+            {
+                TabPageElement = tabPage_tabPatientsAttributes,
+                ElementListItem = new TabElement.TabElementListItem()
+                {
+                    PanelFilters = null,
+                    PanelList = panel_tabPatientsAttributes_list,
+
+                    PanelData = panel_tabPatientsAttributes_data,
+                    PanelActions = panel_tabPatientsAttributes_actions,
+                    PanelUpdates = panel_tabPatientsAttributes_updates,
+
+                    BindingSourceList = vPatientsAttributesBindingSource,
+                    GetDataSourceList = GetDataSourceList_tabPatientsAttributes,
+
+                    BindingSourceEdit = patientsattributesBindingSource,
+                    GetDataSourceEdit = GetDataSourceEdit_tabPatientsAttributes,
+                    AfterSaveAction = AfterSaveAction_tabPatientsAttributes,
+
+                    AddButton = button_tabPatientsAttributes_new,
+                    IsAddButtonDefaultClickEventAttached = false,
+                    UpdateButton = button_tabPatientsAttributes_edit,
+                    RemoveButton = button_tabPatientsAttributes_delete,
+                    SaveButton = button_tabPatientsAttributes_save,
+                    CancelButton = button_tabPatientsAttributes_cancel,
+
+                    Add = Add_tabPatientsAttributes,
+                    Update = Update_tabPatientsAttributes,
+                    Remove = Remove_tabPatientsAttributes
+                }
+            };
+
             //set tabPatients
             tabElement_tabPatients = new TabElement()
             {
@@ -805,6 +855,7 @@ namespace DG.DentneD.Forms
             TabElements.Add(tabElement_tabInvoices);
             TabElements.Add(tabElement_tabEstimates);
             TabElements.Add(tabElement_tabPatientsNotes);
+            TabElements.Add(tabElement_tabPatientsAttributes);
         }
 
         /// <summary>
@@ -911,6 +962,12 @@ namespace DG.DentneD.Forms
             patientsattachmentstypes_idComboBox.ValueMember = "patientsattachmentstypes_id";
             patientsattachmentstypes_idComboBox.SelectedIndex = -1;
 
+            //load patientsattributes types
+            patientsattributestypes_idComboBox.DataSource = _dentnedModel.PatientsAttributesTypes.List().OrderBy(r => r.patientsattributestypes_name).Select(r => new { name = r.patientsattributestypes_name, r.patientsattributestypes_id }).ToArray();
+            patientsattributestypes_idComboBox.DisplayMember = "name";
+            patientsattributestypes_idComboBox.ValueMember = "patientsattributestypes_id";
+            patientsattributestypes_idComboBox.SelectedIndex = -1;
+
             //load rooms
             rooms_idComboBox.DataSource = _dentnedModel.Rooms.List().OrderBy(r => r.rooms_name).Select(r => new { name = r.rooms_name, r.rooms_id }).ToArray();
             rooms_idComboBox.DisplayMember = "name";
@@ -999,6 +1056,8 @@ namespace DG.DentneD.Forms
             advancedDataGridView_tabEstimates_list.SortDESC(advancedDataGridView_tabEstimates_list.Columns[1]);
             advancedDataGridView_tabPatientsNotes_list.CleanFilterAndSort();
             advancedDataGridView_tabPatientsNotes_list.SortDESC(advancedDataGridView_tabPatientsNotes_list.Columns[1]);
+            advancedDataGridView_tabPatientsAttributes_list.CleanFilterAndSort();
+            advancedDataGridView_tabPatientsAttributes_list.SortASC(advancedDataGridView_tabPatientsAttributes_list.Columns[1]);
             IsBindingSourceLoading = false;
         }
 
@@ -4411,7 +4470,7 @@ namespace DG.DentneD.Forms
             r => new VPatientsAttachments
             {
                 patientsattachments_id = r.patientsattachments_id,
-                attachmetnstype = _dentnedModel.PatientsAttachmentsTypes.Find(r.patientsattachmentstypes_id).patientsattachmentstypes_name,
+                attachmentstype = _dentnedModel.PatientsAttachmentsTypes.Find(r.patientsattachmentstypes_id).patientsattachmentstypes_name,
                 date = r.patientsattachments_date.Date,
                 attachment = (r.patientsattachments_value.Length > MaxRowValueLength ? r.patientsattachments_value.Substring(0, MaxRowValueLength) + "..." : r.patientsattachments_value)
             }).ToList();
@@ -5049,6 +5108,131 @@ namespace DG.DentneD.Forms
                     patientsnotesBindingSource.ResetBindings(true);
                 }
             }
+        }
+
+        #endregion
+
+
+        #region tabPatientsAttributes
+
+        /// <summary>
+        /// Get tab list DataSource
+        /// </summary>
+        /// <returns></returns>
+        private object GetDataSourceList_tabPatientsAttributes()
+        {
+            object ret = null;
+
+            int patients_id = -1;
+            if (vPatientsBindingSource.Current != null)
+            {
+                patients_id = (((DataRowView)vPatientsBindingSource.Current).Row).Field<int>("patients_id");
+            }
+
+            IEnumerable<VPatientsAttributes> vPatientsAttributes =
+            _dentnedModel.PatientsAttributes.List(r => r.patients_id == patients_id).Select(
+            r => new VPatientsAttributes
+            {
+                patientsattributes_id = r.patientsattributes_id,
+                attributestype = _dentnedModel.PatientsAttributesTypes.Find(r.patientsattributestypes_id).patientsattributestypes_name,
+                value = (!String.IsNullOrEmpty(r.patientsattributes_value) ? (r.patientsattributes_value.Length > MaxRowValueLength ? r.patientsattributes_value.Substring(0, MaxRowValueLength) + "..." : r.patientsattributes_value) : null)
+            }).ToList();
+
+            ret = DGDataTableUtils.ToDataTable<VPatientsAttributes>(vPatientsAttributes);
+
+            return ret;
+        }
+
+        /// <summary>
+        /// Tab Datagrid filter handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void advancedDataGridView_tabPatientsAttributes_list_FilterStringChanged(object sender, EventArgs e)
+        {
+            vPatientsAttributesBindingSource.Filter = advancedDataGridView_tabPatientsAttributes_list.FilterString;
+        }
+
+        /// <summary>
+        /// Tab Datagrid sort handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void advancedDataGridView_tabPatientsAttributes_list_SortStringChanged(object sender, EventArgs e)
+        {
+            vPatientsAttributesBindingSource.Sort = advancedDataGridView_tabPatientsAttributes_list.SortString;
+        }
+
+        /// <summary>
+        /// Load the tab DataSource
+        /// </summary>
+        /// <returns></returns>
+        private object GetDataSourceEdit_tabPatientsAttributes()
+        {
+            return DGUIGHFData.LoadEntityFromCurrentBindingSource<patientsattributes, DentneDModel>(_dentnedModel.PatientsAttributes, vPatientsAttributesBindingSource, new string[] { "patientsattributes_id" });
+        }
+
+        /// <summary>
+        /// Do actions after Save
+        /// </summary>
+        /// <param name="item"></param>
+        private void AfterSaveAction_tabPatientsAttributes(object item)
+        {
+            DGUIGHFData.SetBindingSourcePosition<patientsattributes, DentneDModel>(_dentnedModel.PatientsAttributes, item, vPatientsAttributesBindingSource);
+        }
+
+        /// <summary>
+        /// Add an item
+        /// </summary>
+        /// <param name="item"></param>
+        private void Add_tabPatientsAttributes(object item)
+        {
+            DGUIGHFData.Add<patientsattributes, DentneDModel>(_dentnedModel.PatientsAttributes, item);
+        }
+
+        /// <summary>
+        /// Update an item
+        /// </summary>
+        /// <param name="item"></param>
+        private void Update_tabPatientsAttributes(object item)
+        {
+            DGUIGHFData.Update<patientsattributes, DentneDModel>(_dentnedModel.PatientsAttributes, item);
+        }
+
+        /// <summary>
+        /// Remove an item
+        /// </summary>
+        /// <param name="item"></param>
+        private void Remove_tabPatientsAttributes(object item)
+        {
+            DGUIGHFData.Remove<patientsattributes, DentneDModel>(_dentnedModel.PatientsAttributes, item);
+        }
+
+        /// <summary>
+        /// New tab button handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button_tabPatientsAttributes_new_Click(object sender, EventArgs e)
+        {
+            if (vPatientsBindingSource.Current != null)
+            {
+                if (AddClick(tabElement_tabPatientsAttributes))
+                {
+                    ((patientsattributes)patientsattributesBindingSource.Current).patients_id = (((DataRowView)vPatientsBindingSource.Current).Row).Field<int>("patients_id");
+                    patientsattributesBindingSource.ResetBindings(true);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Combobox autocomplete
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void patientsattributestypes_idComboBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
         }
 
         #endregion

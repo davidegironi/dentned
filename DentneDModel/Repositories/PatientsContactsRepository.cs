@@ -23,6 +23,7 @@ namespace DG.DentneD.Model.Repositories
             public string text001 = "Contact can not be empty.";
             public string text002 = "Patient is mandatory.";
             public string text003 = "Contact type is mandatory.";
+            public string text004 = "System contact type already inserted.";
         }
 
         /// <summary>
@@ -99,6 +100,34 @@ namespace DG.DentneD.Model.Repositories
                 {
                     ret = false;
                     errors = errors.Concat(new string[] { language.text003 }).ToArray();
+                }
+
+                if (!ret)
+                    break;
+
+                //check one system type per patient
+                contactstypes contactstype = BaseModel.ContactsTypes.Find(item.contactstypes_id);
+                if (contactstype != null)
+                {
+                    if (Enum.GetNames(typeof(ContactsTypesRepository.SystemAttributes)).ToArray().Contains(contactstype.contactstypes_name))
+                    {
+                        if (!isUpdate)
+                        {
+                            if (Any(r => r.patients_id == r.patients_id && r.contactstypes_id == item.contactstypes_id))
+                            {
+                                ret = false;
+                                errors = errors.Concat(new string[] { language.text004 }).ToArray();
+                            }
+                        }
+                        else
+                        {
+                            if (Any(r => r.contactstypes_id != item.contactstypes_id && r.patients_id == r.patients_id && r.contactstypes_id == item.contactstypes_id))
+                            {
+                                ret = false;
+                                errors = errors.Concat(new string[] { language.text004 }).ToArray();
+                            }
+                        }
+                    }
                 }
 
                 if (!ret)

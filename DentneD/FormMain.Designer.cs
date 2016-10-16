@@ -67,6 +67,7 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip_main = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel_logout = new System.Windows.Forms.ToolStripStatusLabel();
+            this.patientAttributesTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip_main.SuspendLayout();
             this.statusStrip_main.SuspendLayout();
             this.SuspendLayout();
@@ -165,6 +166,7 @@
             this.estimatesFootersToolStripMenuItem,
             this.medicalRecordTypesToolStripMenuItem,
             this.invoicesFootersToolStripMenuItem,
+            this.patientAttributesTypesToolStripMenuItem,
             this.patientAttachmentsTypesToolStripMenuItem,
             this.paymentTypesToolStripMenuItem,
             this.roomsToolStripMenuItem,
@@ -377,6 +379,13 @@
             this.toolStripStatusLabel_logout.Visible = false;
             this.toolStripStatusLabel_logout.Click += new System.EventHandler(this.toolStripStatusLabel_logout_Click);
             // 
+            // patientAttributesTypesToolStripMenuItem
+            // 
+            this.patientAttributesTypesToolStripMenuItem.Name = "patientAttributesTypesToolStripMenuItem";
+            this.patientAttributesTypesToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.patientAttributesTypesToolStripMenuItem.Text = "Patient Attributes Types";
+            this.patientAttributesTypesToolStripMenuItem.Click += new System.EventHandler(this.patientAttributesTypesToolStripMenuItem_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -442,6 +451,7 @@
         private System.Windows.Forms.ToolStripMenuItem documentComputedLinesToolStripMenuItem;
         private System.Windows.Forms.StatusStrip statusStrip_main;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_logout;
+        private System.Windows.Forms.ToolStripMenuItem patientAttributesTypesToolStripMenuItem;
     }
 }
 

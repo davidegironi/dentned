@@ -48,17 +48,17 @@ namespace DG.DentneD.Service
                 log.Info("Cleaning Patient Data folder \"" + patientsDatadir + "\"...");
                 CleanDir.CleanPatientDir(patientsDatadir, doSecureDelete, ref messages, ref errors);
                 foreach (string message in messages)
-                    log.Info("  " + message);
+                    log.Info(message);
                 foreach (string error in errors)
-                    log.Error("  " + error);
+                    log.Error(error);
 
                 //clean the patient attachment dir
                 log.Info("Cleaning Patient Attachments folder \"" + patientsAttachmentsdir + "\"...");
                 CleanDir.CleanPatientAttachmentsDir(patientsAttachmentsdir, doSecureDelete, ref messages, ref errors);
                 foreach (string message in messages)
-                    Console.WriteLine("  " + message);
+                    log.Info(message);
                 foreach (string error in errors)
-                    Console.WriteLine("  " + error);
+                    log.Error(error);
             }
             catch
             {

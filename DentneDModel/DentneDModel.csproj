@@ -169,6 +169,8 @@
     </Compile>
     <Compile Include="IDentneDPrintModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\PatientsAttributesRepository.cs" />
+    <Compile Include="Repositories\PatientsAttributesTypesRepository.cs" />
     <Compile Include="Repositories\ReportsRepository.cs" />
     <Compile Include="Repositories\EstimatesFootersRepository.cs" />
     <Compile Include="Repositories\EstimatesRepository.cs" />

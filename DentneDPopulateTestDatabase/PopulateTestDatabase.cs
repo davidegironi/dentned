@@ -224,6 +224,18 @@ EXEC sp_msforeachtable 'DBCC CHECKIDENT(''?'', RESEED, 0)'; DECLARE @max int; SE
                 patientsattachmentstypes = patientsattachmentstypes.Concat(new patientsattachmentstypes[] { patientsattachmentstypestmp }).ToArray();
             }
 
+            Console.WriteLine("Add PatientsAttributesTypes...");
+            patientsattributestypes patientsattributestypesSendAppointmentsReminder = new patientsattributestypes()
+            {
+                patientsattributestypes_name = PatientsAttributesTypesRepository.SystemAttributes.SendAppointmentsReminder.ToString(),
+            };
+            _dentnedModel.PatientsAttributesTypes.Add(patientsattributestypesSendAppointmentsReminder);
+            patientsattributestypes patientsattributestypesAge = new patientsattributestypes()
+            {
+                patientsattributestypes_name = "Age",
+            };
+            _dentnedModel.PatientsAttributesTypes.Add(patientsattributestypesAge);
+
             Console.WriteLine("Add TreatmentsTypes...");
             treatmentstypes[] treatmentstypes = new treatmentstypes[] { };
             for (int i = 0; i < treatmentstypesNum; i++)
@@ -329,6 +341,20 @@ EXEC sp_msforeachtable 'DBCC CHECKIDENT(''?'', RESEED, 0)'; DECLARE @max int; SE
                         patientsaddresses_city = BuildRandomString(_r.Next(5, 10)),
                         patientsaddresses_street = BuildRandomString(_r.Next(5, 30)),
                         patientsaddresses_zipcode = _r.Next(1, 99999).ToString().PadLeft(5, '0')
+                    });
+                } while (_r.Next(0, 100) > 80);
+            }
+
+            Console.WriteLine("Add PatientsAttributes...");
+            foreach (patients patient in patients)
+            {
+                do
+                {
+                    _dentnedModel.PatientsAttributes.Add(new patientsattributes()
+                    {
+                        patients_id = patient.patients_id,
+                        patientsattributestypes_id = patientsattributestypesAge.patientsattributestypes_id,
+                        patientsattributes_value = _r.Next(10, 100).ToString()
                     });
                 } while (_r.Next(0, 100) > 80);
             }

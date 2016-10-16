@@ -29,7 +29,7 @@ It features a client-server architecture.
 * Client-server architecture, access by multiple computer at the same time
 * Multilanguage
 * Send appointments reminder
-* Windows service to perform optional folder cleaning
+* Windows service for additional features
 
 
 ## Requirements

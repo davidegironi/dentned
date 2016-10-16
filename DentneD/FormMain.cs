@@ -78,9 +78,11 @@ namespace DG.DentneD
             //clean temporary folder
             if (Convert.ToBoolean(ConfigurationManager.AppSettings["cleanTmpdirAtStartup"]))
             {
+                string[] messages = new string[] { };
+                string[] errors = new string[] { };
                 try
                 {
-                    FileHelper.PurgeFolder(ConfigurationManager.AppSettings["tmpdir"], false, 2);
+                    CleanDir.CleanTmpdir(ConfigurationManager.AppSettings["tmpdir"], false, -4, ref messages, ref errors);
                 }
                 catch { }
             }

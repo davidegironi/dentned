@@ -69,8 +69,6 @@ namespace DG.DentneD
                 { "h|help",  "show help",
                     v => showhelp = v != null }
             };
-            string[] messages2 = new string[] { };
-            string[] errors2 = new string[] { };
 
             //attach the console
             if (args.Length > 0)

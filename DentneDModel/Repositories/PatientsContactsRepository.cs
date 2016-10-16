@@ -113,7 +113,7 @@ namespace DG.DentneD.Model.Repositories
                     {
                         if (!isUpdate)
                         {
-                            if (Any(r => r.patients_id == r.patients_id && r.contactstypes_id == item.contactstypes_id))
+                            if (Any(r => r.patients_id == item.patients_id && r.contactstypes_id == item.contactstypes_id))
                             {
                                 ret = false;
                                 errors = errors.Concat(new string[] { language.text004 }).ToArray();
@@ -121,7 +121,7 @@ namespace DG.DentneD.Model.Repositories
                         }
                         else
                         {
-                            if (Any(r => r.contactstypes_id != item.contactstypes_id && r.patients_id == r.patients_id && r.contactstypes_id == item.contactstypes_id))
+                            if (Any(r => r.contactstypes_id != item.contactstypes_id && r.patients_id == item.patients_id && r.contactstypes_id == item.contactstypes_id))
                             {
                                 ret = false;
                                 errors = errors.Concat(new string[] { language.text004 }).ToArray();

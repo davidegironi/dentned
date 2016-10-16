@@ -46,7 +46,7 @@ namespace DG.DentneD.Service
 
                 //clean the tmpdir
                 log.Info("Cleaning Temporary folder \"" + tmpdir + "\"...");
-                CleanDir.CleanTmpdir(tmpdir, doSecureDelete, -1, ref messages, ref errors);
+                CleanDir.CleanTmpdir(tmpdir, doSecureDelete, -2, ref messages, ref errors);
                 foreach (string message in messages)
                     log.Info(message);
                 foreach (string error in errors)

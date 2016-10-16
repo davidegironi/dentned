@@ -20,23 +20,6 @@ namespace DG.DentneD.Helpers
             messages = new string[] { };
             errors = new string[] { };
 
-            //clean all folders
-            DirectoryInfo directoryInfo = new DirectoryInfo(folder);
-            foreach (DirectoryInfo subDirectoryInfo in directoryInfo.GetDirectories())
-            {
-                FileHelper.DeleteFolder(subDirectoryInfo.FullName, doSecureDelete);
-
-                if (!Directory.Exists(subDirectoryInfo.FullName))
-                {
-                    messages = messages.Concat(new string[] { String.Format("Folder \"{0}\" was deleted successfully.", subDirectoryInfo.FullName) }).ToArray();
-                }
-                else
-                {
-                    errors = errors.Concat(new string[] { String.Format("Error: Can not delete folder \"{0}\".", subDirectoryInfo.FullName) }).ToArray();
-                }
-            }
-
-            //purge files
             if (FileHelper.PurgeFolder(folder, doSecureDelete, days))
             {
                 messages = messages.Concat(new string[] { String.Format("Folder \"{0}\" was successfully purged.", folder) }).ToArray();

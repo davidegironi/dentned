@@ -56,6 +56,17 @@ namespace DG.DentneD.Service
         /// </summary>
         public ServiceWorker()
         {
+            //set current working directory and load logger files
+            Directory.SetCurrentDirectory(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location));
+            if (File.Exists("Config.log4net"))
+                log4net.Config.XmlConfigurator.Configure(new FileInfo("Config.log4net"));
+            else
+                throw new Exception("Can not load log4net configuration file.");
+            log = log4net.LogManager.GetLogger("MainLogger");
+
+            //start message
+            log.Info("Service is starting...");
+
             //load main configuration file
             ExeConfigurationFileMap configMap = new ExeConfigurationFileMap();
 #if DEBUG
@@ -75,14 +86,6 @@ namespace DG.DentneD.Service
                 throw new Exception("Can not load configuration file.");
 #endif
             Configuration config = ConfigurationManager.OpenMappedExeConfiguration(configMap, ConfigurationUserLevel.None);
-
-            //set current working directory and load logger files
-            Directory.SetCurrentDirectory(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location));
-            if (File.Exists("Config.log4net"))
-                log4net.Config.XmlConfigurator.Configure(new FileInfo("Config.log4net"));
-            else
-                throw new Exception("Can not load log4net configuration file.");
-            log = log4net.LogManager.GetLogger("MainLogger");
 
             //set if run at startup enabled
 #if DEBUG
@@ -128,12 +131,6 @@ namespace DG.DentneD.Service
                 }
                 catch { }
             }
-
-            //load connection string
-            Configuration actualConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            actualConfig.ConnectionStrings.ConnectionStrings["dentnedEntities"].ConnectionString = config.ConnectionStrings.ConnectionStrings["dentnedEntities"].ConnectionString;
-            actualConfig.Save(ConfigurationSaveMode.Modified, true);
-            ConfigurationManager.RefreshSection("connectionStrings");
 
             //load data model
             _dentnedModel = new DentneDModel();

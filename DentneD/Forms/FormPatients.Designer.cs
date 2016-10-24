@@ -567,6 +567,9 @@
             this.button_tabPatientsAttributes_new = new System.Windows.Forms.Button();
             this.panel_tabPatientsAttributes_list = new System.Windows.Forms.Panel();
             this.advancedDataGridView_tabPatientsAttributes_list = new Zuby.ADGV.AdvancedDataGridView();
+            this.patientsattributesidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.attributestypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.valueDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.vPatientsAttributesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel_list = new System.Windows.Forms.Panel();
             this.advancedDataGridView_main = new Zuby.ADGV.AdvancedDataGridView();
@@ -583,9 +586,6 @@
             this.comboBox_filterArchived = new System.Windows.Forms.ComboBox();
             this.invoicesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.estimatesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.patientsattributesidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.attributestypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.valueDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel_data.SuspendLayout();
             this.tabControl_main.SuspendLayout();
             this.tabPage_tabPatients.SuspendLayout();
@@ -2167,7 +2167,6 @@
             // tabPage_tabPatientsTreatments
             // 
             this.tabPage_tabPatientsTreatments.AutoScroll = true;
-            this.tabPage_tabPatientsTreatments.Controls.Add(this.groupBox_t);
             this.tabPage_tabPatientsTreatments.Controls.Add(this.panel_tabPatientsTreatments_filters);
             this.tabPage_tabPatientsTreatments.Controls.Add(this.panel_tabPatientsTreatments_data);
             this.tabPage_tabPatientsTreatments.Controls.Add(this.panel_tabPatientsTreatments_updates);
@@ -2293,7 +2292,7 @@
             this.groupBox_t.Controls.Add(this.patientstreatments_filtert33CheckBox);
             this.groupBox_t.Controls.Add(this.patientstreatments_filtert31CheckBox);
             this.groupBox_t.Controls.Add(this.patientstreatments_filtert32CheckBox);
-            this.groupBox_t.Location = new System.Drawing.Point(94, 96);
+            this.groupBox_t.Location = new System.Drawing.Point(90, 2);
             this.groupBox_t.Name = "groupBox_t";
             this.groupBox_t.Size = new System.Drawing.Size(443, 109);
             this.groupBox_t.TabIndex = 47;
@@ -3474,12 +3473,13 @@
             // 
             // panel_tabPatientsTreatments_filters
             // 
+            this.panel_tabPatientsTreatments_filters.Controls.Add(this.groupBox_t);
             this.panel_tabPatientsTreatments_filters.Controls.Add(this.button_tabPatientsTreatments_filterprint);
             this.panel_tabPatientsTreatments_filters.Controls.Add(this.comboBox_tabPatientsTreatments_filterpaid);
             this.panel_tabPatientsTreatments_filters.Controls.Add(this.label_tabPatientsTreatments_filterpaid);
             this.panel_tabPatientsTreatments_filters.Controls.Add(this.comboBox_tabPatientsTreatments_filterfulfilled);
             this.panel_tabPatientsTreatments_filters.Controls.Add(this.label_tabPatientsTreatments_filterfulfilled);
-            this.panel_tabPatientsTreatments_filters.Location = new System.Drawing.Point(3, 94);
+            this.panel_tabPatientsTreatments_filters.Location = new System.Drawing.Point(6, 6);
             this.panel_tabPatientsTreatments_filters.Name = "panel_tabPatientsTreatments_filters";
             this.panel_tabPatientsTreatments_filters.Size = new System.Drawing.Size(540, 114);
             this.panel_tabPatientsTreatments_filters.TabIndex = 14;
@@ -3563,7 +3563,7 @@
             this.panel_tabPatientsTreatments_data.Controls.Add(this.treatments_idComboBox);
             this.panel_tabPatientsTreatments_data.Controls.Add(this.patientstreatments_idLabel);
             this.panel_tabPatientsTreatments_data.Controls.Add(this.patientstreatments_idTextBox);
-            this.panel_tabPatientsTreatments_data.Location = new System.Drawing.Point(3, 366);
+            this.panel_tabPatientsTreatments_data.Location = new System.Drawing.Point(6, 277);
             this.panel_tabPatientsTreatments_data.Name = "panel_tabPatientsTreatments_data";
             this.panel_tabPatientsTreatments_data.Size = new System.Drawing.Size(540, 320);
             this.panel_tabPatientsTreatments_data.TabIndex = 13;
@@ -4543,7 +4543,7 @@
             // 
             this.panel_tabPatientsTreatments_updates.Controls.Add(this.button_tabPatientsTreatments_cancel);
             this.panel_tabPatientsTreatments_updates.Controls.Add(this.button_tabPatientsTreatments_save);
-            this.panel_tabPatientsTreatments_updates.Location = new System.Drawing.Point(3, 689);
+            this.panel_tabPatientsTreatments_updates.Location = new System.Drawing.Point(6, 600);
             this.panel_tabPatientsTreatments_updates.Name = "panel_tabPatientsTreatments_updates";
             this.panel_tabPatientsTreatments_updates.Size = new System.Drawing.Size(540, 29);
             this.panel_tabPatientsTreatments_updates.TabIndex = 12;
@@ -4573,7 +4573,7 @@
             this.panel_tabPatientsTreatments_actions.Controls.Add(this.button_tabPatientsTreatments_delete);
             this.panel_tabPatientsTreatments_actions.Controls.Add(this.button_tabPatientsTreatments_edit);
             this.panel_tabPatientsTreatments_actions.Controls.Add(this.button_tabPatientsTreatments_new);
-            this.panel_tabPatientsTreatments_actions.Location = new System.Drawing.Point(3, 334);
+            this.panel_tabPatientsTreatments_actions.Location = new System.Drawing.Point(6, 245);
             this.panel_tabPatientsTreatments_actions.Name = "panel_tabPatientsTreatments_actions";
             this.panel_tabPatientsTreatments_actions.Size = new System.Drawing.Size(540, 29);
             this.panel_tabPatientsTreatments_actions.TabIndex = 11;
@@ -4630,7 +4630,7 @@
             // panel_tabPatientsTreatments_list
             // 
             this.panel_tabPatientsTreatments_list.Controls.Add(this.advancedDataGridView_tabPatientsTreatments_list);
-            this.panel_tabPatientsTreatments_list.Location = new System.Drawing.Point(3, 211);
+            this.panel_tabPatientsTreatments_list.Location = new System.Drawing.Point(6, 122);
             this.panel_tabPatientsTreatments_list.Name = "panel_tabPatientsTreatments_list";
             this.panel_tabPatientsTreatments_list.Size = new System.Drawing.Size(540, 120);
             this.panel_tabPatientsTreatments_list.TabIndex = 10;
@@ -4651,7 +4651,6 @@
             this.isfulfilledDataGridViewCheckBoxColumn,
             this.ispaidDataGridViewCheckBoxColumn});
             this.advancedDataGridView_tabPatientsTreatments_list.DataSource = this.vPatientsTreatmentsBindingSource;
-            this.advancedDataGridView_tabPatientsTreatments_list.Dock = System.Windows.Forms.DockStyle.Fill;
             this.advancedDataGridView_tabPatientsTreatments_list.FilterAndSortEnabled = true;
             this.advancedDataGridView_tabPatientsTreatments_list.Location = new System.Drawing.Point(0, 0);
             this.advancedDataGridView_tabPatientsTreatments_list.MultiSelect = false;
@@ -4659,7 +4658,7 @@
             this.advancedDataGridView_tabPatientsTreatments_list.ReadOnly = true;
             this.advancedDataGridView_tabPatientsTreatments_list.RowHeadersVisible = false;
             this.advancedDataGridView_tabPatientsTreatments_list.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.advancedDataGridView_tabPatientsTreatments_list.Size = new System.Drawing.Size(540, 120);
+            this.advancedDataGridView_tabPatientsTreatments_list.Size = new System.Drawing.Size(474, 120);
             this.advancedDataGridView_tabPatientsTreatments_list.TabIndex = 1;
             this.advancedDataGridView_tabPatientsTreatments_list.SortStringChanged += new System.EventHandler(this.advancedDataGridView_tabPatientsTreatments_list_SortStringChanged);
             this.advancedDataGridView_tabPatientsTreatments_list.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_tabPatientsTreatments_list_FilterStringChanged);
@@ -6221,6 +6220,36 @@
             this.advancedDataGridView_tabPatientsAttributes_list.SortStringChanged += new System.EventHandler(this.advancedDataGridView_tabPatientsAttributes_list_SortStringChanged);
             this.advancedDataGridView_tabPatientsAttributes_list.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_tabPatientsAttributes_list_FilterStringChanged);
             // 
+            // patientsattributesidDataGridViewTextBoxColumn
+            // 
+            this.patientsattributesidDataGridViewTextBoxColumn.DataPropertyName = "patientsattributes_id";
+            this.patientsattributesidDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.patientsattributesidDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.patientsattributesidDataGridViewTextBoxColumn.Name = "patientsattributesidDataGridViewTextBoxColumn";
+            this.patientsattributesidDataGridViewTextBoxColumn.ReadOnly = true;
+            this.patientsattributesidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.patientsattributesidDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // attributestypeDataGridViewTextBoxColumn
+            // 
+            this.attributestypeDataGridViewTextBoxColumn.DataPropertyName = "attributestype";
+            this.attributestypeDataGridViewTextBoxColumn.HeaderText = "Type";
+            this.attributestypeDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.attributestypeDataGridViewTextBoxColumn.Name = "attributestypeDataGridViewTextBoxColumn";
+            this.attributestypeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.attributestypeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.attributestypeDataGridViewTextBoxColumn.Width = 150;
+            // 
+            // valueDataGridViewTextBoxColumn1
+            // 
+            this.valueDataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.valueDataGridViewTextBoxColumn1.DataPropertyName = "value";
+            this.valueDataGridViewTextBoxColumn1.HeaderText = "Value";
+            this.valueDataGridViewTextBoxColumn1.MinimumWidth = 22;
+            this.valueDataGridViewTextBoxColumn1.Name = "valueDataGridViewTextBoxColumn1";
+            this.valueDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.valueDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
             // vPatientsAttributesBindingSource
             // 
             this.vPatientsAttributesBindingSource.DataSource = typeof(DG.DentneD.Forms.Objects.VPatientsAttributes);
@@ -6373,36 +6402,6 @@
             // estimatesBindingSource
             // 
             this.estimatesBindingSource.DataSource = typeof(DG.DentneD.Model.Entity.estimates);
-            // 
-            // patientsattributesidDataGridViewTextBoxColumn
-            // 
-            this.patientsattributesidDataGridViewTextBoxColumn.DataPropertyName = "patientsattributes_id";
-            this.patientsattributesidDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.patientsattributesidDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.patientsattributesidDataGridViewTextBoxColumn.Name = "patientsattributesidDataGridViewTextBoxColumn";
-            this.patientsattributesidDataGridViewTextBoxColumn.ReadOnly = true;
-            this.patientsattributesidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.patientsattributesidDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // attributestypeDataGridViewTextBoxColumn
-            // 
-            this.attributestypeDataGridViewTextBoxColumn.DataPropertyName = "attributestype";
-            this.attributestypeDataGridViewTextBoxColumn.HeaderText = "Type";
-            this.attributestypeDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.attributestypeDataGridViewTextBoxColumn.Name = "attributestypeDataGridViewTextBoxColumn";
-            this.attributestypeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.attributestypeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.attributestypeDataGridViewTextBoxColumn.Width = 150;
-            // 
-            // valueDataGridViewTextBoxColumn1
-            // 
-            this.valueDataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.valueDataGridViewTextBoxColumn1.DataPropertyName = "value";
-            this.valueDataGridViewTextBoxColumn1.HeaderText = "Value";
-            this.valueDataGridViewTextBoxColumn1.MinimumWidth = 22;
-            this.valueDataGridViewTextBoxColumn1.Name = "valueDataGridViewTextBoxColumn1";
-            this.valueDataGridViewTextBoxColumn1.ReadOnly = true;
-            this.valueDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
             // FormPatients
             // 

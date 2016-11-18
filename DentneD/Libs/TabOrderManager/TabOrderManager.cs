@@ -9,9 +9,7 @@
 // OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
 ////////////////////////////////////////////////////////////////////////////////////
 
-using System;
 using System.Collections;
-using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace SMcMaster
@@ -37,7 +35,6 @@ namespace SMcMaster
 
                 if (control1 == null || control2 == null)
                 {
-                    Debug.Assert(false, "Attempting to compare a non-control");
                     return 0;
                 }
 
@@ -172,8 +169,6 @@ namespace SMcMaster
 
                 foreach (Control c in controlArraySorted)
                 {
-                    Debug.WriteLine("TabOrderManager:  Changing tab index for " + c.Name);
-
                     c.TabIndex = curTabIndex++;
                     if (c.Controls.Count > 0)
                     {
@@ -189,9 +184,8 @@ namespace SMcMaster
 
                 return curTabIndex;
             }
-            catch (Exception e)
+            catch
             {
-                Debug.Assert(false, "Exception in TabOrderManager.SetTabOrder:  " + e.Message);
                 return 0;
             }
         }

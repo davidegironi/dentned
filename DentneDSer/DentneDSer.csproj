@@ -104,6 +104,12 @@
     <None Include="DentneDSer-it.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="ServiceStop.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ServiceStart.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="ServiceUninstall.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

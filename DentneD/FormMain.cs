@@ -15,6 +15,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace DG.DentneD
@@ -87,24 +88,22 @@ namespace DG.DentneD
                 catch { }
             }
 
-            //eventually maximize
+            //set startup size
             try
             {
-                string sizeOnStartup = ConfigurationManager.AppSettings["sizeOnStartup"];
-                if (sizeOnStartup == "maximized")
+                Match sizeOnStartup = Regex.Match(ConfigurationManager.AppSettings["sizeOnStartup"], @"^(?<w>\d*)x(?<h>\d*)(?<m>M*)$");
+                if (sizeOnStartup.Success)
                 {
-                    this.WindowState = FormWindowState.Maximized;
-                }
-                else
-                {
-                    int width = Convert.ToInt16(sizeOnStartup.Split('x')[0]);
-                    int height = Convert.ToInt16(sizeOnStartup.Split('x')[1]);
+                    int width = Convert.ToInt16(sizeOnStartup.Groups[1].Value);
+                    int height = Convert.ToInt16(sizeOnStartup.Groups[2].Value);
                     if (width > Screen.PrimaryScreen.WorkingArea.Width)
                         width = Screen.PrimaryScreen.WorkingArea.Width - 5;
                     if (height > Screen.PrimaryScreen.WorkingArea.Height)
                         height = Screen.PrimaryScreen.WorkingArea.Height - 5;
                     this.Size = new Size(width, height);
                     this.CenterToScreen();
+                    if (!String.IsNullOrEmpty(sizeOnStartup.Groups[3].Value))
+                        this.WindowState = FormWindowState.Maximized;
                 }
             }
             catch { }

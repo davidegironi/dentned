@@ -287,6 +287,7 @@ namespace DG.DentneD.Forms
             //tabAppointments
             LanguageHelper.AddComponent(tabPage_tabAppointments);
             LanguageHelper.AddComponent(appointmentsidDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
+            LanguageHelper.AddComponent(fromdayDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
             LanguageHelper.AddComponent(fromDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
             LanguageHelper.AddComponent(toDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
             LanguageHelper.AddComponent(titleDataGridViewTextBoxColumn, this.GetType().Name, "HeaderText");
@@ -1046,6 +1047,7 @@ namespace DG.DentneD.Forms
             advancedDataGridView_tabPayments_list.SortDESC(advancedDataGridView_tabPayments_list.Columns[1]);
             advancedDataGridView_tabAppointments_list.CleanFilterAndSort();
             advancedDataGridView_tabAppointments_list.SortDESC(advancedDataGridView_tabAppointments_list.Columns[1]);
+            advancedDataGridView_tabAppointments_list.SortASC(advancedDataGridView_tabAppointments_list.Columns[2]);
             advancedDataGridView_tabPatientsAttachments_list.CleanFilterAndSort();
             advancedDataGridView_tabPatientsAttachments_list.SortASC(advancedDataGridView_tabPatientsAttachments_list.Columns[1]);
             advancedDataGridView_tabPatientsAttachments_list.SortDESC(advancedDataGridView_tabPatientsAttachments_list.Columns[2]);
@@ -4405,8 +4407,9 @@ namespace DG.DentneD.Forms
             r => new VPatientsAppointments
             {
                 appointments_id = r.appointments_id,
+                fromday = r.appointments_from,
                 from = r.appointments_from,
-                to = String.Format("{0:HH:mm}", r.appointments_to),
+                to = r.appointments_to,
                 title = (r.appointments_title.Length > MaxRowValueLength ? r.appointments_title.Substring(0, MaxRowValueLength) + "..." : r.appointments_title)
             }).ToList();
 

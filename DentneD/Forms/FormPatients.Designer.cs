@@ -38,9 +38,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -49,6 +46,12 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPatients));
             this.patientstreatments_idLabel = new System.Windows.Forms.Label();
             this.treatments_idLabel = new System.Windows.Forms.Label();
@@ -199,6 +202,7 @@
             this.valueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.vPatientsMedicalrecordsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabPage_tabPatientsTreatments = new System.Windows.Forms.TabPage();
+            this.panel_tabPatientsTreatments_filters = new System.Windows.Forms.Panel();
             this.groupBox_t = new System.Windows.Forms.GroupBox();
             this.patientstreatments_filtertanyLabel = new System.Windows.Forms.Label();
             this.patientstreatments_filtertanyCheckBox = new System.Windows.Forms.CheckBox();
@@ -310,7 +314,6 @@
             this.patientstreatments_filtert33CheckBox = new System.Windows.Forms.CheckBox();
             this.patientstreatments_filtert31CheckBox = new System.Windows.Forms.CheckBox();
             this.patientstreatments_filtert32CheckBox = new System.Windows.Forms.CheckBox();
-            this.panel_tabPatientsTreatments_filters = new System.Windows.Forms.Panel();
             this.button_tabPatientsTreatments_filterprint = new System.Windows.Forms.Button();
             this.comboBox_tabPatientsTreatments_filterpaid = new System.Windows.Forms.ComboBox();
             this.label_tabPatientsTreatments_filterpaid = new System.Windows.Forms.Label();
@@ -463,10 +466,6 @@
             this.appointments_idTextBox = new System.Windows.Forms.TextBox();
             this.panel_tabAppointments_list = new System.Windows.Forms.Panel();
             this.advancedDataGridView_tabAppointments_list = new Zuby.ADGV.AdvancedDataGridView();
-            this.appointmentsidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fromDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.toDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.vPatientsAppointmentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabPage_tabPatientsAttachments = new System.Windows.Forms.TabPage();
             this.panel_tabPatientsAttachments_data = new System.Windows.Forms.Panel();
@@ -586,6 +585,11 @@
             this.comboBox_filterArchived = new System.Windows.Forms.ComboBox();
             this.invoicesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.estimatesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.appointmentsidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fromdayDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fromDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel_data.SuspendLayout();
             this.tabControl_main.SuspendLayout();
             this.tabPage_tabPatients.SuspendLayout();
@@ -622,8 +626,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabPatientsMedicalrecords_list)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.vPatientsMedicalrecordsBindingSource)).BeginInit();
             this.tabPage_tabPatientsTreatments.SuspendLayout();
-            this.groupBox_t.SuspendLayout();
             this.panel_tabPatientsTreatments_filters.SuspendLayout();
+            this.groupBox_t.SuspendLayout();
             this.panel_tabPatientsTreatments_data.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.patientstreatmentsBindingSource)).BeginInit();
             this.groupBox_tabPatientsTreatments_tooths.SuspendLayout();
@@ -2180,6 +2184,19 @@
             this.tabPage_tabPatientsTreatments.Text = "Treatments";
             this.tabPage_tabPatientsTreatments.UseVisualStyleBackColor = true;
             // 
+            // panel_tabPatientsTreatments_filters
+            // 
+            this.panel_tabPatientsTreatments_filters.Controls.Add(this.groupBox_t);
+            this.panel_tabPatientsTreatments_filters.Controls.Add(this.button_tabPatientsTreatments_filterprint);
+            this.panel_tabPatientsTreatments_filters.Controls.Add(this.comboBox_tabPatientsTreatments_filterpaid);
+            this.panel_tabPatientsTreatments_filters.Controls.Add(this.label_tabPatientsTreatments_filterpaid);
+            this.panel_tabPatientsTreatments_filters.Controls.Add(this.comboBox_tabPatientsTreatments_filterfulfilled);
+            this.panel_tabPatientsTreatments_filters.Controls.Add(this.label_tabPatientsTreatments_filterfulfilled);
+            this.panel_tabPatientsTreatments_filters.Location = new System.Drawing.Point(6, 6);
+            this.panel_tabPatientsTreatments_filters.Name = "panel_tabPatientsTreatments_filters";
+            this.panel_tabPatientsTreatments_filters.Size = new System.Drawing.Size(540, 114);
+            this.panel_tabPatientsTreatments_filters.TabIndex = 14;
+            // 
             // groupBox_t
             // 
             this.groupBox_t.Controls.Add(this.patientstreatments_filtertanyLabel);
@@ -3471,19 +3488,6 @@
             this.patientstreatments_filtert32CheckBox.UseVisualStyleBackColor = true;
             this.patientstreatments_filtert32CheckBox.CheckedChanged += new System.EventHandler(this.patientstreatments_filtert32CheckBox_CheckedChanged);
             // 
-            // panel_tabPatientsTreatments_filters
-            // 
-            this.panel_tabPatientsTreatments_filters.Controls.Add(this.groupBox_t);
-            this.panel_tabPatientsTreatments_filters.Controls.Add(this.button_tabPatientsTreatments_filterprint);
-            this.panel_tabPatientsTreatments_filters.Controls.Add(this.comboBox_tabPatientsTreatments_filterpaid);
-            this.panel_tabPatientsTreatments_filters.Controls.Add(this.label_tabPatientsTreatments_filterpaid);
-            this.panel_tabPatientsTreatments_filters.Controls.Add(this.comboBox_tabPatientsTreatments_filterfulfilled);
-            this.panel_tabPatientsTreatments_filters.Controls.Add(this.label_tabPatientsTreatments_filterfulfilled);
-            this.panel_tabPatientsTreatments_filters.Location = new System.Drawing.Point(6, 6);
-            this.panel_tabPatientsTreatments_filters.Name = "panel_tabPatientsTreatments_filters";
-            this.panel_tabPatientsTreatments_filters.Size = new System.Drawing.Size(540, 114);
-            this.panel_tabPatientsTreatments_filters.TabIndex = 14;
-            // 
             // button_tabPatientsTreatments_filterprint
             // 
             this.button_tabPatientsTreatments_filterprint.Location = new System.Drawing.Point(7, 87);
@@ -4651,6 +4655,7 @@
             this.isfulfilledDataGridViewCheckBoxColumn,
             this.ispaidDataGridViewCheckBoxColumn});
             this.advancedDataGridView_tabPatientsTreatments_list.DataSource = this.vPatientsTreatmentsBindingSource;
+            this.advancedDataGridView_tabPatientsTreatments_list.Dock = System.Windows.Forms.DockStyle.Fill;
             this.advancedDataGridView_tabPatientsTreatments_list.FilterAndSortEnabled = true;
             this.advancedDataGridView_tabPatientsTreatments_list.Location = new System.Drawing.Point(0, 0);
             this.advancedDataGridView_tabPatientsTreatments_list.MultiSelect = false;
@@ -4658,7 +4663,7 @@
             this.advancedDataGridView_tabPatientsTreatments_list.ReadOnly = true;
             this.advancedDataGridView_tabPatientsTreatments_list.RowHeadersVisible = false;
             this.advancedDataGridView_tabPatientsTreatments_list.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.advancedDataGridView_tabPatientsTreatments_list.Size = new System.Drawing.Size(474, 120);
+            this.advancedDataGridView_tabPatientsTreatments_list.Size = new System.Drawing.Size(540, 120);
             this.advancedDataGridView_tabPatientsTreatments_list.TabIndex = 1;
             this.advancedDataGridView_tabPatientsTreatments_list.SortStringChanged += new System.EventHandler(this.advancedDataGridView_tabPatientsTreatments_list_SortStringChanged);
             this.advancedDataGridView_tabPatientsTreatments_list.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_tabPatientsTreatments_list_FilterStringChanged);
@@ -5108,6 +5113,7 @@
             this.advancedDataGridView_tabAppointments_list.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.advancedDataGridView_tabAppointments_list.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.appointmentsidDataGridViewTextBoxColumn,
+            this.fromdayDataGridViewTextBoxColumn,
             this.fromDataGridViewTextBoxColumn,
             this.toDataGridViewTextBoxColumn,
             this.titleDataGridViewTextBoxColumn});
@@ -5124,46 +5130,6 @@
             this.advancedDataGridView_tabAppointments_list.TabIndex = 1;
             this.advancedDataGridView_tabAppointments_list.SortStringChanged += new System.EventHandler(this.advancedDataGridView_tabAppointments_list_SortStringChanged);
             this.advancedDataGridView_tabAppointments_list.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_tabAppointments_list_FilterStringChanged);
-            // 
-            // appointmentsidDataGridViewTextBoxColumn
-            // 
-            this.appointmentsidDataGridViewTextBoxColumn.DataPropertyName = "appointments_id";
-            this.appointmentsidDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.appointmentsidDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.appointmentsidDataGridViewTextBoxColumn.Name = "appointmentsidDataGridViewTextBoxColumn";
-            this.appointmentsidDataGridViewTextBoxColumn.ReadOnly = true;
-            this.appointmentsidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.appointmentsidDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // fromDataGridViewTextBoxColumn
-            // 
-            this.fromDataGridViewTextBoxColumn.DataPropertyName = "from";
-            this.fromDataGridViewTextBoxColumn.HeaderText = "From";
-            this.fromDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.fromDataGridViewTextBoxColumn.Name = "fromDataGridViewTextBoxColumn";
-            this.fromDataGridViewTextBoxColumn.ReadOnly = true;
-            this.fromDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.fromDataGridViewTextBoxColumn.Width = 120;
-            // 
-            // toDataGridViewTextBoxColumn
-            // 
-            this.toDataGridViewTextBoxColumn.DataPropertyName = "to";
-            this.toDataGridViewTextBoxColumn.HeaderText = "To";
-            this.toDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.toDataGridViewTextBoxColumn.Name = "toDataGridViewTextBoxColumn";
-            this.toDataGridViewTextBoxColumn.ReadOnly = true;
-            this.toDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.toDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // titleDataGridViewTextBoxColumn
-            // 
-            this.titleDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.titleDataGridViewTextBoxColumn.DataPropertyName = "title";
-            this.titleDataGridViewTextBoxColumn.HeaderText = "Title";
-            this.titleDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
-            this.titleDataGridViewTextBoxColumn.ReadOnly = true;
-            this.titleDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
             // vPatientsAppointmentsBindingSource
             // 
@@ -5377,8 +5343,8 @@
             this.advancedDataGridView_tabPatientsAttachments_list.AllowUserToAddRows = false;
             this.advancedDataGridView_tabPatientsAttachments_list.AllowUserToDeleteRows = false;
             this.advancedDataGridView_tabPatientsAttachments_list.AllowUserToResizeRows = false;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.advancedDataGridView_tabPatientsAttachments_list.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.advancedDataGridView_tabPatientsAttachments_list.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
             this.advancedDataGridView_tabPatientsAttachments_list.AutoGenerateColumns = false;
             this.advancedDataGridView_tabPatientsAttachments_list.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.advancedDataGridView_tabPatientsAttachments_list.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -5422,8 +5388,8 @@
             // dateDataGridViewTextBoxColumn5
             // 
             this.dateDataGridViewTextBoxColumn5.DataPropertyName = "date";
-            dataGridViewCellStyle11.Format = "d";
-            this.dateDataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle14.Format = "d";
+            this.dateDataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle14;
             this.dateDataGridViewTextBoxColumn5.HeaderText = "Date";
             this.dateDataGridViewTextBoxColumn5.MinimumWidth = 22;
             this.dateDataGridViewTextBoxColumn5.Name = "dateDataGridViewTextBoxColumn5";
@@ -5551,8 +5517,8 @@
             this.advancedDataGridView_tabInvoices_list.AllowUserToAddRows = false;
             this.advancedDataGridView_tabInvoices_list.AllowUserToDeleteRows = false;
             this.advancedDataGridView_tabInvoices_list.AllowUserToResizeRows = false;
-            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.advancedDataGridView_tabInvoices_list.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.advancedDataGridView_tabInvoices_list.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle15;
             this.advancedDataGridView_tabInvoices_list.AutoGenerateColumns = false;
             this.advancedDataGridView_tabInvoices_list.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.advancedDataGridView_tabInvoices_list.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -5588,8 +5554,8 @@
             // dateDataGridViewTextBoxColumn3
             // 
             this.dateDataGridViewTextBoxColumn3.DataPropertyName = "date";
-            dataGridViewCellStyle13.Format = "d";
-            this.dateDataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle16.Format = "d";
+            this.dateDataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle16;
             this.dateDataGridViewTextBoxColumn3.HeaderText = "Date";
             this.dateDataGridViewTextBoxColumn3.MinimumWidth = 22;
             this.dateDataGridViewTextBoxColumn3.Name = "dateDataGridViewTextBoxColumn3";
@@ -5736,8 +5702,8 @@
             this.advancedDataGridView_tabEstimates_list.AllowUserToAddRows = false;
             this.advancedDataGridView_tabEstimates_list.AllowUserToDeleteRows = false;
             this.advancedDataGridView_tabEstimates_list.AllowUserToResizeRows = false;
-            dataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.advancedDataGridView_tabEstimates_list.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.advancedDataGridView_tabEstimates_list.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle17;
             this.advancedDataGridView_tabEstimates_list.AutoGenerateColumns = false;
             this.advancedDataGridView_tabEstimates_list.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.advancedDataGridView_tabEstimates_list.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -5773,8 +5739,8 @@
             // dateDataGridViewTextBoxColumn4
             // 
             this.dateDataGridViewTextBoxColumn4.DataPropertyName = "date";
-            dataGridViewCellStyle15.Format = "d";
-            this.dateDataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle18.Format = "d";
+            this.dateDataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle18;
             this.dateDataGridViewTextBoxColumn4.HeaderText = "Date";
             this.dateDataGridViewTextBoxColumn4.MinimumWidth = 22;
             this.dateDataGridViewTextBoxColumn4.Name = "dateDataGridViewTextBoxColumn4";
@@ -5805,8 +5771,8 @@
             // totalDataGridViewTextBoxColumn1
             // 
             this.totalDataGridViewTextBoxColumn1.DataPropertyName = "total";
-            dataGridViewCellStyle16.Format = "0.00";
-            this.totalDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle19.Format = "0.00";
+            this.totalDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle19;
             this.totalDataGridViewTextBoxColumn1.HeaderText = "Total Due";
             this.totalDataGridViewTextBoxColumn1.MinimumWidth = 22;
             this.totalDataGridViewTextBoxColumn1.Name = "totalDataGridViewTextBoxColumn1";
@@ -5954,8 +5920,8 @@
             this.advancedDataGridView_tabPatientsNotes_list.AllowUserToAddRows = false;
             this.advancedDataGridView_tabPatientsNotes_list.AllowUserToDeleteRows = false;
             this.advancedDataGridView_tabPatientsNotes_list.AllowUserToResizeRows = false;
-            dataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.advancedDataGridView_tabPatientsNotes_list.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.advancedDataGridView_tabPatientsNotes_list.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle20;
             this.advancedDataGridView_tabPatientsNotes_list.AutoGenerateColumns = false;
             this.advancedDataGridView_tabPatientsNotes_list.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.advancedDataGridView_tabPatientsNotes_list.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -5989,8 +5955,8 @@
             // dateDataGridViewTextBoxColumn
             // 
             this.dateDataGridViewTextBoxColumn.DataPropertyName = "date";
-            dataGridViewCellStyle18.Format = "d";
-            this.dateDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle21.Format = "d";
+            this.dateDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle21;
             this.dateDataGridViewTextBoxColumn.HeaderText = "Date";
             this.dateDataGridViewTextBoxColumn.MinimumWidth = 22;
             this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
@@ -6198,8 +6164,8 @@
             this.advancedDataGridView_tabPatientsAttributes_list.AllowUserToAddRows = false;
             this.advancedDataGridView_tabPatientsAttributes_list.AllowUserToDeleteRows = false;
             this.advancedDataGridView_tabPatientsAttributes_list.AllowUserToResizeRows = false;
-            dataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.advancedDataGridView_tabPatientsAttributes_list.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.advancedDataGridView_tabPatientsAttributes_list.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle22;
             this.advancedDataGridView_tabPatientsAttributes_list.AutoGenerateColumns = false;
             this.advancedDataGridView_tabPatientsAttributes_list.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.advancedDataGridView_tabPatientsAttributes_list.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -6269,8 +6235,8 @@
             this.advancedDataGridView_main.AllowUserToAddRows = false;
             this.advancedDataGridView_main.AllowUserToDeleteRows = false;
             this.advancedDataGridView_main.AllowUserToResizeRows = false;
-            dataGridViewCellStyle20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.advancedDataGridView_main.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle23.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.advancedDataGridView_main.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle23;
             this.advancedDataGridView_main.AutoGenerateColumns = false;
             this.advancedDataGridView_main.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.advancedDataGridView_main.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -6403,6 +6369,65 @@
             // 
             this.estimatesBindingSource.DataSource = typeof(DG.DentneD.Model.Entity.estimates);
             // 
+            // appointmentsidDataGridViewTextBoxColumn
+            // 
+            this.appointmentsidDataGridViewTextBoxColumn.DataPropertyName = "appointments_id";
+            this.appointmentsidDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.appointmentsidDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.appointmentsidDataGridViewTextBoxColumn.Name = "appointmentsidDataGridViewTextBoxColumn";
+            this.appointmentsidDataGridViewTextBoxColumn.ReadOnly = true;
+            this.appointmentsidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.appointmentsidDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // fromdayDataGridViewTextBoxColumn
+            // 
+            this.fromdayDataGridViewTextBoxColumn.DataPropertyName = "fromday";
+            dataGridViewCellStyle10.Format = "d";
+            dataGridViewCellStyle10.NullValue = null;
+            this.fromdayDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle10;
+            this.fromdayDataGridViewTextBoxColumn.HeaderText = "Day";
+            this.fromdayDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.fromdayDataGridViewTextBoxColumn.Name = "fromdayDataGridViewTextBoxColumn";
+            this.fromdayDataGridViewTextBoxColumn.ReadOnly = true;
+            this.fromdayDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.fromdayDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // fromDataGridViewTextBoxColumn
+            // 
+            this.fromDataGridViewTextBoxColumn.DataPropertyName = "from";
+            dataGridViewCellStyle11.Format = "t";
+            dataGridViewCellStyle11.NullValue = null;
+            this.fromDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle11;
+            this.fromDataGridViewTextBoxColumn.HeaderText = "From";
+            this.fromDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.fromDataGridViewTextBoxColumn.Name = "fromDataGridViewTextBoxColumn";
+            this.fromDataGridViewTextBoxColumn.ReadOnly = true;
+            this.fromDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.fromDataGridViewTextBoxColumn.Width = 60;
+            // 
+            // toDataGridViewTextBoxColumn
+            // 
+            this.toDataGridViewTextBoxColumn.DataPropertyName = "to";
+            dataGridViewCellStyle12.Format = "t";
+            dataGridViewCellStyle12.NullValue = null;
+            this.toDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle12;
+            this.toDataGridViewTextBoxColumn.HeaderText = "To";
+            this.toDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.toDataGridViewTextBoxColumn.Name = "toDataGridViewTextBoxColumn";
+            this.toDataGridViewTextBoxColumn.ReadOnly = true;
+            this.toDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.toDataGridViewTextBoxColumn.Width = 60;
+            // 
+            // titleDataGridViewTextBoxColumn
+            // 
+            this.titleDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.titleDataGridViewTextBoxColumn.DataPropertyName = "title";
+            this.titleDataGridViewTextBoxColumn.HeaderText = "Title";
+            this.titleDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
+            this.titleDataGridViewTextBoxColumn.ReadOnly = true;
+            this.titleDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
             // FormPatients
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -6458,10 +6483,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView_tabPatientsMedicalrecords_list)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.vPatientsMedicalrecordsBindingSource)).EndInit();
             this.tabPage_tabPatientsTreatments.ResumeLayout(false);
-            this.groupBox_t.ResumeLayout(false);
-            this.groupBox_t.PerformLayout();
             this.panel_tabPatientsTreatments_filters.ResumeLayout(false);
             this.panel_tabPatientsTreatments_filters.PerformLayout();
+            this.groupBox_t.ResumeLayout(false);
+            this.groupBox_t.PerformLayout();
             this.panel_tabPatientsTreatments_data.ResumeLayout(false);
             this.panel_tabPatientsTreatments_data.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.patientstreatmentsBindingSource)).EndInit();
@@ -6684,10 +6709,6 @@
         private System.Windows.Forms.ComboBox doctors_idComboBox;
         private System.Windows.Forms.TextBox appointments_idTextBox;
         private System.Windows.Forms.BindingSource vPatientsAppointmentsBindingSource;
-        private System.Windows.Forms.DataGridViewTextBoxColumn appointmentsidDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fromDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn toDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn titleDataGridViewTextBoxColumn;
         private System.Windows.Forms.Panel panel_tabPatientsTreatments_data;
         private System.Windows.Forms.Panel panel_tabPatientsTreatments_updates;
         private System.Windows.Forms.Button button_tabPatientsTreatments_cancel;
@@ -7076,5 +7097,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn patientsattributesidDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn attributestypeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn valueDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn appointmentsidDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fromdayDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fromDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn toDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn titleDataGridViewTextBoxColumn;
     }
 }

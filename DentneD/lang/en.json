@@ -618,6 +618,7 @@
     "Form-FormPatients-payments_notesLabel":"Notes:",
     "Form-FormPatients-tabPage_tabAppointments":"Appointments",
     "Form-FormPatients-appointmentsidDataGridViewTextBoxColumn":"Id",
+    "Form-FormPatients-fromdayDataGridViewTextBoxColumn":"Day",
     "Form-FormPatients-fromDataGridViewTextBoxColumn":"From",
     "Form-FormPatients-toDataGridViewTextBoxColumn":"To",
     "Form-FormPatients-titleDataGridViewTextBoxColumn":"Title",

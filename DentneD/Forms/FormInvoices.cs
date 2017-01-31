@@ -34,6 +34,7 @@ namespace DG.DentneD.Forms
         private const int MaxRowValueLength = 60;
         private readonly bool _addToothsToDocumentDescription = false;
         private readonly bool _invoicesIsPaidDefault = false;
+        private readonly bool _autoincrementInvoicesEstimatesNumber = false;
 
         /// <summary>
         /// Constructor
@@ -51,6 +52,7 @@ namespace DG.DentneD.Forms
             panel_listtotal.Visible = Convert.ToBoolean(ConfigurationManager.AppSettings["showInvoicesEstimatesTotal"]);
             _addToothsToDocumentDescription = Convert.ToBoolean(ConfigurationManager.AppSettings["addToothsToDocumentDescription"]);
             _invoicesIsPaidDefault = Convert.ToBoolean(ConfigurationManager.AppSettings["invoicesIsPaidDefault"]);
+            _autoincrementInvoicesEstimatesNumber = Convert.ToBoolean(ConfigurationManager.AppSettings["autoincrementInvoicesEstimatesNumber"]);
         }
 
         /// <summary>
@@ -138,6 +140,8 @@ namespace DG.DentneD.Forms
             public string printbuildpdferrorTitle = "Error";
             public string printopenfilenameMessage = "File '{0}' built successful.";
             public string printopenfilenameTitle = "Info";
+            public string savewarningnumberMessage = "The selected number is not consistent with the one proposed. Do you want to continue?";
+            public string savewarningnumberTitle = "Warning";
         }
 
         /// <summary>
@@ -189,6 +193,7 @@ namespace DG.DentneD.Forms
                     IsUpdateButtonDefaultClickEventAttached = false,
                     RemoveButton = button_tabInvoices_delete,
                     SaveButton = button_tabInvoices_save,
+                    IsSaveButtonDefaultClickEventAttached = false,
                     CancelButton = button_tabInvoices_cancel,
 
                     Add = Add_tabInvoices,
@@ -598,7 +603,6 @@ namespace DG.DentneD.Forms
             {
                 //set default values
                 int doctors_id = Convert.ToInt32(comboBox_filterDoctors.SelectedValue);
-                int maxnumber = 0;
                 int year = DateTime.Now.Year;
                 if (comboBox_filterYears.SelectedIndex != -1)
                 {
@@ -610,20 +614,9 @@ namespace DG.DentneD.Forms
                     else
                         year = Convert.ToInt32(comboBox_filterYears.SelectedValue);
                 }
-                string[] numbers = _dentnedModel.Invoices.List(r => r.doctors_id == doctors_id && r.invoices_date.Year == year).Select(r => r.invoices_number).ToArray();
-                try
-                {
-                    foreach (string number in numbers)
-                    {
-                        int n = Convert.ToInt32(number);
-                        if (n > maxnumber)
-                            maxnumber = n;
-                    }
-                    maxnumber++;
-                }
-                catch { }
-                if (maxnumber == 0)
-                    maxnumber++;
+                Nullable<int> maxnumber = null;
+                if (_autoincrementInvoicesEstimatesNumber)
+                    maxnumber = GetMaxNumber(doctors_id, year);
                 ((invoices)invoicesBindingSource.Current).invoices_ispaid = _invoicesIsPaidDefault;
                 ((invoices)invoicesBindingSource.Current).doctors_id = doctors_id;
                 ((invoices)invoicesBindingSource.Current).patients_id = null;
@@ -634,7 +627,8 @@ namespace DG.DentneD.Forms
                 if (_dentnedModel.TaxesDeductions.Any(r => r.taxesdeductions_isdefault))
                     ((invoices)invoicesBindingSource.Current).invoices_deductiontaxrate = _dentnedModel.TaxesDeductions.FirstOrDefault(r => r.taxesdeductions_isdefault).taxesdeductions_rate;
                 ((invoices)invoicesBindingSource.Current).invoices_date = new DateTime(year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, DateTime.Now.Minute, 0);
-                ((invoices)invoicesBindingSource.Current).invoices_number = maxnumber.ToString();
+                if (maxnumber != null)
+                    ((invoices)invoicesBindingSource.Current).invoices_number = ((int)maxnumber).ToString();
                 //reset BindingSource
                 invoicesBindingSource.ResetBindings(true);
                 //raise changed indexes
@@ -716,6 +710,35 @@ namespace DG.DentneD.Forms
         }
 
         /// <summary>
+        /// Save click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button_tabInvoices_save_Click(object sender, EventArgs e)
+        {
+            if (tabElement_tabInvoices.CurrentEditingMode == EditingMode.C)
+            {
+                //check max number for new insertion
+                if (_autoincrementInvoicesEstimatesNumber && ((invoices)invoicesBindingSource.Current).doctors_id != null)
+                {
+                    int doctors_id = (int)((invoices)invoicesBindingSource.Current).doctors_id;
+                    int year = ((invoices)invoicesBindingSource.Current).invoices_date.Year;
+                    int maxnumber = GetMaxNumber(doctors_id, year);
+                    GetMaxNumber(doctors_id, year);
+                    if (maxnumber.ToString() != ((invoices)invoicesBindingSource.Current).invoices_number)
+                    {
+                        if (MessageBox.Show(language.savewarningnumberMessage, language.savewarningnumberTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+                        {
+                            return;
+                        }
+                    }
+                }
+            }
+
+            SaveClick(tabElement_tabInvoices);
+        }
+
+        /// <summary>
         /// Print an invoice
         /// </summary>
         /// <param name="invoices_id"></param>
@@ -789,6 +812,32 @@ namespace DG.DentneD.Forms
             {
                 MessageBox.Show(String.Format(language.printopenfilenameMessage, filename), language.printopenfilenameTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        /// <summary>
+        /// Get the max available number of invoice
+        /// </summary>
+        /// <param name="doctors_id"></param>
+        /// <param name="year"></param>
+        /// <returns></returns>
+        private int GetMaxNumber(int doctors_id, int year)
+        {
+            int maxnumber = 0;
+            string[] numbers = _dentnedModel.Invoices.List(r => r.doctors_id == doctors_id && r.invoices_date.Year == year).Select(r => r.invoices_number).ToArray();
+            try
+            {
+                foreach (string number in numbers)
+                {
+                    int n = Convert.ToInt32(number);
+                    if (n > maxnumber)
+                        maxnumber = n;
+                }
+                maxnumber++;
+            }
+            catch { }
+            if (maxnumber == 0)
+                maxnumber++;
+            return maxnumber;
         }
 
         /// <summary>
@@ -1502,6 +1551,5 @@ namespace DG.DentneD.Forms
         }
 
         #endregion
-
     }
 }

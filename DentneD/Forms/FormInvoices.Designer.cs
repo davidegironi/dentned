@@ -611,6 +611,7 @@
             this.button_tabInvoices_save.TabIndex = 1;
             this.button_tabInvoices_save.Text = "Save";
             this.button_tabInvoices_save.UseVisualStyleBackColor = true;
+            this.button_tabInvoices_save.Click += new System.EventHandler(this.button_tabInvoices_save_Click);
             // 
             // panel_tabInvoices_actions
             // 

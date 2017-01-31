@@ -1183,6 +1183,7 @@
             this.button_tabEstimates_save.TabIndex = 1;
             this.button_tabEstimates_save.Text = "Save";
             this.button_tabEstimates_save.UseVisualStyleBackColor = true;
+            this.button_tabEstimates_save.Click += new System.EventHandler(this.button_tabEstimates_save_Click);
             // 
             // panel_tabEstimates_actions
             // 

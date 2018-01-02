@@ -7,6 +7,7 @@
 using DG.DentneD.Model;
 using NUnit.Framework;
 using System.Configuration;
+using System.IO;
 
 namespace DG.DentneD.Helpers.Test
 {
@@ -18,6 +19,8 @@ namespace DG.DentneD.Helpers.Test
 
         public DentneDHelpersTest()
         {
+            Directory.SetCurrentDirectory(TestContext.CurrentContext.TestDirectory);
+
             _dentnedModel = new DentneDModel();
             tmpdir = ConfigurationManager.AppSettings["tmpdir"];
         }

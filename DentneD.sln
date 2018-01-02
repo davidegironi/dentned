@@ -12,8 +12,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentneDModel", "DentneDMode
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentneDModel.Test", "DentneDModel.Test\DentneDModel.Test.csproj", "{56405FBA-598C-43EA-939C-63128F3EB903}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentneDModel.TestConsole", "DentneDModel.TestConsole\DentneDModel.TestConsole.csproj", "{95022EFA-D5A9-49DA-8AEF-198E479D2D3B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentneDPrintModelDefault", "DentneDPrintModelDefault\DentneDPrintModelDefault.csproj", "{11E53A7F-D538-4FD1-BEBF-43A3A9248A6A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentneDPopulateTestDatabase", "DentneDPopulateTestDatabase\DentneDPopulateTestDatabase.csproj", "{22F62A64-DFCE-46DB-8DD2-9D282D96E8D5}"
@@ -23,8 +21,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentneDHelpers", "DentneDHelpers\DentneDHelpers.csproj", "{A56DE3FD-7E06-4389-A56A-5022D3D68777}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentneDHelpers.Test", "DentneDHelpers.Test\DentneDHelpers.Test.csproj", "{6E1B282E-A6B0-4525-95FE-BE539D45082B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentneDHelpers.TestConsole", "DentneDHelpers.TestConsole\DentneDHelpers.TestConsole.csproj", "{B44AC809-354D-4787-8C24-CA5501B28B02}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,10 +40,6 @@ Global
 		{56405FBA-598C-43EA-939C-63128F3EB903}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56405FBA-598C-43EA-939C-63128F3EB903}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56405FBA-598C-43EA-939C-63128F3EB903}.Release|Any CPU.Build.0 = Release|Any CPU
-		{95022EFA-D5A9-49DA-8AEF-198E479D2D3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{95022EFA-D5A9-49DA-8AEF-198E479D2D3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{95022EFA-D5A9-49DA-8AEF-198E479D2D3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{95022EFA-D5A9-49DA-8AEF-198E479D2D3B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{11E53A7F-D538-4FD1-BEBF-43A3A9248A6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{11E53A7F-D538-4FD1-BEBF-43A3A9248A6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11E53A7F-D538-4FD1-BEBF-43A3A9248A6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -68,10 +60,6 @@ Global
 		{6E1B282E-A6B0-4525-95FE-BE539D45082B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E1B282E-A6B0-4525-95FE-BE539D45082B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E1B282E-A6B0-4525-95FE-BE539D45082B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B44AC809-354D-4787-8C24-CA5501B28B02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B44AC809-354D-4787-8C24-CA5501B28B02}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B44AC809-354D-4787-8C24-CA5501B28B02}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B44AC809-354D-4787-8C24-CA5501B28B02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,6 +5,7 @@
 #endregion
 
 using NUnit.Framework;
+using System.IO;
 
 namespace DG.DentneD.Model.Test
 {
@@ -15,6 +16,8 @@ namespace DG.DentneD.Model.Test
 
         public DentneDModelTest()
         {
+            Directory.SetCurrentDirectory(TestContext.CurrentContext.TestDirectory);
+
             _dentnedModel = new DentneDModel();
         }
     }

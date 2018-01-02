@@ -46,9 +46,6 @@ $builds = @(
 				Name = "DentneDModel.Test";
 			},
 			@{
-				Name = "DentneDModel.TestConsole";
-			},
-			@{
 				Name = "DentneDPopulateTestDatabase";
 			},
 			@{
@@ -59,9 +56,6 @@ $builds = @(
 			},
 			@{
 				Name = "DentneDHelpers.Test";
-			},
-			@{
-				Name = "DentneDHelpers.TestConsole";
 			},
 			@{
 				Name = "DentneDSer";

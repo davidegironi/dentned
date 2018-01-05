@@ -34,7 +34,7 @@ It features a client-server architecture.
 
 ## Requirements
 
-* Microsoft Windows with .NET framework 4.5 or later
+* Microsoft Windows with .NET framework 4.5.2 or later
 * Microsoft SQL Server 2012 or later
 
 

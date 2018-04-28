@@ -24,6 +24,7 @@ namespace DG.DentneD
         /// </summary>
         private class DentneDPrintModelLanguage
         {
+            public string estimatesTemplateName = "Estimate Default";
             public string estimatesTitle = "Estimate";
             public string estimatesNumber = "Number";
             public string estimatesDate = "Date";
@@ -40,6 +41,7 @@ namespace DG.DentneD
             public string estimatesTotalsTotaldocument = "Document total";
             public string estimatesTotalsTotaldeductiontax = "Deduction tax total";
             public string estimatesTotalsTotalamountdue = "Total";
+            public string invoicesTemplateName = "Invoice Default";
             public string invoicesTitle = "Invoice";
             public string invoicesNumber = "Number";
             public string invoicesDate = "Date";
@@ -56,6 +58,7 @@ namespace DG.DentneD
             public string invoicesTotalsTotaldocument = "Document total";
             public string invoicesTotalsTotaldeductiontax = "Deduction tax total";
             public string invoicesTotalsTotalamountdue = "Total";
+            public string patientstreatmentsTemplateName = "Treatments Default";
             public string patientstreatmentsTitle = "Treatments";
             public string patientstreatmentsDate = "Date";
             public string patientstreatmentsPatienttext = "Patient";
@@ -109,7 +112,7 @@ namespace DG.DentneD
         /// <summary>
         /// Default settings file
         /// </summary>
-        private const string languageSettingsFilename = "DentneDPrintModelDefault.json";
+        private const string settingsFilename = "DentneDPrintModelDefault.json";
 
         /// <summary>
         /// Settings
@@ -121,7 +124,7 @@ namespace DG.DentneD
             //load settings
             try
             {
-                string jsontext = File.ReadAllText(languageSettingsFilename);
+                string jsontext = File.ReadAllText(settingsFilename);
                 _settings = new JavaScriptSerializer().Deserialize<DentneDPrintModelDefaultSettings>(jsontext);
             }
             catch { }
@@ -566,6 +569,27 @@ namespace DG.DentneD
             return ret;
         }
 
+        /// <summary>
+        /// Check if PDF for an estimate builder is enabled
+        /// </summary>
+        /// <returns></returns>
+        public bool IsBuildEstimatePDFEnabled()
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// Get the PDF for an estimate builder template name
+        /// </summary>
+        /// <param name="language"></param>
+        /// <returns></returns>
+        public string BuildEstimatePDFName(string language)
+        {
+            //load language
+            LoadLanguageFromFile(languageFolder + "\\" + languageFilenamePrefix + language + ".json");
+
+            return _language.estimatesTemplateName;
+        }
 
         /// <summary>
         /// Build a PDF for an invoice
@@ -989,6 +1013,28 @@ namespace DG.DentneD
         }
 
         /// <summary>
+        /// Check if PDF for an invoice builder is enabled
+        /// </summary>
+        /// <returns></returns>
+        public bool IsBuildInvoicePDFEnabled()
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// Get the PDF for an invoice builder template name
+        /// </summary>
+        /// <param name="language"></param>
+        /// <returns></returns>
+        public string BuildInvoicePDFName(string language)
+        {
+            //load language
+            LoadLanguageFromFile(languageFolder + "\\" + languageFilenamePrefix + language + ".json");
+
+            return _language.estimatesTemplateName;
+        }
+
+        /// <summary>
         /// Build a PDF for patients treatments
         /// </summary>
         /// <param name="dentnedModel"></param>
@@ -1243,6 +1289,28 @@ namespace DG.DentneD
             catch { }
 
             return ret;
+        }
+
+        /// <summary>
+        /// Check if PDF for patients treatments builder is enabled
+        /// </summary>
+        /// <returns></returns>
+        public bool IsBuildPatientsTreatmentsPDFEnabled()
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// Get the PDF for patients treatments builder template name
+        /// </summary>
+        /// <param name="language"></param>
+        /// <returns></returns>
+        public string BuildPatientsTreatmentsPDFName(string language)
+        {
+            //load language
+            LoadLanguageFromFile(languageFolder + "\\" + languageFilenamePrefix + language + ".json");
+
+            return _language.estimatesTemplateName;
         }
 
         /// <summary>

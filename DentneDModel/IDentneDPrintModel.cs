@@ -27,6 +27,19 @@ namespace DG.DentneD
         bool BuildEstimatePDF(DentneDModel dentnedModel, int estimates_id, string filename, string language);
 
         /// <summary>
+        /// Check if PDF for an estimate builder is enabled
+        /// </summary>
+        /// <returns></returns>
+        bool IsBuildEstimatePDFEnabled();
+
+        /// <summary>
+        /// Get the PDF for an estimate builder template name
+        /// </summary>
+        /// <param name="language"></param>
+        /// <returns></returns>
+        string BuildEstimatePDFName(string language);
+
+        /// <summary>
         /// Build a PDF for an invoice
         /// </summary>
         /// <param name="dentnedModel"></param>
@@ -35,6 +48,19 @@ namespace DG.DentneD
         /// <param name="language"></param>
         /// <returns></returns>
         bool BuildInvoicePDF(DentneDModel dentnedModel, int invoices_id, string filename, string language);
+
+        /// <summary>
+        /// Check if PDF for an invoice builder is enabled
+        /// </summary>
+        /// <returns></returns>
+        bool IsBuildInvoicePDFEnabled();
+
+        /// <summary>
+        /// Get the PDF for an invoice builder template name
+        /// </summary>
+        /// <param name="language"></param>
+        /// <returns></returns>
+        string BuildInvoicePDFName(string language);
 
         /// <summary>
         /// Build a PDF for patients treatments
@@ -46,5 +72,18 @@ namespace DG.DentneD
         /// <param name="language"></param>
         /// <returns></returns>
         bool BuildPatientsTreatmentsPDF(DentneDModel dentnedModel, int patients_id, patientstreatments[] patientstreatmentsl, string filename, string language);
+
+        /// <summary>
+        /// Check if PDF for patients treatments builder is enabled
+        /// </summary>
+        /// <returns></returns>
+        bool IsBuildPatientsTreatmentsPDFEnabled();
+
+        /// <summary>
+        /// Get the PDF for patients treatments builder template name
+        /// </summary>
+        /// <param name="language"></param>
+        /// <returns></returns>
+        string BuildPatientsTreatmentsPDFName(string language);
     }
 }

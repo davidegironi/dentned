@@ -1,0 +1,11 @@
+﻿{
+  "estimatesEnabled": true,
+  "estimatesPrintCode": true,
+  "estimatesPrintInvoiceReference": true,
+  "estimatesPrintNumber": false,
+  "estimatesPrintDate": false,
+  "invoicesEnabled": false,
+  "invoicesPrintCode": true,
+  "invoicesPrintNumber": false,
+  "invoicesPrintDate": true
+}

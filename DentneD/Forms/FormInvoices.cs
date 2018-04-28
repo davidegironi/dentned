@@ -130,6 +130,9 @@ namespace DG.DentneD.Forms
             public string paidrequestTitle = "Paid";
             public string printmodelerrorMessage = "Can not instantiate the print model.";
             public string printmodelerrorTitle = "Error";
+            public string printmodelerrorNone = "No print model available";
+            public string printmodelselectMessage = "Select a print template:";
+            public string printmodelselectTitle = "Print template";
             public string printcreatefoldererrorMessage = "Can not create destination folder '{0}'.";
             public string printcreatefoldererrorTitle = "Error";
             public string printvalidfilenameerrorMessage = "Can not found a valid filename.";
@@ -748,9 +751,46 @@ namespace DG.DentneD.Forms
             if (invoice == null)
                 return;
 
-            //instantiate the printmodel
-            string assemblyPath = ConfigurationManager.AppSettings["printModel"];
-            IDentneDPrintModel printModel = DentneDPrintModelHelper.DentneDPrintModelInstance(assemblyPath);
+            //load print templates
+            string[] templates = new string[] { };
+            Dictionary<string, IDentneDPrintModel> templatesModels = new Dictionary<string, IDentneDPrintModel>();
+            foreach (string assemblyPath in ConfigurationManager.AppSettings["printModels"].Split(','))
+            {
+                IDentneDPrintModel printModelt = DentneDPrintModelHelper.DentneDPrintModelInstance(assemblyPath);
+                if (printModelt != null)
+                {
+                    if (printModelt.IsBuildInvoicePDFEnabled())
+                    {
+                        string modelname = printModelt.BuildInvoicePDFName(ConfigurationManager.AppSettings["language"]);
+                        if (!templatesModels.ContainsKey(modelname))
+                        {
+                            templatesModels.Add(modelname, printModelt);
+                            templates = templates.Concat(new string[] { modelname }).ToArray();
+                        }
+                    }
+                }
+            }
+            if (templates.Count() == 0)
+            {
+                MessageBox.Show(language.printmodelerrorMessage, language.printmodelerrorNone, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            //select printmodel from print template
+            IDentneDPrintModel printModel = null;
+            if (templates.Count() == 1)
+                printModel = templatesModels.FirstOrDefault().Value;
+            else
+            {
+                string template = null;
+                if (SelectorBox.Show(language.printmodelselectMessage, language.printmodelselectTitle, templates, ref template) == DialogResult.OK)
+                {
+                    if (templatesModels.Any(r => r.Key == template))
+                        printModel = templatesModels.FirstOrDefault(r => r.Key == template).Value;
+                }
+                else
+                    return;
+            }
             if (printModel == null)
             {
                 MessageBox.Show(language.printmodelerrorMessage, language.printmodelerrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);

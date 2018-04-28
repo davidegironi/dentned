@@ -6,7 +6,7 @@ $solutionName = "DentneD"
 $versionMajor = "1"
 $versionMinor = "1"
 $versionBuild = GetVersionBuild
-$versionRevision = "7"
+$versionRevision = "9"
 #build version number
 $assemblyVersion = GetVersion $versionMajor $versionMinor $versionBuild $versionRevision
 $fileVersion = $assemblyVersion
@@ -50,6 +50,9 @@ $builds = @(
 			},
 			@{
 				Name = "DentneDPrintModelDefault";
+			},
+			@{
+				Name = "DentneDPrintModel01";
 			},
 			@{
 				Name = "DentneDHelpers";

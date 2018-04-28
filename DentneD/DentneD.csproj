@@ -275,6 +275,7 @@
     <Compile Include="Helpers\ComboBoxHelper.cs" />
     <Compile Include="Helpers\DentneDPrintModelHelper.cs" />
     <Compile Include="Helpers\ExcelExporter.cs" />
+    <Compile Include="Helpers\SelectorBox.cs" />
     <Compile Include="Helpers\PasswordHelper.cs" />
     <Compile Include="Helpers\InputBox.cs" />
     <Compile Include="Libs\NDesk.Options\Options.cs" />
@@ -360,6 +361,18 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="..\packages\Int\DentneDPrintModel01\DentneDPrintModel01-en.json">
+      <Link>lang\DentneDPrintModel01-en.json</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\packages\Int\DentneDPrintModel01\DentneDPrintModel01-it.json">
+      <Link>lang\DentneDPrintModel01-it.json</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\packages\Int\DentneDPrintModel01\DentneDPrintModel01.json">
+      <Link>DentneDPrintModel01.json</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="..\packages\Int\DentneDPrintModelDefault\DentneDPrintModelDefault-en.json">
       <Link>lang\DentneDPrintModelDefault-en.json</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -501,6 +514,10 @@
     <EmbeddedResource Include="splashscreen_logo.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\packages\Int\DentneDPrintModel01\DentneDPrintModel01.dll">
+      <Link>DentneDPrintModel01.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="..\packages\Int\DentneDPrintModelDefault\DentneDPrintModelDefault.dll">
       <Link>DentneDPrintModelDefault.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -538,6 +555,7 @@ xcopy "$(ProjectDir)www" "$(TargetDir)www\" /v /y /e
 rmdir "$(TargetDir)backup\" /s
 xcopy "$(ProjectDir)backup" "$(TargetDir)backup\" /v /y  /e
 del "$(TargetDir)DentneDPrintModelDefault-*.json" -f
+del "$(TargetDir)DentneDPrintModel01-*.json" -f
 xcopy "$(SolutionDir)DentneDSer\$(OutDir)DentneDSer.exe.config" "$(TargetDir)" /v /y
 del "$(TargetDir)DentneDSer-*.json" -f
 </PostBuildEvent>

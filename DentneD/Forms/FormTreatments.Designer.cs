@@ -642,8 +642,6 @@
             this.advancedDataGridView_tabTreatmentsPrices_list.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.advancedDataGridView_tabTreatmentsPrices_list.Size = new System.Drawing.Size(480, 200);
             this.advancedDataGridView_tabTreatmentsPrices_list.TabIndex = 1;
-            this.advancedDataGridView_tabTreatmentsPrices_list.SortStringChanged += new System.EventHandler(this.advancedDataGridView_tabTreatmentsPrices_list_SortStringChanged);
-            this.advancedDataGridView_tabTreatmentsPrices_list.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_tabTreatmentsPrices_list_FilterStringChanged);
             // 
             // treatmentspricesidDataGridViewTextBoxColumn
             // 
@@ -715,8 +713,6 @@
             this.advancedDataGridView_main.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.advancedDataGridView_main.Size = new System.Drawing.Size(284, 502);
             this.advancedDataGridView_main.TabIndex = 0;
-            this.advancedDataGridView_main.SortStringChanged += new System.EventHandler(this.advancedDataGridView_main_SortStringChanged);
-            this.advancedDataGridView_main.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_main_FilterStringChanged);
             // 
             // treatmentsidDataGridViewTextBoxColumn
             // 

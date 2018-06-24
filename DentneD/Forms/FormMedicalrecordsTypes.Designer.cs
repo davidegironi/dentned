@@ -243,8 +243,6 @@
             this.advancedDataGridView_main.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.advancedDataGridView_main.Size = new System.Drawing.Size(284, 502);
             this.advancedDataGridView_main.TabIndex = 0;
-            this.advancedDataGridView_main.SortStringChanged += new System.EventHandler(this.advancedDataGridView_main_SortStringChanged);
-            this.advancedDataGridView_main.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_main_FilterStringChanged);
             // 
             // medicalrecordstypesidDataGridViewTextBoxColumn
             // 

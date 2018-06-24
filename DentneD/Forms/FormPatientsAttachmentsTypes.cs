@@ -131,7 +131,7 @@ namespace DG.DentneD.Forms
 
             ReloadView();
         }
-        
+
         /// <summary>
         /// Preload View
         /// </summary>
@@ -168,26 +168,6 @@ namespace DG.DentneD.Forms
                 }).ToList();
 
             return DGDataTableUtils.ToDataTable<VPatientsAttachmentsTypes>(vPatientsAttachmentsTypes);
-        }
-
-        /// <summary>
-        /// Main Datagrid filter handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void advancedDataGridView_main_FilterStringChanged(object sender, EventArgs e)
-        {
-            vPatientsAttachmentsTypesBindingSource.Filter = advancedDataGridView_main.FilterString;
-        }
-
-        /// <summary>
-        /// Main Datagrid sort handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void advancedDataGridView_main_SortStringChanged(object sender, EventArgs e)
-        {
-            vPatientsAttachmentsTypesBindingSource.Sort = advancedDataGridView_main.SortString;
         }
 
 

@@ -1105,25 +1105,10 @@ namespace DG.DentneD.Forms
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void advancedDataGridView_main_FilterStringChanged(object sender, EventArgs e)
+        private void advancedDataGridView_main_FilterStringChanged(object sender, AdvancedDataGridView.FilterEventArgs e)
         {
-            string filter = advancedDataGridView_main.FilterString;
             if (!String.IsNullOrEmpty(textBox_filterPatient.Text))
-            {
-                filter += (!String.IsNullOrEmpty(filter) ? " AND " : "") + String.Format("name LIKE '%{0}%'", textBox_filterPatient.Text);
-            }
-
-            vPatientsBindingSource.Filter = filter;
-        }
-
-        /// <summary>
-        /// Main Datagrid sort handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void advancedDataGridView_main_SortStringChanged(object sender, EventArgs e)
-        {
-            vPatientsBindingSource.Sort = advancedDataGridView_main.SortString;
+                e.FilterString += (!String.IsNullOrEmpty(e.FilterString) ? " AND " : "") + String.Format("name LIKE '%{0}%'", textBox_filterPatient.Text.Replace("'", "''"));
         }
 
         /// <summary>
@@ -1200,7 +1185,7 @@ namespace DG.DentneD.Forms
             if (IsBindingSourceLoading)
                 return;
 
-            advancedDataGridView_main_FilterStringChanged(sender, e);
+            advancedDataGridView_main.TriggerFilterStringChanged();
         }
 
 
@@ -1430,26 +1415,6 @@ namespace DG.DentneD.Forms
         }
 
         /// <summary>
-        /// Tab Datagrid filter handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void advancedDataGridView_tabPatients_tabPatientsContacts_list_FilterStringChanged(object sender, EventArgs e)
-        {
-            vPatientsContactsBindingSource.Filter = advancedDataGridView_tabPatients_tabPatientsContacts_list.FilterString;
-        }
-
-        /// <summary>
-        /// Tab Datagrid sort handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void advancedDataGridView_tabPatients_tabPatientsContacts_list_SortStringChanged(object sender, EventArgs e)
-        {
-            vPatientsContactsBindingSource.Sort = advancedDataGridView_tabPatients_tabPatientsContacts_list.SortString;
-        }
-
-        /// <summary>
         /// Load the tab DataSource
         /// </summary>
         /// <returns></returns>
@@ -1555,26 +1520,6 @@ namespace DG.DentneD.Forms
         }
 
         /// <summary>
-        /// Tab Datagrid filter handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void advancedDataGridView_tabPatients_tabPatientsAddresses_list_FilterStringChanged(object sender, EventArgs e)
-        {
-            vPatientsAddressesBindingSource.Filter = advancedDataGridView_tabPatients_tabPatientsAddresses_list.FilterString;
-        }
-
-        /// <summary>
-        /// Tab Datagrid sort handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void advancedDataGridView_tabPatients_tabPatientsAddresses_list_SortStringChanged(object sender, EventArgs e)
-        {
-            vPatientsAddressesBindingSource.Sort = advancedDataGridView_tabPatients_tabPatientsAddresses_list.SortString;
-        }
-
-        /// <summary>
         /// Load the tab DataSource
         /// </summary>
         /// <returns></returns>
@@ -1677,26 +1622,6 @@ namespace DG.DentneD.Forms
             ret = DGDataTableUtils.ToDataTable<VPatientsMedicalrecords>(vPatientsMedicalrecords);
 
             return ret;
-        }
-
-        /// <summary>
-        /// Tab Datagrid filter handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void advancedDataGridView_tabPatientsMedicalrecords_list_FilterStringChanged(object sender, EventArgs e)
-        {
-            vPatientsMedicalrecordsBindingSource.Filter = advancedDataGridView_tabPatientsMedicalrecords_list.FilterString;
-        }
-
-        /// <summary>
-        /// Tab Datagrid sort handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void advancedDataGridView_tabPatientsMedicalrecords_list_SortStringChanged(object sender, EventArgs e)
-        {
-            vPatientsMedicalrecordsBindingSource.Sort = advancedDataGridView_tabPatientsMedicalrecords_list.SortString;
         }
 
         /// <summary>
@@ -2314,26 +2239,6 @@ namespace DG.DentneD.Forms
             }
 
             return predicate;
-        }
-
-        /// <summary>
-        /// Tab Datagrid filter handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void advancedDataGridView_tabPatientsTreatments_list_FilterStringChanged(object sender, EventArgs e)
-        {
-            vPatientsTreatmentsBindingSource.Filter = advancedDataGridView_tabPatientsTreatments_list.FilterString;
-        }
-
-        /// <summary>
-        /// Tab Datagrid sort handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void advancedDataGridView_tabPatientsTreatments_list_SortStringChanged(object sender, EventArgs e)
-        {
-            vPatientsTreatmentsBindingSource.Sort = advancedDataGridView_tabPatientsTreatments_list.SortString;
         }
 
         /// <summary>
@@ -4341,26 +4246,6 @@ namespace DG.DentneD.Forms
         }
 
         /// <summary>
-        /// Tab Datagrid filter handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void advancedDataGridView_tabPayments_list_FilterStringChanged(object sender, EventArgs e)
-        {
-            vPatientsPaymentsBindingSource.Filter = advancedDataGridView_tabPayments_list.FilterString;
-        }
-
-        /// <summary>
-        /// Tab Datagrid sort handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void advancedDataGridView_tabPayments_list_SortStringChanged(object sender, EventArgs e)
-        {
-            vPatientsPaymentsBindingSource.Sort = advancedDataGridView_tabPayments_list.SortString;
-        }
-
-        /// <summary>
         /// Load the tab DataSource
         /// </summary>
         /// <returns></returns>
@@ -4459,26 +4344,6 @@ namespace DG.DentneD.Forms
         }
 
         /// <summary>
-        /// Tab Datagrid filter handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void advancedDataGridView_tabAppointments_list_FilterStringChanged(object sender, EventArgs e)
-        {
-            vPatientsAppointmentsBindingSource.Filter = advancedDataGridView_tabAppointments_list.FilterString;
-        }
-
-        /// <summary>
-        /// Tab Datagrid sort handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void advancedDataGridView_tabAppointments_list_SortStringChanged(object sender, EventArgs e)
-        {
-            vPatientsAppointmentsBindingSource.Sort = advancedDataGridView_tabAppointments_list.SortString;
-        }
-
-        /// <summary>
         /// Load the tab DataSource
         /// </summary>
         /// <returns></returns>
@@ -4521,26 +4386,6 @@ namespace DG.DentneD.Forms
             ret = DGDataTableUtils.ToDataTable<VPatientsAttachments>(vPatientsAttachments);
 
             return ret;
-        }
-
-        /// <summary>
-        /// Tab Datagrid filter handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void advancedDataGridView_tabPatientsAttachments_list_FilterStringChanged(object sender, EventArgs e)
-        {
-            vPatientsAttachmentsBindingSource.Filter = advancedDataGridView_tabPatientsAttachments_list.FilterString;
-        }
-
-        /// <summary>
-        /// Tab Datagrid sort handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void advancedDataGridView_tabPatientsAttachments_list_SortStringChanged(object sender, EventArgs e)
-        {
-            vPatientsAttachmentsBindingSource.Sort = advancedDataGridView_tabPatientsAttachments_list.SortString;
         }
 
         /// <summary>
@@ -4888,26 +4733,6 @@ namespace DG.DentneD.Forms
         }
 
         /// <summary>
-        /// Tab Datagrid filter handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void advancedDataGridView_tabInvoices_list_FilterStringChanged(object sender, EventArgs e)
-        {
-            vPatientsInvoicesBindingSource.Filter = advancedDataGridView_tabInvoices_list.FilterString;
-        }
-
-        /// <summary>
-        /// Tab Datagrid sort handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void advancedDataGridView_tabInvoices_list_SortStringChanged(object sender, EventArgs e)
-        {
-            vPatientsInvoicesBindingSource.Sort = advancedDataGridView_tabInvoices_list.SortString;
-        }
-
-        /// <summary>
         /// Load the tab DataSource
         /// </summary>
         /// <returns></returns>
@@ -4985,26 +4810,6 @@ namespace DG.DentneD.Forms
         }
 
         /// <summary>
-        /// Tab Datagrid filter handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void advancedDataGridView_tabEstimates_list_FilterStringChanged(object sender, EventArgs e)
-        {
-            vPatientsEstimatesBindingSource.Filter = advancedDataGridView_tabEstimates_list.FilterString;
-        }
-
-        /// <summary>
-        /// Tab Datagrid sort handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void advancedDataGridView_tabEstimates_list_SortStringChanged(object sender, EventArgs e)
-        {
-            vPatientsEstimatesBindingSource.Sort = advancedDataGridView_tabEstimates_list.SortString;
-        }
-
-        /// <summary>
         /// Load the tab DataSource
         /// </summary>
         /// <returns></returns>
@@ -5068,26 +4873,6 @@ namespace DG.DentneD.Forms
             ret = DGDataTableUtils.ToDataTable<VPatientsNotes>(vPatientsNotes);
 
             return ret;
-        }
-
-        /// <summary>
-        /// Tab Datagrid filter handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void advancedDataGridView_tabPatientsNotes_list_FilterStringChanged(object sender, EventArgs e)
-        {
-            vPatientsNotesBindingSource.Filter = advancedDataGridView_tabPatientsNotes_list.FilterString;
-        }
-
-        /// <summary>
-        /// Tab Datagrid sort handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void advancedDataGridView_tabPatientsNotes_list_SortStringChanged(object sender, EventArgs e)
-        {
-            vPatientsNotesBindingSource.Sort = advancedDataGridView_tabPatientsNotes_list.SortString;
         }
 
         /// <summary>
@@ -5187,26 +4972,6 @@ namespace DG.DentneD.Forms
         }
 
         /// <summary>
-        /// Tab Datagrid filter handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void advancedDataGridView_tabPatientsAttributes_list_FilterStringChanged(object sender, EventArgs e)
-        {
-            vPatientsAttributesBindingSource.Filter = advancedDataGridView_tabPatientsAttributes_list.FilterString;
-        }
-
-        /// <summary>
-        /// Tab Datagrid sort handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void advancedDataGridView_tabPatientsAttributes_list_SortStringChanged(object sender, EventArgs e)
-        {
-            vPatientsAttributesBindingSource.Sort = advancedDataGridView_tabPatientsAttributes_list.SortString;
-        }
-
-        /// <summary>
         /// Load the tab DataSource
         /// </summary>
         /// <returns></returns>
@@ -5279,6 +5044,5 @@ namespace DG.DentneD.Forms
         }
 
         #endregion
-
     }
 }

@@ -952,8 +952,6 @@
             this.advancedDataGridView_tabInvoicesLines_list.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.advancedDataGridView_tabInvoicesLines_list.Size = new System.Drawing.Size(480, 200);
             this.advancedDataGridView_tabInvoicesLines_list.TabIndex = 1;
-            this.advancedDataGridView_tabInvoicesLines_list.SortStringChanged += new System.EventHandler(this.advancedDataGridView_tabInvoicesLines_list_SortStringChanged);
-            this.advancedDataGridView_tabInvoicesLines_list.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_tabInvoicesLines_list_FilterStringChanged);
             // 
             // codeDataGridViewTextBoxColumn
             // 
@@ -1056,8 +1054,6 @@
             this.advancedDataGridView_main.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.advancedDataGridView_main.Size = new System.Drawing.Size(284, 390);
             this.advancedDataGridView_main.TabIndex = 0;
-            this.advancedDataGridView_main.SortStringChanged += new System.EventHandler(this.advancedDataGridView_main_SortStringChanged);
-            this.advancedDataGridView_main.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_main_FilterStringChanged);
             // 
             // numberDataGridViewTextBoxColumn
             // 

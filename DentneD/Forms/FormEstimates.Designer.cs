@@ -418,8 +418,6 @@
             this.advancedDataGridView_tabEstimatesLines_list.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.advancedDataGridView_tabEstimatesLines_list.Size = new System.Drawing.Size(480, 200);
             this.advancedDataGridView_tabEstimatesLines_list.TabIndex = 1;
-            this.advancedDataGridView_tabEstimatesLines_list.SortStringChanged += new System.EventHandler(this.advancedDataGridView_tabEstimatesLines_list_SortStringChanged);
-            this.advancedDataGridView_tabEstimatesLines_list.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_tabEstimatesLines_list_FilterStringChanged);
             // 
             // codeDataGridViewTextBoxColumn
             // 
@@ -799,8 +797,6 @@
             this.advancedDataGridView_main.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.advancedDataGridView_main.Size = new System.Drawing.Size(284, 390);
             this.advancedDataGridView_main.TabIndex = 0;
-            this.advancedDataGridView_main.SortStringChanged += new System.EventHandler(this.advancedDataGridView_main_SortStringChanged);
-            this.advancedDataGridView_main.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_main_FilterStringChanged);
             // 
             // numberDataGridViewTextBoxColumn
             // 

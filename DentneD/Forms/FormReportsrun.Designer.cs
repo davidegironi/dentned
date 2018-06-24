@@ -186,8 +186,6 @@
             this.advancedDataGridView_main.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.advancedDataGridView_main.Size = new System.Drawing.Size(784, 402);
             this.advancedDataGridView_main.TabIndex = 1;
-            this.advancedDataGridView_main.SortStringChanged += new System.EventHandler(this.advancedDataGridView_main_SortStringChanged);
-            this.advancedDataGridView_main.FilterStringChanged += new System.EventHandler(this.advancedDataGridView_main_FilterStringChanged);
             // 
             // FormReportsrun
             // 

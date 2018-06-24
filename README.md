@@ -23,12 +23,13 @@ It features a client-server architecture.
 * Treatments lists
 * Scheduling agenda
 * Customizable reports
-* PDF output
+* PDF output templates
 * Cloud backup scripts
 * Calendar web interface
 * Client-server architecture, access by multiple computer at the same time
 * Multilanguage
 * Send appointments reminder
+* Password form protection
 * Windows service for additional features
 
 

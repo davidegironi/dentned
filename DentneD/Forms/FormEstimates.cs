@@ -451,26 +451,6 @@ namespace DG.DentneD.Forms
         }
 
         /// <summary>
-        /// Main Datagrid filter handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void advancedDataGridView_main_FilterStringChanged(object sender, EventArgs e)
-        {
-            vEstimatesBindingSource.Filter = advancedDataGridView_main.FilterString;
-        }
-
-        /// <summary>
-        /// Main Datagrid sort handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void advancedDataGridView_main_SortStringChanged(object sender, EventArgs e)
-        {
-            vEstimatesBindingSource.Sort = advancedDataGridView_main.SortString;
-        }
-
-        /// <summary>
         /// Doctor filter handler
         /// </summary>
         /// <param name="sender"></param>
@@ -1210,26 +1190,6 @@ namespace DG.DentneD.Forms
             ret = DGDataTableUtils.ToDataTable<VEstimatesLines>(vEstimatesLines);
 
             return ret;
-        }
-
-        /// <summary>
-        /// Tab Datagrid filter handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void advancedDataGridView_tabEstimatesLines_list_FilterStringChanged(object sender, EventArgs e)
-        {
-            vEstimatesLinesBindingSource.Filter = advancedDataGridView_tabEstimatesLines_list.FilterString;
-        }
-
-        /// <summary>
-        /// Tab Datagrid sort handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void advancedDataGridView_tabEstimatesLines_list_SortStringChanged(object sender, EventArgs e)
-        {
-            vEstimatesLinesBindingSource.Sort = advancedDataGridView_tabEstimatesLines_list.SortString;
         }
 
         /// <summary>

@@ -144,26 +144,6 @@ namespace DG.DentneD.Forms
             return DGDataTableUtils.ToDataTable<VTreatmentsPricesLists>(vTreatmentsPricesLists);
         }
 
-        /// <summary>
-        /// Main Datagrid filter handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void advancedDataGridView_main_FilterStringChanged(object sender, EventArgs e)
-        {
-            vTreatmentsPricesListsBindingSource.Filter = advancedDataGridView_main.FilterString;
-        }
-
-        /// <summary>
-        /// Main Datagrid sort handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void advancedDataGridView_main_SortStringChanged(object sender, EventArgs e)
-        {
-            vTreatmentsPricesListsBindingSource.Sort = advancedDataGridView_main.SortString;
-        }
-
 
         #region tabTreatmentsPricesLists
 

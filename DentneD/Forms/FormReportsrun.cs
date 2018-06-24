@@ -284,26 +284,6 @@ namespace DG.DentneD.Forms
         }
 
         /// <summary>
-        /// Main Datagrid filter handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void advancedDataGridView_main_FilterStringChanged(object sender, EventArgs e)
-        {
-            _mainBindingSource.Filter = advancedDataGridView_main.FilterString;
-        }
-
-        /// <summary>
-        /// Main Datagrid sort handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void advancedDataGridView_main_SortStringChanged(object sender, EventArgs e)
-        {
-            _mainBindingSource.Sort = advancedDataGridView_main.SortString;
-        }
-
-        /// <summary>
         /// Open an SqlConnection
         /// </summary>
         /// <param name="sqlConnection"></param>

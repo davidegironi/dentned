@@ -143,26 +143,6 @@ namespace DG.DentneD.Forms
             return DGDataTableUtils.ToDataTable<VPatientsAttributesTypes>(vPatientsAttributesTypes);
         }
 
-        /// <summary>
-        /// Main Datagrid filter handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void advancedDataGridView_main_FilterStringChanged(object sender, EventArgs e)
-        {
-            vPatientsAttributesTypesBindingSource.Filter = advancedDataGridView_main.FilterString;
-        }
-
-        /// <summary>
-        /// Main Datagrid sort handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void advancedDataGridView_main_SortStringChanged(object sender, EventArgs e)
-        {
-            vPatientsAttributesTypesBindingSource.Sort = advancedDataGridView_main.SortString;
-        }
-
 
         #region tabPatientsAttributesTypes
 

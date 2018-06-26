@@ -1,6 +1,0 @@
-﻿{
-  "dateFormat":"dd/MM/yyyy",
-  "timeFormat":"HH:mm",
-  "sendAppointmentsReminderSubject":"Promemoria appuntmento Studio Dentistico",
-  "sendAppointmentsReminderBody":"Caro <b>%NAME%</b><br/><br/>Ti ricodiamo il tuo appuntamento presso nostro studio il giorno <b>%DATE%</b> alle ore <b>%TIME%</b>.<br/><br/>Grazie e a presto,<br/><b>Studio Dentistico</b><br/><br/><br/><small>This message is a PRIVATE communication. This message and all attachments are a private communication and may be confidential or protected by privilege. If you are not the intended recipient, you are hereby notified that any disclosure, copying, distribution or use of the information contained in or attached to this message is strictly prohibited. Please notify the sender of the delivery error by replying to this message, and then delete it from your system. Thank you.</small>"
-}

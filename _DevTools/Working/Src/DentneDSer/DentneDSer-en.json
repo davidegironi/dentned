@@ -1,6 +1,0 @@
-﻿{
-  "dateFormat":"yyyy/MM/dd ",
-  "timeFormat":"HH:mm",
-  "sendAppointmentsReminderSubject":"Appointment reminder from Dental Clinic",
-  "sendAppointmentsReminderBody":"Dear <b>%NAME%</b><br/><br/>This is a reminder that you have an appoinment with us on <b>%DATE%</b> at <b>%TIME%</b>.<br/><br/>Thank you,<br/><b>Dental Clinic</b><br/><br/><br/><small>This message is a PRIVATE communication. This message and all attachments are a private communication and may be confidential or protected by privilege. If you are not the intended recipient, you are hereby notified that any disclosure, copying, distribution or use of the information contained in or attached to this message is strictly prohibited. Please notify the sender of the delivery error by replying to this message, and then delete it from your system. Thank you.</small>"
-}

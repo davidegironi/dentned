@@ -304,7 +304,6 @@
             this.taxes_idComboBox.Name = "taxes_idComboBox";
             this.taxes_idComboBox.Size = new System.Drawing.Size(100, 21);
             this.taxes_idComboBox.TabIndex = 17;
-            this.taxes_idComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.taxes_idComboBox_KeyPress);
             // 
             // button_tabTreatments_unsettaxesid
             // 
@@ -354,7 +353,6 @@
             this.treatmentstypes_idComboBox.Name = "treatmentstypes_idComboBox";
             this.treatmentstypes_idComboBox.Size = new System.Drawing.Size(121, 21);
             this.treatmentstypes_idComboBox.TabIndex = 11;
-            this.treatmentstypes_idComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.treatmentstypes_idComboBox_KeyPress);
             // 
             // treatments_priceTextBox
             // 
@@ -543,7 +541,6 @@
             this.treatmentspriceslists_idComboBox.Size = new System.Drawing.Size(180, 21);
             this.treatmentspriceslists_idComboBox.TabIndex = 1;
             this.treatmentspriceslists_idComboBox.SelectedIndexChanged += new System.EventHandler(this.treatmentspriceslists_idComboBox_SelectedIndexChanged);
-            this.treatmentspriceslists_idComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.treatmentspriceslists_idComboBox_KeyPress);
             // 
             // panel_tabTreatmentsPrices_updates
             // 

@@ -1,0 +1,2442 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="dentnedModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="addressestypes">
+          <Key>
+            <PropertyRef Name="addressestypes_id" />
+          </Key>
+          <Property Name="addressestypes_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="addressestypes_name" Type="varchar" MaxLength="16" Nullable="false" />
+        </EntityType>
+        <EntityType Name="appointments">
+          <Key>
+            <PropertyRef Name="appointments_id" />
+          </Key>
+          <Property Name="appointments_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="doctors_id" Type="int" Nullable="false" />
+          <Property Name="patients_id" Type="int" Nullable="false" />
+          <Property Name="rooms_id" Type="int" Nullable="false" />
+          <Property Name="appointments_from" Type="datetime" Nullable="false" />
+          <Property Name="appointments_to" Type="datetime" Nullable="false" />
+          <Property Name="appointments_title" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="appointments_notes" Type="text" />
+          <Property Name="appointments_color" Type="char" MaxLength="7" />
+        </EntityType>
+        <EntityType Name="computedlines">
+          <Key>
+            <PropertyRef Name="computedlines_id" />
+          </Key>
+          <Property Name="computedlines_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="taxes_id" Type="int" />
+          <Property Name="computedlines_code" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="computedlines_name" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="computedlines_rate" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="contactstypes">
+          <Key>
+            <PropertyRef Name="contactstypes_id" />
+          </Key>
+          <Property Name="contactstypes_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="contactstypes_name" Type="varchar" MaxLength="16" Nullable="false" />
+        </EntityType>
+        <EntityType Name="doctors">
+          <Key>
+            <PropertyRef Name="doctors_id" />
+          </Key>
+          <Property Name="doctors_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="doctors_name" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="doctors_surname" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="doctors_doctext" Type="varchar" MaxLength="512" Nullable="false" />
+          <Property Name="doctors_username" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="doctors_password" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="doctors_token" Type="varchar" MaxLength="64" />
+          <Property Name="doctors_lastlogin" Type="datetime" />
+        </EntityType>
+        <EntityType Name="estimates">
+          <Key>
+            <PropertyRef Name="estimates_id" />
+          </Key>
+          <Property Name="estimates_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="doctors_id" Type="int" />
+          <Property Name="patients_id" Type="int" />
+          <Property Name="invoices_id" Type="int" />
+          <Property Name="estimates_number" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="estimates_date" Type="date" Nullable="false" />
+          <Property Name="estimates_doctor" Type="varchar" MaxLength="512" Nullable="false" />
+          <Property Name="estimates_patient" Type="varchar" MaxLength="512" Nullable="false" />
+          <Property Name="estimates_payment" Type="varchar" MaxLength="512" Nullable="false" />
+          <Property Name="estimates_footer" Type="varchar" MaxLength="512" />
+          <Property Name="estimates_totalnet" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="estimates_totalgross" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="estimates_totaldue" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="estimates_deductiontaxrate" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="estimatesfooters">
+          <Key>
+            <PropertyRef Name="estimatesfooters_id" />
+          </Key>
+          <Property Name="estimatesfooters_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="estimatesfooters_name" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="estimatesfooters_doctext" Type="varchar" MaxLength="512" Nullable="false" />
+          <Property Name="estimatesfooters_isdefault" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="estimateslines">
+          <Key>
+            <PropertyRef Name="estimateslines_id" />
+          </Key>
+          <Property Name="estimateslines_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="estimates_id" Type="int" Nullable="false" />
+          <Property Name="patientstreatments_id" Type="int" />
+          <Property Name="estimateslines_code" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="estimateslines_description" Type="varchar" MaxLength="512" Nullable="false" />
+          <Property Name="estimateslines_quantity" Type="int" Nullable="false" />
+          <Property Name="estimateslines_unitprice" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="estimateslines_taxrate" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="estimateslines_istaxesdeductionsable" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="invoices">
+          <Key>
+            <PropertyRef Name="invoices_id" />
+          </Key>
+          <Property Name="invoices_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="doctors_id" Type="int" />
+          <Property Name="patients_id" Type="int" />
+          <Property Name="invoices_number" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="invoices_date" Type="date" Nullable="false" />
+          <Property Name="invoices_doctor" Type="varchar" MaxLength="512" Nullable="false" />
+          <Property Name="invoices_patient" Type="varchar" MaxLength="512" Nullable="false" />
+          <Property Name="invoices_payment" Type="varchar" MaxLength="512" Nullable="false" />
+          <Property Name="invoices_footer" Type="varchar" MaxLength="512" />
+          <Property Name="invoices_totalnet" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="invoices_totalgross" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="invoices_totaldue" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="invoices_deductiontaxrate" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="invoices_ispaid" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="invoicesfooters">
+          <Key>
+            <PropertyRef Name="invoicesfooters_id" />
+          </Key>
+          <Property Name="invoicesfooters_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="invoicesfooters_name" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="invoicesfooters_doctext" Type="varchar" MaxLength="512" Nullable="false" />
+          <Property Name="invoicesfooters_isdefault" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="invoiceslines">
+          <Key>
+            <PropertyRef Name="invoiceslines_id" />
+          </Key>
+          <Property Name="invoiceslines_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="invoices_id" Type="int" Nullable="false" />
+          <Property Name="patientstreatments_id" Type="int" />
+          <Property Name="invoiceslines_code" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="invoiceslines_description" Type="varchar" MaxLength="512" Nullable="false" />
+          <Property Name="invoiceslines_quantity" Type="int" Nullable="false" />
+          <Property Name="invoiceslines_unitprice" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="invoiceslines_taxrate" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="invoiceslines_istaxesdeductionsable" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="medicalrecordstypes">
+          <Key>
+            <PropertyRef Name="medicalrecordstypes_id" />
+          </Key>
+          <Property Name="medicalrecordstypes_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="medicalrecordstypes_name" Type="varchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="patients">
+          <Key>
+            <PropertyRef Name="patients_id" />
+          </Key>
+          <Property Name="patients_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="treatmentspriceslists_id" Type="int" />
+          <Property Name="patients_name" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="patients_surname" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="patients_sex" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="patients_birthdate" Type="date" Nullable="false" />
+          <Property Name="patients_birthcity" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="patients_doctext" Type="varchar" MaxLength="512" Nullable="false" />
+          <Property Name="patients_notes" Type="text" />
+          <Property Name="patients_isarchived" Type="bit" Nullable="false" />
+          <Property Name="patients_username" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="patients_password" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="patients_token" Type="varchar" MaxLength="64" />
+          <Property Name="patients_lastlogin" Type="datetime" />
+        </EntityType>
+        <EntityType Name="patientsaddresses">
+          <Key>
+            <PropertyRef Name="patientsaddresses_id" />
+          </Key>
+          <Property Name="patientsaddresses_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="patients_id" Type="int" Nullable="false" />
+          <Property Name="addressestypes_id" Type="int" Nullable="false" />
+          <Property Name="patientsaddresses_state" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="patientsaddresses_city" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="patientsaddresses_zipcode" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="patientsaddresses_street" Type="varchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="patientsattachments">
+          <Key>
+            <PropertyRef Name="patientsattachments_id" />
+          </Key>
+          <Property Name="patientsattachments_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="patients_id" Type="int" Nullable="false" />
+          <Property Name="patientsattachmentstypes_id" Type="int" Nullable="false" />
+          <Property Name="patientsattachments_value" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="patientsattachments_date" Type="date" Nullable="false" />
+          <Property Name="patientsattachments_filename" Type="varchar" MaxLength="64" />
+          <Property Name="patientsattachments_note" Type="text" />
+        </EntityType>
+        <EntityType Name="patientsattachmentstypes">
+          <Key>
+            <PropertyRef Name="patientsattachmentstypes_id" />
+          </Key>
+          <Property Name="patientsattachmentstypes_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="patientsattachmentstypes_name" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="patientsattachmentstypes_valueautofunc" Type="char" MaxLength="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="patientsattributes">
+          <Key>
+            <PropertyRef Name="patientsattributes_id" />
+          </Key>
+          <Property Name="patientsattributes_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="patients_id" Type="int" Nullable="false" />
+          <Property Name="patientsattributestypes_id" Type="int" Nullable="false" />
+          <Property Name="patientsattributes_value" Type="varchar" MaxLength="512" />
+          <Property Name="patientsattributes_note" Type="text" />
+        </EntityType>
+        <EntityType Name="patientsattributestypes">
+          <Key>
+            <PropertyRef Name="patientsattributestypes_id" />
+          </Key>
+          <Property Name="patientsattributestypes_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="patientsattributestypes_name" Type="varchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="patientscontacts">
+          <Key>
+            <PropertyRef Name="patientscontacts_id" />
+          </Key>
+          <Property Name="patientscontacts_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="patients_id" Type="int" Nullable="false" />
+          <Property Name="contactstypes_id" Type="int" Nullable="false" />
+          <Property Name="patientscontacts_value" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="patientscontacts_note" Type="text" />
+        </EntityType>
+        <EntityType Name="patientsmedicalrecords">
+          <Key>
+            <PropertyRef Name="patientsmedicalrecords_id" />
+          </Key>
+          <Property Name="patientsmedicalrecords_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="patients_id" Type="int" Nullable="false" />
+          <Property Name="medicalrecordstypes_id" Type="int" Nullable="false" />
+          <Property Name="patientsmedicalrecords_value" Type="varchar" MaxLength="128" />
+          <Property Name="patientsmedicalrecords_note" Type="text" />
+        </EntityType>
+        <EntityType Name="patientsnotes">
+          <Key>
+            <PropertyRef Name="patientsnotes_id" />
+          </Key>
+          <Property Name="patientsnotes_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="patients_id" Type="int" Nullable="false" />
+          <Property Name="patientsnotes_date" Type="date" Nullable="false" />
+          <Property Name="patientsnotes_text" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="patientstreatments">
+          <Key>
+            <PropertyRef Name="patientstreatments_id" />
+          </Key>
+          <Property Name="patientstreatments_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="doctors_id" Type="int" Nullable="false" />
+          <Property Name="patients_id" Type="int" Nullable="false" />
+          <Property Name="treatments_id" Type="int" Nullable="false" />
+          <Property Name="patientstreatments_creationdate" Type="date" Nullable="false" />
+          <Property Name="patientstreatments_fulfilldate" Type="date" />
+          <Property Name="patientstreatments_ispaid" Type="bit" Nullable="false" />
+          <Property Name="patientstreatments_price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="patientstreatments_isunitprice" Type="bit" Nullable="false" />
+          <Property Name="patientstreatments_taxrate" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="patientstreatments_description" Type="varchar" MaxLength="128" />
+          <Property Name="patientstreatments_notes" Type="text" />
+          <Property Name="patientstreatments_expirationdate" Type="date" />
+          <Property Name="patientstreatments_t11" Type="bit" Nullable="false" />
+          <Property Name="patientstreatments_t12" Type="bit" Nullable="false" />
+          <Property Name="patientstreatments_t13" Type="bit" Nullable="false" />
+          <Property Name="patientstreatments_t14" Type="bit" Nullable="false" />
+          <Property Name="patientstreatments_t15" Type="bit" Nullable="false" />
+          <Property Name="patientstreatments_t16" Type="bit" Nullable="false" />
+          <Property Name="patientstreatments_t17" Type="bit" Nullable="false" />
+          <Property Name="patientstreatments_t18" Type="bit" Nullable="false" />
+          <Property Name="patientstreatments_t21" Type="bit" Nullable="false" />
+          <Property Name="patientstreatments_t22" Type="bit" Nullable="false" />
+          <Property Name="patientstreatments_t23" Type="bit" Nullable="false" />
+          <Property Name="patientstreatments_t24" Type="bit" Nullable="false" />
+          <Property Name="patientstreatments_t25" Type="bit" Nullable="false" />
+          <Property Name="patientstreatments_t26" Type="bit" Nullable="false" />
+          <Property Name="patientstreatments_t27" Type="bit" Nullable="false" />
+          <Property Name="patientstreatments_t28" Type="bit" Nullable="false" />
+          <Property Name="patientstreatments_t31" Type="bit" Nullable="false" />
+          <Property Name="patientstreatments_t32" Type="bit" Nullable="false" />
+          <Property Name="patientstreatments_t33" Type="bit" Nullable="false" />
+          <Property Name="patientstreatments_t34" Type="bit" Nullable="false" />
+          <Property Name="patientstreatments_t35" Type="bit" Nullable="false" />
+          <Property Name="patientstreatments_t36" Type="bit" Nullable="false" />
+          <Property Name="patientstreatments_t37" Type="bit" Nullable="false" />
+          <Property Name="patientstreatments_t38" Type="bit" Nullable="false" />
+          <Property Name="patientstreatments_t41" Type="bit" Nullable="false" />
+          <Property Name="patientstreatments_t42" Type="bit" Nullable="false" />
+          <Property Name="patientstreatments_t43" Type="bit" Nullable="false" />
+          <Property Name="patientstreatments_t44" Type="bit" Nullable="false" />
+          <Property Name="patientstreatments_t45" Type="bit" Nullable="false" />
+          <Property Name="patientstreatments_t46" Type="bit" Nullable="false" />
+          <Property Name="patientstreatments_t47" Type="bit" Nullable="false" />
+          <Property Name="patientstreatments_t48" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="payments">
+          <Key>
+            <PropertyRef Name="payments_id" />
+          </Key>
+          <Property Name="payments_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="patients_id" Type="int" Nullable="false" />
+          <Property Name="payments_date" Type="date" Nullable="false" />
+          <Property Name="payments_amount" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="payments_notes" Type="text" />
+        </EntityType>
+        <EntityType Name="paymentstypes">
+          <Key>
+            <PropertyRef Name="paymentstypes_id" />
+          </Key>
+          <Property Name="paymentstypes_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="paymentstypes_name" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="paymentstypes_doctext" Type="varchar" MaxLength="512" Nullable="false" />
+          <Property Name="paymentstypes_isdefault" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="reports">
+          <Key>
+            <PropertyRef Name="reports_id" />
+          </Key>
+          <Property Name="reports_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="reports_name" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="reports_query" Type="text" Nullable="false" />
+          <Property Name="reports_infotext" Type="text" />
+          <Property Name="reports_ispasswordprotected" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rooms">
+          <Key>
+            <PropertyRef Name="rooms_id" />
+          </Key>
+          <Property Name="rooms_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rooms_name" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="rooms_color" Type="char" MaxLength="7" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="taxes">
+          <Key>
+            <PropertyRef Name="taxes_id" />
+          </Key>
+          <Property Name="taxes_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="taxes_name" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="taxes_rate" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="taxes_isdefault" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="taxesdeductions">
+          <Key>
+            <PropertyRef Name="taxesdeductions_id" />
+          </Key>
+          <Property Name="taxesdeductions_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="taxesdeductions_name" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="taxesdeductions_rate" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="taxesdeductions_isdefault" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="treatments">
+          <Key>
+            <PropertyRef Name="treatments_id" />
+          </Key>
+          <Property Name="treatments_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="taxes_id" Type="int" />
+          <Property Name="treatmentstypes_id" Type="int" Nullable="false" />
+          <Property Name="treatments_code" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="treatments_name" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="treatments_price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="treatments_isunitprice" Type="bit" Nullable="false" />
+          <Property Name="treatments_mexpiration" Type="tinyint" />
+          <Property Name="treatments_notes" Type="text" />
+        </EntityType>
+        <EntityType Name="treatmentsprices">
+          <Key>
+            <PropertyRef Name="treatmentsprices_id" />
+          </Key>
+          <Property Name="treatmentsprices_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="treatments_id" Type="int" Nullable="false" />
+          <Property Name="treatmentspriceslists_id" Type="int" Nullable="false" />
+          <Property Name="treatmentsprices_price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="treatmentspriceslists">
+          <Key>
+            <PropertyRef Name="treatmentspriceslists_id" />
+          </Key>
+          <Property Name="treatmentspriceslists_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="treatmentspriceslists_name" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="treatmentspriceslists_multiplier" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="treatmentstypes">
+          <Key>
+            <PropertyRef Name="treatmentstypes_id" />
+          </Key>
+          <Property Name="treatmentstypes_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="treatmentstypes_name" Type="varchar" MaxLength="16" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_appointments_doctors">
+          <End Role="doctors" Type="Self.doctors" Multiplicity="1" />
+          <End Role="appointments" Type="Self.appointments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="doctors">
+              <PropertyRef Name="doctors_id" />
+            </Principal>
+            <Dependent Role="appointments">
+              <PropertyRef Name="doctors_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_appointments_patients">
+          <End Role="patients" Type="Self.patients" Multiplicity="1" />
+          <End Role="appointments" Type="Self.appointments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patients">
+              <PropertyRef Name="patients_id" />
+            </Principal>
+            <Dependent Role="appointments">
+              <PropertyRef Name="patients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_appointments_rooms">
+          <End Role="rooms" Type="Self.rooms" Multiplicity="1" />
+          <End Role="appointments" Type="Self.appointments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rooms">
+              <PropertyRef Name="rooms_id" />
+            </Principal>
+            <Dependent Role="appointments">
+              <PropertyRef Name="rooms_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_computedlines_taxes">
+          <End Role="taxes" Type="Self.taxes" Multiplicity="0..1" />
+          <End Role="computedlines" Type="Self.computedlines" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="taxes">
+              <PropertyRef Name="taxes_id" />
+            </Principal>
+            <Dependent Role="computedlines">
+              <PropertyRef Name="taxes_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_estimates_doctors">
+          <End Role="doctors" Type="Self.doctors" Multiplicity="0..1" />
+          <End Role="estimates" Type="Self.estimates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="doctors">
+              <PropertyRef Name="doctors_id" />
+            </Principal>
+            <Dependent Role="estimates">
+              <PropertyRef Name="doctors_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_estimates_invoices">
+          <End Role="invoices" Type="Self.invoices" Multiplicity="0..1" />
+          <End Role="estimates" Type="Self.estimates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="invoices">
+              <PropertyRef Name="invoices_id" />
+            </Principal>
+            <Dependent Role="estimates">
+              <PropertyRef Name="invoices_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_estimates_patients">
+          <End Role="patients" Type="Self.patients" Multiplicity="0..1" />
+          <End Role="estimates" Type="Self.estimates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patients">
+              <PropertyRef Name="patients_id" />
+            </Principal>
+            <Dependent Role="estimates">
+              <PropertyRef Name="patients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_estimateslines_estimates">
+          <End Role="estimates" Type="Self.estimates" Multiplicity="1" />
+          <End Role="estimateslines" Type="Self.estimateslines" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estimates">
+              <PropertyRef Name="estimates_id" />
+            </Principal>
+            <Dependent Role="estimateslines">
+              <PropertyRef Name="estimates_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_estimateslines_patientstreatments">
+          <End Role="patientstreatments" Type="Self.patientstreatments" Multiplicity="0..1" />
+          <End Role="estimateslines" Type="Self.estimateslines" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patientstreatments">
+              <PropertyRef Name="patientstreatments_id" />
+            </Principal>
+            <Dependent Role="estimateslines">
+              <PropertyRef Name="patientstreatments_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_invoices_doctors">
+          <End Role="doctors" Type="Self.doctors" Multiplicity="0..1" />
+          <End Role="invoices" Type="Self.invoices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="doctors">
+              <PropertyRef Name="doctors_id" />
+            </Principal>
+            <Dependent Role="invoices">
+              <PropertyRef Name="doctors_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_invoices_patients">
+          <End Role="patients" Type="Self.patients" Multiplicity="0..1" />
+          <End Role="invoices" Type="Self.invoices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patients">
+              <PropertyRef Name="patients_id" />
+            </Principal>
+            <Dependent Role="invoices">
+              <PropertyRef Name="patients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_invoiceslines_invoices">
+          <End Role="invoices" Type="Self.invoices" Multiplicity="1" />
+          <End Role="invoiceslines" Type="Self.invoiceslines" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="invoices">
+              <PropertyRef Name="invoices_id" />
+            </Principal>
+            <Dependent Role="invoiceslines">
+              <PropertyRef Name="invoices_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_invoiceslines_patientstreatments">
+          <End Role="patientstreatments" Type="Self.patientstreatments" Multiplicity="0..1" />
+          <End Role="invoiceslines" Type="Self.invoiceslines" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patientstreatments">
+              <PropertyRef Name="patientstreatments_id" />
+            </Principal>
+            <Dependent Role="invoiceslines">
+              <PropertyRef Name="patientstreatments_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_patients_treatmentspriceslists">
+          <End Role="treatmentspriceslists" Type="Self.treatmentspriceslists" Multiplicity="0..1" />
+          <End Role="patients" Type="Self.patients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="treatmentspriceslists">
+              <PropertyRef Name="treatmentspriceslists_id" />
+            </Principal>
+            <Dependent Role="patients">
+              <PropertyRef Name="treatmentspriceslists_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_patientsaddresses_addressestypes">
+          <End Role="addressestypes" Type="Self.addressestypes" Multiplicity="1" />
+          <End Role="patientsaddresses" Type="Self.patientsaddresses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="addressestypes">
+              <PropertyRef Name="addressestypes_id" />
+            </Principal>
+            <Dependent Role="patientsaddresses">
+              <PropertyRef Name="addressestypes_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_patientsaddresses_patients">
+          <End Role="patients" Type="Self.patients" Multiplicity="1" />
+          <End Role="patientsaddresses" Type="Self.patientsaddresses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patients">
+              <PropertyRef Name="patients_id" />
+            </Principal>
+            <Dependent Role="patientsaddresses">
+              <PropertyRef Name="patients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_patientsattachments_patients">
+          <End Role="patients" Type="Self.patients" Multiplicity="1" />
+          <End Role="patientsattachments" Type="Self.patientsattachments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patients">
+              <PropertyRef Name="patients_id" />
+            </Principal>
+            <Dependent Role="patientsattachments">
+              <PropertyRef Name="patients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_patientsattachments_patientsattachmentstypes">
+          <End Role="patientsattachmentstypes" Type="Self.patientsattachmentstypes" Multiplicity="1" />
+          <End Role="patientsattachments" Type="Self.patientsattachments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patientsattachmentstypes">
+              <PropertyRef Name="patientsattachmentstypes_id" />
+            </Principal>
+            <Dependent Role="patientsattachments">
+              <PropertyRef Name="patientsattachmentstypes_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_patientsattributes_patients">
+          <End Role="patients" Type="Self.patients" Multiplicity="1" />
+          <End Role="patientsattributes" Type="Self.patientsattributes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patients">
+              <PropertyRef Name="patients_id" />
+            </Principal>
+            <Dependent Role="patientsattributes">
+              <PropertyRef Name="patients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_patientsattributes_patientsattributestypes">
+          <End Role="patientsattributestypes" Type="Self.patientsattributestypes" Multiplicity="1" />
+          <End Role="patientsattributes" Type="Self.patientsattributes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patientsattributestypes">
+              <PropertyRef Name="patientsattributestypes_id" />
+            </Principal>
+            <Dependent Role="patientsattributes">
+              <PropertyRef Name="patientsattributestypes_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_patientscontacts_contactstypes">
+          <End Role="contactstypes" Type="Self.contactstypes" Multiplicity="1" />
+          <End Role="patientscontacts" Type="Self.patientscontacts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="contactstypes">
+              <PropertyRef Name="contactstypes_id" />
+            </Principal>
+            <Dependent Role="patientscontacts">
+              <PropertyRef Name="contactstypes_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_patientscontacts_patients">
+          <End Role="patients" Type="Self.patients" Multiplicity="1" />
+          <End Role="patientscontacts" Type="Self.patientscontacts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patients">
+              <PropertyRef Name="patients_id" />
+            </Principal>
+            <Dependent Role="patientscontacts">
+              <PropertyRef Name="patients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_patientsmedicalrecords_medicalrecordstypes">
+          <End Role="medicalrecordstypes" Type="Self.medicalrecordstypes" Multiplicity="1" />
+          <End Role="patientsmedicalrecords" Type="Self.patientsmedicalrecords" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="medicalrecordstypes">
+              <PropertyRef Name="medicalrecordstypes_id" />
+            </Principal>
+            <Dependent Role="patientsmedicalrecords">
+              <PropertyRef Name="medicalrecordstypes_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_patientsmedicalrecords_patients">
+          <End Role="patients" Type="Self.patients" Multiplicity="1" />
+          <End Role="patientsmedicalrecords" Type="Self.patientsmedicalrecords" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patients">
+              <PropertyRef Name="patients_id" />
+            </Principal>
+            <Dependent Role="patientsmedicalrecords">
+              <PropertyRef Name="patients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_patientsnotes_patients">
+          <End Role="patients" Type="Self.patients" Multiplicity="1" />
+          <End Role="patientsnotes" Type="Self.patientsnotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patients">
+              <PropertyRef Name="patients_id" />
+            </Principal>
+            <Dependent Role="patientsnotes">
+              <PropertyRef Name="patients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_patientstreatments_doctors">
+          <End Role="doctors" Type="Self.doctors" Multiplicity="1" />
+          <End Role="patientstreatments" Type="Self.patientstreatments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="doctors">
+              <PropertyRef Name="doctors_id" />
+            </Principal>
+            <Dependent Role="patientstreatments">
+              <PropertyRef Name="doctors_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_patientstreatments_patients">
+          <End Role="patients" Type="Self.patients" Multiplicity="1" />
+          <End Role="patientstreatments" Type="Self.patientstreatments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patients">
+              <PropertyRef Name="patients_id" />
+            </Principal>
+            <Dependent Role="patientstreatments">
+              <PropertyRef Name="patients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_patientstreatments_treatments">
+          <End Role="treatments" Type="Self.treatments" Multiplicity="1" />
+          <End Role="patientstreatments" Type="Self.patientstreatments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="treatments">
+              <PropertyRef Name="treatments_id" />
+            </Principal>
+            <Dependent Role="patientstreatments">
+              <PropertyRef Name="treatments_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_payments_patients">
+          <End Role="patients" Type="Self.patients" Multiplicity="1" />
+          <End Role="payments" Type="Self.payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patients">
+              <PropertyRef Name="patients_id" />
+            </Principal>
+            <Dependent Role="payments">
+              <PropertyRef Name="patients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_treatments_taxes">
+          <End Role="taxes" Type="Self.taxes" Multiplicity="0..1" />
+          <End Role="treatments" Type="Self.treatments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="taxes">
+              <PropertyRef Name="taxes_id" />
+            </Principal>
+            <Dependent Role="treatments">
+              <PropertyRef Name="taxes_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_treatments_treatmentstypes">
+          <End Role="treatmentstypes" Type="Self.treatmentstypes" Multiplicity="1" />
+          <End Role="treatments" Type="Self.treatments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="treatmentstypes">
+              <PropertyRef Name="treatmentstypes_id" />
+            </Principal>
+            <Dependent Role="treatments">
+              <PropertyRef Name="treatmentstypes_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_treatmentsprices_treatments">
+          <End Role="treatments" Type="Self.treatments" Multiplicity="1" />
+          <End Role="treatmentsprices" Type="Self.treatmentsprices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="treatments">
+              <PropertyRef Name="treatments_id" />
+            </Principal>
+            <Dependent Role="treatmentsprices">
+              <PropertyRef Name="treatments_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_treatmentsprices_treatmentspriceslists">
+          <End Role="treatmentspriceslists" Type="Self.treatmentspriceslists" Multiplicity="1" />
+          <End Role="treatmentsprices" Type="Self.treatmentsprices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="treatmentspriceslists">
+              <PropertyRef Name="treatmentspriceslists_id" />
+            </Principal>
+            <Dependent Role="treatmentsprices">
+              <PropertyRef Name="treatmentspriceslists_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dentnedModelStoreContainer">
+          <EntitySet Name="addressestypes" EntityType="Self.addressestypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="appointments" EntityType="Self.appointments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="computedlines" EntityType="Self.computedlines" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="contactstypes" EntityType="Self.contactstypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="doctors" EntityType="Self.doctors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="estimates" EntityType="Self.estimates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="estimatesfooters" EntityType="Self.estimatesfooters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="estimateslines" EntityType="Self.estimateslines" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="invoices" EntityType="Self.invoices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="invoicesfooters" EntityType="Self.invoicesfooters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="invoiceslines" EntityType="Self.invoiceslines" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="medicalrecordstypes" EntityType="Self.medicalrecordstypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="patients" EntityType="Self.patients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="patientsaddresses" EntityType="Self.patientsaddresses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="patientsattachments" EntityType="Self.patientsattachments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="patientsattachmentstypes" EntityType="Self.patientsattachmentstypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="patientsattributes" EntityType="Self.patientsattributes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="patientsattributestypes" EntityType="Self.patientsattributestypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="patientscontacts" EntityType="Self.patientscontacts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="patientsmedicalrecords" EntityType="Self.patientsmedicalrecords" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="patientsnotes" EntityType="Self.patientsnotes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="patientstreatments" EntityType="Self.patientstreatments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="payments" EntityType="Self.payments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="paymentstypes" EntityType="Self.paymentstypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="reports" EntityType="Self.reports" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rooms" EntityType="Self.rooms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="taxes" EntityType="Self.taxes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="taxesdeductions" EntityType="Self.taxesdeductions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="treatments" EntityType="Self.treatments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="treatmentsprices" EntityType="Self.treatmentsprices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="treatmentspriceslists" EntityType="Self.treatmentspriceslists" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="treatmentstypes" EntityType="Self.treatmentstypes" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_appointments_doctors" Association="Self.FK_appointments_doctors">
+            <End Role="doctors" EntitySet="doctors" />
+            <End Role="appointments" EntitySet="appointments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_appointments_patients" Association="Self.FK_appointments_patients">
+            <End Role="patients" EntitySet="patients" />
+            <End Role="appointments" EntitySet="appointments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_appointments_rooms" Association="Self.FK_appointments_rooms">
+            <End Role="rooms" EntitySet="rooms" />
+            <End Role="appointments" EntitySet="appointments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_computedlines_taxes" Association="Self.FK_computedlines_taxes">
+            <End Role="taxes" EntitySet="taxes" />
+            <End Role="computedlines" EntitySet="computedlines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_estimates_doctors" Association="Self.FK_estimates_doctors">
+            <End Role="doctors" EntitySet="doctors" />
+            <End Role="estimates" EntitySet="estimates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_estimates_invoices" Association="Self.FK_estimates_invoices">
+            <End Role="invoices" EntitySet="invoices" />
+            <End Role="estimates" EntitySet="estimates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_estimates_patients" Association="Self.FK_estimates_patients">
+            <End Role="patients" EntitySet="patients" />
+            <End Role="estimates" EntitySet="estimates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_estimateslines_estimates" Association="Self.FK_estimateslines_estimates">
+            <End Role="estimates" EntitySet="estimates" />
+            <End Role="estimateslines" EntitySet="estimateslines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_estimateslines_patientstreatments" Association="Self.FK_estimateslines_patientstreatments">
+            <End Role="patientstreatments" EntitySet="patientstreatments" />
+            <End Role="estimateslines" EntitySet="estimateslines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_invoices_doctors" Association="Self.FK_invoices_doctors">
+            <End Role="doctors" EntitySet="doctors" />
+            <End Role="invoices" EntitySet="invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_invoices_patients" Association="Self.FK_invoices_patients">
+            <End Role="patients" EntitySet="patients" />
+            <End Role="invoices" EntitySet="invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_invoiceslines_invoices" Association="Self.FK_invoiceslines_invoices">
+            <End Role="invoices" EntitySet="invoices" />
+            <End Role="invoiceslines" EntitySet="invoiceslines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_invoiceslines_patientstreatments" Association="Self.FK_invoiceslines_patientstreatments">
+            <End Role="patientstreatments" EntitySet="patientstreatments" />
+            <End Role="invoiceslines" EntitySet="invoiceslines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_patients_treatmentspriceslists" Association="Self.FK_patients_treatmentspriceslists">
+            <End Role="treatmentspriceslists" EntitySet="treatmentspriceslists" />
+            <End Role="patients" EntitySet="patients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_patientsaddresses_addressestypes" Association="Self.FK_patientsaddresses_addressestypes">
+            <End Role="addressestypes" EntitySet="addressestypes" />
+            <End Role="patientsaddresses" EntitySet="patientsaddresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_patientsaddresses_patients" Association="Self.FK_patientsaddresses_patients">
+            <End Role="patients" EntitySet="patients" />
+            <End Role="patientsaddresses" EntitySet="patientsaddresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_patientsattachments_patients" Association="Self.FK_patientsattachments_patients">
+            <End Role="patients" EntitySet="patients" />
+            <End Role="patientsattachments" EntitySet="patientsattachments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_patientsattachments_patientsattachmentstypes" Association="Self.FK_patientsattachments_patientsattachmentstypes">
+            <End Role="patientsattachmentstypes" EntitySet="patientsattachmentstypes" />
+            <End Role="patientsattachments" EntitySet="patientsattachments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_patientsattributes_patients" Association="Self.FK_patientsattributes_patients">
+            <End Role="patients" EntitySet="patients" />
+            <End Role="patientsattributes" EntitySet="patientsattributes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_patientsattributes_patientsattributestypes" Association="Self.FK_patientsattributes_patientsattributestypes">
+            <End Role="patientsattributestypes" EntitySet="patientsattributestypes" />
+            <End Role="patientsattributes" EntitySet="patientsattributes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_patientscontacts_contactstypes" Association="Self.FK_patientscontacts_contactstypes">
+            <End Role="contactstypes" EntitySet="contactstypes" />
+            <End Role="patientscontacts" EntitySet="patientscontacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_patientscontacts_patients" Association="Self.FK_patientscontacts_patients">
+            <End Role="patients" EntitySet="patients" />
+            <End Role="patientscontacts" EntitySet="patientscontacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_patientsmedicalrecords_medicalrecordstypes" Association="Self.FK_patientsmedicalrecords_medicalrecordstypes">
+            <End Role="medicalrecordstypes" EntitySet="medicalrecordstypes" />
+            <End Role="patientsmedicalrecords" EntitySet="patientsmedicalrecords" />
+          </AssociationSet>
+          <AssociationSet Name="FK_patientsmedicalrecords_patients" Association="Self.FK_patientsmedicalrecords_patients">
+            <End Role="patients" EntitySet="patients" />
+            <End Role="patientsmedicalrecords" EntitySet="patientsmedicalrecords" />
+          </AssociationSet>
+          <AssociationSet Name="FK_patientsnotes_patients" Association="Self.FK_patientsnotes_patients">
+            <End Role="patients" EntitySet="patients" />
+            <End Role="patientsnotes" EntitySet="patientsnotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_patientstreatments_doctors" Association="Self.FK_patientstreatments_doctors">
+            <End Role="doctors" EntitySet="doctors" />
+            <End Role="patientstreatments" EntitySet="patientstreatments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_patientstreatments_patients" Association="Self.FK_patientstreatments_patients">
+            <End Role="patients" EntitySet="patients" />
+            <End Role="patientstreatments" EntitySet="patientstreatments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_patientstreatments_treatments" Association="Self.FK_patientstreatments_treatments">
+            <End Role="treatments" EntitySet="treatments" />
+            <End Role="patientstreatments" EntitySet="patientstreatments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_payments_patients" Association="Self.FK_payments_patients">
+            <End Role="patients" EntitySet="patients" />
+            <End Role="payments" EntitySet="payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_treatments_taxes" Association="Self.FK_treatments_taxes">
+            <End Role="taxes" EntitySet="taxes" />
+            <End Role="treatments" EntitySet="treatments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_treatments_treatmentstypes" Association="Self.FK_treatments_treatmentstypes">
+            <End Role="treatmentstypes" EntitySet="treatmentstypes" />
+            <End Role="treatments" EntitySet="treatments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_treatmentsprices_treatments" Association="Self.FK_treatmentsprices_treatments">
+            <End Role="treatments" EntitySet="treatments" />
+            <End Role="treatmentsprices" EntitySet="treatmentsprices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_treatmentsprices_treatmentspriceslists" Association="Self.FK_treatmentsprices_treatmentspriceslists">
+            <End Role="treatmentspriceslists" EntitySet="treatmentspriceslists" />
+            <End Role="treatmentsprices" EntitySet="treatmentsprices" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dentnedModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="dentnedEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="addressestypes" EntityType="dentnedModel.addressestypes" />
+          <EntitySet Name="appointments" EntityType="dentnedModel.appointments" />
+          <EntitySet Name="computedlines" EntityType="dentnedModel.computedlines" />
+          <EntitySet Name="contactstypes" EntityType="dentnedModel.contactstypes" />
+          <EntitySet Name="doctors" EntityType="dentnedModel.doctors" />
+          <EntitySet Name="estimates" EntityType="dentnedModel.estimates" />
+          <EntitySet Name="estimatesfooters" EntityType="dentnedModel.estimatesfooters" />
+          <EntitySet Name="estimateslines" EntityType="dentnedModel.estimateslines" />
+          <EntitySet Name="invoices" EntityType="dentnedModel.invoices" />
+          <EntitySet Name="invoicesfooters" EntityType="dentnedModel.invoicesfooters" />
+          <EntitySet Name="invoiceslines" EntityType="dentnedModel.invoiceslines" />
+          <EntitySet Name="medicalrecordstypes" EntityType="dentnedModel.medicalrecordstypes" />
+          <EntitySet Name="patients" EntityType="dentnedModel.patients" />
+          <EntitySet Name="patientsaddresses" EntityType="dentnedModel.patientsaddresses" />
+          <EntitySet Name="patientsattachments" EntityType="dentnedModel.patientsattachments" />
+          <EntitySet Name="patientsattachmentstypes" EntityType="dentnedModel.patientsattachmentstypes" />
+          <EntitySet Name="patientsattributes" EntityType="dentnedModel.patientsattributes" />
+          <EntitySet Name="patientsattributestypes" EntityType="dentnedModel.patientsattributestypes" />
+          <EntitySet Name="patientscontacts" EntityType="dentnedModel.patientscontacts" />
+          <EntitySet Name="patientsmedicalrecords" EntityType="dentnedModel.patientsmedicalrecords" />
+          <EntitySet Name="patientsnotes" EntityType="dentnedModel.patientsnotes" />
+          <EntitySet Name="patientstreatments" EntityType="dentnedModel.patientstreatments" />
+          <EntitySet Name="payments" EntityType="dentnedModel.payments" />
+          <EntitySet Name="paymentstypes" EntityType="dentnedModel.paymentstypes" />
+          <EntitySet Name="reports" EntityType="dentnedModel.reports" />
+          <EntitySet Name="rooms" EntityType="dentnedModel.rooms" />
+          <EntitySet Name="sysdiagrams" EntityType="dentnedModel.sysdiagrams" />
+          <EntitySet Name="taxes" EntityType="dentnedModel.taxes" />
+          <EntitySet Name="taxesdeductions" EntityType="dentnedModel.taxesdeductions" />
+          <EntitySet Name="treatments" EntityType="dentnedModel.treatments" />
+          <EntitySet Name="treatmentsprices" EntityType="dentnedModel.treatmentsprices" />
+          <EntitySet Name="treatmentspriceslists" EntityType="dentnedModel.treatmentspriceslists" />
+          <EntitySet Name="treatmentstypes" EntityType="dentnedModel.treatmentstypes" />
+          <AssociationSet Name="FK_patientsaddresses_addressestypes" Association="dentnedModel.FK_patientsaddresses_addressestypes">
+            <End Role="addressestypes" EntitySet="addressestypes" />
+            <End Role="patientsaddresses" EntitySet="patientsaddresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_appointments_doctors" Association="dentnedModel.FK_appointments_doctors">
+            <End Role="doctors" EntitySet="doctors" />
+            <End Role="appointments" EntitySet="appointments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_appointments_patients" Association="dentnedModel.FK_appointments_patients">
+            <End Role="patients" EntitySet="patients" />
+            <End Role="appointments" EntitySet="appointments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_appointments_rooms" Association="dentnedModel.FK_appointments_rooms">
+            <End Role="rooms" EntitySet="rooms" />
+            <End Role="appointments" EntitySet="appointments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_computedlines_taxes" Association="dentnedModel.FK_computedlines_taxes">
+            <End Role="taxes" EntitySet="taxes" />
+            <End Role="computedlines" EntitySet="computedlines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_patientscontacts_contactstypes" Association="dentnedModel.FK_patientscontacts_contactstypes">
+            <End Role="contactstypes" EntitySet="contactstypes" />
+            <End Role="patientscontacts" EntitySet="patientscontacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_estimates_doctors" Association="dentnedModel.FK_estimates_doctors">
+            <End Role="doctors" EntitySet="doctors" />
+            <End Role="estimates" EntitySet="estimates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_invoices_doctors" Association="dentnedModel.FK_invoices_doctors">
+            <End Role="doctors" EntitySet="doctors" />
+            <End Role="invoices" EntitySet="invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_patientstreatments_doctors" Association="dentnedModel.FK_patientstreatments_doctors">
+            <End Role="doctors" EntitySet="doctors" />
+            <End Role="patientstreatments" EntitySet="patientstreatments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_estimates_invoices" Association="dentnedModel.FK_estimates_invoices">
+            <End Role="invoices" EntitySet="invoices" />
+            <End Role="estimates" EntitySet="estimates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_estimates_patients" Association="dentnedModel.FK_estimates_patients">
+            <End Role="patients" EntitySet="patients" />
+            <End Role="estimates" EntitySet="estimates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_estimateslines_estimates" Association="dentnedModel.FK_estimateslines_estimates">
+            <End Role="estimates" EntitySet="estimates" />
+            <End Role="estimateslines" EntitySet="estimateslines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_estimateslines_patientstreatments" Association="dentnedModel.FK_estimateslines_patientstreatments">
+            <End Role="patientstreatments" EntitySet="patientstreatments" />
+            <End Role="estimateslines" EntitySet="estimateslines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_invoices_patients" Association="dentnedModel.FK_invoices_patients">
+            <End Role="patients" EntitySet="patients" />
+            <End Role="invoices" EntitySet="invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_invoiceslines_invoices" Association="dentnedModel.FK_invoiceslines_invoices">
+            <End Role="invoices" EntitySet="invoices" />
+            <End Role="invoiceslines" EntitySet="invoiceslines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_invoiceslines_patientstreatments" Association="dentnedModel.FK_invoiceslines_patientstreatments">
+            <End Role="patientstreatments" EntitySet="patientstreatments" />
+            <End Role="invoiceslines" EntitySet="invoiceslines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_patientsmedicalrecords_medicalrecordstypes" Association="dentnedModel.FK_patientsmedicalrecords_medicalrecordstypes">
+            <End Role="medicalrecordstypes" EntitySet="medicalrecordstypes" />
+            <End Role="patientsmedicalrecords" EntitySet="patientsmedicalrecords" />
+          </AssociationSet>
+          <AssociationSet Name="FK_patients_treatmentspriceslists" Association="dentnedModel.FK_patients_treatmentspriceslists">
+            <End Role="treatmentspriceslists" EntitySet="treatmentspriceslists" />
+            <End Role="patients" EntitySet="patients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_patientsaddresses_patients" Association="dentnedModel.FK_patientsaddresses_patients">
+            <End Role="patients" EntitySet="patients" />
+            <End Role="patientsaddresses" EntitySet="patientsaddresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_patientsattachments_patients" Association="dentnedModel.FK_patientsattachments_patients">
+            <End Role="patients" EntitySet="patients" />
+            <End Role="patientsattachments" EntitySet="patientsattachments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_patientsattributes_patients" Association="dentnedModel.FK_patientsattributes_patients">
+            <End Role="patients" EntitySet="patients" />
+            <End Role="patientsattributes" EntitySet="patientsattributes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_patientscontacts_patients" Association="dentnedModel.FK_patientscontacts_patients">
+            <End Role="patients" EntitySet="patients" />
+            <End Role="patientscontacts" EntitySet="patientscontacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_patientsmedicalrecords_patients" Association="dentnedModel.FK_patientsmedicalrecords_patients">
+            <End Role="patients" EntitySet="patients" />
+            <End Role="patientsmedicalrecords" EntitySet="patientsmedicalrecords" />
+          </AssociationSet>
+          <AssociationSet Name="FK_patientsnotes_patients" Association="dentnedModel.FK_patientsnotes_patients">
+            <End Role="patients" EntitySet="patients" />
+            <End Role="patientsnotes" EntitySet="patientsnotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_patientstreatments_patients" Association="dentnedModel.FK_patientstreatments_patients">
+            <End Role="patients" EntitySet="patients" />
+            <End Role="patientstreatments" EntitySet="patientstreatments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_payments_patients" Association="dentnedModel.FK_payments_patients">
+            <End Role="patients" EntitySet="patients" />
+            <End Role="payments" EntitySet="payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_patientsattachments_patientsattachmentstypes" Association="dentnedModel.FK_patientsattachments_patientsattachmentstypes">
+            <End Role="patientsattachmentstypes" EntitySet="patientsattachmentstypes" />
+            <End Role="patientsattachments" EntitySet="patientsattachments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_patientsattributes_patientsattributestypes" Association="dentnedModel.FK_patientsattributes_patientsattributestypes">
+            <End Role="patientsattributestypes" EntitySet="patientsattributestypes" />
+            <End Role="patientsattributes" EntitySet="patientsattributes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_patientstreatments_treatments" Association="dentnedModel.FK_patientstreatments_treatments">
+            <End Role="treatments" EntitySet="treatments" />
+            <End Role="patientstreatments" EntitySet="patientstreatments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_treatments_taxes" Association="dentnedModel.FK_treatments_taxes">
+            <End Role="taxes" EntitySet="taxes" />
+            <End Role="treatments" EntitySet="treatments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_treatments_treatmentstypes" Association="dentnedModel.FK_treatments_treatmentstypes">
+            <End Role="treatmentstypes" EntitySet="treatmentstypes" />
+            <End Role="treatments" EntitySet="treatments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_treatmentsprices_treatments" Association="dentnedModel.FK_treatmentsprices_treatments">
+            <End Role="treatments" EntitySet="treatments" />
+            <End Role="treatmentsprices" EntitySet="treatmentsprices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_treatmentsprices_treatmentspriceslists" Association="dentnedModel.FK_treatmentsprices_treatmentspriceslists">
+            <End Role="treatmentspriceslists" EntitySet="treatmentspriceslists" />
+            <End Role="treatmentsprices" EntitySet="treatmentsprices" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="addressestypes">
+          <Key>
+            <PropertyRef Name="addressestypes_id" />
+          </Key>
+          <Property Name="addressestypes_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="addressestypes_name" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="patientsaddresses" Relationship="dentnedModel.FK_patientsaddresses_addressestypes" FromRole="addressestypes" ToRole="patientsaddresses" />
+        </EntityType>
+        <EntityType Name="appointments">
+          <Key>
+            <PropertyRef Name="appointments_id" />
+          </Key>
+          <Property Name="appointments_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="doctors_id" Type="Int32" Nullable="false" />
+          <Property Name="patients_id" Type="Int32" Nullable="false" />
+          <Property Name="rooms_id" Type="Int32" Nullable="false" />
+          <Property Name="appointments_from" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="appointments_to" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="appointments_title" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="appointments_notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="appointments_color" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="doctors" Relationship="dentnedModel.FK_appointments_doctors" FromRole="appointments" ToRole="doctors" />
+          <NavigationProperty Name="patients" Relationship="dentnedModel.FK_appointments_patients" FromRole="appointments" ToRole="patients" />
+          <NavigationProperty Name="rooms" Relationship="dentnedModel.FK_appointments_rooms" FromRole="appointments" ToRole="rooms" />
+        </EntityType>
+        <EntityType Name="computedlines">
+          <Key>
+            <PropertyRef Name="computedlines_id" />
+          </Key>
+          <Property Name="computedlines_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="taxes_id" Type="Int32" />
+          <Property Name="computedlines_code" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="computedlines_name" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="computedlines_rate" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <NavigationProperty Name="taxes" Relationship="dentnedModel.FK_computedlines_taxes" FromRole="computedlines" ToRole="taxes" />
+        </EntityType>
+        <EntityType Name="contactstypes">
+          <Key>
+            <PropertyRef Name="contactstypes_id" />
+          </Key>
+          <Property Name="contactstypes_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="contactstypes_name" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="patientscontacts" Relationship="dentnedModel.FK_patientscontacts_contactstypes" FromRole="contactstypes" ToRole="patientscontacts" />
+        </EntityType>
+        <EntityType Name="doctors">
+          <Key>
+            <PropertyRef Name="doctors_id" />
+          </Key>
+          <Property Name="doctors_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="doctors_name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="doctors_surname" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="doctors_doctext" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="doctors_username" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="doctors_password" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="doctors_token" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="doctors_lastlogin" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="appointments" Relationship="dentnedModel.FK_appointments_doctors" FromRole="doctors" ToRole="appointments" />
+          <NavigationProperty Name="estimates" Relationship="dentnedModel.FK_estimates_doctors" FromRole="doctors" ToRole="estimates" />
+          <NavigationProperty Name="invoices" Relationship="dentnedModel.FK_invoices_doctors" FromRole="doctors" ToRole="invoices" />
+          <NavigationProperty Name="patientstreatments" Relationship="dentnedModel.FK_patientstreatments_doctors" FromRole="doctors" ToRole="patientstreatments" />
+        </EntityType>
+        <EntityType Name="estimates">
+          <Key>
+            <PropertyRef Name="estimates_id" />
+          </Key>
+          <Property Name="estimates_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="doctors_id" Type="Int32" />
+          <Property Name="patients_id" Type="Int32" />
+          <Property Name="invoices_id" Type="Int32" />
+          <Property Name="estimates_number" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="estimates_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="estimates_doctor" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="estimates_patient" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="estimates_payment" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="estimates_footer" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="estimates_totalnet" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="estimates_totalgross" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="estimates_totaldue" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="estimates_deductiontaxrate" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <NavigationProperty Name="doctors" Relationship="dentnedModel.FK_estimates_doctors" FromRole="estimates" ToRole="doctors" />
+          <NavigationProperty Name="invoices" Relationship="dentnedModel.FK_estimates_invoices" FromRole="estimates" ToRole="invoices" />
+          <NavigationProperty Name="patients" Relationship="dentnedModel.FK_estimates_patients" FromRole="estimates" ToRole="patients" />
+          <NavigationProperty Name="estimateslines" Relationship="dentnedModel.FK_estimateslines_estimates" FromRole="estimates" ToRole="estimateslines" />
+        </EntityType>
+        <EntityType Name="estimatesfooters">
+          <Key>
+            <PropertyRef Name="estimatesfooters_id" />
+          </Key>
+          <Property Name="estimatesfooters_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="estimatesfooters_name" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="estimatesfooters_doctext" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="estimatesfooters_isdefault" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="estimateslines">
+          <Key>
+            <PropertyRef Name="estimateslines_id" />
+          </Key>
+          <Property Name="estimateslines_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="estimates_id" Type="Int32" Nullable="false" />
+          <Property Name="patientstreatments_id" Type="Int32" />
+          <Property Name="estimateslines_code" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="estimateslines_description" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="estimateslines_quantity" Type="Int32" Nullable="false" />
+          <Property Name="estimateslines_unitprice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="estimateslines_taxrate" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="estimateslines_istaxesdeductionsable" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="estimates" Relationship="dentnedModel.FK_estimateslines_estimates" FromRole="estimateslines" ToRole="estimates" />
+          <NavigationProperty Name="patientstreatments" Relationship="dentnedModel.FK_estimateslines_patientstreatments" FromRole="estimateslines" ToRole="patientstreatments" />
+        </EntityType>
+        <EntityType Name="invoices">
+          <Key>
+            <PropertyRef Name="invoices_id" />
+          </Key>
+          <Property Name="invoices_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="doctors_id" Type="Int32" />
+          <Property Name="patients_id" Type="Int32" />
+          <Property Name="invoices_number" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="invoices_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="invoices_doctor" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="invoices_patient" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="invoices_payment" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="invoices_footer" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="invoices_totalnet" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="invoices_totalgross" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="invoices_totaldue" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="invoices_deductiontaxrate" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="invoices_ispaid" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="doctors" Relationship="dentnedModel.FK_invoices_doctors" FromRole="invoices" ToRole="doctors" />
+          <NavigationProperty Name="estimates" Relationship="dentnedModel.FK_estimates_invoices" FromRole="invoices" ToRole="estimates" />
+          <NavigationProperty Name="patients" Relationship="dentnedModel.FK_invoices_patients" FromRole="invoices" ToRole="patients" />
+          <NavigationProperty Name="invoiceslines" Relationship="dentnedModel.FK_invoiceslines_invoices" FromRole="invoices" ToRole="invoiceslines" />
+        </EntityType>
+        <EntityType Name="invoicesfooters">
+          <Key>
+            <PropertyRef Name="invoicesfooters_id" />
+          </Key>
+          <Property Name="invoicesfooters_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="invoicesfooters_name" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="invoicesfooters_doctext" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="invoicesfooters_isdefault" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="invoiceslines">
+          <Key>
+            <PropertyRef Name="invoiceslines_id" />
+          </Key>
+          <Property Name="invoiceslines_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="invoices_id" Type="Int32" Nullable="false" />
+          <Property Name="patientstreatments_id" Type="Int32" />
+          <Property Name="invoiceslines_code" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="invoiceslines_description" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="invoiceslines_quantity" Type="Int32" Nullable="false" />
+          <Property Name="invoiceslines_unitprice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="invoiceslines_taxrate" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="invoiceslines_istaxesdeductionsable" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="invoices" Relationship="dentnedModel.FK_invoiceslines_invoices" FromRole="invoiceslines" ToRole="invoices" />
+          <NavigationProperty Name="patientstreatments" Relationship="dentnedModel.FK_invoiceslines_patientstreatments" FromRole="invoiceslines" ToRole="patientstreatments" />
+        </EntityType>
+        <EntityType Name="medicalrecordstypes">
+          <Key>
+            <PropertyRef Name="medicalrecordstypes_id" />
+          </Key>
+          <Property Name="medicalrecordstypes_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="medicalrecordstypes_name" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="patientsmedicalrecords" Relationship="dentnedModel.FK_patientsmedicalrecords_medicalrecordstypes" FromRole="medicalrecordstypes" ToRole="patientsmedicalrecords" />
+        </EntityType>
+        <EntityType Name="patients">
+          <Key>
+            <PropertyRef Name="patients_id" />
+          </Key>
+          <Property Name="patients_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="treatmentspriceslists_id" Type="Int32" />
+          <Property Name="patients_name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="patients_surname" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="patients_sex" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="patients_birthdate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="patients_birthcity" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="patients_doctext" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="patients_notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="patients_isarchived" Type="Boolean" Nullable="false" />
+          <Property Name="patients_username" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="patients_password" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="patients_token" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="patients_lastlogin" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="appointments" Relationship="dentnedModel.FK_appointments_patients" FromRole="patients" ToRole="appointments" />
+          <NavigationProperty Name="estimates" Relationship="dentnedModel.FK_estimates_patients" FromRole="patients" ToRole="estimates" />
+          <NavigationProperty Name="invoices" Relationship="dentnedModel.FK_invoices_patients" FromRole="patients" ToRole="invoices" />
+          <NavigationProperty Name="treatmentspriceslists" Relationship="dentnedModel.FK_patients_treatmentspriceslists" FromRole="patients" ToRole="treatmentspriceslists" />
+          <NavigationProperty Name="patientsaddresses" Relationship="dentnedModel.FK_patientsaddresses_patients" FromRole="patients" ToRole="patientsaddresses" />
+          <NavigationProperty Name="patientsattachments" Relationship="dentnedModel.FK_patientsattachments_patients" FromRole="patients" ToRole="patientsattachments" />
+          <NavigationProperty Name="patientsattributes" Relationship="dentnedModel.FK_patientsattributes_patients" FromRole="patients" ToRole="patientsattributes" />
+          <NavigationProperty Name="patientscontacts" Relationship="dentnedModel.FK_patientscontacts_patients" FromRole="patients" ToRole="patientscontacts" />
+          <NavigationProperty Name="patientsmedicalrecords" Relationship="dentnedModel.FK_patientsmedicalrecords_patients" FromRole="patients" ToRole="patientsmedicalrecords" />
+          <NavigationProperty Name="patientsnotes" Relationship="dentnedModel.FK_patientsnotes_patients" FromRole="patients" ToRole="patientsnotes" />
+          <NavigationProperty Name="patientstreatments" Relationship="dentnedModel.FK_patientstreatments_patients" FromRole="patients" ToRole="patientstreatments" />
+          <NavigationProperty Name="payments" Relationship="dentnedModel.FK_payments_patients" FromRole="patients" ToRole="payments" />
+        </EntityType>
+        <EntityType Name="patientsaddresses">
+          <Key>
+            <PropertyRef Name="patientsaddresses_id" />
+          </Key>
+          <Property Name="patientsaddresses_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="patients_id" Type="Int32" Nullable="false" />
+          <Property Name="addressestypes_id" Type="Int32" Nullable="false" />
+          <Property Name="patientsaddresses_state" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="patientsaddresses_city" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="patientsaddresses_zipcode" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="patientsaddresses_street" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="addressestypes" Relationship="dentnedModel.FK_patientsaddresses_addressestypes" FromRole="patientsaddresses" ToRole="addressestypes" />
+          <NavigationProperty Name="patients" Relationship="dentnedModel.FK_patientsaddresses_patients" FromRole="patientsaddresses" ToRole="patients" />
+        </EntityType>
+        <EntityType Name="patientsattachments">
+          <Key>
+            <PropertyRef Name="patientsattachments_id" />
+          </Key>
+          <Property Name="patientsattachments_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="patients_id" Type="Int32" Nullable="false" />
+          <Property Name="patientsattachmentstypes_id" Type="Int32" Nullable="false" />
+          <Property Name="patientsattachments_value" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="patientsattachments_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="patientsattachments_filename" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="patientsattachments_note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="patients" Relationship="dentnedModel.FK_patientsattachments_patients" FromRole="patientsattachments" ToRole="patients" />
+          <NavigationProperty Name="patientsattachmentstypes" Relationship="dentnedModel.FK_patientsattachments_patientsattachmentstypes" FromRole="patientsattachments" ToRole="patientsattachmentstypes" />
+        </EntityType>
+        <EntityType Name="patientsattachmentstypes">
+          <Key>
+            <PropertyRef Name="patientsattachmentstypes_id" />
+          </Key>
+          <Property Name="patientsattachmentstypes_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="patientsattachmentstypes_name" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="patientsattachmentstypes_valueautofunc" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="patientsattachments" Relationship="dentnedModel.FK_patientsattachments_patientsattachmentstypes" FromRole="patientsattachmentstypes" ToRole="patientsattachments" />
+        </EntityType>
+        <EntityType Name="patientsattributes">
+          <Key>
+            <PropertyRef Name="patientsattributes_id" />
+          </Key>
+          <Property Name="patientsattributes_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="patients_id" Type="Int32" Nullable="false" />
+          <Property Name="patientsattributestypes_id" Type="Int32" Nullable="false" />
+          <Property Name="patientsattributes_value" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="patientsattributes_note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="patients" Relationship="dentnedModel.FK_patientsattributes_patients" FromRole="patientsattributes" ToRole="patients" />
+          <NavigationProperty Name="patientsattributestypes" Relationship="dentnedModel.FK_patientsattributes_patientsattributestypes" FromRole="patientsattributes" ToRole="patientsattributestypes" />
+        </EntityType>
+        <EntityType Name="patientsattributestypes">
+          <Key>
+            <PropertyRef Name="patientsattributestypes_id" />
+          </Key>
+          <Property Name="patientsattributestypes_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="patientsattributestypes_name" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="patientsattributes" Relationship="dentnedModel.FK_patientsattributes_patientsattributestypes" FromRole="patientsattributestypes" ToRole="patientsattributes" />
+        </EntityType>
+        <EntityType Name="patientscontacts">
+          <Key>
+            <PropertyRef Name="patientscontacts_id" />
+          </Key>
+          <Property Name="patientscontacts_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="patients_id" Type="Int32" Nullable="false" />
+          <Property Name="contactstypes_id" Type="Int32" Nullable="false" />
+          <Property Name="patientscontacts_value" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="patientscontacts_note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="contactstypes" Relationship="dentnedModel.FK_patientscontacts_contactstypes" FromRole="patientscontacts" ToRole="contactstypes" />
+          <NavigationProperty Name="patients" Relationship="dentnedModel.FK_patientscontacts_patients" FromRole="patientscontacts" ToRole="patients" />
+        </EntityType>
+        <EntityType Name="patientsmedicalrecords">
+          <Key>
+            <PropertyRef Name="patientsmedicalrecords_id" />
+          </Key>
+          <Property Name="patientsmedicalrecords_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="patients_id" Type="Int32" Nullable="false" />
+          <Property Name="medicalrecordstypes_id" Type="Int32" Nullable="false" />
+          <Property Name="patientsmedicalrecords_value" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="patientsmedicalrecords_note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="medicalrecordstypes" Relationship="dentnedModel.FK_patientsmedicalrecords_medicalrecordstypes" FromRole="patientsmedicalrecords" ToRole="medicalrecordstypes" />
+          <NavigationProperty Name="patients" Relationship="dentnedModel.FK_patientsmedicalrecords_patients" FromRole="patientsmedicalrecords" ToRole="patients" />
+        </EntityType>
+        <EntityType Name="patientsnotes">
+          <Key>
+            <PropertyRef Name="patientsnotes_id" />
+          </Key>
+          <Property Name="patientsnotes_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="patients_id" Type="Int32" Nullable="false" />
+          <Property Name="patientsnotes_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="patientsnotes_text" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="patients" Relationship="dentnedModel.FK_patientsnotes_patients" FromRole="patientsnotes" ToRole="patients" />
+        </EntityType>
+        <EntityType Name="patientstreatments">
+          <Key>
+            <PropertyRef Name="patientstreatments_id" />
+          </Key>
+          <Property Name="patientstreatments_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="doctors_id" Type="Int32" Nullable="false" />
+          <Property Name="patients_id" Type="Int32" Nullable="false" />
+          <Property Name="treatments_id" Type="Int32" Nullable="false" />
+          <Property Name="patientstreatments_creationdate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="patientstreatments_fulfilldate" Type="DateTime" Precision="0" />
+          <Property Name="patientstreatments_ispaid" Type="Boolean" Nullable="false" />
+          <Property Name="patientstreatments_price" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="patientstreatments_isunitprice" Type="Boolean" Nullable="false" />
+          <Property Name="patientstreatments_taxrate" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="patientstreatments_description" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="patientstreatments_notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="patientstreatments_expirationdate" Type="DateTime" Precision="0" />
+          <Property Name="patientstreatments_t11" Type="Boolean" Nullable="false" />
+          <Property Name="patientstreatments_t12" Type="Boolean" Nullable="false" />
+          <Property Name="patientstreatments_t13" Type="Boolean" Nullable="false" />
+          <Property Name="patientstreatments_t14" Type="Boolean" Nullable="false" />
+          <Property Name="patientstreatments_t15" Type="Boolean" Nullable="false" />
+          <Property Name="patientstreatments_t16" Type="Boolean" Nullable="false" />
+          <Property Name="patientstreatments_t17" Type="Boolean" Nullable="false" />
+          <Property Name="patientstreatments_t18" Type="Boolean" Nullable="false" />
+          <Property Name="patientstreatments_t21" Type="Boolean" Nullable="false" />
+          <Property Name="patientstreatments_t22" Type="Boolean" Nullable="false" />
+          <Property Name="patientstreatments_t23" Type="Boolean" Nullable="false" />
+          <Property Name="patientstreatments_t24" Type="Boolean" Nullable="false" />
+          <Property Name="patientstreatments_t25" Type="Boolean" Nullable="false" />
+          <Property Name="patientstreatments_t26" Type="Boolean" Nullable="false" />
+          <Property Name="patientstreatments_t27" Type="Boolean" Nullable="false" />
+          <Property Name="patientstreatments_t28" Type="Boolean" Nullable="false" />
+          <Property Name="patientstreatments_t31" Type="Boolean" Nullable="false" />
+          <Property Name="patientstreatments_t32" Type="Boolean" Nullable="false" />
+          <Property Name="patientstreatments_t33" Type="Boolean" Nullable="false" />
+          <Property Name="patientstreatments_t34" Type="Boolean" Nullable="false" />
+          <Property Name="patientstreatments_t35" Type="Boolean" Nullable="false" />
+          <Property Name="patientstreatments_t36" Type="Boolean" Nullable="false" />
+          <Property Name="patientstreatments_t37" Type="Boolean" Nullable="false" />
+          <Property Name="patientstreatments_t38" Type="Boolean" Nullable="false" />
+          <Property Name="patientstreatments_t41" Type="Boolean" Nullable="false" />
+          <Property Name="patientstreatments_t42" Type="Boolean" Nullable="false" />
+          <Property Name="patientstreatments_t43" Type="Boolean" Nullable="false" />
+          <Property Name="patientstreatments_t44" Type="Boolean" Nullable="false" />
+          <Property Name="patientstreatments_t45" Type="Boolean" Nullable="false" />
+          <Property Name="patientstreatments_t46" Type="Boolean" Nullable="false" />
+          <Property Name="patientstreatments_t47" Type="Boolean" Nullable="false" />
+          <Property Name="patientstreatments_t48" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="doctors" Relationship="dentnedModel.FK_patientstreatments_doctors" FromRole="patientstreatments" ToRole="doctors" />
+          <NavigationProperty Name="estimateslines" Relationship="dentnedModel.FK_estimateslines_patientstreatments" FromRole="patientstreatments" ToRole="estimateslines" />
+          <NavigationProperty Name="invoiceslines" Relationship="dentnedModel.FK_invoiceslines_patientstreatments" FromRole="patientstreatments" ToRole="invoiceslines" />
+          <NavigationProperty Name="patients" Relationship="dentnedModel.FK_patientstreatments_patients" FromRole="patientstreatments" ToRole="patients" />
+          <NavigationProperty Name="treatments" Relationship="dentnedModel.FK_patientstreatments_treatments" FromRole="patientstreatments" ToRole="treatments" />
+        </EntityType>
+        <EntityType Name="payments">
+          <Key>
+            <PropertyRef Name="payments_id" />
+          </Key>
+          <Property Name="payments_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="patients_id" Type="Int32" Nullable="false" />
+          <Property Name="payments_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="payments_amount" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="payments_notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="patients" Relationship="dentnedModel.FK_payments_patients" FromRole="payments" ToRole="patients" />
+        </EntityType>
+        <EntityType Name="paymentstypes">
+          <Key>
+            <PropertyRef Name="paymentstypes_id" />
+          </Key>
+          <Property Name="paymentstypes_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="paymentstypes_name" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="paymentstypes_doctext" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="paymentstypes_isdefault" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="reports">
+          <Key>
+            <PropertyRef Name="reports_id" />
+          </Key>
+          <Property Name="reports_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="reports_name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="reports_query" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="reports_infotext" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="reports_ispasswordprotected" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rooms">
+          <Key>
+            <PropertyRef Name="rooms_id" />
+          </Key>
+          <Property Name="rooms_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rooms_name" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="rooms_color" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="appointments" Relationship="dentnedModel.FK_appointments_rooms" FromRole="rooms" ToRole="appointments" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="taxes">
+          <Key>
+            <PropertyRef Name="taxes_id" />
+          </Key>
+          <Property Name="taxes_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="taxes_name" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="taxes_rate" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="taxes_isdefault" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="computedlines" Relationship="dentnedModel.FK_computedlines_taxes" FromRole="taxes" ToRole="computedlines" />
+          <NavigationProperty Name="treatments" Relationship="dentnedModel.FK_treatments_taxes" FromRole="taxes" ToRole="treatments" />
+        </EntityType>
+        <EntityType Name="taxesdeductions">
+          <Key>
+            <PropertyRef Name="taxesdeductions_id" />
+          </Key>
+          <Property Name="taxesdeductions_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="taxesdeductions_name" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="taxesdeductions_rate" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="taxesdeductions_isdefault" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="treatments">
+          <Key>
+            <PropertyRef Name="treatments_id" />
+          </Key>
+          <Property Name="treatments_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="taxes_id" Type="Int32" />
+          <Property Name="treatmentstypes_id" Type="Int32" Nullable="false" />
+          <Property Name="treatments_code" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="treatments_name" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="treatments_price" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="treatments_isunitprice" Type="Boolean" Nullable="false" />
+          <Property Name="treatments_mexpiration" Type="Byte" />
+          <Property Name="treatments_notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="patientstreatments" Relationship="dentnedModel.FK_patientstreatments_treatments" FromRole="treatments" ToRole="patientstreatments" />
+          <NavigationProperty Name="taxes" Relationship="dentnedModel.FK_treatments_taxes" FromRole="treatments" ToRole="taxes" />
+          <NavigationProperty Name="treatmentstypes" Relationship="dentnedModel.FK_treatments_treatmentstypes" FromRole="treatments" ToRole="treatmentstypes" />
+          <NavigationProperty Name="treatmentsprices" Relationship="dentnedModel.FK_treatmentsprices_treatments" FromRole="treatments" ToRole="treatmentsprices" />
+        </EntityType>
+        <EntityType Name="treatmentsprices">
+          <Key>
+            <PropertyRef Name="treatmentsprices_id" />
+          </Key>
+          <Property Name="treatmentsprices_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="treatments_id" Type="Int32" Nullable="false" />
+          <Property Name="treatmentspriceslists_id" Type="Int32" Nullable="false" />
+          <Property Name="treatmentsprices_price" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <NavigationProperty Name="treatments" Relationship="dentnedModel.FK_treatmentsprices_treatments" FromRole="treatmentsprices" ToRole="treatments" />
+          <NavigationProperty Name="treatmentspriceslists" Relationship="dentnedModel.FK_treatmentsprices_treatmentspriceslists" FromRole="treatmentsprices" ToRole="treatmentspriceslists" />
+        </EntityType>
+        <EntityType Name="treatmentspriceslists">
+          <Key>
+            <PropertyRef Name="treatmentspriceslists_id" />
+          </Key>
+          <Property Name="treatmentspriceslists_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="treatmentspriceslists_name" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="treatmentspriceslists_multiplier" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <NavigationProperty Name="patients" Relationship="dentnedModel.FK_patients_treatmentspriceslists" FromRole="treatmentspriceslists" ToRole="patients" />
+          <NavigationProperty Name="treatmentsprices" Relationship="dentnedModel.FK_treatmentsprices_treatmentspriceslists" FromRole="treatmentspriceslists" ToRole="treatmentsprices" />
+        </EntityType>
+        <EntityType Name="treatmentstypes">
+          <Key>
+            <PropertyRef Name="treatmentstypes_id" />
+          </Key>
+          <Property Name="treatmentstypes_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="treatmentstypes_name" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="treatments" Relationship="dentnedModel.FK_treatments_treatmentstypes" FromRole="treatmentstypes" ToRole="treatments" />
+        </EntityType>
+        <Association Name="FK_patientsaddresses_addressestypes">
+          <End Type="dentnedModel.addressestypes" Role="addressestypes" Multiplicity="1" />
+          <End Type="dentnedModel.patientsaddresses" Role="patientsaddresses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="addressestypes">
+              <PropertyRef Name="addressestypes_id" />
+            </Principal>
+            <Dependent Role="patientsaddresses">
+              <PropertyRef Name="addressestypes_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_appointments_doctors">
+          <End Type="dentnedModel.doctors" Role="doctors" Multiplicity="1" />
+          <End Type="dentnedModel.appointments" Role="appointments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="doctors">
+              <PropertyRef Name="doctors_id" />
+            </Principal>
+            <Dependent Role="appointments">
+              <PropertyRef Name="doctors_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_appointments_patients">
+          <End Type="dentnedModel.patients" Role="patients" Multiplicity="1" />
+          <End Type="dentnedModel.appointments" Role="appointments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patients">
+              <PropertyRef Name="patients_id" />
+            </Principal>
+            <Dependent Role="appointments">
+              <PropertyRef Name="patients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_appointments_rooms">
+          <End Type="dentnedModel.rooms" Role="rooms" Multiplicity="1" />
+          <End Type="dentnedModel.appointments" Role="appointments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rooms">
+              <PropertyRef Name="rooms_id" />
+            </Principal>
+            <Dependent Role="appointments">
+              <PropertyRef Name="rooms_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_computedlines_taxes">
+          <End Type="dentnedModel.taxes" Role="taxes" Multiplicity="0..1" />
+          <End Type="dentnedModel.computedlines" Role="computedlines" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="taxes">
+              <PropertyRef Name="taxes_id" />
+            </Principal>
+            <Dependent Role="computedlines">
+              <PropertyRef Name="taxes_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_patientscontacts_contactstypes">
+          <End Type="dentnedModel.contactstypes" Role="contactstypes" Multiplicity="1" />
+          <End Type="dentnedModel.patientscontacts" Role="patientscontacts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="contactstypes">
+              <PropertyRef Name="contactstypes_id" />
+            </Principal>
+            <Dependent Role="patientscontacts">
+              <PropertyRef Name="contactstypes_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_estimates_doctors">
+          <End Type="dentnedModel.doctors" Role="doctors" Multiplicity="0..1" />
+          <End Type="dentnedModel.estimates" Role="estimates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="doctors">
+              <PropertyRef Name="doctors_id" />
+            </Principal>
+            <Dependent Role="estimates">
+              <PropertyRef Name="doctors_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_invoices_doctors">
+          <End Type="dentnedModel.doctors" Role="doctors" Multiplicity="0..1" />
+          <End Type="dentnedModel.invoices" Role="invoices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="doctors">
+              <PropertyRef Name="doctors_id" />
+            </Principal>
+            <Dependent Role="invoices">
+              <PropertyRef Name="doctors_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_patientstreatments_doctors">
+          <End Type="dentnedModel.doctors" Role="doctors" Multiplicity="1" />
+          <End Type="dentnedModel.patientstreatments" Role="patientstreatments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="doctors">
+              <PropertyRef Name="doctors_id" />
+            </Principal>
+            <Dependent Role="patientstreatments">
+              <PropertyRef Name="doctors_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_estimates_invoices">
+          <End Type="dentnedModel.invoices" Role="invoices" Multiplicity="0..1" />
+          <End Type="dentnedModel.estimates" Role="estimates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="invoices">
+              <PropertyRef Name="invoices_id" />
+            </Principal>
+            <Dependent Role="estimates">
+              <PropertyRef Name="invoices_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_estimates_patients">
+          <End Type="dentnedModel.patients" Role="patients" Multiplicity="0..1" />
+          <End Type="dentnedModel.estimates" Role="estimates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patients">
+              <PropertyRef Name="patients_id" />
+            </Principal>
+            <Dependent Role="estimates">
+              <PropertyRef Name="patients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_estimateslines_estimates">
+          <End Type="dentnedModel.estimates" Role="estimates" Multiplicity="1" />
+          <End Type="dentnedModel.estimateslines" Role="estimateslines" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estimates">
+              <PropertyRef Name="estimates_id" />
+            </Principal>
+            <Dependent Role="estimateslines">
+              <PropertyRef Name="estimates_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_estimateslines_patientstreatments">
+          <End Type="dentnedModel.patientstreatments" Role="patientstreatments" Multiplicity="0..1" />
+          <End Type="dentnedModel.estimateslines" Role="estimateslines" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patientstreatments">
+              <PropertyRef Name="patientstreatments_id" />
+            </Principal>
+            <Dependent Role="estimateslines">
+              <PropertyRef Name="patientstreatments_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_invoices_patients">
+          <End Type="dentnedModel.patients" Role="patients" Multiplicity="0..1" />
+          <End Type="dentnedModel.invoices" Role="invoices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patients">
+              <PropertyRef Name="patients_id" />
+            </Principal>
+            <Dependent Role="invoices">
+              <PropertyRef Name="patients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_invoiceslines_invoices">
+          <End Type="dentnedModel.invoices" Role="invoices" Multiplicity="1" />
+          <End Type="dentnedModel.invoiceslines" Role="invoiceslines" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="invoices">
+              <PropertyRef Name="invoices_id" />
+            </Principal>
+            <Dependent Role="invoiceslines">
+              <PropertyRef Name="invoices_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_invoiceslines_patientstreatments">
+          <End Type="dentnedModel.patientstreatments" Role="patientstreatments" Multiplicity="0..1" />
+          <End Type="dentnedModel.invoiceslines" Role="invoiceslines" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patientstreatments">
+              <PropertyRef Name="patientstreatments_id" />
+            </Principal>
+            <Dependent Role="invoiceslines">
+              <PropertyRef Name="patientstreatments_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_patientsmedicalrecords_medicalrecordstypes">
+          <End Type="dentnedModel.medicalrecordstypes" Role="medicalrecordstypes" Multiplicity="1" />
+          <End Type="dentnedModel.patientsmedicalrecords" Role="patientsmedicalrecords" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="medicalrecordstypes">
+              <PropertyRef Name="medicalrecordstypes_id" />
+            </Principal>
+            <Dependent Role="patientsmedicalrecords">
+              <PropertyRef Name="medicalrecordstypes_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_patients_treatmentspriceslists">
+          <End Type="dentnedModel.treatmentspriceslists" Role="treatmentspriceslists" Multiplicity="0..1" />
+          <End Type="dentnedModel.patients" Role="patients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="treatmentspriceslists">
+              <PropertyRef Name="treatmentspriceslists_id" />
+            </Principal>
+            <Dependent Role="patients">
+              <PropertyRef Name="treatmentspriceslists_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_patientsaddresses_patients">
+          <End Type="dentnedModel.patients" Role="patients" Multiplicity="1" />
+          <End Type="dentnedModel.patientsaddresses" Role="patientsaddresses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patients">
+              <PropertyRef Name="patients_id" />
+            </Principal>
+            <Dependent Role="patientsaddresses">
+              <PropertyRef Name="patients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_patientsattachments_patients">
+          <End Type="dentnedModel.patients" Role="patients" Multiplicity="1" />
+          <End Type="dentnedModel.patientsattachments" Role="patientsattachments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patients">
+              <PropertyRef Name="patients_id" />
+            </Principal>
+            <Dependent Role="patientsattachments">
+              <PropertyRef Name="patients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_patientsattributes_patients">
+          <End Type="dentnedModel.patients" Role="patients" Multiplicity="1" />
+          <End Type="dentnedModel.patientsattributes" Role="patientsattributes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patients">
+              <PropertyRef Name="patients_id" />
+            </Principal>
+            <Dependent Role="patientsattributes">
+              <PropertyRef Name="patients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_patientscontacts_patients">
+          <End Type="dentnedModel.patients" Role="patients" Multiplicity="1" />
+          <End Type="dentnedModel.patientscontacts" Role="patientscontacts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patients">
+              <PropertyRef Name="patients_id" />
+            </Principal>
+            <Dependent Role="patientscontacts">
+              <PropertyRef Name="patients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_patientsmedicalrecords_patients">
+          <End Type="dentnedModel.patients" Role="patients" Multiplicity="1" />
+          <End Type="dentnedModel.patientsmedicalrecords" Role="patientsmedicalrecords" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patients">
+              <PropertyRef Name="patients_id" />
+            </Principal>
+            <Dependent Role="patientsmedicalrecords">
+              <PropertyRef Name="patients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_patientsnotes_patients">
+          <End Type="dentnedModel.patients" Role="patients" Multiplicity="1" />
+          <End Type="dentnedModel.patientsnotes" Role="patientsnotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patients">
+              <PropertyRef Name="patients_id" />
+            </Principal>
+            <Dependent Role="patientsnotes">
+              <PropertyRef Name="patients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_patientstreatments_patients">
+          <End Type="dentnedModel.patients" Role="patients" Multiplicity="1" />
+          <End Type="dentnedModel.patientstreatments" Role="patientstreatments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patients">
+              <PropertyRef Name="patients_id" />
+            </Principal>
+            <Dependent Role="patientstreatments">
+              <PropertyRef Name="patients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_payments_patients">
+          <End Type="dentnedModel.patients" Role="patients" Multiplicity="1" />
+          <End Type="dentnedModel.payments" Role="payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patients">
+              <PropertyRef Name="patients_id" />
+            </Principal>
+            <Dependent Role="payments">
+              <PropertyRef Name="patients_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_patientsattachments_patientsattachmentstypes">
+          <End Type="dentnedModel.patientsattachmentstypes" Role="patientsattachmentstypes" Multiplicity="1" />
+          <End Type="dentnedModel.patientsattachments" Role="patientsattachments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patientsattachmentstypes">
+              <PropertyRef Name="patientsattachmentstypes_id" />
+            </Principal>
+            <Dependent Role="patientsattachments">
+              <PropertyRef Name="patientsattachmentstypes_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_patientsattributes_patientsattributestypes">
+          <End Type="dentnedModel.patientsattributestypes" Role="patientsattributestypes" Multiplicity="1" />
+          <End Type="dentnedModel.patientsattributes" Role="patientsattributes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patientsattributestypes">
+              <PropertyRef Name="patientsattributestypes_id" />
+            </Principal>
+            <Dependent Role="patientsattributes">
+              <PropertyRef Name="patientsattributestypes_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_patientstreatments_treatments">
+          <End Type="dentnedModel.treatments" Role="treatments" Multiplicity="1" />
+          <End Type="dentnedModel.patientstreatments" Role="patientstreatments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="treatments">
+              <PropertyRef Name="treatments_id" />
+            </Principal>
+            <Dependent Role="patientstreatments">
+              <PropertyRef Name="treatments_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_treatments_taxes">
+          <End Type="dentnedModel.taxes" Role="taxes" Multiplicity="0..1" />
+          <End Type="dentnedModel.treatments" Role="treatments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="taxes">
+              <PropertyRef Name="taxes_id" />
+            </Principal>
+            <Dependent Role="treatments">
+              <PropertyRef Name="taxes_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_treatments_treatmentstypes">
+          <End Type="dentnedModel.treatmentstypes" Role="treatmentstypes" Multiplicity="1" />
+          <End Type="dentnedModel.treatments" Role="treatments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="treatmentstypes">
+              <PropertyRef Name="treatmentstypes_id" />
+            </Principal>
+            <Dependent Role="treatments">
+              <PropertyRef Name="treatmentstypes_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_treatmentsprices_treatments">
+          <End Type="dentnedModel.treatments" Role="treatments" Multiplicity="1" />
+          <End Type="dentnedModel.treatmentsprices" Role="treatmentsprices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="treatments">
+              <PropertyRef Name="treatments_id" />
+            </Principal>
+            <Dependent Role="treatmentsprices">
+              <PropertyRef Name="treatments_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_treatmentsprices_treatmentspriceslists">
+          <End Type="dentnedModel.treatmentspriceslists" Role="treatmentspriceslists" Multiplicity="1" />
+          <End Type="dentnedModel.treatmentsprices" Role="treatmentsprices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="treatmentspriceslists">
+              <PropertyRef Name="treatmentspriceslists_id" />
+            </Principal>
+            <Dependent Role="treatmentsprices">
+              <PropertyRef Name="treatmentspriceslists_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dentnedModelStoreContainer" CdmEntityContainer="dentnedEntities">
+          <EntitySetMapping Name="addressestypes">
+            <EntityTypeMapping TypeName="dentnedModel.addressestypes">
+              <MappingFragment StoreEntitySet="addressestypes">
+                <ScalarProperty Name="addressestypes_name" ColumnName="addressestypes_name" />
+                <ScalarProperty Name="addressestypes_id" ColumnName="addressestypes_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="appointments">
+            <EntityTypeMapping TypeName="dentnedModel.appointments">
+              <MappingFragment StoreEntitySet="appointments">
+                <ScalarProperty Name="appointments_color" ColumnName="appointments_color" />
+                <ScalarProperty Name="appointments_notes" ColumnName="appointments_notes" />
+                <ScalarProperty Name="appointments_title" ColumnName="appointments_title" />
+                <ScalarProperty Name="appointments_to" ColumnName="appointments_to" />
+                <ScalarProperty Name="appointments_from" ColumnName="appointments_from" />
+                <ScalarProperty Name="rooms_id" ColumnName="rooms_id" />
+                <ScalarProperty Name="patients_id" ColumnName="patients_id" />
+                <ScalarProperty Name="doctors_id" ColumnName="doctors_id" />
+                <ScalarProperty Name="appointments_id" ColumnName="appointments_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="computedlines">
+            <EntityTypeMapping TypeName="dentnedModel.computedlines">
+              <MappingFragment StoreEntitySet="computedlines">
+                <ScalarProperty Name="computedlines_rate" ColumnName="computedlines_rate" />
+                <ScalarProperty Name="computedlines_name" ColumnName="computedlines_name" />
+                <ScalarProperty Name="computedlines_code" ColumnName="computedlines_code" />
+                <ScalarProperty Name="taxes_id" ColumnName="taxes_id" />
+                <ScalarProperty Name="computedlines_id" ColumnName="computedlines_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="contactstypes">
+            <EntityTypeMapping TypeName="dentnedModel.contactstypes">
+              <MappingFragment StoreEntitySet="contactstypes">
+                <ScalarProperty Name="contactstypes_name" ColumnName="contactstypes_name" />
+                <ScalarProperty Name="contactstypes_id" ColumnName="contactstypes_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="doctors">
+            <EntityTypeMapping TypeName="dentnedModel.doctors">
+              <MappingFragment StoreEntitySet="doctors">
+                <ScalarProperty Name="doctors_lastlogin" ColumnName="doctors_lastlogin" />
+                <ScalarProperty Name="doctors_token" ColumnName="doctors_token" />
+                <ScalarProperty Name="doctors_password" ColumnName="doctors_password" />
+                <ScalarProperty Name="doctors_username" ColumnName="doctors_username" />
+                <ScalarProperty Name="doctors_doctext" ColumnName="doctors_doctext" />
+                <ScalarProperty Name="doctors_surname" ColumnName="doctors_surname" />
+                <ScalarProperty Name="doctors_name" ColumnName="doctors_name" />
+                <ScalarProperty Name="doctors_id" ColumnName="doctors_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="estimates">
+            <EntityTypeMapping TypeName="dentnedModel.estimates">
+              <MappingFragment StoreEntitySet="estimates">
+                <ScalarProperty Name="estimates_deductiontaxrate" ColumnName="estimates_deductiontaxrate" />
+                <ScalarProperty Name="estimates_totaldue" ColumnName="estimates_totaldue" />
+                <ScalarProperty Name="estimates_totalgross" ColumnName="estimates_totalgross" />
+                <ScalarProperty Name="estimates_totalnet" ColumnName="estimates_totalnet" />
+                <ScalarProperty Name="estimates_footer" ColumnName="estimates_footer" />
+                <ScalarProperty Name="estimates_payment" ColumnName="estimates_payment" />
+                <ScalarProperty Name="estimates_patient" ColumnName="estimates_patient" />
+                <ScalarProperty Name="estimates_doctor" ColumnName="estimates_doctor" />
+                <ScalarProperty Name="estimates_date" ColumnName="estimates_date" />
+                <ScalarProperty Name="estimates_number" ColumnName="estimates_number" />
+                <ScalarProperty Name="invoices_id" ColumnName="invoices_id" />
+                <ScalarProperty Name="patients_id" ColumnName="patients_id" />
+                <ScalarProperty Name="doctors_id" ColumnName="doctors_id" />
+                <ScalarProperty Name="estimates_id" ColumnName="estimates_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="estimatesfooters">
+            <EntityTypeMapping TypeName="dentnedModel.estimatesfooters">
+              <MappingFragment StoreEntitySet="estimatesfooters">
+                <ScalarProperty Name="estimatesfooters_isdefault" ColumnName="estimatesfooters_isdefault" />
+                <ScalarProperty Name="estimatesfooters_doctext" ColumnName="estimatesfooters_doctext" />
+                <ScalarProperty Name="estimatesfooters_name" ColumnName="estimatesfooters_name" />
+                <ScalarProperty Name="estimatesfooters_id" ColumnName="estimatesfooters_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="estimateslines">
+            <EntityTypeMapping TypeName="dentnedModel.estimateslines">
+              <MappingFragment StoreEntitySet="estimateslines">
+                <ScalarProperty Name="estimateslines_istaxesdeductionsable" ColumnName="estimateslines_istaxesdeductionsable" />
+                <ScalarProperty Name="estimateslines_taxrate" ColumnName="estimateslines_taxrate" />
+                <ScalarProperty Name="estimateslines_unitprice" ColumnName="estimateslines_unitprice" />
+                <ScalarProperty Name="estimateslines_quantity" ColumnName="estimateslines_quantity" />
+                <ScalarProperty Name="estimateslines_description" ColumnName="estimateslines_description" />
+                <ScalarProperty Name="estimateslines_code" ColumnName="estimateslines_code" />
+                <ScalarProperty Name="patientstreatments_id" ColumnName="patientstreatments_id" />
+                <ScalarProperty Name="estimates_id" ColumnName="estimates_id" />
+                <ScalarProperty Name="estimateslines_id" ColumnName="estimateslines_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="invoices">
+            <EntityTypeMapping TypeName="dentnedModel.invoices">
+              <MappingFragment StoreEntitySet="invoices">
+                <ScalarProperty Name="invoices_ispaid" ColumnName="invoices_ispaid" />
+                <ScalarProperty Name="invoices_deductiontaxrate" ColumnName="invoices_deductiontaxrate" />
+                <ScalarProperty Name="invoices_totaldue" ColumnName="invoices_totaldue" />
+                <ScalarProperty Name="invoices_totalgross" ColumnName="invoices_totalgross" />
+                <ScalarProperty Name="invoices_totalnet" ColumnName="invoices_totalnet" />
+                <ScalarProperty Name="invoices_footer" ColumnName="invoices_footer" />
+                <ScalarProperty Name="invoices_payment" ColumnName="invoices_payment" />
+                <ScalarProperty Name="invoices_patient" ColumnName="invoices_patient" />
+                <ScalarProperty Name="invoices_doctor" ColumnName="invoices_doctor" />
+                <ScalarProperty Name="invoices_date" ColumnName="invoices_date" />
+                <ScalarProperty Name="invoices_number" ColumnName="invoices_number" />
+                <ScalarProperty Name="patients_id" ColumnName="patients_id" />
+                <ScalarProperty Name="doctors_id" ColumnName="doctors_id" />
+                <ScalarProperty Name="invoices_id" ColumnName="invoices_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="invoicesfooters">
+            <EntityTypeMapping TypeName="dentnedModel.invoicesfooters">
+              <MappingFragment StoreEntitySet="invoicesfooters">
+                <ScalarProperty Name="invoicesfooters_isdefault" ColumnName="invoicesfooters_isdefault" />
+                <ScalarProperty Name="invoicesfooters_doctext" ColumnName="invoicesfooters_doctext" />
+                <ScalarProperty Name="invoicesfooters_name" ColumnName="invoicesfooters_name" />
+                <ScalarProperty Name="invoicesfooters_id" ColumnName="invoicesfooters_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="invoiceslines">
+            <EntityTypeMapping TypeName="dentnedModel.invoiceslines">
+              <MappingFragment StoreEntitySet="invoiceslines">
+                <ScalarProperty Name="invoiceslines_istaxesdeductionsable" ColumnName="invoiceslines_istaxesdeductionsable" />
+                <ScalarProperty Name="invoiceslines_taxrate" ColumnName="invoiceslines_taxrate" />
+                <ScalarProperty Name="invoiceslines_unitprice" ColumnName="invoiceslines_unitprice" />
+                <ScalarProperty Name="invoiceslines_quantity" ColumnName="invoiceslines_quantity" />
+                <ScalarProperty Name="invoiceslines_description" ColumnName="invoiceslines_description" />
+                <ScalarProperty Name="invoiceslines_code" ColumnName="invoiceslines_code" />
+                <ScalarProperty Name="patientstreatments_id" ColumnName="patientstreatments_id" />
+                <ScalarProperty Name="invoices_id" ColumnName="invoices_id" />
+                <ScalarProperty Name="invoiceslines_id" ColumnName="invoiceslines_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="medicalrecordstypes">
+            <EntityTypeMapping TypeName="dentnedModel.medicalrecordstypes">
+              <MappingFragment StoreEntitySet="medicalrecordstypes">
+                <ScalarProperty Name="medicalrecordstypes_name" ColumnName="medicalrecordstypes_name" />
+                <ScalarProperty Name="medicalrecordstypes_id" ColumnName="medicalrecordstypes_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="patients">
+            <EntityTypeMapping TypeName="dentnedModel.patients">
+              <MappingFragment StoreEntitySet="patients">
+                <ScalarProperty Name="patients_lastlogin" ColumnName="patients_lastlogin" />
+                <ScalarProperty Name="patients_token" ColumnName="patients_token" />
+                <ScalarProperty Name="patients_password" ColumnName="patients_password" />
+                <ScalarProperty Name="patients_username" ColumnName="patients_username" />
+                <ScalarProperty Name="patients_isarchived" ColumnName="patients_isarchived" />
+                <ScalarProperty Name="patients_notes" ColumnName="patients_notes" />
+                <ScalarProperty Name="patients_doctext" ColumnName="patients_doctext" />
+                <ScalarProperty Name="patients_birthcity" ColumnName="patients_birthcity" />
+                <ScalarProperty Name="patients_birthdate" ColumnName="patients_birthdate" />
+                <ScalarProperty Name="patients_sex" ColumnName="patients_sex" />
+                <ScalarProperty Name="patients_surname" ColumnName="patients_surname" />
+                <ScalarProperty Name="patients_name" ColumnName="patients_name" />
+                <ScalarProperty Name="treatmentspriceslists_id" ColumnName="treatmentspriceslists_id" />
+                <ScalarProperty Name="patients_id" ColumnName="patients_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="patientsaddresses">
+            <EntityTypeMapping TypeName="dentnedModel.patientsaddresses">
+              <MappingFragment StoreEntitySet="patientsaddresses">
+                <ScalarProperty Name="patientsaddresses_street" ColumnName="patientsaddresses_street" />
+                <ScalarProperty Name="patientsaddresses_zipcode" ColumnName="patientsaddresses_zipcode" />
+                <ScalarProperty Name="patientsaddresses_city" ColumnName="patientsaddresses_city" />
+                <ScalarProperty Name="patientsaddresses_state" ColumnName="patientsaddresses_state" />
+                <ScalarProperty Name="addressestypes_id" ColumnName="addressestypes_id" />
+                <ScalarProperty Name="patients_id" ColumnName="patients_id" />
+                <ScalarProperty Name="patientsaddresses_id" ColumnName="patientsaddresses_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="patientsattachments">
+            <EntityTypeMapping TypeName="dentnedModel.patientsattachments">
+              <MappingFragment StoreEntitySet="patientsattachments">
+                <ScalarProperty Name="patientsattachments_note" ColumnName="patientsattachments_note" />
+                <ScalarProperty Name="patientsattachments_filename" ColumnName="patientsattachments_filename" />
+                <ScalarProperty Name="patientsattachments_date" ColumnName="patientsattachments_date" />
+                <ScalarProperty Name="patientsattachments_value" ColumnName="patientsattachments_value" />
+                <ScalarProperty Name="patientsattachmentstypes_id" ColumnName="patientsattachmentstypes_id" />
+                <ScalarProperty Name="patients_id" ColumnName="patients_id" />
+                <ScalarProperty Name="patientsattachments_id" ColumnName="patientsattachments_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="patientsattachmentstypes">
+            <EntityTypeMapping TypeName="dentnedModel.patientsattachmentstypes">
+              <MappingFragment StoreEntitySet="patientsattachmentstypes">
+                <ScalarProperty Name="patientsattachmentstypes_valueautofunc" ColumnName="patientsattachmentstypes_valueautofunc" />
+                <ScalarProperty Name="patientsattachmentstypes_name" ColumnName="patientsattachmentstypes_name" />
+                <ScalarProperty Name="patientsattachmentstypes_id" ColumnName="patientsattachmentstypes_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="patientsattributes">
+            <EntityTypeMapping TypeName="dentnedModel.patientsattributes">
+              <MappingFragment StoreEntitySet="patientsattributes">
+                <ScalarProperty Name="patientsattributes_note" ColumnName="patientsattributes_note" />
+                <ScalarProperty Name="patientsattributes_value" ColumnName="patientsattributes_value" />
+                <ScalarProperty Name="patientsattributestypes_id" ColumnName="patientsattributestypes_id" />
+                <ScalarProperty Name="patients_id" ColumnName="patients_id" />
+                <ScalarProperty Name="patientsattributes_id" ColumnName="patientsattributes_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="patientsattributestypes">
+            <EntityTypeMapping TypeName="dentnedModel.patientsattributestypes">
+              <MappingFragment StoreEntitySet="patientsattributestypes">
+                <ScalarProperty Name="patientsattributestypes_name" ColumnName="patientsattributestypes_name" />
+                <ScalarProperty Name="patientsattributestypes_id" ColumnName="patientsattributestypes_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="patientscontacts">
+            <EntityTypeMapping TypeName="dentnedModel.patientscontacts">
+              <MappingFragment StoreEntitySet="patientscontacts">
+                <ScalarProperty Name="patientscontacts_note" ColumnName="patientscontacts_note" />
+                <ScalarProperty Name="patientscontacts_value" ColumnName="patientscontacts_value" />
+                <ScalarProperty Name="contactstypes_id" ColumnName="contactstypes_id" />
+                <ScalarProperty Name="patients_id" ColumnName="patients_id" />
+                <ScalarProperty Name="patientscontacts_id" ColumnName="patientscontacts_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="patientsmedicalrecords">
+            <EntityTypeMapping TypeName="dentnedModel.patientsmedicalrecords">
+              <MappingFragment StoreEntitySet="patientsmedicalrecords">
+                <ScalarProperty Name="patientsmedicalrecords_note" ColumnName="patientsmedicalrecords_note" />
+                <ScalarProperty Name="patientsmedicalrecords_value" ColumnName="patientsmedicalrecords_value" />
+                <ScalarProperty Name="medicalrecordstypes_id" ColumnName="medicalrecordstypes_id" />
+                <ScalarProperty Name="patients_id" ColumnName="patients_id" />
+                <ScalarProperty Name="patientsmedicalrecords_id" ColumnName="patientsmedicalrecords_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="patientsnotes">
+            <EntityTypeMapping TypeName="dentnedModel.patientsnotes">
+              <MappingFragment StoreEntitySet="patientsnotes">
+                <ScalarProperty Name="patientsnotes_text" ColumnName="patientsnotes_text" />
+                <ScalarProperty Name="patientsnotes_date" ColumnName="patientsnotes_date" />
+                <ScalarProperty Name="patients_id" ColumnName="patients_id" />
+                <ScalarProperty Name="patientsnotes_id" ColumnName="patientsnotes_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="patientstreatments">
+            <EntityTypeMapping TypeName="dentnedModel.patientstreatments">
+              <MappingFragment StoreEntitySet="patientstreatments">
+                <ScalarProperty Name="patientstreatments_t48" ColumnName="patientstreatments_t48" />
+                <ScalarProperty Name="patientstreatments_t47" ColumnName="patientstreatments_t47" />
+                <ScalarProperty Name="patientstreatments_t46" ColumnName="patientstreatments_t46" />
+                <ScalarProperty Name="patientstreatments_t45" ColumnName="patientstreatments_t45" />
+                <ScalarProperty Name="patientstreatments_t44" ColumnName="patientstreatments_t44" />
+                <ScalarProperty Name="patientstreatments_t43" ColumnName="patientstreatments_t43" />
+                <ScalarProperty Name="patientstreatments_t42" ColumnName="patientstreatments_t42" />
+                <ScalarProperty Name="patientstreatments_t41" ColumnName="patientstreatments_t41" />
+                <ScalarProperty Name="patientstreatments_t38" ColumnName="patientstreatments_t38" />
+                <ScalarProperty Name="patientstreatments_t37" ColumnName="patientstreatments_t37" />
+                <ScalarProperty Name="patientstreatments_t36" ColumnName="patientstreatments_t36" />
+                <ScalarProperty Name="patientstreatments_t35" ColumnName="patientstreatments_t35" />
+                <ScalarProperty Name="patientstreatments_t34" ColumnName="patientstreatments_t34" />
+                <ScalarProperty Name="patientstreatments_t33" ColumnName="patientstreatments_t33" />
+                <ScalarProperty Name="patientstreatments_t32" ColumnName="patientstreatments_t32" />
+                <ScalarProperty Name="patientstreatments_t31" ColumnName="patientstreatments_t31" />
+                <ScalarProperty Name="patientstreatments_t28" ColumnName="patientstreatments_t28" />
+                <ScalarProperty Name="patientstreatments_t27" ColumnName="patientstreatments_t27" />
+                <ScalarProperty Name="patientstreatments_t26" ColumnName="patientstreatments_t26" />
+                <ScalarProperty Name="patientstreatments_t25" ColumnName="patientstreatments_t25" />
+                <ScalarProperty Name="patientstreatments_t24" ColumnName="patientstreatments_t24" />
+                <ScalarProperty Name="patientstreatments_t23" ColumnName="patientstreatments_t23" />
+                <ScalarProperty Name="patientstreatments_t22" ColumnName="patientstreatments_t22" />
+                <ScalarProperty Name="patientstreatments_t21" ColumnName="patientstreatments_t21" />
+                <ScalarProperty Name="patientstreatments_t18" ColumnName="patientstreatments_t18" />
+                <ScalarProperty Name="patientstreatments_t17" ColumnName="patientstreatments_t17" />
+                <ScalarProperty Name="patientstreatments_t16" ColumnName="patientstreatments_t16" />
+                <ScalarProperty Name="patientstreatments_t15" ColumnName="patientstreatments_t15" />
+                <ScalarProperty Name="patientstreatments_t14" ColumnName="patientstreatments_t14" />
+                <ScalarProperty Name="patientstreatments_t13" ColumnName="patientstreatments_t13" />
+                <ScalarProperty Name="patientstreatments_t12" ColumnName="patientstreatments_t12" />
+                <ScalarProperty Name="patientstreatments_t11" ColumnName="patientstreatments_t11" />
+                <ScalarProperty Name="patientstreatments_expirationdate" ColumnName="patientstreatments_expirationdate" />
+                <ScalarProperty Name="patientstreatments_notes" ColumnName="patientstreatments_notes" />
+                <ScalarProperty Name="patientstreatments_description" ColumnName="patientstreatments_description" />
+                <ScalarProperty Name="patientstreatments_taxrate" ColumnName="patientstreatments_taxrate" />
+                <ScalarProperty Name="patientstreatments_isunitprice" ColumnName="patientstreatments_isunitprice" />
+                <ScalarProperty Name="patientstreatments_price" ColumnName="patientstreatments_price" />
+                <ScalarProperty Name="patientstreatments_ispaid" ColumnName="patientstreatments_ispaid" />
+                <ScalarProperty Name="patientstreatments_fulfilldate" ColumnName="patientstreatments_fulfilldate" />
+                <ScalarProperty Name="patientstreatments_creationdate" ColumnName="patientstreatments_creationdate" />
+                <ScalarProperty Name="treatments_id" ColumnName="treatments_id" />
+                <ScalarProperty Name="patients_id" ColumnName="patients_id" />
+                <ScalarProperty Name="doctors_id" ColumnName="doctors_id" />
+                <ScalarProperty Name="patientstreatments_id" ColumnName="patientstreatments_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="payments">
+            <EntityTypeMapping TypeName="dentnedModel.payments">
+              <MappingFragment StoreEntitySet="payments">
+                <ScalarProperty Name="payments_notes" ColumnName="payments_notes" />
+                <ScalarProperty Name="payments_amount" ColumnName="payments_amount" />
+                <ScalarProperty Name="payments_date" ColumnName="payments_date" />
+                <ScalarProperty Name="patients_id" ColumnName="patients_id" />
+                <ScalarProperty Name="payments_id" ColumnName="payments_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="paymentstypes">
+            <EntityTypeMapping TypeName="dentnedModel.paymentstypes">
+              <MappingFragment StoreEntitySet="paymentstypes">
+                <ScalarProperty Name="paymentstypes_isdefault" ColumnName="paymentstypes_isdefault" />
+                <ScalarProperty Name="paymentstypes_doctext" ColumnName="paymentstypes_doctext" />
+                <ScalarProperty Name="paymentstypes_name" ColumnName="paymentstypes_name" />
+                <ScalarProperty Name="paymentstypes_id" ColumnName="paymentstypes_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="reports">
+            <EntityTypeMapping TypeName="dentnedModel.reports">
+              <MappingFragment StoreEntitySet="reports">
+                <ScalarProperty Name="reports_ispasswordprotected" ColumnName="reports_ispasswordprotected" />
+                <ScalarProperty Name="reports_infotext" ColumnName="reports_infotext" />
+                <ScalarProperty Name="reports_query" ColumnName="reports_query" />
+                <ScalarProperty Name="reports_name" ColumnName="reports_name" />
+                <ScalarProperty Name="reports_id" ColumnName="reports_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rooms">
+            <EntityTypeMapping TypeName="dentnedModel.rooms">
+              <MappingFragment StoreEntitySet="rooms">
+                <ScalarProperty Name="rooms_color" ColumnName="rooms_color" />
+                <ScalarProperty Name="rooms_name" ColumnName="rooms_name" />
+                <ScalarProperty Name="rooms_id" ColumnName="rooms_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="dentnedModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="taxes">
+            <EntityTypeMapping TypeName="dentnedModel.taxes">
+              <MappingFragment StoreEntitySet="taxes">
+                <ScalarProperty Name="taxes_isdefault" ColumnName="taxes_isdefault" />
+                <ScalarProperty Name="taxes_rate" ColumnName="taxes_rate" />
+                <ScalarProperty Name="taxes_name" ColumnName="taxes_name" />
+                <ScalarProperty Name="taxes_id" ColumnName="taxes_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="taxesdeductions">
+            <EntityTypeMapping TypeName="dentnedModel.taxesdeductions">
+              <MappingFragment StoreEntitySet="taxesdeductions">
+                <ScalarProperty Name="taxesdeductions_isdefault" ColumnName="taxesdeductions_isdefault" />
+                <ScalarProperty Name="taxesdeductions_rate" ColumnName="taxesdeductions_rate" />
+                <ScalarProperty Name="taxesdeductions_name" ColumnName="taxesdeductions_name" />
+                <ScalarProperty Name="taxesdeductions_id" ColumnName="taxesdeductions_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="treatments">
+            <EntityTypeMapping TypeName="dentnedModel.treatments">
+              <MappingFragment StoreEntitySet="treatments">
+                <ScalarProperty Name="treatments_notes" ColumnName="treatments_notes" />
+                <ScalarProperty Name="treatments_mexpiration" ColumnName="treatments_mexpiration" />
+                <ScalarProperty Name="treatments_isunitprice" ColumnName="treatments_isunitprice" />
+                <ScalarProperty Name="treatments_price" ColumnName="treatments_price" />
+                <ScalarProperty Name="treatments_name" ColumnName="treatments_name" />
+                <ScalarProperty Name="treatments_code" ColumnName="treatments_code" />
+                <ScalarProperty Name="treatmentstypes_id" ColumnName="treatmentstypes_id" />
+                <ScalarProperty Name="taxes_id" ColumnName="taxes_id" />
+                <ScalarProperty Name="treatments_id" ColumnName="treatments_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="treatmentsprices">
+            <EntityTypeMapping TypeName="dentnedModel.treatmentsprices">
+              <MappingFragment StoreEntitySet="treatmentsprices">
+                <ScalarProperty Name="treatmentsprices_price" ColumnName="treatmentsprices_price" />
+                <ScalarProperty Name="treatmentspriceslists_id" ColumnName="treatmentspriceslists_id" />
+                <ScalarProperty Name="treatments_id" ColumnName="treatments_id" />
+                <ScalarProperty Name="treatmentsprices_id" ColumnName="treatmentsprices_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="treatmentspriceslists">
+            <EntityTypeMapping TypeName="dentnedModel.treatmentspriceslists">
+              <MappingFragment StoreEntitySet="treatmentspriceslists">
+                <ScalarProperty Name="treatmentspriceslists_multiplier" ColumnName="treatmentspriceslists_multiplier" />
+                <ScalarProperty Name="treatmentspriceslists_name" ColumnName="treatmentspriceslists_name" />
+                <ScalarProperty Name="treatmentspriceslists_id" ColumnName="treatmentspriceslists_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="treatmentstypes">
+            <EntityTypeMapping TypeName="dentnedModel.treatmentstypes">
+              <MappingFragment StoreEntitySet="treatmentstypes">
+                <ScalarProperty Name="treatmentstypes_name" ColumnName="treatmentstypes_name" />
+                <ScalarProperty Name="treatmentstypes_id" ColumnName="treatmentstypes_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

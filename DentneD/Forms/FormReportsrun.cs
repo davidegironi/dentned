@@ -24,6 +24,9 @@ namespace DG.DentneD.Forms
     public partial class FormReportsrun : DGUIGHFForm
     {
         private DentneDModel _dentnedModel = null;
+
+        private readonly BoxLoader _boxLoader = null;
+
         private DataTable _datatableReportsParameters = null;
         private SqlConnection _sqlConnection = new SqlConnection();
 
@@ -42,6 +45,8 @@ namespace DG.DentneD.Forms
 
             _dentnedModel = new DentneDModel();
             _dentnedModel.LanguageHelper.LoadFromFile(Program.uighfApplication.LanguageFilename);
+
+            _boxLoader = new BoxLoader(_dentnedModel);
 
             //get the connection string
             using (var context = (DbContext)Activator.CreateInstance(_dentnedModel.ContextType, _dentnedModel.ContextParameters))
@@ -119,10 +124,7 @@ namespace DG.DentneD.Forms
         {
             IsBindingSourceLoading = true;
 
-            //load filter doctors
-            comboBox_reports.DataSource = (new[] { new { name = "", reports_id = -1 } }).Concat(_dentnedModel.Reports.List().OrderBy(r => r.reports_name).Select(r => new { name = r.reports_name, r.reports_id })).ToArray();
-            comboBox_reports.DisplayMember = "name";
-            comboBox_reports.ValueMember = "reports_id";
+            _boxLoader.LoadComboBoxFilterReports(comboBox_reports);
 
             IsBindingSourceLoading = false;
         }

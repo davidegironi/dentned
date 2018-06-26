@@ -10,6 +10,7 @@ using DG.DentneD.Helpers;
 using DG.DentneD.Model;
 using DG.DentneD.Model.Entity;
 using DG.UI.GHF;
+using DG.UI.Helpers;
 using SMcMaster;
 using System;
 using System.Collections;
@@ -30,6 +31,8 @@ namespace DG.DentneD.Forms
         private TabElement tabElement_tabEstimates = new TabElement();
         private TabElement tabElement_tabEstimatesLines = new TabElement();
 
+        private readonly BoxLoader _boxLoader = null;
+
         private const int MaxRowValueLength = 60;
 
         private readonly bool _addToothsToDocumentDescription = false;
@@ -47,6 +50,8 @@ namespace DG.DentneD.Forms
 
             _dentnedModel = new DentneDModel();
             _dentnedModel.LanguageHelper.LoadFromFile(Program.uighfApplication.LanguageFilename);
+
+            _boxLoader = new BoxLoader(_dentnedModel);
 
             panel_listtotal.Visible = Convert.ToBoolean(ConfigurationManager.AppSettings["showInvoicesEstimatesTotal"]);
             _addToothsToDocumentDescription = Convert.ToBoolean(ConfigurationManager.AppSettings["addToothsToDocumentDescription"]);
@@ -303,59 +308,16 @@ namespace DG.DentneD.Forms
         {
             IsBindingSourceLoading = true;
 
-            //load doctors
-            doctors_idComboBox.DataSource = _dentnedModel.Doctors.List().OrderBy(r => r.doctors_surname).ThenBy(r => r.doctors_name).Select(r => new { name = r.doctors_surname + " " + r.doctors_name, r.doctors_id }).ToArray();
-            doctors_idComboBox.DisplayMember = "name";
-            doctors_idComboBox.ValueMember = "doctors_id";
-            doctors_idComboBox.SelectedIndex = -1;
+            _boxLoader.LoadComboBoxDoctors(doctors_idComboBox);
+            _boxLoader.LoadComboBoxPatients(patients_idComboBox);
+            _boxLoader.LoadComboBoxPaymentsTypes(estimates_paymentComboBox);
+            _boxLoader.LoadComboBoxEstimatesFooters(estimates_footerComboBox);
+            _boxLoader.LoadComboBoxTaxesDeductions(estimates_deductiontaxrateComboBox);
+            _boxLoader.LoadComboBoxTaxes(estimateslines_taxrateComboBox);
+            _boxLoader.LoadComboBoxTreatments(treatments_idComboBox);
+            _boxLoader.LoadComboBoxComputedLines(computedlines_idComboBox);
 
-            //load patients
-            patients_idComboBox.DataSource = _dentnedModel.Patients.List().OrderBy(r => r.patients_surname).ThenBy(r => r.patients_name).Select(r => new { name = r.patients_surname + " " + r.patients_name, r.patients_id }).ToArray();
-            patients_idComboBox.DisplayMember = "name";
-            patients_idComboBox.ValueMember = "patients_id";
-            patients_idComboBox.SelectedIndex = -1;
-
-            //load payments
-            estimates_paymentComboBox.DataSource = _dentnedModel.PaymentsTypes.List().OrderBy(r => r.paymentstypes_name).Select(r => new { name = r.paymentstypes_name, r.paymentstypes_id }).ToArray();
-            estimates_paymentComboBox.DisplayMember = "name";
-            estimates_paymentComboBox.ValueMember = "paymentstypes_id";
-            estimates_paymentComboBox.SelectedIndex = -1;
-
-            //load footers
-            estimates_footerComboBox.DataSource = _dentnedModel.EstimatesFooters.List().OrderBy(r => r.estimatesfooters_name).Select(r => new { name = r.estimatesfooters_name, r.estimatesfooters_id }).ToArray();
-            estimates_footerComboBox.DisplayMember = "name";
-            estimates_footerComboBox.ValueMember = "estimatesfooters_id";
-            estimates_footerComboBox.SelectedIndex = -1;
-
-            //load deduction taxes
-            estimates_deductiontaxrateComboBox.DataSource = _dentnedModel.TaxesDeductions.List().OrderBy(r => r.taxesdeductions_name).Select(r => new { name = r.taxesdeductions_name, r.taxesdeductions_id }).ToArray();
-            estimates_deductiontaxrateComboBox.DisplayMember = "name";
-            estimates_deductiontaxrateComboBox.ValueMember = "taxesdeductions_id";
-            estimates_deductiontaxrateComboBox.SelectedIndex = -1;
-
-            //load tax rates
-            estimateslines_taxrateComboBox.DataSource = _dentnedModel.Taxes.List().OrderBy(r => r.taxes_name).Select(r => new { name = r.taxes_name, r.taxes_id }).ToArray();
-            estimateslines_taxrateComboBox.DisplayMember = "name";
-            estimateslines_taxrateComboBox.ValueMember = "taxes_id";
-            estimateslines_taxrateComboBox.SelectedIndex = -1;
-
-            //load treatments
-            treatments_idComboBox.DataSource = _dentnedModel.Treatments.List().OrderBy(r => r.treatments_code).ThenBy(r => r.treatments_name).Select(r => new { name = r.treatments_code + " - " + r.treatments_name, r.treatments_id }).ToArray();
-            treatments_idComboBox.DisplayMember = "name";
-            treatments_idComboBox.ValueMember = "treatments_id";
-            treatments_idComboBox.SelectedIndex = -1;
-
-            //load computed lines
-            computedlines_idComboBox.DataSource = _dentnedModel.ComputedLines.List().OrderBy(r => r.computedlines_name).Select(r => new { name = r.computedlines_name, r.computedlines_id }).ToArray();
-            computedlines_idComboBox.DisplayMember = "name";
-            computedlines_idComboBox.ValueMember = "computedlines_id";
-            computedlines_idComboBox.SelectedIndex = -1;
-
-            //load filter doctors
-            comboBox_filterDoctors.DataSource = (new[] { new { name = "", doctors_id = -1 } }).Concat(_dentnedModel.Doctors.List().OrderBy(r => r.doctors_surname).ThenBy(r => r.doctors_name).Select(r => new { name = r.doctors_surname + " " + r.doctors_name, r.doctors_id })).ToArray();
-            comboBox_filterDoctors.DisplayMember = "name";
-            comboBox_filterDoctors.ValueMember = "doctors_id";
-            comboBox_filterDoctors.SelectedIndex = -1;
+            _boxLoader.LoadComboBoxFilterDoctors(comboBox_filterDoctors);
             if (comboBox_filterDoctors.Items.Count == 2)
                 comboBox_filterDoctors.SelectedIndex = 1;
 
@@ -389,9 +351,19 @@ namespace DG.DentneD.Forms
                 if (!years.Contains(a.estimates_date.Year))
                     years.Add(a.estimates_date.Year);
             }
-            comboBox_filterYears.DataSource = years.Select(r => new { name = r.ToString(), year = r }).ToArray();
-            comboBox_filterYears.DisplayMember = "name";
-            comboBox_filterYears.ValueMember = "year";
+            EnhancedComboBoxHelper.AttachComboBox(
+                comboBox_filterYears,
+                new string[] { "Year" },
+                years.OrderBy(r => r).Select(
+                r => new EnhancedComboBoxHelper.Items()
+                {
+                    _id = r,
+                    _value = r.ToString(),
+                    _values = new string[]
+                    {
+                        r.ToString()
+                    }
+                }).ToArray());
 
             if (currentSelectedIndex == -1)
                 comboBox_filterYears.SelectedIndex = comboBox_filterYears.Items.Count - 1;
@@ -1092,57 +1064,6 @@ namespace DG.DentneD.Forms
             IsBindingSourceLoading = false;
         }
 
-        /// <summary>
-        /// Combobox autocomplete
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void doctors_idComboBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
-        }
-
-        /// <summary>
-        /// Combobox autocomplete
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void patients_idComboBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
-        }
-
-        /// <summary>
-        /// Combobox autocomplete
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void estimates_paymentComboBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
-        }
-
-        /// <summary>
-        /// Combobox autocomplete
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void estimates_footerComboBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
-        }
-
-        /// <summary>
-        /// Combobox autocomplete
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void estimates_deductiontaxrateComboBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
-        }
-
-
         #endregion
 
 
@@ -1295,19 +1216,6 @@ namespace DG.DentneD.Forms
         }
 
         /// <summary>
-        /// Estimates prices changed
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void comboBox_tabEstimatesLines_filterPriceslists_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (IsBindingSourceLoading)
-                return;
-
-            ReloadTab(tabElement_tabEstimatesLines);
-        }
-
-        /// <summary>
         /// Reload patients treatments combobox
         /// </summary>
         /// <param name="patients_id"></param>
@@ -1328,6 +1236,7 @@ namespace DG.DentneD.Forms
                     {
                         estimateslinel = (from estimatesline in context.estimateslines
                                           join estimate in context.estimates on estimatesline.estimates_id equals estimate.estimates_id
+                                          where estimate.patients_id == patients_id
                                           select estimatesline).ToArray();
                     }
                     foreach (estimateslines estimatesline in estimateslinel)
@@ -1357,11 +1266,33 @@ namespace DG.DentneD.Forms
                 }
             }
 
-            //local patients treatments
+            //load patients treatments
             IsBindingSourceLoading = true;
-            patientstreatments_idComboBox.DataSource = patientstreatmentsl.Select(r => new { name = _dentnedModel.Treatments.Find(r.treatments_id).treatments_code + " [" + _dentnedModel.PatientsTreatments.GetTreatmentsToothsString(r) + "] " + r.patientstreatments_creationdate.ToShortDateString(), r.patientstreatments_id }).OrderBy(r => r.name).ToArray();
-            patientstreatments_idComboBox.DisplayMember = "name";
-            patientstreatments_idComboBox.ValueMember = "patientstreatments_id";
+            EnhancedComboBoxHelper.Items[] patientstreatmentsitems = new EnhancedComboBoxHelper.Items[] { };
+            foreach (patientstreatments patientstreatment in patientstreatmentsl)
+            {
+                treatments treatment = _dentnedModel.Treatments.Find(patientstreatment.treatments_id);
+                string toothstring = _dentnedModel.PatientsTreatments.GetTreatmentsToothsString(patientstreatment);
+                patientstreatmentsitems = patientstreatmentsitems.Concat(new EnhancedComboBoxHelper.Items[] {
+                        new EnhancedComboBoxHelper.Items()
+                        {
+                            _id = patientstreatment.patientstreatments_id,
+                            _value = treatment.treatments_code + " [" + toothstring + "] " + patientstreatment.patientstreatments_creationdate.ToShortDateString(),
+                            _values = new string[]
+                            {
+                                treatment.treatments_code + " [" + toothstring + "] " + patientstreatment.patientstreatments_creationdate.ToShortDateString(),
+                                treatment.treatments_code,
+                                treatment.treatments_name,
+                                toothstring,
+                                patientstreatment.patientstreatments_creationdate.ToShortDateString()
+                            }
+                        }
+                    }).ToArray();
+            }
+            EnhancedComboBoxHelper.AttachComboBox(
+                patientstreatments_idComboBox,
+                new string[] { "Full Name", "Code", "Name", "Tooths", "Date" },
+                patientstreatmentsitems);
             IsBindingSourceLoading = false;
         }
 
@@ -1598,47 +1529,7 @@ namespace DG.DentneD.Forms
             computedlines_idComboBox.SelectedIndex = -1;
             IsBindingSourceLoading = false;
         }
-
-        /// <summary>
-        /// Combobox autocomplete
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void treatments_idComboBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
-        }
-
-        /// <summary>
-        /// Combobox autocomplete
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void computedlines_idComboBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
-        }
-
-        /// <summary>
-        /// Combobox autocomplete
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void patientstreatments_idComboBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
-        }
-
-        /// <summary>
-        /// Combobox autocomplete
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void estimateslines_taxrateComboBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
-        }
-
+        
         #endregion
     }
 }

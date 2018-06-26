@@ -26,6 +26,8 @@ namespace DG.DentneD.Forms
 
         private TabElement tabElement_tabAppointments = new TabElement();
 
+        private readonly BoxLoader _boxLoader = null;
+
         private readonly int _calendarDayHourBegin = 9;
         private readonly int _calendarDayHourEnd = 19;
 
@@ -146,6 +148,8 @@ namespace DG.DentneD.Forms
 
             _dentnedModel = new DentneDModel();
             _dentnedModel.LanguageHelper.LoadFromFile(Program.uighfApplication.LanguageFilename);
+
+            _boxLoader = new BoxLoader(_dentnedModel);
 
             checkBox_filterTreatmentsadvices.Checked = Convert.ToBoolean(ConfigurationManager.AppSettings["appointmentsShowTreatmentsAdvicesChecked"]);
 
@@ -287,36 +291,15 @@ namespace DG.DentneD.Forms
         {
             IsBindingSourceLoading = true;
 
-            //load doctors
-            doctors_idComboBox.DataSource = _dentnedModel.Doctors.List().OrderBy(r => r.doctors_surname).ThenBy(r => r.doctors_name).Select(r => new { name = r.doctors_surname + " " + r.doctors_name, r.doctors_id }).ToArray();
-            doctors_idComboBox.DisplayMember = "name";
-            doctors_idComboBox.ValueMember = "doctors_id";
-            doctors_idComboBox.SelectedIndex = -1;
+            _boxLoader.LoadComboBoxDoctors(doctors_idComboBox);
+            _boxLoader.LoadComboBoxRooms(rooms_idComboBox);
+            _boxLoader.LoadComboBoxPatients(patients_idComboBox);
 
-            //load rooms
-            rooms_idComboBox.DataSource = _dentnedModel.Rooms.List().OrderBy(r => r.rooms_name).Select(r => new { name = r.rooms_name, r.rooms_id }).ToArray();
-            rooms_idComboBox.DisplayMember = "name";
-            rooms_idComboBox.ValueMember = "rooms_id";
-            rooms_idComboBox.SelectedIndex = -1;
-
-            //load patients
-            patients_idComboBox.DataSource = _dentnedModel.Patients.List().OrderBy(r => r.patients_surname).ThenBy(r => r.patients_name).Select(r => new { name = r.patients_surname + " " + r.patients_name, r.patients_id }).ToArray();
-            patients_idComboBox.DisplayMember = "name";
-            patients_idComboBox.ValueMember = "patients_id";
-            patients_idComboBox.SelectedIndex = -1;
-
-            //load filter doctors
-            comboBox_filterDoctors.DataSource = (new[] { new { name = "", doctors_id = -1 } }).Concat(_dentnedModel.Doctors.List().OrderBy(r => r.doctors_surname).ThenBy(r => r.doctors_name).Select(r => new { name = r.doctors_surname + " " + r.doctors_name, r.doctors_id })).ToArray();
-            comboBox_filterDoctors.DisplayMember = "name";
-            comboBox_filterDoctors.ValueMember = "doctors_id";
+            _boxLoader.LoadComboBoxFilterDoctors(comboBox_filterDoctors);
             comboBox_filterDoctors.SelectedIndex = -1;
             if (comboBox_filterDoctors.Items.Count == 2)
                 comboBox_filterDoctors.SelectedIndex = 1;
-
-            //load filter rooms
-            comboBox_filterRooms.DataSource = (new[] { new { name = "", rooms_id = -1 } }).Concat(_dentnedModel.Rooms.List().OrderBy(r => r.rooms_name).Select(r => new { name = r.rooms_name, r.rooms_id })).ToArray();
-            comboBox_filterRooms.DisplayMember = "name";
-            comboBox_filterRooms.ValueMember = "rooms_id";
+            _boxLoader.LoadComboBoxFilterRooms(comboBox_filterRooms);
             comboBox_filterRooms.SelectedIndex = -1;
             if (comboBox_filterRooms.Items.Count == 2)
                 comboBox_filterRooms.SelectedIndex = 1;
@@ -976,36 +959,6 @@ namespace DG.DentneD.Forms
                     catch { }
                 }
             }
-        }
-
-        /// <summary>
-        /// Combobox autocomplete
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void patients_idComboBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
-        }
-
-        /// <summary>
-        /// Combobox autocomplete
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void doctors_idComboBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
-        }
-
-        /// <summary>
-        /// Combobox autocomplete
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void rooms_idComboBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
         }
 
         #endregion

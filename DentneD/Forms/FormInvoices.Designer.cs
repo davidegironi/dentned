@@ -442,7 +442,6 @@
             this.patients_idComboBox.Size = new System.Drawing.Size(121, 21);
             this.patients_idComboBox.TabIndex = 24;
             this.patients_idComboBox.SelectedIndexChanged += new System.EventHandler(this.patients_idComboBox_SelectedIndexChanged);
-            this.patients_idComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.patients_idComboBox_KeyPress);
             // 
             // doctors_idComboBox
             // 
@@ -455,7 +454,6 @@
             this.doctors_idComboBox.Size = new System.Drawing.Size(121, 21);
             this.doctors_idComboBox.TabIndex = 23;
             this.doctors_idComboBox.SelectedIndexChanged += new System.EventHandler(this.doctors_idComboBox_SelectedIndexChanged);
-            this.doctors_idComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.doctors_idComboBox_KeyPress);
             // 
             // invoices_deductiontaxrateComboBox
             // 
@@ -467,7 +465,6 @@
             this.invoices_deductiontaxrateComboBox.Size = new System.Drawing.Size(100, 21);
             this.invoices_deductiontaxrateComboBox.TabIndex = 22;
             this.invoices_deductiontaxrateComboBox.SelectedIndexChanged += new System.EventHandler(this.invoices_deductiontaxrateComboBox_SelectedIndexChanged);
-            this.invoices_deductiontaxrateComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.invoices_deductiontaxrateComboBox_KeyPress);
             this.invoices_deductiontaxrateComboBox.Leave += new System.EventHandler(this.invoices_deductiontaxrateComboBox_Leave);
             // 
             // invoices_ispaidCheckBox
@@ -499,7 +496,6 @@
             this.invoices_footerComboBox.Size = new System.Drawing.Size(121, 21);
             this.invoices_footerComboBox.TabIndex = 17;
             this.invoices_footerComboBox.SelectedIndexChanged += new System.EventHandler(this.invoices_footerComboBox_SelectedIndexChanged);
-            this.invoices_footerComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.invoices_footerComboBox_KeyPress);
             this.invoices_footerComboBox.Leave += new System.EventHandler(this.invoices_footerComboBox_Leave);
             // 
             // invoices_footerTextBox
@@ -523,7 +519,6 @@
             this.invoices_paymentComboBox.Size = new System.Drawing.Size(121, 21);
             this.invoices_paymentComboBox.TabIndex = 14;
             this.invoices_paymentComboBox.SelectedIndexChanged += new System.EventHandler(this.invoices_paymentComboBox_SelectedIndexChanged);
-            this.invoices_paymentComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.invoices_paymentComboBox_KeyPress);
             this.invoices_paymentComboBox.Leave += new System.EventHandler(this.invoices_paymentComboBox_Leave);
             // 
             // invoices_paymentTextBox
@@ -760,7 +755,6 @@
             this.computedlines_idComboBox.Size = new System.Drawing.Size(150, 21);
             this.computedlines_idComboBox.TabIndex = 15;
             this.computedlines_idComboBox.SelectedIndexChanged += new System.EventHandler(this.computedlines_idComboBox_SelectedIndexChanged);
-            this.computedlines_idComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.computedlines_idComboBox_KeyPress);
             this.computedlines_idComboBox.Leave += new System.EventHandler(this.computedlines_idComboBox_Leave);
             // 
             // treatments_idComboBox
@@ -773,7 +767,6 @@
             this.treatments_idComboBox.Size = new System.Drawing.Size(150, 21);
             this.treatments_idComboBox.TabIndex = 14;
             this.treatments_idComboBox.SelectedIndexChanged += new System.EventHandler(this.treatments_idComboBox_SelectedIndexChanged);
-            this.treatments_idComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.treatments_idComboBox_KeyPress);
             this.treatments_idComboBox.Leave += new System.EventHandler(this.treatments_idComboBox_Leave);
             // 
             // invoiceslines_taxrateComboBox
@@ -786,7 +779,6 @@
             this.invoiceslines_taxrateComboBox.Size = new System.Drawing.Size(100, 21);
             this.invoiceslines_taxrateComboBox.TabIndex = 12;
             this.invoiceslines_taxrateComboBox.SelectedIndexChanged += new System.EventHandler(this.invoiceslines_taxrateComboBox_SelectedIndexChanged);
-            this.invoiceslines_taxrateComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.invoiceslines_taxrateComboBox_KeyPress);
             this.invoiceslines_taxrateComboBox.Leave += new System.EventHandler(this.invoiceslines_taxrateComboBox_Leave);
             // 
             // patientstreatments_idComboBox
@@ -800,7 +792,6 @@
             this.patientstreatments_idComboBox.Size = new System.Drawing.Size(249, 21);
             this.patientstreatments_idComboBox.TabIndex = 16;
             this.patientstreatments_idComboBox.SelectedIndexChanged += new System.EventHandler(this.patientstreatments_idComboBox_SelectedIndexChanged);
-            this.patientstreatments_idComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.patientstreatments_idComboBox_KeyPress);
             // 
             // invoiceslines_unitpriceTextBox
             // 

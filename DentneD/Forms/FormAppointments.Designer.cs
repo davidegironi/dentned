@@ -330,7 +330,6 @@
             this.patients_idComboBox.Name = "patients_idComboBox";
             this.patients_idComboBox.Size = new System.Drawing.Size(250, 21);
             this.patients_idComboBox.TabIndex = 11;
-            this.patients_idComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.patients_idComboBox_KeyPress);
             // 
             // doctors_idComboBox
             // 
@@ -342,7 +341,6 @@
             this.doctors_idComboBox.Name = "doctors_idComboBox";
             this.doctors_idComboBox.Size = new System.Drawing.Size(250, 21);
             this.doctors_idComboBox.TabIndex = 9;
-            this.doctors_idComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.doctors_idComboBox_KeyPress);
             // 
             // rooms_idComboBox
             // 
@@ -354,7 +352,6 @@
             this.rooms_idComboBox.Name = "rooms_idComboBox";
             this.rooms_idComboBox.Size = new System.Drawing.Size(150, 21);
             this.rooms_idComboBox.TabIndex = 7;
-            this.rooms_idComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.rooms_idComboBox_KeyPress);
             // 
             // appointments_idTextBox
             // 
@@ -716,7 +713,7 @@
             this.ResumeLayout(false);
 
         }
-        
+
         #endregion
 
         private System.Windows.Forms.Panel panel_data;

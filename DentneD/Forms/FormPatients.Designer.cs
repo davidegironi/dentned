@@ -1460,7 +1460,6 @@
             this.treatmentspriceslists_idComboBox.Name = "treatmentspriceslists_idComboBox";
             this.treatmentspriceslists_idComboBox.Size = new System.Drawing.Size(150, 21);
             this.treatmentspriceslists_idComboBox.TabIndex = 8;
-            this.treatmentspriceslists_idComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.treatmentspriceslists_idComboBox_KeyPress);
             // 
             // patients_surnameTextBox
             // 
@@ -1584,7 +1583,6 @@
             this.contactstypes_idComboBox.Name = "contactstypes_idComboBox";
             this.contactstypes_idComboBox.Size = new System.Drawing.Size(150, 21);
             this.contactstypes_idComboBox.TabIndex = 3;
-            this.contactstypes_idComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.contactstypes_idComboBox_KeyPress);
             // 
             // patientscontacts_idTextBox
             // 
@@ -1806,7 +1804,6 @@
             this.addressestypes_idComboBox.Name = "addressestypes_idComboBox";
             this.addressestypes_idComboBox.Size = new System.Drawing.Size(150, 21);
             this.addressestypes_idComboBox.TabIndex = 3;
-            this.addressestypes_idComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.addressestypes_idComboBox_KeyPress);
             // 
             // patientsaddresses_idTextBox
             // 
@@ -2019,7 +2016,6 @@
             this.medicalrecordstypes_idComboBox.Name = "medicalrecordstypes_idComboBox";
             this.medicalrecordstypes_idComboBox.Size = new System.Drawing.Size(250, 21);
             this.medicalrecordstypes_idComboBox.TabIndex = 3;
-            this.medicalrecordstypes_idComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.medicalrecordstypes_idComboBox_KeyPress);
             // 
             // patientsmedicalrecords_idTextBox
             // 
@@ -4478,7 +4474,6 @@
             this.doctors_idComboBox1.Name = "doctors_idComboBox1";
             this.doctors_idComboBox1.Size = new System.Drawing.Size(411, 21);
             this.doctors_idComboBox1.TabIndex = 45;
-            this.doctors_idComboBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.doctors_idComboBox1_KeyPress);
             // 
             // patientstreatments_notesTextBox
             // 
@@ -4526,7 +4521,6 @@
             this.treatments_idComboBox.Size = new System.Drawing.Size(411, 21);
             this.treatments_idComboBox.TabIndex = 3;
             this.treatments_idComboBox.SelectedIndexChanged += new System.EventHandler(this.treatments_idComboBox_SelectedIndexChanged);
-            this.treatments_idComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.treatments_idComboBox_KeyPress);
             // 
             // patientstreatments_idTextBox
             // 
@@ -5242,7 +5236,6 @@
             this.patientsattachmentstypes_idComboBox.Size = new System.Drawing.Size(150, 21);
             this.patientsattachmentstypes_idComboBox.TabIndex = 11;
             this.patientsattachmentstypes_idComboBox.SelectedIndexChanged += new System.EventHandler(this.patientsattachmentstypes_idComboBox_SelectedIndexChanged);
-            this.patientsattachmentstypes_idComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.patientsattachmentstypes_idComboBox_KeyPress);
             // 
             // button_tabPatientsAttachments_filepathdelete
             // 
@@ -6088,7 +6081,6 @@
             this.patientsattributestypes_idComboBox.Name = "patientsattributestypes_idComboBox";
             this.patientsattributestypes_idComboBox.Size = new System.Drawing.Size(250, 21);
             this.patientsattributestypes_idComboBox.TabIndex = 11;
-            this.patientsattributestypes_idComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.patientsattributestypes_idComboBox_KeyPress);
             // 
             // patientsattributes_valueLabel
             // 

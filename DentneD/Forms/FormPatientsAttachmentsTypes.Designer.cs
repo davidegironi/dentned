@@ -150,7 +150,6 @@
             this.patientsattachmentstypes_valueautofuncComboBox.Name = "patientsattachmentstypes_valueautofuncComboBox";
             this.patientsattachmentstypes_valueautofuncComboBox.Size = new System.Drawing.Size(430, 21);
             this.patientsattachmentstypes_valueautofuncComboBox.TabIndex = 4;
-            this.patientsattachmentstypes_valueautofuncComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.patientsattachmentstypes_valueautofuncComboBox_KeyPress);
             // 
             // patientsattachmentstypesBindingSource
             // 

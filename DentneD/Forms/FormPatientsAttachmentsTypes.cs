@@ -6,11 +6,11 @@
 
 using DG.Data.Model.Helpers;
 using DG.DentneD.Forms.Objects;
-using DG.DentneD.Helpers;
 using DG.DentneD.Model;
 using DG.DentneD.Model.Entity;
 using DG.DentneD.Model.Repositories;
 using DG.UI.GHF;
+using DG.UI.Helpers;
 using SMcMaster;
 using System;
 using System.Collections.Generic;
@@ -139,16 +139,47 @@ namespace DG.DentneD.Forms
         {
             IsBindingSourceLoading = true;
 
-            //load valueautofunc
-            patientsattachmentstypes_valueautofuncComboBox.DataSource = (new[] {
-                    new { name = _dentnedModel.PatientsAttachmentsTypes.language.valueAutoFuncNUL, value = PatientsAttachmentsTypesRepository.ValueAutoFuncCode.NUL.ToString() },
-                    new { name = _dentnedModel.PatientsAttachmentsTypes.language.valueAutoFuncAMG, value = PatientsAttachmentsTypesRepository.ValueAutoFuncCode.AMG.ToString() },
-                    new { name = _dentnedModel.PatientsAttachmentsTypes.language.valueAutoFuncAML, value = PatientsAttachmentsTypesRepository.ValueAutoFuncCode.AML.ToString() },
-                    new { name = _dentnedModel.PatientsAttachmentsTypes.language.valueAutoFuncAMD, value = PatientsAttachmentsTypesRepository.ValueAutoFuncCode.AMD.ToString() }
-                }).ToArray();
-            patientsattachmentstypes_valueautofuncComboBox.DisplayMember = "name";
-            patientsattachmentstypes_valueautofuncComboBox.ValueMember = "value";
-            patientsattachmentstypes_valueautofuncComboBox.SelectedIndex = -1;
+            EnhancedComboBoxHelper.AttachComboBox(
+                patientsattachmentstypes_valueautofuncComboBox,
+                new string[] { "Name" },
+                new EnhancedComboBoxHelper.Items[] {
+                    new EnhancedComboBoxHelper.Items()
+                    {
+                        _id = PatientsAttachmentsTypesRepository.ValueAutoFuncCode.NUL.ToString(),
+                        _value = _dentnedModel.PatientsAttachmentsTypes.language.valueAutoFuncNUL,
+                        _values = new string[]
+                        {
+                            _dentnedModel.PatientsAttachmentsTypes.language.valueAutoFuncNUL
+                        }
+                    },
+                    new EnhancedComboBoxHelper.Items()
+                    {
+                        _id = PatientsAttachmentsTypesRepository.ValueAutoFuncCode.AMG.ToString(),
+                        _value = _dentnedModel.PatientsAttachmentsTypes.language.valueAutoFuncAMG,
+                        _values = new string[]
+                        {
+                            _dentnedModel.PatientsAttachmentsTypes.language.valueAutoFuncAMG
+                        }
+                    },
+                    new EnhancedComboBoxHelper.Items()
+                    {
+                        _id = PatientsAttachmentsTypesRepository.ValueAutoFuncCode.AML.ToString(),
+                        _value = _dentnedModel.PatientsAttachmentsTypes.language.valueAutoFuncAML,
+                        _values = new string[]
+                        {
+                            _dentnedModel.PatientsAttachmentsTypes.language.valueAutoFuncAML
+                        }
+                    },
+                    new EnhancedComboBoxHelper.Items()
+                    {
+                        _id = PatientsAttachmentsTypesRepository.ValueAutoFuncCode.AMD.ToString(),
+                        _value = _dentnedModel.PatientsAttachmentsTypes.language.valueAutoFuncAMD,
+                        _values = new string[]
+                        {
+                            _dentnedModel.PatientsAttachmentsTypes.language.valueAutoFuncAMD
+                        }
+                    }
+                }.ToArray());
 
             IsBindingSourceLoading = false;
         }
@@ -230,16 +261,6 @@ namespace DG.DentneD.Forms
                 ((patientsattachmentstypes)patientsattachmentstypesBindingSource.Current).patientsattachmentstypes_valueautofunc = PatientsAttachmentsTypesRepository.ValueAutoFuncCode.NUL.ToString();
                 patientsattachmentstypesBindingSource.ResetBindings(true);
             }
-        }
-
-        /// <summary>
-        /// Combobox autocomplete
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void patientsattachmentstypes_valueautofuncComboBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
         }
 
         #endregion

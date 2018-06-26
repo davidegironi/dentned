@@ -28,6 +28,8 @@ namespace DG.DentneD.Forms
         private TabElement tabElement_tabTreatments = new TabElement();
         private TabElement tabElement_tabTreatmentsPrices = new TabElement();
 
+        private readonly BoxLoader _boxLoader = null;
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -40,6 +42,8 @@ namespace DG.DentneD.Forms
 
             _dentnedModel = new DentneDModel();
             _dentnedModel.LanguageHelper.LoadFromFile(Program.uighfApplication.LanguageFilename);
+
+            _boxLoader = new BoxLoader(_dentnedModel);
         }
 
         /// <summary>
@@ -222,25 +226,11 @@ namespace DG.DentneD.Forms
         {
             IsBindingSourceLoading = true;
 
-            //load categories
-            treatmentstypes_idComboBox.DataSource = _dentnedModel.TreatmentsTypes.List().OrderBy(r => r.treatmentstypes_name).Select(r => new { name = r.treatmentstypes_name, r.treatmentstypes_id }).ToArray();
-            treatmentstypes_idComboBox.DisplayMember = "name";
-            treatmentstypes_idComboBox.ValueMember = "treatmentstypes_id";
+            _boxLoader.LoadComboBoxTreatmentsTypes(treatmentstypes_idComboBox);
+            _boxLoader.LoadComboBoxTreatmentsPricesLists(treatmentspriceslists_idComboBox);
+            _boxLoader.LoadComboBoxTaxes(taxes_idComboBox);
 
-            //load prices lists
-            treatmentspriceslists_idComboBox.DataSource = _dentnedModel.TreatmentsPricesLists.List().OrderBy(r => r.treatmentspriceslists_name).Select(r => new { name = r.treatmentspriceslists_name, r.treatmentspriceslists_id }).ToArray();
-            treatmentspriceslists_idComboBox.DisplayMember = "name";
-            treatmentspriceslists_idComboBox.ValueMember = "treatmentspriceslists_id";
-
-            //load prices lists
-            comboBox_tabTreatmentsPrices_filterPriceslists.DataSource = (new[] { new { name = "", treatmentspriceslists_id = -1 } }).Concat(_dentnedModel.TreatmentsPricesLists.List().OrderBy(r => r.treatmentspriceslists_multiplier).Select(r => new { name = r.treatmentspriceslists_name, r.treatmentspriceslists_id })).ToArray();
-            comboBox_tabTreatmentsPrices_filterPriceslists.DisplayMember = "name";
-            comboBox_tabTreatmentsPrices_filterPriceslists.ValueMember = "treatmentspriceslists_id";
-
-            //load tax rates
-            taxes_idComboBox.DataSource = _dentnedModel.Taxes.List().OrderBy(r => r.taxes_name).Select(r => new { name = r.taxes_name, r.taxes_id }).ToArray();
-            taxes_idComboBox.DisplayMember = "name";
-            taxes_idComboBox.ValueMember = "taxes_id";
+            _boxLoader.LoadComboBoxFilterTreatmentsPricesLists(comboBox_tabTreatmentsPrices_filterPriceslists);
 
             IsBindingSourceLoading = false;
         }
@@ -454,26 +444,6 @@ namespace DG.DentneD.Forms
             taxes_idComboBox.SelectedIndex = -1;
         }
 
-        /// <summary>
-        /// Combobox autocomplete
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void treatmentstypes_idComboBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
-        }
-
-        /// <summary>
-        /// Combobox autocomplete
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void taxes_idComboBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
-        }
-
         #endregion
 
 
@@ -497,7 +467,10 @@ namespace DG.DentneD.Forms
             //get treatments
             List<treatmentsprices> treatmentspricesl = new List<treatmentsprices>();
             if (comboBox_tabTreatmentsPrices_filterPriceslists.SelectedIndex != -1 && comboBox_tabTreatmentsPrices_filterPriceslists.SelectedIndex != 0)
-                treatmentspricesl = _dentnedModel.TreatmentsPrices.List(r => r.treatments_id == treatments_id && r.treatmentspriceslists_id == Convert.ToInt32(comboBox_tabTreatmentsPrices_filterPriceslists.SelectedValue)).ToList();
+            {
+                int treatmentspriceslists_id = Convert.ToInt32(comboBox_tabTreatmentsPrices_filterPriceslists.SelectedValue);
+                treatmentspricesl = _dentnedModel.TreatmentsPrices.List(r => r.treatments_id == treatments_id && r.treatmentspriceslists_id == treatmentspriceslists_id).ToList();
+            }
             else
                 treatmentspricesl = _dentnedModel.TreatmentsPrices.List(r => r.treatments_id == treatments_id).ToList();
             IEnumerable<VTreatmentsPrices> vTreatmentsPrices =
@@ -623,16 +596,6 @@ namespace DG.DentneD.Forms
                     treatmentspricesBindingSource.ResetBindings(true);
                 }
             }
-        }
-
-        /// <summary>
-        /// Combobox autocomplete
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void treatmentspriceslists_idComboBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
         }
 
         #endregion

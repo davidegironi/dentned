@@ -508,7 +508,6 @@
             this.computedlines_idComboBox.Size = new System.Drawing.Size(150, 21);
             this.computedlines_idComboBox.TabIndex = 16;
             this.computedlines_idComboBox.SelectedIndexChanged += new System.EventHandler(this.computedlines_idComboBox_SelectedIndexChanged);
-            this.computedlines_idComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.computedlines_idComboBox_KeyPress);
             this.computedlines_idComboBox.Leave += new System.EventHandler(this.computedlines_idComboBox_Leave);
             // 
             // computedlines_idLabel
@@ -674,7 +673,7 @@
             this.comboBox_filterDoctors.Name = "comboBox_filterDoctors";
             this.comboBox_filterDoctors.Size = new System.Drawing.Size(150, 21);
             this.comboBox_filterDoctors.TabIndex = 5;
-            this.comboBox_filterDoctors.SelectedIndexChanged += new System.EventHandler(this.comboBox_tabEstimatesLines_filterPriceslists_SelectedIndexChanged);
+            this.comboBox_filterDoctors.SelectedIndexChanged += new System.EventHandler(this.comboBox_filterDoctors_SelectedIndexChanged);
             // 
             // totaldueinvoicedTextBox
             // 
@@ -987,7 +986,6 @@
             this.patients_idComboBox.Size = new System.Drawing.Size(121, 21);
             this.patients_idComboBox.TabIndex = 24;
             this.patients_idComboBox.SelectedIndexChanged += new System.EventHandler(this.patients_idComboBox_SelectedIndexChanged);
-            this.patients_idComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.patients_idComboBox_KeyPress);
             // 
             // doctors_idComboBox
             // 
@@ -1000,7 +998,6 @@
             this.doctors_idComboBox.Size = new System.Drawing.Size(121, 21);
             this.doctors_idComboBox.TabIndex = 23;
             this.doctors_idComboBox.SelectedIndexChanged += new System.EventHandler(this.doctors_idComboBox_SelectedIndexChanged);
-            this.doctors_idComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.doctors_idComboBox_KeyPress);
             // 
             // estimates_deductiontaxrateComboBox
             // 
@@ -1012,7 +1009,6 @@
             this.estimates_deductiontaxrateComboBox.Size = new System.Drawing.Size(100, 21);
             this.estimates_deductiontaxrateComboBox.TabIndex = 22;
             this.estimates_deductiontaxrateComboBox.SelectedIndexChanged += new System.EventHandler(this.estimates_deductiontaxrateComboBox_SelectedIndexChanged);
-            this.estimates_deductiontaxrateComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.estimates_deductiontaxrateComboBox_KeyPress);
             this.estimates_deductiontaxrateComboBox.Leave += new System.EventHandler(this.estimates_deductiontaxrateComboBox_Leave);
             // 
             // estimates_deductiontaxrateTextBox
@@ -1033,7 +1029,6 @@
             this.estimates_footerComboBox.Size = new System.Drawing.Size(121, 21);
             this.estimates_footerComboBox.TabIndex = 17;
             this.estimates_footerComboBox.SelectedIndexChanged += new System.EventHandler(this.estimates_footerComboBox_SelectedIndexChanged);
-            this.estimates_footerComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.estimates_footerComboBox_KeyPress);
             this.estimates_footerComboBox.Leave += new System.EventHandler(this.estimates_footerComboBox_Leave);
             // 
             // estimates_footerTextBox
@@ -1057,7 +1052,6 @@
             this.estimates_paymentComboBox.Size = new System.Drawing.Size(121, 21);
             this.estimates_paymentComboBox.TabIndex = 14;
             this.estimates_paymentComboBox.SelectedIndexChanged += new System.EventHandler(this.estimates_paymentComboBox_SelectedIndexChanged);
-            this.estimates_paymentComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.estimates_paymentComboBox_KeyPress);
             this.estimates_paymentComboBox.Leave += new System.EventHandler(this.estimates_paymentComboBox_Leave);
             // 
             // estimates_paymentTextBox

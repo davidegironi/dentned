@@ -25,6 +25,8 @@ namespace DG.DentneD.Forms
 
         private TabElement tabElement_tabComputedLines = new TabElement();
 
+        private readonly BoxLoader _boxLoader = null;
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -37,6 +39,8 @@ namespace DG.DentneD.Forms
 
             _dentnedModel = new DentneDModel();
             _dentnedModel.LanguageHelper.LoadFromFile(Program.uighfApplication.LanguageFilename);
+
+            _boxLoader = new BoxLoader(_dentnedModel);
         }
 
         /// <summary>
@@ -141,10 +145,7 @@ namespace DG.DentneD.Forms
         {
             IsBindingSourceLoading = true;
 
-            //load tax rates
-            taxes_idComboBox.DataSource = _dentnedModel.Taxes.List().OrderBy(r => r.taxes_name).Select(r => new { name = r.taxes_name, r.taxes_id }).ToArray();
-            taxes_idComboBox.DisplayMember = "name";
-            taxes_idComboBox.ValueMember = "taxes_id";
+            _boxLoader.LoadComboBoxTaxes(taxes_idComboBox);
 
             IsBindingSourceLoading = false;
         }
@@ -224,17 +225,7 @@ namespace DG.DentneD.Forms
         {
             taxes_idComboBox.SelectedIndex = -1;
         }
-
-        /// <summary>
-        /// Combobox autocomplete
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void taxes_idComboBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            ComboBoxHelper.AutoCompleteOnKeyPress((ComboBox)sender, e);
-        }
-
+        
         #endregion
 
     }

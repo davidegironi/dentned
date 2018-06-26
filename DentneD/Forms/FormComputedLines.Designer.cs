@@ -246,7 +246,6 @@
             this.taxes_idComboBox.Name = "taxes_idComboBox";
             this.taxes_idComboBox.Size = new System.Drawing.Size(100, 21);
             this.taxes_idComboBox.TabIndex = 7;
-            this.taxes_idComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.taxes_idComboBox_KeyPress);
             // 
             // computedlinesBindingSource
             // 

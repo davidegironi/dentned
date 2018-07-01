@@ -70,8 +70,8 @@
       <HintPath>..\packages\Ext\DGUIGHF\DGUIGHF.dll</HintPath>
     </Reference>
     <Reference Include="EnhancedBoxHelpers, Version=1.0.22225.14, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Ext\EnhancedBoxHelpers\EnhancedBoxHelpers.dll</HintPath>
+      <HintPath>..\packages\DG.EnhancedBoxHelpers.1.0.22225.14\lib\net40\EnhancedBoxHelpers.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

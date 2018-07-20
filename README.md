@@ -1,6 +1,9 @@
 # DentneD
 
 
+![DentneD](Raw/ico_dentned.png?raw=true)
+
+
 DentneD is a **Dental Practice Management Software**.
 
 It's a complete **open source** solution to manage you clinic.
@@ -61,6 +64,14 @@ It features a client-server architecture.
 * Copy all the files under the *www* folder to you webserver page
 * Sets the *config.inc.php* file according to your preferences
 * To add a new translation, or for language settings, change files under the *lang* folder
+
+
+## Screenshots
+
+![Patient Treatments](Raw/dentned-dental_practice_software-patients_treatments.jpg?raw=true)
+![Appointments](Raw/dentned-dental_practice_software-appointments.jpg?raw=true)
+![Invoice](Raw/dentned-dental_practice_software-invoice.jpg?raw=true)
+![PDF Invoice](Raw/dentned-dental_practice_software-PDF_invoice.jpg?raw=true)
 
 
 ## Development

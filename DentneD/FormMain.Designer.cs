@@ -47,6 +47,7 @@
             this.estimatesFootersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.medicalRecordTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.invoicesFootersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.patientAttributesTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.patientAttachmentsTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.paymentTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.roomsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,7 +68,7 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip_main = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel_logout = new System.Windows.Forms.ToolStripStatusLabel();
-            this.patientAttributesTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fitAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip_main.SuspendLayout();
             this.statusStrip_main.SuspendLayout();
             this.SuspendLayout();
@@ -226,6 +227,13 @@
             this.invoicesFootersToolStripMenuItem.Text = "Invoices Footers";
             this.invoicesFootersToolStripMenuItem.Click += new System.EventHandler(this.invoicesFootersToolStripMenuItem_Click);
             // 
+            // patientAttributesTypesToolStripMenuItem
+            // 
+            this.patientAttributesTypesToolStripMenuItem.Name = "patientAttributesTypesToolStripMenuItem";
+            this.patientAttributesTypesToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.patientAttributesTypesToolStripMenuItem.Text = "Patient Attributes Types";
+            this.patientAttributesTypesToolStripMenuItem.Click += new System.EventHandler(this.patientAttributesTypesToolStripMenuItem_Click);
+            // 
             // patientAttachmentsTypesToolStripMenuItem
             // 
             this.patientAttachmentsTypesToolStripMenuItem.Name = "patientAttachmentsTypesToolStripMenuItem";
@@ -310,20 +318,21 @@
             // backupToolStripMenuItem
             // 
             this.backupToolStripMenuItem.Name = "backupToolStripMenuItem";
-            this.backupToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.backupToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.backupToolStripMenuItem.Text = "Backup";
             this.backupToolStripMenuItem.Click += new System.EventHandler(this.backupToolStripMenuItem_Click);
             // 
             // cleanDatadirToolStripMenuItem
             // 
             this.cleanDatadirToolStripMenuItem.Name = "cleanDatadirToolStripMenuItem";
-            this.cleanDatadirToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.cleanDatadirToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cleanDatadirToolStripMenuItem.Text = "Clean Datadir";
             this.cleanDatadirToolStripMenuItem.Click += new System.EventHandler(this.cleanDatadirToolStripMenuItem_Click);
             // 
             // windowsToolStripMenuItem
             // 
             this.windowsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fitAllToolStripMenuItem,
             this.minimizeAllToolStripMenuItem,
             this.closeAllToolStripMenuItem});
             this.windowsToolStripMenuItem.Name = "windowsToolStripMenuItem";
@@ -333,14 +342,14 @@
             // minimizeAllToolStripMenuItem
             // 
             this.minimizeAllToolStripMenuItem.Name = "minimizeAllToolStripMenuItem";
-            this.minimizeAllToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.minimizeAllToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.minimizeAllToolStripMenuItem.Text = "Minimize All";
             this.minimizeAllToolStripMenuItem.Click += new System.EventHandler(this.minimizeAllToolStripMenuItem_Click);
             // 
             // closeAllToolStripMenuItem
             // 
             this.closeAllToolStripMenuItem.Name = "closeAllToolStripMenuItem";
-            this.closeAllToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.closeAllToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.closeAllToolStripMenuItem.Text = "Close All";
             this.closeAllToolStripMenuItem.Click += new System.EventHandler(this.closeAllToolStripMenuItem_Click);
             // 
@@ -379,12 +388,12 @@
             this.toolStripStatusLabel_logout.Visible = false;
             this.toolStripStatusLabel_logout.Click += new System.EventHandler(this.toolStripStatusLabel_logout_Click);
             // 
-            // patientAttributesTypesToolStripMenuItem
+            // fitAllToolStripMenuItem
             // 
-            this.patientAttributesTypesToolStripMenuItem.Name = "patientAttributesTypesToolStripMenuItem";
-            this.patientAttributesTypesToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
-            this.patientAttributesTypesToolStripMenuItem.Text = "Patient Attributes Types";
-            this.patientAttributesTypesToolStripMenuItem.Click += new System.EventHandler(this.patientAttributesTypesToolStripMenuItem_Click);
+            this.fitAllToolStripMenuItem.Name = "fitAllToolStripMenuItem";
+            this.fitAllToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.fitAllToolStripMenuItem.Text = "Fit All";
+            this.fitAllToolStripMenuItem.Click += new System.EventHandler(this.fitAllToolStripMenuItem_Click);
             // 
             // FormMain
             // 
@@ -452,6 +461,7 @@
         private System.Windows.Forms.StatusStrip statusStrip_main;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_logout;
         private System.Windows.Forms.ToolStripMenuItem patientAttributesTypesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fitAllToolStripMenuItem;
     }
 }
 

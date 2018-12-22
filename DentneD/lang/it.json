@@ -47,6 +47,7 @@
     "Form-FormMain-cleanDatadirToolStripMenuItem":"Pulisci cartelle Data",
     "Form-FormMain-minimizeAllToolStripMenuItem":"Minimizza Tutte",
     "Form-FormMain-closeAllToolStripMenuItem":"Chiudi Tutte",
+    "Form-FormMain-fitAllToolStripMenuItem":"Ridimensiona Tutte",
     "DataModel-foreingKeyErrorRaised":"L\u0027operazione ha prodotto un errore di chiave esterna sulla tabella \"{0}\"",
     "DataModel-Doctors-text001":"Il testo documento non può essere lasciato vuoto.",
     "DataModel-Doctors-text002":"Questo elemento non può essere rimosso. Un appuntamento dipende da esso.",

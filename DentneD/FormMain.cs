@@ -152,6 +152,7 @@ namespace DG.DentneD
             LanguageHelper.AddComponent(cleanDatadirToolStripMenuItem);
             LanguageHelper.AddComponent(minimizeAllToolStripMenuItem);
             LanguageHelper.AddComponent(closeAllToolStripMenuItem);
+            LanguageHelper.AddComponent(fitAllToolStripMenuItem);
         }
 
         /// <summary>
@@ -201,6 +202,16 @@ namespace DG.DentneD
         private void closeAllToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             CloseAllForms(this);
+        }
+
+        /// <summary>
+        /// Fit All click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void fitAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FitAllForms(this);
         }
 
         /// <summary>

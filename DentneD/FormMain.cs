@@ -17,6 +17,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using Zuby.ADGV;
 
 namespace DG.DentneD
 {
@@ -107,6 +108,10 @@ namespace DG.DentneD
                 }
             }
             catch { }
+
+            //set AdvancedDataGridView translations
+            AdvancedDataGridView.SetTranslations(AdvancedDataGridView.LoadTranslationsFromFile(Program.uighfApplication.LanguageFilename));
+            AdvancedDataGridViewSearchToolBar.SetTranslations(AdvancedDataGridViewSearchToolBar.LoadTranslationsFromFile(Program.uighfApplication.LanguageFilename));
         }
 
         /// <summary>
@@ -180,9 +185,13 @@ namespace DG.DentneD
         /// </summary>
         public override void SetAdditionalLanguage()
         {
+            //set models languages
             DentneDModel dentnedModel = new DentneDModel();
             dentnedModel.LanguageHelper.LoadFromFile(Program.uighfApplication.LanguageFilename);
             LanguageHelper.AddAdditionalLanguage(dentnedModel.LanguageHelper.Get());
+            //set AdvancedDataGridView languages
+            LanguageHelper.AddAdditionalLanguage(AdvancedDataGridView.LoadTranslationsFromFile(Program.uighfApplication.LanguageFilename));
+            LanguageHelper.AddAdditionalLanguage(AdvancedDataGridViewSearchToolBar.LoadTranslationsFromFile(Program.uighfApplication.LanguageFilename));
         }
         /// <summary>
         /// Minimize All click

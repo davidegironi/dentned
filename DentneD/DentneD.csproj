@@ -57,8 +57,8 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AdvancedDataGridView, Version=1.1.23420.4, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DG.AdvancedDataGridView.1.1.23420.4\lib\net40\AdvancedDataGridView.dll</HintPath>
+    <Reference Include="AdvancedDataGridView, Version=1.1.23503.5, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DG.AdvancedDataGridView.1.1.23503.5\lib\net40\AdvancedDataGridView.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="DGDataModel, Version=1.1.18530.42, Culture=neutral, processorArchitecture=MSIL">
@@ -416,7 +416,9 @@
     <None Include="lang\it.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VAddressesTypes.datasource" />
     <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VComputedLines.datasource" />
     <None Include="Properties\DataSources\DG.DentneD.Forms.Objects.VContactsTypes.datasource" />

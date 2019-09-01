@@ -6,7 +6,7 @@ $solutionName = "DentneD"
 $versionMajor = "1"
 $versionMinor = "1"
 $versionBuild = GetVersionBuild
-$versionRevision = "13"
+$versionRevision = "14"
 #build version number
 $assemblyVersion = GetVersion $versionMajor $versionMinor $versionBuild $versionRevision
 $fileVersion = $assemblyVersion

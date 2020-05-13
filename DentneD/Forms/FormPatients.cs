@@ -409,6 +409,8 @@ namespace DG.DentneD.Forms
             public string printcreatefoldererrorTitle = "Error";
             public string printvalidfilenameerrorMessage = "Can not found a valid filename.";
             public string printvalidfilenameerrorTitle = "Error";
+            public string printoverwritefilenamewarningMessage = "The file '{0}' already exists, press 'Yes' to overwrite it, 'No' to open that file, 'Cancel' to exit.";
+            public string printoverwritefilenamewarningTitle = "Warning";
             public string printbuildpdferrorMessage = "Can not build the PDF file '{0}'.";
             public string printbuildpdferrorTitle = "Error";
             public string printopenfilenameMessage = "File '{0}' built successful.";
@@ -1326,7 +1328,7 @@ namespace DG.DentneD.Forms
                 catch { }
             }
         }
-        
+
         #endregion
 
 
@@ -1421,7 +1423,7 @@ namespace DG.DentneD.Forms
                 }
             }
         }
-        
+
         #endregion
 
 
@@ -1516,7 +1518,7 @@ namespace DG.DentneD.Forms
                 }
             }
         }
-        
+
         #endregion
 
 
@@ -1611,7 +1613,7 @@ namespace DG.DentneD.Forms
                 }
             }
         }
-        
+
         #endregion
 
 
@@ -2385,9 +2387,9 @@ namespace DG.DentneD.Forms
                 IDentneDPrintModel printModelt = DentneDPrintModelHelper.DentneDPrintModelInstance(assemblyPath);
                 if (printModelt != null)
                 {
-                    if (printModelt.IsBuildPatientsTreatmentsPDFEnabled())
+                    if (printModelt.IsBuildPatientTreatmentsTemplateEnabled())
                     {
-                        string modelname = printModelt.BuildPatientsTreatmentsPDFName(ConfigurationManager.AppSettings["language"]);
+                        string modelname = printModelt.BuildPatientTreatmentsTemplateName(ConfigurationManager.AppSettings["language"]);
                         if (!templatesModels.ContainsKey(modelname))
                         {
                             templatesModels.Add(modelname, printModelt);
@@ -2432,28 +2434,46 @@ namespace DG.DentneD.Forms
             }
 
             //make new filename
-            string filename = FileHelper.FindRandomFileName(destfolder, "T", "pdf");
+            bool buildfile = true;
+            string filename = printModel.BuildPatientTreatmentsGetFilename(destfolder);
             if (String.IsNullOrEmpty(filename))
             {
                 MessageBox.Show(language.printvalidfilenameerrorMessage, language.printvalidfilenameerrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
-            //build PDF
-            if (!printModel.BuildPatientsTreatmentsPDF(_dentnedModel, patients_id, patientstreatmentsl, filename, ConfigurationManager.AppSettings["language"]))
+            else if (File.Exists(filename))
             {
-                MessageBox.Show(String.Format(language.printbuildpdferrorMessage, filename), language.printbuildpdferrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                DialogResult dialogResult = MessageBox.Show(String.Format(language.printoverwritefilenamewarningMessage, filename), language.printoverwritefilenamewarningTitle, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                if (dialogResult == DialogResult.Yes)
+                { }
+                else if (dialogResult == DialogResult.No)
+                    buildfile = false;
+                else
+                    return;
+            }
+
+            //build patient treatments
+            if (buildfile)
+            {
+                string[] errors = new string[] { };
+                if (!printModel.BuildPatientTreatments(_dentnedModel, patients_id, patientstreatmentsl, ConfigurationManager.AppSettings["language"], filename, ref errors))
+                {
+                    MessageBox.Show(String.Format(language.printbuildpdferrorMessage, filename) + (errors.Length > 0 ? " " + String.Join("\n", errors) : null), language.printbuildpdferrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
             }
 
             //try to start the process
-            try
+            if (!String.IsNullOrEmpty(filename))
             {
-                Process.Start(filename);
-            }
-            catch
-            {
-                MessageBox.Show(String.Format(language.printopenfilenameMessage, filename), language.printopenfilenameTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                try
+                {
+                    Process.Start(filename);
+                }
+                catch
+                {
+                    MessageBox.Show(String.Format(language.printopenfilenameMessage, filename), language.printopenfilenameTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
         }
 
@@ -2936,7 +2956,7 @@ namespace DG.DentneD.Forms
                 patientstreatments_tdwCheckBox.Checked = false;
             }
         }
-                
+
 
         #region patients treatments filter
 
@@ -4573,7 +4593,7 @@ namespace DG.DentneD.Forms
                 }
             }
         }
-        
+
         #endregion
 
 
@@ -4918,7 +4938,8 @@ namespace DG.DentneD.Forms
                 }
             }
         }
-        
+
         #endregion
+
     }
 }

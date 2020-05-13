@@ -446,7 +446,6 @@ namespace DG.DentneD.Forms
 
         #endregion
 
-
         #region tabTreatmentsPrices
 
         /// <summary>
@@ -599,8 +598,6 @@ namespace DG.DentneD.Forms
         }
 
         #endregion
-
-
 
     }
 }

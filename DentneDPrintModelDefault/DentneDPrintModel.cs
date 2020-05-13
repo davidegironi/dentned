@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web.Script.Serialization;
 
 namespace DG.DentneD
@@ -66,12 +67,13 @@ namespace DG.DentneD
             public string patientstreatmentsItemsDescriptionTH = "Description";
             public string patientstreatmentsItemsToothsTH = "Tooths";
             public string patientstreatmentsFootertext = "";
+            public string buildfileerrorMessage = "Errors happened building the file.";
         }
 
         /// <summary>
         /// Settings model
         /// </summary>
-        private class DentneDPrintModelDefaultSettings
+        private class DentneDPrintModelSettings
         {
             /// <summary>
             /// Print code on estimates items lines
@@ -117,7 +119,7 @@ namespace DG.DentneD
         /// <summary>
         /// Settings
         /// </summary>
-        private DentneDPrintModelDefaultSettings _settings = new DentneDPrintModelDefaultSettings();
+        private DentneDPrintModelSettings _settings = new DentneDPrintModelSettings();
 
         public DentneDPrintModel()
         {
@@ -125,7 +127,7 @@ namespace DG.DentneD
             try
             {
                 string jsontext = File.ReadAllText(settingsFilename);
-                _settings = new JavaScriptSerializer().Deserialize<DentneDPrintModelDefaultSettings>(jsontext);
+                _settings = new JavaScriptSerializer().Deserialize<DentneDPrintModelSettings>(jsontext);
             }
             catch { }
         }
@@ -149,14 +151,15 @@ namespace DG.DentneD
         }
 
         /// <summary>
-        /// Build a PDF for an estimate
+        /// Build a file for an estimate
         /// </summary>
         /// <param name="dentnedModel"></param>
         /// <param name="estimates_id"></param>
-        /// <param name="filename"></param>
         /// <param name="language"></param>
+        /// <param name="filename"></param>
+        /// <param name="errors"></param>
         /// <returns></returns>
-        public bool BuildEstimatePDF(DentneDModel dentnedModel, int estimates_id, string filename, string language)
+        public bool BuildEstimate(DentneDModel dentnedModel, int estimates_id, string language, string filename, ref string[] errors)
         {
             bool ret = false;
 
@@ -564,26 +567,30 @@ namespace DG.DentneD
 
                 ret = true;
             }
-            catch { }
+            catch
+            {
+                errors = errors.Concat(new string[] { _language.buildfileerrorMessage }).ToArray();
+                return false;
+            }
 
             return ret;
         }
 
         /// <summary>
-        /// Check if PDF for an estimate builder is enabled
+        /// Check if estimate builder is enabled
         /// </summary>
         /// <returns></returns>
-        public bool IsBuildEstimatePDFEnabled()
+        public bool IsBuildEstimateEnabled()
         {
             return true;
         }
 
         /// <summary>
-        /// Get the PDF for an estimate builder template name
+        /// Get the estimate builder template name
         /// </summary>
         /// <param name="language"></param>
         /// <returns></returns>
-        public string BuildEstimatePDFName(string language)
+        public string BuildEstimateTemplateName(string language)
         {
             //load language
             LoadLanguageFromFile(languageFolder + "\\" + languageFilenamePrefix + language + ".json");
@@ -592,14 +599,27 @@ namespace DG.DentneD
         }
 
         /// <summary>
-        /// Build a PDF for an invoice
+        /// Get the estimate filename
+        /// </summary>
+        /// <param name="dentnedModel"></param>
+        /// <param name="estimates_id"></param>
+        /// <param name="filefolder"></param>
+        /// <returns></returns>
+        public string BuildEstimateGetFilename(DentneDModel dentnedModel, int estimates_id, string filefolder)
+        {
+            return FindRandomFileName(filefolder, "E", "pdf");
+        }
+
+        /// <summary>
+        /// Build a file for an invoice
         /// </summary>
         /// <param name="dentnedModel"></param>
         /// <param name="invoices_id"></param>
-        /// <param name="filename"></param>
         /// <param name="language"></param>
+        /// <param name="filename"></param>
+        /// <param name="errors"></param>
         /// <returns></returns>
-        public bool BuildInvoicePDF(DentneDModel dentnedModel, int invoices_id, string filename, string language)
+        public bool BuildInvoice(DentneDModel dentnedModel, int invoices_id, string language, string filename, ref string[] errors)
         {
             bool ret = false;
 
@@ -1007,43 +1027,61 @@ namespace DG.DentneD
 
                 ret = true;
             }
-            catch { }
+            catch
+            {
+                errors = errors.Concat(new string[] { _language.buildfileerrorMessage }).ToArray();
+                return false;
+            }
 
             return ret;
         }
 
         /// <summary>
-        /// Check if PDF for an invoice builder is enabled
+        /// Check if invoice builder is enabled
         /// </summary>
         /// <returns></returns>
-        public bool IsBuildInvoicePDFEnabled()
+        public bool IsBuildInvoiceEnabled()
         {
             return true;
         }
 
         /// <summary>
-        /// Get the PDF for an invoice builder template name
+        /// Get the invoice builder template name
         /// </summary>
         /// <param name="language"></param>
         /// <returns></returns>
-        public string BuildInvoicePDFName(string language)
+        public string BuildInvoiceTemplateName(string language)
         {
             //load language
             LoadLanguageFromFile(languageFolder + "\\" + languageFilenamePrefix + language + ".json");
 
-            return _language.estimatesTemplateName;
+            return _language.invoicesTemplateName;
         }
 
         /// <summary>
-        /// Build a PDF for patients treatments
+        /// Get the invoice filename
+        /// </summary>
+        /// <param name="dentnedModel"></param>
+        /// <param name="invoices_id"></param>
+        /// <param name="filefolder"></param>
+        /// <returns></returns>
+        public string BuildInvoiceGetFilename(DentneDModel dentnedModel, int invoices_id, string filefolder)
+        {
+            invoices invoice = dentnedModel.Invoices.Find(invoices_id);
+            return filefolder + "\\" + (invoice.doctors_id != null ? ((int)invoice.doctors_id).ToString() + "_" : null) + invoice.invoices_date.Year.ToString() + "-" + invoice.invoices_number + ".pdf";
+        }
+
+        /// <summary>
+        /// Build a file for patient treatments
         /// </summary>
         /// <param name="dentnedModel"></param>
         /// <param name="patients_id"></param>
         /// <param name="patientstreatmentsl"></param>
-        /// <param name="filename"></param>
         /// <param name="language"></param>
+        /// <param name="filename"></param>
+        /// <param name="errors"></param>
         /// <returns></returns>
-        public bool BuildPatientsTreatmentsPDF(DentneDModel dentnedModel, int patients_id, patientstreatments[] patientstreatmentsl, string filename, string language)
+        public bool BuildPatientTreatments(DentneDModel dentnedModel, int patients_id, patientstreatments[] patientstreatmentsl, string language, string filename, ref string[] errors)
         {
             bool ret = false;
 
@@ -1286,31 +1324,45 @@ namespace DG.DentneD
 
                 ret = true;
             }
-            catch { }
+            catch
+            {
+                errors = errors.Concat(new string[] { _language.buildfileerrorMessage }).ToArray();
+                return false;
+            }
 
             return ret;
         }
 
         /// <summary>
-        /// Check if PDF for patients treatments builder is enabled
+        /// Check if patient treatments builder is enabled
         /// </summary>
         /// <returns></returns>
-        public bool IsBuildPatientsTreatmentsPDFEnabled()
+        public bool IsBuildPatientTreatmentsTemplateEnabled()
         {
             return true;
         }
 
         /// <summary>
-        /// Get the PDF for patients treatments builder template name
+        /// Get the patient treatments builder template name
         /// </summary>
         /// <param name="language"></param>
         /// <returns></returns>
-        public string BuildPatientsTreatmentsPDFName(string language)
+        public string BuildPatientTreatmentsTemplateName(string language)
         {
             //load language
             LoadLanguageFromFile(languageFolder + "\\" + languageFilenamePrefix + language + ".json");
 
             return _language.estimatesTemplateName;
+        }
+
+        /// <summary>
+        /// Get the patient treatments filename
+        /// </summary>
+        /// <param name="filefolder"></param>
+        /// <returns></returns>
+        public string BuildPatientTreatmentsGetFilename(string filefolder)
+        {
+            return FindRandomFileName(filefolder, "T", "pdf");
         }
 
         /// <summary>
@@ -1344,6 +1396,33 @@ namespace DG.DentneD
 
             public override void OnCloseDocument(PdfWriter writer, Document document)
             { }
+        }
+
+        /// <summary>
+        /// Find a random filename that does not exists on a folder
+        /// </summary>
+        /// <param name="folder"></param>
+        /// <param name="prefix"></param>
+        /// <param name="extension"></param>
+        /// <returns></returns>
+        private static string FindRandomFileName(string folder, string prefix, string extension)
+        {
+            Random r = new Random();
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < 12; i++)
+            {
+                //26 letters in the alfabet, ascii + 65 for the capital letters
+                builder.Append(Convert.ToChar(Convert.ToInt32(Math.Floor(26 * r.NextDouble() + 65))));
+            }
+            string randomtext = builder.ToString();
+            string filename = null;
+            int tries = 0;
+            do
+            {
+                filename = folder + "\\" + (!String.IsNullOrEmpty(prefix) ? prefix + "_" : "") + String.Format("{0:yyyyMMddHHmm}", DateTime.Now) + "-" + randomtext + "." + extension;
+                tries++;
+            } while (File.Exists(filename) || tries < 100);
+            return filename;
         }
 
     }

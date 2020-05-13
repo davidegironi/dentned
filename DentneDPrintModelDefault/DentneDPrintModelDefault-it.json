@@ -40,5 +40,6 @@
   "patientstreatmentsItemsCodeTH": "Codice",
   "patientstreatmentsItemsDescriptionTH": "Descrizione",
   "patientstreatmentsItemsToothsTH": "Denti",
-  "patientstreatmentsFootertext": ""
+  "patientstreatmentsFootertext": "",
+  "buildfileerrorMessage": "Errori durante la creazione del file."
 }

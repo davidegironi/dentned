@@ -8,7 +8,7 @@ DentneD is a **Dental Practice Management Software**.
 
 It's a complete **open source** solution to manage you clinic.
 
-You can trace your patient, treatments, scheduling appointments, doing reports, and billing managment.
+You can trace your patient, treatments, scheduling appointments, doing reports, and billing management.
 It features a client-server architecture.
 
 ## Download
@@ -49,7 +49,7 @@ It features a client-server architecture.
 
 ## Installation
 
-* Install all software listed in the requirments
+* Install all software listed in the requirements
 * Restore the *dentned.bak* files you can find under the *_DBDump* folder as a new *dentned* database, alternatively use the *dentned-schema.sql* files
 * Create a new folder, and copy all the DentneD files in that folder
 * Sets the *DentneD.exe.config* file according to your preferences, (see inline comments for further informations)
@@ -60,7 +60,7 @@ It features a client-server architecture.
 
 ## Installation: web app
 
-* Install all software listed in the requirment
+* Install all software listed in the requirement
 * Copy all the files under the *www* folder to you webserver page
 * Sets the *config.inc.php* file according to your preferences
 * To add a new translation, or for language settings, change files under the *lang* folder

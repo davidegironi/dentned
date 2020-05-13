@@ -33,5 +33,6 @@
   "invoicesTotalsTotaltax": "Imposta",
   "invoicesTotalsTotaldocument": "Totale trattamenti",
   "invoicesTotalsTotaldeductiontax": "Trattenuta",
-  "invoicesTotalsTotalamountdue": "Totale"
+  "invoicesTotalsTotalamountdue": "Totale",
+  "buildfileerrorMessage": "Errori durante la creazione del file."
 }

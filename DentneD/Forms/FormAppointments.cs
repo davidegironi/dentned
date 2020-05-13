@@ -371,7 +371,6 @@ namespace DG.DentneD.Forms
 
         #endregion
 
-
         #region Calendar list
 
         /// <summary>
@@ -664,7 +663,6 @@ namespace DG.DentneD.Forms
         }
 
         #endregion
-
 
         #region tabAppointments
 
@@ -962,7 +960,6 @@ namespace DG.DentneD.Forms
         }
 
         #endregion
-
 
         #region calendar handlers
 

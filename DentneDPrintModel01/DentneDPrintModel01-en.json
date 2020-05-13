@@ -1,5 +1,5 @@
 ﻿{
-  "estimatesTemplateName": "Treatments",
+  "estimatesTemplateName": "Treatments View",
   "estimatesTitle": "Treatments",
   "estimatesNumber": "Number",
   "estimatesDate": "Date",
@@ -17,7 +17,7 @@
   "estimatesTotalsTotaldocument": "Document total",
   "estimatesTotalsTotaldeductiontax": "Deduction tax total",
   "estimatesTotalsTotalamountdue": "Total",
-  "invoicesTemplateName": "Treatments",
+  "invoicesTemplateName": "Treatments View",
   "invoicesTitle": "Treatments",
   "invoicesNumber": "Number",
   "invoicesDate": "Date",
@@ -33,5 +33,6 @@
   "invoicesTotalsTotaltax": "Tax",
   "invoicesTotalsTotaldocument": "Document total",
   "invoicesTotalsTotaldeductiontax": "Deduction tax total",
-  "invoicesTotalsTotalamountdue": "Total"
+  "invoicesTotalsTotalamountdue": "Total",
+  "buildfileerrorMessage": "Errors happened building the file."
 }

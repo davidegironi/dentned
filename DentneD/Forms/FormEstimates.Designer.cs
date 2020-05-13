@@ -561,7 +561,7 @@
             this.estimateslines_taxrateComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.estimateslines_taxrateComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.estimateslines_taxrateComboBox.FormattingEnabled = true;
-            this.estimateslines_taxrateComboBox.Location = new System.Drawing.Point(200, 182);
+            this.estimateslines_taxrateComboBox.Location = new System.Drawing.Point(200, 181);
             this.estimateslines_taxrateComboBox.Name = "estimateslines_taxrateComboBox";
             this.estimateslines_taxrateComboBox.Size = new System.Drawing.Size(100, 21);
             this.estimateslines_taxrateComboBox.TabIndex = 12;
@@ -1242,9 +1242,9 @@
             this.estimateslines_istaxesdeductionsableCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.estimateslinesBindingSource, "estimateslines_istaxesdeductionsable", true));
             this.estimateslines_istaxesdeductionsableCheckBox.Location = new System.Drawing.Point(312, 183);
             this.estimateslines_istaxesdeductionsableCheckBox.Name = "estimateslines_istaxesdeductionsableCheckBox";
-            this.estimateslines_istaxesdeductionsableCheckBox.Size = new System.Drawing.Size(124, 17);
+            this.estimateslines_istaxesdeductionsableCheckBox.Size = new System.Drawing.Size(130, 17);
             this.estimateslines_istaxesdeductionsableCheckBox.TabIndex = 19;
-            this.estimateslines_istaxesdeductionsableCheckBox.Text = "Is tax deduction able";
+            this.estimateslines_istaxesdeductionsableCheckBox.Text = "Is deduction tax abled";
             this.estimateslines_istaxesdeductionsableCheckBox.UseVisualStyleBackColor = true;
             // 
             // FormEstimates

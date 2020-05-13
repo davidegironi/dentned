@@ -17,73 +17,101 @@ namespace DG.DentneD
     public interface IDentneDPrintModel
     {
         /// <summary>
-        /// Build a PDF for an estimate
+        /// Build a file for an estimate
         /// </summary>
         /// <param name="dentnedModel"></param>
         /// <param name="estimates_id"></param>
+        /// <param name="language"></param>
         /// <param name="filename"></param>
-        /// <param name="language"></param>
+        /// <param name="errors"></param>
         /// <returns></returns>
-        bool BuildEstimatePDF(DentneDModel dentnedModel, int estimates_id, string filename, string language);
+        bool BuildEstimate(DentneDModel dentnedModel, int estimates_id, string language, string filename, ref string[] errors);
 
         /// <summary>
-        /// Check if PDF for an estimate builder is enabled
+        /// Check if estimate builder is enabled
         /// </summary>
         /// <returns></returns>
-        bool IsBuildEstimatePDFEnabled();
+        bool IsBuildEstimateEnabled();
 
         /// <summary>
-        /// Get the PDF for an estimate builder template name
+        /// Get the estimate builder template name
         /// </summary>
         /// <param name="language"></param>
         /// <returns></returns>
-        string BuildEstimatePDFName(string language);
+        string BuildEstimateTemplateName(string language);
 
         /// <summary>
-        /// Build a PDF for an invoice
+        /// Get the estimate filename
+        /// </summary>
+        /// <param name="dentnedModel"></param>
+        /// <param name="estimates_id"></param>
+        /// <param name="filefolder"></param>
+        /// <returns></returns>
+        string BuildEstimateGetFilename(DentneDModel dentnedModel, int estimates_id, string filefolder);
+
+        /// <summary>
+        /// Build a file for an invoice
         /// </summary>
         /// <param name="dentnedModel"></param>
         /// <param name="invoices_id"></param>
+        /// <param name="language"></param>
         /// <param name="filename"></param>
-        /// <param name="language"></param>
+        /// <param name="errors"></param>
         /// <returns></returns>
-        bool BuildInvoicePDF(DentneDModel dentnedModel, int invoices_id, string filename, string language);
+        bool BuildInvoice(DentneDModel dentnedModel, int invoices_id, string language, string filename, ref string[] errors);
 
         /// <summary>
-        /// Check if PDF for an invoice builder is enabled
+        /// Check if invoice builder is enabled
         /// </summary>
         /// <returns></returns>
-        bool IsBuildInvoicePDFEnabled();
+        bool IsBuildInvoiceEnabled();
 
         /// <summary>
-        /// Get the PDF for an invoice builder template name
+        /// Get the invoice builder template name
         /// </summary>
         /// <param name="language"></param>
         /// <returns></returns>
-        string BuildInvoicePDFName(string language);
+        string BuildInvoiceTemplateName(string language);
 
         /// <summary>
-        /// Build a PDF for patients treatments
+        /// Get the invoice filename
+        /// </summary>
+        /// <param name="dentnedModel"></param>
+        /// <param name="invoices_id"></param>
+        /// <param name="filefolder"></param>
+        /// <returns></returns>
+        string BuildInvoiceGetFilename(DentneDModel dentnedModel, int invoices_id, string filefolder);
+
+        /// <summary>
+        /// Build a file for patient treatments
         /// </summary>
         /// <param name="dentnedModel"></param>
         /// <param name="patients_id"></param>
         /// <param name="patientstreatmentsl"></param>
+        /// <param name="language"></param>
         /// <param name="filename"></param>
-        /// <param name="language"></param>
+        /// <param name="errors"></param>
         /// <returns></returns>
-        bool BuildPatientsTreatmentsPDF(DentneDModel dentnedModel, int patients_id, patientstreatments[] patientstreatmentsl, string filename, string language);
+        bool BuildPatientTreatments(DentneDModel dentnedModel, int patients_id, patientstreatments[] patientstreatmentsl, string language, string filename, ref string[] errors);
 
         /// <summary>
-        /// Check if PDF for patients treatments builder is enabled
+        /// Check if patient treatments builder is enabled
         /// </summary>
         /// <returns></returns>
-        bool IsBuildPatientsTreatmentsPDFEnabled();
+        bool IsBuildPatientTreatmentsTemplateEnabled();
 
         /// <summary>
-        /// Get the PDF for patients treatments builder template name
+        /// Get the patient treatments builder template name
         /// </summary>
         /// <param name="language"></param>
         /// <returns></returns>
-        string BuildPatientsTreatmentsPDFName(string language);
+        string BuildPatientTreatmentsTemplateName(string language);
+
+        /// <summary>
+        /// Get the patient treatments filename
+        /// </summary>
+        /// <param name="filefolder"></param>
+        /// <returns></returns>
+        string BuildPatientTreatmentsGetFilename(string filefolder);
     }
 }

@@ -711,9 +711,9 @@ namespace DG.DentneD.Forms
                 IDentneDPrintModel printModelt = DentneDPrintModelHelper.DentneDPrintModelInstance(assemblyPath);
                 if (printModelt != null)
                 {
-                    if (printModelt.IsBuildInvoicePDFEnabled())
+                    if (printModelt.IsBuildInvoiceEnabled())
                     {
-                        string modelname = printModelt.BuildInvoicePDFName(ConfigurationManager.AppSettings["language"]);
+                        string modelname = printModelt.BuildInvoiceTemplateName(ConfigurationManager.AppSettings["language"]);
                         if (!templatesModels.ContainsKey(modelname))
                         {
                             templatesModels.Add(modelname, printModelt);
@@ -760,49 +760,47 @@ namespace DG.DentneD.Forms
             }
 
             //make new filename
-            bool buildpdf = true;
-            string filename = FileHelper.FindRandomFileName(destfolder, "E", "pdf");
-            if (invoice.doctors_id != null)
+            bool buildfile = true;
+            string filename = printModel.BuildInvoiceGetFilename(_dentnedModel, invoices_id, destfolder);
+            if (String.IsNullOrEmpty(filename))
             {
-                filename = destfolder + "\\" + ((int)invoice.doctors_id).ToString() + "_" + invoice.invoices_date.Year.ToString() + "-" + invoice.invoices_number + ".pdf";
-                if (File.Exists(filename))
-                {
-                    DialogResult dialogResult = MessageBox.Show(String.Format(language.printoverwritefilenamewarningMessage, filename), language.printoverwritefilenamewarningTitle, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-                    if (dialogResult == DialogResult.Yes)
-                    { }
-                    else if (dialogResult == DialogResult.No)
-                        buildpdf = false;
-                    else
-                        return;
-                }
+                MessageBox.Show(language.printvalidfilenameerrorMessage, language.printvalidfilenameerrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            else
+            else if (File.Exists(filename))
             {
-                if (String.IsNullOrEmpty(filename))
+                DialogResult dialogResult = MessageBox.Show(String.Format(language.printoverwritefilenamewarningMessage, filename), language.printoverwritefilenamewarningTitle, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                if (dialogResult == DialogResult.Yes)
                 {
-                    MessageBox.Show(language.printvalidfilenameerrorMessage, language.printvalidfilenameerrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
                 }
+                else if (dialogResult == DialogResult.No)
+                    buildfile = false;
+                else
+                    return;
             }
 
-            if (buildpdf)
+            //build invoice
+            if (buildfile)
             {
-                //build PDF
-                if (!printModel.BuildInvoicePDF(_dentnedModel, invoices_id, filename, ConfigurationManager.AppSettings["language"]))
+                string[] errors = new string[] { };
+                if (!printModel.BuildInvoice(_dentnedModel, invoices_id, ConfigurationManager.AppSettings["language"], filename, ref errors))
                 {
-                    MessageBox.Show(String.Format(language.printbuildpdferrorMessage, filename), language.printbuildpdferrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(String.Format(language.printbuildpdferrorMessage, filename) + (errors.Length > 0 ? " " + String.Join("\n", errors) : null), language.printbuildpdferrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
             }
 
             //try to start the process
-            try
+            if (!String.IsNullOrEmpty(filename))
             {
-                Process.Start(filename);
-            }
-            catch
-            {
-                MessageBox.Show(String.Format(language.printopenfilenameMessage, filename), language.printopenfilenameTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                try
+                {
+                    Process.Start(filename);
+                }
+                catch
+                {
+                    MessageBox.Show(String.Format(language.printopenfilenameMessage, filename), language.printopenfilenameTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
         }
 
@@ -992,8 +990,7 @@ namespace DG.DentneD.Forms
         }
 
         #endregion
-
-
+        
         #region tabInvoicesLines
 
         /// <summary>
@@ -1442,5 +1439,6 @@ namespace DG.DentneD.Forms
         }
 
         #endregion
+
     }
 }

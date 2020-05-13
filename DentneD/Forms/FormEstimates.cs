@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using Zuby.ADGV;
@@ -144,6 +145,8 @@ namespace DG.DentneD.Forms
             public string printcreatefoldererrorTitle = "Error";
             public string printvalidfilenameerrorMessage = "Can not found a valid filename.";
             public string printvalidfilenameerrorTitle = "Error";
+            public string printoverwritefilenamewarningMessage = "The file '{0}' already exists, press 'Yes' to overwrite it, 'No' to open that file, 'Cancel' to exit.";
+            public string printoverwritefilenamewarningTitle = "Warning";
             public string printbuildpdferrorMessage = "Can not build the PDF file '{0}'.";
             public string printbuildpdferrorTitle = "Error";
             public string printopenfilenameMessage = "File '{0}' built successful.";
@@ -807,9 +810,9 @@ namespace DG.DentneD.Forms
                 IDentneDPrintModel printModelt = DentneDPrintModelHelper.DentneDPrintModelInstance(assemblyPath);
                 if (printModelt != null)
                 {
-                    if (printModelt.IsBuildEstimatePDFEnabled())
+                    if (printModelt.IsBuildEstimateEnabled())
                     {
-                        string modelname = printModelt.BuildEstimatePDFName(ConfigurationManager.AppSettings["language"]);
+                        string modelname = printModelt.BuildEstimateTemplateName(ConfigurationManager.AppSettings["language"]);
                         if (!templatesModels.ContainsKey(modelname))
                         {
                             templatesModels.Add(modelname, printModelt);
@@ -854,28 +857,46 @@ namespace DG.DentneD.Forms
             }
 
             //make new filename
-            string filename = FileHelper.FindRandomFileName(destfolder, "E", "pdf");
+            bool buildfile = true;
+            string filename = printModel.BuildEstimateGetFilename(_dentnedModel, estimates_id, destfolder);
             if (String.IsNullOrEmpty(filename))
             {
                 MessageBox.Show(language.printvalidfilenameerrorMessage, language.printvalidfilenameerrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
-            //build PDF
-            if (!printModel.BuildEstimatePDF(_dentnedModel, estimates_id, filename, ConfigurationManager.AppSettings["language"]))
+            else if (File.Exists(filename))
             {
-                MessageBox.Show(String.Format(language.printbuildpdferrorMessage, filename), language.printbuildpdferrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                DialogResult dialogResult = MessageBox.Show(String.Format(language.printoverwritefilenamewarningMessage, filename), language.printoverwritefilenamewarningTitle, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                if (dialogResult == DialogResult.Yes)
+                { }
+                else if (dialogResult == DialogResult.No)
+                    buildfile = false;
+                else
+                    return;
+            }
+
+            //build estimate
+            if (buildfile)
+            {
+                string[] errors = new string[] { };
+                if (!printModel.BuildEstimate(_dentnedModel, estimates_id, ConfigurationManager.AppSettings["language"], filename, ref errors))
+                {
+                    MessageBox.Show(String.Format(language.printbuildpdferrorMessage, filename) + (errors.Length > 0 ? " " + String.Join("\n", errors) : null), language.printbuildpdferrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
             }
 
             //try to start the process
-            try
+            if (!String.IsNullOrEmpty(filename))
             {
-                Process.Start(filename);
-            }
-            catch
-            {
-                MessageBox.Show(String.Format(language.printopenfilenameMessage, filename), language.printopenfilenameTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                try
+                {
+                    Process.Start(filename);
+                }
+                catch
+                {
+                    MessageBox.Show(String.Format(language.printopenfilenameMessage, filename), language.printopenfilenameTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
         }
 
@@ -1065,8 +1086,7 @@ namespace DG.DentneD.Forms
         }
 
         #endregion
-
-
+        
         #region tabEstimatesLines
 
         /// <summary>
@@ -1529,7 +1549,8 @@ namespace DG.DentneD.Forms
             computedlines_idComboBox.SelectedIndex = -1;
             IsBindingSourceLoading = false;
         }
-        
+
         #endregion
+
     }
 }

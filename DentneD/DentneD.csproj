@@ -64,13 +64,11 @@
       <HintPath>..\packages\DG.AdvancedDataGridView.1.1.24512.7\lib\net40\AdvancedDataGridView.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DGDataModel, Version=1.1.18530.42, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Ext\DGDataModel\DGDataModel.dll</HintPath>
+    <Reference Include="DGDataModel, Version=1.2.24516.7, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DG.DataModel.1.2.24516.7\lib\net452\DGDataModel.dll</HintPath>
     </Reference>
-    <Reference Include="DGUIGHF, Version=1.1.18701.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Ext\DGUIGHF\DGUIGHF.dll</HintPath>
+    <Reference Include="DGUIGHF, Version=1.2.24516.12, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DG.UIGHF.1.2.24516.12\lib\net452\DGUIGHF.dll</HintPath>
     </Reference>
     <Reference Include="EnhancedBoxHelpers, Version=1.0.22517.17, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\DG.EnhancedBoxHelpers.1.0.22517.17\lib\net40\EnhancedBoxHelpers.dll</HintPath>

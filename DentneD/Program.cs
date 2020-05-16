@@ -28,6 +28,7 @@ namespace DG.DentneD
                 entryFormParameters = null,
                 displaySplashScreen = true,
                 isStackTracerEnabled = true,
+                isEditingBlockEnabled = true,
                 stackTracerSenderMail = null,
                 stackTracerSenderFrom = "DentneD",
                 appWeblink = "https://github.com/davidegironi/dentned",

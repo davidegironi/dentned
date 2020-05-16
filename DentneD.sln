@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1145
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentneD", "DentneD\DentneD.csproj", "{29E70CEE-F381-4C42-97FA-1BB49BF8F710}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -69,5 +69,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {69711AD8-155B-4A47-AEE3-97ADD5DACB47}
 	EndGlobalSection
 EndGlobal

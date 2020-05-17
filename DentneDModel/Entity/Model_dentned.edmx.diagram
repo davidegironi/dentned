@@ -5,10 +5,10 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="78dc419be0c8474fa514e35383135c72" Name="Diagram1">
-        <EntityTypeShape EntityType="dentnedModel.addressestypes" Width="1.5" PointX="3" PointY="22.5" />
-        <EntityTypeShape EntityType="dentnedModel.appointments" Width="1.5" PointX="5.25" PointY="29.625" />
+        <EntityTypeShape EntityType="dentnedModel.addressestypes" Width="1.5" PointX="3" PointY="38.5" />
+        <EntityTypeShape EntityType="dentnedModel.appointments" Width="1.5" PointX="8.25" PointY="37.625" />
         <EntityTypeShape EntityType="dentnedModel.computedlines" Width="1.5" PointX="3.75" PointY="16.5" />
-        <EntityTypeShape EntityType="dentnedModel.contactstypes" Width="1.5" PointX="6" PointY="45.5" />
+        <EntityTypeShape EntityType="dentnedModel.contactstypes" Width="1.5" PointX="6" PointY="42.5" />
         <EntityTypeShape EntityType="dentnedModel.doctors" Width="1.5" PointX="6" PointY="17.625" />
         <EntityTypeShape EntityType="dentnedModel.estimates" Width="1.5" PointX="5.25" PointY="34" />
         <EntityTypeShape EntityType="dentnedModel.estimatesfooters" Width="1.5" PointX="0.75" PointY="0.75" />
@@ -16,21 +16,21 @@
         <EntityTypeShape EntityType="dentnedModel.invoices" Width="1.5" PointX="8.25" PointY="24" />
         <EntityTypeShape EntityType="dentnedModel.invoicesfooters" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="dentnedModel.invoiceslines" Width="1.5" PointX="13.5" PointY="28.75" />
-        <EntityTypeShape EntityType="dentnedModel.medicalrecordstypes" Width="1.5" PointX="6" PointY="39.5" />
+        <EntityTypeShape EntityType="dentnedModel.medicalrecordstypes" Width="1.5" PointX="3" PointY="22.5" />
         <EntityTypeShape EntityType="dentnedModel.patients" Width="1.5" PointX="3" PointY="28.25" />
-        <EntityTypeShape EntityType="dentnedModel.patientsaddresses" Width="1.5" PointX="5.25" PointY="21.875" />
+        <EntityTypeShape EntityType="dentnedModel.patientsaddresses" Width="1.5" PointX="5.25" PointY="29.875" />
         <EntityTypeShape EntityType="dentnedModel.patientsattachments" Width="1.5" PointX="5.25" PointY="25.875" />
         <EntityTypeShape EntityType="dentnedModel.patientsattachmentstypes" Width="1.5" PointX="3" PointY="35.375" />
-        <EntityTypeShape EntityType="dentnedModel.patientsattributes" Width="1.5" PointX="8.25" PointY="34.125" />
-        <EntityTypeShape EntityType="dentnedModel.patientsattributestypes" Width="1.5" PointX="6" PointY="42.5" />
-        <EntityTypeShape EntityType="dentnedModel.patientscontacts" Width="1.5" PointX="8.25" PointY="38.125" />
-        <EntityTypeShape EntityType="dentnedModel.patientsmedicalrecords" Width="1.5" PointX="8.25" PointY="30.125" />
-        <EntityTypeShape EntityType="dentnedModel.patientsnotes" Width="1.5" PointX="5.25" PointY="74" />
+        <EntityTypeShape EntityType="dentnedModel.patientsattributes" Width="1.5" PointX="8.25" PointY="30.125" />
+        <EntityTypeShape EntityType="dentnedModel.patientsattributestypes" Width="1.5" PointX="6" PointY="39.5" />
+        <EntityTypeShape EntityType="dentnedModel.patientscontacts" Width="1.5" PointX="8.25" PointY="34.125" />
+        <EntityTypeShape EntityType="dentnedModel.patientsmedicalrecords" Width="1.5" PointX="5.25" PointY="22.125" />
+        <EntityTypeShape EntityType="dentnedModel.patientsnotes" Width="1.5" PointX="5.25" PointY="71.125" />
         <EntityTypeShape EntityType="dentnedModel.patientstreatments" Width="1.5" PointX="11.25" PointY="26" />
-        <EntityTypeShape EntityType="dentnedModel.payments" Width="1.5" PointX="5.25" PointY="71.125" />
+        <EntityTypeShape EntityType="dentnedModel.payments" Width="1.5" PointX="5.25" PointY="73.875" />
         <EntityTypeShape EntityType="dentnedModel.paymentstypes" Width="1.5" PointX="0.75" PointY="3.75" />
         <EntityTypeShape EntityType="dentnedModel.reports" Width="1.5" PointX="2.75" PointY="3.75" />
-        <EntityTypeShape EntityType="dentnedModel.rooms" Width="1.5" PointX="3" PointY="38.375" />
+        <EntityTypeShape EntityType="dentnedModel.rooms" Width="1.5" PointX="6" PointY="45.375" />
         <EntityTypeShape EntityType="dentnedModel.sysdiagrams" Width="1.5" PointX="4.75" PointY="0.75" />
         <EntityTypeShape EntityType="dentnedModel.taxes" Width="1.5" PointX="1.5" PointY="16.5" />
         <EntityTypeShape EntityType="dentnedModel.taxesdeductions" Width="1.5" PointX="4.75" PointY="3.75" />

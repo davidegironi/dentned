@@ -74,7 +74,7 @@ CREATE TABLE [dbo].[appointments](
 	[appointments_from] [datetime] NOT NULL,
 	[appointments_to] [datetime] NOT NULL,
 	[appointments_title] [varchar](128) COLLATE Latin1_General_CI_AS NOT NULL,
-	[appointments_notes] [text] COLLATE Latin1_General_CI_AS NULL,
+	[appointments_notes] [varchar](max) COLLATE Latin1_General_CI_AS NULL,
 	[appointments_color] [char](7) COLLATE Latin1_General_CI_AS NULL,
  CONSTRAINT [PK_appointments] PRIMARY KEY CLUSTERED 
 (
@@ -287,7 +287,7 @@ CREATE TABLE [dbo].[patients](
 	[patients_birthdate] [date] NOT NULL,
 	[patients_birthcity] [varchar](64) COLLATE Latin1_General_CI_AS NOT NULL,
 	[patients_doctext] [varchar](512) COLLATE Latin1_General_CI_AS NOT NULL,
-	[patients_notes] [text] COLLATE Latin1_General_CI_AS NULL,
+	[patients_notes] [varchar](max) COLLATE Latin1_General_CI_AS NULL,
 	[patients_isarchived] [bit] NOT NULL,
 	[patients_username] [varchar](8) COLLATE Latin1_General_CI_AS NOT NULL,
 	[patients_password] [varchar](6) COLLATE Latin1_General_CI_AS NOT NULL,
@@ -330,7 +330,7 @@ CREATE TABLE [dbo].[patientsattachments](
 	[patientsattachments_value] [varchar](128) COLLATE Latin1_General_CI_AS NOT NULL,
 	[patientsattachments_date] [date] NOT NULL,
 	[patientsattachments_filename] [varchar](64) COLLATE Latin1_General_CI_AS NULL,
-	[patientsattachments_note] [text] COLLATE Latin1_General_CI_AS NULL,
+	[patientsattachments_note] [varchar](max) COLLATE Latin1_General_CI_AS NULL,
  CONSTRAINT [PK_patientsattachments] PRIMARY KEY CLUSTERED 
 (
 	[patientsattachments_id] ASC
@@ -362,7 +362,7 @@ CREATE TABLE [dbo].[patientsattributes](
 	[patients_id] [int] NOT NULL,
 	[patientsattributestypes_id] [int] NOT NULL,
 	[patientsattributes_value] [varchar](512) COLLATE Latin1_General_CI_AS NULL,
-	[patientsattributes_note] [text] COLLATE Latin1_General_CI_AS NULL,
+	[patientsattributes_note] [varchar](max) COLLATE Latin1_General_CI_AS NULL,
  CONSTRAINT [PK_patientsattributes] PRIMARY KEY CLUSTERED 
 (
 	[patientsattributes_id] ASC
@@ -393,7 +393,7 @@ CREATE TABLE [dbo].[patientscontacts](
 	[patients_id] [int] NOT NULL,
 	[contactstypes_id] [int] NOT NULL,
 	[patientscontacts_value] [varchar](256) COLLATE Latin1_General_CI_AS NOT NULL,
-	[patientscontacts_note] [text] COLLATE Latin1_General_CI_AS NULL,
+	[patientscontacts_note] [varchar](max) COLLATE Latin1_General_CI_AS NULL,
  CONSTRAINT [PK_patientscontacts] PRIMARY KEY CLUSTERED 
 (
 	[patientscontacts_id] ASC
@@ -410,7 +410,7 @@ CREATE TABLE [dbo].[patientsmedicalrecords](
 	[patients_id] [int] NOT NULL,
 	[medicalrecordstypes_id] [int] NOT NULL,
 	[patientsmedicalrecords_value] [varchar](128) COLLATE Latin1_General_CI_AS NULL,
-	[patientsmedicalrecords_note] [text] COLLATE Latin1_General_CI_AS NULL,
+	[patientsmedicalrecords_note] [varchar](max) COLLATE Latin1_General_CI_AS NULL,
  CONSTRAINT [PK_patientsmedicalrecords] PRIMARY KEY CLUSTERED 
 (
 	[patientsmedicalrecords_id] ASC
@@ -426,7 +426,7 @@ CREATE TABLE [dbo].[patientsnotes](
 	[patientsnotes_id] [int] IDENTITY(1,1) NOT NULL,
 	[patients_id] [int] NOT NULL,
 	[patientsnotes_date] [date] NOT NULL,
-	[patientsnotes_text] [text] COLLATE Latin1_General_CI_AS NOT NULL,
+	[patientsnotes_text] [varchar](max) COLLATE Latin1_General_CI_AS NOT NULL,
  CONSTRAINT [PK_patientsnotes] PRIMARY KEY CLUSTERED 
 (
 	[patientsnotes_id] ASC
@@ -450,7 +450,7 @@ CREATE TABLE [dbo].[patientstreatments](
 	[patientstreatments_isunitprice] [bit] NOT NULL,
 	[patientstreatments_taxrate] [decimal](10, 2) NOT NULL,
 	[patientstreatments_description] [varchar](128) COLLATE Latin1_General_CI_AS NULL,
-	[patientstreatments_notes] [text] COLLATE Latin1_General_CI_AS NULL,
+	[patientstreatments_notes] [varchar](max) COLLATE Latin1_General_CI_AS NULL,
 	[patientstreatments_expirationdate] [date] NULL,
 	[patientstreatments_t11] [bit] NOT NULL,
 	[patientstreatments_t12] [bit] NOT NULL,
@@ -500,7 +500,7 @@ CREATE TABLE [dbo].[payments](
 	[patients_id] [int] NOT NULL,
 	[payments_date] [date] NOT NULL,
 	[payments_amount] [decimal](10, 2) NOT NULL,
-	[payments_notes] [text] COLLATE Latin1_General_CI_AS NULL,
+	[payments_notes] [varchar](max) COLLATE Latin1_General_CI_AS NULL,
  CONSTRAINT [PK_payments] PRIMARY KEY CLUSTERED 
 (
 	[payments_id] ASC
@@ -531,8 +531,8 @@ BEGIN
 CREATE TABLE [dbo].[reports](
 	[reports_id] [int] IDENTITY(1,1) NOT NULL,
 	[reports_name] [varchar](64) COLLATE Latin1_General_CI_AS NOT NULL,
-	[reports_query] [text] COLLATE Latin1_General_CI_AS NOT NULL,
-	[reports_infotext] [text] COLLATE Latin1_General_CI_AS NULL,
+	[reports_query] [varchar](max) COLLATE Latin1_General_CI_AS NOT NULL,
+	[reports_infotext] [varchar](max) COLLATE Latin1_General_CI_AS NULL,
 	[reports_ispasswordprotected] [bit] NOT NULL CONSTRAINT [DF_reports_reports_ispasswordprotected]  DEFAULT ((0)),
  CONSTRAINT [PK_reports] PRIMARY KEY CLUSTERED 
 (
@@ -623,7 +623,7 @@ CREATE TABLE [dbo].[treatments](
 	[treatments_price] [decimal](10, 2) NOT NULL,
 	[treatments_isunitprice] [bit] NOT NULL,
 	[treatments_mexpiration] [tinyint] NULL,
-	[treatments_notes] [text] COLLATE Latin1_General_CI_AS NULL,
+	[treatments_notes] [varchar](max) COLLATE Latin1_General_CI_AS NULL,
  CONSTRAINT [PK_treatments] PRIMARY KEY CLUSTERED 
 (
 	[treatments_id] ASC

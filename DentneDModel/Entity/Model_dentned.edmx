@@ -23,7 +23,7 @@
           <Property Name="appointments_from" Type="datetime" Nullable="false" />
           <Property Name="appointments_to" Type="datetime" Nullable="false" />
           <Property Name="appointments_title" Type="varchar" MaxLength="128" Nullable="false" />
-          <Property Name="appointments_notes" Type="text" />
+          <Property Name="appointments_notes" Type="varchar(max)" />
           <Property Name="appointments_color" Type="char" MaxLength="7" />
         </EntityType>
         <EntityType Name="computedlines">
@@ -159,7 +159,7 @@
           <Property Name="patients_birthdate" Type="date" Nullable="false" />
           <Property Name="patients_birthcity" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="patients_doctext" Type="varchar" MaxLength="512" Nullable="false" />
-          <Property Name="patients_notes" Type="text" />
+          <Property Name="patients_notes" Type="varchar(max)" />
           <Property Name="patients_isarchived" Type="bit" Nullable="false" />
           <Property Name="patients_username" Type="varchar" MaxLength="8" Nullable="false" />
           <Property Name="patients_password" Type="varchar" MaxLength="6" Nullable="false" />
@@ -188,7 +188,7 @@
           <Property Name="patientsattachments_value" Type="varchar" MaxLength="128" Nullable="false" />
           <Property Name="patientsattachments_date" Type="date" Nullable="false" />
           <Property Name="patientsattachments_filename" Type="varchar" MaxLength="64" />
-          <Property Name="patientsattachments_note" Type="text" />
+          <Property Name="patientsattachments_note" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="patientsattachmentstypes">
           <Key>
@@ -206,7 +206,7 @@
           <Property Name="patients_id" Type="int" Nullable="false" />
           <Property Name="patientsattributestypes_id" Type="int" Nullable="false" />
           <Property Name="patientsattributes_value" Type="varchar" MaxLength="512" />
-          <Property Name="patientsattributes_note" Type="text" />
+          <Property Name="patientsattributes_note" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="patientsattributestypes">
           <Key>
@@ -223,7 +223,7 @@
           <Property Name="patients_id" Type="int" Nullable="false" />
           <Property Name="contactstypes_id" Type="int" Nullable="false" />
           <Property Name="patientscontacts_value" Type="varchar" MaxLength="256" Nullable="false" />
-          <Property Name="patientscontacts_note" Type="text" />
+          <Property Name="patientscontacts_note" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="patientsmedicalrecords">
           <Key>
@@ -233,7 +233,7 @@
           <Property Name="patients_id" Type="int" Nullable="false" />
           <Property Name="medicalrecordstypes_id" Type="int" Nullable="false" />
           <Property Name="patientsmedicalrecords_value" Type="varchar" MaxLength="128" />
-          <Property Name="patientsmedicalrecords_note" Type="text" />
+          <Property Name="patientsmedicalrecords_note" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="patientsnotes">
           <Key>
@@ -242,7 +242,7 @@
           <Property Name="patientsnotes_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="patients_id" Type="int" Nullable="false" />
           <Property Name="patientsnotes_date" Type="date" Nullable="false" />
-          <Property Name="patientsnotes_text" Type="text" Nullable="false" />
+          <Property Name="patientsnotes_text" Type="varchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="patientstreatments">
           <Key>
@@ -259,7 +259,7 @@
           <Property Name="patientstreatments_isunitprice" Type="bit" Nullable="false" />
           <Property Name="patientstreatments_taxrate" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="patientstreatments_description" Type="varchar" MaxLength="128" />
-          <Property Name="patientstreatments_notes" Type="text" />
+          <Property Name="patientstreatments_notes" Type="varchar(max)" />
           <Property Name="patientstreatments_expirationdate" Type="date" />
           <Property Name="patientstreatments_t11" Type="bit" Nullable="false" />
           <Property Name="patientstreatments_t12" Type="bit" Nullable="false" />
@@ -302,7 +302,7 @@
           <Property Name="patients_id" Type="int" Nullable="false" />
           <Property Name="payments_date" Type="date" Nullable="false" />
           <Property Name="payments_amount" Type="decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="payments_notes" Type="text" />
+          <Property Name="payments_notes" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="paymentstypes">
           <Key>
@@ -319,8 +319,8 @@
           </Key>
           <Property Name="reports_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="reports_name" Type="varchar" MaxLength="64" Nullable="false" />
-          <Property Name="reports_query" Type="text" Nullable="false" />
-          <Property Name="reports_infotext" Type="text" />
+          <Property Name="reports_query" Type="varchar(max)" Nullable="false" />
+          <Property Name="reports_infotext" Type="varchar(max)" />
           <Property Name="reports_ispasswordprotected" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="rooms">
@@ -371,7 +371,7 @@
           <Property Name="treatments_price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="treatments_isunitprice" Type="bit" Nullable="false" />
           <Property Name="treatments_mexpiration" Type="tinyint" />
-          <Property Name="treatments_notes" Type="text" />
+          <Property Name="treatments_notes" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="treatmentsprices">
           <Key>

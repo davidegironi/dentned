@@ -64,8 +64,8 @@
       <HintPath>..\packages\DG.AdvancedDataGridView.1.1.24512.7\lib\net40\AdvancedDataGridView.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DGDataModel, Version=1.2.24516.7, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DG.DataModel.1.2.24516.7\lib\net452\DGDataModel.dll</HintPath>
+    <Reference Include="DGDataModel, Version=1.2.24517.8, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DG.DataModel.1.2.24517.8\lib\net452\DGDataModel.dll</HintPath>
     </Reference>
     <Reference Include="DGUIGHF, Version=1.2.24516.12, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\DG.UIGHF.1.2.24516.12\lib\net452\DGUIGHF.dll</HintPath>

@@ -6,7 +6,7 @@ $solutionName = "DentneD"
 $versionMajor = "1"
 $versionMinor = "1"
 $versionBuild = GetVersionBuild
-$versionRevision = "17"
+$versionRevision = "18"
 #build version number
 $assemblyVersion = GetVersion $versionMajor $versionMinor $versionBuild $versionRevision
 $fileVersion = $assemblyVersion
@@ -35,7 +35,7 @@ $builds = @(
 	@{
 		#solutions filename (.sln)
 		Name = "DentneD";
-		#msbuild optionals contants
+		#msbuild optionals constants
 		Constants = "";
 		#projects to exclude from the release binary package
 		ReleaseBinExcludeProjects = @(

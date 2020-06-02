@@ -4439,7 +4439,7 @@ namespace DG.DentneD.Forms
                 {
                     openFileDialog.Title = language.attachmentselectTitle;
                     openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-                    openFileDialog.Filter = "JPEG|*.jpg|ZIP|*.zip";
+                    openFileDialog.Filter = "Images (*.jpg;*.gif;*.png;*.tiff)|*.jpg;*.gif;*.png;*.tiff|ZIP Files (*.zip)|*.zip|PDF Files (*.pdf)|*.pdf|Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
                     if (openFileDialog.ShowDialog() == DialogResult.OK)
                     {
                         if (!Directory.Exists(_patientsAttachmentsdir + "\\" + patients_id))

@@ -20,7 +20,7 @@ class MSSQLWrapper {
   //Open a connection
   public function connect($hostname, $database, $username, $password) {
     if($this->driver == 'sqlsrv') {
-      $this->connection = sqlsrv_connect($hostname, array( "Database"=>$database, "UID"=>$username, "PWD"=>$password));
+      $this->connection = sqlsrv_connect($hostname, array( "Database"=>$database, "UID"=>$username, "PWD"=>$password, 'CharacterSet' => 'UTF-8'));
       if(!$this->connection)
         return false;
     } else if($this->driver == 'mssql') {

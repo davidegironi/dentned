@@ -58,6 +58,12 @@ It features a client-server architecture.
   as a cron job to activate it automatically
 
 
+## Installation FAQ
+
+* How to install DentneD on a Windows machine?
+  * https://github.com/davidegironi/dentned/issues/7#issue-693503265
+
+
 ## Installation: web app
 
 * Install all software listed in the requirement

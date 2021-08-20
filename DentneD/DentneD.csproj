@@ -60,17 +60,17 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AdvancedDataGridView, Version=1.1.24520.7, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DG.AdvancedDataGridView.1.1.24520.7\lib\net40\AdvancedDataGridView.dll</HintPath>
+    <Reference Include="AdvancedDataGridView, Version=1.2.25902.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DG.AdvancedDataGridView.1.2.25902.3\lib\net40\AdvancedDataGridView.dll</HintPath>
     </Reference>
-    <Reference Include="DGDataModel, Version=1.2.24520.8, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DG.DataModel.1.2.24520.8\lib\net452\DGDataModel.dll</HintPath>
+    <Reference Include="DGDataModel, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DG.DataModel.1.2.26020.10\lib\net40\DGDataModel.dll</HintPath>
     </Reference>
-    <Reference Include="DGUIGHF, Version=1.2.24520.14, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DG.UIGHF.1.2.24520.14\lib\net452\DGUIGHF.dll</HintPath>
+    <Reference Include="DGUIGHF, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DG.UIGHF.1.2.26020.15\lib\net45\DGUIGHF.dll</HintPath>
     </Reference>
-    <Reference Include="EnhancedBoxHelpers, Version=1.0.24520.17, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DG.EnhancedBoxHelpers.1.0.24520.17\lib\net40\EnhancedBoxHelpers.dll</HintPath>
+    <Reference Include="EnhancedBoxHelpers, Version=1.0.25907.18, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DG.EnhancedBoxHelpers.1.0.25907.18\lib\net40\EnhancedBoxHelpers.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
@@ -85,9 +85,11 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms.Calendar, Version=1.0.5665.40596, Culture=neutral, processorArchitecture=MSIL">

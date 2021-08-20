@@ -6,10 +6,9 @@ $solutionName = "DentneD"
 $versionMajor = "1"
 $versionMinor = "1"
 $versionBuild = GetVersionBuild
-$versionRevision = "18"
+$versionRevision = "19"
 #build version number
-$assemblyVersion = GetVersion $versionMajor $versionMinor $versionBuild $versionRevision
-$fileVersion = $assemblyVersion
+$version = GetVersion $versionMajor $versionMinor $versionBuild $versionRevision
 
 #base folder for of the solution
 $baseDir  = Resolve-Path .\..\
@@ -69,12 +68,10 @@ $builds = @(
 		#unit tests to run
 		Tests = @(
 			@{
-				Name = "DentneDModel.Test";
-				TestDll = "DentneDModel.Test.dll"
+				Name = "DentneDModel.Test"
 			},
 			@{
-				Name = "DentneDHelpers.Test";
-				TestDll = "DentneDHelpers.Test.dll"
+				Name = "DentneDHelpers.Test"
 			}
 		);
 		#commands to run before packaging of the release source

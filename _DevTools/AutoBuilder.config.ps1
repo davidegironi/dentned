@@ -89,7 +89,7 @@ $builds = @(
 				Cmd = "xcopy ..\..\_DBDump\* Working\Src\_DBDump\ /s /e /y"
 			}
 		);
-		#commands to run before packaging of the release source
+		#commands to run before packaging of the release binary
 		ReleaseBinCmd = @(
 			@{
 				Cmd = ".\cleandatafolders.bat"

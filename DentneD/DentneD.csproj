@@ -60,17 +60,20 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AdvancedDataGridView, Version=1.2.25902.3, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DG.AdvancedDataGridView.1.2.25902.3\lib\net40\AdvancedDataGridView.dll</HintPath>
+    <Reference Include="AdvancedDataGridView, Version=1.2.32214.19, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DG.AdvancedDataGridView.1.2.32214.19\lib\net40\AdvancedDataGridView.dll</HintPath>
+    </Reference>
+    <Reference Include="DGDataConcurrencyHelper, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DG.DataConcurrencyHelper.1.2.30203\lib\net40\DGDataConcurrencyHelper.dll</HintPath>
     </Reference>
     <Reference Include="DGDataModel, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DG.DataModel.1.2.26020.10\lib\net40\DGDataModel.dll</HintPath>
+      <HintPath>..\packages\DG.DataModel.1.2.31216.13\lib\net40\DGDataModel.dll</HintPath>
     </Reference>
     <Reference Include="DGUIGHF, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DG.UIGHF.1.2.26020.15\lib\net45\DGUIGHF.dll</HintPath>
+      <HintPath>..\packages\DG.UIGHF.1.2.30911.19\lib\net452\DGUIGHF.dll</HintPath>
     </Reference>
-    <Reference Include="EnhancedBoxHelpers, Version=1.0.25907.18, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DG.EnhancedBoxHelpers.1.0.25907.18\lib\net40\EnhancedBoxHelpers.dll</HintPath>
+    <Reference Include="EnhancedBoxHelpers, Version=1.0.32011.23, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DG.EnhancedBoxHelpers.1.0.32011.23\lib\net40\EnhancedBoxHelpers.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>

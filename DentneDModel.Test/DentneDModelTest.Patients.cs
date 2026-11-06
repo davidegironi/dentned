@@ -33,7 +33,7 @@ namespace DG.DentneD.Model.Test
                 patients_username = "xxxx1234",
                 patients_password = "123456"
             };
-            Assert.IsFalse(_dentnedModel.Patients.CanAdd(t_patients));
+            Assert.That(_dentnedModel.Patients.CanAdd(t_patients), Is.EqualTo(false));
 
             t_patients = new patients()
             {
@@ -46,7 +46,7 @@ namespace DG.DentneD.Model.Test
                 patients_username = "xxxx1234",
                 patients_password = "123456"
             };
-            Assert.IsFalse(_dentnedModel.Patients.CanAdd(t_patients));
+            Assert.That(_dentnedModel.Patients.CanAdd(t_patients), Is.EqualTo(false));
 
             t_patients = new patients()
             {
@@ -59,7 +59,7 @@ namespace DG.DentneD.Model.Test
                 patients_username = "xxxx1234",
                 patients_password = "123456"
             };
-            Assert.IsFalse(_dentnedModel.Patients.CanAdd(t_patients));
+            Assert.That(_dentnedModel.Patients.CanAdd(t_patients), Is.EqualTo(false));
 
             t_patients = new patients()
             {
@@ -72,7 +72,7 @@ namespace DG.DentneD.Model.Test
                 patients_username = "xxxx1234",
                 patients_password = "123456"
             };
-            Assert.IsFalse(_dentnedModel.Patients.CanAdd(t_patients));
+            Assert.That(_dentnedModel.Patients.CanAdd(t_patients), Is.EqualTo(false));
 
             t_patients = new patients()
             {
@@ -85,7 +85,7 @@ namespace DG.DentneD.Model.Test
                 patients_username = "xxxx1234",
                 patients_password = "123456"
             };
-            Assert.IsFalse(_dentnedModel.Patients.CanAdd(t_patients));
+            Assert.That(_dentnedModel.Patients.CanAdd(t_patients), Is.EqualTo(false));
 
             t_patients = new patients()
             {
@@ -99,7 +99,7 @@ namespace DG.DentneD.Model.Test
                 patients_username = "xxxx1234",
                 patients_password = "123456"
             };
-            Assert.IsFalse(_dentnedModel.Patients.CanAdd(t_patients));
+            Assert.That(_dentnedModel.Patients.CanAdd(t_patients), Is.EqualTo(false));
 
             t_patients = new patients()
             {
@@ -112,7 +112,7 @@ namespace DG.DentneD.Model.Test
                 //patients_username = "xxxx1234",
                 patients_password = "123456"
             };
-            Assert.IsFalse(_dentnedModel.Patients.CanAdd(t_patients));
+            Assert.That(_dentnedModel.Patients.CanAdd(t_patients), Is.EqualTo(false));
 
             t_patients = new patients()
             {
@@ -125,7 +125,7 @@ namespace DG.DentneD.Model.Test
                 patients_username = "xxxx1234",
                 //patients_password = "123456"
             };
-            Assert.IsFalse(_dentnedModel.Patients.CanAdd(t_patients));
+            Assert.That(_dentnedModel.Patients.CanAdd(t_patients), Is.EqualTo(false));
 
             t_patients = new patients()
             {
@@ -138,7 +138,7 @@ namespace DG.DentneD.Model.Test
                 patients_username = "xXxx1234",
                 patients_password = "123456"
             };
-            Assert.IsFalse(_dentnedModel.Patients.CanAdd(t_patients));
+            Assert.That(_dentnedModel.Patients.CanAdd(t_patients), Is.EqualTo(false));
 
             t_patients = new patients()
             {
@@ -151,7 +151,7 @@ namespace DG.DentneD.Model.Test
                 patients_username = "xxxx1234",
                 patients_password = "X23456"
             };
-            Assert.IsFalse(_dentnedModel.Patients.CanAdd(t_patients));
+            Assert.That(_dentnedModel.Patients.CanAdd(t_patients), Is.EqualTo(false));
 
             t_patients = new patients()
             {
@@ -164,7 +164,7 @@ namespace DG.DentneD.Model.Test
                 patients_username = "xxxx1234",
                 patients_password = "123456"
             };
-            Assert.IsTrue(_dentnedModel.Patients.CanAdd(t_patients));
+            Assert.That(_dentnedModel.Patients.CanAdd(t_patients), Is.EqualTo(true));
             _dentnedModel.Patients.Add(t_patients);
 
             t_patients = new patients()
@@ -178,7 +178,7 @@ namespace DG.DentneD.Model.Test
                 patients_username = "xxxx1234",
                 patients_password = "123456"
             };
-            Assert.IsFalse(_dentnedModel.Patients.CanAdd(t_patients));
+            Assert.That(_dentnedModel.Patients.CanAdd(t_patients), Is.EqualTo(false));
 
             t_patients = new patients()
             {
@@ -191,7 +191,7 @@ namespace DG.DentneD.Model.Test
                 patients_username = "xxxx1235",
                 patients_password = "123456"
             };
-            Assert.IsTrue(_dentnedModel.Patients.CanAdd(t_patients));
+            Assert.That(_dentnedModel.Patients.CanAdd(t_patients), Is.EqualTo(true));
 
             _dentnedModel.Patients.Remove(_dentnedModel.Patients.List(r => r.patients_name == "XX1" && r.patients_surname == "XX1").ToArray());
         }

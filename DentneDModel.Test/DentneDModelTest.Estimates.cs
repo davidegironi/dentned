@@ -67,7 +67,7 @@ namespace DG.DentneD.Model.Test
                 estimates_totaldue = 0,
                 estimates_deductiontaxrate = 0
             };
-            Assert.IsFalse(_dentnedModel.Estimates.CanAdd(t_estimates));
+            Assert.That(_dentnedModel.Estimates.CanAdd(t_estimates), Is.EqualTo(false));
 
             t_estimates = new estimates()
             {
@@ -84,7 +84,7 @@ namespace DG.DentneD.Model.Test
                 estimates_totaldue = 0,
                 estimates_deductiontaxrate = 0
             };
-            Assert.IsFalse(_dentnedModel.Estimates.CanAdd(t_estimates));
+            Assert.That(_dentnedModel.Estimates.CanAdd(t_estimates), Is.EqualTo(false));
 
             t_estimates = new estimates()
             {
@@ -101,7 +101,7 @@ namespace DG.DentneD.Model.Test
                 estimates_totaldue = 0,
                 estimates_deductiontaxrate = 0
             };
-            Assert.IsFalse(_dentnedModel.Estimates.CanAdd(t_estimates));
+            Assert.That(_dentnedModel.Estimates.CanAdd(t_estimates), Is.EqualTo(false));
 
             t_estimates = new estimates()
             {
@@ -118,7 +118,7 @@ namespace DG.DentneD.Model.Test
                 estimates_totaldue = 0,
                 estimates_deductiontaxrate = 0
             };
-            Assert.IsFalse(_dentnedModel.Estimates.CanAdd(t_estimates));
+            Assert.That(_dentnedModel.Estimates.CanAdd(t_estimates), Is.EqualTo(false));
 
             t_estimates = new estimates()
             {
@@ -135,7 +135,7 @@ namespace DG.DentneD.Model.Test
                 estimates_totaldue = 0,
                 estimates_deductiontaxrate = 0
             };
-            Assert.IsFalse(_dentnedModel.Estimates.CanAdd(t_estimates));
+            Assert.That(_dentnedModel.Estimates.CanAdd(t_estimates), Is.EqualTo(false));
 
             t_estimates = new estimates()
             {
@@ -152,7 +152,7 @@ namespace DG.DentneD.Model.Test
                 estimates_totaldue = 0,
                 estimates_deductiontaxrate = 0
             };
-            Assert.IsFalse(_dentnedModel.Estimates.CanAdd(t_estimates));
+            Assert.That(_dentnedModel.Estimates.CanAdd(t_estimates), Is.EqualTo(false));
 
             t_estimates = new estimates()
             {
@@ -169,7 +169,7 @@ namespace DG.DentneD.Model.Test
                 estimates_totaldue = 0,
                 estimates_deductiontaxrate = 0
             };
-            Assert.IsFalse(_dentnedModel.Estimates.CanAdd(t_estimates));
+            Assert.That(_dentnedModel.Estimates.CanAdd(t_estimates), Is.EqualTo(false));
 
             t_estimates = new estimates()
             {
@@ -186,7 +186,7 @@ namespace DG.DentneD.Model.Test
                 estimates_totaldue = 0,
                 estimates_deductiontaxrate = 0
             };
-            Assert.IsFalse(_dentnedModel.Estimates.CanAdd(t_estimates));
+            Assert.That(_dentnedModel.Estimates.CanAdd(t_estimates), Is.EqualTo(false));
 
             t_estimates = new estimates()
             {
@@ -203,7 +203,7 @@ namespace DG.DentneD.Model.Test
                 estimates_totaldue = 0,
                 estimates_deductiontaxrate = 0
             };
-            Assert.IsFalse(_dentnedModel.Estimates.CanAdd(t_estimates));
+            Assert.That(_dentnedModel.Estimates.CanAdd(t_estimates), Is.EqualTo(false));
 
             t_estimates = new estimates()
             {
@@ -220,7 +220,7 @@ namespace DG.DentneD.Model.Test
                 estimates_totaldue = 0,
                 estimates_deductiontaxrate = 0
             };
-            Assert.IsFalse(_dentnedModel.Estimates.CanAdd(t_estimates));
+            Assert.That(_dentnedModel.Estimates.CanAdd(t_estimates), Is.EqualTo(false));
 
             t_estimates = new estimates()
             {
@@ -237,7 +237,7 @@ namespace DG.DentneD.Model.Test
                 estimates_totaldue = 0,
                 estimates_deductiontaxrate = 0
             };
-            Assert.IsTrue(_dentnedModel.Estimates.CanAdd(t_estimates));
+            Assert.That(_dentnedModel.Estimates.CanAdd(t_estimates), Is.EqualTo(true));
             _dentnedModel.Estimates.Add(t_estimates);
 
             t_estimates = new estimates()
@@ -255,7 +255,7 @@ namespace DG.DentneD.Model.Test
                 estimates_totaldue = 0,
                 estimates_deductiontaxrate = 0
             };
-            Assert.IsTrue(_dentnedModel.Estimates.CanAdd(t_estimates));
+            Assert.That(_dentnedModel.Estimates.CanAdd(t_estimates), Is.EqualTo(true));
 
             t_estimates = new estimates()
             {
@@ -272,18 +272,18 @@ namespace DG.DentneD.Model.Test
                 estimates_totaldue = 0,
                 estimates_deductiontaxrate = 0
             };
-            Assert.IsTrue(_dentnedModel.Estimates.CanAdd(t_estimates));
+            Assert.That(_dentnedModel.Estimates.CanAdd(t_estimates), Is.EqualTo(true));
             _dentnedModel.Estimates.Add(t_estimates);
 
             t_estimates = _dentnedModel.Estimates.FirstOrDefault(r => r.estimates_number == "XX1" && r.estimates_date == today.Date);
             t_estimates.estimates_number = "XX2";
-            Assert.IsFalse(_dentnedModel.Estimates.CanUpdate(t_estimates));
+            Assert.That(_dentnedModel.Estimates.CanUpdate(t_estimates), Is.EqualTo(false));
             t_estimates.estimates_number = "XX3";
-            Assert.IsTrue(_dentnedModel.Estimates.CanUpdate(t_estimates));
+            Assert.That(_dentnedModel.Estimates.CanUpdate(t_estimates), Is.EqualTo(true));
 
             t_estimates = _dentnedModel.Estimates.FirstOrDefault(r => r.estimates_number == "XX1" && r.estimates_date == today.Date);
             t_estimates.doctors_id = -999;
-            Assert.IsTrue(_dentnedModel.Estimates.CanUpdate(t_estimates));
+            Assert.That(_dentnedModel.Estimates.CanUpdate(t_estimates), Is.EqualTo(true));
 
             _dentnedModel.Estimates.Remove(_dentnedModel.Estimates.List(r => r.estimates_number == "XX1" && r.estimates_date == today.Date).ToArray());
             _dentnedModel.Estimates.Remove(_dentnedModel.Estimates.List(r => r.estimates_number == "XX2" && r.estimates_date == today.Date).ToArray());

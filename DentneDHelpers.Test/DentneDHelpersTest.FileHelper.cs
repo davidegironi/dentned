@@ -32,8 +32,8 @@ namespace DG.DentneD.Helpers.Test
                 Directory.Delete("test", true);
             Directory.CreateDirectory("test");
 
-            Assert.IsTrue(FileHelper.CreateFolder("test\\test"));
-            Assert.IsTrue(Directory.Exists("test\\test"));
+            Assert.That(FileHelper.CreateFolder("test\\test"), Is.EqualTo(true));
+            Assert.That(Directory.Exists("test\\test"), Is.EqualTo(true));
             Directory.Delete("test\\test");
 
             Directory.Delete("test");
@@ -46,15 +46,15 @@ namespace DG.DentneD.Helpers.Test
                 Directory.Delete("test", true);
             Directory.CreateDirectory("test");
 
-            Assert.IsTrue(FileHelper.CreateFolder("test\\test"));
-            Assert.IsTrue(Directory.Exists("test\\test"));
-            Assert.IsTrue(FileHelper.DeleteFolder("test\\test", false));
-            Assert.IsFalse(Directory.Exists("test\\test"));
+            Assert.That(FileHelper.CreateFolder("test\\test"), Is.EqualTo(true));
+            Assert.That(Directory.Exists("test\\test"), Is.EqualTo(true));
+            Assert.That(FileHelper.DeleteFolder("test\\test", false), Is.EqualTo(true));
+            Assert.That(Directory.Exists("test\\test"), Is.EqualTo(false));
 
-            Assert.IsTrue(FileHelper.CreateFolder("test\\test"));
-            Assert.IsTrue(Directory.Exists("test\\test"));
-            Assert.IsTrue(FileHelper.DeleteFolder("test\\test", true));
-            Assert.IsFalse(Directory.Exists("test\\test"));
+            Assert.That(FileHelper.CreateFolder("test\\test"), Is.EqualTo(true));
+            Assert.That(Directory.Exists("test\\test"), Is.EqualTo(true));
+            Assert.That(FileHelper.DeleteFolder("test\\test", true), Is.EqualTo(true));
+            Assert.That(Directory.Exists("test\\test"), Is.EqualTo(false));
 
             Directory.Delete("test");
         }
@@ -68,16 +68,16 @@ namespace DG.DentneD.Helpers.Test
 
             File.Create("test\\test1.txt").Dispose();
             File.Create("test\\test2.txt").Dispose();
-            Assert.IsTrue(File.Exists("test\\test1.txt"));
-            Assert.IsTrue(File.Exists("test\\test2.txt"));
+            Assert.That(File.Exists("test\\test1.txt"), Is.EqualTo(true));
+            Assert.That(File.Exists("test\\test2.txt"), Is.EqualTo(true));
 
-            Assert.IsTrue(File.Exists("test\\test1.txt"));
-            Assert.IsTrue(FileHelper.DeleteFile("test\\test1.txt", false));
-            Assert.IsFalse(File.Exists("test\\test1.txt"));
+            Assert.That(File.Exists("test\\test1.txt"), Is.EqualTo(true));
+            Assert.That(FileHelper.DeleteFile("test\\test1.txt", false), Is.EqualTo(true));
+            Assert.That(File.Exists("test\\test1.txt"), Is.EqualTo(false));
 
-            Assert.IsTrue(File.Exists("test\\test2.txt"));
-            Assert.IsTrue(FileHelper.DeleteFile("test\\test2.txt", true));
-            Assert.IsFalse(File.Exists("test\\test2.txt"));
+            Assert.That(File.Exists("test\\test2.txt"), Is.EqualTo(true));
+            Assert.That(FileHelper.DeleteFile("test\\test2.txt", true), Is.EqualTo(true));
+            Assert.That(File.Exists("test\\test2.txt"), Is.EqualTo(false));
 
             Directory.Delete("test");
         }
@@ -95,14 +95,14 @@ namespace DG.DentneD.Helpers.Test
             File.Create("test\\test2.txt").Dispose();
             File.SetLastWriteTime("test\\test2.txt", DateTime.Now.AddDays(-5));
             File.Create("test\\test3.txt").Dispose();
-            Assert.IsTrue(File.Exists("test\\test1.txt"));
-            Assert.IsTrue(File.Exists("test\\test2.txt"));
-            Assert.IsTrue(File.Exists("test\\test3.txt"));
-            Assert.IsTrue(FileHelper.PurgeFolder("test", false, -2));
-            Assert.IsFalse(File.Exists("test\\test1.txt"));
-            Assert.IsFalse(File.Exists("test\\test2.txt"));
-            Assert.IsTrue(File.Exists("test\\test3.txt"));
-            Assert.IsTrue(Directory.Exists("test\\test2"));
+            Assert.That(File.Exists("test\\test1.txt"), Is.EqualTo(true));
+            Assert.That(File.Exists("test\\test2.txt"), Is.EqualTo(true));
+            Assert.That(File.Exists("test\\test3.txt"), Is.EqualTo(true));
+            Assert.That(FileHelper.PurgeFolder("test", false, -2), Is.EqualTo(true));
+            Assert.That(File.Exists("test\\test1.txt"), Is.EqualTo(false));
+            Assert.That(File.Exists("test\\test2.txt"), Is.EqualTo(false));
+            Assert.That(File.Exists("test\\test3.txt"), Is.EqualTo(true));
+            Assert.That(Directory.Exists("test\\test2"), Is.EqualTo(true));
             File.Delete("test\\test3.txt");
 
             File.Create("test\\test1.txt").Dispose();
@@ -110,40 +110,40 @@ namespace DG.DentneD.Helpers.Test
             File.Create("test\\test2.txt").Dispose();
             File.SetLastWriteTime("test\\test2.txt", DateTime.Now.AddDays(-5));
             File.Create("test\\test3.txt").Dispose();
-            Assert.IsTrue(File.Exists("test\\test1.txt"));
-            Assert.IsTrue(File.Exists("test\\test2.txt"));
-            Assert.IsTrue(File.Exists("test\\test3.txt"));
-            Assert.IsTrue(FileHelper.PurgeFolder("test", true, -2));
-            Assert.IsFalse(File.Exists("test\\test1.txt"));
-            Assert.IsFalse(File.Exists("test\\test2.txt"));
-            Assert.IsTrue(File.Exists("test\\test3.txt"));
-            Assert.IsTrue(Directory.Exists("test\\test2"));
+            Assert.That(File.Exists("test\\test1.txt"), Is.EqualTo(true));
+            Assert.That(File.Exists("test\\test2.txt"), Is.EqualTo(true));
+            Assert.That(File.Exists("test\\test3.txt"), Is.EqualTo(true));
+            Assert.That(FileHelper.PurgeFolder("test", true, -2), Is.EqualTo(true));
+            Assert.That(File.Exists("test\\test1.txt"), Is.EqualTo(false));
+            Assert.That(File.Exists("test\\test2.txt"), Is.EqualTo(false));
+            Assert.That(File.Exists("test\\test3.txt"), Is.EqualTo(true));
+            Assert.That(Directory.Exists("test\\test2"), Is.EqualTo(true));
             File.Delete("test\\test3.txt");
 
             File.Create("test\\test1.txt").Dispose();
             File.Create("test\\test2.txt").Dispose();
             File.Create("test\\test3.txt").Dispose();
-            Assert.IsTrue(File.Exists("test\\test1.txt"));
-            Assert.IsTrue(File.Exists("test\\test2.txt"));
-            Assert.IsTrue(File.Exists("test\\test3.txt"));
-            Assert.IsTrue(FileHelper.PurgeFolder("test", false, null));
-            Assert.IsFalse(File.Exists("test\\test1.txt"));
-            Assert.IsFalse(File.Exists("test\\test2.txt"));
-            Assert.IsFalse(File.Exists("test\\test3.txt"));
-            Assert.IsTrue(Directory.Exists("test\\test2"));
-            Assert.IsTrue(Directory.Exists("test\\test2"));
+            Assert.That(File.Exists("test\\test1.txt"), Is.EqualTo(true));
+            Assert.That(File.Exists("test\\test2.txt"), Is.EqualTo(true));
+            Assert.That(File.Exists("test\\test3.txt"), Is.EqualTo(true));
+            Assert.That(FileHelper.PurgeFolder("test", false, null), Is.EqualTo(true));
+            Assert.That(File.Exists("test\\test1.txt"), Is.EqualTo(false));
+            Assert.That(File.Exists("test\\test2.txt"), Is.EqualTo(false));
+            Assert.That(File.Exists("test\\test3.txt"), Is.EqualTo(false));
+            Assert.That(Directory.Exists("test\\test2"), Is.EqualTo(true));
+            Assert.That(Directory.Exists("test\\test2"), Is.EqualTo(true));
 
             File.Create("test\\test1.txt").Dispose();
             File.Create("test\\test2.txt").Dispose();
             File.Create("test\\test3.txt").Dispose();
-            Assert.IsTrue(File.Exists("test\\test1.txt"));
-            Assert.IsTrue(File.Exists("test\\test2.txt"));
-            Assert.IsTrue(File.Exists("test\\test3.txt"));
-            Assert.IsTrue(FileHelper.PurgeFolder("test", true, null));
-            Assert.IsFalse(File.Exists("test\\test1.txt"));
-            Assert.IsFalse(File.Exists("test\\test2.txt"));
-            Assert.IsFalse(File.Exists("test\\test3.txt"));
-            Assert.IsTrue(Directory.Exists("test\\test2"));
+            Assert.That(File.Exists("test\\test1.txt"), Is.EqualTo(true));
+            Assert.That(File.Exists("test\\test2.txt"), Is.EqualTo(true));
+            Assert.That(File.Exists("test\\test3.txt"), Is.EqualTo(true));
+            Assert.That(FileHelper.PurgeFolder("test", true, null), Is.EqualTo(true));
+            Assert.That(File.Exists("test\\test1.txt"), Is.EqualTo(false));
+            Assert.That(File.Exists("test\\test2.txt"), Is.EqualTo(false));
+            Assert.That(File.Exists("test\\test3.txt"), Is.EqualTo(false));
+            Assert.That(Directory.Exists("test\\test2"), Is.EqualTo(true));
 
             Directory.Delete("test", true);
         }

@@ -28,14 +28,14 @@ namespace DG.DentneD.Model.Test
                 //treatmentspriceslists_name = "XX1",
                 treatmentspriceslists_multiplier = 1
             };
-            Assert.IsFalse(_dentnedModel.TreatmentsPricesLists.CanAdd(t_treatmentspriceslists));
+            Assert.That(_dentnedModel.TreatmentsPricesLists.CanAdd(t_treatmentspriceslists), Is.EqualTo(false));
 
             t_treatmentspriceslists = new treatmentspriceslists()
             {
                 treatmentspriceslists_name = "XX1",
                 treatmentspriceslists_multiplier = 1
             };
-            Assert.IsTrue(_dentnedModel.TreatmentsPricesLists.CanAdd(t_treatmentspriceslists));
+            Assert.That(_dentnedModel.TreatmentsPricesLists.CanAdd(t_treatmentspriceslists), Is.EqualTo(true));
             _dentnedModel.TreatmentsPricesLists.Add(t_treatmentspriceslists);
 
             t_treatmentspriceslists = new treatmentspriceslists()
@@ -43,7 +43,7 @@ namespace DG.DentneD.Model.Test
                 treatmentspriceslists_name = "XX1",
                 treatmentspriceslists_multiplier = 1
             };
-            Assert.IsFalse(_dentnedModel.TreatmentsPricesLists.CanAdd(t_treatmentspriceslists));
+            Assert.That(_dentnedModel.TreatmentsPricesLists.CanAdd(t_treatmentspriceslists), Is.EqualTo(false));
 
             t_treatmentspriceslists = new treatmentspriceslists()
             {
@@ -54,9 +54,9 @@ namespace DG.DentneD.Model.Test
 
             t_treatmentspriceslists = _dentnedModel.TreatmentsPricesLists.FirstOrDefault(r => r.treatmentspriceslists_name == "XX1");
             t_treatmentspriceslists.treatmentspriceslists_name = "XX2";
-            Assert.IsFalse(_dentnedModel.TreatmentsPricesLists.CanUpdate(t_treatmentspriceslists));
+            Assert.That(_dentnedModel.TreatmentsPricesLists.CanUpdate(t_treatmentspriceslists), Is.EqualTo(false));
             t_treatmentspriceslists.treatmentspriceslists_name = "XX3";
-            Assert.IsTrue(_dentnedModel.TreatmentsPricesLists.CanUpdate(t_treatmentspriceslists));
+            Assert.That(_dentnedModel.TreatmentsPricesLists.CanUpdate(t_treatmentspriceslists), Is.EqualTo(true));
 
             _dentnedModel.TreatmentsPricesLists.Remove(_dentnedModel.TreatmentsPricesLists.List(r => r.treatmentspriceslists_name == "XX1").ToArray());
             _dentnedModel.TreatmentsPricesLists.Remove(_dentnedModel.TreatmentsPricesLists.List(r => r.treatmentspriceslists_name == "XX2").ToArray());

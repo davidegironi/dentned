@@ -28,20 +28,20 @@ namespace DG.DentneD.Model.Test
             {
                 //contactstypes_name = "XX1"
             };
-            Assert.IsFalse(_dentnedModel.ContactsTypes.CanAdd(t_contactstypes));
+            Assert.That(_dentnedModel.ContactsTypes.CanAdd(t_contactstypes), Is.EqualTo(false));
 
             t_contactstypes = new contactstypes()
             {
                 contactstypes_name = "XX1"
             };
-            Assert.IsTrue(_dentnedModel.ContactsTypes.CanAdd(t_contactstypes));
+            Assert.That(_dentnedModel.ContactsTypes.CanAdd(t_contactstypes), Is.EqualTo(true));
             _dentnedModel.ContactsTypes.Add(t_contactstypes);
 
             t_contactstypes = new contactstypes()
             {
                 contactstypes_name = "XX1"
             };
-            Assert.IsFalse(_dentnedModel.ContactsTypes.CanAdd(t_contactstypes));
+            Assert.That(_dentnedModel.ContactsTypes.CanAdd(t_contactstypes), Is.EqualTo(false));
 
             t_contactstypes = new contactstypes()
             {
@@ -51,9 +51,9 @@ namespace DG.DentneD.Model.Test
 
             t_contactstypes = _dentnedModel.ContactsTypes.FirstOrDefault(r => r.contactstypes_name == "XX1");
             t_contactstypes.contactstypes_name = "XX2";
-            Assert.IsFalse(_dentnedModel.ContactsTypes.CanUpdate(t_contactstypes));
+            Assert.That(_dentnedModel.ContactsTypes.CanUpdate(t_contactstypes), Is.EqualTo(false));
             t_contactstypes.contactstypes_name = "XX3";
-            Assert.IsTrue(_dentnedModel.ContactsTypes.CanUpdate(t_contactstypes));
+            Assert.That(_dentnedModel.ContactsTypes.CanUpdate(t_contactstypes), Is.EqualTo(true));
 
             _dentnedModel.ContactsTypes.Remove(_dentnedModel.ContactsTypes.List(r => r.contactstypes_name == "XX1").ToArray());
             _dentnedModel.ContactsTypes.Remove(_dentnedModel.ContactsTypes.List(r => r.contactstypes_name == "XX2").ToArray());
@@ -97,11 +97,11 @@ namespace DG.DentneD.Model.Test
             };
             _dentnedModel.PatientsContacts.Add(t_patientscontacts);
 
-            Assert.IsFalse(_dentnedModel.ContactsTypes.CanRemove(_dentnedModel.ContactsTypes.List(r => r.contactstypes_name == "XX1").ToArray()));
+            Assert.That(_dentnedModel.ContactsTypes.CanRemove(_dentnedModel.ContactsTypes.List(r => r.contactstypes_name == "XX1").ToArray()), Is.EqualTo(false));
 
             _dentnedModel.Patients.Remove(_dentnedModel.Patients.List(r => r.patients_name == "XX1" && r.patients_surname == "XX1").ToArray());
 
-            Assert.IsTrue(_dentnedModel.ContactsTypes.CanRemove(_dentnedModel.ContactsTypes.List(r => r.contactstypes_name == "XX1").ToArray()));
+            Assert.That(_dentnedModel.ContactsTypes.CanRemove(_dentnedModel.ContactsTypes.List(r => r.contactstypes_name == "XX1").ToArray()), Is.EqualTo(true));
 
             _dentnedModel.ContactsTypes.Remove(_dentnedModel.ContactsTypes.List(r => r.contactstypes_name == "XX1").ToArray());
         }
@@ -123,10 +123,10 @@ namespace DG.DentneD.Model.Test
             }
 
             contactstypesEMail.contactstypes_name = "test";
-            Assert.IsFalse(_dentnedModel.ContactsTypes.CanUpdate(contactstypesEMail));
+            Assert.That(_dentnedModel.ContactsTypes.CanUpdate(contactstypesEMail), Is.EqualTo(false));
 
             contactstypesEMail = _dentnedModel.ContactsTypes.FirstOrDefault(r => r.contactstypes_name == ContactsTypesRepository.SystemAttributes.EMail.ToString());
-            Assert.IsFalse(_dentnedModel.ContactsTypes.CanRemove(contactstypesEMail));
+            Assert.That(_dentnedModel.ContactsTypes.CanRemove(contactstypesEMail), Is.EqualTo(false));
         }
     }
 }

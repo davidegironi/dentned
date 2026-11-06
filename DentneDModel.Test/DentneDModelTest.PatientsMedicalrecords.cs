@@ -50,7 +50,7 @@ namespace DG.DentneD.Model.Test
                 medicalrecordstypes_id = t_medicalrecordstypes.medicalrecordstypes_id,
                 patientsmedicalrecords_value = "ttt"
             };
-            Assert.IsFalse(_dentnedModel.PatientsMedicalrecords.CanAdd(t_patientsmedicalrecords));
+            Assert.That(_dentnedModel.PatientsMedicalrecords.CanAdd(t_patientsmedicalrecords), Is.EqualTo(false));
 
             t_patientsmedicalrecords = new patientsmedicalrecords()
             {
@@ -58,7 +58,7 @@ namespace DG.DentneD.Model.Test
                 //medicalrecordstypes_id = t_medicalrecordstypes.medicalrecordstypes_id,
                 patientsmedicalrecords_value = "ttt"
             };
-            Assert.IsFalse(_dentnedModel.PatientsMedicalrecords.CanAdd(t_patientsmedicalrecords));
+            Assert.That(_dentnedModel.PatientsMedicalrecords.CanAdd(t_patientsmedicalrecords), Is.EqualTo(false));
 
             t_patientsmedicalrecords = new patientsmedicalrecords()
             {
@@ -66,7 +66,7 @@ namespace DG.DentneD.Model.Test
                 medicalrecordstypes_id = t_medicalrecordstypes.medicalrecordstypes_id,
                 patientsmedicalrecords_value = "ttt"
             };
-            Assert.IsTrue(_dentnedModel.PatientsMedicalrecords.CanAdd(t_patientsmedicalrecords));
+            Assert.That(_dentnedModel.PatientsMedicalrecords.CanAdd(t_patientsmedicalrecords), Is.EqualTo(true));
             _dentnedModel.PatientsMedicalrecords.Add(t_patientsmedicalrecords);
 
             _dentnedModel.Patients.Remove(_dentnedModel.Patients.List(r => r.patients_name == "XX1" && r.patients_surname == "XX1").ToArray());

@@ -27,20 +27,20 @@ namespace DG.DentneD.Model.Test
             {
                 //addressestypes_name = "XX1"
             };
-            Assert.IsFalse(_dentnedModel.AddressesTypes.CanAdd(t_addressestypes));
+            Assert.That(_dentnedModel.AddressesTypes.CanAdd(t_addressestypes), Is.EqualTo(false));
 
             t_addressestypes = new addressestypes()
             {
                 addressestypes_name = "XX1"
             };
-            Assert.IsTrue(_dentnedModel.AddressesTypes.CanAdd(t_addressestypes));
+            Assert.That(_dentnedModel.AddressesTypes.CanAdd(t_addressestypes), Is.EqualTo(true));
             _dentnedModel.AddressesTypes.Add(t_addressestypes);
 
             t_addressestypes = new addressestypes()
             {
                 addressestypes_name = "XX1"
             };
-            Assert.IsFalse(_dentnedModel.AddressesTypes.CanAdd(t_addressestypes));
+            Assert.That(_dentnedModel.AddressesTypes.CanAdd(t_addressestypes), Is.EqualTo(false));
 
             t_addressestypes = new addressestypes()
             {
@@ -50,9 +50,9 @@ namespace DG.DentneD.Model.Test
 
             t_addressestypes = _dentnedModel.AddressesTypes.FirstOrDefault(r => r.addressestypes_name == "XX1");
             t_addressestypes.addressestypes_name = "XX2";
-            Assert.IsFalse(_dentnedModel.AddressesTypes.CanUpdate(t_addressestypes));
+            Assert.That(_dentnedModel.AddressesTypes.CanUpdate(t_addressestypes), Is.EqualTo(false));
             t_addressestypes.addressestypes_name = "XX3";
-            Assert.IsTrue(_dentnedModel.AddressesTypes.CanUpdate(t_addressestypes));
+            Assert.That(_dentnedModel.AddressesTypes.CanUpdate(t_addressestypes), Is.EqualTo(true));
 
             _dentnedModel.AddressesTypes.Remove(_dentnedModel.AddressesTypes.List(r => r.addressestypes_name == "XX1").ToArray());
             _dentnedModel.AddressesTypes.Remove(_dentnedModel.AddressesTypes.List(r => r.addressestypes_name == "XX2").ToArray());
@@ -99,11 +99,11 @@ namespace DG.DentneD.Model.Test
             };
             _dentnedModel.PatientsAddresses.Add(t_patientsaddresses);
 
-            Assert.IsFalse(_dentnedModel.AddressesTypes.CanRemove(_dentnedModel.AddressesTypes.List(r => r.addressestypes_name == "XX1").ToArray()));
+            Assert.That(_dentnedModel.AddressesTypes.CanRemove(_dentnedModel.AddressesTypes.List(r => r.addressestypes_name == "XX1").ToArray()), Is.EqualTo(false));
 
             _dentnedModel.Patients.Remove(_dentnedModel.Patients.List(r => r.patients_name == "XX1" && r.patients_surname == "XX1").ToArray());
 
-            Assert.IsTrue(_dentnedModel.AddressesTypes.CanRemove(_dentnedModel.AddressesTypes.List(r => r.addressestypes_name == "XX1").ToArray()));
+            Assert.That(_dentnedModel.AddressesTypes.CanRemove(_dentnedModel.AddressesTypes.List(r => r.addressestypes_name == "XX1").ToArray()), Is.EqualTo(true));
 
             _dentnedModel.AddressesTypes.Remove(_dentnedModel.AddressesTypes.List(r => r.addressestypes_name == "XX1").ToArray());
         }

@@ -76,7 +76,7 @@ namespace DG.DentneD.Model.Test
                 patientstreatments_price = 10,
                 patientstreatments_taxrate = 0,
             };
-            Assert.IsFalse(_dentnedModel.PatientsTreatments.CanAdd(t_patientstreatments));
+            Assert.That(_dentnedModel.PatientsTreatments.CanAdd(t_patientstreatments), Is.EqualTo(false));
 
             t_patientstreatments = new patientstreatments()
             {
@@ -87,7 +87,7 @@ namespace DG.DentneD.Model.Test
                 patientstreatments_price = 10,
                 patientstreatments_taxrate = 0,
             };
-            Assert.IsFalse(_dentnedModel.PatientsTreatments.CanAdd(t_patientstreatments));
+            Assert.That(_dentnedModel.PatientsTreatments.CanAdd(t_patientstreatments), Is.EqualTo(false));
 
             t_patientstreatments = new patientstreatments()
             {
@@ -98,7 +98,7 @@ namespace DG.DentneD.Model.Test
                 patientstreatments_price = 10,
                 patientstreatments_taxrate = 0,
             };
-            Assert.IsFalse(_dentnedModel.PatientsTreatments.CanAdd(t_patientstreatments));
+            Assert.That(_dentnedModel.PatientsTreatments.CanAdd(t_patientstreatments), Is.EqualTo(false));
 
             t_patientstreatments = new patientstreatments()
             {
@@ -109,7 +109,7 @@ namespace DG.DentneD.Model.Test
                 patientstreatments_price = 10,
                 patientstreatments_taxrate = -10,
             };
-            Assert.IsFalse(_dentnedModel.PatientsTreatments.CanAdd(t_patientstreatments));
+            Assert.That(_dentnedModel.PatientsTreatments.CanAdd(t_patientstreatments), Is.EqualTo(false));
 
             t_patientstreatments = new patientstreatments()
             {
@@ -120,7 +120,7 @@ namespace DG.DentneD.Model.Test
                 patientstreatments_price = 10,
                 patientstreatments_taxrate = 0,
             };
-            Assert.IsTrue(_dentnedModel.PatientsTreatments.CanAdd(t_patientstreatments));
+            Assert.That(_dentnedModel.PatientsTreatments.CanAdd(t_patientstreatments), Is.EqualTo(true));
             _dentnedModel.PatientsTreatments.Add(t_patientstreatments);
 
             _dentnedModel.Patients.Remove(_dentnedModel.Patients.List(r => r.patients_name == "XX1" && r.patients_surname == "XX1").ToArray());

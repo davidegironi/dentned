@@ -38,7 +38,7 @@ namespace DG.DentneD.Model.Test
                 taxes_id = t_taxes.taxes_id,
                 computedlines_rate = 20
             };
-            Assert.IsFalse(_dentnedModel.ComputedLines.CanAdd(t_computedlines));
+            Assert.That(_dentnedModel.ComputedLines.CanAdd(t_computedlines), Is.EqualTo(false));
 
             t_computedlines = new computedlines()
             {
@@ -47,7 +47,7 @@ namespace DG.DentneD.Model.Test
                 taxes_id = t_taxes.taxes_id,
                 computedlines_rate = 20
             };
-            Assert.IsFalse(_dentnedModel.ComputedLines.CanAdd(t_computedlines));
+            Assert.That(_dentnedModel.ComputedLines.CanAdd(t_computedlines), Is.EqualTo(false));
 
             t_computedlines = new computedlines()
             {
@@ -56,7 +56,7 @@ namespace DG.DentneD.Model.Test
                 //taxes_id = t_taxes.taxes_id,
                 computedlines_rate = 20
             };
-            Assert.IsTrue(_dentnedModel.ComputedLines.CanAdd(t_computedlines));
+            Assert.That(_dentnedModel.ComputedLines.CanAdd(t_computedlines), Is.EqualTo(true));
 
             t_computedlines = new computedlines()
             {
@@ -65,7 +65,7 @@ namespace DG.DentneD.Model.Test
                 taxes_id = -999,
                 computedlines_rate = 20
             };
-            Assert.IsFalse(_dentnedModel.ComputedLines.CanAdd(t_computedlines));
+            Assert.That(_dentnedModel.ComputedLines.CanAdd(t_computedlines), Is.EqualTo(false));
 
             t_computedlines = new computedlines()
             {
@@ -74,7 +74,7 @@ namespace DG.DentneD.Model.Test
                 taxes_id = t_taxes.taxes_id,
                 computedlines_rate = 20
             };
-            Assert.IsTrue(_dentnedModel.ComputedLines.CanAdd(t_computedlines));
+            Assert.That(_dentnedModel.ComputedLines.CanAdd(t_computedlines), Is.EqualTo(true));
             _dentnedModel.ComputedLines.Add(t_computedlines);
 
             t_computedlines = new computedlines()
@@ -83,7 +83,7 @@ namespace DG.DentneD.Model.Test
                 computedlines_name = "XX1",
                 computedlines_rate = 20
             };
-            Assert.IsFalse(_dentnedModel.ComputedLines.CanAdd(t_computedlines));
+            Assert.That(_dentnedModel.ComputedLines.CanAdd(t_computedlines), Is.EqualTo(false));
 
             t_computedlines = new computedlines()
             {
@@ -95,9 +95,9 @@ namespace DG.DentneD.Model.Test
 
             t_computedlines = _dentnedModel.ComputedLines.FirstOrDefault(r => r.computedlines_code == "XX1");
             t_computedlines.computedlines_code = "XX2";
-            Assert.IsFalse(_dentnedModel.ComputedLines.CanUpdate(t_computedlines));
+            Assert.That(_dentnedModel.ComputedLines.CanUpdate(t_computedlines), Is.EqualTo(false));
             t_computedlines.computedlines_code = "XX3";
-            Assert.IsTrue(_dentnedModel.ComputedLines.CanUpdate(t_computedlines));
+            Assert.That(_dentnedModel.ComputedLines.CanUpdate(t_computedlines), Is.EqualTo(true));
 
             _dentnedModel.ComputedLines.Remove(_dentnedModel.ComputedLines.List(r => r.computedlines_code == "XX1").ToArray());
             _dentnedModel.ComputedLines.Remove(_dentnedModel.ComputedLines.List(r => r.computedlines_code == "XX2").ToArray());

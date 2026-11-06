@@ -48,7 +48,7 @@ namespace DG.DentneD.Model.Test
                 treatments_mexpiration = 1,
                 treatments_price = 10
             };
-            Assert.IsFalse(_dentnedModel.Treatments.CanAdd(t_treatments));
+            Assert.That(_dentnedModel.Treatments.CanAdd(t_treatments), Is.EqualTo(false));
 
             t_treatments = new treatments()
             {
@@ -59,7 +59,7 @@ namespace DG.DentneD.Model.Test
                 treatments_mexpiration = 1,
                 treatments_price = 10
             };
-            Assert.IsFalse(_dentnedModel.Treatments.CanAdd(t_treatments));
+            Assert.That(_dentnedModel.Treatments.CanAdd(t_treatments), Is.EqualTo(false));
 
             t_treatments = new treatments()
             {
@@ -70,7 +70,7 @@ namespace DG.DentneD.Model.Test
                 treatments_mexpiration = 1,
                 treatments_price = 10
             };
-            Assert.IsFalse(_dentnedModel.Treatments.CanAdd(t_treatments));
+            Assert.That(_dentnedModel.Treatments.CanAdd(t_treatments), Is.EqualTo(false));
 
             t_treatments = new treatments()
             {
@@ -81,7 +81,7 @@ namespace DG.DentneD.Model.Test
                 //treatments_mexpiration = 1,
                 treatments_price = 10
             };
-            Assert.IsTrue(_dentnedModel.Treatments.CanAdd(t_treatments));
+            Assert.That(_dentnedModel.Treatments.CanAdd(t_treatments), Is.EqualTo(true));
 
             t_treatments = new treatments()
             {
@@ -92,7 +92,7 @@ namespace DG.DentneD.Model.Test
                 treatments_mexpiration = 0,
                 treatments_price = 10
             };
-            Assert.IsFalse(_dentnedModel.Treatments.CanAdd(t_treatments));
+            Assert.That(_dentnedModel.Treatments.CanAdd(t_treatments), Is.EqualTo(false));
 
             t_treatments = new treatments()
             {
@@ -102,7 +102,7 @@ namespace DG.DentneD.Model.Test
                 treatments_name = "XX1",
                 treatments_price = 10
             };
-            Assert.IsTrue(_dentnedModel.Treatments.CanAdd(t_treatments));
+            Assert.That(_dentnedModel.Treatments.CanAdd(t_treatments), Is.EqualTo(true));
 
             t_treatments = new treatments()
             {
@@ -112,7 +112,7 @@ namespace DG.DentneD.Model.Test
                 treatments_name = "XX1",
                 treatments_price = 10
             };
-            Assert.IsFalse(_dentnedModel.Treatments.CanAdd(t_treatments));
+            Assert.That(_dentnedModel.Treatments.CanAdd(t_treatments), Is.EqualTo(false));
 
             t_treatments = new treatments()
             {
@@ -122,7 +122,7 @@ namespace DG.DentneD.Model.Test
                 treatments_name = "XX1",
                 treatments_price = 10
             };
-            Assert.IsTrue(_dentnedModel.Treatments.CanAdd(t_treatments));
+            Assert.That(_dentnedModel.Treatments.CanAdd(t_treatments), Is.EqualTo(true));
             _dentnedModel.Treatments.Add(t_treatments);
 
             t_treatments = new treatments()
@@ -132,7 +132,7 @@ namespace DG.DentneD.Model.Test
                 treatments_name = "XX1",
                 treatments_price = 10
             };
-            Assert.IsFalse(_dentnedModel.Treatments.CanAdd(t_treatments));
+            Assert.That(_dentnedModel.Treatments.CanAdd(t_treatments), Is.EqualTo(false));
 
             t_treatments = new treatments()
             {
@@ -141,7 +141,7 @@ namespace DG.DentneD.Model.Test
                 treatments_name = "XX2",
                 treatments_price = 20
             };
-            Assert.IsTrue(_dentnedModel.Treatments.CanAdd(t_treatments));
+            Assert.That(_dentnedModel.Treatments.CanAdd(t_treatments), Is.EqualTo(true));
             _dentnedModel.Treatments.Add(t_treatments);
 
             t_treatments = new treatments()
@@ -151,13 +151,13 @@ namespace DG.DentneD.Model.Test
                 treatments_name = "XX-",
                 treatments_price = 20
             };
-            Assert.IsTrue(_dentnedModel.Treatments.CanAdd(t_treatments));
+            Assert.That(_dentnedModel.Treatments.CanAdd(t_treatments), Is.EqualTo(true));
 
             t_treatments = _dentnedModel.Treatments.FirstOrDefault(r => r.treatments_code == "XX1");
             t_treatments.treatments_code = "XX2";
-            Assert.IsFalse(_dentnedModel.Treatments.CanUpdate(t_treatments));
+            Assert.That(_dentnedModel.Treatments.CanUpdate(t_treatments), Is.EqualTo(false));
             t_treatments.treatments_code = "XX3";
-            Assert.IsTrue(_dentnedModel.Treatments.CanUpdate(t_treatments));
+            Assert.That(_dentnedModel.Treatments.CanUpdate(t_treatments), Is.EqualTo(true));
 
             _dentnedModel.Treatments.Remove(_dentnedModel.Treatments.List(r => r.treatments_code == "XX1").ToArray());
             _dentnedModel.Treatments.Remove(_dentnedModel.Treatments.List(r => r.treatments_code == "XX2").ToArray());

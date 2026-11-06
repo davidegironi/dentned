@@ -29,21 +29,21 @@ namespace DG.DentneD.Model.Test
                 //patientsattachmentstypes_name = "XX1",
                 patientsattachmentstypes_valueautofunc = PatientsAttachmentsTypesRepository.ValueAutoFuncCode.NUL.ToString()
             };
-            Assert.IsFalse(_dentnedModel.PatientsAttachmentsTypes.CanAdd(t_patientsattachmentstypes));
+            Assert.That(_dentnedModel.PatientsAttachmentsTypes.CanAdd(t_patientsattachmentstypes), Is.EqualTo(false));
 
             t_patientsattachmentstypes = new patientsattachmentstypes()
             {
                 patientsattachmentstypes_name = "XX1",
                 //patientsattachmentstypes_valueautofunc = PatientsAttachmentsTypesRepository.ValueAutoFuncCode.NUL.ToString()
             };
-            Assert.IsFalse(_dentnedModel.PatientsAttachmentsTypes.CanAdd(t_patientsattachmentstypes));
+            Assert.That(_dentnedModel.PatientsAttachmentsTypes.CanAdd(t_patientsattachmentstypes), Is.EqualTo(false));
 
             t_patientsattachmentstypes = new patientsattachmentstypes()
             {
                 patientsattachmentstypes_name = "XX1",
                 patientsattachmentstypes_valueautofunc = PatientsAttachmentsTypesRepository.ValueAutoFuncCode.NUL.ToString()
             };
-            Assert.IsTrue(_dentnedModel.PatientsAttachmentsTypes.CanAdd(t_patientsattachmentstypes));
+            Assert.That(_dentnedModel.PatientsAttachmentsTypes.CanAdd(t_patientsattachmentstypes), Is.EqualTo(true));
             _dentnedModel.PatientsAttachmentsTypes.Add(t_patientsattachmentstypes);
 
             t_patientsattachmentstypes = new patientsattachmentstypes()
@@ -51,7 +51,7 @@ namespace DG.DentneD.Model.Test
                 patientsattachmentstypes_name = "XX1",
                 patientsattachmentstypes_valueautofunc = PatientsAttachmentsTypesRepository.ValueAutoFuncCode.NUL.ToString()
             };
-            Assert.IsFalse(_dentnedModel.PatientsAttachmentsTypes.CanAdd(t_patientsattachmentstypes));
+            Assert.That(_dentnedModel.PatientsAttachmentsTypes.CanAdd(t_patientsattachmentstypes), Is.EqualTo(false));
 
             t_patientsattachmentstypes = new patientsattachmentstypes()
             {
@@ -62,9 +62,9 @@ namespace DG.DentneD.Model.Test
 
             t_patientsattachmentstypes = _dentnedModel.PatientsAttachmentsTypes.FirstOrDefault(r => r.patientsattachmentstypes_name == "XX1");
             t_patientsattachmentstypes.patientsattachmentstypes_name = "XX2";
-            Assert.IsFalse(_dentnedModel.PatientsAttachmentsTypes.CanUpdate(t_patientsattachmentstypes));
+            Assert.That(_dentnedModel.PatientsAttachmentsTypes.CanUpdate(t_patientsattachmentstypes), Is.EqualTo(false));
             t_patientsattachmentstypes.patientsattachmentstypes_name = "XX3";
-            Assert.IsTrue(_dentnedModel.PatientsAttachmentsTypes.CanUpdate(t_patientsattachmentstypes));
+            Assert.That(_dentnedModel.PatientsAttachmentsTypes.CanUpdate(t_patientsattachmentstypes), Is.EqualTo(true));
 
             _dentnedModel.PatientsAttachmentsTypes.Remove(_dentnedModel.PatientsAttachmentsTypes.List(r => r.patientsattachmentstypes_name == "XX1").ToArray());
             _dentnedModel.PatientsAttachmentsTypes.Remove(_dentnedModel.PatientsAttachmentsTypes.List(r => r.patientsattachmentstypes_name == "XX2").ToArray());
@@ -110,11 +110,11 @@ namespace DG.DentneD.Model.Test
             };
             _dentnedModel.PatientsAttachments.Add(t_patientsattachments);
 
-            Assert.IsFalse(_dentnedModel.PatientsAttachmentsTypes.CanRemove(_dentnedModel.PatientsAttachmentsTypes.List(r => r.patientsattachmentstypes_name == "XX1").ToArray()));
+            Assert.That(_dentnedModel.PatientsAttachmentsTypes.CanRemove(_dentnedModel.PatientsAttachmentsTypes.List(r => r.patientsattachmentstypes_name == "XX1").ToArray()), Is.EqualTo(false));
 
             _dentnedModel.Patients.Remove(_dentnedModel.Patients.List(r => r.patients_name == "XX1" && r.patients_surname == "XX1").ToArray());
 
-            Assert.IsTrue(_dentnedModel.PatientsAttachmentsTypes.CanRemove(_dentnedModel.PatientsAttachmentsTypes.List(r => r.patientsattachmentstypes_name == "XX1").ToArray()));
+            Assert.That(_dentnedModel.PatientsAttachmentsTypes.CanRemove(_dentnedModel.PatientsAttachmentsTypes.List(r => r.patientsattachmentstypes_name == "XX1").ToArray()), Is.EqualTo(true));
 
             _dentnedModel.PatientsAttachmentsTypes.Remove(_dentnedModel.PatientsAttachmentsTypes.List(r => r.patientsattachmentstypes_name == "XX1").ToArray());
         }

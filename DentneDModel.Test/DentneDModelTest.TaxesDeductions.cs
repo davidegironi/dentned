@@ -27,21 +27,21 @@ namespace DG.DentneD.Model.Test
                 //taxesdeductions_name = "XX1",
                 taxesdeductions_rate = 20
             };
-            Assert.IsFalse(_dentnedModel.TaxesDeductions.CanAdd(t_taxesdeductions));
+            Assert.That(_dentnedModel.TaxesDeductions.CanAdd(t_taxesdeductions), Is.EqualTo(false));
 
             t_taxesdeductions = new taxesdeductions()
             {
                 taxesdeductions_name = "XX1",
                 taxesdeductions_rate = -20
             };
-            Assert.IsFalse(_dentnedModel.TaxesDeductions.CanAdd(t_taxesdeductions));
+            Assert.That(_dentnedModel.TaxesDeductions.CanAdd(t_taxesdeductions), Is.EqualTo(false));
 
             t_taxesdeductions = new taxesdeductions()
             {
                 taxesdeductions_name = "XX1",
                 taxesdeductions_rate = 20
             };
-            Assert.IsTrue(_dentnedModel.TaxesDeductions.CanAdd(t_taxesdeductions));
+            Assert.That(_dentnedModel.TaxesDeductions.CanAdd(t_taxesdeductions), Is.EqualTo(true));
             _dentnedModel.TaxesDeductions.Add(t_taxesdeductions);
 
             t_taxesdeductions = new taxesdeductions()
@@ -49,7 +49,7 @@ namespace DG.DentneD.Model.Test
                 taxesdeductions_name = "XX1",
                 taxesdeductions_rate = 20
             };
-            Assert.IsFalse(_dentnedModel.TaxesDeductions.CanAdd(t_taxesdeductions));
+            Assert.That(_dentnedModel.TaxesDeductions.CanAdd(t_taxesdeductions), Is.EqualTo(false));
 
             t_taxesdeductions = new taxesdeductions()
             {
@@ -60,9 +60,9 @@ namespace DG.DentneD.Model.Test
 
             t_taxesdeductions = _dentnedModel.TaxesDeductions.FirstOrDefault(r => r.taxesdeductions_name == "XX1");
             t_taxesdeductions.taxesdeductions_name = "XX2";
-            Assert.IsFalse(_dentnedModel.TaxesDeductions.CanUpdate(t_taxesdeductions));
+            Assert.That(_dentnedModel.TaxesDeductions.CanUpdate(t_taxesdeductions), Is.EqualTo(false));
             t_taxesdeductions.taxesdeductions_name = "XX3";
-            Assert.IsTrue(_dentnedModel.TaxesDeductions.CanUpdate(t_taxesdeductions));
+            Assert.That(_dentnedModel.TaxesDeductions.CanUpdate(t_taxesdeductions), Is.EqualTo(true));
 
             _dentnedModel.TaxesDeductions.Remove(_dentnedModel.TaxesDeductions.List(r => r.taxesdeductions_name == "XX1").ToArray());
             _dentnedModel.TaxesDeductions.Remove(_dentnedModel.TaxesDeductions.List(r => r.taxesdeductions_name == "XX2").ToArray());

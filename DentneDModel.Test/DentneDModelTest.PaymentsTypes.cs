@@ -27,21 +27,21 @@ namespace DG.DentneD.Model.Test
                 //paymentstypes_name = "XX1",
                 paymentstypes_doctext = "xxx"
             };
-            Assert.IsFalse(_dentnedModel.PaymentsTypes.CanAdd(t_paymentstypes));
+            Assert.That(_dentnedModel.PaymentsTypes.CanAdd(t_paymentstypes), Is.EqualTo(false));
 
             t_paymentstypes = new paymentstypes()
             {
                 paymentstypes_name = "XX1",
                 //paymentstypes_doctext = "xxx"
             };
-            Assert.IsFalse(_dentnedModel.PaymentsTypes.CanAdd(t_paymentstypes));
+            Assert.That(_dentnedModel.PaymentsTypes.CanAdd(t_paymentstypes), Is.EqualTo(false));
 
             t_paymentstypes = new paymentstypes()
             {
                 paymentstypes_name = "XX1",
                 paymentstypes_doctext = "xxx"
             };
-            Assert.IsTrue(_dentnedModel.PaymentsTypes.CanAdd(t_paymentstypes));
+            Assert.That(_dentnedModel.PaymentsTypes.CanAdd(t_paymentstypes), Is.EqualTo(true));
             _dentnedModel.PaymentsTypes.Add(t_paymentstypes);
 
             t_paymentstypes = new paymentstypes()
@@ -49,7 +49,7 @@ namespace DG.DentneD.Model.Test
                 paymentstypes_name = "XX1",
                 paymentstypes_doctext = "xxx"
             };
-            Assert.IsFalse(_dentnedModel.PaymentsTypes.CanAdd(t_paymentstypes));
+            Assert.That(_dentnedModel.PaymentsTypes.CanAdd(t_paymentstypes), Is.EqualTo(false));
 
             t_paymentstypes = new paymentstypes()
             {
@@ -60,9 +60,9 @@ namespace DG.DentneD.Model.Test
 
             t_paymentstypes = _dentnedModel.PaymentsTypes.FirstOrDefault(r => r.paymentstypes_name == "XX1");
             t_paymentstypes.paymentstypes_name = "XX2";
-            Assert.IsFalse(_dentnedModel.PaymentsTypes.CanUpdate(t_paymentstypes));
+            Assert.That(_dentnedModel.PaymentsTypes.CanUpdate(t_paymentstypes), Is.EqualTo(false));
             t_paymentstypes.paymentstypes_name = "XX3";
-            Assert.IsTrue(_dentnedModel.PaymentsTypes.CanUpdate(t_paymentstypes));
+            Assert.That(_dentnedModel.PaymentsTypes.CanUpdate(t_paymentstypes), Is.EqualTo(true));
 
             _dentnedModel.PaymentsTypes.Remove(_dentnedModel.PaymentsTypes.List(r => r.paymentstypes_name == "XX1").ToArray());
             _dentnedModel.PaymentsTypes.Remove(_dentnedModel.PaymentsTypes.List(r => r.paymentstypes_name == "XX2").ToArray());

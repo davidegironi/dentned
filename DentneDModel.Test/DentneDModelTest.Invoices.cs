@@ -67,7 +67,7 @@ namespace DG.DentneD.Model.Test
                 invoices_totaldue = 0,
                 invoices_deductiontaxrate = 0
             };
-            Assert.IsFalse(_dentnedModel.Invoices.CanAdd(t_invoices));
+            Assert.That(_dentnedModel.Invoices.CanAdd(t_invoices), Is.EqualTo(false));
 
             t_invoices = new invoices()
             {
@@ -84,7 +84,7 @@ namespace DG.DentneD.Model.Test
                 invoices_totaldue = 0,
                 invoices_deductiontaxrate = 0
             };
-            Assert.IsFalse(_dentnedModel.Invoices.CanAdd(t_invoices));
+            Assert.That(_dentnedModel.Invoices.CanAdd(t_invoices), Is.EqualTo(false));
 
             t_invoices = new invoices()
             {
@@ -101,7 +101,7 @@ namespace DG.DentneD.Model.Test
                 invoices_totaldue = 0,
                 invoices_deductiontaxrate = 0
             };
-            Assert.IsFalse(_dentnedModel.Invoices.CanAdd(t_invoices));
+            Assert.That(_dentnedModel.Invoices.CanAdd(t_invoices), Is.EqualTo(false));
 
             t_invoices = new invoices()
             {
@@ -118,7 +118,7 @@ namespace DG.DentneD.Model.Test
                 invoices_totaldue = 0,
                 invoices_deductiontaxrate = 0
             };
-            Assert.IsFalse(_dentnedModel.Invoices.CanAdd(t_invoices));
+            Assert.That(_dentnedModel.Invoices.CanAdd(t_invoices), Is.EqualTo(false));
 
             t_invoices = new invoices()
             {
@@ -135,7 +135,7 @@ namespace DG.DentneD.Model.Test
                 invoices_totaldue = 0,
                 invoices_deductiontaxrate = 0
             };
-            Assert.IsFalse(_dentnedModel.Invoices.CanAdd(t_invoices));
+            Assert.That(_dentnedModel.Invoices.CanAdd(t_invoices), Is.EqualTo(false));
 
             t_invoices = new invoices()
             {
@@ -152,7 +152,7 @@ namespace DG.DentneD.Model.Test
                 invoices_totaldue = 0,
                 invoices_deductiontaxrate = 0
             };
-            Assert.IsFalse(_dentnedModel.Invoices.CanAdd(t_invoices));
+            Assert.That(_dentnedModel.Invoices.CanAdd(t_invoices), Is.EqualTo(false));
 
             t_invoices = new invoices()
             {
@@ -169,7 +169,7 @@ namespace DG.DentneD.Model.Test
                 invoices_totaldue = 0,
                 invoices_deductiontaxrate = 0
             };
-            Assert.IsFalse(_dentnedModel.Invoices.CanAdd(t_invoices));
+            Assert.That(_dentnedModel.Invoices.CanAdd(t_invoices), Is.EqualTo(false));
 
             t_invoices = new invoices()
             {
@@ -186,7 +186,7 @@ namespace DG.DentneD.Model.Test
                 invoices_totaldue = 0,
                 invoices_deductiontaxrate = 0
             };
-            Assert.IsFalse(_dentnedModel.Invoices.CanAdd(t_invoices));
+            Assert.That(_dentnedModel.Invoices.CanAdd(t_invoices), Is.EqualTo(false));
 
             t_invoices = new invoices()
             {
@@ -203,7 +203,7 @@ namespace DG.DentneD.Model.Test
                 invoices_totaldue = 0,
                 invoices_deductiontaxrate = 0
             };
-            Assert.IsFalse(_dentnedModel.Invoices.CanAdd(t_invoices));
+            Assert.That(_dentnedModel.Invoices.CanAdd(t_invoices), Is.EqualTo(false));
 
             t_invoices = new invoices()
             {
@@ -220,7 +220,7 @@ namespace DG.DentneD.Model.Test
                 invoices_totaldue = 0,
                 invoices_deductiontaxrate = 0
             };
-            Assert.IsFalse(_dentnedModel.Invoices.CanAdd(t_invoices));
+            Assert.That(_dentnedModel.Invoices.CanAdd(t_invoices), Is.EqualTo(false));
 
             t_invoices = new invoices()
             {
@@ -237,7 +237,7 @@ namespace DG.DentneD.Model.Test
                 invoices_totaldue = 0,
                 invoices_deductiontaxrate = 0
             };
-            Assert.IsTrue(_dentnedModel.Invoices.CanAdd(t_invoices));
+            Assert.That(_dentnedModel.Invoices.CanAdd(t_invoices), Is.EqualTo(true));
             _dentnedModel.Invoices.Add(t_invoices);
 
             t_invoices = new invoices()
@@ -255,7 +255,7 @@ namespace DG.DentneD.Model.Test
                 invoices_totaldue = 0,
                 invoices_deductiontaxrate = 0
             };
-            Assert.IsTrue(_dentnedModel.Invoices.CanAdd(t_invoices));
+            Assert.That(_dentnedModel.Invoices.CanAdd(t_invoices), Is.EqualTo(true));
 
             t_invoices = new invoices()
             {
@@ -272,18 +272,18 @@ namespace DG.DentneD.Model.Test
                 invoices_totaldue = 0,
                 invoices_deductiontaxrate = 0
             };
-            Assert.IsTrue(_dentnedModel.Invoices.CanAdd(t_invoices));
+            Assert.That(_dentnedModel.Invoices.CanAdd(t_invoices), Is.EqualTo(true));
             _dentnedModel.Invoices.Add(t_invoices);
 
             t_invoices = _dentnedModel.Invoices.FirstOrDefault(r => r.invoices_number == "XX1" && r.invoices_date == today.Date);
             t_invoices.invoices_number = "XX2";
-            Assert.IsFalse(_dentnedModel.Invoices.CanUpdate(t_invoices));
+            Assert.That(_dentnedModel.Invoices.CanUpdate(t_invoices), Is.EqualTo(false));
             t_invoices.invoices_number = "XX3";
-            Assert.IsTrue(_dentnedModel.Invoices.CanUpdate(t_invoices));
+            Assert.That(_dentnedModel.Invoices.CanUpdate(t_invoices), Is.EqualTo(true));
 
             t_invoices = _dentnedModel.Invoices.FirstOrDefault(r => r.invoices_number == "XX1" && r.invoices_date == today.Date);
             t_invoices.doctors_id = -999;
-            Assert.IsTrue(_dentnedModel.Invoices.CanUpdate(t_invoices));
+            Assert.That(_dentnedModel.Invoices.CanUpdate(t_invoices), Is.EqualTo(true));
 
             _dentnedModel.Invoices.Remove(_dentnedModel.Invoices.List(r => r.invoices_number == "XX1" && r.invoices_date == today.Date).ToArray());
             _dentnedModel.Invoices.Remove(_dentnedModel.Invoices.List(r => r.invoices_number == "XX2" && r.invoices_date == today.Date).ToArray());

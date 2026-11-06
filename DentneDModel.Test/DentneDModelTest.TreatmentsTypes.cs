@@ -26,20 +26,20 @@ namespace DG.DentneD.Model.Test
             {
                 //treatmentstypes_name = "XX1"
             };
-            Assert.IsFalse(_dentnedModel.TreatmentsTypes.CanAdd(t_treatmentstypes));
+            Assert.That(_dentnedModel.TreatmentsTypes.CanAdd(t_treatmentstypes), Is.EqualTo(false));
 
             t_treatmentstypes = new treatmentstypes()
             {
                 treatmentstypes_name = "XX1"
             };
-            Assert.IsTrue(_dentnedModel.TreatmentsTypes.CanAdd(t_treatmentstypes));
+            Assert.That(_dentnedModel.TreatmentsTypes.CanAdd(t_treatmentstypes), Is.EqualTo(true));
             _dentnedModel.TreatmentsTypes.Add(t_treatmentstypes);
 
             t_treatmentstypes = new treatmentstypes()
             {
                 treatmentstypes_name = "XX1"
             };
-            Assert.IsFalse(_dentnedModel.TreatmentsTypes.CanAdd(t_treatmentstypes));
+            Assert.That(_dentnedModel.TreatmentsTypes.CanAdd(t_treatmentstypes), Is.EqualTo(false));
 
             t_treatmentstypes = new treatmentstypes()
             {
@@ -49,9 +49,9 @@ namespace DG.DentneD.Model.Test
 
             t_treatmentstypes = _dentnedModel.TreatmentsTypes.FirstOrDefault(r => r.treatmentstypes_name == "XX1");
             t_treatmentstypes.treatmentstypes_name = "XX2";
-            Assert.IsFalse(_dentnedModel.TreatmentsTypes.CanUpdate(t_treatmentstypes));
+            Assert.That(_dentnedModel.TreatmentsTypes.CanUpdate(t_treatmentstypes), Is.EqualTo(false));
             t_treatmentstypes.treatmentstypes_name = "XX3";
-            Assert.IsTrue(_dentnedModel.TreatmentsTypes.CanUpdate(t_treatmentstypes));
+            Assert.That(_dentnedModel.TreatmentsTypes.CanUpdate(t_treatmentstypes), Is.EqualTo(true));
 
             _dentnedModel.TreatmentsTypes.Remove(_dentnedModel.TreatmentsTypes.List(r => r.treatmentstypes_name == "XX1").ToArray());
             _dentnedModel.TreatmentsTypes.Remove(_dentnedModel.TreatmentsTypes.List(r => r.treatmentstypes_name == "XX2").ToArray());
@@ -92,11 +92,11 @@ namespace DG.DentneD.Model.Test
             };
             _dentnedModel.Treatments.Add(t_treatments);
 
-            Assert.IsFalse(_dentnedModel.TreatmentsTypes.CanRemove(_dentnedModel.TreatmentsTypes.List(r => r.treatmentstypes_name == "XX1").ToArray()));
+            Assert.That(_dentnedModel.TreatmentsTypes.CanRemove(_dentnedModel.TreatmentsTypes.List(r => r.treatmentstypes_name == "XX1").ToArray()), Is.EqualTo(false));
 
             _dentnedModel.Treatments.Remove(_dentnedModel.Treatments.List(r => r.treatments_code == "XX1").ToArray());
 
-            Assert.IsTrue(_dentnedModel.TreatmentsTypes.CanRemove(_dentnedModel.TreatmentsTypes.List(r => r.treatmentstypes_name == "XX1").ToArray()));
+            Assert.That(_dentnedModel.TreatmentsTypes.CanRemove(_dentnedModel.TreatmentsTypes.List(r => r.treatmentstypes_name == "XX1").ToArray()), Is.EqualTo(true));
 
             _dentnedModel.TreatmentsTypes.Remove(_dentnedModel.TreatmentsTypes.List(r => r.treatmentstypes_name == "XX1").ToArray());
             _dentnedModel.Taxes.Remove(_dentnedModel.Taxes.List(r => r.taxes_name == "XX1").ToArray());

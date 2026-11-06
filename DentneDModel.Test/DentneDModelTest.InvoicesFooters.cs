@@ -27,21 +27,21 @@ namespace DG.DentneD.Model.Test
                 //invoicesfooters_name = "XX1",
                 invoicesfooters_doctext = "xxx"
             };
-            Assert.IsFalse(_dentnedModel.InvoicesFooters.CanAdd(t_invoicesfooters));
+            Assert.That(_dentnedModel.InvoicesFooters.CanAdd(t_invoicesfooters), Is.EqualTo(false));
 
             t_invoicesfooters = new invoicesfooters()
             {
                 invoicesfooters_name = "XX1",
                 //invoicesfooters_doctext = "xxx"
             };
-            Assert.IsFalse(_dentnedModel.InvoicesFooters.CanAdd(t_invoicesfooters));
+            Assert.That(_dentnedModel.InvoicesFooters.CanAdd(t_invoicesfooters), Is.EqualTo(false));
 
             t_invoicesfooters = new invoicesfooters()
             {
                 invoicesfooters_name = "XX1",
                 invoicesfooters_doctext = "xxx"
             };
-            Assert.IsTrue(_dentnedModel.InvoicesFooters.CanAdd(t_invoicesfooters));
+            Assert.That(_dentnedModel.InvoicesFooters.CanAdd(t_invoicesfooters), Is.EqualTo(true));
             _dentnedModel.InvoicesFooters.Add(t_invoicesfooters);
 
             t_invoicesfooters = new invoicesfooters()
@@ -49,7 +49,7 @@ namespace DG.DentneD.Model.Test
                 invoicesfooters_name = "XX1",
                 invoicesfooters_doctext = "xxx"
             };
-            Assert.IsFalse(_dentnedModel.InvoicesFooters.CanAdd(t_invoicesfooters));
+            Assert.That(_dentnedModel.InvoicesFooters.CanAdd(t_invoicesfooters), Is.EqualTo(false));
 
             t_invoicesfooters = new invoicesfooters()
             {
@@ -60,9 +60,9 @@ namespace DG.DentneD.Model.Test
 
             t_invoicesfooters = _dentnedModel.InvoicesFooters.FirstOrDefault(r => r.invoicesfooters_name == "XX1");
             t_invoicesfooters.invoicesfooters_name = "XX2";
-            Assert.IsFalse(_dentnedModel.InvoicesFooters.CanUpdate(t_invoicesfooters));
+            Assert.That(_dentnedModel.InvoicesFooters.CanUpdate(t_invoicesfooters), Is.EqualTo(false));
             t_invoicesfooters.invoicesfooters_name = "XX3";
-            Assert.IsTrue(_dentnedModel.InvoicesFooters.CanUpdate(t_invoicesfooters));
+            Assert.That(_dentnedModel.InvoicesFooters.CanUpdate(t_invoicesfooters), Is.EqualTo(true));
 
             _dentnedModel.InvoicesFooters.Remove(_dentnedModel.InvoicesFooters.List(r => r.invoicesfooters_name == "XX1").ToArray());
             _dentnedModel.InvoicesFooters.Remove(_dentnedModel.InvoicesFooters.List(r => r.invoicesfooters_name == "XX2").ToArray());

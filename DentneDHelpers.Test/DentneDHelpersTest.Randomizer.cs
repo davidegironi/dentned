@@ -28,7 +28,7 @@ namespace DG.DentneD.Helpers.Test
         {
             int n;
             Assert.That(Randomizer.BuildRandomNumber(5).Length, Is.EqualTo(5));
-            Assert.IsTrue(int.TryParse(Randomizer.BuildRandomNumber(5), out n));
+            Assert.That(int.TryParse(Randomizer.BuildRandomNumber(5), out n), Is.EqualTo(true));
         }
 
     }

@@ -110,7 +110,7 @@ namespace DG.DentneD.Model.Test
                 invoiceslines_istaxesdeductionsable = true,
                 patientstreatments_id = t_patientstreatments.patientstreatments_id
             };
-            Assert.IsTrue(_dentnedModel.InvoicesLines.CanAdd(t_invoiceslines));
+            Assert.That(_dentnedModel.InvoicesLines.CanAdd(t_invoiceslines), Is.EqualTo(true));
 
             t_invoiceslines = new invoiceslines()
             {
@@ -123,7 +123,7 @@ namespace DG.DentneD.Model.Test
                 invoiceslines_istaxesdeductionsable = true,
                 patientstreatments_id = t_patientstreatments.patientstreatments_id
             };
-            Assert.IsFalse(_dentnedModel.InvoicesLines.CanAdd(t_invoiceslines));
+            Assert.That(_dentnedModel.InvoicesLines.CanAdd(t_invoiceslines), Is.EqualTo(false));
 
             t_invoiceslines = new invoiceslines()
             {
@@ -136,7 +136,7 @@ namespace DG.DentneD.Model.Test
                 invoiceslines_istaxesdeductionsable = true,
                 patientstreatments_id = t_patientstreatments.patientstreatments_id
             };
-            Assert.IsFalse(_dentnedModel.InvoicesLines.CanAdd(t_invoiceslines));
+            Assert.That(_dentnedModel.InvoicesLines.CanAdd(t_invoiceslines), Is.EqualTo(false));
 
             t_invoiceslines = new invoiceslines()
             {
@@ -149,7 +149,7 @@ namespace DG.DentneD.Model.Test
                 invoiceslines_istaxesdeductionsable = true,
                 patientstreatments_id = t_patientstreatments.patientstreatments_id
             };
-            Assert.IsFalse(_dentnedModel.InvoicesLines.CanAdd(t_invoiceslines));
+            Assert.That(_dentnedModel.InvoicesLines.CanAdd(t_invoiceslines), Is.EqualTo(false));
 
             t_invoiceslines = new invoiceslines()
             {
@@ -162,7 +162,7 @@ namespace DG.DentneD.Model.Test
                 invoiceslines_istaxesdeductionsable = true,
                 patientstreatments_id = t_patientstreatments.patientstreatments_id
             };
-            Assert.IsFalse(_dentnedModel.InvoicesLines.CanAdd(t_invoiceslines));
+            Assert.That(_dentnedModel.InvoicesLines.CanAdd(t_invoiceslines), Is.EqualTo(false));
 
             t_invoiceslines = new invoiceslines()
             {
@@ -175,7 +175,7 @@ namespace DG.DentneD.Model.Test
                 invoiceslines_istaxesdeductionsable = true,
                 patientstreatments_id = -999
             };
-            Assert.IsFalse(_dentnedModel.InvoicesLines.CanAdd(t_invoiceslines));
+            Assert.That(_dentnedModel.InvoicesLines.CanAdd(t_invoiceslines), Is.EqualTo(false));
 
             t_invoiceslines = new invoiceslines()
             {
@@ -188,7 +188,7 @@ namespace DG.DentneD.Model.Test
                 invoiceslines_istaxesdeductionsable = true,
                 //patientstreatments_id = t_patientstreatments.patientstreatments_id
             };
-            Assert.IsTrue(_dentnedModel.InvoicesLines.CanAdd(t_invoiceslines));
+            Assert.That(_dentnedModel.InvoicesLines.CanAdd(t_invoiceslines), Is.EqualTo(true));
 
             t_invoiceslines = new invoiceslines()
             {
@@ -201,7 +201,7 @@ namespace DG.DentneD.Model.Test
                 invoiceslines_istaxesdeductionsable = true,
                 patientstreatments_id = t_patientstreatments.patientstreatments_id
             };
-            Assert.IsTrue(_dentnedModel.InvoicesLines.CanAdd(t_invoiceslines));
+            Assert.That(_dentnedModel.InvoicesLines.CanAdd(t_invoiceslines), Is.EqualTo(true));
             _dentnedModel.InvoicesLines.Add(t_invoiceslines);
 
             t_invoiceslines = new invoiceslines()
@@ -215,7 +215,7 @@ namespace DG.DentneD.Model.Test
                 invoiceslines_istaxesdeductionsable = true,
                 patientstreatments_id = t_patientstreatments.patientstreatments_id
             };
-            Assert.IsTrue(_dentnedModel.InvoicesLines.CanAdd(t_invoiceslines));
+            Assert.That(_dentnedModel.InvoicesLines.CanAdd(t_invoiceslines), Is.EqualTo(true));
             _dentnedModel.InvoicesLines.Add(t_invoiceslines);
 
             t_invoiceslines = new invoiceslines()
@@ -229,7 +229,7 @@ namespace DG.DentneD.Model.Test
                 invoiceslines_istaxesdeductionsable = true,
                 patientstreatments_id = t_patientstreatments.patientstreatments_id
             };
-            Assert.IsTrue(_dentnedModel.InvoicesLines.CanAdd(t_invoiceslines));
+            Assert.That(_dentnedModel.InvoicesLines.CanAdd(t_invoiceslines), Is.EqualTo(true));
             _dentnedModel.InvoicesLines.Add(t_invoiceslines);
 
             t_invoiceslines = new invoiceslines()
@@ -243,13 +243,13 @@ namespace DG.DentneD.Model.Test
                 invoiceslines_istaxesdeductionsable = true,
                 patientstreatments_id = t_patientstreatments.patientstreatments_id
             };
-            Assert.IsFalse(_dentnedModel.InvoicesLines.CanAdd(t_invoiceslines));
+            Assert.That(_dentnedModel.InvoicesLines.CanAdd(t_invoiceslines), Is.EqualTo(false));
 
             t_invoiceslines = _dentnedModel.InvoicesLines.FirstOrDefault(r => r.invoiceslines_code == "XXX");
             t_invoiceslines.patientstreatments_id = -999;
-            Assert.IsFalse(_dentnedModel.InvoicesLines.CanUpdate(t_invoiceslines));
+            Assert.That(_dentnedModel.InvoicesLines.CanUpdate(t_invoiceslines), Is.EqualTo(false));
             t_invoiceslines.patientstreatments_id = null;
-            Assert.IsTrue(_dentnedModel.InvoicesLines.CanUpdate(t_invoiceslines));
+            Assert.That(_dentnedModel.InvoicesLines.CanUpdate(t_invoiceslines), Is.EqualTo(true));
 
             _dentnedModel.Invoices.Remove(_dentnedModel.Invoices.List(r => r.invoices_number == "XX1" && r.invoices_date == today.Date).ToArray());
             _dentnedModel.Patients.Remove(_dentnedModel.Patients.List(r => r.patients_name == "XX1" && r.patients_surname == "XX1").ToArray());

@@ -42,7 +42,7 @@ namespace DG.DentneD.Model.Test
                 payments_date = DateTime.Now,
                 patients_id = t_patients.patients_id
             };
-            Assert.IsFalse(_dentnedModel.Payments.CanAdd(t_payments));
+            Assert.That(_dentnedModel.Payments.CanAdd(t_payments), Is.EqualTo(false));
 
             t_payments = new payments()
             {
@@ -50,7 +50,7 @@ namespace DG.DentneD.Model.Test
                 payments_date = DateTime.Now,
                 //patients_id = t_patients.patients_id
             };
-            Assert.IsFalse(_dentnedModel.Payments.CanAdd(t_payments));
+            Assert.That(_dentnedModel.Payments.CanAdd(t_payments), Is.EqualTo(false));
 
             t_payments = new payments()
             {
@@ -58,7 +58,7 @@ namespace DG.DentneD.Model.Test
                 payments_date = DateTime.Now,
                 patients_id = t_patients.patients_id
             };
-            Assert.IsTrue(_dentnedModel.Payments.CanAdd(t_payments));
+            Assert.That(_dentnedModel.Payments.CanAdd(t_payments), Is.EqualTo(true));
             _dentnedModel.Payments.Add(t_payments);
 
             _dentnedModel.Patients.Remove(_dentnedModel.Patients.List(r => r.patients_name == "XX1" && r.patients_surname == "XX1").ToArray());

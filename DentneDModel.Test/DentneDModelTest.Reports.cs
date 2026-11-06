@@ -27,20 +27,20 @@ namespace DG.DentneD.Model.Test
                 //reports_name = "XX1",
                 reports_query = "SELECT * FROM reports"
             };
-            Assert.IsFalse(_dentnedModel.Reports.CanAdd(t_reports));
+            Assert.That(_dentnedModel.Reports.CanAdd(t_reports), Is.EqualTo(false));
             t_reports = new reports()
             {
                 reports_name = "XX1",
                 //reports_query = "SELECT * FROM reports"
             };
-            Assert.IsFalse(_dentnedModel.Reports.CanAdd(t_reports));
+            Assert.That(_dentnedModel.Reports.CanAdd(t_reports), Is.EqualTo(false));
 
             t_reports = new reports()
             {
                 reports_name = "XX1",
                 reports_query = "SELECT * FROM reports"
             };
-            Assert.IsTrue(_dentnedModel.Reports.CanAdd(t_reports));
+            Assert.That(_dentnedModel.Reports.CanAdd(t_reports), Is.EqualTo(true));
             _dentnedModel.Reports.Add(t_reports);
 
             t_reports = new reports()
@@ -48,7 +48,7 @@ namespace DG.DentneD.Model.Test
                 reports_name = "XX1",
                 reports_query = "SELECT * FROM reports"
             };
-            Assert.IsFalse(_dentnedModel.Reports.CanAdd(t_reports));
+            Assert.That(_dentnedModel.Reports.CanAdd(t_reports), Is.EqualTo(false));
 
             t_reports = new reports()
             {
@@ -59,9 +59,9 @@ namespace DG.DentneD.Model.Test
 
             t_reports = _dentnedModel.Reports.FirstOrDefault(r => r.reports_name == "XX1");
             t_reports.reports_name = "XX2";
-            Assert.IsFalse(_dentnedModel.Reports.CanUpdate(t_reports));
+            Assert.That(_dentnedModel.Reports.CanUpdate(t_reports), Is.EqualTo(false));
             t_reports.reports_name = "XX3";
-            Assert.IsTrue(_dentnedModel.Reports.CanUpdate(t_reports));
+            Assert.That(_dentnedModel.Reports.CanUpdate(t_reports), Is.EqualTo(true));
 
             _dentnedModel.Reports.Remove(_dentnedModel.Reports.List(r => r.reports_name == "XX1").ToArray());
             _dentnedModel.Reports.Remove(_dentnedModel.Reports.List(r => r.reports_name == "XX2").ToArray());

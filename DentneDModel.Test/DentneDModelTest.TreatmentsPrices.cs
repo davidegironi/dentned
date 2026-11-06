@@ -64,7 +64,7 @@ namespace DG.DentneD.Model.Test
                 treatmentspriceslists_id = t_treatmentspriceslists.treatmentspriceslists_id,
                 treatmentsprices_price = 10
             };
-            Assert.IsFalse(_dentnedModel.TreatmentsPrices.CanAdd(t_treatmentsprices));
+            Assert.That(_dentnedModel.TreatmentsPrices.CanAdd(t_treatmentsprices), Is.EqualTo(false));
 
             t_treatmentsprices = new treatmentsprices()
             {
@@ -72,7 +72,7 @@ namespace DG.DentneD.Model.Test
                 //treatmentspriceslists_id = t_treatmentspriceslists.treatmentspriceslists_id,
                 treatmentsprices_price = 10
             };
-            Assert.IsFalse(_dentnedModel.TreatmentsPrices.CanAdd(t_treatmentsprices));
+            Assert.That(_dentnedModel.TreatmentsPrices.CanAdd(t_treatmentsprices), Is.EqualTo(false));
 
             t_treatmentsprices = new treatmentsprices()
             {
@@ -80,7 +80,7 @@ namespace DG.DentneD.Model.Test
                 treatmentspriceslists_id = t_treatmentspriceslists.treatmentspriceslists_id,
                 treatmentsprices_price = 10
             };
-            Assert.IsTrue(_dentnedModel.TreatmentsPrices.CanAdd(t_treatmentsprices));
+            Assert.That(_dentnedModel.TreatmentsPrices.CanAdd(t_treatmentsprices), Is.EqualTo(true));
             _dentnedModel.TreatmentsPrices.Add(t_treatmentsprices);
 
             t_treatmentsprices = new treatmentsprices()
@@ -89,7 +89,7 @@ namespace DG.DentneD.Model.Test
                 treatmentspriceslists_id = t_treatmentspriceslists.treatmentspriceslists_id,
                 treatmentsprices_price = 10
             };
-            Assert.IsFalse(_dentnedModel.TreatmentsPrices.CanAdd(t_treatmentsprices));
+            Assert.That(_dentnedModel.TreatmentsPrices.CanAdd(t_treatmentsprices), Is.EqualTo(false));
 
             t_treatmentsprices = new treatmentsprices()
             {
@@ -97,7 +97,7 @@ namespace DG.DentneD.Model.Test
                 treatmentspriceslists_id = t_treatmentspriceslists.treatmentspriceslists_id,
                 treatmentsprices_price = 20
             };
-            Assert.IsTrue(_dentnedModel.TreatmentsPrices.CanAdd(t_treatmentsprices));
+            Assert.That(_dentnedModel.TreatmentsPrices.CanAdd(t_treatmentsprices), Is.EqualTo(true));
             _dentnedModel.TreatmentsPrices.Add(t_treatmentsprices);
 
             _dentnedModel.Treatments.Remove(_dentnedModel.Treatments.List(r => r.treatments_code == "XX1").ToArray());

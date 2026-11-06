@@ -51,7 +51,7 @@ namespace DG.DentneD.Model.Test
                 contactstypes_id = t_contactstypes.contactstypes_id,
                 patientscontacts_value = "XX"
             };
-            Assert.IsFalse(_dentnedModel.PatientsContacts.CanAdd(t_patientscontacts));
+            Assert.That(_dentnedModel.PatientsContacts.CanAdd(t_patientscontacts), Is.EqualTo(false));
 
             t_patientscontacts = new patientscontacts()
             {
@@ -59,7 +59,7 @@ namespace DG.DentneD.Model.Test
                 //contactstypes_id = t_contactstypes.contactstypes_id,
                 patientscontacts_value = "XX"
             };
-            Assert.IsFalse(_dentnedModel.PatientsContacts.CanAdd(t_patientscontacts));
+            Assert.That(_dentnedModel.PatientsContacts.CanAdd(t_patientscontacts), Is.EqualTo(false));
 
             t_patientscontacts = new patientscontacts()
             {
@@ -67,7 +67,7 @@ namespace DG.DentneD.Model.Test
                 contactstypes_id = t_contactstypes.contactstypes_id,
                 //patientscontacts_value = "XX"
             };
-            Assert.IsFalse(_dentnedModel.PatientsContacts.CanAdd(t_patientscontacts));
+            Assert.That(_dentnedModel.PatientsContacts.CanAdd(t_patientscontacts), Is.EqualTo(false));
 
             t_patientscontacts = new patientscontacts()
             {
@@ -75,7 +75,7 @@ namespace DG.DentneD.Model.Test
                 contactstypes_id = t_contactstypes.contactstypes_id,
                 patientscontacts_value = "XX"
             };
-            Assert.IsTrue(_dentnedModel.PatientsContacts.CanAdd(t_patientscontacts));
+            Assert.That(_dentnedModel.PatientsContacts.CanAdd(t_patientscontacts), Is.EqualTo(true));
             _dentnedModel.PatientsContacts.Add(t_patientscontacts);
 
             _dentnedModel.Patients.Remove(_dentnedModel.Patients.List(r => r.patients_name == "XX1" && r.patients_surname == "XX1").ToArray());
@@ -121,7 +121,7 @@ namespace DG.DentneD.Model.Test
                 contactstypes_id = contactstypesEMail.contactstypes_id,
                 patientscontacts_value = "XX"
             };
-            Assert.IsTrue(_dentnedModel.PatientsContacts.CanAdd(t_patientscontacts));
+            Assert.That(_dentnedModel.PatientsContacts.CanAdd(t_patientscontacts), Is.EqualTo(true));
             _dentnedModel.PatientsContacts.Add(t_patientscontacts);
 
             t_patientscontacts = new patientscontacts()
@@ -130,11 +130,11 @@ namespace DG.DentneD.Model.Test
                 contactstypes_id = contactstypesEMail.contactstypes_id,
                 patientscontacts_value = "XX2"
             };
-            Assert.IsFalse(_dentnedModel.PatientsContacts.CanAdd(t_patientscontacts));
+            Assert.That(_dentnedModel.PatientsContacts.CanAdd(t_patientscontacts), Is.EqualTo(false));
 
             t_patientscontacts = _dentnedModel.PatientsContacts.FirstOrDefault(r => r.patients_id == t_patients.patients_id && r.contactstypes_id == contactstypesEMail.contactstypes_id);
             t_patientscontacts.patientscontacts_value = "XX3";
-            Assert.IsTrue(_dentnedModel.PatientsContacts.CanUpdate(t_patientscontacts));
+            Assert.That(_dentnedModel.PatientsContacts.CanUpdate(t_patientscontacts), Is.EqualTo(true));
             _dentnedModel.PatientsContacts.Update(t_patientscontacts);
 
             t_patientscontacts = new patientscontacts()
@@ -143,7 +143,7 @@ namespace DG.DentneD.Model.Test
                 contactstypes_id = contactstypesEMail.contactstypes_id,
                 patientscontacts_value = "XX2"
             };
-            Assert.IsFalse(_dentnedModel.PatientsContacts.CanAdd(t_patientscontacts));
+            Assert.That(_dentnedModel.PatientsContacts.CanAdd(t_patientscontacts), Is.EqualTo(false));
 
             t_patientscontacts = _dentnedModel.PatientsContacts.FirstOrDefault(r => r.patients_id == t_patients.patients_id && r.contactstypes_id == contactstypesEMail.contactstypes_id);
             _dentnedModel.PatientsContacts.Remove(t_patientscontacts);
@@ -154,7 +154,7 @@ namespace DG.DentneD.Model.Test
                 contactstypes_id = contactstypesEMail.contactstypes_id,
                 patientscontacts_value = "XX2"
             };
-            Assert.IsTrue(_dentnedModel.PatientsContacts.CanAdd(t_patientscontacts));
+            Assert.That(_dentnedModel.PatientsContacts.CanAdd(t_patientscontacts), Is.EqualTo(true));
 
             _dentnedModel.Patients.Remove(_dentnedModel.Patients.List(r => r.patients_name == "XX1" && r.patients_surname == "XX1").ToArray());
         }

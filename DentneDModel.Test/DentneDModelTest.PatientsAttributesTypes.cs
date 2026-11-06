@@ -28,20 +28,20 @@ namespace DG.DentneD.Model.Test
             {
                 //patientsattributestypes_name = "XX1"
             };
-            Assert.IsFalse(_dentnedModel.PatientsAttributesTypes.CanAdd(t_patientsattributestypes));
+            Assert.That(_dentnedModel.PatientsAttributesTypes.CanAdd(t_patientsattributestypes), Is.EqualTo(false));
 
             t_patientsattributestypes = new patientsattributestypes()
             {
                 patientsattributestypes_name = "XX1"
             };
-            Assert.IsTrue(_dentnedModel.PatientsAttributesTypes.CanAdd(t_patientsattributestypes));
+            Assert.That(_dentnedModel.PatientsAttributesTypes.CanAdd(t_patientsattributestypes), Is.EqualTo(true));
             _dentnedModel.PatientsAttributesTypes.Add(t_patientsattributestypes);
 
             t_patientsattributestypes = new patientsattributestypes()
             {
                 patientsattributestypes_name = "XX1"
             };
-            Assert.IsFalse(_dentnedModel.PatientsAttributesTypes.CanAdd(t_patientsattributestypes));
+            Assert.That(_dentnedModel.PatientsAttributesTypes.CanAdd(t_patientsattributestypes), Is.EqualTo(false));
 
             t_patientsattributestypes = new patientsattributestypes()
             {
@@ -51,9 +51,9 @@ namespace DG.DentneD.Model.Test
 
             t_patientsattributestypes = _dentnedModel.PatientsAttributesTypes.FirstOrDefault(r => r.patientsattributestypes_name == "XX1");
             t_patientsattributestypes.patientsattributestypes_name = "XX2";
-            Assert.IsFalse(_dentnedModel.PatientsAttributesTypes.CanUpdate(t_patientsattributestypes));
+            Assert.That(_dentnedModel.PatientsAttributesTypes.CanUpdate(t_patientsattributestypes), Is.EqualTo(false));
             t_patientsattributestypes.patientsattributestypes_name = "XX3";
-            Assert.IsTrue(_dentnedModel.PatientsAttributesTypes.CanUpdate(t_patientsattributestypes));
+            Assert.That(_dentnedModel.PatientsAttributesTypes.CanUpdate(t_patientsattributestypes), Is.EqualTo(true));
 
             _dentnedModel.PatientsAttributesTypes.Remove(_dentnedModel.PatientsAttributesTypes.List(r => r.patientsattributestypes_name == "XX1").ToArray());
             _dentnedModel.PatientsAttributesTypes.Remove(_dentnedModel.PatientsAttributesTypes.List(r => r.patientsattributestypes_name == "XX2").ToArray());
@@ -97,11 +97,11 @@ namespace DG.DentneD.Model.Test
             };
             _dentnedModel.PatientsAttributes.Add(t_patientsattributes);
 
-            Assert.IsFalse(_dentnedModel.PatientsAttributesTypes.CanRemove(_dentnedModel.PatientsAttributesTypes.List(r => r.patientsattributestypes_name == "XX1").ToArray()));
+            Assert.That(_dentnedModel.PatientsAttributesTypes.CanRemove(_dentnedModel.PatientsAttributesTypes.List(r => r.patientsattributestypes_name == "XX1").ToArray()), Is.EqualTo(false));
 
             _dentnedModel.Patients.Remove(_dentnedModel.Patients.List(r => r.patients_name == "XX1" && r.patients_surname == "XX1").ToArray());
 
-            Assert.IsTrue(_dentnedModel.PatientsAttributesTypes.CanRemove(_dentnedModel.PatientsAttributesTypes.List(r => r.patientsattributestypes_name == "XX1").ToArray()));
+            Assert.That(_dentnedModel.PatientsAttributesTypes.CanRemove(_dentnedModel.PatientsAttributesTypes.List(r => r.patientsattributestypes_name == "XX1").ToArray()), Is.EqualTo(true));
 
             _dentnedModel.PatientsAttributesTypes.Remove(_dentnedModel.PatientsAttributesTypes.List(r => r.patientsattributestypes_name == "XX1").ToArray());
         }
@@ -123,10 +123,10 @@ namespace DG.DentneD.Model.Test
             }
 
             patientsattributestypesSendAppointmentsReminder.patientsattributestypes_name = "test";
-            Assert.IsFalse(_dentnedModel.PatientsAttributesTypes.CanUpdate(patientsattributestypesSendAppointmentsReminder));
+            Assert.That(_dentnedModel.PatientsAttributesTypes.CanUpdate(patientsattributestypesSendAppointmentsReminder), Is.EqualTo(false));
 
             patientsattributestypesSendAppointmentsReminder = _dentnedModel.PatientsAttributesTypes.FirstOrDefault(r => r.patientsattributestypes_name == PatientsAttributesTypesRepository.SystemAttributes.SendAppointmentsReminder.ToString());
-            Assert.IsFalse(_dentnedModel.PatientsAttributesTypes.CanRemove(patientsattributestypesSendAppointmentsReminder));
+            Assert.That(_dentnedModel.PatientsAttributesTypes.CanRemove(patientsattributestypesSendAppointmentsReminder), Is.EqualTo(false));
         }
     }
 }

@@ -28,42 +28,42 @@ namespace DG.DentneD.Model.Test
                 //rooms_name = "XX1",
                 rooms_color = "#dddddd"
             };
-            Assert.IsFalse(_dentnedModel.Rooms.CanAdd(t_rooms));
+            Assert.That(_dentnedModel.Rooms.CanAdd(t_rooms), Is.EqualTo(false));
 
             t_rooms = new rooms()
             {
                 rooms_name = "XX1",
                 //rooms_color = "#dddddd"
             };
-            Assert.IsTrue(_dentnedModel.Rooms.CanAdd(t_rooms));
+            Assert.That(_dentnedModel.Rooms.CanAdd(t_rooms), Is.EqualTo(true));
 
             t_rooms = new rooms()
             {
                 rooms_name = "XX1",
                 rooms_color = "#ddd"
             };
-            Assert.IsFalse(_dentnedModel.Rooms.CanAdd(t_rooms));
+            Assert.That(_dentnedModel.Rooms.CanAdd(t_rooms), Is.EqualTo(false));
 
             t_rooms = new rooms()
             {
                 rooms_name = "XX1",
                 rooms_color = "blue"
             };
-            Assert.IsFalse(_dentnedModel.Rooms.CanAdd(t_rooms));
+            Assert.That(_dentnedModel.Rooms.CanAdd(t_rooms), Is.EqualTo(false));
 
             t_rooms = new rooms()
             {
                 rooms_name = "XX1",
                 rooms_color = "#dddddd"
             };
-            Assert.IsTrue(_dentnedModel.Rooms.CanAdd(t_rooms));
+            Assert.That(_dentnedModel.Rooms.CanAdd(t_rooms), Is.EqualTo(true));
             _dentnedModel.Rooms.Add(t_rooms);
 
             t_rooms = new rooms()
             {
                 rooms_name = "XX1"
             };
-            Assert.IsFalse(_dentnedModel.Rooms.CanAdd(t_rooms));
+            Assert.That(_dentnedModel.Rooms.CanAdd(t_rooms), Is.EqualTo(false));
 
             t_rooms = new rooms()
             {
@@ -73,9 +73,9 @@ namespace DG.DentneD.Model.Test
 
             t_rooms = _dentnedModel.Rooms.FirstOrDefault(r => r.rooms_name == "XX1");
             t_rooms.rooms_name = "XX2";
-            Assert.IsFalse(_dentnedModel.Rooms.CanUpdate(t_rooms));
+            Assert.That(_dentnedModel.Rooms.CanUpdate(t_rooms), Is.EqualTo(false));
             t_rooms.rooms_name = "XX3";
-            Assert.IsTrue(_dentnedModel.Rooms.CanUpdate(t_rooms));
+            Assert.That(_dentnedModel.Rooms.CanUpdate(t_rooms), Is.EqualTo(true));
 
             _dentnedModel.Rooms.Remove(_dentnedModel.Rooms.List(r => r.rooms_name == "XX1").ToArray());
             _dentnedModel.Rooms.Remove(_dentnedModel.Rooms.List(r => r.rooms_name == "XX2").ToArray());
@@ -137,13 +137,13 @@ namespace DG.DentneD.Model.Test
             };
             _dentnedModel.Appointments.Add(t_appointments);
 
-            Assert.IsFalse(_dentnedModel.Rooms.CanRemove(_dentnedModel.Rooms.List(r => r.rooms_name == "XX1").ToArray()));
+            Assert.That(_dentnedModel.Rooms.CanRemove(_dentnedModel.Rooms.List(r => r.rooms_name == "XX1").ToArray()), Is.EqualTo(false));
 
             t_patients = _dentnedModel.Patients.FirstOrDefault(r => r.patients_name == "XX1" && r.patients_surname == "XX1");
             if (t_patients != null)
                 _dentnedModel.Appointments.Remove(_dentnedModel.Appointments.List(r => r.patients_id == t_patients.patients_id).ToArray());
 
-            Assert.IsTrue(_dentnedModel.Rooms.CanRemove(_dentnedModel.Rooms.List(r => r.rooms_name == "XX1").ToArray()));
+            Assert.That(_dentnedModel.Rooms.CanRemove(_dentnedModel.Rooms.List(r => r.rooms_name == "XX1").ToArray()), Is.EqualTo(true));
 
             _dentnedModel.Patients.Remove(_dentnedModel.Patients.List(r => r.patients_name == "XX1" && r.patients_surname == "XX1").ToArray());
             _dentnedModel.Doctors.Remove(_dentnedModel.Doctors.List(r => r.doctors_name == "XX1" && r.doctors_surname == "XX1").ToArray());

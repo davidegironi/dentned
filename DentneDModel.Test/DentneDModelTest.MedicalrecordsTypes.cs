@@ -27,20 +27,20 @@ namespace DG.DentneD.Model.Test
             {
                 //medicalrecordstypes_name = "XX1"
             };
-            Assert.IsFalse(_dentnedModel.MedicalrecordsTypes.CanAdd(t_medicalrecordstypes));
+            Assert.That(_dentnedModel.MedicalrecordsTypes.CanAdd(t_medicalrecordstypes), Is.EqualTo(false));
 
             t_medicalrecordstypes = new medicalrecordstypes()
             {
                 medicalrecordstypes_name = "XX1"
             };
-            Assert.IsTrue(_dentnedModel.MedicalrecordsTypes.CanAdd(t_medicalrecordstypes));
+            Assert.That(_dentnedModel.MedicalrecordsTypes.CanAdd(t_medicalrecordstypes), Is.EqualTo(true));
             _dentnedModel.MedicalrecordsTypes.Add(t_medicalrecordstypes);
 
             t_medicalrecordstypes = new medicalrecordstypes()
             {
                 medicalrecordstypes_name = "XX1"
             };
-            Assert.IsFalse(_dentnedModel.MedicalrecordsTypes.CanAdd(t_medicalrecordstypes));
+            Assert.That(_dentnedModel.MedicalrecordsTypes.CanAdd(t_medicalrecordstypes), Is.EqualTo(false));
 
             t_medicalrecordstypes = new medicalrecordstypes()
             {
@@ -50,9 +50,9 @@ namespace DG.DentneD.Model.Test
 
             t_medicalrecordstypes = _dentnedModel.MedicalrecordsTypes.FirstOrDefault(r => r.medicalrecordstypes_name == "XX1");
             t_medicalrecordstypes.medicalrecordstypes_name = "XX2";
-            Assert.IsFalse(_dentnedModel.MedicalrecordsTypes.CanUpdate(t_medicalrecordstypes));
+            Assert.That(_dentnedModel.MedicalrecordsTypes.CanUpdate(t_medicalrecordstypes), Is.EqualTo(false));
             t_medicalrecordstypes.medicalrecordstypes_name = "XX3";
-            Assert.IsTrue(_dentnedModel.MedicalrecordsTypes.CanUpdate(t_medicalrecordstypes));
+            Assert.That(_dentnedModel.MedicalrecordsTypes.CanUpdate(t_medicalrecordstypes), Is.EqualTo(true));
 
             _dentnedModel.MedicalrecordsTypes.Remove(_dentnedModel.MedicalrecordsTypes.List(r => r.medicalrecordstypes_name == "XX1").ToArray());
             _dentnedModel.MedicalrecordsTypes.Remove(_dentnedModel.MedicalrecordsTypes.List(r => r.medicalrecordstypes_name == "XX2").ToArray());
@@ -96,11 +96,11 @@ namespace DG.DentneD.Model.Test
             };
             _dentnedModel.PatientsMedicalrecords.Add(t_patientsmedicalrecords);
 
-            Assert.IsFalse(_dentnedModel.MedicalrecordsTypes.CanRemove(_dentnedModel.MedicalrecordsTypes.List(r => r.medicalrecordstypes_name == "XX1").ToArray()));
+            Assert.That(_dentnedModel.MedicalrecordsTypes.CanRemove(_dentnedModel.MedicalrecordsTypes.List(r => r.medicalrecordstypes_name == "XX1").ToArray()), Is.EqualTo(false));
 
             _dentnedModel.Patients.Remove(_dentnedModel.Patients.List(r => r.patients_name == "XX1" && r.patients_surname == "XX1").ToArray());
 
-            Assert.IsTrue(_dentnedModel.MedicalrecordsTypes.CanRemove(_dentnedModel.MedicalrecordsTypes.List(r => r.medicalrecordstypes_name == "XX1").ToArray()));
+            Assert.That(_dentnedModel.MedicalrecordsTypes.CanRemove(_dentnedModel.MedicalrecordsTypes.List(r => r.medicalrecordstypes_name == "XX1").ToArray()), Is.EqualTo(true));
 
             _dentnedModel.MedicalrecordsTypes.Remove(_dentnedModel.MedicalrecordsTypes.List(r => r.medicalrecordstypes_name == "XX1").ToArray());
         }

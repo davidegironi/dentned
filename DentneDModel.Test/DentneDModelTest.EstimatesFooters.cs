@@ -27,21 +27,21 @@ namespace DG.DentneD.Model.Test
                 //estimatesfooters_name = "XX1",
                 estimatesfooters_doctext = "xxx"
             };
-            Assert.IsFalse(_dentnedModel.EstimatesFooters.CanAdd(t_estimatesfooters));
+            Assert.That(_dentnedModel.EstimatesFooters.CanAdd(t_estimatesfooters), Is.EqualTo(false));
 
             t_estimatesfooters = new estimatesfooters()
             {
                 estimatesfooters_name = "XX1",
                 //estimatesfooters_doctext = "xxx"
             };
-            Assert.IsFalse(_dentnedModel.EstimatesFooters.CanAdd(t_estimatesfooters));
+            Assert.That(_dentnedModel.EstimatesFooters.CanAdd(t_estimatesfooters), Is.EqualTo(false));
 
             t_estimatesfooters = new estimatesfooters()
             {
                 estimatesfooters_name = "XX1",
                 estimatesfooters_doctext = "xxx"
             };
-            Assert.IsTrue(_dentnedModel.EstimatesFooters.CanAdd(t_estimatesfooters));
+            Assert.That(_dentnedModel.EstimatesFooters.CanAdd(t_estimatesfooters), Is.EqualTo(true));
             _dentnedModel.EstimatesFooters.Add(t_estimatesfooters);
 
             t_estimatesfooters = new estimatesfooters()
@@ -49,7 +49,7 @@ namespace DG.DentneD.Model.Test
                 estimatesfooters_name = "XX1",
                 estimatesfooters_doctext = "xxx"
             };
-            Assert.IsFalse(_dentnedModel.EstimatesFooters.CanAdd(t_estimatesfooters));
+            Assert.That(_dentnedModel.EstimatesFooters.CanAdd(t_estimatesfooters), Is.EqualTo(false));
 
             t_estimatesfooters = new estimatesfooters()
             {
@@ -60,9 +60,9 @@ namespace DG.DentneD.Model.Test
 
             t_estimatesfooters = _dentnedModel.EstimatesFooters.FirstOrDefault(r => r.estimatesfooters_name == "XX1");
             t_estimatesfooters.estimatesfooters_name = "XX2";
-            Assert.IsFalse(_dentnedModel.EstimatesFooters.CanUpdate(t_estimatesfooters));
+            Assert.That(_dentnedModel.EstimatesFooters.CanUpdate(t_estimatesfooters), Is.EqualTo(false));
             t_estimatesfooters.estimatesfooters_name = "XX3";
-            Assert.IsTrue(_dentnedModel.EstimatesFooters.CanUpdate(t_estimatesfooters));
+            Assert.That(_dentnedModel.EstimatesFooters.CanUpdate(t_estimatesfooters), Is.EqualTo(true));
 
             _dentnedModel.EstimatesFooters.Remove(_dentnedModel.EstimatesFooters.List(r => r.estimatesfooters_name == "XX1").ToArray());
             _dentnedModel.EstimatesFooters.Remove(_dentnedModel.EstimatesFooters.List(r => r.estimatesfooters_name == "XX2").ToArray());

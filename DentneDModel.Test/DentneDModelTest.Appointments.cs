@@ -69,7 +69,7 @@ namespace DG.DentneD.Model.Test
                 appointments_to = DateTime.Now.AddMinutes(40),
                 appointments_color = "#dddddd"
             };
-            Assert.IsFalse(_dentnedModel.Appointments.CanAdd(t_appointments));
+            Assert.That(_dentnedModel.Appointments.CanAdd(t_appointments), Is.EqualTo(false));
 
             t_appointments = new appointments()
             {
@@ -81,7 +81,7 @@ namespace DG.DentneD.Model.Test
                 appointments_to = DateTime.Now.AddMinutes(40),
                 appointments_color = "#dddddd"
             };
-            Assert.IsFalse(_dentnedModel.Appointments.CanAdd(t_appointments));
+            Assert.That(_dentnedModel.Appointments.CanAdd(t_appointments), Is.EqualTo(false));
 
             t_appointments = new appointments()
             {
@@ -93,7 +93,7 @@ namespace DG.DentneD.Model.Test
                 appointments_to = DateTime.Now.AddMinutes(40),
                 appointments_color = "#dddddd"
             };
-            Assert.IsFalse(_dentnedModel.Appointments.CanAdd(t_appointments));
+            Assert.That(_dentnedModel.Appointments.CanAdd(t_appointments), Is.EqualTo(false));
 
             t_appointments = new appointments()
             {
@@ -105,7 +105,7 @@ namespace DG.DentneD.Model.Test
                 appointments_to = DateTime.Now.AddMinutes(40),
                 appointments_color = "#dddddd"
             };
-            Assert.IsFalse(_dentnedModel.Appointments.CanAdd(t_appointments));
+            Assert.That(_dentnedModel.Appointments.CanAdd(t_appointments), Is.EqualTo(false));
 
             t_appointments = new appointments()
             {
@@ -117,7 +117,7 @@ namespace DG.DentneD.Model.Test
                 appointments_to = DateTime.Now.AddMinutes(-40),
                 appointments_color = "#dddddd"
             };
-            Assert.IsFalse(_dentnedModel.Appointments.CanAdd(t_appointments));
+            Assert.That(_dentnedModel.Appointments.CanAdd(t_appointments), Is.EqualTo(false));
 
             t_appointments = new appointments()
             {
@@ -128,7 +128,7 @@ namespace DG.DentneD.Model.Test
                 appointments_from = DateTime.Now,
                 appointments_to = DateTime.Now.AddMinutes(40)
             };
-            Assert.IsTrue(_dentnedModel.Appointments.CanAdd(t_appointments));
+            Assert.That(_dentnedModel.Appointments.CanAdd(t_appointments), Is.EqualTo(true));
 
             t_appointments = new appointments()
             {
@@ -140,7 +140,7 @@ namespace DG.DentneD.Model.Test
                 appointments_to = DateTime.Now.AddMinutes(-40),
                 appointments_color = "blue"
             };
-            Assert.IsFalse(_dentnedModel.Appointments.CanAdd(t_appointments));
+            Assert.That(_dentnedModel.Appointments.CanAdd(t_appointments), Is.EqualTo(false));
 
             t_appointments = new appointments()
             {
@@ -152,7 +152,7 @@ namespace DG.DentneD.Model.Test
                 appointments_to = DateTime.Now.AddMinutes(40),
                 appointments_color = "#dddddd"
             };
-            Assert.IsTrue(_dentnedModel.Appointments.CanAdd(t_appointments));
+            Assert.That(_dentnedModel.Appointments.CanAdd(t_appointments), Is.EqualTo(true));
             _dentnedModel.Appointments.Add(t_appointments);
 
             t_patients = _dentnedModel.Patients.FirstOrDefault(r => r.patients_name == "XX1" && r.patients_surname == "XX1");

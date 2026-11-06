@@ -53,7 +53,7 @@ namespace DG.DentneD.Model.Test
                 patientsaddresses_street = "XX",
                 patientsaddresses_zipcode = "XX"
             };
-            Assert.IsFalse(_dentnedModel.PatientsAddresses.CanAdd(t_patientsaddresses));
+            Assert.That(_dentnedModel.PatientsAddresses.CanAdd(t_patientsaddresses), Is.EqualTo(false));
 
             t_patientsaddresses = new patientsaddresses()
             {
@@ -64,7 +64,7 @@ namespace DG.DentneD.Model.Test
                 patientsaddresses_street = "XX",
                 patientsaddresses_zipcode = "XX"
             };
-            Assert.IsFalse(_dentnedModel.PatientsAddresses.CanAdd(t_patientsaddresses));
+            Assert.That(_dentnedModel.PatientsAddresses.CanAdd(t_patientsaddresses), Is.EqualTo(false));
 
             t_patientsaddresses = new patientsaddresses()
             {
@@ -75,7 +75,7 @@ namespace DG.DentneD.Model.Test
                 patientsaddresses_street = "XX",
                 patientsaddresses_zipcode = "XX"
             };
-            Assert.IsFalse(_dentnedModel.PatientsAddresses.CanAdd(t_patientsaddresses));
+            Assert.That(_dentnedModel.PatientsAddresses.CanAdd(t_patientsaddresses), Is.EqualTo(false));
 
             t_patientsaddresses = new patientsaddresses()
             {
@@ -86,7 +86,7 @@ namespace DG.DentneD.Model.Test
                 patientsaddresses_street = "XX",
                 patientsaddresses_zipcode = "XX"
             };
-            Assert.IsFalse(_dentnedModel.PatientsAddresses.CanAdd(t_patientsaddresses));
+            Assert.That(_dentnedModel.PatientsAddresses.CanAdd(t_patientsaddresses), Is.EqualTo(false));
 
             t_patientsaddresses = new patientsaddresses()
             {
@@ -97,7 +97,7 @@ namespace DG.DentneD.Model.Test
                 //patientsaddresses_street = "XX",
                 patientsaddresses_zipcode = "XX"
             };
-            Assert.IsFalse(_dentnedModel.PatientsAddresses.CanAdd(t_patientsaddresses));
+            Assert.That(_dentnedModel.PatientsAddresses.CanAdd(t_patientsaddresses), Is.EqualTo(false));
 
             t_patientsaddresses = new patientsaddresses()
             {
@@ -108,7 +108,7 @@ namespace DG.DentneD.Model.Test
                 patientsaddresses_street = "XX",
                 //patientsaddresses_zipcode = "XX"
             };
-            Assert.IsFalse(_dentnedModel.PatientsAddresses.CanAdd(t_patientsaddresses));
+            Assert.That(_dentnedModel.PatientsAddresses.CanAdd(t_patientsaddresses), Is.EqualTo(false));
 
             t_patientsaddresses = new patientsaddresses()
             {
@@ -119,7 +119,7 @@ namespace DG.DentneD.Model.Test
                 patientsaddresses_street = "XX",
                 patientsaddresses_zipcode = "XX"
             };
-            Assert.IsTrue(_dentnedModel.PatientsAddresses.CanAdd(t_patientsaddresses));
+            Assert.That(_dentnedModel.PatientsAddresses.CanAdd(t_patientsaddresses), Is.EqualTo(true));
             _dentnedModel.PatientsAddresses.Add(t_patientsaddresses);
 
             _dentnedModel.Patients.Remove(_dentnedModel.Patients.List(r => r.patients_name == "XX1" && r.patients_surname == "XX1").ToArray());

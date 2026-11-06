@@ -51,7 +51,7 @@ namespace DG.DentneD.Model.Test
                 patientsattributestypes_id = t_patientsattributestypes.patientsattributestypes_id,
                 patientsattributes_value = "XX"
             };
-            Assert.IsFalse(_dentnedModel.PatientsAttributes.CanAdd(t_patientsattributes));
+            Assert.That(_dentnedModel.PatientsAttributes.CanAdd(t_patientsattributes), Is.EqualTo(false));
 
             t_patientsattributes = new patientsattributes()
             {
@@ -59,7 +59,7 @@ namespace DG.DentneD.Model.Test
                 //patientsattributestypes_id = t_patientsattributestypes.patientsattributestypes_id,
                 patientsattributes_value = "XX"
             };
-            Assert.IsFalse(_dentnedModel.PatientsAttributes.CanAdd(t_patientsattributes));
+            Assert.That(_dentnedModel.PatientsAttributes.CanAdd(t_patientsattributes), Is.EqualTo(false));
 
             t_patientsattributes = new patientsattributes()
             {
@@ -67,7 +67,7 @@ namespace DG.DentneD.Model.Test
                 patientsattributestypes_id = t_patientsattributestypes.patientsattributestypes_id,
                 //patientsattributes_value = "XX"
             };
-            Assert.IsTrue(_dentnedModel.PatientsAttributes.CanAdd(t_patientsattributes));
+            Assert.That(_dentnedModel.PatientsAttributes.CanAdd(t_patientsattributes), Is.EqualTo(true));
 
             t_patientsattributes = new patientsattributes()
             {
@@ -75,7 +75,7 @@ namespace DG.DentneD.Model.Test
                 patientsattributestypes_id = t_patientsattributestypes.patientsattributestypes_id,
                 patientsattributes_value = "XX"
             };
-            Assert.IsTrue(_dentnedModel.PatientsAttributes.CanAdd(t_patientsattributes));
+            Assert.That(_dentnedModel.PatientsAttributes.CanAdd(t_patientsattributes), Is.EqualTo(true));
             _dentnedModel.PatientsAttributes.Add(t_patientsattributes);
 
             _dentnedModel.Patients.Remove(_dentnedModel.Patients.List(r => r.patients_name == "XX1" && r.patients_surname == "XX1").ToArray());
@@ -121,7 +121,7 @@ namespace DG.DentneD.Model.Test
                 patientsattributestypes_id = patientsattributestypesSendAppointmentsReminder.patientsattributestypes_id,
                 patientsattributes_value = "XX"
             };
-            Assert.IsTrue(_dentnedModel.PatientsAttributes.CanAdd(t_patientsattributes));
+            Assert.That(_dentnedModel.PatientsAttributes.CanAdd(t_patientsattributes), Is.EqualTo(true));
             _dentnedModel.PatientsAttributes.Add(t_patientsattributes);
 
             t_patientsattributes = new patientsattributes()
@@ -130,11 +130,11 @@ namespace DG.DentneD.Model.Test
                 patientsattributestypes_id = patientsattributestypesSendAppointmentsReminder.patientsattributestypes_id,
                 patientsattributes_value = "XX2"
             };
-            Assert.IsFalse(_dentnedModel.PatientsAttributes.CanAdd(t_patientsattributes));
+            Assert.That(_dentnedModel.PatientsAttributes.CanAdd(t_patientsattributes), Is.EqualTo(false));
 
             t_patientsattributes = _dentnedModel.PatientsAttributes.FirstOrDefault(r => r.patients_id == t_patients.patients_id && r.patientsattributestypes_id == patientsattributestypesSendAppointmentsReminder.patientsattributestypes_id);
             t_patientsattributes.patientsattributes_value = "XX3";
-            Assert.IsTrue(_dentnedModel.PatientsAttributes.CanUpdate(t_patientsattributes));
+            Assert.That(_dentnedModel.PatientsAttributes.CanUpdate(t_patientsattributes), Is.EqualTo(true));
             _dentnedModel.PatientsAttributes.Update(t_patientsattributes);
 
             t_patientsattributes = new patientsattributes()
@@ -143,7 +143,7 @@ namespace DG.DentneD.Model.Test
                 patientsattributestypes_id = patientsattributestypesSendAppointmentsReminder.patientsattributestypes_id,
                 patientsattributes_value = "XX2"
             };
-            Assert.IsFalse(_dentnedModel.PatientsAttributes.CanAdd(t_patientsattributes));
+            Assert.That(_dentnedModel.PatientsAttributes.CanAdd(t_patientsattributes), Is.EqualTo(false));
 
             t_patientsattributes = _dentnedModel.PatientsAttributes.FirstOrDefault(r => r.patients_id == t_patients.patients_id && r.patientsattributestypes_id == patientsattributestypesSendAppointmentsReminder.patientsattributestypes_id);
             _dentnedModel.PatientsAttributes.Remove(t_patientsattributes);
@@ -154,7 +154,7 @@ namespace DG.DentneD.Model.Test
                 patientsattributestypes_id = patientsattributestypesSendAppointmentsReminder.patientsattributestypes_id,
                 patientsattributes_value = "XX2"
             };
-            Assert.IsTrue(_dentnedModel.PatientsAttributes.CanAdd(t_patientsattributes));
+            Assert.That(_dentnedModel.PatientsAttributes.CanAdd(t_patientsattributes), Is.EqualTo(true));
 
             _dentnedModel.Patients.Remove(_dentnedModel.Patients.List(r => r.patients_name == "XX1" && r.patients_surname == "XX1").ToArray());
         }

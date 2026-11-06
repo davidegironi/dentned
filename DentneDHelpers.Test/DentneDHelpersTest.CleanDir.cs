@@ -31,15 +31,15 @@ namespace DG.DentneD.Helpers.Test
             File.Create("test\\test2.txt").Dispose();
             File.SetLastWriteTime("test\\test2.txt", DateTime.Now.AddDays(-5));
             File.Create("test\\test3.txt").Dispose();
-            Assert.IsTrue(File.Exists("test\\test1.txt"));
-            Assert.IsTrue(File.Exists("test\\test2.txt"));
-            Assert.IsTrue(File.Exists("test\\test3.txt"));
+            Assert.That(File.Exists("test\\test1.txt"), Is.EqualTo(true));
+            Assert.That(File.Exists("test\\test2.txt"), Is.EqualTo(true));
+            Assert.That(File.Exists("test\\test3.txt"), Is.EqualTo(true));
             CleanDir.CleanTmpdir("test", false, null, ref messages, ref errors);
             Assert.That(messages.Length, Is.Not.EqualTo(0));
             Assert.That(errors.Length, Is.EqualTo(0));
-            Assert.IsFalse(File.Exists("test\\test1.txt"));
-            Assert.IsFalse(File.Exists("test\\test2.txt"));
-            Assert.IsFalse(File.Exists("test\\test3.txt"));
+            Assert.That(File.Exists("test\\test1.txt"), Is.EqualTo(false));
+            Assert.That(File.Exists("test\\test2.txt"), Is.EqualTo(false));
+            Assert.That(File.Exists("test\\test3.txt"), Is.EqualTo(false));
             File.Delete("test\\test3.txt");
 
             //for other methods call test, look at FileHelper.PurgeFolder         
@@ -99,12 +99,12 @@ namespace DG.DentneD.Helpers.Test
             File.Create("test\\" + t_patients2.patients_id + "\\test1.txt").Dispose();
             File.Create("test\\" + t_patients2.patients_id + "\\test\\test1.txt").Dispose();
 
-            Assert.IsTrue(Directory.Exists("test\\" + t_patients1.patients_id));
-            Assert.IsTrue(File.Exists("test\\" + t_patients1.patients_id + "\\test1.txt"));
-            Assert.IsTrue(File.Exists("test\\" + t_patients1.patients_id + "\\test\\test1.txt"));
-            Assert.IsTrue(Directory.Exists("test\\" + t_patients2.patients_id));
-            Assert.IsTrue(File.Exists("test\\" + t_patients2.patients_id + "\\test1.txt"));
-            Assert.IsTrue(File.Exists("test\\" + t_patients2.patients_id + "\\test\\test1.txt"));
+            Assert.That(Directory.Exists("test\\" + t_patients1.patients_id), Is.EqualTo(true));
+            Assert.That(File.Exists("test\\" + t_patients1.patients_id + "\\test1.txt"), Is.EqualTo(true));
+            Assert.That(File.Exists("test\\" + t_patients1.patients_id + "\\test\\test1.txt"), Is.EqualTo(true));
+            Assert.That(Directory.Exists("test\\" + t_patients2.patients_id), Is.EqualTo(true));
+            Assert.That(File.Exists("test\\" + t_patients2.patients_id + "\\test1.txt"), Is.EqualTo(true));
+            Assert.That(File.Exists("test\\" + t_patients2.patients_id + "\\test\\test1.txt"), Is.EqualTo(true));
 
             CleanDir.CleanPatientDir("test", false, ref messages, ref errors);
             Assert.That(messages.Length, Is.EqualTo(0));
@@ -116,12 +116,12 @@ namespace DG.DentneD.Helpers.Test
             Assert.That(messages.Length, Is.Not.EqualTo(0));
             Assert.That(errors.Length, Is.EqualTo(0));
 
-            Assert.IsTrue(Directory.Exists("test\\" + t_patients1.patients_id));
-            Assert.IsTrue(File.Exists("test\\" + t_patients1.patients_id + "\\test1.txt"));
-            Assert.IsTrue(File.Exists("test\\" + t_patients1.patients_id + "\\test\\test1.txt"));
-            Assert.IsFalse(Directory.Exists("test\\" + t_patients2.patients_id));
-            Assert.IsFalse(File.Exists("test\\" + t_patients2.patients_id + "\\test1.txt"));
-            Assert.IsFalse(File.Exists("test\\" + t_patients2.patients_id + "\\test\\test1.txt"));
+            Assert.That(Directory.Exists("test\\" + t_patients1.patients_id), Is.EqualTo(true));
+            Assert.That(File.Exists("test\\" + t_patients1.patients_id + "\\test1.txt"), Is.EqualTo(true));
+            Assert.That(File.Exists("test\\" + t_patients1.patients_id + "\\test\\test1.txt"), Is.EqualTo(true));
+            Assert.That(Directory.Exists("test\\" + t_patients2.patients_id), Is.EqualTo(false));
+            Assert.That(File.Exists("test\\" + t_patients2.patients_id + "\\test1.txt"), Is.EqualTo(false));
+            Assert.That(File.Exists("test\\" + t_patients2.patients_id + "\\test\\test1.txt"), Is.EqualTo(false));
 
             _dentnedModel.Patients.Remove(_dentnedModel.Patients.List(r => r.patients_name == "XX1" && r.patients_surname == "XX1").ToArray());
             _dentnedModel.Patients.Remove(_dentnedModel.Patients.List(r => r.patients_name == "XX2" && r.patients_surname == "XX2").ToArray());
@@ -130,12 +130,12 @@ namespace DG.DentneD.Helpers.Test
             Assert.That(messages.Length, Is.Not.EqualTo(0));
             Assert.That(errors.Length, Is.EqualTo(0));
 
-            Assert.IsFalse(Directory.Exists("test\\" + t_patients1.patients_id));
-            Assert.IsFalse(File.Exists("test\\" + t_patients1.patients_id + "\\test1.txt"));
-            Assert.IsFalse(File.Exists("test\\" + t_patients1.patients_id + "\\test\\test1.txt"));
-            Assert.IsFalse(Directory.Exists("test\\" + t_patients2.patients_id));
-            Assert.IsFalse(File.Exists("test\\" + t_patients2.patients_id + "\\test1.txt"));
-            Assert.IsFalse(File.Exists("test\\" + t_patients2.patients_id + "\\test\\test1.txt"));
+            Assert.That(Directory.Exists("test\\" + t_patients1.patients_id), Is.EqualTo(false));
+            Assert.That(File.Exists("test\\" + t_patients1.patients_id + "\\test1.txt"), Is.EqualTo(false));
+            Assert.That(File.Exists("test\\" + t_patients1.patients_id + "\\test\\test1.txt"), Is.EqualTo(false));
+            Assert.That(Directory.Exists("test\\" + t_patients2.patients_id), Is.EqualTo(false));
+            Assert.That(File.Exists("test\\" + t_patients2.patients_id + "\\test1.txt"), Is.EqualTo(false));
+            Assert.That(File.Exists("test\\" + t_patients2.patients_id + "\\test\\test1.txt"), Is.EqualTo(false));
 
             Directory.Delete("test", true);
         }
@@ -202,22 +202,22 @@ namespace DG.DentneD.Helpers.Test
             File.Create("test\\" + t_patients.patients_id + "\\test1.txt").Dispose();
             File.Create("test\\" + t_patients.patients_id + "\\test2.txt").Dispose();
 
-            Assert.IsTrue(Directory.Exists("test\\" + t_patients.patients_id));
-            Assert.IsTrue(File.Exists("test\\" + t_patients.patients_id + "\\test1.txt"));
-            Assert.IsTrue(File.Exists("test\\" + t_patients.patients_id + "\\test2.txt"));
+            Assert.That(Directory.Exists("test\\" + t_patients.patients_id), Is.EqualTo(true));
+            Assert.That(File.Exists("test\\" + t_patients.patients_id + "\\test1.txt"), Is.EqualTo(true));
+            Assert.That(File.Exists("test\\" + t_patients.patients_id + "\\test2.txt"), Is.EqualTo(true));
             CleanDir.CleanPatientAttachmentsDir("test", false, ref messages, ref errors);
             Assert.That(messages.Length, Is.EqualTo(0));
             Assert.That(errors.Length, Is.EqualTo(0));
-            Assert.IsTrue(Directory.Exists("test\\" + t_patients.patients_id));
-            Assert.IsTrue(File.Exists("test\\" + t_patients.patients_id + "\\test1.txt"));
-            Assert.IsTrue(File.Exists("test\\" + t_patients.patients_id + "\\test2.txt"));
+            Assert.That(Directory.Exists("test\\" + t_patients.patients_id), Is.EqualTo(true));
+            Assert.That(File.Exists("test\\" + t_patients.patients_id + "\\test1.txt"), Is.EqualTo(true));
+            Assert.That(File.Exists("test\\" + t_patients.patients_id + "\\test2.txt"), Is.EqualTo(true));
 
             Directory.CreateDirectory("test\\" + t_patients.patients_id + "\\test");
-            Assert.IsTrue(Directory.Exists("test\\" + t_patients.patients_id + "\\test"));
+            Assert.That(Directory.Exists("test\\" + t_patients.patients_id + "\\test"), Is.EqualTo(true));
             CleanDir.CleanPatientAttachmentsDir("test", false, ref messages, ref errors);
             Assert.That(messages.Length, Is.Not.EqualTo(0));
             Assert.That(errors.Length, Is.EqualTo(0));
-            Assert.IsFalse(Directory.Exists("test\\" + t_patients.patients_id + "\\test"));
+            Assert.That(Directory.Exists("test\\" + t_patients.patients_id + "\\test"), Is.EqualTo(false));
 
             t_patientsattachments2.patientsattachments_filename = null;
             _dentnedModel.PatientsAttachments.Update(t_patientsattachments2);
@@ -225,9 +225,9 @@ namespace DG.DentneD.Helpers.Test
             CleanDir.CleanPatientAttachmentsDir("test", false, ref messages, ref errors);
             Assert.That(messages.Length, Is.Not.EqualTo(0));
             Assert.That(errors.Length, Is.EqualTo(0));
-            Assert.IsTrue(Directory.Exists("test\\" + t_patients.patients_id));
-            Assert.IsTrue(File.Exists("test\\" + t_patients.patients_id + "\\test1.txt"));
-            Assert.IsFalse(File.Exists("test\\" + t_patients.patients_id + "\\test2.txt"));
+            Assert.That(Directory.Exists("test\\" + t_patients.patients_id), Is.EqualTo(true));
+            Assert.That(File.Exists("test\\" + t_patients.patients_id + "\\test1.txt"), Is.EqualTo(true));
+            Assert.That(File.Exists("test\\" + t_patients.patients_id + "\\test2.txt"), Is.EqualTo(false));
 
             t_patientsattachments1.patientsattachments_filename = null;
             _dentnedModel.PatientsAttachments.Update(t_patientsattachments1);
@@ -235,9 +235,9 @@ namespace DG.DentneD.Helpers.Test
             CleanDir.CleanPatientAttachmentsDir("test", true, ref messages, ref errors);
             Assert.That(messages.Length, Is.Not.EqualTo(0));
             Assert.That(errors.Length, Is.EqualTo(0));
-            Assert.IsFalse(Directory.Exists("test\\" + t_patients.patients_id));
-            Assert.IsFalse(File.Exists("test\\" + t_patients.patients_id + "\\test1.txt"));
-            Assert.IsFalse(File.Exists("test\\" + t_patients.patients_id + "\\test2.txt"));
+            Assert.That(Directory.Exists("test\\" + t_patients.patients_id), Is.EqualTo(false));
+            Assert.That(File.Exists("test\\" + t_patients.patients_id + "\\test1.txt"), Is.EqualTo(false));
+            Assert.That(File.Exists("test\\" + t_patients.patients_id + "\\test2.txt"), Is.EqualTo(false));
 
             _dentnedModel.Patients.Remove(_dentnedModel.Patients.List(r => r.patients_name == "XX1" && r.patients_surname == "XX1").ToArray());
 

@@ -42,7 +42,7 @@ namespace DG.DentneD.Model.Test
                 patientsnotes_text = "XX",
                 patientsnotes_date = DateTime.Now
             };
-            Assert.IsFalse(_dentnedModel.PatientsNotes.CanAdd(t_patientsnotes));
+            Assert.That(_dentnedModel.PatientsNotes.CanAdd(t_patientsnotes), Is.EqualTo(false));
 
             t_patientsnotes = new patientsnotes()
             {
@@ -50,7 +50,7 @@ namespace DG.DentneD.Model.Test
                 //contactstypes_id = t_contactstypes.contactstypes_id,
                 patientsnotes_date = DateTime.Now
             };
-            Assert.IsFalse(_dentnedModel.PatientsNotes.CanAdd(t_patientsnotes));
+            Assert.That(_dentnedModel.PatientsNotes.CanAdd(t_patientsnotes), Is.EqualTo(false));
 
             t_patientsnotes = new patientsnotes()
             {
@@ -58,7 +58,7 @@ namespace DG.DentneD.Model.Test
                 patientsnotes_text = "XX",
                 patientsnotes_date = DateTime.Now
             };
-            Assert.IsTrue(_dentnedModel.PatientsNotes.CanAdd(t_patientsnotes));
+            Assert.That(_dentnedModel.PatientsNotes.CanAdd(t_patientsnotes), Is.EqualTo(true));
             _dentnedModel.PatientsNotes.Add(t_patientsnotes);
 
             _dentnedModel.Patients.Remove(_dentnedModel.Patients.List(r => r.patients_name == "XX1" && r.patients_surname == "XX1").ToArray());
